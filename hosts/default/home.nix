@@ -82,4 +82,12 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  nocturne = {
+    editors.emacs = {
+      enable = true;
+      main = true;
+      server = true;
+    };
+  };
 }

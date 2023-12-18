@@ -3,9 +3,10 @@
 {
   imports = [ 
     ./cli
-    # ./browsers
+    ./browsers
     ./editors
     # ./graphical
+    # ./misc
     # ./plasma
     # ./services
     # ./shells
@@ -13,8 +14,4 @@
     # ./wayland
   ];
 
-  config = {
-    editors.emacs.enable = true;
-
-  };
 }
