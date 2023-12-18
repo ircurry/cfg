@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./git
+    ./git.nix
     # ./lf
   ];
 }

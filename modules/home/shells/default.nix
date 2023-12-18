@@ -6,7 +6,7 @@
   };
   
   imports = [
-    ./zsh
+    ./zsh.nix
   ];
 
 }
