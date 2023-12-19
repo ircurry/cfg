@@ -96,6 +96,7 @@
     };
     graphical = {
       keepassxc.enable = true;
+      flatpak.enable = false;
     };
   };
 }
