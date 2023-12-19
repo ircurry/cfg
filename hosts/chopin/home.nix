@@ -98,6 +98,7 @@
       keepassxc.enable = true;
       kid3.enable = true;
       obs.enable = true;
+      signal-desktop.enable = false;
     };
   };
 }

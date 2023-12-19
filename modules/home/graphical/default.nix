@@ -6,6 +6,7 @@
     ./flatpak.nix
     ./kid3.nix
     ./obs.nix
+    ./signal.nix
   ];
 
 }
