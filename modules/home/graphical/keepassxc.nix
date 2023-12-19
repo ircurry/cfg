@@ -8,7 +8,7 @@ in
     enable = lib.mkEnableOption "Whether to enable keepassxc";
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       keepassxc
     ];
