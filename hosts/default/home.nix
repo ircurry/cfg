@@ -27,7 +27,6 @@
     # # "Hello, world!" when run.
     hello
     vim
-    firefox
     kate
     lf
     mpv
@@ -83,11 +82,17 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # The Meat of my configuration
   nocturne = {
     editors.emacs = {
       enable = true;
       main = true;
       server = true;
+    };
+    browsers = {
+      brave.enable = true;
+      firefox.enable = true;
+      tor-browser.enable = true;
     };
   };
 }

@@ -2,6 +2,8 @@
 
 {
   imports = [
+    ./brave.nix
+    ./firefox.nix
     ./tor-browser.nix
   ];
 }
