@@ -94,6 +94,7 @@
       tor-browser.enable = true;
     };
     graphical = {
+      alacritty.enable = true;
       flatpak.enable = false;
       keepassxc.enable = true;
       kid3.enable = true;
