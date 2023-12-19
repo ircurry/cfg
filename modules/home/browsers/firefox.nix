@@ -7,12 +7,39 @@ in
   options.nocturne.browsers.firefox = {
     enable = lib.mkEnableOption "Whether to enable firefox.";
   };
+
+  imports = [ inputs.arkenfox.hmModules.default ];
   
   config = lib.mkIf cfg.enable {
+    
     programs.firefox = {
       enable = true;
+      arkenfox = {
+        enable = true;
+        version = "119.0";
+      };
+      
       profiles.recur = {
         isDefault = true;
+        arkenfox = {
+          enable = true;
+          "0000".enable = true;
+          "0100".enable = true;
+          "0200".enable = true;
+          "0300".enable = true;
+          "0400".enable = true;
+          "0600".enable = true;
+          "0700".enable = true;
+          "0800" = {
+            enable = true;
+            "0810"."browser.formfill.enable".value = false;
+          };
+          "0900".enable = true;
+          "1200".enable = true;
+          "2600".enable = true;
+          "2700".enable = true;
+        };
+        
         bookmarks = [
           {
             name = "wikipedia";
@@ -73,6 +100,7 @@ in
         extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
           ublock-origin
           libredirect
+          multi-account-containers
         ];
       };
     };

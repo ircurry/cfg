@@ -90,7 +90,7 @@
       server = true;
     };
     browsers = {
-      brave.enable = true;
+      brave.enable = false;
       firefox.enable = true;
       tor-browser.enable = true;
     };
