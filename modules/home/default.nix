@@ -5,7 +5,7 @@
     ./cli
     ./browsers
     ./editors
-    # ./graphical
+    ./graphical
     # ./misc
     # ./plasma
     # ./services

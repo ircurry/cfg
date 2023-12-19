@@ -94,5 +94,8 @@
       firefox.enable = true;
       tor-browser.enable = true;
     };
+    graphical = {
+      keepassxc.enable = true;
+    };
   };
 }
