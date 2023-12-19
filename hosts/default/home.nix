@@ -98,6 +98,7 @@
       flatpak.enable = false;
       keepassxc.enable = true;
       kid3.enable = true;
+      obs.enable = true;
     };
   };
 }
