@@ -9,4 +9,8 @@
     ./zsh.nix
   ];
 
+  config = {
+
+  };
+
 }
