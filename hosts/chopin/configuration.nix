@@ -75,6 +75,7 @@
     isNormalUser = true;
     description = "Ian Curran";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
   };
 
   home-manager = {
