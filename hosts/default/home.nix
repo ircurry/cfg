@@ -87,7 +87,7 @@
     editors.emacs = {
       enable = true;
       main = true;
-      server = true;
+      server = false;
     };
     browsers = {
       brave.enable = false;
