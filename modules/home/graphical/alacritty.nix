@@ -31,6 +31,29 @@ in
           bold.style = "Bold";
           size = 10;
         };
+
+        key_bindings = [
+          {
+            key = "V";
+            mods = "Alt";
+            action = "Paste";
+          }
+          {
+            key = "C";
+            mods = "Alt";
+            action = "Copy";
+          }
+          {
+            key = "J";
+            mods = "Alt|Control";
+            action = "Increasefontsize";
+          }
+          {
+            key = "K";
+            mods = "Alt|Control";
+            action = "Decreasefontsize";
+          }
+        ];
         
       };
     };
