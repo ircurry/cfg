@@ -85,8 +85,6 @@
   nocturne = {
     editors.emacs = {
       enable = true;
-      main = true;
-      server = false;
     };
     browsers = {
       brave.enable = false;

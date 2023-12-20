@@ -27,20 +27,5 @@ in
       ".emacs.d/themes".source = ./themes;
     };
 
-    home.sessionVariables = lib.mkIf cfg.main (if (cfg.server == true ) then {
-      EDITOR = "emacsclient -c -a 'emacs'";
-    } else {
-      EDITOR = "emacs";
-    });
-
-    services.emacs = lib.mkIf cfg.server {
-      enable = true;
-      package = pkgs.emacs29-pgtk;
-      client = {
-        enable = true;
-        arguments = ["-c" "-a" "'emacs'"];
-      };
-    };
-    
   };
 }
