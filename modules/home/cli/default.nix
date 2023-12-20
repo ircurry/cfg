@@ -5,5 +5,6 @@
     ./core.nix
     ./git.nix
     # ./lf
+    ./zsh.nix
   ];
 }

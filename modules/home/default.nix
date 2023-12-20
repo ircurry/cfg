@@ -9,7 +9,7 @@
     ./misc
     # ./plasma
     # ./services
-    ./shells
+    # ./shells
     # ./themes
     # ./wayland
   ];
