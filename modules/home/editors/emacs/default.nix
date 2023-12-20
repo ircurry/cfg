@@ -6,8 +6,6 @@ in
 {
   options.nocturne.editors.emacs = {
     enable = lib.mkEnableOption "Whether to use emacs as an editor";
-    main = lib.mkEnableOption "Whether to set emacs as the main editor";
-    server = lib.mkEnableOption "Whether to use emacs daemon";
   };
 
   config = lib.mkIf cfg.enable {
