@@ -12,9 +12,6 @@ let
 in
 {
   home.sessionVariables = {
-    XDG_CONFIG_HOME = config.xdg.configHome;
-    XDG_DATA_HOME = config.xdg.dataHome;
-    XDG_CACHE_HOME = config.xdg.cacheHome;
     TMUX_TMPDIR = "$XDG_RUNTIME_DIR";
     GNUPGHOME = d + "/gnupg";
     LESSHISTFILE = "/dev/null";

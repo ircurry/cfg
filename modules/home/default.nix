@@ -6,7 +6,7 @@
     ./browsers
     ./editors
     ./graphical
-    # ./misc
+    ./misc
     # ./plasma
     # ./services
     ./shells
