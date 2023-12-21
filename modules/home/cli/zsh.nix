@@ -49,25 +49,24 @@ in
       grep = "grep --color=auto";
 
       rm = "rm -i";
-      ls = "eza -h --group-directories-first --icons";
-      ll = "eza -h --group-directories-first --icons -L 1 -T -l";
-      la = "eza -h --group-directories-first --icons -L 1 -T -l -a";
-      tree = "eza -h --group-directories-first --icons -L 2 -T -l";
+      ls = "${pkgs.eza}/bin/eza -h --group-directories-first --icons";
+      ll = "${pkgs.eza}/bin/eza -h --group-directories-first --icons -L 1 -T -l";
+      la = "${pkgs.eza}/bin/eza -h --group-directories-first --icons -L 1 -T -l -a";
+      tree = "${pkgs.eza}/bin/eza -h --group-directories-first --icons -L 2 -T -l";
       mv = "mv -i";
       cp = "cp -i";
-      tp = "trash put";
+      tp = "${pkgs.trashy}/bin/trash put";
       # zc = "zuluCrypt-cli";
       # zm = "zuluMoutn-cli";
 
       ip = "ip -color=auto";
-      wget = "wget --no-hsts";
+      wget = "${pkgs.wget}/bin/wget --no-hsts";
 
-      am = "amfora";
-      irssi = "irssi --config=$XDG_CONFIG_HOME/irssi/config --home=$XDG_DATA_HOME/irssi";
-      scim = "sc-im";
-      YT = "ytfzf -T chafa";
-      YTO = "ytfzf -T chafa -c O";
-      YTM = "ytfzf -T chafa -t -s -m";
+      am = "${pkgs.amfora}/bin/amfora";
+      irssi = "${pkgs.irssi}/bin/irssi --config=$XDG_CONFIG_HOME/irssi/config --home=$XDG_DATA_HOME/irssi";
+      YT = "${pkgs.ytfzf}/bin/ytfzf -T chafa";
+      YTO = "${pkgs.ytfzf}/bin/ytfzf -T chafa -c O";
+      YTM = "${pkgs.ytfzf}/bin/ytfzf -T chafa -t -s -m";
 
     };
     
