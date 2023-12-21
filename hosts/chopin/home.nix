@@ -87,6 +87,7 @@
       enable = true;
     };
     browsers = {
+      amfora.enable = true;
       brave.enable = false;
       firefox.enable = true;
       tor-browser.enable = true;
