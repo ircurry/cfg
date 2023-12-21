@@ -99,5 +99,8 @@
       obs.enable = true;
       signal-desktop.enable = false;
     };
+    cli = {
+      scripts.youtube-scripts = true;
+    };
   };
 }
