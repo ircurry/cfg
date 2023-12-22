@@ -21,6 +21,7 @@ in
       
       profiles.recur = {
         isDefault = true;
+        id = 0;
         arkenfox = {
           enable = true;
           "0000".enable = true;
@@ -102,6 +103,77 @@ in
           libredirect
           multi-account-containers
         ];
+      };
+      
+      profiles.school = {
+        isDefault = false;
+        id = 1;
+        arkenfox = {
+          enable = true;
+          "0000".enable = true;
+          "0100".enable = true;
+          "0200".enable = true;
+          "0300".enable = true;
+          "0400".enable = true;
+          "0600".enable = true;
+          "0700".enable = true;
+          "0800" = {
+            enable = true;
+            "0810"."browser.formfill.enable".value = false;
+          };
+          "0900".enable = true;
+          # "1200".enable = true;
+          "2600".enable = true;
+          "2700".enable = true;
+        };
+        
+        bookmarks = [
+          {
+            name = "wikipedia";
+            tags = [ "wiki" ];
+            keyword = "wiki";
+            url = "https://en.wikipedia.org/";
+          }
+        ];
+        
+        containers = {
+          default = {
+            color = "blue";
+            icon = "circle";
+            id = 1;
+          };
+          unsafe = {
+            color = "red";
+            icon = "fruit";
+            id = 2;
+          };
+        };
+
+        search = {
+          default = "DuckDuckGo";
+          force = true;
+          engines = {
+            "Nix Packages" = {
+              urls = [{
+                template = "https://search.nixos.org/packages";
+                params = [
+                  { name = "type"; value = "packages"; }
+                  { name = "query"; value = "{searchTerms}"; }
+                ];
+              }];
+              
+              icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+              definedAliases = [ "@np" ];
+            };
+          };
+        };
+
+        extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
+          ublock-origin
+          libredirect
+          multi-account-containers
+        ];
+      
       };
     };
   };
