@@ -1,7 +1,6 @@
-{ config, pkgs, inputs, ... }:
-
-{
+{ ... }: {
   imports = [
+    ./amfora
     ./core.nix
     ./git.nix
     # ./lf
