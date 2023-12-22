@@ -4,14 +4,10 @@ let
   cfg = config.nocturne.editors.emacs;
 in
 {
-  options.nocturne.editors.emacs = {
-    enable = lib.mkEnableOption "Whether to use emacs as an editor";
-  };
-
   config = lib.mkIf cfg.enable {
     programs.emacs = { 
       enable = true;
-      package = pkgs.emacs29-pgtk;
+      package = cfg.pkg;
     };
 
     home.packages = with pkgs; [
