@@ -1,8 +1,8 @@
 { ... }: {
   imports = [
+    ./cli
     ./options
     ./programs
-    ./shell
     ./wayland
   ];
 }
