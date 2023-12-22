@@ -19,7 +19,7 @@
   # environment.
   
   imports = [ 
-    ../../modules/home
+    ../../home
   ];
 
   home.packages = with pkgs; [
@@ -81,24 +81,4 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  # The Meat of my configuration
-  nocturne = {
-    editors.emacs = {
-      enable = true;
-      main = true;
-      server = false;
-    };
-    browsers = {
-      brave.enable = false;
-      firefox.enable = true;
-      tor-browser.enable = true;
-    };
-    graphical = {
-      flatpak.enable = false;
-      keepassxc.enable = true;
-      kid3.enable = true;
-      obs.enable = true;
-    };
-  };
 }
