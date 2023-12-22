@@ -4,10 +4,6 @@ let
   cfg = config.nocturne.graphical.alacritty;
 in
 {
-  options.nocturne.graphical.alacritty = {
-    enable = lib.mkEnableOption "Whether to enable alacrittys for user";
-  };
-
   config = lib.mkIf cfg.enable {
     programs.alacritty = {
       enable = true;
