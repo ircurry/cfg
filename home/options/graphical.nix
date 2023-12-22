@@ -11,6 +11,11 @@
       default = true;
       description = "Enable Firefox";
     };
+    flatpak.enable = lib.mkEnableOption "Enable Flatpaks";
+    keepassxc.enable = lib.mkEnableOption "Enable KeepassXC";
+    kid3.enable = lib.mkEnableOption "Enable kid3";
+    obs.enable = lib.mkEnableOption "Enable OBS";
+    signal-desktop.enable = lib.mkEnableOption "Enable Signal Desktop";
     tor-browser.enable = lib.mkEnableOption "Enable the Tor Browser";
   };
 }

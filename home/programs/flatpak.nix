@@ -4,10 +4,6 @@ let
   cfg = config.nocturne.graphical.flatpak;
 in
 {
-  options.nocturne.graphical.flatpak = {
-    enable = lib.mkEnableOption "Whether to enable flatpaks for user";
-  };
-
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       flatpak
