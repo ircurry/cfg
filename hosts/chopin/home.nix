@@ -62,8 +62,8 @@
       keepassxc.enable = true;
       kid3.enable = true;
       obs.enable = true;
-      signal-desktop.enable = false;
-      tor-browser.enable = true;
+      signalDesktop.enable = false;
+      torBrowser.enable = true;
     };
     cli = {
       scripts.youtube-scripts = true;
