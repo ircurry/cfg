@@ -1,13 +1,9 @@
 { lib, config, pkgs, inputs, ... }:
 
 let
-  cfg = config.nocturne.browsers.firefox;
+  cfg = config.nocturne.graphical.firefox;
 in
 {
-  options.nocturne.browsers.firefox = {
-    enable = lib.mkEnableOption "Whether to enable firefox.";
-  };
-
   imports = [ inputs.arkenfox.hmModules.default ];
   
   config = lib.mkIf cfg.enable {

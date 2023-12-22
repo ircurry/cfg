@@ -53,17 +53,17 @@
     };
     browsers = {
       amfora.enable = true;
-      brave.enable = false;
-      firefox.enable = true;
-      tor-browser.enable = true;
     };
     graphical = {
       alacritty.enable = true;
+      brave.enable = false;
+      firefox.enable = true;
       flatpak.enable = false;
       keepassxc.enable = true;
       kid3.enable = true;
       obs.enable = true;
       signal-desktop.enable = false;
+      tor-browser.enable = true;
     };
     cli = {
       scripts.youtube-scripts = true;
