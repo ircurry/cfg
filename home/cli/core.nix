@@ -1,7 +1,4 @@
-{ config, pkgs, inputs, ... }:
-
-{
-  
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     eza      # a smart ls replacement
     file     # file info
@@ -12,5 +9,4 @@
     vim      # cli text editor (I don't want to use nano)
     zoxide   # a smart cd replacement
   ];
-
 }

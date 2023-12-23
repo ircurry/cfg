@@ -1,8 +1,8 @@
 { config, pkgs, lib, ... }:
 
 let
-  cfg = config.nocturne.cli.scripts.youtube-scripts;
-in lib.mkIf cfg {
+  cfg = config.nocturne.cli.scripts.youtubeScripts;
+in lib.mkIf cfg.enable {
   home.packages = let
     ytu = pkgs.writeShellScriptBin "ytu" ''
     if [ -z $1 ]; then

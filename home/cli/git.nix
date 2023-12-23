@@ -1,10 +1,7 @@
-{ config, pkgs, inputs, ... }:
-
-{
-  programs.git = {
+{ config, pkgs, inputs, ... }: {
+  programs.git = let cfg = config.nocturne.cli.git; in {
     enable = true;
-    userEmail = "icurran@protonmail.com";
-    userName = "Ian Curran";
+    userEmail = cfg.userName;
+    userName = cfg.userEmail;
   };
-
 }

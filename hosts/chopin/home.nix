@@ -51,9 +51,6 @@
     editors.emacs = {
       enable = true;
     };
-    browsers = {
-      amfora.enable = true;
-    };
     graphical = {
       alacritty.enable = true;
       brave.enable = false;
@@ -66,7 +63,10 @@
       torBrowser.enable = true;
     };
     cli = {
-      scripts.youtube-scripts = true;
+      amfora.enable = true;
+      scripts = {
+        youtubeScripts.enable = true;
+      };
     };
   };
 }

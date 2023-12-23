@@ -1,11 +1,4 @@
-{ config, lib, pkgs, ... }:
-
-{
-
-  options.nocturne.cli.scripts = {
-    youtube-scripts = lib.mkEnableOption "Whether to enable youtube scripts";
-  };
-  
+{ config, lib, pkgs, ... }: {
   imports = [
     ./youtube-scripts.nix
   ];
