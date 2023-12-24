@@ -13,7 +13,7 @@ in
             x = 4;
             y = 4;
           };
-          opacity = 1.0;
+          opacity = 0.85;
           title = "Alacritty";
           class = {
             instance = "Alacritty";
