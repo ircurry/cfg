@@ -1,7 +1,7 @@
 { config, pkgs, inputs, ... }: {
   programs.git = let cfg = config.nocturne.cli.git; in {
     enable = true;
-    userEmail = cfg.userName;
-    userName = cfg.userEmail;
+    userEmail = cfg.userEmail;
+    userName = cfg.userName;
   };
 }
