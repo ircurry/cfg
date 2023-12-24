@@ -9,6 +9,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
+      ../../nixos
     ];
 
   # Bootloader.
@@ -43,6 +44,8 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  nocturne-sys.hyprland.enable = false;
+
   # # Enable the X11 windowing system.
   # services.xserver = { 
   #   enable = true;
@@ -57,12 +60,12 @@
   # };
 
   # enable Hyprland
-  services.xserver.desktopManager.gnome.enable = lib.mkForce false;
-  services.xserver.displayManager.lightdm.enable = lib.mkForce false;
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
+  # services.xserver.desktopManager.gnome.enable = lib.mkForce false;
+  # services.xserver.displayManager.lightdm.enable = lib.mkForce false;
+  # programs.hyprland = {
+  #   enable = true;
+  #   xwayland.enable = true;
+  # };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
