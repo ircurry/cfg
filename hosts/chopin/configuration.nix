@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ lib, config, pkgs, inputs, ... }:
 
 {
   imports =
@@ -43,17 +43,25 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver = { 
+  # # Enable the X11 windowing system.
+  # services.xserver = { 
+  #   enable = true;
+
+  #   # Enable the KDE Plasma Desktop Environment.
+  #   displayManager.sddm.enable = true;
+  #   desktopManager.plasma5.enable = true;
+
+  #   # Configure keymap in X11
+  #   layout = "us";
+  #   xkbVariant = "";
+  # };
+
+  # enable Hyprland
+  services.xserver.desktopManager.gnome.enable = lib.mkForce false;
+  services.xserver.displayManager.lightdm.enable = lib.mkForce false;
+  programs.hyprland = {
     enable = true;
-
-    # Enable the KDE Plasma Desktop Environment.
-    displayManager.sddm.enable = true;
-    desktopManager.plasma5.enable = true;
-
-    # Configure keymap in X11
-    layout = "us";
-    xkbVariant = "";
+    xwayland.enable = true;
   };
 
   # Enable CUPS to print documents.
