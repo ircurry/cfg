@@ -44,7 +44,7 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  nocturne-sys.hyprland.enable = false;
+  nocturne-sys.hyprland.enable = true;
 
   # # Enable the X11 windowing system.
   # services.xserver = { 
