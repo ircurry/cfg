@@ -34,6 +34,9 @@
         #workspaces button.empty {
           color: #4c566a;
         }
+        #workspaces button.active {
+          color: #d8dee9;
+        }
         #workspaces button.urgent {
           color: #d08770;
         }
