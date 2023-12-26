@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   config = {
-    home.packages = with pkgs; [ rofi-wayland ];
+    home.packages = with pkgs; [ rofi-wayland killall ];
     wayland.windowManager.hyprland = {
       enable = true;
       extraConfig = ''
@@ -146,6 +146,7 @@
 	      bind = $mainMod, E, exec, $editor
         bind = $mainMod, R, exec, rofi -show run
         bind = $mainMod, P, exec, rofi -show drun
+        bind = $mainMod, B, exec, killall ".waybar-wrapped" || waybar
         bind = $mainMod_SHIFT, C, killactive, 
         bind = $mainMod_SHIFT, Q, exit,
         
