@@ -64,6 +64,15 @@
         #battery.critical:not(.charging) {
           color: #bf616a;
         }
+        /* ===Clock=== */
+        #clock {
+          font-family: Material Design Icons;
+          font-size: ${stdFontSize}px;
+          color: #d8dee9;
+          background-color: #2e3440;
+          margin: 0px ${stdMargin}px;
+          padding: 0px ${stdPadding}px;
+        }
         /* ===Power=== */
         #custom-power {
           font-family: Material Design Icons;
@@ -82,6 +91,7 @@
           "eDP-1"
         ];
         modules-left = [ "custom/launcher" "hyprland/workspaces" "battery" ];
+        modules-center = [ "clock" ];
         modules-right = [ "custom/power" ];
         "custom/launcher" = {
           format = "󱄅";
@@ -115,6 +125,12 @@
           format-plugged = "󰂄 {capacity}%";
           format-alt = "{icon} {capacity}%";
           format-icons = ["󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+        };
+        # Center
+        clock = {
+          interval = 60;
+          format = "󰅐 {:%H:%M}";
+          max-length = 25;
         };
         # Right
         "custom/power" = {
