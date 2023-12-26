@@ -64,6 +64,15 @@
         #battery.critical:not(.charging) {
           color: #bf616a;
         }
+        /* ===Power=== */
+        #custom-power {
+          font-family: Material Design Icons;
+          font-size: 24px;
+          color: #2e3440;
+          background-color: #bf616a;
+          margin: 0px ${stdMargin}px;
+          padding: 0px ${stdPadding}px;
+        }
       '';
 
       settings = [{
@@ -73,6 +82,7 @@
           "eDP-1"
         ];
         modules-left = [ "custom/launcher" "hyprland/workspaces" "battery" ];
+        modules-right = [ "custom/power" ];
         "custom/launcher" = {
           format = "󱄅";
           tooltip = false;
@@ -105,6 +115,12 @@
           format-plugged = "󰂄 {capacity}%";
           format-alt = "{icon} {capacity}%";
           format-icons = ["󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+        };
+        # Right
+        "custom/power" = {
+          format = "󰐥";
+          tooltip = false;
+          on-click = "sleep 0.1 && ${pkgs.wlogout}/bin/wlogout";
         };
       }];
     };
