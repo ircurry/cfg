@@ -58,14 +58,17 @@
           font-size: ${stdFontSize}px;
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
-          color: #8fbcbb;
+          color: #a3be8c;
           background-color: #2e3440;
         }
-        #battery.warning {
+        #battery.warning:not(.charging) {
           color: #d08770;
         }
         #battery.critical:not(.charging) {
           color: #bf616a;
+        }
+        #battery.charging {
+          color: #8fbcbb;
         }
         /* ===Clock=== */
         #clock {
@@ -76,11 +79,11 @@
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
-        /* ===Network=== */
-        #network {
+        /* ===Backlight=== */
+        #backlight {
           font-family: Material Design Icons, Iosevka Nerd Font Mono;
           font-size: ${stdFontSize}px;
-          color: #81a1c1;
+          color: #ebcb8b;
           background-color: #2e3440;
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
@@ -89,7 +92,16 @@
         #pulseaudio {
           font-family: Material Design Icons, Iosevka Nerd Font Mono;
           font-size: ${stdFontSize}px;
-          color: #a3be8c;
+          color: #5e81ac;
+          background-color: #2e3440;
+          margin: 0px ${stdMargin}px;
+          padding: 0px ${stdPadding}px;
+        }
+        /* ===Network=== */
+        #network {
+          font-family: Material Design Icons, Iosevka Nerd Font Mono;
+          font-size: ${stdFontSize}px;
+          color: #d8dee9;
           background-color: #2e3440;
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
@@ -113,7 +125,7 @@
         ];
         modules-left = [ "custom/launcher" "hyprland/workspaces" "battery" ];
         modules-center = [ "clock" ];
-        modules-right = [ "pulseaudio" "network" "custom/power" ];
+        modules-right = [ "backlight" "pulseaudio" "network" "custom/power" ];
         "custom/launcher" = {
           format = "󱄅";
           tooltip = false;
@@ -141,7 +153,7 @@
             warning = 30;
             critical = 15;
           };
-          interval = 30;
+          interval = 15;
           format = "{icon} {capacity}%";
           format-charging = "󰂄 {capacity}%";
           format-plugged = "󰂄 {capacity}%";
@@ -155,21 +167,28 @@
           max-length = 25;
         };
         # Right
+        backlight = {
+          format = "{icon} {percent}%";
+          format-icons = [ "󰋙" "󰫃" "󰫄" "󰫅" "󰫆" "󰫇" "󰫈" ];
+          on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl s +5%";
+          on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl s 5%-";
+        };
         pulseaudio = {
           scroll-step = 5;
+          on-click = "sleep 0.1 && ${pkgs.pavucontrol}/bin/pavucontrol";
           tooltip = true;
           tooltip-format = "{volume}%";
           format = "{icon} {volume}%";
-          format-muted = "󰝟 ";
+          format-muted = "󰝟 MUTE";
           format-icons = {
             default = ["󰕿" "󰖀" "󰕾"];
           };
         };
         network = {
           format = "{ifname}";
-          format-wifi = "󰤨 {essid}";
-          format-ethernet = "󰈀 {ipaddr}";
-          format-disconnected = "";
+          format-wifi = "󰤨";
+          format-ethernet = "󰈀";
+          format-disconnected = "󰤭";
           tooltip-format = "󰛳 {ifname} via {gwaddr}";
           tooltip-format-wifi = "󰤨 {essid}";
           tooltip-format-ethernet = "󰈀 {ipaddr}/{cidr}";
