@@ -85,6 +85,15 @@
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
+        /* ===Audio=== */
+        #pulseaudio {
+          font-family: Material Design Icons, Iosevka Nerd Font Mono;
+          font-size: ${stdFontSize}px;
+          color: #a3be8c;
+          background-color: #2e3440;
+          margin: 0px ${stdMargin}px;
+          padding: 0px ${stdPadding}px;
+        }
         /* ===Power=== */
         #custom-power {
           font-family: Material Design Icons;
@@ -104,7 +113,7 @@
         ];
         modules-left = [ "custom/launcher" "hyprland/workspaces" "battery" ];
         modules-center = [ "clock" ];
-        modules-right = [ "network" "custom/power" ];
+        modules-right = [ "pulseaudio" "network" "custom/power" ];
         "custom/launcher" = {
           format = "󱄅";
           tooltip = false;
@@ -132,6 +141,7 @@
             warning = 30;
             critical = 15;
           };
+          interval = 30;
           format = "{icon} {capacity}%";
           format-charging = "󰂄 {capacity}%";
           format-plugged = "󰂄 {capacity}%";
@@ -145,6 +155,16 @@
           max-length = 25;
         };
         # Right
+        pulseaudio = {
+          scroll-step = 5;
+          tooltip = true;
+          tooltip-format = "{volume}%";
+          format = "{icon} {volume}%";
+          format-muted = "󰝟 ";
+          format-icons = {
+            default = ["󰕿" "󰖀" "󰕾"];
+          };
+        };
         network = {
           format = "{ifname}";
           format-wifi = "󰤨 {essid}";
