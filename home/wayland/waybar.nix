@@ -26,7 +26,7 @@
           padding: 0px ${stdPadding}px;
         }
         #workspaces button {
-          font-family: Material Design Icons;
+          font-family: Material Design Icons, Iosevka Nerd Font Mono;
           font-size: ${stdFontSize}px;
           margin: 0px;
           padding: 0px ${stdPadding}px;
@@ -69,9 +69,18 @@
         }
         /* ===Clock=== */
         #clock {
-          font-family: Material Design Icons;
+          font-family: Material Design Icons, Iosevka Nerd Font Mono;
           font-size: ${stdFontSize}px;
           color: #d8dee9;
+          background-color: #2e3440;
+          margin: 0px ${stdMargin}px;
+          padding: 0px ${stdPadding}px;
+        }
+        /* ===Network=== */
+        #network {
+          font-family: Material Design Icons, Iosevka Nerd Font Mono;
+          font-size: ${stdFontSize}px;
+          color: #81a1c1;
           background-color: #2e3440;
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
@@ -95,7 +104,7 @@
         ];
         modules-left = [ "custom/launcher" "hyprland/workspaces" "battery" ];
         modules-center = [ "clock" ];
-        modules-right = [ "custom/power" ];
+        modules-right = [ "network" "custom/power" ];
         "custom/launcher" = {
           format = "󱄅";
           tooltip = false;
@@ -136,6 +145,17 @@
           max-length = 25;
         };
         # Right
+        network = {
+          format = "{ifname}";
+          format-wifi = "󰤨 {essid}";
+          format-ethernet = "󰈀 {ipaddr}";
+          format-disconnected = "";
+          tooltip-format = "󰛳 {ifname} via {gwaddr}";
+          tooltip-format-wifi = "󰤨 {essid}";
+          tooltip-format-ethernet = "󰈀 {ipaddr}/{cidr}";
+          tooltip-format-disconnected = "Disconnected";
+          max-length = "25";
+        };
         "custom/power" = {
           format = "󰐥";
           tooltip = false;
