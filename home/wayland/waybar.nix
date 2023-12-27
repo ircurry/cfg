@@ -67,9 +67,6 @@
         #battery.critical:not(.charging) {
           color: #bf616a;
         }
-        #battery.charging {
-          color: #8fbcbb;
-        }
         /* ===Clock=== */
         #clock {
           font-family: Material Design Icons, Iosevka Nerd Font Mono;
