@@ -169,6 +169,8 @@
         bind = $mainMod_SHIFT, K, layoutmsg, mfact, +0.05
         bind = $mainMod_SHIFT, J, layoutmsg, mfact, -0.05
         bind = $mainMod, Return, layoutmsg, swapwithmaster
+        bind = $mainMod, F, fullscreen
+        bind = $mainMod, M, fullscreen, 1
 
         # Switch workspaces with mainMod + [0-9]
         bind = $mainMod, 1, workspace, 1
