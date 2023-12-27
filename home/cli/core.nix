@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    bottom   # system resource monitor
     eza      # a smart ls replacement
     file     # file info
     fzf      # cli fuzzy finder
