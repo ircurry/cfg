@@ -103,6 +103,10 @@
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
+        #network.disconnected,
+        #network.disabled {
+          color: #4c566a;
+        }
         /* ===Power=== */
         #custom-power {
           font-family: Material Design Icons;
