@@ -57,6 +57,7 @@ in
       tp = "${pkgs.trashy}/bin/trash put";
       # zc = "zuluCrypt-cli";
       # zm = "zuluMoutn-cli";
+      zo = "zoxide";
 
       ip = "ip -color=auto";
       wget = "${pkgs.wget}/bin/wget --no-hsts";
