@@ -42,7 +42,6 @@ in
     shellAliases = {
       cl = "clear";
       info = "info --vi-keys";
-      cd = "__zoxide_z";
       icd = "__zoxide_zi";
 
       diff = "diff --color=auto";
