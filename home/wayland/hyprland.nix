@@ -25,6 +25,7 @@
         # exec-once = waybar & hyprpaper & firefox
         exec-once = emacs --daemon
         exec-once = waybar
+        exec-once = ${pkgs.swayidle}/bin/swayidle -w timeout 300 'swaylock -f' timeout 360 'systemctl suspend'
         
         # Source a file (multi-file configs)
         # source = ~/.config/hypr/myColors.conf
