@@ -2,7 +2,7 @@
   config = {
     home.packages = let
       rofi-logout = pkgs.writeShellScriptBin "rofi-logout" ''
-        op=$( echo -e " Lock\n Logout\n Poweroff\n Reboot\n Suspend" | ${pkgs.rofi-wayland}/bin/rofi -p "Power Menu" -dmenu | awk '{print tolower($2)}' )
+        op=$( echo -e " Lock\n Logout\n Poweroff\n Reboot\n Suspend" | ${pkgs.rofi-wayland}/bin/rofi -i -p "Power Menu" -dmenu | awk '{print tolower($2)}' )
         
         case $op in 
                 poweroff) systemctl poweroff ;;
