@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   config = {
-    home.packages = [ pkgs.material-design-icons ];
+    home.packages = with pkgs; [ material-design-icons nerdfonts ];
     programs.waybar = {
       enable = true;
       package = pkgs.waybar;
