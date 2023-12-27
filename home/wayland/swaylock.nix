@@ -1,6 +1,18 @@
 { pkgs, ... }: {
   config = {
-    home.packages = [ pkgs.nerdfonts pkgs.swaylock-effects ];
+    home.packages = let
+      rofi-logout = pkgs.writeShellScriptBin "rofi-logout" ''
+        op=$( echo -e " Lock\n Logout\n Poweroff\n Reboot\n Suspend" | ${pkgs.rofi-wayland}/bin/rofi -p "Power Menu" -dmenu | awk '{print tolower($2)}' )
+        
+        case $op in 
+                poweroff) systemctl poweroff ;;
+                reboot) systemctl reboot ;;
+                suspend) systemctl suspend && swaylock ;;
+                lock) swaylock ;;
+                logout) loginctl terminate-user $USER ;;
+        esac
+      '';
+    in [ pkgs.nerdfonts pkgs.swaylock-effects rofi-logout ];
 
     xdg.configFile."swaylock/config" = {
       enable = true;

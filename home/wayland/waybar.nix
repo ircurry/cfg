@@ -198,7 +198,7 @@
         "custom/power" = {
           format = "󰐥";
           tooltip = false;
-          on-click = "sleep 0.1 && ${pkgs.wlogout}/bin/wlogout";
+          on-click = "sleep 0.1 && rofi-logout";
         };
       }];
     };

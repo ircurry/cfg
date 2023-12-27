@@ -149,7 +149,7 @@
         bind = $mainMod, B, exec, killall ".waybar-wrapped" || waybar
         bind = $mainMod_SHIFT, C, killactive, 
         bind = $mainMod_SHIFT, Q, exit,
-        bind = $mainMod_CTRL, code:47, exec, swaylock
+        bind = $mainMod_CTRL, code:47, exec, rofi-logout
         
         # Move focus with mainMod + arrow keys
         # bind = $mainMod, H, movefocus, l
