@@ -1,6 +1,11 @@
 { pkgs, ... }: {
   config = {
-    home.packages = with pkgs; [ rofi-wayland killall ];
+    home.packages = with pkgs; [
+      rofi-wayland
+      killall
+      # Audio Control
+      pavucontrol
+    ];
     wayland.windowManager.hyprland = {
       enable = true;
       extraConfig = ''
@@ -130,13 +135,13 @@
         device:at-translated-set-2-keyboard {
             kb_options = ctrl:nocaps
         }
-        
-        # Example windowrule v1
-        # windowrule = float, ^(kitty)$
-        # Example windowrule v2
-        # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-        # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+
+        ## Window Rules
         windowrulev2 = nomaximizerequest, class:.* # You'll probably like this.
+        # Pavucontrol
+        windowrulev2 = float, class:^(pavucontrol)$, title:^(Volume Control)$
+        windowrulev2 = size 80% 85%, class:^(pavucontrol)$, title:^(Volume Control)$
+        windowrulev2 = center, class:^(pavucontrol)$, title:^(Volume Control)$
         
         
         # See https://wiki.hyprland.org/Configuring/Keywords/ for more
