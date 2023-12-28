@@ -26,8 +26,7 @@
   :bind (:map cur/leader-keymap
 	 ("t C-t" . cur/meow-theme-tweaker))
   :config
-  (when (display-graphic-p)
-    (load-theme 'doom-nord-aurora t)))
+  (load-theme 'doom-nord-aurora t))
 
 ;; ===Autothemer===
 (use-package autothemer
