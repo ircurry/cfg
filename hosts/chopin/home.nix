@@ -64,6 +64,7 @@
       scripts = {
         youtubeScripts.enable = true;
       };
+      ytfzf.enable = true;
     };
   };
 }

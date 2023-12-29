@@ -64,10 +64,6 @@ in
 
       am = "${pkgs.amfora}/bin/amfora";
       irssi = "${pkgs.irssi}/bin/irssi --config=$XDG_CONFIG_HOME/irssi/config --home=$XDG_DATA_HOME/irssi";
-      YT = "${pkgs.ytfzf}/bin/ytfzf -T chafa";
-      YTO = "${pkgs.ytfzf}/bin/ytfzf -T chafa -c O";
-      YTM = "${pkgs.ytfzf}/bin/ytfzf -T chafa -t -s -m";
-
     };
     
   };

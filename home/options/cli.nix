@@ -21,5 +21,6 @@
     scripts = {
       youtubeScripts.enable = lib.mkEnableOption "Enable YouTube scripts";
     };
+    ytfzf.enable = lib.mkEnableOption "Enable ytfzf and scripts around it";
   };
 }
