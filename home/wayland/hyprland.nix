@@ -75,8 +75,14 @@
           orientation = "top";
         };
         gestures.workspace_swipe = "off";
-        # Anime lady hehe
-        misc.force_default_wallpaper = -1;
+        misc = {
+          # Anime lady hehe
+          force_default_wallpaper = -1;
+          enable_swallow = true;
+          swallow_regex = [
+            "^(Alacritty)$"
+          ];
+        };
         "device:at-translated-set-2-keyboard" = {
           kb_options = "ctrl:nocaps";
         };
