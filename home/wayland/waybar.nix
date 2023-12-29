@@ -12,7 +12,7 @@
       in ''
         * {
           border: none;
-          border-radius: 5px;
+          border-radius: 8px;
         }
         window#waybar {
           background: transparent;
@@ -21,7 +21,7 @@
         }
         /* ===Workspaces=== */
         #workspaces {
-          background-color: #2e3440;
+          background-color: #3b4252;
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
@@ -30,6 +30,12 @@
           font-size: ${stdFontSize}px;
           margin: 0px;
           padding: 0px ${stdPadding}px;
+        }
+        #workspaces button:hover {
+          box-shadow: none;
+          text-shadow: none;
+          background: none;
+          background-color: #2e3440;
         }
         #workspaces button.empty {
           color: #4c566a;
@@ -47,7 +53,7 @@
         #custom-launcher {
           font-family: Material Design Icons;
           font-size: 24px;
-          color: #2e3440;
+          color: #3b4252;
           background-color: #5e81ac;
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
@@ -59,7 +65,7 @@
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
           color: #a3be8c;
-          background-color: #2e3440;
+          background-color: #3b4252;
         }
         #battery.warning:not(.charging) {
           color: #d08770;
@@ -72,7 +78,7 @@
           font-family: Material Design Icons, Iosevka Nerd Font Mono;
           font-size: ${stdFontSize}px;
           color: #d8dee9;
-          background-color: #2e3440;
+          background-color: #3b4252;
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
@@ -81,7 +87,7 @@
           font-family: Material Design Icons, Iosevka Nerd Font Mono;
           font-size: ${stdFontSize}px;
           color: #ebcb8b;
-          background-color: #2e3440;
+          background-color: #3b4252;
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
@@ -90,7 +96,7 @@
           font-family: Material Design Icons, Iosevka Nerd Font Mono;
           font-size: ${stdFontSize}px;
           color: #5e81ac;
-          background-color: #2e3440;
+          background-color: #3b4252;
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
@@ -99,7 +105,7 @@
           font-family: Material Design Icons, Iosevka Nerd Font Mono;
           font-size: ${stdFontSize}px;
           color: #d8dee9;
-          background-color: #2e3440;
+          background-color: #3b4252;
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
@@ -111,7 +117,7 @@
         #custom-power {
           font-family: Material Design Icons;
           font-size: 24px;
-          color: #2e3440;
+          color: #3b4252;
           background-color: #bf616a;
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
@@ -132,6 +138,7 @@
           tooltip = false;
           on-click = "sleep 0.1 && rofi -show drun";
         };
+        margin-top = 5;
         "hyprland/workspaces" = {
           on-click = "activate";
           format = "{icon}";
