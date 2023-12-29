@@ -22,8 +22,6 @@
   home.packages = with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
-    hello
-    kate
     mpv
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
