@@ -13,6 +13,11 @@
         description = "Default email for git";
       };
     };
+    lf.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable lf File Manager";
+    };
     scripts = {
       youtubeScripts.enable = lib.mkEnableOption "Enable YouTube scripts";
     };

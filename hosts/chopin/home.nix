@@ -24,7 +24,6 @@
     # # "Hello, world!" when run.
     hello
     kate
-    lf
     mpv
 
     # # It is sometimes useful to fine-tune packages, for example, by applying

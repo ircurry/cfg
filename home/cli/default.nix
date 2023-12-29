@@ -3,7 +3,7 @@
     ./amfora
     ./core.nix
     ./git.nix
-    # ./lf
+    ./lf
     ./scripts
     ./zsh.nix
   ];
