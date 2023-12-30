@@ -95,6 +95,11 @@
           "float, class:^(pavucontrol)$, title:^(Volume Control)$"
           "size 80% 85%, class:^(pavucontrol)$, title:^(Volume Control)$"
           "center, class:^(pavucontrol)$, title:^(Volume Control)$"
+          
+          # Center
+          "float, class:^(center)$"
+          "size 80% 85%, class:^(center)$"
+          "center, class:^(center)$"
         ];
         bind = [
           "$MOD_SHIFT, Return, exec, $terminal"
