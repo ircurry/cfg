@@ -5,6 +5,7 @@
       killall
       # Audio Control
       pavucontrol
+      swww
     ];
     wayland.windowManager.hyprland = {
       enable = true;
@@ -24,6 +25,7 @@
           "emacs --daemon"
           "waybar"
           "${pkgs.swayidle}/bin/swayidle -w timeout 300 'swaylock -f' timeout 360 'systemctl suspend'"
+          "${pkgs.swww}/bin/swww init"
         ];
         general = {
           gaps_in = 5;
