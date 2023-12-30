@@ -131,6 +131,13 @@
           "$MOD SHIFT, 5, movetoworkspace, 5"
           "$MOD SHIFT, 6, movetoworkspace, 6"
         ];
+        binde = [
+          ", XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d 1"
+          ", XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer -i 1"
+          ", XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t"
+          ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +1%"
+          ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 1%-"
+        ];
         bindm = [
           # Move/resize windows with mainMod + LMB/RMB and dragging
           "$MOD, mouse:272, movewindow"
