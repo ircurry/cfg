@@ -129,6 +129,7 @@
         position = "top";
         output = [
           "eDP-1"
+          "DP-2"
         ];
         modules-left = [ "custom/launcher" "hyprland/workspaces" "battery" ];
         modules-center = [ "clock" ];
