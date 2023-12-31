@@ -1,11 +1,22 @@
 { pkgs, ... }: {
   config = {
-    home.packages = with pkgs; [
-      rofi-wayland
-      killall
+    home.packages = let
+      scrn = pkgs.writeShellScriptBin "scrn" ''
+        mkdir -p "$HOME/pix/ss"
+        case $1 in
+            -s) ssfile="$HOME/pix/ss/$(date +%Y%m%d-%s)-screenshot.png"
+               ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | tee "$ssfile" | ${pkgs.wl-clipboard}/bin/wl-copy && ${pkgs.libnotify}/bin/notify-send -c screenshot -i "$ssfile" "Screenshot" "Selected screen screenshot taken" 2>/dev/null ;;
+            *) ssfile="$HOME/pix/ss/$(date +%Y%m%d-%s)-screenshot.png"
+               ${pkgs.grim}/bin/grim - | tee "$ssfile" | ${pkgs.wl-clipboard}/bin/wl-copy && ${pkgs.libnotify}/bin/notify-send -c screenshot -i "$ssfile" "Screenshot" "Full screen screenshot taken" 2>/dev/null ;;
+        esac
+      '';
+    in [
+      pkgs.rofi-wayland
+      pkgs.killall
       # Audio Control
-      pavucontrol
-      swww
+      pkgs.pavucontrol
+      pkgs.swww
+      scrn
     ];
     wayland.windowManager.hyprland = {
       enable = true;
@@ -108,6 +119,8 @@
           "$MOD, R, exec, rofi -show run"
           "$MOD, P, exec, rofi -show drun"
           "$MOD, B, exec, killall '.waybar-wrapped' || waybar"
+          "$MOD, S, exec, scrn"
+          "$MOD_SHIFT, S, exec, scrn -s"
           "$MOD_SHIFT, C, killactive, "
           "$MOD_SHIFT, Q, exit,"
           "$MOD_CTRL, code:47, exec, rofi-logout"
