@@ -123,6 +123,7 @@
           "$MOD, S, exec, scrn"
           "$MOD_SHIFT, S, exec, scrn -s"
           "$MOD_SHIFT, C, killactive, "
+          "$MOD, C, killactive, "
           "$MOD_SHIFT, Q, exit,"
           "$MOD_CTRL, code:47, exec, rofi-logout"
         
