@@ -118,6 +118,7 @@
 	        "$MOD, E, exec, $editor"
           "$MOD, R, exec, rofi -show run"
           "$MOD, P, exec, rofi -show drun"
+          "$MOD, code:61, exec, rofi -show window"
           "$MOD, B, exec, killall '.waybar-wrapped' || waybar"
           "$MOD, S, exec, scrn"
           "$MOD_SHIFT, S, exec, scrn -s"
