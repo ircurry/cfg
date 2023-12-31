@@ -136,6 +136,7 @@
           "$MOD, Return, layoutmsg, swapwithmaster"
           "$MOD, F, fullscreen"
           "$MOD, M, fullscreen, 1"
+          "$MOD, W, togglefloating"
 
           # Switch workspaces with mainMod + [0-9]
           "$MOD, 1, workspace, 1"
