@@ -21,6 +21,19 @@
         icons = true;
       };
       commands = {
+        open = ''
+        ''${{
+          case $(file --mime-type "$f" -bL) in
+            application/pdf|application/vnd.djvu|application/epub*) setsid -f ${pkgs.zathura}/bin/zathura "$fx" >/dev/null 2>&1 ;;
+            text/*|application/json|inode/x-empty|application/x-subrip) setsid -f ${config.programs.emacs.package}/bin/emacsclient -r "$f" >/dev/null 2>&1 ;;
+            # image/*) setsid -f ${pkgs.imv}/bin/imv-dir "$f" >/dev/null 2>&1 ;;
+            image/*) setsid -f ${pkgs.imv}/bin/imv-dir "$f" 2>/home/recur/errors.txt;;
+            audio/*|video/x-ms-asf) ${pkgs.mpv}/bin/mpv --audio-display=no "$f" ;;
+            video/*) setsid -f ${pkgs.mpv}/bin/mpv "$f" -quiet >/dev/null 2>&1 ;;
+            *) xdg-open "$f" ;;
+          esac
+        }}
+        '';
         browser-open = ''$setsid -f ${pkgs.firefox}/bin/firefox "$f" >/dev/null 2>&1'';
         mkdir = ''$mkdir -p "$(echo $* | tr ' ' '\ ')"'';
         mkscript = ''
