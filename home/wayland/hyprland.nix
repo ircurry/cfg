@@ -115,6 +115,7 @@
         ];
         bind = [
           "$MOD_SHIFT, Return, exec, $terminal"
+          "$MOD, Return, exec, $terminal"
 	        "$MOD, E, exec, $editor"
           "$MOD, R, exec, rofi -show run"
           "$MOD, P, exec, rofi -show drun"
