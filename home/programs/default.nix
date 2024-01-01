@@ -7,6 +7,7 @@
     ./flatpak.nix
     ./keepassxc.nix
     ./kid3.nix
+    ./mullvad-browser.nix
     ./obs.nix
     ./signal.nix
     ./tor-browser.nix
