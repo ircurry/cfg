@@ -61,6 +61,7 @@
       obs.enable = true;
       signalDesktop.enable = false;
       torBrowser.enable = true;
+      zathura.enable = true;
     };
     cli = {
       amfora.enable = true;

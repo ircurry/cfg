@@ -11,5 +11,6 @@
     ./obs.nix
     ./signal.nix
     ./tor-browser.nix
+    ./zathura.nix
   ];
 }

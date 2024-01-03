@@ -18,5 +18,6 @@
     obs.enable = lib.mkEnableOption "Enable OBS";
     signalDesktop.enable = lib.mkEnableOption "Enable Signal Desktop";
     torBrowser.enable = lib.mkEnableOption "Enable the Tor Browser";
+    zathura.enable = lib.mkEnableOption "Enable Zathura";
   };
 }
