@@ -18,6 +18,7 @@
       default = true;
       description = "Enable lf File Manager";
     };
+    phetch.enable = lib.mkEnableOption "Enable Phetch";
     scripts = {
       youtubeScripts.enable = lib.mkEnableOption "Enable YouTube scripts";
     };
