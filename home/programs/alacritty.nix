@@ -40,12 +40,12 @@ in
             action = "Copy";
           }
           {
-            key = "J";
+            key = "K";
             mods = "Alt|Control";
             action = "Increasefontsize";
           }
           {
-            key = "K";
+            key = "J";
             mods = "Alt|Control";
             action = "Decreasefontsize";
           }
