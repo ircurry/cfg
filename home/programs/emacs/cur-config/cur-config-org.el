@@ -8,6 +8,11 @@
   :ensure nil
   :defer t
   :hook (org-mode . cur/org-mode-setup)
+  :bind (:map org-mode-map
+	  ("C-S-h" . outline-promote)
+	  ("C-S-j" . outline-move-subtree-down)
+	  ("C-S-k" . outline-move-subtree-up)
+	  ("C-S-l" . outline-demote))
   :init
   (defun cur/org-mode-setup ()
     (org-indent-mode 1)
