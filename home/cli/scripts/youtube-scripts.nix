@@ -58,7 +58,30 @@ in lib.mkIf cfg.enable {
     		  -P "$HOME/dl/intake-playlists/" "$url" ;;
     esac
     '';
+    ytp = pkgs.writeShellScriptBin "ytp" ''
+    if [ -z $1 ]; then
+    	echo "no url provided"
+    	exit 1
+    fi
     
-  in [ ytu ytd ytdp ];
+    case $1 in
+    	-i) url=$(${pkgs.ytfzf}/bin/ytfzf -T ${pkgs.chafa}/bin/chafa -t -L)
+    	    if [ -z $url ]; then
+    		    echo "error, no url selected"
+    		    exit 2
+    	    fi
+    	    ytp "$url" ;;
+    	*) base="$(echo $1 | grep -Eo 'watch\?v=.{11}')"
+    	   url=$(echo "https://youtube.com/$base")
+         mkdir -p "$HOME/dl/intake-pods"
+    	   ${pkgs.yt-dlp}/bin/yt-dlp --embed-metadata \
+          -x --audio-format mp3 \
+		      -f bestaudio/best \
+          -o "%(uploader)s--%(title)s--%(id)s.%(ext)s" \
+    		  -P "$HOME/dl/intake-pods/" "$url" ;;
+    esac
+    '';
+    
+  in [ ytu ytd ytdp ytp ];
 
 }
