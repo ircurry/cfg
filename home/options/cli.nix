@@ -1,6 +1,7 @@
 { lib, ... }: {
   options.nocturne.cli = {
     amfora.enable = lib.mkEnableOption "Enable the Amfora Gemini browser";
+    ani-cli.enable = lib.mkEnableOption "Enable ani-cli";
     git = {
       userName = lib.mkOption {
         type = lib.types.str;

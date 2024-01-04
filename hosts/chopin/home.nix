@@ -65,6 +65,7 @@
     };
     cli = {
       amfora.enable = true;
+      ani-cli.enable = true;
       phetch.enable = true;
       scripts = {
         youtubeScripts.enable = true;

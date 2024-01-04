@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./amfora
+    ./ani-cli.nix
     ./core.nix
     ./git.nix
     ./lf
