@@ -27,6 +27,9 @@ in
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     defaultKeymap = "emacs";
+    profileExtra = ''
+    [[ $(tty) == /dev/tty1 ]] && exec Hyprland && exit 0
+    '';
     initExtraFirst = ''
     autoload -U colors && colors	# Load colors
     # zoxide
