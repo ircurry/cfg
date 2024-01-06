@@ -14,10 +14,14 @@ in {
       ytl = pkgs.writeShellScriptBin "ytl" ''
         ytfzf --type=playlist --notify-playing $@
       '';
+      ytm = pkgs.writeShellScriptBin "ytm" ''
+        ytfzf -m --notify-playing $@
+      '';
     in [
       yt
       yta
       ytl
+      ytm
       pkgs.ytfzf
       pkgs.chafa
     ];
