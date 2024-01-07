@@ -57,6 +57,7 @@
       flatpak.enable = false;
       keepassxc.enable = true;
       kid3.enable = true;
+      libreoffice.enable = true;
       mullvadBrowser.enable = true;
       obs.enable = true;
       signalDesktop.enable = false;

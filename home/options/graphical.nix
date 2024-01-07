@@ -14,6 +14,7 @@
     flatpak.enable = lib.mkEnableOption "Enable Flatpaks";
     keepassxc.enable = lib.mkEnableOption "Enable KeepassXC";
     kid3.enable = lib.mkEnableOption "Enable kid3";
+    libreoffice.enable = lib.mkEnableOption "Enable LibreOffice";
     mullvadBrowser.enable = lib.mkEnableOption "Enable Mullvad Browser";
     obs.enable = lib.mkEnableOption "Enable OBS";
     signalDesktop.enable = lib.mkEnableOption "Enable Signal Desktop";
