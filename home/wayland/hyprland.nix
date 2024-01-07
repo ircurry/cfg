@@ -1,4 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: let
+  menu-drun = "${pkgs.rofi-wayland}/bin/rofi -show drun";
+  menu-run = "${pkgs.rofi-wayland}/bin/rofi -show run";
+  menu-window = "${pkgs.rofi-wayland}/bin/rofi -show window";
+in {
   config = {
     home.packages = let
       scrn = pkgs.writeShellScriptBin "scrn" ''
@@ -24,7 +28,9 @@
         "$terminal" = "alacritty";
         "$editor" = "emacsclient -c -a 'emacs'";
         "$fileManager" = "dolphin";
-        "$menu" = "wofi --show drun";
+        "$menu-drun" = menu-drun;
+        "$menu-run" = menu-run;
+        "$menu-window" = menu-window;
         "$MOD" = "SUPER";
         env = [
           "XCURSOR_SIZE,24"
@@ -117,9 +123,9 @@
           "$MOD_SHIFT, Return, exec, $terminal"
           "$MOD, Return, exec, $terminal"
 	        "$MOD, E, exec, $editor"
-          "$MOD, R, exec, rofi -show run"
-          "$MOD, P, exec, rofi -show drun"
-          "$MOD, code:61, exec, rofi -show window"
+          "$MOD, R, exec, $menu-run"
+          "$MOD, P, exec, $menu-drun"
+          "$MOD, code:61, exec, $menu-window"
           "$MOD, B, exec, killall '.waybar-wrapped' || waybar"
           "$MOD, S, exec, scrn"
           "$MOD_SHIFT, S, exec, scrn -s"
