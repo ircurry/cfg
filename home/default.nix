@@ -3,6 +3,7 @@
     ./cli
     ./options
     ./programs
+    ./themes
     ./wayland
   ];
 }
