@@ -17,7 +17,8 @@
   (defun cur/org-mode-setup ()
     (org-indent-mode 1)
     (variable-pitch-mode 0)
-    (visual-line-mode 1))
+    (visual-line-mode 1)
+    (flyspell-mode 1))
   (defun cur/org-font-setup ()
     ;; Replace list hyphen with dot
     (font-lock-add-keywords 'org-mode
