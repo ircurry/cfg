@@ -17,7 +17,7 @@
         window#waybar {
           background: transparent;
           /* background-color: #2e3440; */
-          color: #d8dee9;
+          /* color: #d8dee9; */
         }
         /* ===Workspaces=== */
         #workspaces {
@@ -26,7 +26,8 @@
           padding: 0px ${stdPadding}px;
         }
         #workspaces button {
-          font-family: Material Design Icons, Iosevka Nerd Font Mono;
+          color: #d8dee9;
+          font-family: Material Design Icons, Iosevka Nerd Font Mono, DejaVu Sans;
           font-size: ${stdFontSize}px;
           margin: 0px;
           padding: 0px ${stdPadding}px;
