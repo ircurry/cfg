@@ -24,12 +24,12 @@
         open = ''
         ''${{
           case $(file --mime-type "$f" -bL) in
-            application/pdf|application/vnd.djvu|application/epub*) setsid -f ${pkgs.zathura}/bin/zathura "$fx" >/dev/null 2>&1 ;;
-            text/*|application/json|inode/x-empty|application/x-subrip) setsid -f ${config.programs.emacs.package}/bin/emacsclient -r "$f" >/dev/null 2>&1 ;;
+            application/pdf|application/vnd.djvu|application/epub*) ${pkgs.zathura}/bin/zathura "$fx" ;;
+            text/*|application/json|inode/x-empty|application/x-subrip) ${config.programs.emacs.package}/bin/emacsclient -r "$f" ;;
             # image/*) setsid -f ${pkgs.imv}/bin/imv-dir "$f" >/dev/null 2>&1 ;;
-            image/*) setsid -f ${pkgs.imv}/bin/imv-dir "$f" 2>/home/recur/errors.txt;;
+            image/*) ${pkgs.imv}/bin/imv-dir "$f" ;;
             audio/*|video/x-ms-asf) ${pkgs.mpv}/bin/mpv --audio-display=no "$f" ;;
-            video/*) setsid -f ${pkgs.mpv}/bin/mpv "$f" -quiet >/dev/null 2>&1 ;;
+            video/*) ${pkgs.mpv}/bin/mpv "$f" -quiet ;;
             *) xdg-open "$f" ;;
           esac
         }}
