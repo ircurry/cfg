@@ -28,7 +28,7 @@ in
           size = 10;
         };
 
-        key_bindings = [
+        keyboard.bindings = [
           {
             key = "V";
             mods = "Alt";
