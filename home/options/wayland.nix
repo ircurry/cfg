@@ -1,5 +1,16 @@
 { lib, ... }: {
   options.nocturne.wayland = {
+    logout = {
+      name = lib.mkOption {
+        type = lib.types.nullOr (lib.types.enum [ "rofi-logout" ]);
+        default = "rofi-logout";
+        example = "rofi-logout";
+        description = "Which screenshot program to use";
+      };
+      exec = lib.mkOption {
+        type = lib.types.str;
+      };
+    };
     menu = {
       name = lib.mkOption {
         type = lib.types.nullOr (lib.types.enum [ "rofi-wayland" ]);

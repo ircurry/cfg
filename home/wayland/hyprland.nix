@@ -118,8 +118,8 @@ in {
           "$MOD_SHIFT, C, killactive, "
           "$MOD, C, killactive, "
           "$MOD_SHIFT, Q, exit,"
-          "$MOD_CTRL, code:47, exec, rofi-logout"
-          "$MOD, code:47, exec, rofi-logout"
+          "$MOD_CTRL, code:47, exec, ${config.nocturne.wayland.logout.exec}"
+          "$MOD, code:47, exec, ${config.nocturne.wayland.logout.exec}"
         
           # Move focus with mainMod + arrow keys
           "$MOD, H, layoutmsg, swapprev"

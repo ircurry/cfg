@@ -208,7 +208,7 @@
         "custom/power" = {
           format = "󰐥";
           tooltip = false;
-          on-click = "sleep 0.1 && rofi-logout";
+          on-click = "sleep 0.1 && ${config.nocturne.wayland.logout.exec}";
         };
       }];
     };
