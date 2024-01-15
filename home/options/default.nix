@@ -4,6 +4,6 @@
     ./editors.nix
     ./graphical.nix
     ./themes.nix
-    # ./wayland.nix
+    ./wayland.nix
   ];
 }

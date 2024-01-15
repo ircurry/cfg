@@ -1,26 +1,15 @@
-{ pkgs, ... }: let
+{ config, pkgs, lib, ... }: let
   menu-drun = "${pkgs.rofi-wayland}/bin/rofi -show drun";
   menu-run = "${pkgs.rofi-wayland}/bin/rofi -show run";
   menu-window = "${pkgs.rofi-wayland}/bin/rofi -show window";
 in {
   config = {
-    home.packages = let
-      scrn = pkgs.writeShellScriptBin "scrn" ''
-        mkdir -p "$HOME/pix/ss"
-        case $1 in
-            -s) ssfile="$HOME/pix/ss/$(date +%Y%m%d-%s)-screenshot.png"
-               ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - | tee "$ssfile" | ${pkgs.wl-clipboard}/bin/wl-copy && ${pkgs.libnotify}/bin/notify-send -c screenshot -i "$ssfile" "Screenshot" "Selected screen screenshot taken" 2>/dev/null ;;
-            *) ssfile="$HOME/pix/ss/$(date +%Y%m%d-%s)-screenshot.png"
-               ${pkgs.grim}/bin/grim - | tee "$ssfile" | ${pkgs.wl-clipboard}/bin/wl-copy && ${pkgs.libnotify}/bin/notify-send -c screenshot -i "$ssfile" "Screenshot" "Full screen screenshot taken" 2>/dev/null ;;
-        esac
-      '';
-    in [
+    home.packages = [
       pkgs.rofi-wayland
       pkgs.killall
       # Audio Control
       pkgs.pavucontrol
       pkgs.swww
-      scrn
     ];
     wayland.windowManager.hyprland = {
       enable = true;
@@ -127,8 +116,8 @@ in {
           "$MOD, P, exec, $menu-drun"
           "$MOD, code:61, exec, $menu-window"
           "$MOD, B, exec, killall '.waybar-wrapped' || waybar"
-          "$MOD, S, exec, scrn"
-          "$MOD_SHIFT, S, exec, scrn -s"
+          "$MOD, S, exec, noct-scrn"
+          "$MOD_SHIFT, S, exec, noct-scrn-region"
           "$MOD_SHIFT, C, killactive, "
           "$MOD, C, killactive, "
           "$MOD_SHIFT, Q, exit,"
@@ -161,6 +150,7 @@ in {
           "$MOD SHIFT, 5, movetoworkspace, 5"
           "$MOD SHIFT, 6, movetoworkspace, 6"
         ];
+        
         binde = [
           ", XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d 1"
           ", XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer -i 1"

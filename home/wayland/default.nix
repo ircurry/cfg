@@ -1,5 +1,6 @@
 { ... }: {
   imports = [
+    ./grim-slurp.nix
     ./hyprland.nix
     ./mako.nix
     ./rofi.nix
