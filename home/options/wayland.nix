@@ -1,11 +1,17 @@
 { lib, ... }: {
   options.nocturne.wayland = {
-    screen-shot = {
+    screenshot = {
       name = lib.mkOption {
-        type = lib.types.enum [ "grim-slurp" ];
+        type = lib.types.nullOr (lib.types.enum [ "grim-slurp" ]);
         default = "grim-slurp";
         example = "grim-slurp";
         description = "Which screenshot program to use";
+      };
+      scrn = lib.mkOption {
+        type = lib.types.package;
+      };
+      scrn-region = lib.mkOption {
+        type = lib.types.package;
       };
     };
   };

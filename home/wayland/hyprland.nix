@@ -116,8 +116,6 @@ in {
           "$MOD, P, exec, $menu-drun"
           "$MOD, code:61, exec, $menu-window"
           "$MOD, B, exec, killall '.waybar-wrapped' || waybar"
-          "$MOD, S, exec, noct-scrn"
-          "$MOD_SHIFT, S, exec, noct-scrn-region"
           "$MOD_SHIFT, C, killactive, "
           "$MOD, C, killactive, "
           "$MOD_SHIFT, Q, exit,"
@@ -149,6 +147,9 @@ in {
           "$MOD SHIFT, 4, movetoworkspace, 4"
           "$MOD SHIFT, 5, movetoworkspace, 5"
           "$MOD SHIFT, 6, movetoworkspace, 6"
+        ] ++ lib.optionals (config.nocturne.wayland.screenshot.name != null) [
+          "$MOD, S, exec, ${lib.getExe config.nocturne.wayland.screenshot.scrn}"
+          "$MOD_SHIFT, S, exec, ${lib.getExe config.nocturne.wayland.screenshot.scrn-region}"
         ];
         
         binde = [
