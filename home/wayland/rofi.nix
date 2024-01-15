@@ -1,6 +1,14 @@
-{ config, pkgs, lib, ... }: {
-  config = {
-    home.packages = [ pkgs.nerdfonts ];
+{ config, pkgs, lib, ... }:
+let
+  cfg = config.nocturne.wayland.menu.name;
+in {
+  config = lib.mkIf (cfg == "rofi-wayland" ) {
+    home.packages = [ pkgs.nerdfonts pkgs.rofi-wayland ];
+    nocturne.wayland.menu = {
+      drun = "${pkgs.rofi-wayland}/bin/rofi -show drun";
+      run = "${pkgs.rofi-wayland}/bin/rofi -show run";
+      window = "${pkgs.rofi-wayland}/bin/rofi -show window";
+    };
     programs.rofi = {
       enable = true;
       package = pkgs.rofi-wayland;

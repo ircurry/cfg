@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   config = {
     home.packages = with pkgs; [ material-design-icons nerdfonts ];
     programs.waybar = {
@@ -138,7 +138,7 @@
         "custom/launcher" = {
           format = "󱄅";
           tooltip = false;
-          on-click = "sleep 0.1 && rofi -show drun";
+          on-click = "sleep 0.1 && ${config.nocturne.wayland.menu.drun}";
         };
         margin-top = 5;
         "hyprland/workspaces" = {

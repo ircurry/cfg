@@ -1,11 +1,10 @@
 { config, pkgs, lib, ... }: let
-  menu-drun = "${pkgs.rofi-wayland}/bin/rofi -show drun";
-  menu-run = "${pkgs.rofi-wayland}/bin/rofi -show run";
-  menu-window = "${pkgs.rofi-wayland}/bin/rofi -show window";
+  menu-drun = config.nocturne.wayland.menu.drun;
+  menu-run = config.nocturne.wayland.menu.run;
+  menu-window = config.nocturne.wayland.menu.window;
 in {
   config = {
     home.packages = [
-      pkgs.rofi-wayland
       pkgs.killall
       # Audio Control
       pkgs.pavucontrol
