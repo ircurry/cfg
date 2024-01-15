@@ -119,6 +119,7 @@ in {
           "$MOD, C, killactive, "
           "$MOD_SHIFT, Q, exit,"
           "$MOD_CTRL, code:47, exec, rofi-logout"
+          "$MOD, code:47, exec, rofi-logout"
         
           # Move focus with mainMod + arrow keys
           "$MOD, H, layoutmsg, swapprev"
