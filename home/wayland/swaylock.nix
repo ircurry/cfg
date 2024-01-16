@@ -1,7 +1,11 @@
-{ pkgs, ... }: {
-  config = {
+{ config, lib, pkgs, ... }:
+let
+  cfg = config.nocturne.wayland.lock;
+in
+{
+  config = lib.mkIf (cfg.name == "swaylock") {
     home.packages = [ pkgs.nerdfonts pkgs.swaylock-effects ];
-
+    nocturne.wayland.lock.exec = "${lib.getExe pkgs.swaylock-effects}";
     xdg.configFile."swaylock/config" = {
       enable = true;
       text = ''

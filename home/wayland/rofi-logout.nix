@@ -9,8 +9,8 @@ let
     case $op in 
             poweroff) systemctl poweroff ;;
             reboot) systemctl reboot ;;
-            suspend) systemctl suspend && swaylock ;;
-            lock) swaylock ;;
+            suspend) systemctl suspend && ${config.nocturne.wayland.lock.exec} ;;
+            lock) ${config.nocturne.wayland.lock.exec} ;;
             logout) loginctl terminate-user $USER ;;
     esac
   '';

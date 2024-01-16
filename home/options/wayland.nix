@@ -1,5 +1,16 @@
 { lib, ... }: {
   options.nocturne.wayland = {
+    lock = {
+      name = lib.mkOption {
+        type = lib.types.enum [ "swaylock" ];
+        default = "swaylock";
+        example = "swaylock";
+        description = "Which screenshot program to use";
+      };
+      exec = lib.mkOption {
+        type = lib.types.str;
+      };
+    };
     logout = {
       name = lib.mkOption {
         type = lib.types.nullOr (lib.types.enum [ "rofi-logout" ]);
