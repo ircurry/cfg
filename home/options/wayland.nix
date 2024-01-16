@@ -5,7 +5,7 @@
         type = lib.types.enum [ "swaylock" ];
         default = "swaylock";
         example = "swaylock";
-        description = "Which screenshot program to use";
+        description = "Which screen locking program to use";
       };
       exec = lib.mkOption {
         type = lib.types.str;
@@ -16,7 +16,7 @@
         type = lib.types.enum [ "rofi-logout" ];
         default = "rofi-logout";
         example = "rofi-logout";
-        description = "Which screenshot program to use";
+        description = "Which logout program to use";
       };
       exec = lib.mkOption {
         type = lib.types.str;
@@ -27,7 +27,7 @@
         type = lib.types.enum [ "rofi-wayland" ];
         default = "rofi-wayland";
         example = "rofi-wayland";
-        description = "Which screenshot program to use";
+        description = "Which menu program to use";
       };
       drun = lib.mkOption {
         type = lib.types.str;
