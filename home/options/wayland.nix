@@ -39,6 +39,17 @@
         type = lib.types.str;
       };
     };
+    notification = {
+      daemon = lib.mkOption {
+        type = lib.types.enum [ "mako" ];
+        default = "mako";
+        example = "mako";
+        description = "Which notification daemon to use";
+      };
+      exec-start = lib.mkOption{
+        type = lib.types.str;
+      };
+    };
     screenshot = {
       name = lib.mkOption {
         type = lib.types.nullOr (lib.types.enum [ "grim-slurp" ]);

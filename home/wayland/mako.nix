@@ -1,6 +1,9 @@
-{ pkgs, ... }: {
-  config = {
+{ lib, config, pkgs, ... }: let
+  cfg = config.nocturne.wayland.notification.daemon;
+in {
+  config = lib.mkIf (cfg == "mako") {
     home.packages = [ pkgs.nerdfonts pkgs.libnotify ];
+    nocturne.wayland.notification.exec-start = "${lib.getExe pkgs.mako}"; 
     services.mako = {
       enable = true;
       defaultTimeout = 7000;

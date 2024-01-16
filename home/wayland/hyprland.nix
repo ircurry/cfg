@@ -31,7 +31,7 @@ in {
           "waybar"
           "${pkgs.swayidle}/bin/swayidle -w timeout 300 '${config.nocturne.wayland.lock.exec} -f' timeout 360 'systemctl suspend'"
           "${pkgs.swww}/bin/swww init"
-          "${pkgs.mako}/bin/mako"
+          "${config.nocturne.wayland.notification.exec-start}"
         ];
         general = {
           gaps_in = 5;
