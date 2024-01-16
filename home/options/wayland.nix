@@ -13,7 +13,7 @@
     };
     logout = {
       name = lib.mkOption {
-        type = lib.types.nullOr (lib.types.enum [ "rofi-logout" ]);
+        type = lib.types.enum [ "rofi-logout" ];
         default = "rofi-logout";
         example = "rofi-logout";
         description = "Which screenshot program to use";
@@ -24,7 +24,7 @@
     };
     menu = {
       name = lib.mkOption {
-        type = lib.types.nullOr (lib.types.enum [ "rofi-wayland" ]);
+        type = lib.types.enum [ "rofi-wayland" ];
         default = "rofi-wayland";
         example = "rofi-wayland";
         description = "Which screenshot program to use";
