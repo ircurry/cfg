@@ -182,6 +182,29 @@ in
         ];
       
       };
+      profiles.games = {
+        isDefault = false;
+        id = 2;
+        
+        containers = {
+          temp = {
+            color = "blue";
+            icon = "circle";
+            id = 1;
+          };
+        };
+
+        search = {
+          default = "DuckDuckGo";
+          force = true;
+        };
+
+        extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
+          multi-account-containers
+          ublock-origin
+        ];
+      
+      };
     };
   };
 }
