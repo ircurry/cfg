@@ -47,12 +47,10 @@
 
   # The Meat of my configuration
   nocturne = {
-    editors.emacs = {
-      enable = true;
-    };
     graphical = {
       alacritty.enable = true;
       brave.enable = false;
+      emacs.enable = true;
       firefox.enable = true;
       flatpak.enable = false;
       keepassxc.enable = true;
