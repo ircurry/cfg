@@ -79,16 +79,21 @@
 
 ;; ===project.el===
 (use-package projectile
+  :after (rg)
   :ensure t
   :bind (:map cur/leader-keymap
               ("p C-p" . projectile-switch-project)
               ("p C-d" . projectile-find-dir)
               ("p C-f" . projectile-find-file)
+              ("p C-r" . projectile-ripgrep)
               ("p C-c" . projectile-compile-project)
               ("p C-b" . projectile-switch-to-buffer)
               ("p b"   . projectile-ibuffer)
               ("p C-k" . projectile-kill-buffers)
               ("p d"   . projectile-dired)))
+
+(use-package rg
+  :ensure t)
 
 ;; ===Zoxide===
 (use-package zoxide
