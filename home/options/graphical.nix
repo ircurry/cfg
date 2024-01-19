@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ lib, pkgs, ... }: {
   options.nocturne.graphical = {
     alacritty.enable = lib.mkOption {
       type = lib.types.bool;
@@ -6,6 +6,25 @@
       description = "Enable Alacritty";
     };
     brave.enable = lib.mkEnableOption "Enable Brave Browser";
+    emacs = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable Emacs";
+      };
+      pkg = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.emacs29-pgtk;
+        example = pkgs.emacs29-pgtk;
+        description = "Emacs package to use";
+      };
+      associatedPkgs = lib.mkOption {
+        type = lib.types.listOf lib.types.package;
+        default = with pkgs; [ nerdfonts texliveFull ]; 
+        example = with pkgs; [ nerdfonts texliveFull ];
+        description = "Nix packages that emacs uses";
+      };
+    };
     firefox.enable = lib.mkOption {
       type = lib.types.bool;
       default = true;

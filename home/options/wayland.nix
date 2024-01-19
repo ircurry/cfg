@@ -1,5 +1,19 @@
 { lib, ... }: {
   options.nocturne.wayland = {
+    editor = {
+      name = lib.mkOption {
+        type = lib.types.enum [ "emacs" ];
+        default = "emacs";
+        example = "emacs";
+        description = "Name of the main system editor";
+      };
+      exec = lib.mkOption {
+        type = lib.types.str;
+      };
+      exec-start = lib.mkOption {
+        type = lib.types.str;
+      };
+    };
     lock = {
       name = lib.mkOption {
         type = lib.types.enum [ "swaylock" ];

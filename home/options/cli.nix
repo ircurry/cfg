@@ -2,6 +2,19 @@
   options.nocturne.cli = {
     amfora.enable = lib.mkEnableOption "Enable the Amfora Gemini browser";
     ani-cli.enable = lib.mkEnableOption "Enable ani-cli";
+    editor = {
+      name = lib.mkOption {
+        type = lib.types.enum [ "vim" "emnw" ];
+        default = "vim";
+        description = "Default cli editor";
+      };
+      exec = lib.mkOption {
+        type = lib.types.str;
+      };
+      exec-start = lib.mkOption {
+        type = lib.types.str;
+      };
+    };
     git = {
       userName = lib.mkOption {
         type = lib.types.str;
