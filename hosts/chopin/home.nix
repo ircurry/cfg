@@ -60,7 +60,7 @@
       libreoffice.enable = true;
       mullvadBrowser.enable = true;
       obs.enable = true;
-      signalDesktop.enable = false;
+      signalDesktop.enable = true;
       torBrowser.enable = true;
       zathura.enable = true;
     };
