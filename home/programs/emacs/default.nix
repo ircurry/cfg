@@ -11,7 +11,10 @@ in
     };
 
     home.packages = with pkgs; [
+      ccls
       ispell
+      jdt-language-server
+      libvterm
       nerdfonts
       texliveFull
     ];
