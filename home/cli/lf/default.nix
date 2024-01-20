@@ -2,6 +2,7 @@
 
 let
   cfg = config.nocturne.cli.lf;
+  # TODO: make this an option to use terminal editor, wayland exec-reuse, and wayland exec
   ed-cfg = config.nocturne.wayland.editor;
 in {
   config = lib.mkIf cfg.enable {
@@ -34,7 +35,7 @@ in {
             # image/*) setsid -f ${pkgs.imv}/bin/imv-dir "$f" >/dev/null 2>&1 ;;
             image/*) ${pkgs.imv}/bin/imv-dir "$f" ;;
             audio/*|video/x-ms-asf) ${pkgs.mpv}/bin/mpv --audio-display=no "$f" ;;
-            video/*) ${pkgs.mpv}/bin/mpv "$f" -quiet ;;
+            video/*) ${pkgs.mpv}/bin/mpv -quiet "$f" ;;
             *) xdg-open "$f" ;;
           esac
         }}
