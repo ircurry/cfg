@@ -2,6 +2,7 @@
   menu-drun = config.nocturne.wayland.menu.drun;
   menu-run = config.nocturne.wayland.menu.run;
   menu-window = config.nocturne.wayland.menu.window;
+  ed-cfg = config.nocturne.wayland.editor;
 in {
   config = {
     home.packages = [
@@ -14,7 +15,7 @@ in {
       enable = true;
       settings = {
         "$terminal" = "alacritty";
-        "$editor" = "emacsclient -c -a 'emacs'";
+        "$editor" = "${ed-cfg.exec}";
         "$fileManager" = "dolphin";
         "$menu-drun" = menu-drun;
         "$menu-run" = menu-run;
@@ -27,7 +28,7 @@ in {
           ",preferred,auto,auto"
         ];
         exec-once = [
-          "emacs --daemon"
+          "${ed-cfg.exec-start}"
           "waybar"
           "${pkgs.swayidle}/bin/swayidle -w timeout 300 '${config.nocturne.wayland.lock.exec} -f' timeout 360 'systemctl suspend'"
           "${pkgs.swww}/bin/swww init"

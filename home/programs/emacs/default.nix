@@ -2,6 +2,7 @@
 
 let
   cfg = config.nocturne.graphical.emacs;
+  way-cfg = config.nocturne.wayland.editor; 
 in
 {
   config = lib.mkMerge [
@@ -26,6 +27,17 @@ in
         ".emacs.d/cur-lisp".source = ./cur-lisp;
         ".emacs.d/themes".source = ./themes;
       };
+    })
+    (lib.mkIf (way-cfg.name == "emacs") {
+      assertions = [
+        {
+          assertion = cfg.enable == true;
+          message = "emacs is set as the default editor on wayland but is not ebabled";
+        }
+      ];
+      nocturne.wayland.editor.exec = "${cfg.pkg}/bin/emacsclient -c -a 'emacs'";
+      nocturne.wayland.editor.exec-reuse = "${cfg.pkg}/bin/emacsclient -r";
+      nocturne.wayland.editor.exec-start = "${cfg.pkg}/bin/emacs --daemon";
     })
   ];
 }

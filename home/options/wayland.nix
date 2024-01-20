@@ -10,8 +10,11 @@
       exec = lib.mkOption {
         type = lib.types.str;
       };
+      exec-reuse = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+      };
       exec-start = lib.mkOption {
-        type = lib.types.str;
+        type = lib.types.nullOr lib.types.str;
       };
     };
     lock = {
