@@ -59,6 +59,7 @@
       mullvadBrowser.enable = true;
       obs.enable = true;
       signalDesktop.enable = true;
+      thunderbird.enable = true;
       torBrowser.enable = true;
       zathura.enable = true;
     };

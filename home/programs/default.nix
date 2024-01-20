@@ -11,6 +11,7 @@
     ./mullvad-browser.nix
     ./obs.nix
     ./signal.nix
+    ./thunderbird.nix
     ./tor-browser.nix
     ./zathura.nix
   ];

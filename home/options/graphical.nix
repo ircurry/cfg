@@ -37,6 +37,7 @@
     mullvadBrowser.enable = lib.mkEnableOption "Enable Mullvad Browser";
     obs.enable = lib.mkEnableOption "Enable OBS";
     signalDesktop.enable = lib.mkEnableOption "Enable Signal Desktop";
+    thunderbird.enable = lib.mkEnableOption "Enable Thunderbird";
     torBrowser.enable = lib.mkEnableOption "Enable the Tor Browser";
     zathura.enable = lib.mkEnableOption "Enable Zathura";
   };
