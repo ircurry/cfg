@@ -29,13 +29,14 @@ in {
           ",preferred,auto,auto"
         ];
         exec-once = [
-          "${ed-cfg.exec-start}"
           "waybar"
           "${pkgs.swayidle}/bin/swayidle -w timeout 300 '${config.nocturne.wayland.lock.exec} -f' timeout 360 'systemctl suspend'"
           "${pkgs.swww}/bin/swww init"
           "${config.nocturne.wayland.notification.exec-start}"
         ] ++ lib.optionals (term-cfg.exec-start != null) [
           "${term-cfg.exec-start}"
+        ] ++ lib.optionals (ed-cfg.exec-start != null) [
+          "${ed-cfg.exec-start}"
         ];
         general = {
           gaps_in = 5;
