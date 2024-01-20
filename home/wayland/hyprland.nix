@@ -3,6 +3,7 @@
   menu-run = config.nocturne.wayland.menu.run;
   menu-window = config.nocturne.wayland.menu.window;
   ed-cfg = config.nocturne.wayland.editor;
+  term-cfg = config.nocturne.wayland.terminal;
 in {
   config = {
     home.packages = [
@@ -14,7 +15,7 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
       settings = {
-        "$terminal" = "alacritty";
+        "$terminal" = "${term-cfg.exec}";
         "$editor" = "${ed-cfg.exec}";
         "$fileManager" = "dolphin";
         "$menu-drun" = menu-drun;
@@ -33,6 +34,8 @@ in {
           "${pkgs.swayidle}/bin/swayidle -w timeout 300 '${config.nocturne.wayland.lock.exec} -f' timeout 360 'systemctl suspend'"
           "${pkgs.swww}/bin/swww init"
           "${config.nocturne.wayland.notification.exec-start}"
+        ] ++ lib.optionals (term-cfg.exec-start != null) [
+          "${term-cfg.exec-start}"
         ];
         general = {
           gaps_in = 5;

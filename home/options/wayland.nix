@@ -81,5 +81,19 @@
         type = lib.types.package;
       };
     };
+    terminal = {
+      name = lib.mkOption {
+        type = lib.types.nullOr (lib.types.enum [ "alacritty" ]);
+        default = "alacritty";
+        example = "alacritty";
+        description = "Which terminal emulator to use";
+      };
+      exec = lib.mkOption{
+        type = lib.types.str;
+      };
+      exec-start = lib.mkOption{
+        type = lib.types.nullOr lib.types.str;
+      };
+    };
   };
 }
