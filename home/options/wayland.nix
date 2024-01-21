@@ -17,6 +17,20 @@
         type = lib.types.nullOr lib.types.str;
       };
     };
+    image = {
+      name = lib.mkOption {
+        type = lib.types.enum [ "imv" ];
+        default = "imv";
+        example = "imv";
+        description = "Name of the main system image viewer";
+      };
+      exec = lib.mkOption {
+        type = lib.types.str;
+      };
+      exec-dir = lib.mkOption {
+        type = lib.types.str;
+      };
+    };
     lock = {
       name = lib.mkOption {
         type = lib.types.enum [ "swaylock" ];

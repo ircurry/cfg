@@ -5,6 +5,7 @@
     ./emacs
     ./firefox.nix
     ./flatpak.nix
+    ./imv.nix
     ./keepassxc.nix
     ./kid3.nix
     ./libreoffice.nix

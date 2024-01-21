@@ -31,6 +31,11 @@
       description = "Enable Firefox";
     };
     flatpak.enable = lib.mkEnableOption "Enable Flatpaks";
+    imv.enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable imv";
+    };
     keepassxc.enable = lib.mkEnableOption "Enable KeepassXC";
     kid3.enable = lib.mkEnableOption "Enable kid3";
     libreoffice.enable = lib.mkEnableOption "Enable LibreOffice";
