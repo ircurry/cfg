@@ -89,7 +89,7 @@ in
       assertions = [
         {
           assertion = cfg.enable == true;
-          message = "alacritty is set as the default terminal emulator on wayland but is not ebabled";
+          message = "alacritty is set as the default terminal emulator on wayland but is not enabled";
         }
       ];
       nocturne.wayland.terminal.exec = "${lib.getExe pkgs.alacritty}";
