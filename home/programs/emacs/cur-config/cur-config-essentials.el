@@ -15,11 +15,11 @@
 (global-display-line-numbers-mode t)
 (setq display-line-numbers-type t)
 ;; Disable line numbers for terminal modes
-;;(dolist (mode '(term-mode-hook
-;;                vterm-mode-hook
-;;                shell-mode-hook
-;;                eshell-mode-hook))
-;;  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+(dolist (mode '(term-mode-hook
+                vterm-mode-hook
+                shell-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (provide 'cur-config-essentials)
 ;;; cur-config-essentials.el ends here

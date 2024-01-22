@@ -29,7 +29,8 @@
 ;; ===Package Initialization===
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("elpa" . "https://elpa.gnu.org/packages/"))) ;; Setting Repos
+                         ("elpa" . "https://elpa.gnu.org/packages/")
+			 ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; Setting Repos
 (package-initialize)
 (unless package-archive-contents
  (package-refresh-contents))
