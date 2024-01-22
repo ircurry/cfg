@@ -113,6 +113,28 @@ in
               icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
               definedAliases = [ "@mn" ];
             };
+            "Odysee" = {
+              urls = [{
+                template = "https://odysee.com/$/search";
+                params = [
+                  { name = "q"; value = "{searchTerms}"; }
+                ];
+              }];
+              
+              icon = "${pkgs.libsForQt5.breeze-icons}/share/icons/breeze-dark/actions/16/media-playback-start.svg";
+              definedAliases = [ "@od" ];
+            };
+            "Invidious" = {
+              urls = [{
+                template = "https://invidious.slipfox.xyz/search";
+                params = [
+                  { name = "q"; value = "{searchTerms}"; }
+                ];
+              }];
+              
+              icon = "${pkgs.libsForQt5.breeze-icons}/share/icons/breeze-dark/actions/16/media-playback-start.svg";
+              definedAliases = [ "@iv" ];
+            };
           };
         };
 
