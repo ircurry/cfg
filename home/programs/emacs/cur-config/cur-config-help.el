@@ -27,10 +27,11 @@
 ;; ===Info===
 (use-package info
   :config
+  (setq meow-info-keymap (make-keymap))
   (meow-define-state info
     "meow state for interacting with Info"
     :lighter "INFO"
-    :keymap meow-dired-keymap)
+    :keymap meow-info-keymap)
   (meow-define-keys 'info
     '(":" . meow-page-up)
     '("?" . meow-page-down)
@@ -63,7 +64,7 @@
     ; '("w" . )
     ; '("x" . )
     '("y" . Info-copy-current-node-name)
-    ; '("z" . Info-goto-node)
+    '("z" . info-display-manual)
     '("RET" . Info-follow-nearest-node)
     '("SPC" . meow-keypad)
     '("TAB" . Info-next-reference)
