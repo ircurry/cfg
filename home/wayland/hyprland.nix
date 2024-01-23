@@ -34,6 +34,7 @@ in {
           "${pkgs.swayidle}/bin/swayidle -w timeout 300 '${config.nocturne.wayland.lock.exec} -f' timeout 360 'systemctl suspend'"
           "${pkgs.swww}/bin/swww init"
           "${config.nocturne.wayland.notification.exec-start}"
+          "${pkgs.networkmanagerapplet}/bin/nm-applet"
         ] ++ lib.optionals (term-cfg.exec-start != null) [
           "${term-cfg.exec-start}"
         ] ++ lib.optionals (ed-cfg.exec-start != null) [
