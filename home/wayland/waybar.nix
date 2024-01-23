@@ -180,7 +180,8 @@
         };
         tray = {
           icon-size = 21;
-          spacing = 10;
+          # TODO: make this work with the other margin options
+          spacing = 6;
         };
         # Center
         clock = {
