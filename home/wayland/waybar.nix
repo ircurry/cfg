@@ -74,6 +74,14 @@
         #battery.critical:not(.charging) {
           color: #bf616a;
         }
+        /* ===Tray=== */
+        #tray {
+          font-family: Material Design Icons, Iosevka Nerd Font Mono;
+          font-size: ${stdFontSize}px;
+          background-color: #3b4252;
+          margin: 0px ${stdMargin}px;
+          padding: 0px ${stdPadding}px;
+        }
         /* ===Clock=== */
         #clock {
           font-family: Material Design Icons, Iosevka Nerd Font Mono;
@@ -134,7 +142,7 @@
         ];
         modules-left = [ "custom/launcher" "hyprland/workspaces" "battery" ];
         modules-center = [ "clock" ];
-        modules-right = [ "backlight" "pulseaudio" "network" "custom/power" ];
+        modules-right = [ "tray" "backlight" "pulseaudio" "network" "custom/power" ];
         "custom/launcher" = {
           format = "󱄅";
           tooltip = false;
@@ -169,6 +177,10 @@
           format-plugged = "󰂄 {capacity}%";
           format-alt = "{icon} {capacity}%";
           format-icons = ["󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+        };
+        tray = {
+          icon-size = 21;
+          spacing = 10;
         };
         # Center
         clock = {
