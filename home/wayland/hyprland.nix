@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: let
+{ config, pkgs, lib, inputs, ... }: let
   menu-drun = config.nocturne.wayland.menu.drun;
   menu-run = config.nocturne.wayland.menu.run;
   menu-window = config.nocturne.wayland.menu.window;
@@ -14,6 +14,7 @@ in {
     ];
     wayland.windowManager.hyprland = {
       enable = true;
+      package = inputs.hyprland.packages."${pkgs.system}".hyprland;
       settings = {
         "$terminal" = "${term-cfg.exec}";
         "$editor" = "${ed-cfg.exec}";
@@ -106,6 +107,11 @@ in {
           "float, class:^(pavucontrol)$, title:^(Volume Control)$"
           "size 80% 85%, class:^(pavucontrol)$, title:^(Volume Control)$"
           "center, class:^(pavucontrol)$, title:^(Volume Control)$"
+          
+          # Pavucontrol
+          "float, class:^(nm-connection-editor)$, title:^(.*)$"
+          "size 80% 85%, class:^(nm-connection-editor)$, title:^(.*)$"
+          "center, class:^(nm-connection-editor)$, title:^(.*)$"
           
           # Center
           "float, class:^(center)$"
