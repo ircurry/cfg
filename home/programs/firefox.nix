@@ -212,6 +212,7 @@ in
           ublock-origin
           libredirect
           multi-account-containers
+          user-agent-string-switcher
         ];
       
       };
