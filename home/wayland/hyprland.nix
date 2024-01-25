@@ -11,6 +11,7 @@ in {
       # Audio Control
       pkgs.pavucontrol
       pkgs.swww
+      pkgs.wl-clipboard
     ];
     wayland.windowManager.hyprland = {
       enable = true;
