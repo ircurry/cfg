@@ -47,7 +47,7 @@
   nocturne = {
     graphical = {
       alacritty.enable = true;
-      brave.enable = false;
+      brave.enable = true;
       emacs.enable = true;
       firefox.enable = true;
       flatpak.enable = false;
