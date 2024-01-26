@@ -5,13 +5,13 @@
 ;;; Code:
 ;; ===Hydra===
 (use-package hydra
-  :ensure t
+  ;:ensure t
   :demand t)
 
 ;; ===Meow Setup===
 (use-package meow
   :after (hydra)
-  :ensure t
+  ;:ensure t
   :demand t
   :preface
   (defvar cur/leader-keymap

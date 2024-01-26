@@ -9,7 +9,7 @@
 ;;; Code:
 ;; ===Counsel==
 (use-package counsel
-  :ensure t
+  ; :ensure t
   :demand t
   :bind (("M-x" . counsel-M-x)
          ("C-x b" . counsel-switch-buffer)
@@ -19,12 +19,12 @@
 
 ;; ===Swiper===
 (use-package swiper
-  :ensure t
+  ;:ensure t
   :commands (swiper))
 
 ;; ===Ivy===
 (use-package ivy
-  :ensure t
+  ;:ensure t
   :demand t
   :after (counsel)
   :bind (("C-s" . swiper)
@@ -44,7 +44,7 @@
   (ivy-mode 1))
 
 (use-package ivy-rich
-  :ensure t
+  ;:ensure t
   :after (counsel ivy)
   :config
   (ivy-rich-mode 1))

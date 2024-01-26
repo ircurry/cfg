@@ -4,8 +4,8 @@
 
 ;;; Code:
 ;; ===nix-mode===
-(use-package nix-mode
-  :ensure t)
+(use-package nix-mode)
+  ;:ensure t)
 
 (provide 'cur-config-nix)
 ;;; cur-config-nix.el ends here

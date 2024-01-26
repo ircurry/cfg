@@ -41,7 +41,7 @@
 
 ;; ===Org Bullets===
 (use-package org-bullets
-  :ensure t
+  ;:ensure t
   :after org
   :hook (org-mode . org-bullets-mode)
   :custom

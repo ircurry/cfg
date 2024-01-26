@@ -5,7 +5,7 @@
 ;;; Code:
 ;; ===rainbow-delimiters===
 (use-package rainbow-delimiters
-  :ensure t
+  ;:ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; ===Helpful Emacs-Lisp Functions===

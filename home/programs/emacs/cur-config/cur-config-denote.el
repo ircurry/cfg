@@ -5,7 +5,7 @@
 ;;; Code:
 ;; ===Denote===
 (use-package denote
-  :ensure t
+  ;:ensure t
   
   ;; ===Defining Helper Fucntions===
   :init

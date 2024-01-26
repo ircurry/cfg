@@ -14,7 +14,7 @@
 
 ;; ===Doom Emacs Themes===
 (use-package doom-themes
-  :ensure t
+  ;:ensure t
   :demand t
   :init
   (defun cur/meow-theme-tweaker ()
@@ -30,17 +30,19 @@
 
 ;; ===Autothemer===
 (use-package autothemer
-  :ensure t)
+  ;:ensure t
+  )
 
 ;; ===Catppuccin Theme===
 (use-package catppuccin-theme
-  :ensure t)
+  ;:ensure t
+  )
 
-(use-package ewal
-  :ensure t)
-
-(use-package ewal-doom-themes
-  :ensure t)
+;; (use-package ewal
+;;   :ensure t)
+;; 
+;; (use-package ewal-doom-themes
+;;   :ensure t)
 
 ;; ===Text Scaling===
 (defhydra hydra-text-scale (:timeout 4)

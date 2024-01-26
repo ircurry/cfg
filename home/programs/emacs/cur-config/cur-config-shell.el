@@ -10,7 +10,6 @@
 
 ;; ===Vterm===
 (use-package vterm
-  :disabled
   :ensure nil
   :commands (vterm cur/meow-vterm-other-window cur/meow-vterm)
   :bind (:map vterm-mode-map
@@ -37,8 +36,8 @@
   (setq vterm-max-scrollback 10000))
 
 ;; ===Eat===
-(use-package eat
-  :ensure t)
+(use-package eat)
+  ;:ensure t)
 
 (provide 'cur-config-shell)
 ;;; cur-config-shell.el ends here

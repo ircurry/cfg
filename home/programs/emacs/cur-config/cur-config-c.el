@@ -5,7 +5,7 @@
 ;;; Code:
 ;; ===CCLS===
 (use-package ccls
-  :ensure t
+  ;:ensure t
   :hook
   ((c-mode c++-mode) . lsp-mode)
   ((c-mode c++-mode) .

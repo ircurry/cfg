@@ -4,12 +4,12 @@
 
 ;; ===YAML===
 (use-package yaml-mode
-  :ensure t
+  ;:ensure t
   :commands (yaml-mode))
 
 ;; ===EWW/Yuck Configuration===
 (use-package yuck-mode
-  :ensure t
+  ;:ensure t
   :commands (yuck-mode))
 
 (provide 'cur-config-markup)

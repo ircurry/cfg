@@ -8,7 +8,7 @@
 ;;; Code:
 ;; ===LSP Mode===
 (use-package lsp-mode
-  :ensure t
+  ;:ensure t
   :demand t
   :hook
   (lsp-mode  . lsp-enable-which-key-integration)
@@ -22,13 +22,13 @@
   (lsp-enable-which-key-integration t))
 
 (use-package lsp-ui
-  :ensure t
+  ;:ensure t
   :after (lsp-mode)
   :hook (lsp-mode . lsp-ui-mode))
 
 ;; ===Company Mode===
 (use-package company
-  :ensure t
+  ;:ensure t
   :hook
   (prog-mode . company-mode)
   (lsp-mode . company-mode)
@@ -44,14 +44,14 @@
 
 ;; ===Flycheck===
 (use-package flycheck
-  :ensure t
+  ;:ensure t
   :hook
   (prog-mode . flycheck-mode)
   (lsp-mode  . flycheck-mode))
 
 ;; ===Treemacs==
 (use-package treemacs
-  :ensure t
+  ;:ensure t
   :bind
   (:map prog-mode-map
         ("C-c C-t" . treemacs-select-window))
@@ -62,7 +62,7 @@
 
 ;; ===xref-ivy===
 (use-package ivy-xref
-  :ensure t
+  ;:ensure t
   :after (ivy)
   :init
   (setq xref-show-definitions-function #'ivy-xref-show-defs)
@@ -70,7 +70,7 @@
 
 ;; ===Magit===
 (use-package magit
-  :ensure t
+  ;:ensure t
   :bind (:map cur/sub-leader-keymap
 	 ("C-M-g" . magit))
   :custom
@@ -80,7 +80,7 @@
 ;; ===project.el===
 (use-package projectile
   :after (rg)
-  :ensure t
+  ;:ensure t
   :bind (:map cur/leader-keymap
               ("p C-p" . projectile-switch-project)
               ("p C-d" . projectile-find-dir)
@@ -92,12 +92,12 @@
               ("p C-k" . projectile-kill-buffers)
               ("p d"   . projectile-dired)))
 
-(use-package rg
-  :ensure t)
+(use-package rg)
+  ;:ensure t)
 
 ;; ===Zoxide===
 (use-package zoxide
-  :ensure t
+  ;:ensure t
   :bind (:map cur/leader-keymap
 	 ("z" . zoxide-find-file)))
 

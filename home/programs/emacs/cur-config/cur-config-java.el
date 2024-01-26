@@ -14,7 +14,7 @@
 
 ;; ===lsp-java===
 (use-package lsp-java
-  :ensure t
+  ;:ensure t
   :after (lsp-mode)
   :hook
   (java-mode . lsp-mode))
