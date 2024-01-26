@@ -3,14 +3,8 @@
 let
   cfg = config.nocturne.graphical.emacs;
   way-cfg = config.nocturne.wayland.editor;
-in
-{
-  config = lib.mkMerge [
-    (lib.mkIf cfg.enable {
-      programs.emacs = { 
-        enable = true;
-        package = pkgs.emacs29-pgtk;
-        extraPackages = epkgs: [
+  emacs-package = pkgs.emacs29-pgtk;
+  emacs-packages = epkgs: [
           epkgs.autothemer
           epkgs.catppuccin-theme
           epkgs.ccls
@@ -44,7 +38,15 @@ in
           epkgs.yaml-mode
           epkgs.yuck-mode
           epkgs.zoxide
-        ];
+  ];
+in
+{
+  config = lib.mkMerge [
+    (lib.mkIf cfg.enable {
+      programs.emacs = { 
+        enable = true;
+        package = emacs-package;
+        extraPackages = emacs-packages;
       };
       
       home.packages = with pkgs; [
@@ -63,6 +65,7 @@ in
         ".emacs.d/themes".source = ./themes;
       };
     })
+    
     (lib.mkIf (way-cfg.name == "emacs") {
       assertions = [
         {
