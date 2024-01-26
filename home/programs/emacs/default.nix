@@ -2,14 +2,14 @@
 
 let
   cfg = config.nocturne.graphical.emacs;
-  way-cfg = config.nocturne.wayland.editor; 
+  way-cfg = config.nocturne.wayland.editor;
 in
 {
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       programs.emacs = { 
         enable = true;
-        package = cfg.pkg;
+        package = pkgs.emacs29-pgtk;
       };
       
       home.packages = with pkgs; [
@@ -35,9 +35,9 @@ in
           message = "emacs is set as the default editor on wayland but is not ebabled";
         }
       ];
-      nocturne.wayland.editor.exec = "${cfg.pkg}/bin/emacsclient -c -a 'emacs'";
-      nocturne.wayland.editor.exec-reuse = "${cfg.pkg}/bin/emacsclient -r";
-      nocturne.wayland.editor.exec-start = "${cfg.pkg}/bin/emacs --daemon";
+      nocturne.wayland.editor.exec = "${config.programs.emacs.package}/bin/emacsclient -c -a 'emacs'";
+      nocturne.wayland.editor.exec-reuse = "${config.programs.emacs.package}/bin/emacsclient -r";
+      nocturne.wayland.editor.exec-start = "${config.programs.emacs.package}/bin/emacs --daemon";
     })
   ];
 }
