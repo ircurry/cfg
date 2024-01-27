@@ -5,39 +5,81 @@ let
   way-cfg = config.nocturne.wayland.editor;
   emacs-package = with pkgs; ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (
     epkgs: [
-      epkgs.autothemer
-      epkgs.catppuccin-theme
-      epkgs.ccls
-      epkgs.company
-      epkgs.counsel
-      epkgs.denote
-      epkgs.doom-themes
-      epkgs.eat
-      epkgs.flycheck
-      epkgs.gemini-mode
-      epkgs.helpful
+      ########################################
+      ## Configuration Modules Dependencies ##
+      ########################################
+      
+      # ===Bindings===
       epkgs.hydra
+      epkgs.meow
+
+      # ===C===
+      epkgs.ccls
+
+      # ===Completion===
+      epkgs.counsel
+      epkgs.swiper
       epkgs.ivy
       epkgs.ivy-rich
-      epkgs.ivy-xref
-      epkgs.lsp-java
+
+      # ===Denote===
+      epkgs.denote
+
+      # ===Dired===
+
+      # ===Elisp===
+      epkgs.rainbow-delimiters
+
+      # ===Essentials===
+      
+      # ===Faces===
+      epkgs.doom-themes
+      epkgs.autothemer
+      epkgs.catppuccin-theme
+      
+      # ===Help===
+      epkgs.helpful
+      epkgs.which-key
+      
+      # ===IDE===
       epkgs.lsp-mode
       epkgs.lsp-ui
-      epkgs.magit
-      epkgs.meow
-      epkgs.nix-mode
-      epkgs.org-bullets
-      epkgs.ox-gemini
-      epkgs.projectile
-      epkgs.rainbow-delimiters
-      epkgs.rg
-      epkgs.swiper
+      epkgs.company
+      epkgs.flycheck
       epkgs.treemacs
-      epkgs.vterm
-      epkgs.which-key
+      epkgs.ivy-xref
+      epkgs.magit
+      epkgs.projectile
+      epkgs.rg
+      epkgs.zoxide
+      
+      # ===Java===
+      epkgs.lsp-java
+      
+      # ===Markup===
       epkgs.yaml-mode
       epkgs.yuck-mode
-      epkgs.zoxide
+      
+      # ===Nix===
+      epkgs.nix-mode
+      
+      # ===Org===
+      epkgs.org-bullets
+      
+      # ===Shell===
+      epkgs.eat
+      epkgs.vterm
+      
+      # ===Smol-net===
+      epkgs.gemini-mode
+      epkgs.ox-gemini
+      
+      # ===Windows===
+      
+      ###############################
+      ## Lisp Modules Dependencies ##
+      ###############################
+
     ]
   ));
 in
