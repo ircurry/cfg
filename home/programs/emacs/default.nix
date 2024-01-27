@@ -3,42 +3,43 @@
 let
   cfg = config.nocturne.graphical.emacs;
   way-cfg = config.nocturne.wayland.editor;
-  emacs-package = pkgs.emacs29-pgtk;
-  emacs-packages = epkgs: [
-          epkgs.autothemer
-          epkgs.catppuccin-theme
-          epkgs.ccls
-          epkgs.company
-          epkgs.counsel
-          epkgs.denote
-          epkgs.doom-themes
-          epkgs.eat
-          epkgs.flycheck
-          epkgs.gemini-mode
-          epkgs.helpful
-          epkgs.hydra
-          epkgs.ivy
-          epkgs.ivy-rich
-          epkgs.ivy-xref
-          epkgs.lsp-java
-          epkgs.lsp-mode
-          epkgs.lsp-ui
-          epkgs.magit
-          epkgs.meow
-          epkgs.nix-mode
-          epkgs.org-bullets
-          epkgs.ox-gemini
-          epkgs.projectile
-          epkgs.rainbow-delimiters
-          epkgs.rg
-          epkgs.swiper
-          epkgs.treemacs
-          epkgs.vterm
-          epkgs.which-key
-          epkgs.yaml-mode
-          epkgs.yuck-mode
-          epkgs.zoxide
-  ];
+  emacs-package = with pkgs; ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (
+    epkgs: [
+      epkgs.autothemer
+      epkgs.catppuccin-theme
+      epkgs.ccls
+      epkgs.company
+      epkgs.counsel
+      epkgs.denote
+      epkgs.doom-themes
+      epkgs.eat
+      epkgs.flycheck
+      epkgs.gemini-mode
+      epkgs.helpful
+      epkgs.hydra
+      epkgs.ivy
+      epkgs.ivy-rich
+      epkgs.ivy-xref
+      epkgs.lsp-java
+      epkgs.lsp-mode
+      epkgs.lsp-ui
+      epkgs.magit
+      epkgs.meow
+      epkgs.nix-mode
+      epkgs.org-bullets
+      epkgs.ox-gemini
+      epkgs.projectile
+      epkgs.rainbow-delimiters
+      epkgs.rg
+      epkgs.swiper
+      epkgs.treemacs
+      epkgs.vterm
+      epkgs.which-key
+      epkgs.yaml-mode
+      epkgs.yuck-mode
+      epkgs.zoxide
+    ]
+  ));
 in
 {
   config = lib.mkMerge [
@@ -46,8 +47,9 @@ in
       programs.emacs = { 
         enable = true;
         package = emacs-package;
-        extraPackages = emacs-packages;
       };
+      
+      services.emacs.enable = true;
       
       home.packages = with pkgs; [
         ccls

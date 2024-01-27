@@ -38,8 +38,6 @@ in {
           "${pkgs.networkmanagerapplet}/bin/nm-applet"
         ] ++ lib.optionals (term-cfg.exec-start != null) [
           "${term-cfg.exec-start}"
-        ] ++ lib.optionals (ed-cfg.exec-start != null) [
-          "${ed-cfg.exec-start}"
         ];
         general = {
           gaps_in = 5;

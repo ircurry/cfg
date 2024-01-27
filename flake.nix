@@ -21,6 +21,8 @@
 
     hyprland.url = "github:hyprwm/Hyprland";
 
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -46,5 +48,6 @@
         ];
       };
 
+      nixpkgs.overlays = [ (import self.inputs.emacs-overlay) ];
     };
 }
