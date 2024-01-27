@@ -24,12 +24,14 @@
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
+    devenv.url = "github:cachix/devenv";
+    
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
     let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      forAllSystems = function:
+        nixpkgs.lib.genAttrs ["x86_64-linux"] (system: function nixpkgs.legacyPackages.${system});
     in
     {
     
@@ -50,5 +52,20 @@
       };
 
       nixpkgs.overlays = [ (import self.inputs.emacs-overlay) ];
+
+      devShells = forAllSystems (pkgs: {
+        default = inputs.devenv.lib.mkShell {
+          inherit inputs pkgs;
+          modules = [
+            ({pkgs, ...}: {
+              languages.nix.enable = true;
+              scripts = {
+                nix-diff.exec = ''nix store diff-closures "$(${pkgs.fd}/bin/fd 'system-' /nix/var/nix/profiles/ -j 1 | sort --reverse | ${ pkgs.fzf }/bin/fzf )" /nix/var/nix/profiles/system | column -t -s ':' -o ' (' '';
+              };
+            })
+          ];
+        };
+      });
+      
     };
 }
