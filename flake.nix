@@ -61,6 +61,32 @@
               languages.nix.enable = true;
               scripts = {
                 nix-diff.exec = ''nix store diff-closures "$(${pkgs.fd}/bin/fd 'system-' /nix/var/nix/profiles/ -j 1 | sort --reverse | ${ pkgs.fzf }/bin/fzf )" /nix/var/nix/profiles/system | column -t -s ':' -o ' (' '';
+                flk-inputs.exec = ''
+                  inputs=$(nix flake metadata --json \
+                               | ${pkgs.jq}/bin/jq ".locks.nodes.root.inputs | keys[]" \
+                               | sed "s/\"//g"
+                        )
+
+                  select=$(printf "all\n$inputs" | ${pkgs.fzf}/bin/fzf)
+
+                  if [ -z $select ]; then
+                      exit 0
+                  fi
+
+                  case "$select" in
+                      all) nix flake update ;;
+                      *) nix flake lock --update-input $select ;;
+                  esac
+                '';
+                flk-rebuild.exec = ''
+                  select=$(printf "switch\ntest\nboot\nbuild\n" | ${pkgs.fzf}/bin/fzf)
+
+                  if [ -z $select ]; then
+                      exit 0
+                  fi
+
+                  sudo nixos-rebuild $select --flake .
+                '';
               };
             })
           ];
