@@ -15,7 +15,8 @@ in {
     ];
     wayland.windowManager.hyprland = {
       enable = true;
-      package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+      ## Bleeding edge Hyprland
+      # package = inputs.hyprland.packages."${pkgs.system}".hyprland;
       settings = {
         "$terminal" = "${term-cfg.exec}";
         "$editor" = "${ed-cfg.exec}";
