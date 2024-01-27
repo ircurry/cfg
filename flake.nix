@@ -23,6 +23,11 @@
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
+    nh = {
+      url = "github:viperML/nh";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -49,5 +54,6 @@
       };
 
       nixpkgs.overlays = [ (import self.inputs.emacs-overlay) ];
+
     };
 }
