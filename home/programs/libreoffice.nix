@@ -11,6 +11,8 @@ in
       ];
     home.packages = with pkgs; [
       corefonts
+      hunspell
+      hunspellDicts.en_US
       libreoffice-qt
     ];
   };
