@@ -58,6 +58,10 @@
           inherit inputs pkgs;
           modules = [
             ({pkgs, ...}: {
+              enterShell = ''
+                eval "$(ssh-agent -s)"
+                ssh-add ~/.ssh/id_github
+              '';
               languages.nix.enable = true;
               scripts = {
                 nix-diff.exec = ''nix store diff-closures "$(${pkgs.fd}/bin/fd 'system-' /nix/var/nix/profiles/ -j 1 | sort --reverse | ${ pkgs.fzf }/bin/fzf )" /nix/var/nix/profiles/system | column -t -s ':' -o ' (' '';
