@@ -25,6 +25,11 @@
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
     devenv.url = "github:cachix/devenv";
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     
   };
 
@@ -40,6 +45,7 @@
         modules = [ 
           ./hosts/default/configuration.nix
           inputs.home-manager.nixosModules.default
+          inputs.sops-nix.nixosModules.sops
         ];
       };
       
@@ -48,6 +54,7 @@
         modules = [ 
           ./hosts/chopin/configuration.nix
           inputs.home-manager.nixosModules.default
+          inputs.sops-nix.nixosModules.sops
         ];
       };
 
@@ -58,6 +65,11 @@
           inherit inputs pkgs;
           modules = [
             ({pkgs, ...}: {
+              packages = [
+                pkgs.age
+                pkgs.sops
+                pkgs.ssh-to-age
+              ];
               enterShell = ''
                 eval "$(ssh-agent -s)"
                 ssh-add ~/.ssh/id_github

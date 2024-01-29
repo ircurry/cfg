@@ -125,5 +125,15 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
 
+  # sops = {
+  #   defaultSopsFile = ../../secrets/secrets.yaml;
+  #   defaultSopsFormat = "yaml";
+  #   age.keyFile = "/home/recur/.config/sops/age/keys.txt";
+  #   secrets = {
+  #     "myservice/my_subdir/my_secret" = { };
+  #     "example-key" = { };
+  #   };
+  # };
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
