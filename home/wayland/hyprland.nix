@@ -143,6 +143,8 @@ in {
           "$MOD, F, fullscreen"
           "$MOD, M, fullscreen, 1"
           "$MOD, W, togglefloating"
+          "$MOD, TAB, cyclenext"
+          "$MOD, TAB, bringactivetotop"
 
           # Switch workspaces with mainMod + [0-9]
           "$MOD, 1, workspace, 1"
