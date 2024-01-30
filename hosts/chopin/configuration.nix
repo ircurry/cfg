@@ -81,16 +81,31 @@
     pulse.enable = true;
   };
 
+  # Secrets
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = "/home/recur/.config/sops/age/keys.txt";
+    secrets = {
+      "recur_password".neededForUsers = true;
+    };
+  };
+  
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.recur = {
     isNormalUser = true;
     description = "Ian Curran";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
+    initialPassword = "password";
+    hashedPasswordFile = config.sops.secrets."recur_password".path;
   };
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
+    sharedModules = [
+      inputs.sops-nix.homeManagerModules.sops
+    ];
     users = { 
       "recur" = import ./home.nix; 
     };
@@ -124,16 +139,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
-  # sops = {
-  #   defaultSopsFile = ../../secrets/secrets.yaml;
-  #   defaultSopsFormat = "yaml";
-  #   age.keyFile = "/home/recur/.config/sops/age/keys.txt";
-  #   secrets = {
-  #     "myservice/my_subdir/my_secret" = { };
-  #     "example-key" = { };
-  #   };
-  # };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
