@@ -62,18 +62,18 @@ in
           }
         ];
         
-        containers = {
-          default = {
-            color = "blue";
-            icon = "circle";
-            id = 1;
-          };
-          unsafe = {
-            color = "red";
-            icon = "fruit";
-            id = 2;
-          };
-        };
+        # containers = {
+        #   default = {
+        #     color = "blue";
+        #     icon = "circle";
+        #     id = 1;
+        #   };
+        #   unsafe = {
+        #     color = "red";
+        #     icon = "fruit";
+        #     id = 2;
+        #   };
+        # };
 
         search = {
           default = "DuckDuckGo";
@@ -176,18 +176,18 @@ in
           }
         ];
         
-        containers = {
-          default = {
-            color = "blue";
-            icon = "circle";
-            id = 1;
-          };
-          unsafe = {
-            color = "red";
-            icon = "fruit";
-            id = 2;
-          };
-        };
+        # containers = {
+        #   default = {
+        #     color = "blue";
+        #     icon = "circle";
+        #     id = 1;
+        #   };
+        #   unsafe = {
+        #     color = "red";
+        #     icon = "fruit";
+        #     id = 2;
+        #   };
+        # };
 
         search = {
           default = "DuckDuckGo";
@@ -220,13 +220,13 @@ in
         isDefault = false;
         id = 2;
         
-        containers = {
-          temp = {
-            color = "blue";
-            icon = "circle";
-            id = 1;
-          };
-        };
+        # containers = {
+        #   temp = {
+        #     color = "blue";
+        #     icon = "circle";
+        #     id = 1;
+        #   };
+        # };
 
         search = {
           default = "DuckDuckGo";
