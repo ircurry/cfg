@@ -15,6 +15,7 @@
         type = lib.types.str;
       };
     };
+    file-convert.enable = lib.mkEnableOption "Enable file conversion tools";
     git = {
       userName = lib.mkOption {
         type = lib.types.str;
