@@ -103,6 +103,40 @@
     libreoffice.enable = lib.mkEnableOption "Enable LibreOffice";
     mullvadBrowser.enable = lib.mkEnableOption "Enable Mullvad Browser";
     obs.enable = lib.mkEnableOption "Enable OBS";
+    rofi = {
+      bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base00;
+      };
+      bg-selection = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
+      fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base05;
+      };
+      fg-selection = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base04;
+      };
+      fg-placeholder = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base03;
+      };
+      fg-urgent = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base09;
+      };
+      fg-active = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0A;
+      };
+      border-color = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0D;
+      };
+    };
     signalDesktop.enable = lib.mkEnableOption "Enable Signal Desktop";
     thunderbird.enable = lib.mkEnableOption "Enable Thunderbird";
     torBrowser.enable = lib.mkEnableOption "Enable the Tor Browser";

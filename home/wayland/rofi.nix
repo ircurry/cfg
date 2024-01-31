@@ -39,32 +39,43 @@ in {
       theme = let
         inherit (config.lib.formats.rasi) mkLiteral;
         colors = {
-          base00 = "2e3440";
-          base01 = "3b4252";
-          base02 = "434c5e";
-          base03 = "4c566a";
-          base04 = "d8dee9";
-          base05 = "e5e9f0";
-          base06 = "eceff4";
-          base08 = "bf616a";
-          base09 = "d08770";
-          base0A = "ebcb8b";
-          base0B = "a3be8c";
-          base0C = "88c0d0";
-          base0D = "81a1c1";
-          base0E = "b48ead";
-          base0F = "5e81ac";
+          bg = config.nocturne.graphical.rofi.bg;
+          bg-selection = config.nocturne.graphical.rofi.bg-selection;
+          fg = config.nocturne.graphical.rofi.fg;
+          fg-selection = config.nocturne.graphical.rofi.fg-selection;
+          fg-placeholder = config.nocturne.graphical.rofi.fg-placeholder;
+          fg-urgent = config.nocturne.graphical.rofi.fg-urgent;
+          fg-active = config.nocturne.graphical.rofi.fg-active;
+          # Normally base0D
+          border-color = config.nocturne.graphical.rofi.border-color;
+          
+          # base00 = config.nocturne.themes.colors.base00; # ----
+          # base01 = config.nocturne.themes.colors.base01; # ---
+          # base02 = config.nocturne.themes.colors.base02; # --
+          # base03 = config.nocturne.themes.colors.base03; # -
+          # base04 = config.nocturne.themes.colors.base04; # ++
+          # base05 = config.nocturne.themes.colors.base05; # +
+          # base06 = config.nocturne.themes.colors.base06; # +++
+          # base07 = config.nocturne.themes.colors.base07; # ~
+          # base08 = config.nocturne.themes.colors.base08; # red
+          # base09 = config.nocturne.themes.colors.base09; # orange
+          # base0A = config.nocturne.themes.colors.base0A; # yellow
+          # base0B = config.nocturne.themes.colors.base0B; # green
+          # base0C = config.nocturne.themes.colors.base0C; # aqua/cyan
+          # base0D = config.nocturne.themes.colors.base0D; # blue
+          # base0E = config.nocturne.themes.colors.base0E; # purple
+          # base0F = config.nocturne.themes.colors.base0F; # brown
         };
       in {
         "*" = {
-          bg = mkLiteral "#${colors.base00}";
-          bg-selection = mkLiteral "#${colors.base01}";
-          fg = mkLiteral "#${colors.base05}";
-          fg-selection = mkLiteral "#${colors.base04}";
-          fg-placeholder = mkLiteral "#${colors.base03}";
-          fg-urgent = mkLiteral "#${colors.base09}";
-          fg-active = mkLiteral "#${colors.base0C}";
-          border-color = mkLiteral "#${colors.base0F}";
+          bg = mkLiteral "#${colors.bg}";
+          bg-selection = mkLiteral "#${colors.bg-selection}";
+          fg = mkLiteral "#${colors.fg}";
+          fg-selection = mkLiteral "#${colors.fg-selection}";
+          fg-placeholder = mkLiteral "#${colors.fg-placeholder}";
+          fg-urgent = mkLiteral "#${colors.fg-urgent}";
+          fg-active = mkLiteral "#${colors.fg-active}";
+          border-color = mkLiteral "#${colors.border-color}";
         };
         "window" = {
           width = mkLiteral "60%";
@@ -113,13 +124,13 @@ in {
           border-radius = mkLiteral "8px";
           text-color = mkLiteral "@fg";
         };
-        "element normal.normal" = {
+        "element normal" = {
           text-color = mkLiteral "@fg";
         };
-        "element normal.urgent" = {
+        "element urgent" = {
           text-color = mkLiteral "@fg-urgent";
         };
-        "element normal.active" = {
+        "element active" = {
           text-color = mkLiteral "@fg-active";
         };
         "element selected.normal" = {
