@@ -67,7 +67,7 @@
 ;(require 'cur-config-java)
 (require 'cur-config-markup)
 (require 'cur-config-nix)
-(require 'cur-config-smol-net.el)
+(require 'cur-config-smol-net)
 
 ;; ===Terminal Apps===
 (require 'cur-config-shell)
