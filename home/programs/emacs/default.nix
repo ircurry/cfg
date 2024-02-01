@@ -65,6 +65,9 @@ let
       
       # ===Org===
       epkgs.org-bullets
+
+      # ===Rust===
+      epkgs.rustic
       
       # ===Shell===
       epkgs.eat
