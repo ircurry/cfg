@@ -11,5 +11,5 @@
 (use-package ox-gemini)
   ;:ensure t)
 
-(provide 'cur-config-smol-net.el)
+(provide 'cur-config-smol-net)
 ;;; cur-config-smol-net.el ends here

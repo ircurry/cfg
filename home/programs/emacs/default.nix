@@ -65,6 +65,9 @@ let
       
       # ===Org===
       epkgs.org-bullets
+
+      # ===Rust===
+      epkgs.rustic
       
       # ===Shell===
       epkgs.eat
@@ -94,12 +97,24 @@ in
       services.emacs.enable = true;
       
       home.packages = with pkgs; [
-        ccls
+        # ===General===
         ispell
-        jdt-language-server
         libvterm
         nerdfonts
         texliveFull
+
+        # ===C/C++ Tools and LSP-Servers
+        ccls
+
+        # ===Java Tools and LSP-Servers
+        jdt-language-server
+
+        # ===Rust Tools and LSP-Servers===
+        cargo
+        clippy
+        rustc
+        rustfmt
+        rust-analyzer
       ];
       
       home.file = {
