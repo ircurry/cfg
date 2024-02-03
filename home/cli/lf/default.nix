@@ -196,6 +196,7 @@ in {
         ZA = "zoxideadd";
 
         md = "push :mkdir<space>";
+        "+" = "push :mkdir<space>";
         ms = "mkscript";
 
         "<c-n>" = ''''$${pkgs.newsboat}/bin/newsboat'';
