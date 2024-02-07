@@ -37,6 +37,11 @@ let
       epkgs.autothemer
       epkgs.catppuccin-theme
       
+      # ===Haskell===
+      epkgs.haskell-mode
+      epkgs.lsp-haskell
+      epkgs.company-ghci
+      
       # ===Help===
       epkgs.helpful
       epkgs.which-key
@@ -103,10 +108,15 @@ in
         nerdfonts
         texliveFull
 
-        # ===C/C++ Tools and LSP-Servers
+        # ===C/C++ Tools and LSP-Servers===
         ccls
 
-        # ===Java Tools and LSP-Servers
+        # ===Haskell Tools and LSP-Servers===
+        ghc
+        haskellPackages.haskell-language-server
+        haskellPackages.hoogle
+
+        # ===Java Tools and LSP-Servers===
         jdt-language-server
 
         # ===Rust Tools and LSP-Servers===
