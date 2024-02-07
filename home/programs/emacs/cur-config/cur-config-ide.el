@@ -24,7 +24,10 @@
 (use-package lsp-ui
   ;:ensure t
   :after (lsp-mode)
-  :hook (lsp-mode . lsp-ui-mode))
+  :bind (:map cur/leader-keymap
+	 ("l C-d" . lsp-ui-doc-glance))
+  :hook
+  (lsp-mode . lsp-ui-mode))
 
 ;; ===Company Mode===
 (use-package company

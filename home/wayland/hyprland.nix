@@ -44,6 +44,7 @@ in {
           gaps_in = 5;
           gaps_out = 5;
           border_size = 2;
+          # TODO: Parameterize
           "col.active_border" = "rgba(5e81acee) rgba(81a1c1ee) 45deg";
           "col.inactive_border" = "rgba(4c566aaa)";
           layout = "master";
@@ -65,9 +66,6 @@ in {
             passes = 2;
           };
           drop_shadow = "no";
-          shadow_range = 4;
-          shadow_render_power = 3;
-          "col.shadow" = "rgba(1a1a1aee)";
         };
         animations = {
           enabled = "yes";
