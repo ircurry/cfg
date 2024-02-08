@@ -93,7 +93,9 @@
               ("p C-b" . projectile-switch-to-buffer)
               ("p b"   . projectile-ibuffer)
               ("p C-k" . projectile-kill-buffers)
-              ("p d"   . projectile-dired)))
+              ("p d"   . projectile-dired))
+  :config
+  (projectile-mode 1))
 
 (use-package rg)
   ;:ensure t)
