@@ -43,6 +43,12 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  sops = {
+    defaultSopsFile = ../../secrets/secrets.yaml;
+    defaultSopsFormat = "yaml";
+    age.keyFile = "/home/recur/.config/sops/age/keys.txt";
+  };
+  
   # The Meat of my configuration
   nocturne = {
     graphical = {
