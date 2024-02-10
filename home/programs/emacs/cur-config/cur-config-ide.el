@@ -85,15 +85,17 @@
   :after (rg)
   ;:ensure t
   :bind (:map cur/leader-keymap
-              ("p C-p" . projectile-switch-project)
-              ("p C-d" . projectile-find-dir)
-              ("p C-f" . projectile-find-file)
-              ("p C-r" . projectile-ripgrep)
-              ("p C-c" . projectile-compile-project)
-              ("p C-b" . projectile-switch-to-buffer)
-              ("p b"   . projectile-ibuffer)
-              ("p C-k" . projectile-kill-buffers)
-              ("p d"   . projectile-dired))
+              ("p C-p"   . projectile-switch-project)
+              ("p C-d"   . projectile-find-dir)
+              ("p C-f"   . projectile-find-file)
+              ("p C-r"   . projectile-ripgrep)
+              ("p C-c"   . projectile-compile-project)
+              ("p C-b"   . projectile-switch-to-buffer)
+              ("p b"     . projectile-ibuffer)
+              ("p C-k"   . projectile-kill-buffers)
+              ("p d"     . projectile-dired)
+              ("p C-M-g" . projectile-vc)
+              ("p C-a"   . projectile-add-known-project))
   :config
   (projectile-mode 1))
 
