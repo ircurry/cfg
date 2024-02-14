@@ -36,7 +36,7 @@
   (setq org-agenda-time-grid '((daily today require-timed)
                                (400 600 800 1000 1200 1400 1600 1800 2000 2200)
                                "......" "----------------"))
-  (setq org-format-latex-options '(:foreground "#e5e9e9" :scale 3.0))
+  (setq org-format-latex-options '(:foreground "#e5e9e9" :scale 1.0))
   (cur/org-font-setup))
 
 ;; ===Org Bullets===
