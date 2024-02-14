@@ -91,7 +91,7 @@
               ("p C-r"   . projectile-ripgrep)
               ("p C-c"   . projectile-compile-project)
               ("p C-b"   . projectile-switch-to-buffer)
-              ("p b"     . projectile-ibuffer)
+              ("p C-l"   . projectile-ibuffer)
               ("p C-k"   . projectile-kill-buffers)
               ("p d"     . projectile-dired)
               ("p C-M-g" . projectile-vc)
