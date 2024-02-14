@@ -78,5 +78,27 @@
       };
       ytfzf.enable = true;
     };
+    wayland.monitors = [
+      {
+        name = "eDP-1";
+        width = 2256;
+        height = 1504;
+        refreshRate = 60;
+        x = 0;
+        y = 0;
+        scale = 2;
+      }
+    ];
+    wayland.docked-monitors = [
+      {
+        name = "DP-2";
+        width = 1920;
+        height = 1080;
+        refreshRate = 60;
+        x = 0;
+        y = 0;
+        scale = 1;
+      }
+    ];
   };
 }

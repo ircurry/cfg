@@ -70,6 +70,60 @@
         type = lib.types.str;
       };
     };
+    monitors = lib.mkOption {
+      type = lib.types.listOf (lib.types.submodule {
+        options = {
+          name = lib.mkOption {
+            type = lib.types.str;
+          };
+          width = lib.mkOption {
+            type = lib.types.int;
+          };
+          height = lib.mkOption {
+            type = lib.types.int;
+          };
+          refreshRate = lib.mkOption {
+            type = lib.types.int;
+          };
+          x = lib.mkOption {
+            type = lib.types.int;
+          };
+          y = lib.mkOption {
+            type = lib.types.int;
+          };
+          scale = lib.mkOption {
+            type = lib.types.int;
+          };
+        };
+      });
+    };
+    docked-monitors = lib.mkOption {
+      type = lib.types.listOf (lib.types.submodule {
+        options = {
+          name = lib.mkOption {
+            type = lib.types.str;
+          };
+          width = lib.mkOption {
+            type = lib.types.int;
+          };
+          height = lib.mkOption {
+            type = lib.types.int;
+          };
+          refreshRate = lib.mkOption {
+            type = lib.types.int;
+          };
+          x = lib.mkOption {
+            type = lib.types.int;
+          };
+          y = lib.mkOption {
+            type = lib.types.int;
+          };
+          scale = lib.mkOption {
+            type = lib.types.int;
+          };
+        };
+      });
+    };
     notification = {
       daemon = lib.mkOption {
         type = lib.types.enum [ "mako" ];
