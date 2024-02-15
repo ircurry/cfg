@@ -5,10 +5,35 @@
       enable = true;
       package = pkgs.waybar;
       style = let
-        stdMargin = builtins.toString 4;
-        stdPadding = builtins.toString 6;
-        stdLaunchFontSize = builtins.toString 24;
-        stdFontSize = builtins.toString 16;
+        stdMargin = builtins.toString config.nocturne.wayland.waybar.stdMargin;
+        stdPadding = builtins.toString config.nocturne.wayland.waybar.stdPadding;
+        stdFontSize = builtins.toString config.nocturne.wayland.waybar.stdFontSize;
+        workspace-bg = config.nocturne.wayland.waybar.workspace-bg;
+        workspace-hover-bg = config.nocturne.wayland.waybar.workspace-hover-bg;
+        workspace-fg = config.nocturne.wayland.waybar.workspace-fg;
+        workspace-empty = config.nocturne.wayland.waybar.workspace-empty;
+        workspace-urgent = config.nocturne.wayland.waybar.workspace-urgent;
+        workspace-visible = config.nocturne.wayland.waybar.workspace-visible;
+        launcher-font-size = builtins.toString config.nocturne.wayland.waybar.launcher-font-size;
+        launcher-fg = config.nocturne.wayland.waybar.launcher-fg;
+        launcher-bg = config.nocturne.wayland.waybar.launcher-bg;
+        battery-fg = config.nocturne.wayland.waybar.battery-fg;
+        battery-bg = config.nocturne.wayland.waybar.battery-bg;
+        battery-warning = config.nocturne.wayland.waybar.battery-warning;
+        battery-critical = config.nocturne.wayland.waybar.battery-critical;
+        clock-fg = config.nocturne.wayland.waybar.clock-fg;
+        clock-bg = config.nocturne.wayland.waybar.clock-bg;
+        tray-bg = config.nocturne.wayland.waybar.tray-bg;
+        backlight-fg = config.nocturne.wayland.waybar.backlight-fg;
+        backlight-bg = config.nocturne.wayland.waybar.backlight-bg;
+        audio-fg = config.nocturne.wayland.waybar.audio-fg;
+        audio-bg = config.nocturne.wayland.waybar.audio-bg;
+        network-fg = config.nocturne.wayland.waybar.network-fg;
+        network-bg = config.nocturne.wayland.waybar.network-bg;
+        network-disconnected = config.nocturne.wayland.waybar.network-disconnected;
+        power-font-size = builtins.toString config.nocturne.wayland.waybar.power-font-size;
+        power-fg = config.nocturne.wayland.waybar.power-fg;
+        power-bg = config.nocturne.wayland.waybar.power-bg;
       in ''
         * {
           border: none;
@@ -21,12 +46,12 @@
         }
         /* ===Workspaces=== */
         #workspaces {
-          background-color: #3b4252;
+          background-color: #${workspace-bg};
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
         #workspaces button {
-          color: #d8dee9;
+          color: #${workspace-fg};
           font-family: Material Design Icons, Iosevka Nerd Font Mono, DejaVu Sans;
           font-size: ${stdFontSize}px;
           margin: 0px;
@@ -36,26 +61,26 @@
           box-shadow: none;
           text-shadow: none;
           background: none;
-          background-color: #2e3440;
+          background-color: #${workspace-hover-bg};
         }
         #workspaces button.empty {
-          color: #4c566a;
+          color: #${workspace-empty};
         }
         #workspaces button.active {
-          color: #d8dee9;
+          color: #${workspace-fg};
         }
         #workspaces button.urgent {
-          color: #d08770;
+          color: #${workspace-urgent};
         }
         #workspaces button.visible {
-          color: #ebcb8b;
+          color: #${workspace-visible};
         }
         /* ===Launcher=== */
         #custom-launcher {
           font-family: Material Design Icons;
-          font-size: 24px;
-          color: #3b4252;
-          background-color: #5e81ac;
+          font-size: ${launcher-font-size}px;
+          color: #${launcher-fg};
+          background-color: #${launcher-bg};
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
@@ -65,20 +90,20 @@
           font-size: ${stdFontSize}px;
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
-          color: #a3be8c;
-          background-color: #3b4252;
+          color: #${battery-fg};
+          background-color: #${battery-bg};
         }
         #battery.warning:not(.charging) {
-          color: #d08770;
+          color: #${battery-warning};
         }
         #battery.critical:not(.charging) {
-          color: #bf616a;
+          color: #${battery-critical};
         }
         /* ===Tray=== */
         #tray {
           font-family: Material Design Icons, Iosevka Nerd Font Mono;
           font-size: ${stdFontSize}px;
-          background-color: #3b4252;
+          background-color: #${tray-bg};
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
@@ -86,8 +111,8 @@
         #clock {
           font-family: Material Design Icons, Iosevka Nerd Font Mono;
           font-size: ${stdFontSize}px;
-          color: #d8dee9;
-          background-color: #3b4252;
+          color: #${clock-fg};
+          background-color: #${clock-bg};
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
@@ -95,8 +120,8 @@
         #backlight {
           font-family: Material Design Icons, Iosevka Nerd Font Mono;
           font-size: ${stdFontSize}px;
-          color: #ebcb8b;
-          background-color: #3b4252;
+          color: #${backlight-fg};
+          background-color: #${backlight-bg};
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
@@ -104,8 +129,8 @@
         #pulseaudio {
           font-family: Material Design Icons, Iosevka Nerd Font Mono;
           font-size: ${stdFontSize}px;
-          color: #5e81ac;
-          background-color: #3b4252;
+          color: #${audio-fg};
+          background-color: #${audio-bg};
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
@@ -113,21 +138,21 @@
         #network {
           font-family: Material Design Icons, Iosevka Nerd Font Mono;
           font-size: ${stdFontSize}px;
-          color: #d8dee9;
-          background-color: #3b4252;
+          color: #${network-fg};
+          background-color: #${network-bg};
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
         #network.disconnected,
         #network.disabled {
-          color: #4c566a;
+          color: #${network-disconnected};
         }
         /* ===Power=== */
         #custom-power {
           font-family: Material Design Icons;
-          font-size: 24px;
-          color: #3b4252;
-          background-color: #bf616a;
+          font-size: ${power-font-size}px;
+          color: #${power-fg};
+          background-color: #${power-bg};
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }

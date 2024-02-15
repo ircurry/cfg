@@ -44,6 +44,10 @@ in
         # alacritty.bright-white = nord06;
         rofi.border-color = nord10;
       };
+      wayland.waybar = {
+        launcher-bg = nord10;
+        audio-fg = nord10;
+      };
     };
   };
 }

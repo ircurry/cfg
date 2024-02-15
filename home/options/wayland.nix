@@ -177,5 +177,123 @@
         type = lib.types.nullOr lib.types.str;
       };
     };
+    waybar = {
+      stdMargin = lib.mkOption {
+        type = lib.types.int;
+        default = 4;
+      };
+      stdPadding = lib.mkOption {
+        type = lib.types.int;
+        default = 6;
+      };
+      stdFontSize = lib.mkOption {
+        type = lib.types.int;
+        default = 16;
+      };
+      workspace-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
+      workspace-hover-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base00;
+      };
+      workspace-fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base05;
+      };
+      workspace-empty = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base03;
+      };
+      workspace-urgent = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base09;
+      };
+      workspace-visible = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0A;
+      };
+      launcher-font-size = lib.mkOption {
+        type = lib.types.int;
+        default = 24;
+      };
+      launcher-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0D;
+      };
+      launcher-fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
+      battery-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
+      battery-fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0B;
+      };
+      battery-warning = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0A;
+      };
+      battery-critical = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base08;
+      };
+      clock-fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base05;
+      };
+      clock-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
+      tray-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
+      backlight-fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0A;
+      };
+      backlight-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
+      audio-fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0D;
+      };
+      audio-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
+      network-fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base05;
+      };
+      network-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
+      network-disconnected = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base03;
+      };
+      power-font-size = lib.mkOption {
+        type = lib.types.int;
+        default = 24;
+      };
+      power-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base08;
+      };
+      power-fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
+    };
   };
 }
