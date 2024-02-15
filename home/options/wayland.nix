@@ -236,7 +236,7 @@
       };
       battery-warning = lib.mkOption {
         type = lib.types.str;
-        default = config.nocturne.themes.colors.base0A;
+        default = config.nocturne.themes.colors.base09;
       };
       battery-critical = lib.mkOption {
         type = lib.types.str;
