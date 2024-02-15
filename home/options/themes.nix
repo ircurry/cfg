@@ -1,7 +1,7 @@
 { lib, ... }: {
   options.nocturne.themes = {
     theme = lib.mkOption {
-      type = lib.types.enum [ "nord-aurora" ];
+      type = lib.types.enum [ "basic-dark" "gruvbox-dark-medium" "nord-aurora" ];
       default = "nord-aurora";
       description = "Which theme for the system to use";
     };

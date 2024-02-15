@@ -1,7 +1,12 @@
 { ... }: {
   imports = [
+    # ===Took Kits===
     ./gtk.nix
-    ./nord-aurora.nix
     ./qt.nix
+    
+    # ===Themes===
+    ./basic-dark.nix
+    ./gruvbox.nix
+    ./nord-aurora.nix
   ];
 }

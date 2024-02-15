@@ -41,6 +41,7 @@ in
       };
       graphical = {
         alacritty.bright-cyan = nord07;
+        # alacritty.bright-white = nord06;
         rofi.border-color = nord10;
       };
     };

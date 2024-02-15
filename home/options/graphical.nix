@@ -44,7 +44,7 @@
       };
       white = lib.mkOption {
         type = lib.types.str;
-        default = config.nocturne.themes.colors.base04;
+        default = config.nocturne.themes.colors.base06;
       };
       bright-black = lib.mkOption {
         type = lib.types.str;
@@ -76,7 +76,7 @@
       };
       bright-white = lib.mkOption {
         type = lib.types.str;
-        default = config.nocturne.themes.colors.base06;
+        default = config.nocturne.themes.colors.base05;
       };
     };
     brave.enable = lib.mkEnableOption "Enable Brave Browser";
