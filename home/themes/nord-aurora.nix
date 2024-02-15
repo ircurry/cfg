@@ -49,7 +49,10 @@ in
       };
       wayland.waybar = {
         launcher-bg = nord10;
-        audio-fg = nord10;
+      };
+      wayland.mako = {
+        border-color = nord10 + "FF";
+        progress-color = nord10 + "FF";
       };
     };
   };

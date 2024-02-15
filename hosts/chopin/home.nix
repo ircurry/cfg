@@ -51,7 +51,7 @@
   
   # The Meat of my configuration
   nocturne = {
-    themes.theme = "nord-aurora";
+    themes.theme = "gruvbox-dark-medium";
     graphical = {
       alacritty.enable = true;
       brave.enable = false;

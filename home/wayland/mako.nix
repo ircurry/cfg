@@ -4,16 +4,21 @@ in {
   config = lib.mkIf (cfg == "mako") {
     home.packages = [ pkgs.nerdfonts pkgs.libnotify ];
     nocturne.wayland.notification.exec-start = "${lib.getExe pkgs.mako}"; 
-    services.mako = {
+    services.mako = let
+      bg = config.nocturne.wayland.mako.bg;
+      fg = config.nocturne.wayland.mako.fg;
+      border-color = config.nocturne.wayland.mako.border-color;
+      progress-color = config.nocturne.wayland.mako.progress-color;
+    in {
       enable = true;
       defaultTimeout = 7000;
       font = "JetBrainsMono Nerd Font 10";
-      backgroundColor = "#434c5eaa";
-      textColor = "#d8dee9FF";
-      borderColor = "#5e81acFF";
+      backgroundColor = "#" + bg;
+      textColor = "#" + fg;
+      borderColor = "#" + border-color;
       borderRadius = 8;
-      borderSize = 2;
-      progressColor = "#5e81acFF";
+      borderSize = config.nocturne.wayland.mako.borderSize;
+      progressColor = "#" + progress-color;
     };
   };
 }
