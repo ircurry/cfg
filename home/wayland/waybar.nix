@@ -226,9 +226,8 @@
           format-icons = ["󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
         };
         tray = {
-          icon-size = 21;
-          # TODO: make this work with the other margin options
-          spacing = 6;
+          icon-size = config.nocturne.wayland.waybar.stdIconSize;
+          spacing = config.nocturne.wayland.waybar.stdPadding;
         };
         # Center
         clock = {

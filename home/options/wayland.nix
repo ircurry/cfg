@@ -190,6 +190,10 @@
         type = lib.types.int;
         default = 16;
       };
+      stdIconSize = lib.mkOption {
+        type = lib.types.int;
+        default = 21;
+      };
       workspace-bg = lib.mkOption {
         type = lib.types.str;
         default = config.nocturne.themes.colors.base01;
