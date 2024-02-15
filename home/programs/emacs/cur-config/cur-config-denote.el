@@ -62,7 +62,7 @@ is set to \\='(title keywords template subdirectory)."
   :config
   ;; ===Templates===
   (setq denote-templates
-	`((default . "\n\n\nCite:  ")
+	`((default . "\n\n\nCite: ")
           (bibliography . ,(concat "* Citation\n"
                            "#+begin_src bibtex\n"
                            "  \n"

@@ -37,7 +37,6 @@ in
     eval "$(zoxide init zsh)"
     '';
     initExtra = ''
-    clear
     ${pkgs.nitch}/bin/nitch
     '';
     localVariables = {

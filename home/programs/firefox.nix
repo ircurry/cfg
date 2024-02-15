@@ -126,14 +126,14 @@ in
             };
             "Invidious" = {
               urls = [{
-                template = "https://invidious.slipfox.xyz/search";
+                template = "https://invidious.nerdvpn.de/search";
                 params = [
                   { name = "q"; value = "{searchTerms}"; }
                 ];
               }];
               
               icon = "${pkgs.libsForQt5.breeze-icons}/share/icons/breeze-dark/actions/16/media-playback-start.svg";
-              definedAliases = [ "@iv" ];
+              definedAliases = [ "@in" "@inv" ];
             };
           };
         };

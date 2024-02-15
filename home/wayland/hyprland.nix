@@ -4,15 +4,78 @@
   menu-window = config.nocturne.wayland.menu.window;
   ed-cfg = config.nocturne.wayland.editor;
   term-cfg = config.nocturne.wayland.terminal;
+
+  # Monitors
+  monitors = map (m:
+    let
+      resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
+      position = "${toString m.x}x${toString m.y}";
+    in
+      "${m.name},${resolution},${position},${toString m.scale}"
+  ) config.nocturne.wayland.monitors;
+  
+  # Monitors for dock station
+  docked-monitors = map (m:
+    let
+      resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
+      position = "${toString m.x}x${toString m.y}";
+    in
+      "${m.name},${resolution},${position},${toString m.scale}"
+  ) config.nocturne.wayland.docked-monitors;
+
+  # Disgusting script to disable monitors when docking
+  hyprdock = let
+    gmonHead = "^" + (builtins.head config.nocturne.wayland.docked-monitors).name;
+    gmonTain = builtins.tail config.nocturne.wayland.docked-monitors;
+    grepString = lib.lists.foldr (x: acc:
+      acc + "\\|^" + x.name
+    ) gmonHead gmonTain;
+    
+    dmonHead = "hyprctl keyword monitor " + builtins.head docked-monitors;
+    dmonTail = builtins.tail docked-monitors;
+    dmonString = lib.lists.foldr (x: acc:
+      acc + "\n      hyprctl keyword monitor " + x
+    ) dmonHead dmonTail;
+    
+    monHead = "hyprctl keyword monitor " + builtins.head monitors;
+    monTail = builtins.tail monitors;
+    monString = lib.lists.foldr (x: acc:
+      acc + "\n    hyprctl keyword monitor " + x
+    ) monHead monTail;
+    
+    dismonHead = "hyprctl keyword monitor " + (builtins.head config.nocturne.wayland.monitors).name + ",disable";
+    dismonTail = map (m:
+      "${m.name},disable"
+    ) (builtins.tail config.nocturne.wayland.monitors);
+    dismonString = lib.lists.foldr (x: acc:
+      acc + "\n      hyprctl keyword monitor " + x
+    ) dismonHead dismonTail;
+    
+  in pkgs.writeShellScriptBin "hyprdock" ''
+  monitorIsDocked="$(${pkgs.wlr-randr}/bin/wlr-randr | grep '${grepString}')"
+  case $1 in
+    -dock)
+      if [ -n "$monitorIsDocked" ]; then
+        ${dismonString}
+        ${dmonString}
+      fi ;;
+    -undock)
+      ${monString} ;;
+    *) echo "unknown parameter" ;; 
+  esac
+  '';
+  
 in {
   config = {
     home.packages = [
+      hyprdock
       pkgs.killall
       # Audio Control
       pkgs.pavucontrol
       pkgs.swww
       pkgs.wl-clipboard
     ];
+    
     wayland.windowManager.hyprland = {
       enable = true;
       ## Bleeding edge Hyprland
@@ -28,7 +91,7 @@ in {
         env = [
           "XCURSOR_SIZE,24"
         ];
-        monitor= [
+        monitor = monitors ++ [
           ",preferred,auto,auto"
         ];
         exec-once = [
@@ -175,6 +238,10 @@ in {
           # Move/resize windows with mainMod + LMB/RMB and dragging
           "$MOD, mouse:272, movewindow"
           "$MOD, mouse:273, resizewindow"
+        ];
+        bindl = [
+          ",switch:on:Lid Switch,exec,${hyprdock}/bin/hyprdock -dock"
+          ",switch:off:Lid Switch,exec,${hyprdock}/bin/hyprdock -undock"
         ];
       };
     };
