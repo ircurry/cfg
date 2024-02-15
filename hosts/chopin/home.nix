@@ -51,7 +51,7 @@
   
   # The Meat of my configuration
   nocturne = {
-    themes.theme = "basic-dark";
+    themes.theme = "nord-aurora";
     graphical = {
       alacritty.enable = true;
       brave.enable = false;

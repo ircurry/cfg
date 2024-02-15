@@ -44,6 +44,9 @@ in
         # alacritty.bright-white = nord06;
         rofi.border-color = nord10;
       };
+      wayland.hyprland = {
+        col-active-border1 = nord10 + "ee";
+      };
       wayland.waybar = {
         launcher-bg = nord10;
         audio-fg = nord10;
