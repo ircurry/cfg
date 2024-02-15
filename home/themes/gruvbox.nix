@@ -61,6 +61,27 @@ in
           magenta = light-purple;
           bright-black = grey;
         };
+        rofi.border-color = bg4;
+      };
+      wayland.hyprland = {
+        col-active-border1 = bg4 + "ee";
+        col-active-border2 = bg3 + "ee";
+        col-inactive-border = bg1 + "ee";
+      };
+      wayland.waybar = {
+        # Right side
+        power-bg = light-red;
+        clock-fg = light-orange;
+        network-fg = light-yellow;
+        audio-fg = light-green;
+        memory-fg = light-blue;
+        cpu-fg = light-purple;
+        # Left side
+        backlight-fg = light-yellow;
+        battery-fg = light-green;
+        battery-warning = light-orange;
+        battery-critical = light-red;
+        launcher-bg = light-blue;
       };
     };
   };
