@@ -244,7 +244,7 @@
       };
       clock-fg = lib.mkOption {
         type = lib.types.str;
-        default = config.nocturne.themes.colors.base05;
+        default = config.nocturne.themes.colors.base09;
       };
       clock-bg = lib.mkOption {
         type = lib.types.str;
@@ -264,7 +264,7 @@
       };
       audio-fg = lib.mkOption {
         type = lib.types.str;
-        default = config.nocturne.themes.colors.base0D;
+        default = config.nocturne.themes.colors.base0B;
       };
       audio-bg = lib.mkOption {
         type = lib.types.str;
@@ -272,7 +272,7 @@
       };
       network-fg = lib.mkOption {
         type = lib.types.str;
-        default = config.nocturne.themes.colors.base05;
+        default = config.nocturne.themes.colors.base0A;
       };
       network-bg = lib.mkOption {
         type = lib.types.str;
@@ -291,6 +291,22 @@
         default = config.nocturne.themes.colors.base08;
       };
       power-fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
+      cpu-fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0E;
+      };
+      cpu-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
+      memory-fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0D;
+      };
+      memory-bg = lib.mkOption {
         type = lib.types.str;
         default = config.nocturne.themes.colors.base01;
       };

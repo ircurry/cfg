@@ -49,7 +49,6 @@ in
       };
       wayland.waybar = {
         launcher-bg = nord10;
-        audio-fg = nord10;
       };
     };
   };

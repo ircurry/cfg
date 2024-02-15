@@ -34,6 +34,10 @@
         power-font-size = builtins.toString config.nocturne.wayland.waybar.power-font-size;
         power-fg = config.nocturne.wayland.waybar.power-fg;
         power-bg = config.nocturne.wayland.waybar.power-bg;
+        cpu-fg = config.nocturne.wayland.waybar.cpu-fg;
+        cpu-bg = config.nocturne.wayland.waybar.cpu-bg;
+        memory-fg = config.nocturne.wayland.waybar.memory-fg;
+        memory-bg = config.nocturne.wayland.waybar.memory-bg;
       in ''
         * {
           border: none;
@@ -156,6 +160,24 @@
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
+        /* ===CPU=== */
+        #cpu {
+          font-family: Material Design Icons, Iosevka Nerd Font Mono;
+          font-size: ${stdFontSize}px;
+          color: #${cpu-fg};
+          background-color: #${cpu-bg};
+          margin: 0px ${stdMargin}px;
+          padding: 0px ${stdPadding}px;
+        }
+        /* ===Memory=== */
+        #memory {
+          font-family: Material Design Icons, Iosevka Nerd Font Mono;
+          font-size: ${stdFontSize}px;
+          color: #${memory-fg};
+          background-color: #${memory-bg};
+          margin: 0px ${stdMargin}px;
+          padding: 0px ${stdPadding}px;
+        }
       '';
 
       settings = [{
@@ -165,9 +187,9 @@
           "eDP-1"
           "DP-2"
         ];
-        modules-left = [ "custom/launcher" "hyprland/workspaces" "battery" ];
-        modules-center = [ "clock" ];
-        modules-right = [ "tray" "backlight" "pulseaudio" "network" "custom/power" ];
+        modules-left = [ "custom/launcher" "battery" "backlight" "tray" ];
+        modules-center = [ "hyprland/workspaces" ];
+        modules-right = [ "cpu" "memory" "pulseaudio" "network" "clock" "custom/power" ];
         "custom/launcher" = {
           format = "󱄅";
           tooltip = false;
@@ -247,6 +269,12 @@
           format = "󰐥";
           tooltip = false;
           on-click = "sleep 0.1 && ${config.nocturne.wayland.logout.exec}";
+        };
+        cpu = {
+          format = "󰻠 {usage}%";
+        };
+        memory = {
+          format = "󰍛 {percentage}%";
         };
       }];
     };
