@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ config, lib, ... }: {
   options.nocturne.wayland = {
     editor = {
       name = lib.mkOption {
@@ -15,6 +15,20 @@
       };
       exec-start = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
+      };
+    };
+    hyprland = {
+      col-active-border1 = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0D + "ee";
+      };
+      col-active-border2 = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0C + "ee";
+      };
+      col-inactive-border = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base03 + "aa";
       };
     };
     image = {

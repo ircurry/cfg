@@ -4,6 +4,12 @@
   menu-window = config.nocturne.wayland.menu.window;
   ed-cfg = config.nocturne.wayland.editor;
   term-cfg = config.nocturne.wayland.terminal;
+  #col_active_border1 = "5e81acee";
+  #col_active_border2 = "81a1c1ee";
+  #col_inactive_border = "4c566aaa";
+  col_active_border1 = config.nocturne.wayland.hyprland.col-active-border1;
+  col_active_border2 = config.nocturne.wayland.hyprland.col-active-border2;
+  col_inactive_border = config.nocturne.wayland.hyprland.col-inactive-border;
 
   # Monitors
   monitors = map (m:
@@ -108,8 +114,8 @@ in {
           gaps_out = 5;
           border_size = 2;
           # TODO: Parameterize
-          "col.active_border" = "rgba(5e81acee) rgba(81a1c1ee) 45deg";
-          "col.inactive_border" = "rgba(4c566aaa)";
+          "col.active_border" = "rgba(${col_active_border1}) rgba(${col_active_border2}) 45deg";
+          "col.inactive_border" = "rgba(${col_inactive_border})";
           layout = "master";
           allow_tearing = false;
         };
