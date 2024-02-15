@@ -67,6 +67,28 @@
         type = lib.types.str;
       };
     };
+    mako = {
+      borderSize = lib.mkOption {
+        type = lib.types.int;
+        default = 2;
+      };
+      bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base02 + "AA";
+      };
+      fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base05 + "FF";
+      };
+      border-color = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base03 + "FF";
+      };
+      progress-color = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0A + "FF";
+      };
+    };
     menu = {
       name = lib.mkOption {
         type = lib.types.enum [ "rofi-wayland" ];
