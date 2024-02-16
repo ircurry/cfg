@@ -54,6 +54,10 @@ in
         border-color = nord10 + "FF";
         progress-color = nord10 + "FF";
       };
+      wayland.swaylock-effects = {
+        key-press = nord10;
+        ring-ver = nord10;
+      };
     };
   };
 }

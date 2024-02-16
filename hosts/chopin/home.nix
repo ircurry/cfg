@@ -54,8 +54,8 @@
     #themes.theme = "basic-dark";
     #themes.theme = "catppuccin-mocha";
     #themes.theme = "gruvbox-dark-medium";
-    themes.theme = "kanagawa-wave";
-    #themes.theme = "nord-aurora";
+    #themes.theme = "kanagawa-wave";
+    themes.theme = "nord-aurora";
     graphical = {
       alacritty.enable = true;
       brave.enable = false;

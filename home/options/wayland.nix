@@ -185,6 +185,56 @@
         type = lib.types.package;
       };
     };
+    swaylock-effects = {
+      bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base00;
+      };
+      fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base05;
+      };
+      bg-inside = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
+      ring = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base02;
+      };
+      key-press = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0D;
+      };
+      fg-ring-clear = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0A;
+      };
+      fg-ver = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base05;
+      };
+      ring-ver = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0D;
+      };
+      fg-wrong = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base08;
+      };
+      ring-wrong = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base08;
+      };
+      fg-caps = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base09;
+      };
+      key-press-caps = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base09;
+      };
+    };
     terminal = {
       name = lib.mkOption {
         type = lib.types.nullOr (lib.types.enum [ "alacritty" ]);
