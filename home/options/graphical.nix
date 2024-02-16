@@ -118,7 +118,7 @@
       };
       fg-selection = lib.mkOption {
         type = lib.types.str;
-        default = config.nocturne.themes.colors.base04;
+        default = config.nocturne.themes.colors.base05;
       };
       fg-placeholder = lib.mkOption {
         type = lib.types.str;
