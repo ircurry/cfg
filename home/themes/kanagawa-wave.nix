@@ -61,13 +61,15 @@ in
         base0F = katanaGray; # brown
       };
       graphical.alacritty = {
+        red = samuriRed;
+        green = springGreen;
+        yellow = autumnYellow;
+        blue = cyrstalBlue;
+        cyan = waveAqua2;
         white = oldWhite;
-        red = autumnRed;
-        yellow = boatYellow2;
-        green = autumnGreen;
-        cyan = waveAqua1;
-        bright-blue = springBlue;
-        bright-magenta = springViolet1;
+        bright-red = samuriRed;
+        bright-yellow = autumnYellow;
+        bright-blue = cyrstalBlue;
       };
       graphical.rofi = {
         border-color = oniViolet;
