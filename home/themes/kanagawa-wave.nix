@@ -79,7 +79,7 @@ in
         col-active-border2 = oniViolet + "ee";
       };
       wayland.mako = {
-        progress-color = waveBlue2 + "FF";
+        progress-color = oniViolet + "FF";
       };
       wayland.waybar = {
         workspace-visible = autumnYellow;
