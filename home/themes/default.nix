@@ -8,6 +8,7 @@
     ./basic-dark.nix
     ./catppuccin-mocha.nix
     ./gruvbox.nix
+    ./kanagawa-wave.nix
     ./nord-aurora.nix
   ];
 }
