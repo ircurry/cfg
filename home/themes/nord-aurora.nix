@@ -49,6 +49,7 @@ in
       };
       wayland.waybar = {
         launcher-bg = nord10;
+        #mpd-fg = nord08;
       };
       wayland.mako = {
         border-color = nord10 + "FF";

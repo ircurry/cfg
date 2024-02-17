@@ -38,6 +38,8 @@
         cpu-bg = config.nocturne.wayland.waybar.cpu-bg;
         memory-fg = config.nocturne.wayland.waybar.memory-fg;
         memory-bg = config.nocturne.wayland.waybar.memory-bg;
+        mpd-fg = config.nocturne.wayland.waybar.mpd-fg;
+        mpd-bg = config.nocturne.wayland.waybar.mpd-bg;
       in ''
         * {
           border: none;
@@ -178,6 +180,15 @@
           margin: 0px ${stdMargin}px;
           padding: 0px ${stdPadding}px;
         }
+        /* ===MPD=== */
+        #mpd {
+          font-family: Material Design Icons, Iosevka Nerd Font Mono;
+          font-size: ${stdFontSize}px;
+          color: #${mpd-fg};
+          background-color: #${mpd-bg};
+          margin: 0px ${stdMargin}px;
+          padding: 0px ${stdPadding}px;
+        }
       '';
 
       settings = [{
@@ -187,7 +198,7 @@
           "eDP-1"
           "DP-2"
         ];
-        modules-left = [ "custom/launcher" "battery" "backlight" "tray" ];
+        modules-left = [ "custom/launcher" "battery" "backlight" "mpd" "tray" ];
         modules-center = [ "hyprland/workspaces" ];
         modules-right = [ "cpu" "memory" "pulseaudio" "network" "clock" "custom/power" ];
         "custom/launcher" = {
@@ -274,6 +285,21 @@
         };
         memory = {
           format = "󰍛 {percentage}%";
+        };
+        mpd = {
+          format = "{stateIcon} {title}";
+          format-stopped = "󰓛 Stopped";
+          format-paused = "{stateIcon} {title}";
+          max-length = 15;
+          on-click = "${pkgs.mpc-cli}/bin/mpc toggle";
+          on-click-middle = "${pkgs.mpc-cli}/bin/mpc stop";
+          on-click-right = "${config.nocturne.wayland.terminal.exec-center} ${pkgs.ncmpcpp}/bin/ncmpcpp";
+          state-icons = {
+            paused = "󰂼";
+            playing = "󱉺";
+          };
+          tooltip = true;
+          tooltip-format = "| Queue: {songPosition}/{queueLength}\n| Time: {elapsedTime:%M:%S} - {totalTime:%M:%S}\n| Song: {title}\n| Artist: {artist}\n| Album: {album}";
         };
       }];
     };

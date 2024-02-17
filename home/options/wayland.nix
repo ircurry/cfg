@@ -248,6 +248,9 @@
       exec-start = lib.mkOption{
         type = lib.types.nullOr lib.types.str;
       };
+      exec-center = lib.mkOption {
+        type = lib.types.str;
+      };
     };
     waybar = {
       stdMargin = lib.mkOption {
@@ -383,6 +386,14 @@
         default = config.nocturne.themes.colors.base0D;
       };
       memory-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
+      mpd-fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0D;
+      };
+      mpd-bg = lib.mkOption {
         type = lib.types.str;
         default = config.nocturne.themes.colors.base01;
       };

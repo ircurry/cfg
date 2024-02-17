@@ -112,6 +112,7 @@ in
       ];
       nocturne.wayland.terminal.exec = "${lib.getExe pkgs.alacritty}";
       nocturne.wayland.terminal.exec-start = null;
+      nocturne.wayland.terminal.exec-center = "${lib.getExe pkgs.alacritty} --class=center -e";
     })
   ];
 }

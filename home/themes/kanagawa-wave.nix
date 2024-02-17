@@ -83,6 +83,7 @@ in
       };
       wayland.waybar = {
         workspace-visible = autumnYellow;
+        mpd-fg = cyrstalBlue;
       };
     };
   };

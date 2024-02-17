@@ -77,6 +77,7 @@ in
         memory-fg = light-blue;
         cpu-fg = light-purple;
         # Left side
+        mpd-fg = light-aqua;
         backlight-fg = light-yellow;
         battery-fg = light-green;
         battery-warning = light-orange;
