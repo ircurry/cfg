@@ -56,11 +56,11 @@ in {
         { key = ","; command = "move_home"; }
         { key = "."; command = "move_end"; }
         { key = "R"; command = "update_database"; }
-        { key = "g"; command = "reset_search_engine"; }
-        { key = "g"; command = "stop"; }
+        { key = "s"; command = "reset_search_engine"; }
+        { key = "s"; command = "stop"; }
         { key = "f"; command = "show_browser"; }
         { key = "f"; command = "change_browse_mode"; }
-        { key = "s"; command = "delete_playlist_items"; }
+        { key = "d"; command = "delete_playlist_items"; }
         { key = "P"; command = "show_playlist"; }
       ];
       settings = {
