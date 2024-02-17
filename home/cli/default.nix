@@ -6,6 +6,7 @@
     ./file-convert.nix
     ./git.nix
     ./lf
+    ./mpd.nix
     ./phetch.nix
     ./scripts
     ./ytfzf.nix
