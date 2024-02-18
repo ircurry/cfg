@@ -40,10 +40,23 @@
         memory-bg = config.nocturne.wayland.waybar.memory-bg;
         mpd-fg = config.nocturne.wayland.waybar.mpd-fg;
         mpd-bg = config.nocturne.wayland.waybar.mpd-bg;
+        tooltip-bg = config.nocturne.wayland.waybar.tooltip-bg;
+        tooltip-fg = config.nocturne.wayland.waybar.tooltip-fg;
       in ''
         * {
           border: none;
           border-radius: 8px;
+        }
+        tooltip {
+          font-family: Material Design Icons, Iosevka Nerd Font Mono, DejaVu Sans;
+          background-color: #${tooltip-bg};
+          font-size: ${stdFontSize}px;
+        }
+        tooltip * {
+          font-family: Material Design Icons, Iosevka Nerd Font Mono, DejaVu Sans;
+          color: #${tooltip-fg};
+          font-size: ${stdFontSize}px;
+          padding: 0px 0px;
         }
         window#waybar {
           background: transparent;
@@ -244,6 +257,8 @@
         clock = {
           interval = 60;
           format = "󰅐 {:%H:%M}";
+          tooltip = true;
+          tooltip-format = "󰃰 {:%m/%d (%a)}";
           max-length = 25;
         };
         # Right

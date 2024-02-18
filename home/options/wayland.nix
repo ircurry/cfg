@@ -397,6 +397,14 @@
         type = lib.types.str;
         default = config.nocturne.themes.colors.base01;
       };
+      tooltip-fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base05;
+      };
+      tooltip-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
     };
   };
 }
