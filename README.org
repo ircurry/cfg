@@ -1,0 +1,31 @@
+#+TITLE: Ircurry's NixOS Configuration
+#+AUTHOR: ircurry
+
+* About
+My poorly constructed configurations for [[https://nixos.org/][NixOS]] using [[https://nixos.wiki/wiki/Flakes][flakes]]. 
+
+* Unixporn
+I have themes for:
+- Catppuccin Mocha
+- Gruvbox Dark Medium
+- Kanagawa Wave
+- Nord Aurora (default)
+- Basic Dark (not really a themes, basically just for testing)
+
+* Credits and Inspirations
+- [[https://github.com/iynaix/dotfiles][Iynaix's Config]]
+- [[https://github.com/vimjoyer/nixconf][Vimjoyer's Config]] and [[https://youtube.com/channel/UC_zBdZ0_H_jn41FDRG7q4Tw][Videos]]
+- [[https://youtube.com/channel/UCFzUEe9XUlkDLp6AmtNzmOA][IogaMaster's Videos]]
+- [[https://github.com/jakehamilton/config][Jake Hamilton's Config]], [[https://youtube.com/playlist?list=PLCy0xwW0SDSSt2VJKx3MsXRuVvcFUO6Sw][Livestreams]] and [[https://github.com/snowfallorg/lib][Snowfall Lib]]
+- [[https://youtube.com/channel/UCs_xdqtQHTkl7LxazKIjKCg][RubberDuck's Videos]]
+- [[https://youtube.com/channel/UCeZyoDTk0J-UPhd7MUktexw][LibrePhoenix's Videos]]
+- [[https://nixos-and-flakes.thiscute.world/][The Nix Flakes Book]]
+- [[https://nix.dev/][The nix.dev Tutorials and Guides]]
+- [[https://nixos.wiki/][The Unofficial NixOS Wiki]]
+- [[https://github.com/Misterio77/nix-config][Misterio77's Configs]] and [[https://github.com/Misterio77/nix-starter-configs][Starter Configs]]
+- [[https://git.bugswriter.com/dotfiles.git/][Bugswriter's Rice]]
+- [[https://github.com/junnunkarim/dotfiles-linux][junnunkarim's dwm rice(s)]]
+- [[https://github.com/AlphaTechnolog/dwm][AlphaTechnolog's dwm rice]]
+- [[https://github.com/LukeSmithxyz/voidrice][Luke Smith's rice]]
+- [[https://gitlab.com/dtos/dtos][DistroTube's DTOS]]
+- [[https://github.com/ericmurphyxyz/dotfiles][Eric Murphy's BSPWM rice]]
