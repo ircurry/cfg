@@ -24,6 +24,10 @@ I have themes for:
 - Nord Aurora (default)
 - Basic Dark (not really a themes, basically just for testing)
 
+[[file:./screenshots/screenshot1.png]]
+[[file:./screenshots/screenshot2.png]]
+[[file:./screenshots/screenshot3.png]]
+
 * Credits and Inspirations
 - [[https://github.com/iynaix/dotfiles][Iynaix's Config]]
 - [[https://github.com/vimjoyer/nixconf][Vimjoyer's Config]] and [[https://youtube.com/channel/UC_zBdZ0_H_jn41FDRG7q4Tw][Videos]]
