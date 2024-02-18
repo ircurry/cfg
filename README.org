@@ -2,7 +2,19 @@
 #+AUTHOR: ircurry
 
 * About
-My poorly constructed configurations for [[https://nixos.org/][NixOS]] using [[https://nixos.wiki/wiki/Flakes][flakes]]. 
+My poorly constructed configurations for [[https://nixos.org/][NixOS]] using [[https://nixos.wiki/wiki/Flakes][flakes]].
+
+** Specs
+Here are some specs you've seen a trillion times:
+- *WM*: Hyprland
+- *Bar*: Waybar
+- *Launcher/Menu*: Rofi-Wayland
+- *Editor*: Emacs
+- *Terminal*: Alacritty
+- *Shell*: Zsh
+
+** Hardware
+Right now I just have my [[https://frame.work/][framework]] laptop but I hope expand it to a desktop, my other laptops, and a NAS (eventually).
 
 * Unixporn
 I have themes for:
