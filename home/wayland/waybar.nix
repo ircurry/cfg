@@ -49,11 +49,17 @@
         }
         tooltip {
           font-family: Material Design Icons, Iosevka Nerd Font Mono, DejaVu Sans;
+          box-shadow: none;
+          text-shadow: none;
+          background: none;
           background-color: #${tooltip-bg};
           font-size: ${stdFontSize}px;
         }
         tooltip * {
           font-family: Material Design Icons, Iosevka Nerd Font Mono, DejaVu Sans;
+          box-shadow: none;
+          text-shadow: none;
+          background: none;
           color: #${tooltip-fg};
           font-size: ${stdFontSize}px;
           padding: 0px 0px;
