@@ -106,6 +106,7 @@ in {
           "${pkgs.swww}/bin/swww init"
           "${config.nocturne.wayland.notification.exec-start}"
           "${pkgs.networkmanagerapplet}/bin/nm-applet"
+          "[workspace 2 silent] $terminal"
         ] ++ lib.optionals (term-cfg.exec-start != null) [
           "${term-cfg.exec-start}"
         ];
