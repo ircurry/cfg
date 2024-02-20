@@ -237,7 +237,7 @@
     };
     terminal = {
       name = lib.mkOption {
-        type = lib.types.nullOr (lib.types.enum [ "alacritty" ]);
+        type = lib.types.enum [ "alacritty" ];
         default = "alacritty";
         example = "alacritty";
         description = "Which terminal emulator to use";
