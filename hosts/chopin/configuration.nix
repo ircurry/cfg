@@ -96,7 +96,6 @@
     isNormalUser = true;
     description = "Ian Curran";
     extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
     initialPassword = "password";
     hashedPasswordFile = config.sops.secrets."recur_password".path;
   };

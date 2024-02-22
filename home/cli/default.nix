@@ -3,6 +3,7 @@
     ./aliases.nix
     ./amfora
     ./ani-cli.nix
+    ./bash.nix
     ./core.nix
     ./enviornment-vars.nix
     ./file-convert.nix
