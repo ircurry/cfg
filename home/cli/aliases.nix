@@ -14,7 +14,6 @@
       ll = "${pkgs.eza}/bin/eza -h --group-directories-first --icons -L 1 -T -l";
       la = "${pkgs.eza}/bin/eza -h --group-directories-first --icons -L 1 -T -l -a";
       lt = "${pkgs.eza}/bin/eza -h --group-directories-first --icons -L 4 -T -l";
-      tree = "${pkgs.eza}/bin/eza -h --group-directories-first --icons -T -l";
       mv = "mv -i";
       cp = "cp -i";
       tp = "${pkgs.trashy}/bin/trash put";
