@@ -3,6 +3,7 @@
 let
   cfg = config.nocturne.graphical.alacritty;
   way-cfg = config.nocturne.wayland.terminal;
+  shell-cfg = config.nocturne.cli.shell;
   bg = config.nocturne.graphical.alacritty.bg; # ----
   fg = config.nocturne.graphical.alacritty.fg; # ++
   black = config.nocturne.graphical.alacritty.black; # ---
@@ -28,6 +29,9 @@ in
       programs.alacritty = {
         enable = true;
         settings = {
+          shell = {
+            program = shell-cfg.exec;
+          };
           window = {
             padding = {
               x = 4;

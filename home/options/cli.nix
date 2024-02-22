@@ -37,6 +37,16 @@
     scripts = {
       youtubeScripts.enable = lib.mkEnableOption "Enable YouTube scripts";
     };
+    shell = {
+      name = lib.mkOption {
+        type = lib.types.enum [ "zsh" "fish" ];
+        default = "fish";
+        description = "Interactive Shell";
+      };
+      exec = lib.mkOption {
+        type = lib.types.str;
+      };
+    };
     ytfzf.enable = lib.mkEnableOption "Enable ytfzf and scripts around it";
   };
 }
