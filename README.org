@@ -45,3 +45,37 @@ I have themes for:
 - [[https://github.com/LukeSmithxyz/voidrice][Luke Smith's rice]]
 - [[https://gitlab.com/dtos/dtos][DistroTube's DTOS]]
 - [[https://github.com/ericmurphyxyz/dotfiles][Eric Murphy's BSPWM rice]]
+
+* The TODO List
+- [-] Home Manager Modules [0%]
+  - [ ] Clean up modules [0%]
+    - [ ] Wayland Options
+    - [ ] Hyprland
+    - [ ] Rofi
+    - [ ] Waybar
+  - [-] Fix/Add Modules [20%]
+    - [ ] Flatpak
+    - [X] Fish
+    - [ ] SSH Configuration
+    - [ ] GPG Configuration
+    - [ ] Direnv
+  - [-] Fix/Add Options [25%]
+    - [ ] Default Browser on Wayland
+    - [ ] Default Fonts on Wayland
+    - [ ] MPD Options
+    - [X] Shell Options
+- [ ] NixOS Modules [0%]
+  - [ ] Reorganize Modules
+  - [ ] Services [0%]
+    - [ ] SSH Configuration
+- [ ] Hosts [0%]
+  - [ ] Stream line hosts nixos
+  - [ ] Make Stand Alone Home Manager Work
+- [ ] Create Custom Library [0%]
+  - [ ] Nix variables to Elisp vars Function - A function that takes a set of values and creates an Elisp file (function maybe?) creates Elisp equivalent variables.
+- [ ] Create Custom Packages Directory [0%]
+  - [ ] Move Scripts to Custom Packages
+- [ ] Emacs [0%]
+  - [ ] Eshell
+  - [ ] Direnv Support
+  - [ ] Better Pipes
