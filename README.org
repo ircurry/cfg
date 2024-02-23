@@ -53,10 +53,10 @@ I have themes for:
     - [ ] Hyprland
     - [ ] Rofi
     - [ ] Waybar
-  - [-] Fix/Add Modules [20%]
+  - [-] Fix/Add Modules [40%]
     - [ ] Flatpak
     - [X] Fish
-    - [ ] SSH Configuration
+    - [X] SSH Configuration
     - [ ] GPG Configuration
     - [ ] Direnv
   - [-] Fix/Add Options [25%]

@@ -13,6 +13,7 @@
     ./mpd.nix
     ./my-fetch
     ./phetch.nix
+    ./ssh.nix
     ./scripts
     ./ytfzf.nix
     ./zsh.nix
