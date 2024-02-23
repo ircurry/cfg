@@ -104,6 +104,7 @@ ex	  
 *.s       
 *.sh      󱆃
 *.bash    
+*.nix     󱄅
 *.yaml	  
 *.yml	  
 *.toml	  
