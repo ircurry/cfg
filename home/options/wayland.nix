@@ -1,5 +1,13 @@
 { config, lib, ... }: {
   options.nocturne.wayland = {
+    compositor = {
+      name = lib.mkOption {
+        type = lib.types.enum [ "hyprland" ];
+        default = "hyprland";
+        example = "hyprland";
+        description = "Name of the compositor";
+      };
+    };
     editor = {
       name = lib.mkOption {
         type = lib.types.enum [ "emacs" ];

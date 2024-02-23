@@ -81,6 +81,7 @@
       scripts = {
         youtubeScripts.enable = true;
       };
+      shell.name = "fish";
       ytfzf.enable = true;
     };
     wayland.monitors = [

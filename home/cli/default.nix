@@ -7,10 +7,11 @@
     ./core.nix
     ./enviornment-vars.nix
     ./file-convert.nix
-    ./fish
+    ./fish.nix
     ./git.nix
     ./lf
     ./mpd.nix
+    ./my-fetch
     ./phetch.nix
     ./scripts
     ./ytfzf.nix

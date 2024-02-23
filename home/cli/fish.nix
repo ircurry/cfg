@@ -13,17 +13,13 @@ in
           ''
             string join ''' -- (set_color -o) (set_color red) '[' (set_color yellow) $USER (set_color green) '@' (set_color blue) $hostname ' ' (set_color magenta) (prompt_pwd) (set_color red) ']' (set_color normal) '$ '
           '';
-        startup_ascii_art =
-          ''
-            cat ${./nocturne-three-point}
-          '';
       };
       
       shellInit =
         ''
           set fish_greeting
           ${pkgs.zoxide}/bin/zoxide init fish | source
-          startup_ascii_art
+          my-fetch
         '';
     };
   };
