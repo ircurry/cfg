@@ -76,6 +76,7 @@
     cli = {
       amfora.enable = true;
       ani-cli.enable = true;
+      conversion.enable = true;
       file-convert.enable = true;
       phetch.enable = true;
       scripts = {
