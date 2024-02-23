@@ -5,6 +5,7 @@
     ./ani-cli.nix
     ./bash.nix
     ./core.nix
+    ./direnv.nix
     ./enviornment-vars.nix
     ./file-convert.nix
     ./fish.nix

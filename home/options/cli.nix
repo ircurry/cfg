@@ -3,6 +3,7 @@
     amfora.enable = lib.mkEnableOption "Enable the Amfora Gemini browser";
     ani-cli.enable = lib.mkEnableOption "Enable ani-cli";
     conversion.enable = lib.mkEnableOption "Enable conversion tools";
+    direnv.enable = lib.mkEnableOption "Enable direnv";
     editor = {
       name = lib.mkOption {
         type = lib.types.enum [ "vim" "emnw" ];

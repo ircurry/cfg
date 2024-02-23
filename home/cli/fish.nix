@@ -19,6 +19,7 @@ in
         ''
           set fish_greeting
           ${pkgs.zoxide}/bin/zoxide init fish | source
+          direnv hook fish | source
           my-fetch
         '';
     };

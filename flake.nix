@@ -71,10 +71,6 @@
                 pkgs.sops
                 pkgs.ssh-to-age
               ];
-              enterShell = ''
-                eval "$(ssh-agent -s)"
-                ssh-add ~/.ssh/id_github
-              '';
               languages.nix.enable = true;
               scripts = {
                 fl.exec = ''
