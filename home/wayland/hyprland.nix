@@ -81,7 +81,11 @@ in {
       pkgs.swww
       pkgs.wl-clipboard
     ];
-    
+
+    nocturne.wayland.compositor.profileExtra = ''
+      [[ $(tty) == /dev/tty1 ]] && exec Hyprland && exit 0
+    '';
+
     wayland.windowManager.hyprland = {
       enable = true;
       ## Bleeding edge Hyprland

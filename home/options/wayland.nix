@@ -7,6 +7,9 @@
         example = "hyprland";
         description = "Name of the compositor";
       };
+      profileExtra = lib.mkOption {
+        type = lib.types.str;
+      };
     };
     editor = {
       name = lib.mkOption {
