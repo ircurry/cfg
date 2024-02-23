@@ -59,10 +59,10 @@ I have themes for:
     - [X] SSH Configuration
     - [ ] GPG Configuration
     - [ ] Direnv
-  - [-] Fix/Add Options [25%]
+  - [-] Fix/Add Options [50%]
     - [ ] Default Browser on Wayland
     - [ ] Default Fonts on Wayland
-    - [ ] MPD Options
+    - [X] MPD Options
     - [X] Shell Options
 - [ ] NixOS Modules [0%]
   - [ ] Reorganize Modules

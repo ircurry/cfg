@@ -34,6 +34,7 @@
       default = true;
       description = "Enable lf File Manager";
     };
+    mpd.enable = lib.mkEnableOption "Enable Music Player Daemon and NCMPCPP";
     phetch.enable = lib.mkEnableOption "Enable Phetch";
     scripts = {
       youtubeScripts.enable = lib.mkEnableOption "Enable YouTube scripts";

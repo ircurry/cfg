@@ -78,6 +78,7 @@
       ani-cli.enable = true;
       conversion.enable = true;
       file-convert.enable = true;
+      mpd.enable = true;
       phetch.enable = true;
       scripts = {
         youtubeScripts.enable = true;

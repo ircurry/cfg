@@ -1,7 +1,8 @@
 { config, lib, ... }: let
+  cfg = config.nocturne.cli.mpd;
   musicDir = config.xdg.userDirs.music;
 in {
-  config = {
+  config = lib.mkIf cfg.enable {
     services.mpd = {
       enable = true;
       musicDirectory = musicDir;
