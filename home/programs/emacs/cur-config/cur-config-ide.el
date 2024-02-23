@@ -102,6 +102,13 @@
 (use-package rg)
   ;:ensure t)
 
+;; ===Envrc===
+(use-package envrc
+  ;; envrc should load AFTER things that load executables
+  :after (ccls company lsp lsp-haskell flycheck projectile rg zoxide)
+  :config
+  (envrc-global-mode))
+
 ;; ===Zoxide===
 (use-package zoxide
   ;:ensure t

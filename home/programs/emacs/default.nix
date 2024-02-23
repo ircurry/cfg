@@ -56,6 +56,7 @@ let
       epkgs.magit
       epkgs.projectile
       epkgs.rg
+      epkgs.envrc
       epkgs.zoxide
       
       # ===Java===
@@ -112,9 +113,9 @@ in
         ccls
 
         # ===Haskell Tools and LSP-Servers===
-        ghc
-        haskellPackages.haskell-language-server
-        haskellPackages.hoogle
+        # ghc
+        # haskellPackages.haskell-language-server
+        # haskellPackages.hoogle
 
         # ===Java Tools and LSP-Servers===
         jdt-language-server
