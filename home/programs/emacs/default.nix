@@ -108,24 +108,6 @@ in
         libvterm
         nerdfonts
         texliveFull
-
-        # ===C/C++ Tools and LSP-Servers===
-        ccls
-
-        # ===Haskell Tools and LSP-Servers===
-        # ghc
-        # haskellPackages.haskell-language-server
-        # haskellPackages.hoogle
-
-        # ===Java Tools and LSP-Servers===
-        jdt-language-server
-
-        # ===Rust Tools and LSP-Servers===
-        cargo
-        clippy
-        rustc
-        rustfmt
-        rust-analyzer
       ];
       
       home.file = {

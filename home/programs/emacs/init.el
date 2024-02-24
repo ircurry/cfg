@@ -63,7 +63,7 @@
 ;; ===Languages===
 (require 'cur-config-ide)
 (require 'cur-config-elisp)
-(require 'cur-config-c)
+;(require 'cur-config-c)
 ;(require 'cur-config-java)
 (require 'cur-config-markup)
 (require 'cur-config-nix)
@@ -77,5 +77,9 @@
 ;; ===Word Processing and PKM===
 (require 'cur-config-org)
 (require 'cur-config-denote)
+
+;; ===Direnv is Last===
+(require 'cur-config-direnv)
+
 (provide 'init)
 ;;; init.el ends here

@@ -12,9 +12,10 @@
   :demand t
   :hook
   (lsp-mode  . lsp-enable-which-key-integration)
+  ;(haskell-mode . lsp-deferred)
   :custom (lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
   :config
-  (lsp)
+  (lsp-deferred)
   (setq gc-cons-threshold (* 100 1024 1024))
   (setq read-process-output-max (* 3 1024 1024))
   (setq lsp-idle-delay 0.500)
@@ -102,18 +103,11 @@
 (use-package rg)
   ;:ensure t)
 
-;; ===Envrc===
-(use-package envrc
-  ;; envrc should load AFTER things that load executables
-  :after (ccls company lsp lsp-haskell flycheck projectile rg zoxide)
-  :config
-  (envrc-global-mode))
-
 ;; ===Zoxide===
 (use-package zoxide
   ;:ensure t
   :bind (:map cur/leader-keymap
-	 ("z" . zoxide-find-file)))
+ 	 ("z" . zoxide-find-file)))
 
 (provide 'cur-config-ide)
 ;;; cur-config-ide.el ends here

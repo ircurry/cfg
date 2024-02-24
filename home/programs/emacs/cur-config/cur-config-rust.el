@@ -4,7 +4,9 @@
 
 ;;; Code:
 ;; ===Rust-Mode===
-(use-package rustic)
+(use-package rustic
+  :after (lsp-mode)
+  :hook (rustic . lsp-deferred))
 
 (provide 'cur-config-rust)
 ;;; cur-config-rust.el ends here

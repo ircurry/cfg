@@ -9,9 +9,7 @@
 ;; ===LSP-Haskell===
 (use-package lsp-haskell
   :hook
-  ((haskell-mode) . lsp-mode)
-  ((haskell.mode) .
-   (lambda () (require 'lsp-haskell))))
+  ((haskell-mode) . lsp-deferred))
 
 ;; ===Company-GHCI===
 (use-package company-ghci
