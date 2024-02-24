@@ -58,8 +58,6 @@
         ];
       };
 
-      nixpkgs.overlays = [ (import self.inputs.emacs-overlay) ];
-
       devShells = forAllSystems (pkgs: {
         default = inputs.devenv.lib.mkShell {
           inherit inputs pkgs;

@@ -1,9 +1,9 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 let
   cfg = config.nocturne.graphical.emacs;
   way-cfg = config.nocturne.wayland.editor;
-  emacs-package = with pkgs; ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (
+  emacs-package = with pkgs; ((emacsPackagesFor emacs-pgtk).emacsWithPackages (
     epkgs: [
       ########################################
       ## Configuration Modules Dependencies ##
@@ -95,6 +95,8 @@ in
 {
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
+      nixpkgs.overlays = [ inputs.emacs-overlay.overlay ];
+
       programs.emacs = { 
         enable = true;
         package = emacs-package;
@@ -109,7 +111,7 @@ in
         nerdfonts
         texliveFull
       ];
-      
+
       home.file = {
         ".emacs.d/init.el".source = ./init.el;
         ".emacs.d/cur-config".source = ./cur-config;
