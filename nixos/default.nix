@@ -1,7 +1,6 @@
 { ... }: {
   imports = [
+    ./desktop
     ./options
-    ./hyprland.nix
-    ./plasma.nix
   ];
 }

@@ -1,5 +1,5 @@
 { config, lib, ... }: let
-  cfg = config.nocturne-sys.hyprland;
+  cfg = config.noctsys.desktop.hyprland;
 in {
   config = lib.mkIf cfg.enable {
     services.xserver.desktopManager.gnome.enable = lib.mkForce false;
