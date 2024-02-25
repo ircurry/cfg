@@ -1,3 +1,9 @@
+#  .   .         .
+#  |\  |        _|_
+#  | \ | .-.  .-.|  .  . .--..--. .-.
+#  |  \|(   )(   |  |  | |   |  |(.-'
+#  '   ' `-'  `-'`-'`--`-'   '  `-`--'
+
 {
   description = "Nixos config flake";
 
@@ -19,9 +25,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ## Bleeding edge Hyprland
-    # hyprland.url = "github:hyprwm/Hyprland";
-
     emacs-overlay.url = "github:nix-community/emacs-overlay";
 
     devenv.url = "github:cachix/devenv";
@@ -32,88 +35,42 @@
     };
     
   };
-
-  outputs = { self, nixpkgs, ... }@inputs:
+  
+  outputs = { ... }@inputs:
     let
+      # ===Dealing with System===
+      forSystem = function: system: function inputs.nixpkgs.legacyPackages.${system};
+
+      systems = ["x86_64-linux"];
+
       forAllSystems = function:
-        nixpkgs.lib.genAttrs ["x86_64-linux"] (system: function nixpkgs.legacyPackages.${system});
+        inputs.nixpkgs.lib.genAttrs systems (forSystem function);
+
+      # ===NixOS Build Functions===
+      mkSystemCustomModules = modules: config: inputs.nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          config
+        ] ++ modules;
+      };
+      
+      commonNixosModules = [
+        inputs.home-manager.nixosModules.default
+        inputs.sops-nix.nixosModules.sops
+      ];
+      
+      mkSystem = mkSystemCustomModules commonNixosModules;
     in
     {
-    
-      nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
-        modules = [ 
-          ./hosts/default/configuration.nix
-          inputs.home-manager.nixosModules.default
-          inputs.sops-nix.nixosModules.sops
-        ];
+      # ===NixOS Configurations===
+      nixosConfigurations = {
+        default = mkSystem ./hosts/default/configuration.nix;
+        "chopin" = mkSystem ./hosts/chopin/configuration.nix;
       };
       
-      nixosConfigurations."chopin" = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
-        modules = [ 
-          ./hosts/chopin/configuration.nix
-          inputs.home-manager.nixosModules.default
-          inputs.sops-nix.nixosModules.sops
-        ];
-      };
-
+      # ======Development Enviornment===
       devShells = forAllSystems (pkgs: {
-        default = inputs.devenv.lib.mkShell {
-          inherit inputs pkgs;
-          modules = [
-            ({pkgs, ...}: {
-              packages = [
-                pkgs.age
-                pkgs.nh
-                pkgs.sops
-                pkgs.ssh-to-age
-              ];
-              languages.nix.enable = true;
-              scripts = {
-                fl.exec = ''
-                  nix-diff() {
-                      nix store diff-closures "$(${pkgs.fd}/bin/fd 'system-' /nix/var/nix/profiles/ -j 1 | sort --reverse | ${ pkgs.fzf }/bin/fzf )" /nix/var/nix/profiles/system | column -t -s ':' -o ' (' 
-                  }
-                  inputs() {
-                      inputs=$(nix flake metadata --json \
-                               | ${pkgs.jq}/bin/jq ".locks.nodes.root.inputs | keys[]" \
-                               | sed "s/\"//g"
-                            )
-
-                      select=$(printf "all\n$inputs" | ${pkgs.fzf}/bin/fzf)
-
-                      if [ -z $select ]; then
-                          exit 0
-                      fi
-
-                      case "$select" in
-                          all) nix flake update ;;
-                          *) nix flake lock --update-input $select ;;
-                      esac
-                  }
-                  rebuild() {
-                      select=$(printf "switch\ntest\nboot\n" | ${pkgs.fzf}/bin/fzf)
-
-                      if [ -z $select ]; then
-                          exit 0
-                      fi
-
-                      nh os $select --nom .
-                  }
-                  case $1 in
-                      diff) nix-diff ;;
-                      in|inputs) inputs ;;
-                      rb|rebuild) rebuild ;;
-                      up|update) nix flake update && rebuild;;
-                      *) echo -e "\033[1mUnknown command, please try again.\033[0m";;
-                  esac
-                '';
-              };
-            })
-          ];
-        };
+        default = import ./devenv.nix { inherit inputs; inherit pkgs; };
       });
-      
     };
 }
