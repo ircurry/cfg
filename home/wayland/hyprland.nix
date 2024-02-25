@@ -111,7 +111,9 @@ in {
           "${config.nocturne.wayland.notification.exec-start}"
           "${pkgs.networkmanagerapplet}/bin/nm-applet"
           "[workspace 2 silent] $terminal"
-        ] ++ lib.optionals (term-cfg.exec-start != null) [
+        ] ++ lib.optionals (config.nocturne.graphical.firefox.enable) [
+          "[workspace 4 silent] firefox"
+        ]++ lib.optionals (term-cfg.exec-start != null) [
           "${term-cfg.exec-start}"
         ];
         general = {
