@@ -53,12 +53,13 @@ I have themes for:
     - [ ] Hyprland
     - [ ] Rofi
     - [ ] Waybar
-  - [-] Fix/Add Modules [60%]
+  - [-] Fix/Add Modules [50%]
     - [ ] Flatpak
     - [X] Fish
     - [X] SSH Configuration
     - [ ] GPG Configuration
     - [X] Direnv
+    - [ ] Use appropriate xdg-desktop-portal
   - [-] Fix/Add Options [50%]
     - [ ] Default Browser on Wayland
     - [ ] Default Fonts on Wayland
