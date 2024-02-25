@@ -2,13 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ lib, config, pkgs, inputs, ... }:
+{ lib, config, pkgs, inputs, user, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
+      inputs.sops-nix.nixosModules.sops
       ../../nixos
     ];
 
@@ -44,28 +44,7 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  nocturne-sys.hyprland.enable = true;
-
-  # # Enable the X11 windowing system.
-  # services.xserver = { 
-  #   enable = true;
-
-  #   # Enable the KDE Plasma Desktop Environment.
-  #   displayManager.sddm.enable = true;
-  #   desktopManager.plasma5.enable = true;
-
-  #   # Configure keymap in X11
-  #   layout = "us";
-  #   xkbVariant = "";
-  # };
-
-  # enable Hyprland
-  # services.xserver.desktopManager.gnome.enable = lib.mkForce false;
-  # services.xserver.displayManager.lightdm.enable = lib.mkForce false;
-  # programs.hyprland = {
-  #   enable = true;
-  #   xwayland.enable = true;
-  # };
+  noctsys.programs.hyprland.enable = true;
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -81,37 +60,21 @@
     pulse.enable = true;
   };
 
-  # Secrets
-  sops = {
-    defaultSopsFile = ../../secrets/secrets.yaml;
-    defaultSopsFormat = "yaml";
-    age.keyFile = "/home/recur/.config/sops/age/keys.txt";
-    secrets = {
-      "recur_password".neededForUsers = true;
-    };
-  };
-  
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.recur = {
+  users.users."${user}" = {
     isNormalUser = true;
     description = "Ian Curran";
     extraGroups = [ "networkmanager" "wheel" ];
     initialPassword = "password";
-    hashedPasswordFile = config.sops.secrets."recur_password".path;
+    hashedPasswordFile = config.sops.secrets."${user}_password".path;
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    sharedModules = [
-      inputs.sops-nix.homeManagerModules.sops
-    ];
     users = { 
-      "recur" = import ./home.nix; 
+      "${user}" = import ./home.nix; 
     };
   };
 
-  programs.zsh.enable = true;
-  
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

@@ -1,6 +1,11 @@
 { ... }: {
   imports = [
-    ./desktop
+    # Options
     ./options
+
+    # Configuration Modules
+    ./hyprland.nix
+    ./plasma.nix
+    ./secrets.nix
   ];
 }

@@ -1,5 +1,5 @@
 { lib, ... }: {
-  options.noctsys.desktop = {
+  options.noctsys.programs = {
     hyprland.enable = lib.mkOption {
       type = lib.types.bool;
       default = true;

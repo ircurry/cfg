@@ -46,27 +46,16 @@
       forAllSystems = function:
         inputs.nixpkgs.lib.genAttrs systems (forSystem function);
 
-      # ===NixOS Build Functions===
-      mkSystemCustomModules = modules: config: inputs.nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
-        modules = [
-          config
-        ] ++ modules;
+      # ===Common Attributes===
+      commonAttrs = {
+        inherit (inputs.nixpkgs) lib;
+        inherit (inputs) nixpkgs self;
+        inherit inputs;
       };
-      
-      commonNixosModules = [
-        inputs.home-manager.nixosModules.default
-        inputs.sops-nix.nixosModules.sops
-      ];
-      
-      mkSystem = mkSystemCustomModules commonNixosModules;
     in
     {
       # ===NixOS Configurations===
-      nixosConfigurations = {
-        default = mkSystem ./hosts/default/configuration.nix;
-        "chopin" = mkSystem ./hosts/chopin/configuration.nix;
-      };
+      nixosConfigurations = import ./hosts commonAttrs;
       
       # ======Development Enviornment===
       devShells = forAllSystems (pkgs: {
