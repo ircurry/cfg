@@ -1,5 +1,9 @@
 { inputs, user, ... }:
 {
+  imports = [
+    inputs.sops-nix.nixosModules.sops
+  ];
+
   config = {
     home-manager = {
       sharedModules = [
