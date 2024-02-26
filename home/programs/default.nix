@@ -9,6 +9,7 @@
     ./keepassxc.nix
     ./kid3.nix
     ./libreoffice.nix
+    ./mpv.nix
     ./mullvad-browser.nix
     ./obs.nix
     ./signal.nix
