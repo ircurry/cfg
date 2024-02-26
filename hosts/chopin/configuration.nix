@@ -15,10 +15,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Set your time zone.
-  time.timeZone = "America/New_York";
-
-  noctsys.programs.hyprland.enable = true;
+  noctsys = {
+    programs.hyprland.enable = true;
+  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

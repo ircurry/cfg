@@ -10,5 +10,6 @@
     ./pipewire.nix
     ./plasma.nix
     ./secrets.nix
+    ./timezone.nix
   ];
 }
