@@ -15,21 +15,6 @@
     programs.hyprland.enable = true;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users."${user}" = {
-    isNormalUser = true;
-    description = "Ian Curran";
-    extraGroups = [ "networkmanager" "wheel" ];
-    initialPassword = "password";
-    hashedPasswordFile = config.sops.secrets."${user}_password".path;
-  };
-
-  home-manager = {
-    users = { 
-      "${user}" = import ./home.nix; 
-    };
-  };
-
   # ===Don't Change Please===
   system.stateVersion = "23.11"; # Did you read the comment?
 

@@ -13,5 +13,6 @@
     ./printing.nix
     ./secrets.nix
     ./timezone.nix
+    ./user.nix
   ];
 }
