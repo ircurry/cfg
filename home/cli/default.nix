@@ -14,6 +14,7 @@
     ./mpd.nix
     ./my-fetch
     ./phetch.nix
+    ./sops.nix
     ./ssh.nix
     ./scripts
     ./ytfzf.nix

@@ -6,13 +6,7 @@
     ../../home
   ];
 
-  sops = {
-    defaultSopsFile = ../../secrets/secrets.yaml;
-    defaultSopsFormat = "yaml";
-    age.keyFile = "/home/recur/.config/sops/age/keys.txt";
-  };
-  
-  # The Meat of my configuration
+  # ===Nocturne Home Configuration===
   nocturne = {
     #themes.theme = "basic-dark";
     #themes.theme = "catppuccin-mocha";
