@@ -19,9 +19,6 @@
     programs.hyprland.enable = true;
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${user}" = {
     isNormalUser = true;

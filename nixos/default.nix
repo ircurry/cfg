@@ -9,6 +9,7 @@
     ./networking.nix
     ./pipewire.nix
     ./plasma.nix
+    ./printing.nix
     ./secrets.nix
     ./timezone.nix
   ];
