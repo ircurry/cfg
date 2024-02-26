@@ -1,4 +1,4 @@
-{ ... }: {
+{ user, ... }: {
   imports = [
     ./cli
     ./options
@@ -6,4 +6,9 @@
     ./themes
     ./wayland
   ];
+
+  config = {
+    home.username = "${user}";
+    home.homeDirectory = "/home/${user}";
+  };
 }
