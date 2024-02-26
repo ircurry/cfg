@@ -5,15 +5,11 @@
 { lib, config, pkgs, inputs, user, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ../../nixos
-    ];
-
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../../nixos
+  ];
 
   noctsys = {
     programs.hyprland.enable = true;

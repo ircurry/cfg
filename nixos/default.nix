@@ -4,6 +4,7 @@
     ./options
 
     # Configuration Modules
+    ./boot.nix
     ./hyprland.nix
     ./locales.nix
     ./networking.nix
