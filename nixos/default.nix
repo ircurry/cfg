@@ -8,6 +8,7 @@
     ./hyprland.nix
     ./locales.nix
     ./networking.nix
+    ./nix.nix
     ./pipewire.nix
     ./plasma.nix
     ./printing.nix
