@@ -1,9 +1,6 @@
 { lib, ... }: {
   options.nocturne.cli = {
-    amfora.enable = lib.mkEnableOption "Enable the Amfora Gemini browser";
-    ani-cli.enable = lib.mkEnableOption "Enable ani-cli";
-    conversion.enable = lib.mkEnableOption "Enable conversion tools";
-    direnv.enable = lib.mkEnableOption "Enable direnv";
+    # ===Abstract Options===
     editor = {
       name = lib.mkOption {
         type = lib.types.enum [ "vim" "emnw" ];
@@ -17,6 +14,22 @@
         type = lib.types.str;
       };
     };
+    shell = {
+      name = lib.mkOption {
+        type = lib.types.enum [ "zsh" "fish" ];
+        default = "fish";
+        description = "Interactive Shell";
+      };
+      exec = lib.mkOption {
+        type = lib.types.str;
+      };
+    };
+    
+    # ===Program Options===
+    amfora.enable = lib.mkEnableOption "Enable the Amfora Gemini browser";
+    ani-cli.enable = lib.mkEnableOption "Enable ani-cli";
+    conversion.enable = lib.mkEnableOption "Enable conversion tools";
+    direnv.enable = lib.mkEnableOption "Enable direnv";
     file-convert.enable = lib.mkEnableOption "Enable file conversion tools";
     git = {
       userName = lib.mkOption {
@@ -39,16 +52,6 @@
     phetch.enable = lib.mkEnableOption "Enable Phetch";
     scripts = {
       youtubeScripts.enable = lib.mkEnableOption "Enable YouTube scripts";
-    };
-    shell = {
-      name = lib.mkOption {
-        type = lib.types.enum [ "zsh" "fish" ];
-        default = "fish";
-        description = "Interactive Shell";
-      };
-      exec = lib.mkOption {
-        type = lib.types.str;
-      };
     };
     ytfzf.enable = lib.mkEnableOption "Enable ytfzf and scripts around it";
   };
