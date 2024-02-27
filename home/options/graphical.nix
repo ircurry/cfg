@@ -1,5 +1,6 @@
 { config, lib, pkgs, ... }: {
   options.nocturne.graphical = {
+    # ===Program Options===
     alacritty = {
       enable = lib.mkOption {
         type = lib.types.bool;

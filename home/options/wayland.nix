@@ -1,5 +1,6 @@
 { config, lib, ... }: {
   options.nocturne.wayland = {
+    # ===Abstract Options===
     compositor = {
       name = lib.mkOption {
         type = lib.types.enum [ "hyprland" ];
@@ -10,6 +11,33 @@
       profileExtra = lib.mkOption {
         type = lib.types.str;
       };
+    };
+    docked-monitors = lib.mkOption {
+      type = lib.types.listOf (lib.types.submodule {
+        options = {
+          name = lib.mkOption {
+            type = lib.types.str;
+          };
+          width = lib.mkOption {
+            type = lib.types.int;
+          };
+          height = lib.mkOption {
+            type = lib.types.int;
+          };
+          refreshRate = lib.mkOption {
+            type = lib.types.int;
+          };
+          x = lib.mkOption {
+            type = lib.types.int;
+          };
+          y = lib.mkOption {
+            type = lib.types.int;
+          };
+          scale = lib.mkOption {
+            type = lib.types.int;
+          };
+        };
+      });
     };
     editor = {
       name = lib.mkOption {
@@ -26,20 +54,6 @@
       };
       exec-start = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
-      };
-    };
-    hyprland = {
-      col-active-border1 = lib.mkOption {
-        type = lib.types.str;
-        default = config.nocturne.themes.colors.base0D + "ee";
-      };
-      col-active-border2 = lib.mkOption {
-        type = lib.types.str;
-        default = config.nocturne.themes.colors.base0C + "ee";
-      };
-      col-inactive-border = lib.mkOption {
-        type = lib.types.str;
-        default = config.nocturne.themes.colors.base03 + "aa";
       };
     };
     image = {
@@ -78,28 +92,6 @@
         type = lib.types.str;
       };
     };
-    mako = {
-      borderSize = lib.mkOption {
-        type = lib.types.int;
-        default = 2;
-      };
-      bg = lib.mkOption {
-        type = lib.types.str;
-        default = config.nocturne.themes.colors.base02 + "AA";
-      };
-      fg = lib.mkOption {
-        type = lib.types.str;
-        default = config.nocturne.themes.colors.base05 + "FF";
-      };
-      border-color = lib.mkOption {
-        type = lib.types.str;
-        default = config.nocturne.themes.colors.base03 + "FF";
-      };
-      progress-color = lib.mkOption {
-        type = lib.types.str;
-        default = config.nocturne.themes.colors.base0A + "FF";
-      };
-    };
     menu = {
       name = lib.mkOption {
         type = lib.types.enum [ "rofi-wayland" ];
@@ -118,33 +110,6 @@
       };
     };
     monitors = lib.mkOption {
-      type = lib.types.listOf (lib.types.submodule {
-        options = {
-          name = lib.mkOption {
-            type = lib.types.str;
-          };
-          width = lib.mkOption {
-            type = lib.types.int;
-          };
-          height = lib.mkOption {
-            type = lib.types.int;
-          };
-          refreshRate = lib.mkOption {
-            type = lib.types.int;
-          };
-          x = lib.mkOption {
-            type = lib.types.int;
-          };
-          y = lib.mkOption {
-            type = lib.types.int;
-          };
-          scale = lib.mkOption {
-            type = lib.types.int;
-          };
-        };
-      });
-    };
-    docked-monitors = lib.mkOption {
       type = lib.types.listOf (lib.types.submodule {
         options = {
           name = lib.mkOption {
@@ -196,6 +161,61 @@
         type = lib.types.package;
       };
     };
+    terminal = {
+      name = lib.mkOption {
+        type = lib.types.enum [ "alacritty" ];
+        default = "alacritty";
+        example = "alacritty";
+        description = "Which terminal emulator to use";
+      };
+      exec = lib.mkOption{
+        type = lib.types.str;
+      };
+      exec-start = lib.mkOption{
+        type = lib.types.nullOr lib.types.str;
+      };
+      exec-center = lib.mkOption {
+        type = lib.types.str;
+      };
+    };
+    
+    # ===Program Options===
+    hyprland = {
+      col-active-border1 = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0D + "ee";
+      };
+      col-active-border2 = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0C + "ee";
+      };
+      col-inactive-border = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base03 + "aa";
+      };
+    };
+    mako = {
+      borderSize = lib.mkOption {
+        type = lib.types.int;
+        default = 2;
+      };
+      bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base02 + "AA";
+      };
+      fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base05 + "FF";
+      };
+      border-color = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base03 + "FF";
+      };
+      progress-color = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0A + "FF";
+      };
+    };
     swaylock-effects = {
       bg = lib.mkOption {
         type = lib.types.str;
@@ -244,23 +264,6 @@
       key-press-caps = lib.mkOption {
         type = lib.types.str;
         default = config.nocturne.themes.colors.base09;
-      };
-    };
-    terminal = {
-      name = lib.mkOption {
-        type = lib.types.enum [ "alacritty" ];
-        default = "alacritty";
-        example = "alacritty";
-        description = "Which terminal emulator to use";
-      };
-      exec = lib.mkOption{
-        type = lib.types.str;
-      };
-      exec-start = lib.mkOption{
-        type = lib.types.nullOr lib.types.str;
-      };
-      exec-center = lib.mkOption {
-        type = lib.types.str;
       };
     };
     waybar = {
