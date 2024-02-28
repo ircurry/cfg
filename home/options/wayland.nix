@@ -1,6 +1,14 @@
 { config, lib, ... }: {
   options.nocturne.wayland = {
     # ===Abstract Options===
+    browser = {
+      name = lib.mkOption {
+        type = lib.types.enum [ "firefox" ];
+        default = "firefox";
+        example = "firefox";
+        description = "Name of default browser";
+      };
+    };
     compositor = {
       name = lib.mkOption {
         type = lib.types.enum [ "hyprland" ];
