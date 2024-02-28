@@ -7,6 +7,11 @@
         default = "vim";
         description = "Default cli editor";
       };
+      follow = lib.mkOption {
+        type = lib.types.enum [ "cli" "wayland" ];
+        default = "wayland";
+        description = "Use graphical or terminal editor";
+      };
       exec = lib.mkOption {
         type = lib.types.str;
       };

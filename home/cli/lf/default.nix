@@ -2,8 +2,6 @@
 
 let
   cfg = config.nocturne.cli.lf;
-  # TODO: make this an option to use terminal editor, wayland exec-reuse, and wayland exec
-  ed-cfg = config.nocturne.wayland.editor;
 in {
   config = lib.mkIf cfg.enable {
     home.packages = [ pkgs.nerdfonts pkgs.bzip2 pkgs.gzip pkgs.xz ];
@@ -31,7 +29,7 @@ in {
         ''${{
           case $(file --mime-type "$f" -bL) in
             application/pdf|application/vnd.djvu|application/epub*) ${pkgs.zathura}/bin/zathura "$fx" ;;
-            text/*|application/json|inode/x-empty|application/x-subrip) ${ed-cfg.exec} "$f" ;;
+            text/*|application/json|inode/x-empty|application/x-subrip) $EDITOR "$f" ;;
             # image/*) setsid -f ${pkgs.imv}/bin/imv-dir "$f" >/dev/null 2>&1 ;;
             image/*) ${pkgs.imv}/bin/imv-dir "$f" ;;
             audio/*|video/x-ms-asf) ${pkgs.mpv}/bin/mpv --audio-display=no "$f" ;;

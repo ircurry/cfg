@@ -6,6 +6,7 @@
     ./bash.nix
     ./core.nix
     ./direnv.nix
+    ./editor.nix
     ./enviornment-vars.nix
     ./file-convert.nix
     ./fish.nix
