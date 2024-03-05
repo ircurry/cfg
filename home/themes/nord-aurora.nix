@@ -21,6 +21,7 @@ in
 {
   config = lib.mkIf (theme == "nord-aurora") {
     nocturne = {
+      themes.variant = "dark";
       themes.colors = {
         base00 = nord00; # ----
         base01 = nord01; # ---

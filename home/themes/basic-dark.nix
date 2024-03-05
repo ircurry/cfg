@@ -5,6 +5,7 @@ in
 {
   config = lib.mkIf (theme == "basic-dark") {
     nocturne = {
+      themes.variant = "dark";
       themes.colors = {
         base00 = "000000"; # ----
         base01 = "222222"; # ---

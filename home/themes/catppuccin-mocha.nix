@@ -31,6 +31,7 @@ in
 {
   config = lib.mkIf (theme == "catppuccin-mocha") {
     nocturne = {
+      themes.variant = "dark";
       themes.colors = {
         base00 = base; # ----
         base01 = surface0; # ---

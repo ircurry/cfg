@@ -1,7 +1,10 @@
 { lib, ... }: {
   options.nocturne.themes = {
+    variant = lib.mkOption {
+      type = lib.types.enum [ "dark" "light" ];
+    };
     theme = lib.mkOption {
-      type = lib.types.enum [ "basic-dark" "catppuccin-mocha" "gruvbox-dark-medium" "kanagawa-wave" "nord-aurora" ];
+      type = lib.types.enum [ "basic-dark" "catppuccin-mocha" "gruvbox-dark-medium" "gruvbox-light-medium" "kanagawa-wave" "nord-aurora" "nord-light" ];
       default = "nord-aurora";
       description = "Which theme for the system to use";
     };
@@ -55,15 +58,19 @@
         type = lib.types.str;
       };
     };
-    gtk.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Enable GTK";
+    gtk = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable GTK";
+      };
     };
-    qt.enable = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Enable qt";
+    qt = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable qt";
+      };
     };
   };
 }

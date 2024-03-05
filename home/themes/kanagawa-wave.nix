@@ -42,6 +42,7 @@ in
 {
   config = lib.mkIf (theme == "kanagawa-wave") {
     nocturne = {
+      themes.variant = "dark";
       themes.colors = {
         base00 = sumiInk1; # ----
         base01 = sumiInk2; # ---
