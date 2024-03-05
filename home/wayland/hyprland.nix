@@ -183,21 +183,27 @@ in {
         };
         windowrulev2 = [
           "suppressevent maximize, class:.*"
-          
-          # Pavucontrol
-          "float, class:^(pavucontrol)$, title:^(Volume Control)$"
-          "size 80% 85%, class:^(pavucontrol)$, title:^(Volume Control)$"
-          "center, class:^(pavucontrol)$, title:^(Volume Control)$"
-          
-          # Pavucontrol
-          "float, class:^(nm-connection-editor)$, title:^(.*)$"
-          "size 80% 85%, class:^(nm-connection-editor)$, title:^(.*)$"
-          "center, class:^(nm-connection-editor)$, title:^(.*)$"
-          
+
           # Center
           "float, class:^(center)$"
           "size 80% 85%, class:^(center)$"
           "center, class:^(center)$"
+
+          # Discord/Vesktop
+          "workspace 1, class:^(vesktop)$, title:^(.*)$"
+
+          # Pavucontrol
+          "float, class:^(pavucontrol)$, title:^(Volume Control)$"
+          "size 80% 85%, class:^(pavucontrol)$, title:^(Volume Control)$"
+          "center, class:^(pavucontrol)$, title:^(Volume Control)$"
+
+          # Network Manager Applet
+          "float, class:^(nm-connection-editor)$, title:^(.*)$"
+          "size 80% 85%, class:^(nm-connection-editor)$, title:^(.*)$"
+          "center, class:^(nm-connection-editor)$, title:^(.*)$"
+
+          # Signal
+          "workspace 1, class:^(Signal)$, title:^(.*)$"
         ];
         bind = [
           # General Keybindings
