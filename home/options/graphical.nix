@@ -81,6 +81,7 @@
       };
     };
     brave.enable = lib.mkEnableOption "Enable Brave Browser";
+    discord.enable = lib.mkEnableOption "Enable Vesktop Discord Client";
     emacs = {
       enable = lib.mkOption {
         type = lib.types.bool;

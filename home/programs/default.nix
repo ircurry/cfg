@@ -2,6 +2,7 @@
   imports = [
     ./alacritty.nix
     ./brave.nix
+    ./discord.nix
     ./emacs
     ./firefox.nix
     ./flatpak.nix
