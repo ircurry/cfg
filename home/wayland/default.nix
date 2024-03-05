@@ -7,6 +7,5 @@
     ./rofi.nix
     ./swaylock.nix
     ./waybar.nix
-    ./xdg.nix
   ];
 }
