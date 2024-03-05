@@ -181,11 +181,8 @@ in {
             "^(Alacritty)$"
           ];
         };
-        "device:at-translated-set-2-keyboard" = {
-          kb_options = "ctrl:nocaps";
-        };
         windowrulev2 = [
-          "nomaximizerequest, class:.*"
+          "suppressevent maximize, class:.*"
           
           # Pavucontrol
           "float, class:^(pavucontrol)$, title:^(Volume Control)$"
@@ -271,6 +268,13 @@ in {
                   ",switch:off:Lid Switch,exec,${hyprdock}/bin/hyprdock -undock"
                 ];
       };
+      # Devices
+      extraConfig = ''
+        device {
+            name = at-translated-set-2-keyboard
+            kb_options = ctrl:nocaps
+        }
+      '';
     };
   };
 }
