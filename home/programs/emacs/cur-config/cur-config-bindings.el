@@ -113,8 +113,8 @@
   :init
   (defhydra cur/hydra-buffer-cycle (:timeout 4)
     "tab through buffers"
-    ("j" next-buffer "next buffer")
-    ("k" previous-buffer "previous buffer")
+    ("n" next-buffer "next buffer")
+    ("p" previous-buffer "previous buffer")
     ("f" nil "finished" :exit t)
     ("RET" nil "finished" :exit t))
   :custom
@@ -158,8 +158,8 @@
 	 ("b C-c" . kill-current-buffer)
 	 ("b C-b" . counsel-switch-buffer)
 	 ("b C-l" . ibuffer)
-	 ("b C-j" . cur/hydra-buffer-cycle/next-buffer)
-	 ("b C-k" . cur/hydra-buffer-cycle/previous-buffer)
+	 ("b C-n" . cur/hydra-buffer-cycle/next-buffer)
+	 ("b C-p" . cur/hydra-buffer-cycle/previous-buffer)
 	 ("b C-s" . save-buffer)
 	 :map cur/sub-leader-keymap
 	 ("C-b"   . bookmark-jump))
