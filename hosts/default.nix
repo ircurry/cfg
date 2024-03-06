@@ -22,9 +22,20 @@ let
     modules = [
       # Host Configuration
       ./${host}/configuration.nix
-      # Home-Manager Modules Configuration
+      # Home-Manager Module Configuration
       inputs.home-manager.nixosModules.default
-      { home-manager = { inherit extraSpecialArgs; }; }
+      {
+        home-manager = {
+          useGlobalPkgs = true;
+          inherit extraSpecialArgs;
+        };
+      }
+      # Alias for home-manager, stolen from iynaix (https://github.com/iynaix/dotfiles)
+      (lib.mkAliasOptionModule [ "hm" ] [
+        "home-manager"
+        "users"
+        user
+      ])
       # Extra Modules
     ] ++ modules;
   };
