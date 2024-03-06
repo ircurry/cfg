@@ -67,7 +67,6 @@
 ;(require 'cur-config-java)
 (require 'cur-config-markup)
 (require 'cur-config-nix)
-(require 'cur-config-smol-net)
 (require 'cur-config-rust)
 (require 'cur-config-haskell)
 
@@ -79,6 +78,7 @@
 (require 'cur-config-denote)
 
 ;; ===Misc===
+(require 'cur-config-smol-net)
 (require 'cur-config-elcord)
 
 ;; ===Direnv is Last===
