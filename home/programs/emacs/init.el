@@ -78,6 +78,9 @@
 (require 'cur-config-org)
 (require 'cur-config-denote)
 
+;; ===Misc===
+(require 'cur-config-elcord)
+
 ;; ===Direnv is Last===
 (require 'cur-config-direnv)
 

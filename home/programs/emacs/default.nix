@@ -27,6 +27,9 @@ let
 
       # ===Dired===
 
+      # ===Elcord===
+      epkgs.elcord
+
       # ===Elisp===
       epkgs.rainbow-delimiters
 
