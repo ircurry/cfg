@@ -132,6 +132,7 @@
      (diff-mode . normal)
      (dired-mode . dired)
      (ediff-mode . motion)
+     (eshell-mode . insert)
      (gud-mode . normal)
      (haskell-interactive-mode . normal)
      (help-mode . normal)
@@ -149,7 +150,7 @@
      (text-mode . normal)
      (vterm-mode . normal)
      (Custom-mode . normal))
-   "Default mepw states for modes")
+   "Default meow states for modes")
   (meow-cheatsheet-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
   :bind (:map cur/leader-keymap
 	 ;; Files
