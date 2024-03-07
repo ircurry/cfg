@@ -36,26 +36,13 @@ stdenv.mkDerivation rec {
     runHook preInstall
 
     mkdir -p $out/bin
-    install -Dm 0755 $src/ytu $out/bin
-    wrapProgram $out/bin/ytu --set PATH \
-      "${
-        makeBinPath runtimeDependencies
-      }"
-    install -Dm 0755 $src/ytd $out/bin
-    wrapProgram $out/bin/ytd --set PATH \
-      "${
-        makeBinPath runtimeDependencies
-      }"
-    install -Dm 0755 $src/ytdp $out/bin
-    wrapProgram $out/bin/ytdp --set PATH \
-      "${
-        makeBinPath runtimeDependencies
-      }"
-    install -Dm 0755 $src/ytp $out/bin
-    wrapProgram $out/bin/ytp --set PATH \
-      "${
-        makeBinPath runtimeDependencies
-      }"
+    for script in ytd ytdp ytp ytu; do
+      install -Dm 0755 $src/$script $out/bin
+      wrapProgram $out/bin/$script --set PATH \
+        "${
+          makeBinPath runtimeDependencies
+        }"
+    done
     
     runHook postInstall
   '';
