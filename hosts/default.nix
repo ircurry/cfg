@@ -24,6 +24,10 @@ let
       ./${host}/configuration.nix
       # Home-Manager Module Configuration
       inputs.home-manager.nixosModules.default
+      # NixOS Configuration Modules
+      ../nixos
+      # Nixpkgs Overlays
+      ../overlays
       {
         home-manager = {
           useGlobalPkgs = true;
