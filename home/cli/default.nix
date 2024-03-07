@@ -15,10 +15,9 @@
     ./mpd.nix
     ./my-fetch
     ./phetch.nix
-    ./scripts.nix
     ./sops.nix
     ./ssh.nix
-    ./ytfzf.nix
+    ./youtube.nix
     ./zsh.nix
   ];
 }

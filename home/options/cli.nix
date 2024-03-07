@@ -55,9 +55,10 @@
     };
     mpd.enable = lib.mkEnableOption "Enable Music Player Daemon and NCMPCPP";
     phetch.enable = lib.mkEnableOption "Enable Phetch";
-    scripts = {
-      youtubeScripts.enable = lib.mkEnableOption "Enable YouTube scripts";
+    youtube = {
+      enable = lib.mkEnableOption "Enable youtube scripts and programs";
+      ytfzf.enable = lib.mkEnableOption "Enable ytfzf and scripts around it" // { default = true; };
+      youtubeScripts.enable = lib.mkEnableOption "Enable YouTube scripts" // { default = true; };
     };
-    ytfzf.enable = lib.mkEnableOption "Enable ytfzf and scripts around it";
   };
 }

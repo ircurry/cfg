@@ -41,11 +41,8 @@
       file-convert.enable = true;
       mpd.enable = true;
       phetch.enable = true;
-      scripts = {
-        youtubeScripts.enable = true;
-      };
       shell.name = "fish";
-      ytfzf.enable = true;
+      youtube.enable = true;
     };
     wayland.monitors = [
       {
