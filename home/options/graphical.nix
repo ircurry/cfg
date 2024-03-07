@@ -106,6 +106,7 @@
     mullvadBrowser.enable = lib.mkEnableOption "Enable Mullvad Browser";
     obs.enable = lib.mkEnableOption "Enable OBS";
     rofi = {
+      enable = lib.mkEnableOption "Enable Rofi";
       bg = lib.mkOption {
         type = lib.types.str;
         default = config.nocturne.themes.colors.base00;
