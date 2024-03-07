@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if [ -z $1 ]; then
+    echo "no url provided"
+    exit 1
+fi
+
+base="$(echo $1 | grep -Eo 'playlist\?list=.{34}')"
+url=$(echo "https://youtube.com/$base")
+mkdir -p "$HOME/dl/intake-playlists"
+yt-dlp --embed-metadata \
+       -f 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/22/bestvideo+bestaudio' \
+       -o "%(playlist_title)s--%(playlist_index)s--%(upload_date)s--%(title)s.%(ext)s" \
+       -P "$HOME/dl/intake-playlists/" "$url"

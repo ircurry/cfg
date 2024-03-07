@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+if [ -z $1 ]; then
+    echo "no url provided"
+    exit 1
+fi
+
+base="$(echo $1 | grep -Eo 'watch\?v=.{11}')"
+url=$(echo "https://youtube.com/$base")
+mkdir -p "$HOME/dl/intake-pods"
+yt-dlp --embed-metadata \
+       -x --audio-format mp3 \
+       -f bestaudio/best \
+       -o "%(uploader)s--%(title)s--%(id)s.%(ext)s" \
+       -P "$HOME/dl/intake-pods/" "$url"

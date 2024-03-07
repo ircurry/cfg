@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ -z $1 ]; then
+    base=$(echo "$(wl-paste)" | grep -Eo "watch\?v=.{11}")
+    [ -n "$base" ] && mpv "https://youtube.com/$base"
+else 
+    base=$(echo $1 | grep -Eo "watch\?v=.{11}")  
+    mpv "https://youtube.com/$base"
+fi
+exit 0

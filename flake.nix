@@ -56,6 +56,10 @@
     {
       # ===NixOS Configurations===
       nixosConfigurations = import ./hosts commonAttrs;
+
+      # ===Packages===
+      packages = forAllSystems (pkgs:
+        (import ./packages { inherit pkgs inputs; }));
       
       # ======Development Enviornment===
       devShells = forAllSystems (pkgs: {
