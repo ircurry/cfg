@@ -25,6 +25,7 @@ This is the rough organization for my config. This is subject to change at any p
     - *wayland* - configuration for my Wayland environment. Sometimes graphical programs are configured here if they are integral to my environment.
   - *hosts* - per host configurations. Almost always has a configuration.nix, hardware-configuration.nix, and a home.nix (for the main user).
     - *chopin* - my framework laptop
+  - *lib* - my library of custom functions and variables to help with my config
   - *modules* - proper modules for nixos and home-manager that can be used by others
   - *nixos* - system wide reusable configurations
   - *overlays* - self explanatory
