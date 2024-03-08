@@ -11,7 +11,7 @@ Here are some specs you've seen a trillion times:
 - *Launcher/Menu*: Rofi-Wayland
 - *Editor*: Emacs
 - *Terminal*: Alacritty
-- *Shell*: Zsh
+- *Shell*: Fish
 
 ** Hardware
 Right now I just have my [[https://frame.work/][framework]] laptop but I hope expand it to a desktop, my other laptops, and a NAS (eventually).
