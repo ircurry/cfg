@@ -1,10 +1,10 @@
-{
-  inputs,
-  isNixos ? true,
-  lib,
-  self,
-  user ? "recur",
-  ...
+{ inputs
+, isNixos ? true
+, lib
+, self
+, user ? "recur"
+, mylib
+, ...
 }:
 let
   # ===Extra Helpers===
@@ -14,7 +14,7 @@ let
   mkSystemCustomModules = modules: host: sys: let
     pkgs = pkgsFor sys;
     extraSpecialArgs = {
-      inherit inputs self isNixos user host;
+      inherit inputs self isNixos user host mylib;
       isLaptop = host == "chopin";
     };
   in inputs.nixpkgs.lib.nixosSystem {

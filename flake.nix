@@ -46,11 +46,17 @@
       forAllSystems = function:
         inputs.nixpkgs.lib.genAttrs systems (forSystem function);
 
+      # ===My Library===
+      mylib = import ./lib {
+        inherit (inputs.nixpkgs) lib;
+        inherit (inputs) nixpkgs;
+      };
+
       # ===Common Attributes===
       commonAttrs = {
         inherit (inputs.nixpkgs) lib;
         inherit (inputs) nixpkgs self;
-        inherit inputs;
+        inherit inputs mylib;
       };
     in
     {
