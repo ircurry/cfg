@@ -16,6 +16,21 @@ Here are some specs you've seen a trillion times:
 ** Hardware
 Right now I just have my [[https://frame.work/][framework]] laptop but I hope expand it to a desktop, my other laptops, and a NAS (eventually).
 
+** Rough Structure
+This is the rough organization for my config. This is subject to change at any point and may not reflect what the current structure is.
+  - *flake.nix* - central point of my config
+  - *home* - reusable configurations for home-manager
+    - *cli* - cli programs, tui programs, and services primarily interacted with through a terminal
+    - *graphical* - programs that are graphical, irrespective of whether or not they are X11 or Wayland
+    - *wayland* - configuration for my Wayland environment. Sometimes graphical programs are configured here if they are integral to my environment.
+  - *hosts* - per host configurations. Almost always has a configuration.nix, hardware-configuration.nix, and a home.nix (for the main user).
+    - *chopin* - my framework laptop
+  - *modules* - proper modules for nixos and home-manager that can be used by others
+  - *nixos* - system wide reusable configurations
+  - *overlays* - self explanatory
+  - *packages* - my personal packages, can be inputs in other's flakes
+  - *secrets* - shhhhhh...
+
 * Unixporn
 I have themes for:
 - Catppuccin Mocha
