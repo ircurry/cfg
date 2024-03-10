@@ -14,7 +14,7 @@ let
   mkSystemCustomModules = modules: host: sys: let
     pkgs = pkgsFor sys;
     extraSpecialArgs = {
-      inherit inputs self isNixos user host mylib;
+      inherit inputs isNixos self user mylib host;
       isLaptop = host == "chopin";
     };
   in inputs.nixpkgs.lib.nixosSystem {
