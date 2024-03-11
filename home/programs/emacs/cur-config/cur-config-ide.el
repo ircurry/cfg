@@ -25,8 +25,8 @@
 (use-package lsp-ui
   ;:ensure t
   :after (lsp-mode)
-  :bind (:map cur/leader-keymap
-	 ("l C-d" . lsp-ui-doc-glance))
+  :bind (:map lsp-ui-mode-map
+	 ("C-c C-l C-d" . lsp-ui-doc-glance))
   :hook
   (lsp-mode . lsp-ui-mode))
 
