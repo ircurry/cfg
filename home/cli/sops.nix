@@ -1,5 +1,4 @@
-{ user, ... }:
-{
+{ user, ... }: {
   config = {
     sops = {
       defaultSopsFile = ../../secrets/secrets.yaml;

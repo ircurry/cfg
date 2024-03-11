@@ -1,14 +1,5 @@
-{ lib
-, stdenv
-, makeWrapper
-, chafa
-, coreutils
-, gnugrep
-, mpv
-, wl-clipboard
-, ytfzf
-, yt-dlp
-}:
+{ lib, stdenv, makeWrapper, chafa, coreutils, gnugrep, mpv, wl-clipboard, ytfzf
+, yt-dlp }:
 
 with lib;
 
@@ -18,15 +9,8 @@ stdenv.mkDerivation rec {
   src = ./scripts;
 
   nativeBuildInputs = [ makeWrapper ];
-  runtimeDependencies = [
-    chafa
-    coreutils
-    gnugrep
-    mpv
-    wl-clipboard
-    ytfzf
-    yt-dlp
-  ];
+  runtimeDependencies =
+    [ chafa coreutils gnugrep mpv wl-clipboard ytfzf yt-dlp ];
 
   dontUnpack = true;
   dontBuild = true;
@@ -39,11 +23,9 @@ stdenv.mkDerivation rec {
     for script in ytd ytdp ytp ytu; do
       install -Dm 0755 $src/$script $out/bin
       wrapProgram $out/bin/$script --set PATH \
-        "${
-          makeBinPath runtimeDependencies
-        }"
+        "${makeBinPath runtimeDependencies}"
     done
-    
+
     runHook postInstall
   '';
 

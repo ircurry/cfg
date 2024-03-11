@@ -1,11 +1,5 @@
 { user, config, lib, isNixos, ... }: {
-  imports = [
-    ./cli
-    ./options
-    ./programs
-    ./themes
-    ./wayland
-  ];
+  imports = [ ./cli ./options ./programs ./themes ./wayland ];
 
   config = lib.mkMerge [
     {

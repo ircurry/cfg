@@ -16,11 +16,6 @@ in {
   config = lib.mkIf (cfg.name == "grim-slurp") {
     nocturne.wayland.screenshot.scrn = scrn;
     nocturne.wayland.screenshot.scrn-region = scrn-region;
-    home.packages = [
-      pkgs.grim
-      pkgs.slurp
-      scrn
-      scrn-region
-    ];
+    home.packages = [ pkgs.grim pkgs.slurp scrn scrn-region ];
   };
 }

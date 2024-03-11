@@ -1,5 +1,4 @@
-{ user, config, host, ... }:
-{
+{ user, config, host, ... }: {
   config = {
     users.users."${user}" = {
       isNormalUser = true;
@@ -8,11 +7,9 @@
       initialPassword = "password";
       hashedPasswordFile = config.sops.secrets."${user}_password".path;
     };
-    
+
     home-manager = {
-      users = { 
-        "${user}" = import ../hosts/${host}/home.nix; 
-      };
+      users = { "${user}" = import ../hosts/${host}/home.nix; };
     };
   };
 }

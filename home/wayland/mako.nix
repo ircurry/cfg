@@ -1,9 +1,9 @@
-{ lib, config, pkgs, ... }: let
-  cfg = config.nocturne.wayland.notification.daemon;
+{ lib, config, pkgs, ... }:
+let cfg = config.nocturne.wayland.notification.daemon;
 in {
   config = lib.mkIf (cfg == "mako") {
     home.packages = [ pkgs.nerdfonts pkgs.libnotify ];
-    nocturne.wayland.notification.exec-start = "${lib.getExe pkgs.mako}"; 
+    nocturne.wayland.notification.exec-start = "${lib.getExe pkgs.mako}";
     services.mako = let
       bg = config.nocturne.wayland.mako.bg;
       fg = config.nocturne.wayland.mako.fg;

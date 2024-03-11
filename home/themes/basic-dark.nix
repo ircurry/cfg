@@ -1,8 +1,6 @@
 { config, lib, ... }:
-let
-  theme = config.nocturne.themes.theme;
-in
-{
+let theme = config.nocturne.themes.theme;
+in {
   config = lib.mkIf (theme == "basic-dark") {
     nocturne = {
       themes.variant = "dark";

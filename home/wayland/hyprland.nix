@@ -1,15 +1,16 @@
-{ config, pkgs, lib, inputs, isLaptop, ... }: let
+{ config, pkgs, lib, inputs, isLaptop, ... }:
+let
   # ===Application Launcher(s)===
   menu-drun = config.nocturne.wayland.menu.drun;
   menu-run = config.nocturne.wayland.menu.run;
   menu-window = config.nocturne.wayland.menu.window;
-  
+
   # ===Editor===
   ed-cfg = config.nocturne.wayland.editor;
-  
+
   # ===Terminal===
   term-cfg = config.nocturne.wayland.terminal;
-  
+
   # ===Border Colors===
   col_active_border1 = config.nocturne.wayland.hyprland.col-active-border1;
   col_active_border2 = config.nocturne.wayland.hyprland.col-active-border2;
@@ -18,67 +19,68 @@
   # ===Monitor Configurations===
   monitors = map (m:
     let
-      resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
+      resolution =
+        "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
       position = "${toString m.x}x${toString m.y}";
-    in "${m.name},${resolution},${position},${toString m.scale}"
-  ) config.nocturne.wayland.monitors;
-  
+    in "${m.name},${resolution},${position},${toString m.scale}")
+    config.nocturne.wayland.monitors;
+
   # ===Dock Station Monitor Configurations===
   docked-monitors = map (m:
     let
-      resolution = "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
+      resolution =
+        "${toString m.width}x${toString m.height}@${toString m.refreshRate}";
       position = "${toString m.x}x${toString m.y}";
-    in "${m.name},${resolution},${position},${toString m.scale}"
-  ) config.nocturne.wayland.docked-monitors;
+    in "${m.name},${resolution},${position},${toString m.scale}")
+    config.nocturne.wayland.docked-monitors;
 
   # ===Hyprdock Script===
   # Disgusting script to disable monitors when docking
   hyprdock = let
     # String that grep uses to check if any of the docked monitors are connected
     grepString = let
-      start = "^" + (builtins.head config.nocturne.wayland.docked-monitors).name;
+      start = "^"
+        + (builtins.head config.nocturne.wayland.docked-monitors).name;
       list = builtins.tail config.nocturne.wayland.docked-monitors;
-    in lib.lists.foldr
-      (x: acc: acc + "\\|^" + x.name) start list;
+    in lib.lists.foldr (x: acc: acc + "\\|^" + x.name) start list;
 
     # String that set docked monitors
     dmonString = let
       start = "hyprctl keyword monitor " + builtins.head docked-monitors;
       list = builtins.tail docked-monitors;
-    in lib.lists.foldr
-      (x: acc: acc + "\n      hyprctl keyword monitor " + x) start list;
+    in lib.lists.foldr (x: acc: acc + "\n      hyprctl keyword monitor " + x)
+    start list;
 
     # String that enable default monitors
     monString = let
       start = "hyprctl keyword monitor " + builtins.head monitors;
       list = builtins.tail monitors;
-    in lib.lists.foldr
-      (x: acc: acc + "\n    hyprctl keyword monitor " + x) start list;
+    in lib.lists.foldr (x: acc: acc + "\n    hyprctl keyword monitor " + x)
+    start list;
 
     # String that disable default monitors
     dismonString = let
-      start = "hyprctl keyword monitor " +
-              (builtins.head config.nocturne.wayland.monitors).name + ",disable";
-      list = map
-        (m: "${m.name},disable")
+      start = "hyprctl keyword monitor "
+        + (builtins.head config.nocturne.wayland.monitors).name + ",disable";
+      list = map (m: "${m.name},disable")
         (builtins.tail config.nocturne.wayland.monitors);
-    in lib.lists.foldr
-      (x: acc: acc + "\n      hyprctl keyword monitor " + x) start list;
-    
+    in lib.lists.foldr (x: acc: acc + "\n      hyprctl keyword monitor " + x)
+    start list;
+
   in pkgs.writeShellScriptBin "hyprdock" ''
-  monitorIsDocked="$(${pkgs.wlr-randr}/bin/wlr-randr | grep '${grepString}')"
-  case $1 in
-    -dock)
-      if [ -n "$monitorIsDocked" ]; then
-        ${dismonString}
-        ${dmonString}
-      fi ;;
-    -undock)
-      ${monString} ;;
-    *) echo "unknown parameter" ;; 
-  esac
+    monitorIsDocked="$(${pkgs.wlr-randr}/bin/wlr-randr | grep '${grepString}')"
+    case $1 in
+      -dock)
+        if [ -n "$monitorIsDocked" ]; then
+          ${dismonString}
+          ${dmonString}
+        fi ;;
+      -undock)
+        ${monString} ;;
+      *) echo "unknown parameter" ;; 
+    esac
   '';
-  
+
 in {
   config = {
     # ===Packages Needed===
@@ -107,13 +109,9 @@ in {
         "$menu-run" = menu-run;
         "$menu-window" = menu-window;
         "$MOD" = "SUPER";
-        
-        env = [
-          "XCURSOR_SIZE,24"
-        ];
-        monitor = monitors ++ [
-          ",preferred,auto,auto"
-        ];
+
+        env = [ "XCURSOR_SIZE,24" ];
+        monitor = monitors ++ [ ",preferred,auto,auto" ];
         exec-once = [
           "waybar"
           "${pkgs.swayidle}/bin/swayidle -w timeout 300 '${config.nocturne.wayland.lock.exec} -f' timeout 360 'systemctl suspend'"
@@ -121,16 +119,16 @@ in {
           "${config.nocturne.wayland.notification.exec-start}"
           "${pkgs.networkmanagerapplet}/bin/nm-applet"
           "[workspace 2 silent] $terminal"
-        ] ++ lib.optionals (config.nocturne.graphical.firefox.enable) [
-          "[workspace 4 silent] firefox"
-        ]++ lib.optionals (term-cfg.exec-start != null) [
-          "${term-cfg.exec-start}"
-        ];
+        ] ++ lib.optionals (config.nocturne.graphical.firefox.enable)
+          [ "[workspace 4 silent] firefox" ]
+          ++ lib.optionals (term-cfg.exec-start != null)
+          [ "${term-cfg.exec-start}" ];
         general = {
           gaps_in = 5;
           gaps_out = 5;
           border_size = 2;
-          "col.active_border" = "rgba(${col_active_border1}) rgba(${col_active_border2}) 45deg";
+          "col.active_border" =
+            "rgba(${col_active_border1}) rgba(${col_active_border2}) 45deg";
           "col.inactive_border" = "rgba(${col_inactive_border})";
           layout = "master";
           allow_tearing = false;
@@ -138,9 +136,7 @@ in {
         input = {
           kb_layout = "us";
           follow_mouse = 2;
-          touchpad = {
-            natural_scroll = "no";
-          };
+          touchpad = { natural_scroll = "no"; };
           sensitivity = 0;
         };
         decoration = {
@@ -177,9 +173,7 @@ in {
           # Anime lady hehe
           force_default_wallpaper = -1;
           enable_swallow = true;
-          swallow_regex = [
-            "^(Alacritty)$"
-          ];
+          swallow_regex = [ "^(Alacritty)$" ];
         };
         windowrulev2 = [
           "suppressevent maximize, class:.*"
@@ -209,7 +203,7 @@ in {
           # General Keybindings
           "$MOD_SHIFT, Return, exec, $terminal"
           "$MOD, Return, exec, $terminal"
-	        "$MOD, E, exec, $editor"
+          "$MOD, E, exec, $editor"
           "$MOD, R, exec, $menu-run"
           "$MOD, P, exec, $menu-drun"
           "$MOD, code:61, exec, $menu-window"
@@ -220,7 +214,7 @@ in {
           ## Logout (semi-colon)
           "$MOD_CTRL, code:47, exec, ${config.nocturne.wayland.logout.exec}"
           "$MOD, code:47, exec, ${config.nocturne.wayland.logout.exec}"
-        
+
           # Window Manipulation
           "$MOD, H, layoutmsg, swapprev"
           "$MOD, L, layoutmsg, swapnext"
@@ -251,9 +245,11 @@ in {
           # Screenshot Commands (if enabled)
         ] ++ lib.optionals (config.nocturne.wayland.screenshot.name != null) [
           "$MOD, S, exec, ${lib.getExe config.nocturne.wayland.screenshot.scrn}"
-          "$MOD_SHIFT, S, exec, ${lib.getExe config.nocturne.wayland.screenshot.scrn-region}"
+          "$MOD_SHIFT, S, exec, ${
+            lib.getExe config.nocturne.wayland.screenshot.scrn-region
+          }"
         ];
-        
+
         binde = [
           # Volume and Brightness
           ", XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d 1"
@@ -267,12 +263,12 @@ in {
           "$MOD, mouse:272, movewindow"
           "$MOD, mouse:273, resizewindow"
         ];
-        bindl = [] ++
-                # Dock when closing Laptop lid
-                lib.optionals (isLaptop == true) [
-                  ",switch:on:Lid Switch,exec,${hyprdock}/bin/hyprdock -dock"
-                  ",switch:off:Lid Switch,exec,${hyprdock}/bin/hyprdock -undock"
-                ];
+        bindl = [ ] ++
+          # Dock when closing Laptop lid
+          lib.optionals (isLaptop == true) [
+            ",switch:on:Lid Switch,exec,${hyprdock}/bin/hyprdock -dock"
+            ",switch:off:Lid Switch,exec,${hyprdock}/bin/hyprdock -undock"
+          ];
       };
       # Devices
       extraConfig = ''

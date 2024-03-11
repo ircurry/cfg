@@ -8,9 +8,7 @@
   ];
 
   # ===Nocturne System Configuration===
-  noctsys = {
-    programs.hyprland.enable = true;
-  };
+  noctsys = { programs.hyprland.enable = true; };
 
   # ===Don't Change Please===
   system.stateVersion = "23.11"; # Did you read the comment?

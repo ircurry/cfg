@@ -38,8 +38,7 @@ let
   fg3 = "665c54";
   fg4 = "7c6f64";
 
-in
-{
+in {
   config = lib.mkIf (theme == "gruvbox-light-medium") {
     nocturne = {
       themes.variant = "light";
@@ -61,9 +60,7 @@ in
         base0E = purple; # purple
         base0F = grey; # brown
       };
-      graphical = {
-        rofi.border-color = bg4;
-      };
+      graphical = { rofi.border-color = bg4; };
       wayland.hyprland = {
         col-active-border1 = bg4 + "ee";
         col-active-border2 = bg3 + "ee";
@@ -82,7 +79,7 @@ in
         workspace-visible = yellow;
         workspace-bg = bg0;
         workspace-hover-bg = bg1;
-        
+
         # Right
         cpu-bg = bg0;
         memory-bg = bg0;

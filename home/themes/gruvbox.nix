@@ -28,8 +28,7 @@ let
   fg2 = "d5c4a1";
   fg3 = "bdae93";
   fg4 = "a89984";
-in
-{
+in {
   config = lib.mkIf (theme == "gruvbox-dark-medium") {
     nocturne = {
       themes.variant = "dark";

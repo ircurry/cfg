@@ -3,12 +3,12 @@
 let
   cfg = config.nocturne.graphical.emacs;
   way-cfg = config.nocturne.wayland.editor;
-  emacs-package = with pkgs; ((emacsPackagesFor emacs-pgtk).emacsWithPackages (
-    epkgs: [
+  emacs-package = with pkgs;
+    ((emacsPackagesFor emacs-pgtk).emacsWithPackages (epkgs: [
       ########################################
       ## Configuration Modules Dependencies ##
       ########################################
-      
+
       # ===Bindings===
       epkgs.hydra
       epkgs.meow
@@ -34,21 +34,21 @@ let
       epkgs.rainbow-delimiters
 
       # ===Essentials===
-      
+
       # ===Faces===
       epkgs.doom-themes
       epkgs.autothemer
       epkgs.catppuccin-theme
-      
+
       # ===Haskell===
       epkgs.haskell-mode
       epkgs.lsp-haskell
       epkgs.company-ghci
-      
+
       # ===Help===
       epkgs.helpful
       epkgs.which-key
-      
+
       # ===IDE===
       epkgs.lsp-mode
       epkgs.lsp-ui
@@ -61,50 +61,48 @@ let
       epkgs.rg
       epkgs.envrc
       epkgs.zoxide
-      
+
       # ===Java===
       epkgs.lsp-java
-      
+
       # ===Markup===
       epkgs.yaml-mode
       epkgs.yuck-mode
-      
+
       # ===Nix===
       epkgs.nix-mode
-      
+
       # ===Org===
       epkgs.org-bullets
 
       # ===Rust===
       epkgs.rustic
-      
+
       # ===Shell===
       epkgs.eat
       epkgs.vterm
-      
+
       # ===Smol-net===
       epkgs.gemini-mode
       epkgs.ox-gemini
-      
+
       # ===Windows===
-      
+
       ###############################
       ## Lisp Modules Dependencies ##
       ###############################
 
-    ]
-  ));
-in
-{
+    ]));
+in {
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
-      programs.emacs = { 
+      programs.emacs = {
         enable = true;
         package = emacs-package;
       };
-      
+
       services.emacs.enable = true;
-      
+
       home.packages = with pkgs; [
         # ===General===
         ispell
@@ -120,17 +118,19 @@ in
         ".emacs.d/themes".source = ./themes;
       };
     })
-    
+
     (lib.mkIf (way-cfg.name == "emacs") {
-      assertions = [
-        {
-          assertion = cfg.enable == true;
-          message = "emacs is set as the default editor on wayland but is not ebabled";
-        }
-      ];
-      nocturne.wayland.editor.exec = "${config.programs.emacs.package}/bin/emacsclient -c -a 'emacs'";
-      nocturne.wayland.editor.exec-reuse = "${config.programs.emacs.package}/bin/emacsclient -r";
-      nocturne.wayland.editor.exec-start = "${config.programs.emacs.package}/bin/emacs --daemon";
+      assertions = [{
+        assertion = cfg.enable == true;
+        message =
+          "emacs is set as the default editor on wayland but is not ebabled";
+      }];
+      nocturne.wayland.editor.exec =
+        "${config.programs.emacs.package}/bin/emacsclient -c -a 'emacs'";
+      nocturne.wayland.editor.exec-reuse =
+        "${config.programs.emacs.package}/bin/emacsclient -r";
+      nocturne.wayland.editor.exec-start =
+        "${config.programs.emacs.package}/bin/emacs --daemon";
     })
   ];
 }

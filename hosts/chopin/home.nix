@@ -2,18 +2,16 @@
 
 {
   # ===Import Home Configuration Modules===
-  imports = [ 
-    ../../home
-  ];
+  imports = [ ../../home ];
 
   # ===Nocturne Home Configuration===
   nocturne = {
     #themes.theme = "basic-dark";
     #themes.theme = "catppuccin-mocha";
-    #themes.theme = "gruvbox-dark-medium";
+    themes.theme = "gruvbox-dark-medium";
     #themes.theme = "gruvbox-light-medium";
     #themes.theme = "kanagawa-wave";
-    themes.theme = "nord-aurora";
+    #themes.theme = "nord-aurora";
     #themes.theme = "nord-light";
     graphical = {
       alacritty.enable = true;
@@ -44,28 +42,24 @@
       shell.name = "fish";
       youtube.enable = true;
     };
-    wayland.monitors = [
-      {
-        name = "eDP-1";
-        width = 2256;
-        height = 1504;
-        refreshRate = 60;
-        x = 0;
-        y = 0;
-        scale = 2;
-      }
-    ];
-    wayland.docked-monitors = [
-      {
-        name = "DP-2";
-        width = 1920;
-        height = 1080;
-        refreshRate = 60;
-        x = 0;
-        y = 0;
-        scale = 1;
-      }
-    ];
+    wayland.monitors = [{
+      name = "eDP-1";
+      width = 2256;
+      height = 1504;
+      refreshRate = 60;
+      x = 0;
+      y = 0;
+      scale = 2;
+    }];
+    wayland.docked-monitors = [{
+      name = "DP-2";
+      width = 1920;
+      height = 1080;
+      refreshRate = 60;
+      x = 0;
+      y = 0;
+      scale = 1;
+    }];
   };
 
   # ===Don't Change Please===

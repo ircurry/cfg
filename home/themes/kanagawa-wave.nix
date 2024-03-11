@@ -38,8 +38,7 @@ let
   peachRed = "ff5d62";
   surimiOrange = "ffa066";
   katanaGray = "717c7c";
-in
-{
+in {
   config = lib.mkIf (theme == "kanagawa-wave") {
     nocturne = {
       themes.variant = "dark";
@@ -72,16 +71,12 @@ in
         bright-yellow = autumnYellow;
         bright-blue = cyrstalBlue;
       };
-      graphical.rofi = {
-        border-color = oniViolet;
-      };
+      graphical.rofi = { border-color = oniViolet; };
       wayland.hyprland = {
         col-active-border1 = oniViolet + "ee";
         col-active-border2 = oniViolet + "ee";
       };
-      wayland.mako = {
-        progress-color = oniViolet + "FF";
-      };
+      wayland.mako = { progress-color = oniViolet + "FF"; };
       wayland.waybar = {
         workspace-visible = autumnYellow;
         mpd-fg = cyrstalBlue;

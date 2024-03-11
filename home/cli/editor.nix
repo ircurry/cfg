@@ -1,10 +1,13 @@
-{ config, lib, pkgs, ... }: let
+{ config, lib, pkgs, ... }:
+let
   way-ed = config.nocturne.wayland.editor;
   cli-ed = config.nocturne.cli.editor;
 in {
   config = lib.mkMerge [
     # Terminal Text Editor
-    { home.packages = with pkgs; [ vim ]; }
+    {
+      home.packages = with pkgs; [ vim ];
+    }
 
     # Use Terminal Editor
     (lib.mkIf (config.nocturne.cli.editor.follow == "cli") {

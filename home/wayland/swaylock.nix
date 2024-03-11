@@ -1,8 +1,6 @@
 { config, lib, pkgs, ... }:
-let
-  cfg = config.nocturne.wayland.lock;
-in
-{
+let cfg = config.nocturne.wayland.lock;
+in {
   config = lib.mkIf (cfg.name == "swaylock") {
     home.packages = [ pkgs.nerdfonts pkgs.swaylock-effects ];
     nocturne.wayland.lock.exec = "${lib.getExe pkgs.swaylock-effects}";
@@ -22,11 +20,12 @@ in
         fg-wrong = config.nocturne.wayland.swaylock-effects.fg-wrong;
         ring-wrong = config.nocturne.wayland.swaylock-effects.ring-wrong;
         fg-caps = config.nocturne.wayland.swaylock-effects.fg-caps;
-        key-press-caps = config.nocturne.wayland.swaylock-effects.key-press-caps;
+        key-press-caps =
+          config.nocturne.wayland.swaylock-effects.key-press-caps;
       in ''
         ignore-empty-password
         font="Fira Sans Semibold"
-        
+
         clock
         timestr=%T
         datestr=%a, %e of %b
@@ -45,19 +44,19 @@ in
         ring-color=${ring}
         key-hl-color=${key-press}
         bs-hl-color=${ring}
-        
+
         # Cleared Colors
         text-clear-color=${fg-ring-clear}
         inside-clear-color=${bg-inside}
         line-clear-color=${bg}
         ring-clear-color=${fg-ring-clear}
-        
+
         # Verifying Colors
         text-ver-color=${fg-ver}
         inside-ver-color=${bg-inside}
         line-ver-color=${bg}
         ring-ver-color=${ring-ver}
-        
+
         # Wrong Colors
         text-wrong-color=${fg-wrong}
         inside-wrong-color=${bg-inside}

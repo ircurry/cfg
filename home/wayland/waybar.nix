@@ -6,15 +6,18 @@
       package = pkgs.waybar;
       style = let
         stdMargin = builtins.toString config.nocturne.wayland.waybar.stdMargin;
-        stdPadding = builtins.toString config.nocturne.wayland.waybar.stdPadding;
-        stdFontSize = builtins.toString config.nocturne.wayland.waybar.stdFontSize;
+        stdPadding =
+          builtins.toString config.nocturne.wayland.waybar.stdPadding;
+        stdFontSize =
+          builtins.toString config.nocturne.wayland.waybar.stdFontSize;
         workspace-bg = config.nocturne.wayland.waybar.workspace-bg;
         workspace-hover-bg = config.nocturne.wayland.waybar.workspace-hover-bg;
         workspace-fg = config.nocturne.wayland.waybar.workspace-fg;
         workspace-empty = config.nocturne.wayland.waybar.workspace-empty;
         workspace-urgent = config.nocturne.wayland.waybar.workspace-urgent;
         workspace-visible = config.nocturne.wayland.waybar.workspace-visible;
-        launcher-font-size = builtins.toString config.nocturne.wayland.waybar.launcher-font-size;
+        launcher-font-size =
+          builtins.toString config.nocturne.wayland.waybar.launcher-font-size;
         launcher-fg = config.nocturne.wayland.waybar.launcher-fg;
         launcher-bg = config.nocturne.wayland.waybar.launcher-bg;
         battery-fg = config.nocturne.wayland.waybar.battery-fg;
@@ -30,8 +33,10 @@
         audio-bg = config.nocturne.wayland.waybar.audio-bg;
         network-fg = config.nocturne.wayland.waybar.network-fg;
         network-bg = config.nocturne.wayland.waybar.network-bg;
-        network-disconnected = config.nocturne.wayland.waybar.network-disconnected;
-        power-font-size = builtins.toString config.nocturne.wayland.waybar.power-font-size;
+        network-disconnected =
+          config.nocturne.wayland.waybar.network-disconnected;
+        power-font-size =
+          builtins.toString config.nocturne.wayland.waybar.power-font-size;
         power-fg = config.nocturne.wayland.waybar.power-fg;
         power-bg = config.nocturne.wayland.waybar.power-bg;
         cpu-fg = config.nocturne.wayland.waybar.cpu-fg;
@@ -213,13 +218,11 @@
       settings = [{
         layer = "top";
         position = "top";
-        output = [
-          "eDP-1"
-          "DP-2"
-        ];
+        output = [ "eDP-1" "DP-2" ];
         modules-left = [ "custom/launcher" "battery" "backlight" "mpd" "tray" ];
         modules-center = [ "hyprland/workspaces" ];
-        modules-right = [ "cpu" "memory" "pulseaudio" "network" "clock" "custom/power" ];
+        modules-right =
+          [ "cpu" "memory" "pulseaudio" "network" "clock" "custom/power" ];
         "custom/launcher" = {
           format = "󱄅";
           tooltip = false;
@@ -239,9 +242,7 @@
             "5" = "五";
             "6" = "六";
           };
-          persistent-workspaces = {
-            "*" = [ 1 2 3 4 5 6 ];
-          };
+          persistent-workspaces = { "*" = [ 1 2 3 4 5 6 ]; };
         };
         battery = {
           states = {
@@ -253,7 +254,7 @@
           format-charging = "󰂄 {capacity}%";
           format-plugged = "󰂄 {capacity}%";
           format-alt = "{icon} {capacity}%";
-          format-icons = ["󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
+          format-icons = [ "󰂃" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹" ];
         };
         tray = {
           icon-size = config.nocturne.wayland.waybar.stdIconSize;
@@ -281,9 +282,7 @@
           tooltip-format = "{volume}%";
           format = "{icon} {volume}%";
           format-muted = "󰝟 MUTE";
-          format-icons = {
-            default = ["󰕿" "󰖀" "󰕾"];
-          };
+          format-icons = { default = [ "󰕿" "󰖀" "󰕾" ]; };
         };
         network = {
           format = "{ifname}";
@@ -301,12 +300,8 @@
           tooltip = false;
           on-click = "sleep 0.1 && ${config.nocturne.wayland.logout.exec}";
         };
-        cpu = {
-          format = "󰻠 {usage}%";
-        };
-        memory = {
-          format = "󰍛 {percentage}%";
-        };
+        cpu = { format = "󰻠 {usage}%"; };
+        memory = { format = "󰍛 {percentage}%"; };
         mpd = {
           format = "{stateIcon} {title}";
           format-stopped = "󰓛 Stopped";
@@ -314,13 +309,19 @@
           max-length = 15;
           on-click = "${pkgs.mpc-cli}/bin/mpc toggle";
           on-click-middle = "${pkgs.mpc-cli}/bin/mpc stop";
-          on-click-right = "${config.nocturne.wayland.terminal.exec-center} ${pkgs.ncmpcpp}/bin/ncmpcpp";
+          on-click-right =
+            "${config.nocturne.wayland.terminal.exec-center} ${pkgs.ncmpcpp}/bin/ncmpcpp";
           state-icons = {
             paused = "󰂼";
             playing = "󱉺";
           };
           tooltip = true;
-          tooltip-format = "| Queue: {songPosition}/{queueLength}\n| Time: {elapsedTime:%M:%S} - {totalTime:%M:%S}\n| Song: {title}\n| Artist: {artist}\n| Album: {album}";
+          tooltip-format = ''
+            | Queue: {songPosition}/{queueLength}
+            | Time: {elapsedTime:%M:%S} - {totalTime:%M:%S}
+            | Song: {title}
+            | Artist: {artist}
+            | Album: {album}'';
         };
       }];
     };

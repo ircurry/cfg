@@ -1,4 +1,4 @@
-#  .   .         .
+# .   .         .
 #  |\  |        _|_
 #  | \ | .-.  .-.|  .  . .--..--. .-.
 #  |  \|(   )(   |  |  | |   |  |(.-'
@@ -19,7 +19,7 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     arkenfox = {
       url = "github:dwarfmaster/arkenfox-nixos";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -33,15 +33,16 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
   };
-  
+
   outputs = { ... }@inputs:
     let
       # ===Dealing with System===
-      forSystem = function: system: function inputs.nixpkgs.legacyPackages.${system};
+      forSystem = function: system:
+        function inputs.nixpkgs.legacyPackages.${system};
 
-      systems = ["x86_64-linux"];
+      systems = [ "x86_64-linux" ];
 
       forAllSystems = function:
         inputs.nixpkgs.lib.genAttrs systems (forSystem function);
@@ -58,18 +59,20 @@
         inherit (inputs) nixpkgs self;
         inherit inputs mylib;
       };
-    in
-    {
+    in {
       # ===NixOS Configurations===
       nixosConfigurations = import ./hosts commonAttrs;
 
       # ===Packages===
-      packages = forAllSystems (pkgs:
-        (import ./packages { inherit pkgs inputs; }));
-      
+      packages =
+        forAllSystems (pkgs: (import ./packages { inherit pkgs inputs; }));
+
       # ======Development Enviornment===
       devShells = forAllSystems (pkgs: {
-        default = import ./devenv.nix { inherit inputs; inherit pkgs; };
+        default = import ./devenv.nix {
+          inherit inputs;
+          inherit pkgs;
+        };
       });
     };
 }

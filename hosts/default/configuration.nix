@@ -5,11 +5,10 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.default
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -44,7 +43,7 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver = { 
+  services.xserver = {
     enable = true;
 
     # Enable the KDE Plasma Desktop Environment.
@@ -79,9 +78,7 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
-    users = { 
-      "recur" = import ./home.nix; 
-    };
+    users = { "recur" = import ./home.nix; };
   };
 
   # Some programs need SUID wrappers, can be configured further or are

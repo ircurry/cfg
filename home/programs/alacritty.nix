@@ -18,20 +18,18 @@ let
   bright-red = config.nocturne.graphical.alacritty.bright-red; # red
   bright-yellow = config.nocturne.graphical.alacritty.bright-yellow; # yellow
   bright-green = config.nocturne.graphical.alacritty.bright-green; # green
-  bright-cyan = config.nocturne.graphical.alacritty.bright-cyan; # ~, normally aqua/cyan
+  bright-cyan =
+    config.nocturne.graphical.alacritty.bright-cyan; # ~, normally aqua/cyan
   bright-blue = config.nocturne.graphical.alacritty.bright-blue; # blue
   bright-magenta = config.nocturne.graphical.alacritty.bright-magenta; # purple
   bright-white = config.nocturne.graphical.alacritty.bright-white; # +++
-in
-{
+in {
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       programs.alacritty = {
         enable = true;
         settings = {
-          shell = {
-            program = shell-cfg.exec;
-          };
+          shell = { program = shell-cfg.exec; };
           window = {
             padding = {
               x = 4;
@@ -44,14 +42,14 @@ in
               general = "Alacritty";
             };
           };
-          
+
           font = {
             normal.family = "JetBrainsMono Nerd Font";
             bold.family = "JetBrainsMono Nerd Font";
             bold.style = "Bold";
             size = 10;
           };
-          
+
           keyboard.bindings = [
             {
               key = "V";
@@ -108,15 +106,15 @@ in
       };
     })
     (lib.mkIf (way-cfg.name == "alacritty") {
-      assertions = [
-        {
-          assertion = cfg.enable == true;
-          message = "alacritty is set as the default terminal emulator on wayland but is not enabled";
-        }
-      ];
+      assertions = [{
+        assertion = cfg.enable == true;
+        message =
+          "alacritty is set as the default terminal emulator on wayland but is not enabled";
+      }];
       nocturne.wayland.terminal.exec = "${lib.getExe pkgs.alacritty}";
       nocturne.wayland.terminal.exec-start = null;
-      nocturne.wayland.terminal.exec-center = "${lib.getExe pkgs.alacritty} --class=center -e";
+      nocturne.wayland.terminal.exec-center =
+        "${lib.getExe pkgs.alacritty} --class=center -e";
     })
   ];
 }
