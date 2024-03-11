@@ -6,12 +6,11 @@ in {
   config = lib.mkMerge [
     (lib.mkIf (way-cfg == "rofi-wayland" || cfg.enable) {
       # Warnings
-      warnings =
-        lib.optionals ((way-cfg == "rofi-wayland") && (cfg.enable == false))
+      warnings = lib.optionals ((way-cfg == "rofi-wayland") && (cfg.enable == false))
         [ "rofi is set as the wayland application launcher but is not enabled" ]
-        ++ lib.optionals ((way-cfg != "rofi-wayland") && (cfg.enable == true))
+      ++ lib.optionals ((way-cfg != "rofi-wayland") && (cfg.enable == true))
         [ "rofi is enabled but not set as the wayland application launcher" ];
-
+      
       home.packages = [ pkgs.nerdfonts pkgs.rofi-wayland ];
       nocturne.wayland.menu = {
         drun = "${pkgs.rofi-wayland}/bin/rofi -show drun";
@@ -115,9 +114,15 @@ in {
             border-radius = mkLiteral "8px";
             text-color = mkLiteral "@fg";
           };
-          "element normal" = { text-color = mkLiteral "@fg"; };
-          "element urgent" = { text-color = mkLiteral "@fg-urgent"; };
-          "element active" = { text-color = mkLiteral "@fg-active"; };
+          "element normal" = {
+            text-color = mkLiteral "@fg";
+          };
+          "element urgent" = {
+            text-color = mkLiteral "@fg-urgent";
+          };
+          "element active" = {
+            text-color = mkLiteral "@fg-active";
+          };
           "element selected.normal" = {
             text-color = mkLiteral "@fg-selection";
             background-color = mkLiteral "@bg-selection";

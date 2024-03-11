@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   config = {
     home.packages = let
       compositor = config.nocturne.wayland.compositor.name;

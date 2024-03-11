@@ -1,3 +1,6 @@
-{ ... }: {
-  config = { nix.settings.experimental-features = [ "nix-command" "flakes" ]; };
+{ ... }:
+{
+  config = {
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  };
 }

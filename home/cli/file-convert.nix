@@ -1,5 +1,9 @@
 { pkgs, ... }:
 
 {
-  config = { home.packages = with pkgs; [ imagemagick ]; };
+  config = {
+    home.packages = with pkgs; [
+      imagemagick
+    ];
+  };
 }

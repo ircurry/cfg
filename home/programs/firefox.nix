@@ -3,9 +3,10 @@
 let
   cfg = config.nocturne.graphical.firefox;
   way-cfg = config.nocturne.wayland.browser;
-in {
+in
+{
   imports = [ inputs.arkenfox.hmModules.default ];
-
+  
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       programs.firefox = {
@@ -14,7 +15,7 @@ in {
           enable = true;
           version = "119.0";
         };
-
+        
         profiles.recur = {
           isDefault = true;
           id = 0;
@@ -36,7 +37,7 @@ in {
             "2600".enable = true;
             "2700".enable = true;
           };
-
+          
           bookmarks = [
             {
               name = "wikipedia";
@@ -61,7 +62,7 @@ in {
               url = "https://nix.dev/";
             }
           ];
-
+          
           search = {
             default = "DuckDuckGo";
             force = true;
@@ -70,71 +71,56 @@ in {
                 urls = [{
                   template = "https://search.nixos.org/packages";
                   params = [
-                    {
-                      name = "type";
-                      value = "packages";
-                    }
-                    {
-                      name = "query";
-                      value = "{searchTerms}";
-                    }
+                    { name = "type"; value = "packages"; }
+                    { name = "query"; value = "{searchTerms}"; }
                   ];
                 }];
-
-                icon =
-                  "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                
+                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
                 definedAliases = [ "@np" ];
               };
               "Noogle" = {
                 urls = [{
                   template = "https://noogle.dev/q";
-                  params = [{
-                    name = "term";
-                    value = "{searchTerms}";
-                  }];
+                  params = [
+                    { name = "term"; value = "{searchTerms}"; }
+                  ];
                 }];
-
-                icon =
-                  "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                
+                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
                 definedAliases = [ "@no" ];
               };
               "MyNixOS" = {
                 urls = [{
                   template = "https://mynixos.com/search";
-                  params = [{
-                    name = "q";
-                    value = "{searchTerms}";
-                  }];
+                  params = [
+                    { name = "q"; value = "{searchTerms}"; }
+                  ];
                 }];
-
-                icon =
-                  "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                
+                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
                 definedAliases = [ "@mn" ];
               };
               "Odysee" = {
                 urls = [{
                   template = "https://odysee.com/$/search";
-                  params = [{
-                    name = "q";
-                    value = "{searchTerms}";
-                  }];
+                  params = [
+                    { name = "q"; value = "{searchTerms}"; }
+                  ];
                 }];
-
-                icon =
-                  "${pkgs.libsForQt5.breeze-icons}/share/icons/breeze-dark/actions/16/media-playback-start.svg";
+                
+                icon = "${pkgs.libsForQt5.breeze-icons}/share/icons/breeze-dark/actions/16/media-playback-start.svg";
                 definedAliases = [ "@od" ];
               };
               "Invidious" = {
                 urls = [{
                   template = "https://invidious.nerdvpn.de/search";
-                  params = [{
-                    name = "q";
-                    value = "{searchTerms}";
-                  }];
+                  params = [
+                    { name = "q"; value = "{searchTerms}"; }
+                  ];
                 }];
-
-                icon =
-                  "${pkgs.libsForQt5.breeze-icons}/share/icons/breeze-dark/actions/16/media-playback-start.svg";
+                
+                icon = "${pkgs.libsForQt5.breeze-icons}/share/icons/breeze-dark/actions/16/media-playback-start.svg";
                 definedAliases = [ "@in" "@inv" ];
               };
             };
@@ -146,7 +132,7 @@ in {
             multi-account-containers
           ];
         };
-
+        
         profiles.school = {
           isDefault = false;
           id = 1;
@@ -168,14 +154,16 @@ in {
             "2600".enable = true;
             "2700".enable = true;
           };
-
-          bookmarks = [{
-            name = "wikipedia";
-            tags = [ "wiki" ];
-            keyword = "wiki";
-            url = "https://en.wikipedia.org/";
-          }];
-
+          
+          bookmarks = [
+            {
+              name = "wikipedia";
+              tags = [ "wiki" ];
+              keyword = "wiki";
+              url = "https://en.wikipedia.org/";
+            }
+          ];
+          
           search = {
             default = "DuckDuckGo";
             force = true;
@@ -184,19 +172,12 @@ in {
                 urls = [{
                   template = "https://search.nixos.org/packages";
                   params = [
-                    {
-                      name = "type";
-                      value = "packages";
-                    }
-                    {
-                      name = "query";
-                      value = "{searchTerms}";
-                    }
+                    { name = "type"; value = "packages"; }
+                    { name = "query"; value = "{searchTerms}"; }
                   ];
                 }];
-
-                icon =
-                  "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
+                
+                icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
                 definedAliases = [ "@np" ];
               };
             };
@@ -208,12 +189,12 @@ in {
             multi-account-containers
             user-agent-string-switcher
           ];
-
+          
         };
         profiles.games = {
           isDefault = false;
           id = 2;
-
+          
           search = {
             default = "DuckDuckGo";
             force = true;
@@ -227,7 +208,8 @@ in {
       };
     })
     (lib.mkIf (way-cfg.name == "firefox") {
-      home.sessionVariables = let firefox-exe = lib.getExe pkgs.firefox;
+      home.sessionVariables = let
+        firefox-exe = lib.getExe pkgs.firefox;
       in {
         DEFAULT_BROWSER = firefox-exe;
         BROWSER = firefox-exe;

@@ -17,7 +17,8 @@ let
   nord13 = "ebcb8b";
   nord14 = "a3be8c";
   nord15 = "b48ead";
-in {
+in
+{
   config = lib.mkIf (theme == "nord-aurora") {
     nocturne = {
       themes.variant = "dark";
@@ -44,7 +45,9 @@ in {
         # alacritty.bright-white = nord06;
         rofi.border-color = nord10;
       };
-      wayland.hyprland = { col-active-border1 = nord10 + "ee"; };
+      wayland.hyprland = {
+        col-active-border1 = nord10 + "ee";
+      };
       wayland.waybar = {
         launcher-bg = nord10;
         #mpd-fg = nord08;

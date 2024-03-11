@@ -3,7 +3,7 @@
     # ===Took Kits===
     ./gtk.nix
     ./qt.nix
-
+    
     # ===Themes===
     ./basic-dark.nix
     ./catppuccin-mocha.nix

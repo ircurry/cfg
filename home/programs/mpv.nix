@@ -1,1 +1,6 @@
-{ ... }: { config = { programs.mpv.enable = true; }; }
+{ ... }:
+{
+  config = {
+    programs.mpv.enable = true;
+  };
+}

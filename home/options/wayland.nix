@@ -16,18 +16,34 @@
         example = "hyprland";
         description = "Name of the compositor";
       };
-      profileExtra = lib.mkOption { type = lib.types.str; };
+      profileExtra = lib.mkOption {
+        type = lib.types.str;
+      };
     };
     docked-monitors = lib.mkOption {
       type = lib.types.listOf (lib.types.submodule {
         options = {
-          name = lib.mkOption { type = lib.types.str; };
-          width = lib.mkOption { type = lib.types.int; };
-          height = lib.mkOption { type = lib.types.int; };
-          refreshRate = lib.mkOption { type = lib.types.int; };
-          x = lib.mkOption { type = lib.types.int; };
-          y = lib.mkOption { type = lib.types.int; };
-          scale = lib.mkOption { type = lib.types.int; };
+          name = lib.mkOption {
+            type = lib.types.str;
+          };
+          width = lib.mkOption {
+            type = lib.types.int;
+          };
+          height = lib.mkOption {
+            type = lib.types.int;
+          };
+          refreshRate = lib.mkOption {
+            type = lib.types.int;
+          };
+          x = lib.mkOption {
+            type = lib.types.int;
+          };
+          y = lib.mkOption {
+            type = lib.types.int;
+          };
+          scale = lib.mkOption {
+            type = lib.types.int;
+          };
         };
       });
     };
@@ -38,9 +54,15 @@
         example = "emacs";
         description = "Name of the main system editor";
       };
-      exec = lib.mkOption { type = lib.types.str; };
-      exec-reuse = lib.mkOption { type = lib.types.nullOr lib.types.str; };
-      exec-start = lib.mkOption { type = lib.types.nullOr lib.types.str; };
+      exec = lib.mkOption {
+        type = lib.types.str;
+      };
+      exec-reuse = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+      };
+      exec-start = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+      };
     };
     image = {
       name = lib.mkOption {
@@ -49,8 +71,12 @@
         example = "imv";
         description = "Name of the main system image viewer";
       };
-      exec = lib.mkOption { type = lib.types.str; };
-      exec-dir = lib.mkOption { type = lib.types.str; };
+      exec = lib.mkOption {
+        type = lib.types.str;
+      };
+      exec-dir = lib.mkOption {
+        type = lib.types.str;
+      };
     };
     lock = {
       name = lib.mkOption {
@@ -59,7 +85,9 @@
         example = "swaylock";
         description = "Which screen locking program to use";
       };
-      exec = lib.mkOption { type = lib.types.str; };
+      exec = lib.mkOption {
+        type = lib.types.str;
+      };
     };
     logout = {
       name = lib.mkOption {
@@ -68,7 +96,9 @@
         example = "rofi-logout";
         description = "Which logout program to use";
       };
-      exec = lib.mkOption { type = lib.types.str; };
+      exec = lib.mkOption {
+        type = lib.types.str;
+      };
     };
     menu = {
       name = lib.mkOption {
@@ -77,20 +107,40 @@
         example = "rofi-wayland";
         description = "Which menu program to use";
       };
-      drun = lib.mkOption { type = lib.types.str; };
-      run = lib.mkOption { type = lib.types.str; };
-      window = lib.mkOption { type = lib.types.str; };
+      drun = lib.mkOption {
+        type = lib.types.str;
+      };
+      run = lib.mkOption {
+        type = lib.types.str;
+      };
+      window = lib.mkOption {
+        type = lib.types.str;
+      };
     };
     monitors = lib.mkOption {
       type = lib.types.listOf (lib.types.submodule {
         options = {
-          name = lib.mkOption { type = lib.types.str; };
-          width = lib.mkOption { type = lib.types.int; };
-          height = lib.mkOption { type = lib.types.int; };
-          refreshRate = lib.mkOption { type = lib.types.int; };
-          x = lib.mkOption { type = lib.types.int; };
-          y = lib.mkOption { type = lib.types.int; };
-          scale = lib.mkOption { type = lib.types.int; };
+          name = lib.mkOption {
+            type = lib.types.str;
+          };
+          width = lib.mkOption {
+            type = lib.types.int;
+          };
+          height = lib.mkOption {
+            type = lib.types.int;
+          };
+          refreshRate = lib.mkOption {
+            type = lib.types.int;
+          };
+          x = lib.mkOption {
+            type = lib.types.int;
+          };
+          y = lib.mkOption {
+            type = lib.types.int;
+          };
+          scale = lib.mkOption {
+            type = lib.types.int;
+          };
         };
       });
     };
@@ -101,7 +151,9 @@
         example = "mako";
         description = "Which notification daemon to use";
       };
-      exec-start = lib.mkOption { type = lib.types.str; };
+      exec-start = lib.mkOption{
+        type = lib.types.str;
+      };
     };
     screenshot = {
       name = lib.mkOption {
@@ -110,8 +162,12 @@
         example = "grim-slurp";
         description = "Which screenshot program to use";
       };
-      scrn = lib.mkOption { type = lib.types.package; };
-      scrn-region = lib.mkOption { type = lib.types.package; };
+      scrn = lib.mkOption {
+        type = lib.types.package;
+      };
+      scrn-region = lib.mkOption {
+        type = lib.types.package;
+      };
     };
     terminal = {
       name = lib.mkOption {
@@ -120,11 +176,17 @@
         example = "alacritty";
         description = "Which terminal emulator to use";
       };
-      exec = lib.mkOption { type = lib.types.str; };
-      exec-start = lib.mkOption { type = lib.types.nullOr lib.types.str; };
-      exec-center = lib.mkOption { type = lib.types.str; };
+      exec = lib.mkOption{
+        type = lib.types.str;
+      };
+      exec-start = lib.mkOption{
+        type = lib.types.nullOr lib.types.str;
+      };
+      exec-center = lib.mkOption {
+        type = lib.types.str;
+      };
     };
-
+    
     # ===Program Options===
     hyprland = {
       col-active-border1 = lib.mkOption {

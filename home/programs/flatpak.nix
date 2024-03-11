@@ -1,9 +1,13 @@
 { config, lib, pkgs, ... }:
 
-let cfg = config.nocturne.graphical.flatpak;
-in {
+let
+  cfg = config.nocturne.graphical.flatpak;
+in
+{
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [ flatpak ];
+    home.packages = with pkgs; [
+      flatpak
+    ];
 
     #TODO: fix adding the environment variables
     xdg.systemDirs.data = [

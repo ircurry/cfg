@@ -1,4 +1,7 @@
-{ fetchFromGitHub, lib, stdenv }:
+{ fetchFromGitHub
+, lib
+, stdenv
+}:
 stdenv.mkDerivation {
   name = "id3";
   version = "0.81";
@@ -12,12 +15,12 @@ stdenv.mkDerivation {
 
   installPhase = ''
     runHook preInstall
-
+    
     mkdir -p $out/bin
     mkdir -p $out/share/man/man1
     make prefix="$out" mandir="$out/share/man" install
     make prefix="$out" bash_completion
-
+    
     runHook postInstall
   '';
 }

@@ -18,7 +18,8 @@ let
   nord13 = "9A7500";
   nord14 = "4F894C";
   nord15 = "842879";
-in {
+in
+{
   config = lib.mkIf (theme == "nord-light") {
     nocturne = {
       themes.variant = "light";
@@ -65,7 +66,7 @@ in {
         workspace-hover-bg = nord04;
         workspace-fg = nord03;
         workspace-empty = nord04;
-
+        
         # Left
         cpu-bg = nord06;
         memory-bg = nord06;

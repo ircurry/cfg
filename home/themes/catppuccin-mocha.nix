@@ -27,7 +27,8 @@ let
   base = "1e1e2e";
   mantle = "181825";
   crust = "11111b";
-in {
+in
+{
   config = lib.mkIf (theme == "catppuccin-mocha") {
     nocturne = {
       themes.variant = "dark";

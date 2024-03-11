@@ -1,5 +1,5 @@
-{ config, lib, pkgs, ... }:
-let cfg = config.nocturne.cli.direnv;
+{ config, lib, pkgs, ... }: let
+  cfg = config.nocturne.cli.direnv;
 in {
   config = lib.mkIf cfg.enable {
     programs.direnv = {

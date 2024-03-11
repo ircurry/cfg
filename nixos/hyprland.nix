@@ -1,5 +1,5 @@
-{ config, lib, pkgs, ... }:
-let cfg = config.noctsys.programs.hyprland;
+{ config, lib, pkgs, ... }: let
+  cfg = config.noctsys.programs.hyprland;
 in {
   config = lib.mkIf cfg.enable {
     services.xserver.desktopManager.gnome.enable = lib.mkForce false;
@@ -12,7 +12,9 @@ in {
     security.pam.services.swaylock.text = "auth include login";
     xdg.portal = {
       enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+      ];
     };
   };
 }
