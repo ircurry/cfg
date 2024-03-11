@@ -9,6 +9,7 @@ inputs.devenv.lib.mkShell {
         pkgs.nh
         pkgs.sops
         pkgs.ssh-to-age
+        pkgs.nil
       ];
       languages.nix.enable = true;
       scripts = {
