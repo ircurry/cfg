@@ -10,16 +10,8 @@ inputs.devenv.lib.mkShell {
         pkgs.sops
         pkgs.ssh-to-age
         pkgs.nil
-        pkgs.nixfmt
       ];
       languages.nix.enable = true;
-      pre-commit = {
-        hooks = {
-          nixfmt = {
-            enable = true;
-          };
-        };
-      };
       scripts = {
         fl.exec =
           ''
