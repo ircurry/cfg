@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.nocturne.graphical.alacritty;
@@ -44,14 +49,14 @@ in
               general = "Alacritty";
             };
           };
-          
+
           font = {
             normal.family = "JetBrainsMono Nerd Font";
             bold.family = "JetBrainsMono Nerd Font";
             bold.style = "Bold";
             size = 10;
           };
-          
+
           keyboard.bindings = [
             {
               key = "V";

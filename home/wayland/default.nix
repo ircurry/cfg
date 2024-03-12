@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   imports = [
     ./grim-slurp.nix
     ./hyprland.nix

@@ -1,13 +1,14 @@
-{ lib
-, stdenv
-, makeWrapper
-, chafa
-, coreutils
-, gnugrep
-, mpv
-, wl-clipboard
-, ytfzf
-, yt-dlp
+{
+  lib,
+  stdenv,
+  makeWrapper,
+  chafa,
+  coreutils,
+  gnugrep,
+  mpv,
+  wl-clipboard,
+  ytfzf,
+  yt-dlp,
 }:
 
 with lib;
@@ -39,11 +40,9 @@ stdenv.mkDerivation rec {
     for script in ytd ytdp ytp ytu; do
       install -Dm 0755 $src/$script $out/bin
       wrapProgram $out/bin/$script --set PATH \
-        "${
-          makeBinPath runtimeDependencies
-        }"
+        "${makeBinPath runtimeDependencies}"
     done
-    
+
     runHook postInstall
   '';
 

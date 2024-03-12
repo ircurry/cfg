@@ -1,4 +1,11 @@
-{ lib, config, pkgs, inputs, user, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  inputs,
+  user,
+  ...
+}:
 
 {
   # ===Imports===

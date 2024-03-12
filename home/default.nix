@@ -1,4 +1,11 @@
-{ user, config, lib, isNixos, ... }: {
+{
+  user,
+  config,
+  lib,
+  isNixos,
+  ...
+}:
+{
   imports = [
     ./cli
     ./options

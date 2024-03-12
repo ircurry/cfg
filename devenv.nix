@@ -1,22 +1,37 @@
-{ inputs, pkgs, ...}:
+{ inputs, system, ... }:
 
 inputs.devenv.lib.mkShell {
-  inherit inputs pkgs;
+  inherit inputs;
+
+  pkgs = import inputs.nixpkgs {
+    inherit system;
+    overlays = [ (_: prev: { nixfmt = prev.nixfmt-rfc-style; }) ];
+  };
+
   modules = [
-    ({pkgs, ...}: {
-      packages = [
-        pkgs.age
-        pkgs.nh
-        pkgs.sops
-        pkgs.ssh-to-age
-        pkgs.nil
-      ];
-      languages.nix.enable = true;
-      scripts = {
-        fl.exec =
-          ''
+    (
+      { pkgs, ... }:
+      {
+        packages = [
+          pkgs.age
+          pkgs.nh
+          pkgs.sops
+          pkgs.ssh-to-age
+          pkgs.nil
+          pkgs.nixfmt-rfc-style
+        ];
+
+        pre-commit = {
+          hooks.nixfmt = {
+            enable = true;
+          };
+        };
+
+        languages.nix.enable = true;
+        scripts = {
+          fl.exec = ''
             nix-diff() {
-                nix store diff-closures "$(${pkgs.fd}/bin/fd 'system-' /nix/var/nix/profiles/ -j 1 | sort --reverse | ${ pkgs.fzf }/bin/fzf )" /nix/var/nix/profiles/system | column -t -s ':' -o ' (' 
+                nix store diff-closures "$(${pkgs.fd}/bin/fd 'system-' /nix/var/nix/profiles/ -j 1 | sort --reverse | ${pkgs.fzf}/bin/fzf )" /nix/var/nix/profiles/system | column -t -s ':' -o ' (' 
             }
             inputs() {
                 inputs=$(nix flake metadata --json \
@@ -52,7 +67,8 @@ inputs.devenv.lib.mkShell {
                 *) echo -e "\033[1mUnknown command, please try again.\033[0m";;
             esac
           '';
-      };
-    })
+        };
+      }
+    )
   ];
 }

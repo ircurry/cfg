@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.nocturne.graphical.obs;
@@ -9,5 +14,4 @@ in
       enable = true;
     };
   };
-
 }

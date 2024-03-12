@@ -2,14 +2,19 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.default
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -44,7 +49,7 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver = { 
+  services.xserver = {
     enable = true;
 
     # Enable the KDE Plasma Desktop Environment.
@@ -74,13 +79,18 @@
   users.users.recur = {
     isNormalUser = true;
     description = "Ian Curran";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = { 
-      "recur" = import ./home.nix; 
+    extraSpecialArgs = {
+      inherit inputs;
+    };
+    users = {
+      "recur" = import ./home.nix;
     };
   };
 
@@ -111,5 +121,8 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 }

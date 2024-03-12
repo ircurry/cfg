@@ -1,4 +1,10 @@
-{ lib, config, pkgs, inputs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   cfg = config.nocturne.cli.amfora;
@@ -10,6 +16,5 @@ in
     xdg.configFile."amfora/config.toml" = {
       source = ./config.toml;
     };
-    
   };
 }

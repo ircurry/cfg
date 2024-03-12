@@ -18,10 +18,10 @@
       cp = "cp -i";
       tp = "${pkgs.trashy}/bin/trash put";
       zo = "zoxide";
-      
+
       ip = "ip -color=auto";
       wget = "${pkgs.wget}/bin/wget --no-hsts";
-      
+
       am = "${pkgs.amfora}/bin/amfora";
       irssi = "${pkgs.irssi}/bin/irssi --config=$XDG_CONFIG_HOME/irssi/config --home=$XDG_DATA_HOME/irssi";
     };

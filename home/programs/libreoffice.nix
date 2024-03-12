@@ -1,4 +1,10 @@
-{ config, lib, pkgs, isNixos, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  isNixos,
+  ...
+}:
 
 let
   cfg = config.nocturne.graphical.libreoffice;
@@ -14,10 +20,7 @@ in
       ];
     })
     (lib.mkIf (cfg.enable && (isNixos == false)) {
-      nixpkgs.config.allowUnfreePredicate = pkg:
-        builtins.elem (lib.getName pkg) [
-          "corefonts"
-        ];
+      nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "corefonts" ];
     })
   ];
 }

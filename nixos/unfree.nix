@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
   # ===Nixpkgs Unfree Configuration===
   nixpkgs-cfg = config.nixpkgs.config.allowUnfree;
 
@@ -6,12 +12,10 @@
   libreoffice-cfg = config.hm.nocturne.graphical.libreoffice;
 
   # ===Unfree Package Lists===
-  unfree-pkgs = []
-                ++ lib.optionals (libreoffice-cfg.enable)
-                  [ "corefonts" ];
-in {
+  unfree-pkgs = [ ] ++ lib.optionals (libreoffice-cfg.enable) [ "corefonts" ];
+in
+{
   config = {
-    nixpkgs.config.allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) unfree-pkgs;
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) unfree-pkgs;
   };
 }

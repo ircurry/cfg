@@ -1,6 +1,13 @@
-{ config, lib, pkgs, ... }: let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
   cfg = config.nocturne.themes.qt;
-in {
+in
+{
   config = lib.mkIf cfg.enable {
     qt = {
       enable = true;

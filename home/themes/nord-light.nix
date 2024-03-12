@@ -66,7 +66,7 @@ in
         workspace-hover-bg = nord04;
         workspace-fg = nord03;
         workspace-empty = nord04;
-        
+
         # Left
         cpu-bg = nord06;
         memory-bg = nord06;

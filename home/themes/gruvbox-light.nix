@@ -37,7 +37,6 @@ let
   fg2 = "504945";
   fg3 = "665c54";
   fg4 = "7c6f64";
-
 in
 {
   config = lib.mkIf (theme == "gruvbox-light-medium") {
@@ -82,7 +81,7 @@ in
         workspace-visible = yellow;
         workspace-bg = bg0;
         workspace-hover-bg = bg1;
-        
+
         # Right
         cpu-bg = bg0;
         memory-bg = bg0;
