@@ -8,12 +8,16 @@
 ;;; Code:
 ;; ===LSP Mode===
 (use-package lsp-mode
-  ;:ensure t
   :demand t
   :hook
   (lsp-mode  . lsp-enable-which-key-integration)
-  ;(haskell-mode . lsp-deferred)
-  :custom (lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
+  :custom
+  (lsp-keymap-prefix "C-c C-M-l" "lsp mode keymap")
+  :bind (:map lsp-mode-map
+	  ("C-c C-a" . lsp-execute-code-action)  ; code actions
+	  ("C-c C-e" . lsp-treemacs-errors-list) ; treemacs error list
+	  ("C-c f"   . lsp-find-references)      ; find references
+	  ("C-c r"   . lsp-find-definition))     ; find definitions
   :config
   (lsp-deferred)
   (setq gc-cons-threshold (* 100 1024 1024))
@@ -23,16 +27,28 @@
   (lsp-enable-which-key-integration t))
 
 (use-package lsp-ui
-  ;:ensure t
   :after (lsp-mode)
+  :custom
+  (lsp-ui-doc-enable nil "lsp-ui doc disabled by default")
+  (lsp-ui-doc-show-with-cursor t "lsp-ui doc follows cursor")
+  (lsp-ui-doc-show-with-mouse t "lsp-ui doc follows mouse")
+  (lsp-ui-doc-position 'at-point "lsp-ui doc shows at cursor")
   :bind (:map lsp-ui-mode-map
-	 ("C-c C-l C-d" . lsp-ui-doc-glance))
+	 ("C-c C-f" . lsp-ui-peek-find-references)  ; find references ui
+	 ("C-c C-r" . lsp-ui-peek-find-definitions) ; find definitions ui
+	 ("C-c C-d" . lsp-ui-doc-mode) ; toggle doc mode
+	 :map lsp-ui-peek-mode-map
+	 ("ESC" . lsp-ui-peek--abort)             ; toggle doc mode
+	 ("g"   . lsp-ui-peek--abort)             ; toggle doc mode
+	 ("j"   . lsp-ui-peek--select-next)       ; toggle doc mode
+	 ("k"   . lsp-ui-peek--select-prev)       ; toggle doc mode
+	 ("C-j" . lsp-ui-peek--select-next-file)  ; toggle doc mode
+	 ("C-k" . lsp-ui-peek--select-prev-file)) ; toggle doc mode
   :hook
   (lsp-mode . lsp-ui-mode))
 
 ;; ===Company Mode===
 (use-package company
-  ;:ensure t
   :hook
   (prog-mode . company-mode)
   (lsp-mode . company-mode)
@@ -48,17 +64,13 @@
 
 ;; ===Flycheck===
 (use-package flycheck
-  ;:ensure t
   :hook
   (prog-mode . flycheck-mode)
   (lsp-mode  . flycheck-mode))
 
 ;; ===Treemacs==
 (use-package treemacs
-  ;:ensure t
   :bind
-  (:map prog-mode-map
-        ("C-c C-t" . treemacs-select-window))
   (:map cur/sub-leader-keymap
 	("C-t" . treemacs-select-window))
   :config
@@ -66,7 +78,6 @@
 
 ;; ===xref-ivy===
 (use-package ivy-xref
-  ;:ensure t
   :after (ivy)
   :init
   (setq xref-show-definitions-function #'ivy-xref-show-defs)
@@ -74,7 +85,6 @@
 
 ;; ===Magit===
 (use-package magit
-  ;:ensure t
   :bind (:map cur/sub-leader-keymap
 	 ("C-M-g" . magit))
   :custom
@@ -84,7 +94,6 @@
 ;; ===project.el===
 (use-package projectile
   :after (rg)
-  ;:ensure t
   :bind (:map cur/leader-keymap
               ("p C-p"   . projectile-switch-project)
               ("p C-d"   . projectile-find-dir)
@@ -101,11 +110,9 @@
   (projectile-mode 1))
 
 (use-package rg)
-  ;:ensure t)
 
 ;; ===Zoxide===
 (use-package zoxide
-  ;:ensure t
   :bind (:map cur/leader-keymap
  	 ("z" . zoxide-find-file)))
 
