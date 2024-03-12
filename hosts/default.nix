@@ -16,6 +16,12 @@ let
     modules: host: sys:
     let
       pkgs = pkgsFor sys;
+      pkgsUnfree = (
+        import inputs.nixpkgs {
+          system = sys;
+          config.allowUnfree = true;
+        }
+      );
       extraSpecialArgs = {
         inherit
           inputs
@@ -24,11 +30,14 @@ let
           user
           mylib
           host
+          sys
+          pkgsUnfree
           ;
         isLaptop = host == "chopin";
       };
     in
     inputs.nixpkgs.lib.nixosSystem {
+      inherit pkgs;
       specialArgs = extraSpecialArgs;
       modules = [
         # Host Configuration
@@ -59,6 +68,6 @@ let
 in
 {
   # ===NixOS Configurations===
-  chopin = mkSystem "chopin" "x86_64";
-  default = mkSystem "default" "x86_64";
+  chopin = mkSystem "chopin" "x86_64-linux";
+  default = mkSystem "default" "x86_64-linux";
 }
