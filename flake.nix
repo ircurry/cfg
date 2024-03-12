@@ -36,7 +36,7 @@
   };
 
   outputs =
-    { ... }@inputs:
+    inputs:
     let
       # ===Dealing with System===
       forSystem = function: system: function inputs.nixpkgs.legacyPackages.${system};
