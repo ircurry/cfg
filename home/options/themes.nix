@@ -11,8 +11,9 @@
       type = lib.types.enum [
         "basic-dark"
         "catppuccin-mocha"
-        "gruvbox-dark-medium"
-        "gruvbox-light-medium"
+        "gruvbox-dark"
+        "gruvbox-dark-bright"
+        "gruvbox-light"
         "kanagawa-wave"
         "nord-aurora"
         "nord-light"

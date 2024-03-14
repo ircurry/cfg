@@ -39,7 +39,7 @@ let
   fg4 = "7c6f64";
 in
 {
-  config = lib.mkIf (theme == "gruvbox-light-medium") {
+  config = lib.mkIf (theme == "gruvbox-light") {
     nocturne = {
       themes.variant = "light";
       themes.colors = {

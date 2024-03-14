@@ -19,9 +19,7 @@ let
   light-orange = "fe8019";
   dark-red = "9d0006";
   dark-yellow = "b57614";
-  bg0_h = "1d2021";
   bg0 = "282828";
-  bg0_s = "32302f";
   bg1 = "3c3836";
   bg2 = "504945";
   bg3 = "665c54";
@@ -34,7 +32,7 @@ let
   fg4 = "a89984";
 in
 {
-  config = lib.mkIf (theme == "gruvbox-dark") {
+  config = lib.mkIf (theme == "gruvbox-dark-bright") {
     nocturne = {
       themes.variant = "dark";
       themes.colors = {
@@ -57,27 +55,37 @@ in
       };
       graphical = {
         alacritty = {
-          bg = bg;
-          #  red = light-red;
-          #  yellow = light-yellow;
-          #  green = light-green;
-          #  cyan = light-aqua;
-          #  blue = light-blue;
-          #  magenta = light-purple;
-          #  bright-black = grey;
+          bg = "32302f";
+          red = light-red;
+          yellow = light-yellow;
+          green = light-green;
+          cyan = light-aqua;
+          blue = light-blue;
+          magenta = light-purple;
+          bright-black = grey;
         };
-        rofi.border-color = bg2;
+        rofi.border-color = bg4;
       };
       wayland.hyprland = {
-        col-active-border1 = bg3 + "ee";
-        col-active-border2 = bg2 + "ee";
+        col-active-border1 = bg4 + "ee";
+        col-active-border2 = bg3 + "ee";
         col-inactive-border = bg1 + "ee";
       };
       wayland.waybar = {
-        power-bg = dark-red;
-        mpd-fg = aqua;
-        launcher-bg = dark-yellow;
-        default-bg = bg0_s;
+        # Right side
+        power-bg = light-red;
+        clock-fg = light-orange;
+        network-fg = light-yellow;
+        audio-fg = light-green;
+        memory-fg = light-blue;
+        cpu-fg = light-purple;
+        # Left side
+        mpd-fg = light-aqua;
+        backlight-fg = light-yellow;
+        battery-fg = light-green;
+        battery-warning = light-orange;
+        battery-critical = light-red;
+        launcher-bg = light-blue;
       };
     };
   };
