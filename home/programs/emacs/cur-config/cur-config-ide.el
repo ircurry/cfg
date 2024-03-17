@@ -105,6 +105,7 @@
               ("p C-k"   . projectile-kill-buffers)
               ("p d"     . projectile-dired)
               ("p C-M-g" . projectile-vc)
+              ("p v" . projectile-vc)
               ("p C-a"   . projectile-add-known-project))
   :config
   (projectile-mode 1))
