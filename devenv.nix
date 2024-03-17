@@ -57,7 +57,7 @@ inputs.devenv.lib.mkShell {
                     exit 0
                 fi
 
-                nh os $select --nom .
+                nh os $select .
             }
             case $1 in
                 diff) nix-diff ;;
