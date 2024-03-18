@@ -15,7 +15,7 @@
     #themes.theme = "catppuccin-mocha";
     #themes.theme = "gruvbox-dark";
     themes.theme = "gruvbox-dark-bright";
-    #themes.theme = "gruvbox-light-medium";
+    #themes.theme = "gruvbox-light";
     #themes.theme = "kanagawa-wave";
     #themes.theme = "nord-aurora";
     #themes.theme = "nord-light";
