@@ -1,6 +1,6 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 let
-  inherit (pkgs) lib callPackage;
+  inherit (pkgs) callPackage;
 in
 {
   id3 = callPackage ./id3 { };
