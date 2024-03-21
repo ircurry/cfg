@@ -12,6 +12,11 @@ let
   emacs-package =
     with pkgs;
     ((emacsPackagesFor emacs-pgtk).emacsWithPackages (epkgs: [
+      ##########################
+      ## Tree-Sitter Grammars ##
+      ##########################
+      epkgs.treesit-grammars.with-all-grammars
+
       ########################################
       ## Configuration Modules Dependencies ##
       ########################################
