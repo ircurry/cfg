@@ -91,7 +91,6 @@ let
       epkgs.rustic
 
       # ===Shell===
-      epkgs.eat
       epkgs.vterm
 
       # ===Smol-net===
