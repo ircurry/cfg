@@ -23,8 +23,8 @@
     (cond ((equal custom-enabled-themes '(doom-gruvbox))
            (set-face-attribute 'secondary-selection nil :background "#504945"))
           (t t)))
-  :bind (:map cur/leader-keymap
-	 ("t C-t" . cur/meow-theme-tweaker))
+  :bind (:map cur/toggle-map
+	 ("C-t" . cur/meow-theme-tweaker))
   :config
   (load-theme 'doom-nord-aurora t))
 
@@ -51,7 +51,7 @@
   ("j" text-scale-decrease "out")
   ("f" nil "finished" :exit t)
   ("RET" nil "finished" :exit t))
-(define-key cur/leader-keymap (kbd "t C-s") 'hydra-text-scale/body)
+(define-key cur/toggle-map (kbd "C-s") 'hydra-text-scale/body)
 
 (provide 'cur-config-faces)
 ;;; cur-config-faces.el ends here

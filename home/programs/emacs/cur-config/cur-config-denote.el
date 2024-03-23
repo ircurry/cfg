@@ -39,21 +39,21 @@ is set to \\='(title keywords template subdirectory)."
   (denote-org-link-format "[[denote:%s][%s]]" "Use the title as the link name")
   
   ;; ===Bindings===
-  :bind (:map cur/leader-keymap
-	 ("d C-d" . denote)
-	 ("d d" . denote-all)
-	 ("d M-d" . denote-subdir-and-template)
-	 ("d C-l" . denote-link-or-create)
-	 ("d C-f" . denote-link-find-file)
-	 ("d C-b" . denote-link-find-backlink)
-	 ("d C-a" . denote-link-add-missing-links)
-	 ("d a" . denote-link-add-links)
-	 ("d C-r" . denote-dired-rename-marked-files)
-	 ("d r" . denote-dired-rename-marked-files-using-front-matter)
-	 ("d C-t" . denote-keywords-add)
-	 ("d t" . denote-keywords-remove)
-	 ("d C-n" . denote-rename-file)
-	 ("d n" . denote-rename-file-using-front-matter))
+;  :bind (:map cur/leader-keymap
+;	 ("d C-d" . denote)
+;	 ("d d" . denote-all)
+;	 ("d M-d" . denote-subdir-and-template)
+;	 ("d C-l" . denote-link-or-create)
+;	 ("d C-f" . denote-link-find-file)
+;	 ("d C-b" . denote-link-find-backlink)
+;	 ("d C-a" . denote-link-add-missing-links)
+;	 ("d a" . denote-link-add-links)
+;	 ("d C-r" . denote-dired-rename-marked-files)
+;	 ("d r" . denote-dired-rename-marked-files-using-front-matter)
+;	 ("d C-t" . denote-keywords-add)
+;	 ("d t" . denote-keywords-remove)
+;	 ("d C-n" . denote-rename-file)
+;	 ("d n" . denote-rename-file-using-front-matter))
 
   ;; ===Hooks===
   :hook

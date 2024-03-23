@@ -3,10 +3,6 @@
 ;;; Commentary:
 
 ;;; Code:
-;; ===Compile Commands===
-(use-package compile
-  :bind (:map cur/leader-keymap
-	 ("RET" . compile)))
 
 ;; ===Vterm===
 (use-package vterm

@@ -94,28 +94,23 @@
 ;; ===project.el===
 (use-package projectile
   :after (rg)
-  :bind (:map cur/leader-keymap
-              ("p C-p"   . projectile-switch-project)
-              ("p C-d"   . projectile-find-dir)
-              ("p C-f"   . projectile-find-file)
-              ("p C-r"   . projectile-ripgrep)
-              ("p C-c"   . projectile-compile-project)
-              ("p C-b"   . projectile-switch-to-buffer)
-              ("p C-l"   . projectile-ibuffer)
-              ("p C-k"   . projectile-kill-buffers)
-              ("p d"     . projectile-dired)
-              ("p C-M-g" . projectile-vc)
-              ("p v" . projectile-vc)
-              ("p C-a"   . projectile-add-known-project))
+  :bind (:map cur/projectile-map
+              ("C-p"   . projectile-switch-project)
+              ("C-d"   . projectile-find-dir)
+              ("C-f"   . projectile-find-file)
+              ("C-r"   . projectile-ripgrep)
+              ("C-c"   . projectile-compile-project)
+              ("C-b"   . projectile-switch-to-buffer)
+              ("C-l"   . projectile-ibuffer)
+              ("C-k"   . projectile-kill-buffers)
+              ("d"     . projectile-dired)
+              ("C-M-g" . projectile-vc)
+              ("v" . projectile-vc)
+              ("C-a"   . projectile-add-known-project))
   :config
   (projectile-mode 1))
 
 (use-package rg)
-
-;; ===Zoxide===
-(use-package zoxide
-  :bind (:map cur/leader-keymap
- 	 ("z" . zoxide-find-file)))
 
 (provide 'cur-config-ide)
 ;;; cur-config-ide.el ends here
