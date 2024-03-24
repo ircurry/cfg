@@ -114,6 +114,7 @@ in
 
       services.emacs.enable = true;
 
+      home.sessionVariables.JDTLS_PATH = "${pkgs.jdt-language-server}";
       home.packages = with pkgs; [
         # ===General===
         ispell
