@@ -25,17 +25,11 @@ let
       epkgs.hydra
       epkgs.meow
 
-      # ===C===
-      epkgs.ccls
-
       # ===Completion===
       epkgs.counsel
       epkgs.swiper
       epkgs.ivy
       epkgs.ivy-rich
-
-      # ===Denote===
-      epkgs.denote
 
       # ===Dired===
 
@@ -72,7 +66,6 @@ let
       epkgs.projectile
       epkgs.rg
       epkgs.envrc
-      epkgs.zoxide
 
       # ===Java===
       epkgs.lsp-java

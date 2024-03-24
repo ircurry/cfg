@@ -63,7 +63,6 @@
 ;; ===Languages===
 (require 'cur-config-ide)
 (require 'cur-config-elisp)
-;(require 'cur-config-c)
 (require 'cur-config-java)
 (require 'cur-config-markup)
 (require 'cur-config-nix)
@@ -73,9 +72,8 @@
 ;; ===Terminal Apps===
 (require 'cur-config-shell)
 
-;; ===Word Processing and PKM===
+;; ===Word Processing===
 (require 'cur-config-org)
-(require 'cur-config-denote)
 
 ;; ===Misc===
 (require 'cur-config-smol-net)
