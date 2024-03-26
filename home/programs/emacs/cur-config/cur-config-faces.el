@@ -6,10 +6,8 @@
 ;; ===Default Font===
 (add-to-list 'default-frame-alist
              '(font . "JetBrains Mono Nerd Font-11"))
-;; (add-to-list 'default-frame-alist
-;;              '(font . "Iosevka Term-11"))
 
-;; Themes Path
+;; ===Themes Path===
 (add-to-list 'custom-theme-load-path (locate-user-emacs-file "themes"))
 
 ;; ===Doom Emacs Themes===
@@ -42,20 +40,10 @@ check for overrides with `cur/theme-override'."
   (cur/load-theme 'doom-gruvbox))
 
 ;; ===Autothemer===
-(use-package autothemer
-  ;:ensure t
-  )
+(use-package autothemer)
 
 ;; ===Catppuccin Theme===
-(use-package catppuccin-theme
-  ;:ensure t
-  )
-
-;; (use-package ewal
-;;   :ensure t)
-;; 
-;; (use-package ewal-doom-themes
-;;   :ensure t)
+(use-package catppuccin-theme)
 
 ;; ===Text Scaling===
 (defhydra hydra-text-scale (:timeout 4)
