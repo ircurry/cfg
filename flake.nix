@@ -33,10 +33,6 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    #!!! This is a fix for the waybar-wireplumber update issue.
-    #!!! Please see https://github.com/Alexays/Waybar/pull/3036 for more info.
-    nixpkgs-fix-waybar.url = "github:andresilva/nixpkgs/waybar-wireplumber-0.4";
   };
 
   outputs =

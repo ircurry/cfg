@@ -16,10 +16,6 @@
             inherit (prev) pkgs;
             inherit inputs;
           });
-        # fix waybar wireplumber issue
-        waybar =
-          assert (lib.assertMsg (prev.waybar.version == "0.10.0") "is the fix still necessary?");
-          inputs.nixpkgs-fix-waybar.legacyPackages.${sys}.waybar;
       })
     ];
   };
