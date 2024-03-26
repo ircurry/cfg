@@ -215,7 +215,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("L" . meow-right-expand)
      '(";" . meow-reverse)
      '(":" . meow-page-up)
-     ;'("RET"   . )
+     '("RET" . "C-c")
      ;'("S-RET" . )
      
      ;; ===4th Row===
