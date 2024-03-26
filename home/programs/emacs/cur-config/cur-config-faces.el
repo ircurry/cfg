@@ -17,16 +17,29 @@
   ;:ensure t
   :demand t
   :init
-  (defun cur/meow-theme-tweaker ()
-    (interactive)
-    (counsel-load-theme)
+  (defun cur/theme-override ()
+    "Change faces depending on what the value of `custom-enabled-themes' is."
     (cond ((equal custom-enabled-themes '(doom-gruvbox))
            (set-face-attribute 'secondary-selection nil :background "#504945"))
           (t t)))
+  (defun cur/load-theme (theme)
+    "Load THEME, disabling all other currently enabled themes. Then
+check for overrides with `cur/theme-override'."
+    (interactive
+     (list
+      (intern (completing-read "Cur Custom Themes: "
+			       (mapcar #'symbol-name
+				       (custom-available-themes))))))
+    (condition-case nil
+	(progn
+	  (mapc #'disable-theme custom-enabled-themes)
+	  (load-theme theme t)
+	  (cur/theme-override))
+      (error "Problem loading theme %s" theme)))
   :bind (:map cur/toggle-map
-	 ("C-t" . cur/meow-theme-tweaker))
+	 ("C-t" . cur/load-theme))
   :config
-  (load-theme 'doom-nord-aurora t))
+  (cur/load-theme 'doom-gruvbox))
 
 ;; ===Autothemer===
 (use-package autothemer
