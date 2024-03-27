@@ -68,6 +68,9 @@
 (require 'cur-config-nix)
 (require 'cur-config-rust)
 (require 'cur-config-haskell)
+(require 'cur-config-c)
+(require 'cur-config-zig)
+(require 'cur-config-go)
 
 ;; ===Terminal Apps===
 (require 'cur-config-shell)

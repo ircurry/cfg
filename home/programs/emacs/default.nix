@@ -92,6 +92,9 @@ let
 
       # ===Windows===
 
+      # ===Zig===
+      epkgs.zig-mode
+
       ###############################
       ## Lisp Modules Dependencies ##
       ###############################
