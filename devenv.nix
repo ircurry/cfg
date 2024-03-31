@@ -14,18 +14,18 @@ inputs.devenv.lib.mkShell {
       {
         packages = [
           pkgs.age
-          pkgs.nh
+          inputs.nh.packages.${system}.default
           pkgs.sops
           pkgs.ssh-to-age
           pkgs.nil
-          pkgs.nixfmt-rfc-style
+          #pkgs.nixfmt-rfc-style
         ];
 
-        pre-commit = {
-          hooks.nixfmt = {
-            enable = true;
-          };
-        };
+        # pre-commit = {
+        #   hooks.nixfmt = {
+        #     enable = true;
+        #   };
+        # };
 
         languages.nix.enable = true;
         scripts = {
