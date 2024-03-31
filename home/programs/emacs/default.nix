@@ -11,7 +11,7 @@ let
   way-cfg = config.nocturne.wayland.editor;
   emacs-package =
     with pkgs;
-    ((emacsPackagesFor emacs-pgtk).emacsWithPackages (epkgs: [
+    ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs: [
       ##########################
       ## Tree-Sitter Grammars ##
       ##########################
