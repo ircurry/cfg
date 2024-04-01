@@ -5,14 +5,22 @@
 ;;; Code:
 ;; ===C Tree-Sitter Mode===
 (use-package c-ts-mode
+  :after (cc-mode)
   :mode
   ("\\.c\\'" . c-ts-mode)
   ("\\.h\\'" . c-ts-mode)
   :custom
-  ;; TODO: make this only append if the a-list does not have the desiered value
-  (c-default-style (append '((c-ts-mode . "linux")) c-default-style) "default style for c programs is linux")
+  (c-default-style '((c-ts-mode . "linux")
+		     (java-mode . "java")
+		     (awk-mode  . "awk")
+		     (other     . "gnu"))
+   "default style for c programs is linux")
   :hook
-  (c-ts-mode . lsp-deferred))
+  (c-ts-mode . (lambda () (require 'ccls) (lsp-deferred))))
+
+;; ===CCLS Mode===
+(use-package ccls
+  :after (cc-mode c-ts-mode))
 
 (provide 'cur-config-c)
 ;;; cur-config-c.el ends here

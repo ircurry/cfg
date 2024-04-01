@@ -25,6 +25,9 @@ let
       epkgs.hydra
       epkgs.meow
 
+      # ===C===
+      epkgs.ccls
+
       # ===Completion===
       epkgs.counsel
       epkgs.swiper
