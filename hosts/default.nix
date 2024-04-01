@@ -30,7 +30,6 @@ let
           user
           mylib
           host
-          sys
           pkgsUnfree
           ;
         isLaptop = host == "chopin";

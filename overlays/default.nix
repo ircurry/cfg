@@ -1,9 +1,4 @@
-{
-  inputs,
-  sys,
-  lib,
-  ...
-}:
+{ inputs, lib, ... }:
 {
   config = {
     nixpkgs.overlays = [
