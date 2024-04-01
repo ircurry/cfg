@@ -37,13 +37,14 @@ check for overrides with `cur/theme-override'."
   :bind (:map cur/toggle-map
 	 ("C-t" . cur/load-theme))
   :config
-  (cur/load-theme 'doom-gruvbox))
+  (cur/load-theme 'catppuccin))
 
 ;; ===Autothemer===
 (use-package autothemer)
 
 ;; ===Catppuccin Theme===
-(use-package catppuccin-theme)
+(use-package catppuccin-theme
+  :after (autothemer))
 
 ;; ===Text Scaling===
 (defhydra hydra-text-scale (:timeout 4)
