@@ -31,5 +31,7 @@
   (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
   (setq vterm-max-scrollback 10000))
 
+(use-package eat)
+
 (provide 'cur-config-shell)
 ;;; cur-config-shell.el ends here
