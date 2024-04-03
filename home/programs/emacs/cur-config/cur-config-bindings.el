@@ -104,7 +104,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      
      ;; ===2nd Row===
      ;'("TAB"  . )
-     ;'("q" . )
+     '("q" . comment-dwim)
      '("w" . cur/window/body)
      ;'("e" . )
      '("r" . query-replace)
