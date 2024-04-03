@@ -189,11 +189,8 @@ in
           enable_swallow = true;
           swallow_regex = [ "^(Alacritty)$" ];
         };
-        "device:at-translated-set-2-keyboard" = {
-          kb_options = "ctrl:nocaps";
-        };
         windowrulev2 = [
-          #"suppressevent maximize, class:.*"
+          "suppressevent maximize, class:.*"
 
           # Center
           "float, class:^(center)$"
@@ -289,12 +286,12 @@ in
           ];
       };
       # Devices
-      # extraConfig = ''
-      #   device {
-      #       name = at-translated-set-2-keyboard
-      #       kb_options = ctrl:nocaps
-      #   }
-      # '';
+      extraConfig = ''
+        device {
+            name = at-translated-set-2-keyboard
+            kb_options = ctrl:nocaps
+        }
+      '';
     };
   };
 }
