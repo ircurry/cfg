@@ -89,6 +89,7 @@ let
       # ===Shell===
       epkgs.vterm
       epkgs.eat
+      epkgs.zoxide
 
       # ===Smol-net===
       epkgs.gemini-mode

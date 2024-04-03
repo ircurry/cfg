@@ -31,7 +31,30 @@
   (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
   (setq vterm-max-scrollback 10000))
 
-(use-package eat)
+;; ===Eat===
+(use-package eat
+  :config
+  (eat-eshell-mode 1))
+
+;; ===Eshell===
+(use-package eshell
+  :init
+  (defun cur/eshell-prompt ()
+    (concat
+     (propertize "[" 'face 'ansi-color-red)
+     (propertize (eshell/whoami) 'face 'ansi-color-yellow)
+     (propertize "@" 'face 'ansi-color-green)
+     (propertize (system-name) 'face 'ansi-color-blue)
+     " "
+     (propertize (concat (eshell/pwd)) 'face 'ansi-color-magenta)
+     (propertize "]" 'face 'ansi-color-red)
+     (propertize "$ " 'face 'bold)))
+  :custom 
+  (eshell-prompt-regexp "^\\[[^]]*\\]\\[?[[:digit:]]*\\]?[#$λ] " "Regex for custom eshell prompt")
+  (eshell-prompt-function 'cur/eshell-prompt "Set custom prompt for eshell"))
+
+;; ===Zoxide===
+(use-package zoxide)
 
 (provide 'cur-config-shell)
 ;;; cur-config-shell.el ends here
