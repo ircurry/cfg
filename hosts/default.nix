@@ -75,5 +75,4 @@ in
 {
   # ===NixOS Configurations===
   chopin = mkSystem "chopin" "x86_64-linux";
-  default = mkSystem "default" "x86_64-linux";
 }
