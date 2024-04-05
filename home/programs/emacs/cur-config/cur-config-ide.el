@@ -96,17 +96,17 @@
   :after (rg)
   :bind (:map cur/projectile-map
               ("C-p"   . projectile-switch-project)
+              ("C-a"   . projectile-add-known-project)
               ("C-d"   . projectile-find-dir)
+              ("d"     . projectile-dired)
               ("C-f"   . projectile-find-file)
               ("C-r"   . projectile-ripgrep)
               ("C-c"   . projectile-compile-project)
               ("C-b"   . projectile-switch-to-buffer)
               ("C-l"   . projectile-ibuffer)
               ("C-k"   . projectile-kill-buffers)
-              ("d"     . projectile-dired)
-              ("C-M-g" . projectile-vc)
-              ("v" . projectile-vc)
-              ("C-a"   . projectile-add-known-project))
+              ("C-v"   . projectile-vc)
+	      ("C-e"   . projectile-run-eshell))
   :config
   (projectile-mode 1))
 
