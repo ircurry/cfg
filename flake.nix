@@ -85,12 +85,15 @@
       # ===Packages===
       packages = forAllSystems (pkgs: (import ./packages { inherit pkgs inputs mylib; }));
 
-      # ======Development Enviornment===
+      # ===Development Enviornment===
       devShells = forAllSystems (pkgs: {
         default = import ./devenv.nix {
           inherit inputs;
           inherit (pkgs) system;
         };
       });
+
+      # ===Templates===
+      templates = import ./templates;
     };
 }
