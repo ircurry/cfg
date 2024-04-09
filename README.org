@@ -31,6 +31,8 @@ This is the rough organization for my config. This is subject to change at any p
   - *overlays* - self explanatory
   - *packages* - my personal packages, part of this flake's outputs so accessible if you use my flake as an input.
   - *secrets* - shhhhhh...
+  - *templates* - templates so I don't have to set up my development environment every time I start a project
+    - *haskell* - for Haskell development
 
 * Unixporn
 I have themes for:
