@@ -37,6 +37,7 @@
             ];
             languages.nix.enable = true;
             languages.haskell.enable = true;
+            languages.haskell.package = pkgs.haskellPackages.ghcWithPackages (hpkgs: with hpkgs; [ ]);
           };
         };
     };
