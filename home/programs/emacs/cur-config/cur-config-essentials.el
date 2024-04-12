@@ -15,7 +15,8 @@
 (global-display-line-numbers-mode t)
 (setq display-line-numbers-type t)
 ;; Disable line numbers for terminal modes
-(dolist (mode '(term-mode-hook
+(dolist (mode '(dired-mode-hook
+		term-mode-hook
                 vterm-mode-hook
                 shell-mode-hook
                 eshell-mode-hook
