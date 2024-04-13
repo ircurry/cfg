@@ -60,5 +60,12 @@ check for overrides with `cur/theme-override'."
   ("RET" nil "finished" :exit t))
 (define-key cur/toggle-map (kbd "C-s") 'hydra-text-scale/body)
 
+;; ===Ef-Themes===
+(use-package ef-themes)
+
+;; ===Ibuffer Icons===
+(use-package nerd-icons-ibuffer
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
+
 (provide 'cur-config-faces)
 ;;; cur-config-faces.el ends here

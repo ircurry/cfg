@@ -49,6 +49,8 @@ let
       epkgs.doom-themes
       epkgs.autothemer
       epkgs.catppuccin-theme
+      epkgs.ef-themes
+      epkgs.nerd-icons-ibuffer
 
       # ===Haskell===
       epkgs.haskell-mode
