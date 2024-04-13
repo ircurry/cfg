@@ -261,7 +261,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      (deadgrep-edit-mode . normal)
      (deft-mode . normal)
      (diff-mode . normal)
-     (dired-mode . dired)
+     (dired-mode . motion)
      (eat-mode . insert)
      (ediff-mode . motion)
      (eshell-mode . insert)

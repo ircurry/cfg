@@ -35,6 +35,7 @@ let
       epkgs.ivy-rich
 
       # ===Dired===
+      epkgs.nerd-icons-dired
 
       # ===Elcord===
       epkgs.elcord
