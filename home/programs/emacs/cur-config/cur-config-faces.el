@@ -17,8 +17,13 @@
   :init
   (defun cur/theme-override ()
     "Change faces depending on what the value of `custom-enabled-themes' is."
-    (cond ((equal custom-enabled-themes '(doom-gruvbox))
-           (set-face-attribute 'secondary-selection nil :background "#504945"))
+    (cond ((member 'doom-gruvbox custom-enabled-themes)
+           (set-face-attribute 'secondary-selection nil
+			       :background "#504945"))
+	  ((member 'doom-flatwhite custom-enabled-themes)
+	   (set-face-attribute 'haskell-constructor-face nil
+			       :background (doom-color 'fw-orange-blend)
+			       :foreground (doom-color 'fw-orange-text)))
           (t t)))
   (defun cur/load-theme (theme)
     "Load THEME, disabling all other currently enabled themes. Then
