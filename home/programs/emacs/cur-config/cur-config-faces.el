@@ -21,6 +21,12 @@
            (set-face-attribute 'secondary-selection nil
 			       :background "#504945"))
 	  ((member 'doom-flatwhite custom-enabled-themes)
+	   (set-face-attribute 'haskell-operator-face nil
+			       :background (doom-color 'bg)
+			       :foreground (doom-color 'fg))
+	   (set-face-attribute 'haskell-type-face nil
+			       :background (doom-color 'fw-teal-blend)
+			       :foreground (doom-color 'fw-teal-text))
 	   (set-face-attribute 'haskell-constructor-face nil
 			       :background (doom-color 'fw-orange-blend)
 			       :foreground (doom-color 'fw-orange-text)))
