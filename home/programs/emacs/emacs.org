@@ -1239,6 +1239,26 @@
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-rust.el
 :END:
 
+#+begin_src emacs-lisp
+;;; cur-config-rust.el --- rust language configurations
+
+;;; Commentary:
+
+;;; Code:
+#+end_src
+
+#+begin_src emacs-lisp
+;; ===Rust-Mode===
+(use-package rustic
+  :after (lsp-mode)
+  :hook (rustic . lsp-deferred))
+#+end_src
+
+#+begin_src emacs-lisp
+(provide 'cur-config-rust)
+;;; cur-config-rust.el ends here
+#+end_src
+
 ** Configurations for Haskell (=cur-config-haskell.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-haskell.el
