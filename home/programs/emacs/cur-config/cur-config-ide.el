@@ -6,6 +6,7 @@
 ;; checker, and a dap client (yet to be included/configured).
 
 ;;; Code:
+
 ;; ===LSP Mode===
 (use-package lsp-mode
   :demand t

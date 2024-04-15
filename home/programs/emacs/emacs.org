@@ -937,6 +937,9 @@
   ;; checker, and a dap client (yet to be included/configured).
 
   ;;; Code:
+#+end_src
+
+#+begin_src emacs-lisp
   ;; ===LSP Mode===
   (use-package lsp-mode
     :demand t
@@ -956,7 +959,9 @@
     (setq lsp-idle-delay 0.500)
     (setq lsp-lens-enable nil)
     (lsp-enable-which-key-integration t))
+#+end_src
 
+#+begin_src emacs-lisp
   (use-package lsp-ui
     :after (lsp-mode)
     :custom
@@ -977,7 +982,9 @@
                 ("C-k" . lsp-ui-peek--select-prev-file)) ; toggle doc mode
     :hook
     (lsp-mode . lsp-ui-mode))
+#+end_src
 
+#+begin_src emacs-lisp
   ;; ===Company Mode===
   (use-package company
     :hook
@@ -992,13 +999,17 @@
     (company-minimum-prefix-length 1)
     (company-idle-delay 0.0))
   ;;(company-tng-configure-default))
+#+end_src
 
+#+begin_src emacs-lisp
   ;; ===Flycheck===
   (use-package flycheck
     :hook
     (prog-mode . flycheck-mode)
     (lsp-mode  . flycheck-mode))
+#+end_src
 
+#+begin_src emacs-lisp
   ;; ===Treemacs==
   (use-package treemacs
     :bind
@@ -1006,14 +1017,18 @@
           ("C-t" . treemacs-select-window))
     :config
     (treemacs-follow-mode))
+#+end_src
 
+#+begin_src emacs-lisp
   ;; ===xref-ivy===
   (use-package ivy-xref
     :after (ivy)
     :init
     (setq xref-show-definitions-function #'ivy-xref-show-defs)
     (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+#+end_src
 
+#+begin_src emacs-lisp
   ;; ===Magit===
   (use-package magit
     :bind (:map cur/sub-leader-keymap
@@ -1021,7 +1036,9 @@
     :custom
     (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
     (transient-default-level 5 "Allowing for commit signing"))
+#+end_src
 
+#+begin_src emacs-lisp
   ;; ===project.el===
   (use-package projectile
     :after (rg)
@@ -1040,12 +1057,116 @@
                 ("C-e"   . projectile-run-eshell))
     :config
     (projectile-mode 1))
+#+end_src
 
+#+begin_src emacs-lisp
   (use-package rg)
+#+end_src
 
+#+begin_src emacs-lisp
   (provide 'cur-config-ide)
   ;;; cur-config-ide.el ends here
-
 #+end_src
+
+** Configurations for Emacs Lisp (=cur-config-elisp.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-elisp.el
+:END:
+
+#+begin_src emacs-lisp
+;;; cur-config-elisp.el --- configurations for working with elisp
+
+;;; Commentary:
+
+;;; Code:
+#+end_src
+
+#+begin_src emacs-lisp
+;; ===rainbow-delimiters===
+(use-package rainbow-delimiters
+  ;:ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
+#+end_src
+
+#+begin_src emacs-lisp
+;; ===Helpful Emacs-Lisp Functions===
+(defun cur/alist-add-or-replace (pair alist)
+  "Function to add or replace a PAIR to ALIST and return ALIST.
+
+This does not set the variable to be a new value."
+  (let* ((pair-key     (car pair))
+	 (alist-result (assoc pair-key alist)))
+    (if alist-result
+	(let ((new-alist (assoc-delete-all pair-key alist)))
+	  (push pair new-alist))
+      (push pair alist))))
+
+(defun cur/alist-add-if-pair-not-exist (pair alist)
+  "Function to add a PAIR to ALIST if PAIR is not in ALIST and return ALIST.
+
+This does not set the variable to be a new value."
+  (let* ((pair-key     (car pair))
+	 (pair-value   (cdr pair))
+	 (alist-result (assoc pair-key alist)))
+    (if (and alist-result (equal pair-value alist-result))
+	nil
+      (push pair alist))))
+
+(defun cur/alist-add-if-key-not-exist (pair alist)
+  "Function to add a PAIR to ALIST if the key in PAIR is not in ALIST.
+Returns ALIST.
+
+This does not set the variable to be a new value."
+  (let* ((pair-key     (car pair))
+	 (alist-result (assoc pair-key alist)))
+    (if alist-result
+	nil
+      (push pair alist))))
+#+end_src
+
+#+begin_src emacs-lisp
+(provide 'cur-config-elisp)
+;;; cur-config-elisp.el ends here
+#+end_src
+
+** Configurations for Java (=cur-config-java.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-java.el
+:END:
+
+** Configurations for Markup Languages (=cur-config-markup.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-markup.el
+:END:
+
+** Configurations for Nix (=cur-config-nix.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-nix.el
+:END:
+
+** Configurations for Rust (=cur-config-rust.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-rust.el
+:END:
+
+** Configurations for Haskell (=cur-config-haskell.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-haskell.el
+:END:
+
+** Configurations for C (=cur-config-c.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-c.el
+:END:
+
+** Configurations for Zig (=cur-config-zig.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-zig.el
+:END:
+
+** Configurations for Go (=cur-config-go.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-go.el
+:END:
 
 * Custom Library Modules

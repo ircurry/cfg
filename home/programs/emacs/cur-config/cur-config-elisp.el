@@ -3,6 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
+
 ;; ===rainbow-delimiters===
 (use-package rainbow-delimiters
   ;:ensure t
