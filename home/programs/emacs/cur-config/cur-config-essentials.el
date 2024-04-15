@@ -3,6 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
+
 ;; ===Parens===
 (use-package paren
   :ensure nil
@@ -16,11 +17,11 @@
 (setq display-line-numbers-type t)
 ;; Disable line numbers for terminal modes
 (dolist (mode '(dired-mode-hook
-		term-mode-hook
+                term-mode-hook
                 vterm-mode-hook
                 shell-mode-hook
                 eshell-mode-hook
-		eat-mode-hook))
+                eat-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (provide 'cur-config-essentials)

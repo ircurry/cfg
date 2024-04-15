@@ -124,4 +124,51 @@
 
 * Configuration Modules
 
+** Essential configuration (=cur-config-essentials.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-essentials.el
+:END:
+#+begin_src emacs-lisp
+  ;;; cur-config-essentials.el --- essentials for emacs
+
+  ;;; Commentary:
+
+  ;;; Code:
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===Parens===
+  (use-package paren
+    :ensure nil
+    :demand t
+    :custom
+    (show-paren-delay 0 "No delay for paren highlighting"))
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===Line Numbers===
+  (column-number-mode)
+  (global-display-line-numbers-mode t)
+  (setq display-line-numbers-type t)
+  ;; Disable line numbers for terminal modes
+  (dolist (mode '(dired-mode-hook
+                  term-mode-hook
+                  vterm-mode-hook
+                  shell-mode-hook
+                  eshell-mode-hook
+                  eat-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+#+end_src
+
+#+begin_src emacs-lisp
+  (provide 'cur-config-essentials)
+  ;;; cur-config-essentials.el ends here
+#+end_src
+
+** 
+
+** 
+
+** 
+
 * Custom Library Modules
