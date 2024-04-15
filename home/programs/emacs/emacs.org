@@ -1299,6 +1299,40 @@
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-c.el
 :END:
 
+#+begin_src emacs-lisp
+;;; cur-config-c.el --- configuration for c
+
+;;; Commentary:
+
+;;; Code:
+#+end_src
+
+#+begin_src emacs-lisp
+;; ===C Tree-Sitter Mode===
+(use-package c-ts-mode
+  :after (cc-mode)
+  :mode
+  ("\\.c\\'" . c-ts-mode)
+  ("\\.h\\'" . c-ts-mode)
+  :custom
+  (c-default-style '((c-ts-mode . "linux")
+		     (java-mode . "java")
+		     (awk-mode  . "awk")
+		     (other     . "gnu"))
+   "default style for c programs is linux")
+  :hook
+  (c-ts-mode . (lambda () (require 'ccls) (lsp-deferred))))
+
+;; ===CCLS Mode===
+(use-package ccls
+  :after (cc-mode c-ts-mode))
+#+end_src
+
+#+begin_src emacs-lisp
+(provide 'cur-config-c)
+;;; cur-config-c.el ends here
+#+end_src
+
 ** Configurations for Zig (=cur-config-zig.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-zig.el
