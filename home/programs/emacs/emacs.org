@@ -886,4 +886,41 @@
   ;;; cur-config-completion.el ends here
 #+end_src
 
+** Window management configurations (=cur-config-windows.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-windows.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; cur-config-windows.el --- emacs windows configuration
+
+  ;;; Commentary:
+
+  ;;; Code:
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===Window Functions===
+  (defun cur/split-and-follow-horizontally ()
+    (interactive)
+    (split-window-below)
+    (balance-windows)
+    (other-window 1))
+
+  (defun cur/split-and-follow-vertically ()
+    (interactive)
+    (split-window-right)
+    (balance-windows)
+    (other-window 1))
+
+  (defun cur/other-window-reverse ()
+    (interactive)
+    (other-window -1))
+#+end_src
+
+#+begin_src emacs-lisp
+  (provide 'cur-config-windows)
+  ;;; cur-config-windows.el ends here
+#+end_src
+
 * Custom Library Modules

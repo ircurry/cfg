@@ -3,6 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
+
 ;; ===Window Functions===
 (defun cur/split-and-follow-horizontally ()
   (interactive)
