@@ -3,15 +3,14 @@
 ;;; Commentary:
 
 ;;; Code:
+
 ;; ===Hydra===
 (use-package hydra
-  ;:ensure t
   :demand t)
 
 ;; ===Meow Setup===
 (use-package meow
   :after (hydra)
-  ;:ensure t
   :demand t
   :preface
   (defvar cur/sub-leader-keymap
@@ -54,18 +53,18 @@ _o_: other window
     ("v" cur/split-and-follow-vertically "split vertical" :exit t)
     (";" cur/split-and-follow-horizontally "split horizontal" :exit t)
     ("c" delete-window "delete window" :exit t)
-    
+
     ("o" other-window)
     ("h" windmove-left)
     ("j" windmove-down)
     ("k" windmove-up)
     ("l" windmove-right)
-    
+
     ("1" delete-other-windows)
     ("2" cur/split-and-follow-vertically)
     ("3" cur/split-and-follow-horizontally)
     ("0" delete-window)
-    
+
     ("H" windmove-swap-states-left)
     ("J" windmove-swap-states-down)
     ("K" windmove-swap-states-up)
@@ -101,7 +100,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      ;'("8" . )
      ;'("9" . )
      '("0" . delete-window)
-     
+
      ;; ===2nd Row===
      ;'("TAB"  . )
      '("q" . comment-dwim)
@@ -115,7 +114,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      ;'("o" . )
      (cons "p" cur/projectile-map)
      ;'("-" . )
-    
+
      ;; ===3rd Row===
      ;'("<escape>" . )
      ;'("a" . )
@@ -129,7 +128,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      ;'("l" . )
      (cons ";" cur/sub-leader-keymap)
      '("RET"   . counsel-M-x)
-     
+
      ;; ===4th Row===
      (cons "z" cur/alignment-map)
      ;'("x" . )
@@ -166,7 +165,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      ;'("(" . )
      '("0" . meow-expand-0)
      ;'(")" . )
-     
+
      ;; ===2nd Row===
      ;'("TAB"  . )
      ;'("BTAB" . )
@@ -192,7 +191,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("P" . meow-clipboard-yank)
      '("-" . negative-argument)
      ;'("_" . )
-    
+
      ;; ===3rd Row===
      '("<escape>" . keyboard-quit)
      '("a" . meow-append)
@@ -217,7 +216,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '(":" . meow-page-up)
      '("RET" . "C-c")
      ;'("S-RET" . )
-     
+
      ;; ===4th Row===
      '("z" . meow-pop-selection)
      ;'("Z" . )
@@ -293,7 +292,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
   (meow-keypad-describe-delay 0.0 "No delay in keypad help popup")
   (meow-cheats-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
   :bind (:map cur/sub-leader-keymap
-	      ("C-b"   . ibuffer))
+              ("C-b"   . ibuffer))
   :config
   (setq meow-kteypad-leader-dispatch nil)
   (meow-setup)
