@@ -1,0 +1,127 @@
+#+title: Emacs Configuration
+#+author: icurry
+#+language: en
+#+options: toc:2 num:t author:t
+#+starupt: content
+
+* Introduction and Overview
+
+* Initialization of Emacs (=init.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./init.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; init.el --- init.el
+
+  ;;; Commentary:
+
+  ;;; Code:
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===Check Emacs Version===
+  (when (version< emacs-version "29.1")
+    (error "This setup is only guarunteed to work on 29.1, disable this line to load anyways."))
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===Basic Settings===
+  (setq frame-title-format "%b")      ;; Set window title to buffer name
+  (setq initial-scratch-message ";; Scratch Buffer\n\n")
+  (setq initial-buffer-choice t)      ;; Scratch as initial buffer
+  (setq make-backup-files nil)        ;; No more file~ everywhere
+  (setq inhibit-startup-message t)    ;; Starts on blank screen
+  (scroll-bar-mode -1)                ;; Disable visible scrollbar
+  (tool-bar-mode -1)                  ;; Disable tool bar
+  (menu-bar-mode -1)                  ;; Disable menu bar
+  (tooltip-mode -1)                   ;; Disable tooltips
+  (set-fringe-mode 10)                ;; No idea what this does
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===Enable Disabled Functions===
+  (dolist (c '(narrow-to-region narrow-to-page upcase-region downcase-region))
+    (put c 'disabled nil))
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===Disable Custom===
+  (setq custom-file (make-temp-file "emacs-custom-"))
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===Package Initialization===
+  (require 'package)
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                           ("elpa" . "https://elpa.gnu.org/packages/")
+                           ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; Setting Repos
+  (package-initialize)
+  (unless package-archive-contents
+    (package-refresh-contents))
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===use-package Initialization===
+  (unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+  (require 'use-package)
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===Load Modules and Packages===
+  (dolist (path '("cur-lisp" "cur-config"))
+    (add-to-list 'load-path (locate-user-emacs-file path)))
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; =====================
+  ;; == Loading Modules ==
+  ;; =====================
+
+  ;; ===Essentials===
+  (require 'cur-config-essentials)
+  (require 'cur-config-bindings)
+  (require 'cur-config-help)
+  (require 'cur-config-dired)
+
+  ;; ===Interfaces===
+  (require 'cur-config-faces)
+  (require 'cur-config-completion)
+  (require 'cur-config-windows)
+  (require 'cur-modeline)
+
+  ;; ===Languages===
+  (require 'cur-config-ide)
+  (require 'cur-config-elisp)
+  (require 'cur-config-java)
+  (require 'cur-config-markup)
+  (require 'cur-config-nix)
+  (require 'cur-config-rust)
+  (require 'cur-config-haskell)
+  (require 'cur-config-c)
+  (require 'cur-config-zig)
+  (require 'cur-config-go)
+
+  ;; ===Terminal Apps===
+  (require 'cur-config-shell)
+
+  ;; ===Word Processing===
+  (require 'cur-config-org)
+
+  ;; ===Misc===
+  (require 'cur-config-smol-net)
+  (require 'cur-config-elcord)
+
+  ;; ===Direnv is Last===
+  (require 'cur-config-direnv)
+#+end_src
+
+#+begin_src emacs-lisp
+  (provide 'init)
+  ;;; init.el ends here
+#+end_src
+
+* Configuration Modules
+
+* Custom Library Modules

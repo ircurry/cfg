@@ -3,6 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
+
 ;; ===Check Emacs Version===
 (when (version< emacs-version "29.1")
   (error "This setup is only guarunteed to work on 29.1, disable this line to load anyways."))
@@ -30,14 +31,14 @@
 (require 'package)
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("elpa" . "https://elpa.gnu.org/packages/")
-			 ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; Setting Repos
+                         ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; Setting Repos
 (package-initialize)
 (unless package-archive-contents
- (package-refresh-contents))
+  (package-refresh-contents))
 
 ;; ===use-package Initialization===
 (unless (package-installed-p 'use-package)
-   (package-install 'use-package))
+  (package-install 'use-package))
 (require 'use-package)
 
 ;; ===Load Modules and Packages===
