@@ -3,6 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
+
 ;; ===Haskell-Mode===
 (use-package haskell-mode)
 
