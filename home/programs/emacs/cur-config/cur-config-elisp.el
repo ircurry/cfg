@@ -15,10 +15,10 @@
 
 This does not set the variable to be a new value."
   (let* ((pair-key     (car pair))
-	 (alist-result (assoc pair-key alist)))
+         (alist-result (assoc pair-key alist)))
     (if alist-result
-	(let ((new-alist (assoc-delete-all pair-key alist)))
-	  (push pair new-alist))
+        (let ((new-alist (assoc-delete-all pair-key alist)))
+          (push pair new-alist))
       (push pair alist))))
 
 (defun cur/alist-add-if-pair-not-exist (pair alist)
@@ -26,10 +26,10 @@ This does not set the variable to be a new value."
 
 This does not set the variable to be a new value."
   (let* ((pair-key     (car pair))
-	 (pair-value   (cdr pair))
-	 (alist-result (assoc pair-key alist)))
+         (pair-value   (cdr pair))
+         (alist-result (assoc pair-key alist)))
     (if (and alist-result (equal pair-value alist-result))
-	nil
+        nil
       (push pair alist))))
 
 (defun cur/alist-add-if-key-not-exist (pair alist)
@@ -38,9 +38,9 @@ Returns ALIST.
 
 This does not set the variable to be a new value."
   (let* ((pair-key     (car pair))
-	 (alist-result (assoc pair-key alist)))
+         (alist-result (assoc pair-key alist)))
     (if alist-result
-	nil
+        nil
       (push pair alist))))
 
 (provide 'cur-config-elisp)

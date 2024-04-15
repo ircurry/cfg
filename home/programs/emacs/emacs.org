@@ -1074,65 +1074,109 @@
 :END:
 
 #+begin_src emacs-lisp
-;;; cur-config-elisp.el --- configurations for working with elisp
+  ;;; cur-config-elisp.el --- configurations for working with elisp
 
-;;; Commentary:
+  ;;; Commentary:
 
-;;; Code:
+  ;;; Code:
 #+end_src
 
 #+begin_src emacs-lisp
-;; ===rainbow-delimiters===
-(use-package rainbow-delimiters
-  ;:ensure t
-  :hook (prog-mode . rainbow-delimiters-mode))
+  ;; ===rainbow-delimiters===
+  (use-package rainbow-delimiters
+    ;:ensure t
+    :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
 #+begin_src emacs-lisp
-;; ===Helpful Emacs-Lisp Functions===
-(defun cur/alist-add-or-replace (pair alist)
-  "Function to add or replace a PAIR to ALIST and return ALIST.
+  ;; ===Helpful Emacs-Lisp Functions===
+  (defun cur/alist-add-or-replace (pair alist)
+    "Function to add or replace a PAIR to ALIST and return ALIST.
 
-This does not set the variable to be a new value."
-  (let* ((pair-key     (car pair))
-	 (alist-result (assoc pair-key alist)))
-    (if alist-result
-	(let ((new-alist (assoc-delete-all pair-key alist)))
-	  (push pair new-alist))
-      (push pair alist))))
+  This does not set the variable to be a new value."
+    (let* ((pair-key     (car pair))
+           (alist-result (assoc pair-key alist)))
+      (if alist-result
+          (let ((new-alist (assoc-delete-all pair-key alist)))
+            (push pair new-alist))
+        (push pair alist))))
 
-(defun cur/alist-add-if-pair-not-exist (pair alist)
-  "Function to add a PAIR to ALIST if PAIR is not in ALIST and return ALIST.
+  (defun cur/alist-add-if-pair-not-exist (pair alist)
+    "Function to add a PAIR to ALIST if PAIR is not in ALIST and return ALIST.
 
-This does not set the variable to be a new value."
-  (let* ((pair-key     (car pair))
-	 (pair-value   (cdr pair))
-	 (alist-result (assoc pair-key alist)))
-    (if (and alist-result (equal pair-value alist-result))
-	nil
-      (push pair alist))))
+  This does not set the variable to be a new value."
+    (let* ((pair-key     (car pair))
+           (pair-value   (cdr pair))
+           (alist-result (assoc pair-key alist)))
+      (if (and alist-result (equal pair-value alist-result))
+          nil
+        (push pair alist))))
 
-(defun cur/alist-add-if-key-not-exist (pair alist)
-  "Function to add a PAIR to ALIST if the key in PAIR is not in ALIST.
-Returns ALIST.
+  (defun cur/alist-add-if-key-not-exist (pair alist)
+    "Function to add a PAIR to ALIST if the key in PAIR is not in ALIST.
+  Returns ALIST.
 
-This does not set the variable to be a new value."
-  (let* ((pair-key     (car pair))
-	 (alist-result (assoc pair-key alist)))
-    (if alist-result
-	nil
-      (push pair alist))))
+  This does not set the variable to be a new value."
+    (let* ((pair-key     (car pair))
+           (alist-result (assoc pair-key alist)))
+      (if alist-result
+          nil
+        (push pair alist))))
 #+end_src
 
 #+begin_src emacs-lisp
-(provide 'cur-config-elisp)
-;;; cur-config-elisp.el ends here
+  (provide 'cur-config-elisp)
+  ;;; cur-config-elisp.el ends here
 #+end_src
 
 ** Configurations for Java (=cur-config-java.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-java.el
 :END:
+
+#+begin_src emacs-lisp
+  ;;; cur-config-java.el --- configuration for java
+
+  ;;; Commentary:
+  ;; My configuration for java in Emacs.
+  ;; Currently does not work on my machine because jdtls
+  ;; is not available in the void repos.  When it does I
+  ;; will remove the comment in front of requiring this
+  ;; package.
+
+  ;;; Code:
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===Java Tree-Sitter Mode===
+  (use-package java-ts-mode
+    :mode "\\.java\\'")
+
+  ;; ===lsp-java===
+  (use-package lsp-java
+    :after (lsp-mode cc-mode)
+    :init
+    :hook
+    (envrc-mode . (lambda ()
+                    (when (equal major-mode 'java-ts-mode)
+                      (setq lsp-java-server-install-dir (concat (getenv "JDTLS_PATH") "/share/java/jdtls/")))))
+    (java-ts-mode . lsp-deferred)
+    :config
+    (defun lsp-java--ls-command ()
+      (let ((jdtls-path (getenv "JDTLS_PATH"))
+            (jdtls-exec-options (list
+                                 "-configuration"
+                                 (concat (getenv "HOME") "/.jdtls/config_linux")
+                                 "-data"
+                                 (concat (getenv "HOME") "/.jdtls/java-workspace"))))
+        (message (concat jdtls-path "/share/java/"))
+        (append (list (concat jdtls-path "/bin/jdtls")) jdtls-exec-options))))
+#+end_src
+
+#+begin_src emacs-lisp
+  (provide 'cur-config-java)
+  ;;; cur-config-java.el ends here
+#+end_src
 
 ** Configurations for Markup Languages (=cur-config-markup.el=)
 :PROPERTIES:
