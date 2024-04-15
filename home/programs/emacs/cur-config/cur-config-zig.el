@@ -3,7 +3,8 @@
 ;;; Commentary:
 
 ;;; Code:
-;; ===Go Tree-Sitter Mode===
+
+;; ===Zig Mode===
 (use-package zig-mode)
 
 (provide 'cur-config-zig)

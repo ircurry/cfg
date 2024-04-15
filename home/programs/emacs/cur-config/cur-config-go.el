@@ -3,6 +3,7 @@
 ;;; Commentary:
 
 ;;; Code:
+
 ;; ===Go Tree-Sitter Mode===
 (use-package go-ts-mode
   :mode "\\.go\\'"

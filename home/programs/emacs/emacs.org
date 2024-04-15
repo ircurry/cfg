@@ -1240,23 +1240,23 @@
 :END:
 
 #+begin_src emacs-lisp
-;;; cur-config-rust.el --- rust language configurations
+  ;;; cur-config-rust.el --- rust language configurations
 
-;;; Commentary:
+  ;;; Commentary:
 
-;;; Code:
+  ;;; Code:
 #+end_src
 
 #+begin_src emacs-lisp
-;; ===Rust-Mode===
-(use-package rustic
-  :after (lsp-mode)
-  :hook (rustic . lsp-deferred))
+  ;; ===Rust-Mode===
+  (use-package rustic
+    :after (lsp-mode)
+    :hook (rustic . lsp-deferred))
 #+end_src
 
 #+begin_src emacs-lisp
-(provide 'cur-config-rust)
-;;; cur-config-rust.el ends here
+  (provide 'cur-config-rust)
+  ;;; cur-config-rust.el ends here
 #+end_src
 
 ** Configurations for Haskell (=cur-config-haskell.el=)
@@ -1300,37 +1300,37 @@
 :END:
 
 #+begin_src emacs-lisp
-;;; cur-config-c.el --- configuration for c
+  ;;; cur-config-c.el --- configuration for c
 
-;;; Commentary:
+  ;;; Commentary:
 
-;;; Code:
+  ;;; Code:
 #+end_src
 
 #+begin_src emacs-lisp
-;; ===C Tree-Sitter Mode===
-(use-package c-ts-mode
-  :after (cc-mode)
-  :mode
-  ("\\.c\\'" . c-ts-mode)
-  ("\\.h\\'" . c-ts-mode)
-  :custom
-  (c-default-style '((c-ts-mode . "linux")
-		     (java-mode . "java")
-		     (awk-mode  . "awk")
-		     (other     . "gnu"))
-   "default style for c programs is linux")
-  :hook
-  (c-ts-mode . (lambda () (require 'ccls) (lsp-deferred))))
+  ;; ===C Tree-Sitter Mode===
+  (use-package c-ts-mode
+    :after (cc-mode)
+    :mode
+    ("\\.c\\'" . c-ts-mode)
+    ("\\.h\\'" . c-ts-mode)
+    :custom
+    (c-default-style '((c-ts-mode . "linux")
+                       (java-mode . "java")
+                       (awk-mode  . "awk")
+                       (other     . "gnu"))
+     "default style for c programs is linux")
+    :hook
+    (c-ts-mode . (lambda () (require 'ccls) (lsp-deferred))))
 
-;; ===CCLS Mode===
-(use-package ccls
-  :after (cc-mode c-ts-mode))
+  ;; ===CCLS Mode===
+  (use-package ccls
+    :after (cc-mode c-ts-mode))
 #+end_src
 
 #+begin_src emacs-lisp
-(provide 'cur-config-c)
-;;; cur-config-c.el ends here
+  (provide 'cur-config-c)
+  ;;; cur-config-c.el ends here
 #+end_src
 
 ** Configurations for Zig (=cur-config-zig.el=)
@@ -1338,9 +1338,41 @@
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-zig.el
 :END:
 
+#+begin_src emacs-lisp
+  ;;; cur-config-zig.el --- configuration for zig
+
+  ;;; Commentary:
+
+  ;;; Code:
+
+  ;; ===Zig Mode===
+  (use-package zig-mode)
+
+  (provide 'cur-config-zig)
+  ;;; cur-config-zig.el ends here
+#+end_src
+
 ** Configurations for Go (=cur-config-go.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-go.el
 :END:
+
+#+begin_src emacs-lisp
+  ;;; cur-config-go.el --- configuration for go
+
+  ;;; Commentary:
+
+  ;;; Code:
+  
+  ;; ===Go Tree-Sitter Mode===
+  (use-package go-ts-mode
+    :mode "\\.go\\'"
+    :custom
+    (go-ts-mode-indent-offset 4 "Set the indentation to 4")
+    :hook (go-ts-mode . lsp-deferred))
+
+  (provide 'cur-config-go)
+  ;;; cur-config-java.el ends here
+#+end_src
 
 * Custom Library Modules

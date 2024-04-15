@@ -12,9 +12,9 @@
   ("\\.h\\'" . c-ts-mode)
   :custom
   (c-default-style '((c-ts-mode . "linux")
-		     (java-mode . "java")
-		     (awk-mode  . "awk")
-		     (other     . "gnu"))
+                     (java-mode . "java")
+                     (awk-mode  . "awk")
+                     (other     . "gnu"))
    "default style for c programs is linux")
   :hook
   (c-ts-mode . (lambda () (require 'ccls) (lsp-deferred))))
