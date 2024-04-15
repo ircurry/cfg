@@ -90,16 +90,55 @@ I have themes for:
   - [-] Make Stand Alone Home Manager Work
 - [X] Create Custom Packages Directory [100%]
   - [X] Move Scripts to Custom Packages
-- [-] Emacs [11%]
+- [-] Emacs [6%]
   - [ ] migrate to literate config?
+  - [ ] switch to vertico/marginalia/consult/embark
+    - [ ] vertico
+    - [ ] marginalia
+    - [ ] consult
+    - [ ] embark
   - [ ] Eshell
     - [ ] my aliases
   - [ ] isearch (and search and replace in general)
+  - [ ] imenu
   - [ ] mark and register
   - [ ] custom themes
   - [ ] keyboard macros
-  - [ ] meow things
+  - [ ] meow things [0%]
     - [ ] real functions
-  - [ ] dired
+    - [ ] var definition
+    - [ ] window
+  - [ ] dired [0%]
+    - [ ] open-dwim
+    - [ ] preview
+    - [ ] thumbnail preview
+    - [ ] archive commands [0%]
+      - [ ] zip
+      - [ ] tar
+      - [ ] gz
+      - [ ] tar.gz
+      - [ ] bz2
+      - [ ] tar.bz2 
+      - [ ] xz
+      - [ ] tar.xz
+      - [ ] give date command
+    - [ ] zoxide (or zoxide like) directory changing
+    - [ ] cycle through images in dir
+  - [ ] bookmarks
+  - [ ] occur
+  - [ ] dashboard?
+  - [ ] modeline [0%]
+    - [ ] time
+    - [ ] last/current command
+    - [ ] last/current key-binding
+    - [ ] custom faces
+    - [ ] vc branch
+    - [ ] flycheck
+    - [ ] flymake
+    - [ ] flyspell
+    - [ ] better modified status
+    - [ ] project compile mode status
+    - [ ] debug errors
+  - [ ] eglot vs lsp-mode?
   - [X] Direnv Support
   - [ ] Better Pipes
