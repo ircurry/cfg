@@ -3,9 +3,9 @@
 ;;; Commentary:
 
 ;;; Code:
+
 ;; ===which-key===
 (use-package which-key
-  ;:ensure t
   :demand t
   :init (which-key-mode)
   :diminish which-key-mode
@@ -14,7 +14,6 @@
 
 ;; ===helpful===
 (use-package helpful
-  ;:ensure t
   :custom
   (counsel-describe-function-function #'helpful-callable)
   (counsel-describe-variable-function #'helpful-variable)

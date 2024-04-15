@@ -481,8 +481,237 @@
   ;;; cur-config-bindings.el ends here
 #+end_src
 
-** 
+** Help configurations (=cur-config-help.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-help.el
+:END:
 
-** 
+#+begin_src emacs-lisp
+  ;;; cur-config-help.el --- help configurations
+
+  ;;; Commentary:
+
+  ;;; Code:
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===which-key===
+  (use-package which-key
+    :demand t
+    :init (which-key-mode)
+    :diminish which-key-mode
+    :config
+    (setq which-key-idle-delay 0.0001))
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===helpful===
+  (use-package helpful
+    :custom
+    (counsel-describe-function-function #'helpful-callable)
+    (counsel-describe-variable-function #'helpful-variable)
+    :bind
+    ([remap describe-function] . counsel-describe-function)
+    ([remap describe-command] . helpful-command)
+    ([remap describe-variable] . counsel-describe-variable)
+    ([remap describe-key] . helpful-key))
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===Info===
+  (use-package info
+    :config
+    (setq meow-info-keymap (make-keymap))
+    (meow-define-state info
+      "meow state for interacting with Info"
+      :lighter "INFO"
+      :keymap meow-info-keymap)
+    (meow-define-keys 'info
+      '(":" . meow-page-up)
+      '("?" . meow-page-down)
+      '("," . beginning-of-buffer)
+      '("." . end-of-buffer)
+      ; '("a" . )
+      ; '("b" . )
+      ; '("c" . Info-follow-reference)
+      ; '("d" . )
+      ; '("e" . )
+      '("f" . Info-menu)
+      '("g" . keyboard-quit)
+      '("h" . Info-backward-node)
+      '("H" . meow-left)
+      '("i" . Info-index)
+      '("j" . meow-next)
+      '("k" . meow-prev)
+      '("l" . Info-forward-node)
+      '("L" . meow-right)
+      '("m" . meow-join)
+      '("n" . Info-next)
+      ; '("o" . )
+      '("p" . Info-prev)
+      '("q" . meow-goto-line)
+      '("r" . Info-follow-reference)
+      ; '("s" . )
+      '("t" . Info-toc)
+      '("u" . Info-up)
+      '("v" . meow-visit)
+      ; '("w" . )
+      ; '("x" . )
+      '("y" . Info-copy-current-node-name)
+      '("z" . info-display-manual)
+      '("RET" . Info-follow-nearest-node)
+      '("SPC" . meow-keypad)
+      '("TAB" . Info-next-reference)
+      '("<backtab>" . Info-prev-reference)
+      '("<escape>" . keyboard-quit))
+    (add-hook 'Info-mode-hook #'meow-info-mode))
+#+end_src
+
+#+begin_src emacs-lisp
+  (provide 'cur-config-help)
+  ;;; cur-config-help.el ends here
+#+end_src
+
+** Dired configuration (=cur-config-dired.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-dired.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; cur-config-dired.el --- configurations for dired
+
+  ;;; Commentary:
+
+  ;;; Code:
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===Dired Icons===
+  (use-package nerd-icons-dired
+    :after (dired)
+    :hook (dired-mode . nerd-icons-dired-mode))
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===Dired===
+  (use-package dired
+    :hook
+    (dired-mode . dired-hide-details-mode)
+    (dired-mode . hl-line-mode)
+    ;; TODO: create a dired-find-file-dwim for external programs
+    :bind (:map dired-mode-map
+                ;; ===Top Row===
+                ;; ("1" . )
+                ;; ("!" . )
+                ;; ("2" . )
+                ;; ("@" . )
+                ;; ("3" . )
+                ;; ("#" . )
+                ;; ("4" . )
+                ;; ("$" . )
+                ;; ("5" . )
+                ;; ("%" . )
+                ;; ("6" . )
+                ;; ("^" . )
+                ;; ("7" . )
+                ;; ("&" . )
+                ;; ("8" . )
+                ;; ("*" . )
+                ;; ("9" . )
+                ;; ("(" . )
+                ;; ("0" . )
+                ;; (")" . )
+
+                ;; ===2nd Row===
+                ;; ("TAB"  . )
+                ;; ("BTAB" . )
+                ("q" . kmacro-end-and-call-macro)
+                ("Q" . cur/kmacro-toggle)
+                ;; ("w" . )
+                ;; ("W" . )
+                ;; ("e" . )
+                ;; ("E" . )
+                ("r" . dired-do-rename)
+                ("R" . dired-toggle-read-only)
+                ("t" . dired-toggle-marks)
+                ;; ("T" . )
+                ;; ("y" . )
+                ;; ("Y" . )
+                ("u" . dired-unmark)
+                ("U" . dired-unmark-all-marks)
+                ("i" . dired-isearch-filenames-regexp)
+                ("I" . dired-do-isearch-regexp)
+                ;; ("o" . )
+                ("O" . dired-do-chown)
+                ("p" . dired-previous-line)
+                ;; ("P" . )
+                ("-" . negative-argument)
+                ;; ("_" . )
+
+                ;; ===3rd Row===
+                ("<escape>" . keyboard-quit)
+                ;; ("a" . )
+                ;; ("A" . )
+                ;; ("s" . )
+                ;; ("S" . )
+                ("d" . dired-do-kill-lines)
+                ("D" . dired-do-delete)
+                ("f" . find-file)
+                ;; ("F" . )
+                ("g" . revert-buffer)
+                ;; ("G" . )
+                ("h" . dired-up-directory)
+                ;; ("H" . )
+                ("j" . dired-next-line)
+                ;; ("J" . )
+                ("k" . dired-previous-line)
+                ;; ("K" . )
+                ("l" . dired-find-file)
+                ("L" . dired-find-file-other-window)
+                ;; (";" . )
+                ;; (":" . )
+                ("RET" . dired-find-file)
+                ;; ("S-RET" . )
+
+                ;; ===4th Row===
+                ("z" . dired-undo)
+                ;; ("Z" . )
+                ("x" . dired-mark)
+                ;; ("X" . )
+                ("c" . dired-do-copy)
+                ("C" . dired-do-copy-regexp)
+                ("v" . dired-find-file-other-window)
+                ;; ("V" . )
+                ;; ("b" . )
+                ;; ("B" . )
+                ("n" . dired-next-line)
+                ;; ("N" . )
+                ("m" . dired-mark-files-regexp)
+                ("M" . dired-do-chmod)
+                ;; ("," . )
+                ;; ("<" . )
+                ;; ("." . )
+                ;; (">" . )
+                ("/" . dired-goto-file)
+                ;; ("?" . )
+                ;; ("'"  . )
+                ;; ("\"" . )
+                )
+    :config
+    (setq delete-by-moving-to-trash t)
+    (setq dired-recursive-copies t)
+    (setq dired-recursive-deletes t)
+    (setq dired-listing-switches "-A -G -F -h -l -v --group-directories-first --time-style=long-iso")
+    (setq dired-dwim-target t)
+    (setq dired-auto-revert-buffer #'dired-directory-changed-p)
+    (setq dired-free-space nil)
+    (setq dired-make-directory-clickable t)
+    (setq dired-mouse-drag-files t))
+#+end_src
+
+#+begin_src emacs-lisp
+  (provide 'cur-config-dired)
+  ;;; cur-config-dired.el ends here
+#+end_src
 
 * Custom Library Modules
