@@ -9,10 +9,10 @@
   :ensure nil
   :commands (vterm cur/meow-vterm-other-window cur/meow-vterm)
   :bind (:map vterm-mode-map
-	 ("C-c C-k" . cur/vterm-kill)
-	 :map cur/sub-leader-keymap
-	 ("C-RET" . cur/meow-vterm-other-window)
-	 ("RET"   . cur/meow-vterm))
+         ("C-c C-k" . cur/vterm-kill)
+         :map cur/sub-leader-keymap
+         ("C-RET" . cur/meow-vterm-other-window)
+         ("RET"   . cur/meow-vterm))
   :init
   (defun cur/meow-vterm ()
     (interactive)
@@ -53,16 +53,16 @@
     "Eshell alias to open FILE. Will call `find-file' interactively if no file is
 specified."
     (cond (file
-	   (find-file file))
-	  (t
-	   (call-interactively 'find-file))))
+           (find-file file))
+          (t
+           (call-interactively 'find-file))))
   (defun eshell/dir (&optional dir)
     "Eshell alias to open `dired' at DIR. Will call `dired' on current directory
 if no directory is specified"
     (cond (dir
-	   (dired dir))
-	  (t
-	   (dired "."))))
+           (dired dir))
+          (t
+           (dired "."))))
   :custom
   (eshell-prompt-regexp "^\\[[^]]*\\]\\[?[[:digit:]]*\\]?[#$λ] " "Regex for custom eshell prompt")
   (eshell-prompt-function 'cur/eshell-prompt "Set custom prompt for eshell"))
