@@ -3,16 +3,17 @@
 ;;; Commentary:
 
 ;;; Code:
+
 ;; ===Org-Mode===
 (use-package org
   :ensure nil
   :defer t
   :hook (org-mode . cur/org-mode-setup)
   :bind (:map org-mode-map
-	  ("C-S-h" . outline-promote)
-	  ("C-S-j" . outline-move-subtree-down)
-	  ("C-S-k" . outline-move-subtree-up)
-	  ("C-S-l" . outline-demote))
+          ("C-S-h" . outline-promote)
+          ("C-S-j" . outline-move-subtree-down)
+          ("C-S-k" . outline-move-subtree-up)
+          ("C-S-l" . outline-demote))
   :init
   (defun cur/org-mode-setup ()
     (org-indent-mode 1)
@@ -53,7 +54,7 @@
   :after org
   :config
   (push '("conf-unix" . conf-unix) org-src-lang-modes)
-  
+
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("py" . "src python"))
@@ -66,6 +67,7 @@
 ;; ===Org Babel===
 (use-package ob
   :after org)
+;; TODO: fix this so I can still auto tangle on saving
   ;; :init
   ;; (defun cur/org-babel-tangle-config ()
   ;;   (when (string-equal (file-name-directory (buffer-file-name))
