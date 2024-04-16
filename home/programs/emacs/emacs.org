@@ -180,6 +180,8 @@ I like having absolute line numbers, especially since the meow number selection 
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-bindings.el
 :END:
 
+I use [[https:github.com/meow-edit/meow][meow]], a modal editing layer designed to be integrate well into emacs. It's very easy to hack on and extend and just feels more emacsy. I have had almost no issues with this, compared to evil which just felt sluggish and was hard to customize. The object-verb syntax is also really great and I prefer it to the verb-object of vim/nvim.
+
 #+begin_src emacs-lisp
   ;;; cur-config-bindings.el --- emacs keybindings
 
@@ -188,12 +190,33 @@ I like having absolute line numbers, especially since the meow number selection 
   ;;; Code:
 #+end_src
 
+*** Hydra 
+
+I use hydras for repeat keybindings. I plan to switch to use the built in repeat keymap more in the future but they are very helpful for creating something almost like a mini meow state, just for one particular task.
+
 #+begin_src emacs-lisp
   ;; ===Hydra===
   (use-package hydra
     :demand t)
 #+end_src
 
+*** Meow
+
+This is the meat and potatoes of my keybindings. First I have several keymaps: sub-leader, projectile, toggle, and alignment. Sub leader is for more miscellaneous one-off commands, such as ~ibuffer~. Projectile is for, you guessed it, projectile related commands. Toggle is for quick, on the fly, changing of settings, such as the font size. The alignment is currently unused as of now but will have commands to change how text is currently being viewed without actually modifying the text of the buffer, think ~recenter-top-bottom~ like commands and more.
+
+I try to keep the leader key map as static as possible, with no keybindings being changed with the mode. If I want something to change with the mode I will put it under C-c, which I can access from =RET= via normal mode. The leader key primarily has things for interacting with general emacs constructs, like buffers, universal arg, =M-x=, etc.
+
+The meow states, what vim/nvim call modes, are as follows:
+  - *Normal* - The main state that is used. Used for navigation, selection, and editing. Basically vim's normal and visual mode in one.
+  - *Insert* - Insert text, esc to go back to normal state.
+  - *Motion* - A minimal state used when you don't know what the major-mode does. I have only =j=, =k=, and =SPC= bound to down, up, and leader respectively. Everything else is as the major mode defines it. It's just there so I'm still able to interface with emacs like I normally would, just with a minimal interface.
+  - *Keypad* - Leader key map.
+  - *Beacon* - Multi-cursor in a region. Very convenient but kmacros are GOATed.
+
+Also of note, I find it easier to think about the cursor in normal mode as being a single character selection. This is how helix does it and I really like it so I have a lot of the meow fallback commands to operate on the char after the cursor.
+
+A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
+  
 #+begin_src emacs-lisp
   ;; ===Meow Setup===
   (use-package meow
@@ -484,9 +507,6 @@ I like having absolute line numbers, especially since the meow number selection 
     (setq meow-kteypad-leader-dispatch nil)
     (meow-setup)
     (meow-global-mode 1))
-#+end_src
-
-#+begin_src emacs-lisp
   (provide 'cur-config-bindings)
   ;;; cur-config-bindings.el ends here
 #+end_src
