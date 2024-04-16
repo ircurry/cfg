@@ -507,6 +507,7 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
     (setq meow-kteypad-leader-dispatch nil)
     (meow-setup)
     (meow-global-mode 1))
+
   (provide 'cur-config-bindings)
   ;;; cur-config-bindings.el ends here
 #+end_src
