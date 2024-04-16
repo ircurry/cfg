@@ -620,6 +620,8 @@ Info is emacs' built in manual system. In essence, its a more feature rich =man=
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-dired.el
 :END:
 
+Dired is the built in file manager in emacs. Its very capable and very hackable although it lacks good file previewing solutions
+
 #+begin_src emacs-lisp
   ;;; cur-config-dired.el --- configurations for dired
 
@@ -628,6 +630,10 @@ Info is emacs' built in manual system. In essence, its a more feature rich =man=
   ;;; Code:
 #+end_src
 
+*** Nerd Icons Dired
+
+Adds icons to make dired a bit more pretty and gives a visual sense of what files are what. 
+
 #+begin_src emacs-lisp
   ;; ===Dired Icons===
   (use-package nerd-icons-dired
@@ -635,12 +641,18 @@ Info is emacs' built in manual system. In essence, its a more feature rich =man=
     :hook (dired-mode . nerd-icons-dired-mode))
 #+end_src
 
+*** Main Dired Configuration
+
+By default, I want dired to look very minimal. This lack of clutter makes it easier to focus on what I am doing in the file manager. This is also the approach I try to take with other parts of emacs as well. By default, I have file details (owner, permissions, last modified, etc.) hidden. I have other changes as well, use the system trash can instead of deleting, that are under the ~:config~ part of the ~use-package~ declaration.
+
+The keybindings are a hybrid of my normal state and the default dired keybindings.
+
 #+begin_src emacs-lisp
   ;; ===Dired===
   (use-package dired
     :hook
-    (dired-mode . dired-hide-details-mode)
-    (dired-mode . hl-line-mode)
+    (dired-mode . dired-hide-details-mode) ; don't show file details by default
+    (dired-mode . hl-line-mode) ; Highlight the line the cursor is on
     ;; TODO: create a dired-find-file-dwim for external programs
     :bind (:map dired-mode-map
                 ;; ===Top Row===
@@ -750,9 +762,7 @@ Info is emacs' built in manual system. In essence, its a more feature rich =man=
     (setq dired-free-space nil)
     (setq dired-make-directory-clickable t)
     (setq dired-mouse-drag-files t))
-#+end_src
 
-#+begin_src emacs-lisp
   (provide 'cur-config-dired)
   ;;; cur-config-dired.el ends here
 #+end_src

@@ -12,8 +12,8 @@
 ;; ===Dired===
 (use-package dired
   :hook
-  (dired-mode . dired-hide-details-mode)
-  (dired-mode . hl-line-mode)
+  (dired-mode . dired-hide-details-mode) ; don't show file details by default
+  (dired-mode . hl-line-mode) ; Highlight the line the cursor is on
   ;; TODO: create a dired-find-file-dwim for external programs
   :bind (:map dired-mode-map
               ;; ===Top Row===
