@@ -991,15 +991,15 @@ A better interface for ivy.
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-windows.el
 :END:
 
+The default window functions only split the window and don't jump to the newly created window like you would expect in say a tiling window manager. These functions are provide that kind of functionality.
+
 #+begin_src emacs-lisp
   ;;; cur-config-windows.el --- emacs windows configuration
 
   ;;; Commentary:
 
   ;;; Code:
-#+end_src
 
-#+begin_src emacs-lisp
   ;; ===Window Functions===
   (defun cur/split-and-follow-horizontally ()
     (interactive)
@@ -1016,9 +1016,7 @@ A better interface for ivy.
   (defun cur/other-window-reverse ()
     (interactive)
     (other-window -1))
-#+end_src
 
-#+begin_src emacs-lisp
   (provide 'cur-config-windows)
   ;;; cur-config-windows.el ends here
 #+end_src
