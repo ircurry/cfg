@@ -1565,6 +1565,29 @@
   ;;; cur-config-org.el ends here
 #+end_src
 
+** Configurations for Gemini and the smolnet (=cur-config-smol-net.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-smol-net.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; cur-config-smol-net.el --- emacs keybindings
+
+  ;;; Commentary:
+
+  ;;; Code:
+  ;; ===Gemini-Mode===
+  (use-package gemini-mode)
+    ;:ensure t)
+
+  ;; ===Org Gemini Exporter==
+  (use-package ox-gemini)
+    ;:ensure t)
+  
+  (provide 'cur-config-smol-net)
+  ;;; cur-config-smol-net.el ends here
+#+end_src
+
 * Custom Library Modules
 
 ** Custom modeline (=cur-modline.el=)
