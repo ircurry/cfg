@@ -1608,6 +1608,27 @@
 
 #+end_src
 
+** Direnv integration (=cur-config-direnv.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-direnv.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; cur-config-direnv.el --- direnv integration into emacs
+
+  ;;; Commentary:
+
+  ;;; Code:
+  
+  ;; ===Envrc===
+  (use-package envrc
+    :config
+    (envrc-global-mode))
+
+  (provide 'cur-config-direnv)
+  ;;; cur-config-direnv.el ends here
+#+end_src
+
 * Custom Library Modules
 
 ** Custom modeline (=cur-modline.el=)
