@@ -154,7 +154,7 @@ Removing the weird delay for highlighting the opposite parenthesis.
 
 *** Line numbers
 
-I like having absolute line numbers, especially since the meow number selection makes relative line numbers not as useful. Some modes, especially terminal mode, look weird with line numbers so I disable them. Org-mode also has them disabled because they make the document look kind of weird, especially with images or non-text.
+I like having absolute line numbers, especially since the meow number selection makes relative line numbers not as useful. Some modes, especially terminal and shell modes, look weird with line numbers so I disable them. Org-mode also has them disabled because they make the document look kind of weird, especially with images or non-text.
 
 #+begin_src emacs-lisp
   ;; ===Line Numbers===
