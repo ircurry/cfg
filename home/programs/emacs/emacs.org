@@ -128,20 +128,35 @@
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-essentials.el
 :END:
+
+These are the basic configurations that I have done in emacs. Its sort of a hodge-podge of fixing/changing things that are built emacs. They aren't strictly essential so the name is kind of a misnomer.
+
 #+begin_src emacs-lisp
   ;;; cur-config-essentials.el --- essentials for emacs
 
   ;;; Commentary:
 
   ;;; Code:
+#+end_src
 
+*** Parentheses highlighting
+
+Removing the weird delay for highlighting the opposite parenthesis.
+
+#+begin_src emacs-lisp
   ;; ===Parens===
   (use-package paren
     :ensure nil
     :demand t
     :custom
     (show-paren-delay 0 "No delay for paren highlighting"))
+#+end_src
 
+*** Line numbers
+
+I like having absolute line numbers, especially since the meow number selection makes relative line numbers not as useful. Some modes, especially terminal mode, look weird with line numbers so I disable them. Org-mode also has them disabled because they make the document look kind of weird, especially with images or non-text.
+
+#+begin_src emacs-lisp
   ;; ===Line Numbers===
   (column-number-mode)
   (global-display-line-numbers-mode t)
