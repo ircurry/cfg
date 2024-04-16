@@ -516,6 +516,8 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-help.el
 :END:
 
+Enhancing the help mechanisms in emacs.
+
 #+begin_src emacs-lisp
   ;;; cur-config-help.el --- help configurations
 
@@ -523,6 +525,10 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
 
   ;;; Code:
 #+end_src
+
+*** Which-key
+
+Which-key shows you what keybindings are available in a keychord. Super helpful and a must have in emacs.
 
 #+begin_src emacs-lisp
   ;; ===which-key===
@@ -533,6 +539,10 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
     :config
     (setq which-key-idle-delay 0.0001))
 #+end_src
+
+*** Helpful
+
+Provides additional info help.
 
 #+begin_src emacs-lisp
   ;; ===helpful===
@@ -546,6 +556,10 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
     ([remap describe-variable] . counsel-describe-variable)
     ([remap describe-key] . helpful-key))
 #+end_src
+
+*** Info
+
+Info is emacs' built in manual system. In essence, its a more feature rich =man= (which emacs also has easy access to with =woman=). Right now I have a custom meow state for keybindings. However, this kind of sucks and I will eventually switch to just changing the default keybindings.
 
 #+begin_src emacs-lisp
   ;; ===Info===
@@ -595,9 +609,7 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
       '("<backtab>" . Info-prev-reference)
       '("<escape>" . keyboard-quit))
     (add-hook 'Info-mode-hook #'meow-info-mode))
-#+end_src
 
-#+begin_src emacs-lisp
   (provide 'cur-config-help)
   ;;; cur-config-help.el ends here
 #+end_src
