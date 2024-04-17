@@ -92,7 +92,7 @@
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   (transient-default-level 5 "Allowing for commit signing"))
 
-;; ===project.el===
+;; ===Projectile===
 (use-package projectile
   :after (rg)
   :bind (:map cur/projectile-map
@@ -111,6 +111,7 @@
   :config
   (projectile-mode 1))
 
+;; Need ripgrep wrapper for `projectile-ripgrep'
 (use-package rg)
 
 (provide 'cur-config-ide)

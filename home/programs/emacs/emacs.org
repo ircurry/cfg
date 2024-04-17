@@ -1026,6 +1026,12 @@ The default window functions only split the window and don't jump to the newly c
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-ide.el
 :END:
 
+Emacs can be made to have all the features of a modern text editor and then some.
+
+*** LSP-mode
+
+Lsp-mode is my chosen language server protocol support package. I chose this over eglot because of the richer features and (at the time that I started using lsp) more mature state. I will revisit elgot in the future but for now I am perfectly happy with lsp-mode.
+
 #+begin_src emacs-lisp
   ;;; cur-config-ide.el --- configuration to make emacs ide like
 
@@ -1035,9 +1041,7 @@ The default window functions only split the window and don't jump to the newly c
   ;; checker, and a dap client (yet to be included/configured).
 
   ;;; Code:
-#+end_src
 
-#+begin_src emacs-lisp
   ;; ===LSP Mode===
   (use-package lsp-mode
     :demand t
@@ -1058,6 +1062,10 @@ The default window functions only split the window and don't jump to the newly c
     (setq lsp-lens-enable nil)
     (lsp-enable-which-key-integration t))
 #+end_src
+
+*** LSP UI
+
+Lsp-ui provides some ui enhancements and extra features to lsp. Probably the best one is the doc feature to view documentation in the editor.
 
 #+begin_src emacs-lisp
   (use-package lsp-ui
@@ -1082,6 +1090,10 @@ The default window functions only split the window and don't jump to the newly c
     (lsp-mode . lsp-ui-mode))
 #+end_src
 
+*** Company
+
+The code completion system. This is different from completions systems like ivy or vertico, this is for interactively completing a symbol while programming.
+
 #+begin_src emacs-lisp
   ;; ===Company Mode===
   (use-package company
@@ -1099,6 +1111,10 @@ The default window functions only split the window and don't jump to the newly c
   ;;(company-tng-configure-default))
 #+end_src
 
+*** Flycheck
+
+Code error checking with a nice UI.
+
 #+begin_src emacs-lisp
   ;; ===Flycheck===
   (use-package flycheck
@@ -1106,6 +1122,10 @@ The default window functions only split the window and don't jump to the newly c
     (prog-mode . flycheck-mode)
     (lsp-mode  . flycheck-mode))
 #+end_src
+
+*** Treemacs
+
+Project tree, I don't use this all that often.
 
 #+begin_src emacs-lisp
   ;; ===Treemacs==
@@ -1117,6 +1137,10 @@ The default window functions only split the window and don't jump to the newly c
     (treemacs-follow-mode))
 #+end_src
 
+*** Ivy-xref
+
+This lets us use ivy to select xref candidates.
+
 #+begin_src emacs-lisp
   ;; ===xref-ivy===
   (use-package ivy-xref
@@ -1125,6 +1149,10 @@ The default window functions only split the window and don't jump to the newly c
     (setq xref-show-definitions-function #'ivy-xref-show-defs)
     (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 #+end_src
+
+*** Magit
+
+Magit is a git interface, probably the best one I have ever seen or had the pleasure of using. I consider magit to be one of emacs' "killer features", right up there with org-mode.
 
 #+begin_src emacs-lisp
   ;; ===Magit===
@@ -1136,8 +1164,12 @@ The default window functions only split the window and don't jump to the newly c
     (transient-default-level 5 "Allowing for commit signing"))
 #+end_src
 
+*** Projectile
+
+Projectile provides many commands to help manage and do things in a project, such as compile a project from its root, list all files in the project, or run grep or ripgrep on all the files in the project. I also use it's project switching aspect as sort of a bookmark like system.
+
 #+begin_src emacs-lisp
-  ;; ===project.el===
+  ;; ===Projectile===
   (use-package projectile
     :after (rg)
     :bind (:map cur/projectile-map
@@ -1155,13 +1187,10 @@ The default window functions only split the window and don't jump to the newly c
                 ("C-e"   . projectile-run-eshell))
     :config
     (projectile-mode 1))
-#+end_src
 
-#+begin_src emacs-lisp
+  ;; Need ripgrep wrapper for `projectile-ripgrep'
   (use-package rg)
-#+end_src
 
-#+begin_src emacs-lisp
   (provide 'cur-config-ide)
   ;;; cur-config-ide.el ends here
 #+end_src
