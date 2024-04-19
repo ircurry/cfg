@@ -1,11 +1,6 @@
 ;;; cur-config-java.el --- configuration for java
 
 ;;; Commentary:
-;; My configuration for java in Emacs.
-;; Currently does not work on my machine because jdtls
-;; is not available in the void repos.  When it does I
-;; will remove the comment in front of requiring this
-;; package.
 
 ;;; Code:
 

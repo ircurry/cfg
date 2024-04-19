@@ -1200,6 +1200,8 @@ Projectile provides many commands to help manage and do things in a project, suc
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-elisp.el
 :END:
 
+These are my configurations for working with emacs lisp. Truth be told, a lot could be improved here and I intend to do so eventually.
+
 #+begin_src emacs-lisp
   ;;; cur-config-elisp.el --- configurations for working with elisp
 
@@ -1208,12 +1210,20 @@ Projectile provides many commands to help manage and do things in a project, suc
   ;;; Code:
 #+end_src
 
+*** Rainbow Delimiters
+
+This color codes opening and closing delimiters such as parentheses and square brackets.
+
 #+begin_src emacs-lisp
   ;; ===rainbow-delimiters===
   (use-package rainbow-delimiters
     ;:ensure t
     :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
+
+*** Helper Functions
+
+These are some helper functions that I don't really use anymore. They are mostly about alists and I think some of them just replicate behavior of built in functions. I plan to either fix and move or just remove them at some point.
 
 #+begin_src emacs-lisp
   ;; ===Helpful Emacs-Lisp Functions===
@@ -1249,9 +1259,7 @@ Projectile provides many commands to help manage and do things in a project, suc
       (if alist-result
           nil
         (push pair alist))))
-#+end_src
 
-#+begin_src emacs-lisp
   (provide 'cur-config-elisp)
   ;;; cur-config-elisp.el ends here
 #+end_src
@@ -1261,20 +1269,17 @@ Projectile provides many commands to help manage and do things in a project, suc
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-java.el
 :END:
 
+My configurations for working with the Java language. I have ~java-ts-mode~, the tree sitter version of the normal ~java-mode~, as the mode for editing =.java= files. I have found that either tree sitter provides exactly the same or better syntax highlighting and the possibility of better movement once it gets better integrated into emacs.
+
+I also have lsp-java set up for better integrating ~lsp-mode~ into ~java-ts-mode~. Note because I have =direnv= integration with ~envrc~, the hooks I add to start ~lsp~ must be ~lsp-defered~. ~lsp-defered~ does not start ~lsp-mode~ until after the buffer has visually loaded. We want this because ~envrc~ will change the ~exec-path~ to what =direnv= would change it to. For instance, if I have a devshell that says "here is the lsp-server, the build tool, and external libraries with these exact versions", envrc will make sure that ~exec-path~ contains exactly those versions of those programs in the nix store.
+
 #+begin_src emacs-lisp
   ;;; cur-config-java.el --- configuration for java
 
   ;;; Commentary:
-  ;; My configuration for java in Emacs.
-  ;; Currently does not work on my machine because jdtls
-  ;; is not available in the void repos.  When it does I
-  ;; will remove the comment in front of requiring this
-  ;; package.
 
   ;;; Code:
-#+end_src
 
-#+begin_src emacs-lisp
   ;; ===Java Tree-Sitter Mode===
   (use-package java-ts-mode
     :mode "\\.java\\'")
@@ -1298,9 +1303,7 @@ Projectile provides many commands to help manage and do things in a project, suc
                                  (concat (getenv "HOME") "/.jdtls/java-workspace"))))
         (message (concat jdtls-path "/share/java/"))
         (append (list (concat jdtls-path "/bin/jdtls")) jdtls-exec-options))))
-#+end_src
 
-#+begin_src emacs-lisp
   (provide 'cur-config-java)
   ;;; cur-config-java.el ends here
 #+end_src
