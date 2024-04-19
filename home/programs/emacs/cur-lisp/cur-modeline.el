@@ -6,13 +6,13 @@
 ;; use doom modeline.
 
 ;;; Code:
-;; (defgroup cur-modeline nil
-;;   "My custom modeline that tries to be minimal."
-;;   :group 'mode-line)
-;; 
-;; (defgroup cur-modeline-faces nil
-;;   "The faces for my custom modeline."
-;;   :group cur-modeline)
+(defgroup cur-modeline nil
+  "My custom modeline that tries to be minimal."
+  :group 'mode-line)
+
+(defgroup cur-modeline-faces nil
+  "The faces for my custom modeline."
+  :group 'cur-modeline)
 
 (defun cur-mode-line/padding ()
   "Function to return padding so `mode-line-end-spaces' will be right aligned."
