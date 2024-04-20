@@ -1825,3 +1825,130 @@ I also have lsp-java set up for better integrating ~lsp-mode~ into ~java-ts-mode
   (provide 'cur-modeline)
   ;;; cur-modeline.el ends here
 #+end_src
+
+** More Intuitive Isearch (=cur-isearch-intuitive.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-lisp/cur-isearch-intuitive.el
+:END:
+
+#+begin_src emacs-lisp
+  (require 'isearch)
+
+  (defgroup isearch-intutive nil
+    "Setting for `isearch-inuitive-mode'."
+    :group 'isearch)
+
+  (defun isearch-intuitive-undefined ()
+    (interactive)
+    (message "key undefined"))
+
+  (define-minor-mode isearch-intuitive-mode
+    "Minor mode to make `isearch' feel more \"vim like\"."
+    nil
+    :global nil
+    :group 'cur-modeline
+    :lighter " isearch-intuitive"
+    :keymap
+    (define-keymap
+      "`"     #'isearch-intuitive-undefined
+      "~"     #'isearch-intuitive-undefined
+      "1"     #'isearch-intuitive-undefined
+      "!"     #'isearch-intuitive-undefined
+      "2"     #'isearch-intuitive-undefined
+      "@"     #'isearch-intuitive-undefined
+      "3"     #'isearch-intuitive-undefined
+      "#"     #'isearch-intuitive-undefined
+      "4"     #'isearch-intuitive-undefined
+      "$"     #'isearch-intuitive-undefined
+      "5"     #'isearch-intuitive-undefined
+      "%"     #'isearch-intuitive-undefined
+      "6"     #'isearch-intuitive-undefined
+      "^"     #'isearch-intuitive-undefined
+      "7"     #'isearch-intuitive-undefined
+      "&"     #'isearch-intuitive-undefined
+      "8"     #'isearch-intuitive-undefined
+      "*"     #'isearch-intuitive-undefined
+      "9"     #'isearch-intuitive-undefined
+      "("     #'isearch-intuitive-undefined
+      "0"     #'isearch-intuitive-undefined
+      ")"     #'isearch-intuitive-undefined
+      "a"     #'isearch-intuitive-undefined
+      "A"     #'isearch-intuitive-undefined
+      "b"     #'isearch-intuitive-undefined
+      "B"     #'isearch-intuitive-undefined
+      "c"     #'isearch-intuitive-undefined
+      "C"     #'isearch-intuitive-undefined
+      "d"     #'isearch-intuitive-undefined
+      "D"     #'isearch-intuitive-undefined
+      "e"     #'isearch-intuitive-undefined
+      "E"     #'isearch-intuitive-undefined
+      "f"     #'isearch-intuitive-undefined
+      "F"     #'isearch-intuitive-undefined
+      "g"     #'isearch-intuitive-undefined
+      "G"     #'isearch-intuitive-undefined
+      "h"     #'isearch-intuitive-undefined
+      "H"     #'isearch-intuitive-undefined
+      "i"     #'isearch-intuitive-undefined
+      "I"     #'isearch-intuitive-undefined
+      "j"     #'isearch-intuitive-undefined
+      "J"     #'isearch-intuitive-undefined
+      "k"     #'isearch-intuitive-undefined
+      "K"     #'isearch-intuitive-undefined
+      "l"     #'isearch-intuitive-undefined
+      "L"     #'isearch-intuitive-undefined
+      "m"     #'isearch-intuitive-undefined
+      "M"     #'isearch-intuitive-undefined
+      "n"     #'isearch-intuitive-undefined
+      "N"     #'isearch-intuitive-undefined
+      "o"     #'isearch-intuitive-undefined
+      "O"     #'isearch-intuitive-undefined
+      "p"     #'isearch-intuitive-undefined
+      "P"     #'isearch-intuitive-undefined
+      "q"     #'isearch-intuitive-undefined
+      "Q"     #'isearch-intuitive-undefined
+      "r"     #'isearch-intuitive-undefined
+      "R"     #'isearch-intuitive-undefined
+      "s"     #'isearch-intuitive-undefined
+      "S"     #'isearch-intuitive-undefined
+      "t"     #'isearch-intuitive-undefined
+      "T"     #'isearch-intuitive-undefined
+      "u"     #'isearch-intuitive-undefined
+      "U"     #'isearch-intuitive-undefined
+      "v"     #'isearch-intuitive-undefined
+      "V"     #'isearch-intuitive-undefined
+      "w"     #'isearch-intuitive-undefined
+      "W"     #'isearch-intuitive-undefined
+      "x"     #'isearch-intuitive-undefined
+      "X"     #'isearch-intuitive-undefined
+      "y"     #'isearch-intuitive-undefined
+      "Y"     #'isearch-intuitive-undefined
+      "z"     #'isearch-intuitive-undefined
+      "Z"     #'isearch-intuitive-undefined
+      "-"     #'isearch-intuitive-undefined
+      "_"     #'isearch-intuitive-undefined
+      "="     #'isearch-intuitive-undefined
+      "+"     #'isearch-intuitive-undefined
+      "["     #'isearch-intuitive-undefined
+      "{"     #'isearch-intuitive-undefined
+      "]"     #'isearch-intuitive-undefined
+      "}"     #'isearch-intuitive-undefined
+      "\\"    #'isearch-intuitive-undefined
+      "|"     #'isearch-intuitive-undefined
+      ";"     #'isearch-intuitive-undefined
+      ":"     #'isearch-intuitive-undefined
+      "'"     #'isearch-intuitive-undefined
+      "\""    #'isearch-intuitive-undefined
+      ","     #'isearch-intuitive-undefined
+      "<"     #'isearch-intuitive-undefined
+      "."     #'isearch-intuitive-undefined
+      ">"     #'isearch-intuitive-undefined
+      "/"     #'isearch-intuitive-undefined
+      "?"     #'isearch-intuitive-undefined
+      "RET"   #'isearch-intuitive-mode
+      "SPC"   #'isearch-intuitive-undefined))
+
+  (define-key isearch-mode-map (kbd "RET") 'isearch-intuitive-mode)
+  (define-key isearch-mode-map (kbd "<return>") 'isearch-intuitive-mode)
+
+  (add-hook 'isearch-mode-end-hook (lambda () (isearch-intuitive-mode -1)))
+#+end_src
