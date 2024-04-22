@@ -10,7 +10,7 @@
 
 ;; ===Meow Setup===
 (use-package meow
-  :after (hydra)
+  :after (hydra isearch)
   :demand t
   :preface
   (defvar cur/sub-leader-keymap
@@ -236,7 +236,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("<" . meow-bounds-of-thing)
      '("." . meow-end-of-thing)
      '(">" . meow-inner-of-thing)
-     '("/" . meow-visit)
+     '("/" . isearch-meow-wrapper)
      '("?" . meow-page-down)
      '("'"  . meow-block)
      '("\"" . meow-to-block)))
