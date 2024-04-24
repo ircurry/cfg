@@ -18,12 +18,19 @@
 
   ;;; Code:
 #+end_src
+** Emacs Version Check
+
+I have not tested this config on any emacs version less than 29.1.
 
 #+begin_src emacs-lisp
   ;; ===Check Emacs Version===
   (when (version< emacs-version "29.1")
     (error "This setup is only guarunteed to work on 29.1, disable this line to load anyways."))
 #+end_src
+
+** Some Basic Settings
+
+These are some basic settings that don't really fit anywhere else in my config.
 
 #+begin_src emacs-lisp
   ;; ===Basic Settings===
@@ -39,16 +46,28 @@
   (set-fringe-mode 10)                ;; No idea what this does
 #+end_src
 
+** Enabling Disabled Functions
+
+These functions I want enabled and not asking me if I want to run the command every single time.
+
 #+begin_src emacs-lisp
   ;; ===Enable Disabled Functions===
   (dolist (c '(narrow-to-region narrow-to-page upcase-region downcase-region))
     (put c 'disabled nil))
 #+end_src
 
+** "Disabling" Custom
+
+Set it to a temp file so I don't have to deal with custom, lol.
+
 #+begin_src emacs-lisp
   ;; ===Disable Custom===
   (setq custom-file (make-temp-file "emacs-custom-"))
 #+end_src
+
+** Package.el and Package Archives
+
+This is only used if I find myself on a non-nixos system, as I have nixos manage my emacs packages instead.
 
 #+begin_src emacs-lisp
   ;; ===Package Initialization===
@@ -61,6 +80,10 @@
     (package-refresh-contents))
 #+end_src
 
+** Use-package
+
+Setting up use package. Not sure if all of this is necessary now since ~use-package~ comes with base emacs now.
+
 #+begin_src emacs-lisp
   ;; ===use-package Initialization===
   (unless (package-installed-p 'use-package)
@@ -68,21 +91,23 @@
   (require 'use-package)
 #+end_src
 
+** Configuration modules.
+
+First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just as simple as ~(require 'module)~.
+
 #+begin_src emacs-lisp
   ;; ===Load Modules and Packages===
   (dolist (path '("cur-lisp" "cur-config"))
     (add-to-list 'load-path (locate-user-emacs-file path)))
-#+end_src
 
-#+begin_src emacs-lisp
   ;; =====================
   ;; == Loading Modules ==
   ;; =====================
 
   ;; ===Essentials===
   (require 'cur-config-essentials)
-  (require 'cur-config-bindings)
   (require 'cur-config-isearch)
+  (require 'cur-config-bindings)
   (require 'cur-config-help)
   (require 'cur-config-dired)
 
@@ -116,9 +141,7 @@
 
   ;; ===Direnv is Last===
   (require 'cur-config-direnv)
-#+end_src
 
-#+begin_src emacs-lisp
   (provide 'init)
   ;;; init.el ends here
 #+end_src
@@ -174,6 +197,22 @@ I like having absolute line numbers, especially since the meow number selection 
 
   (provide 'cur-config-essentials)
   ;;; cur-config-essentials.el ends here
+#+end_src
+
+** Isearch (=cur-config-isearch.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-isearch.el
+:END:
+
+#+begin_src emacs-lisp
+  (use-package isearch
+    :custom
+    (isearch-wrap-pause 'no-ding)
+    (isearch-repeat-on-direction-change t))
+
+  (use-package cur-isearch-meow)
+
+  (provide 'cur-config-isearch)
 #+end_src
 
 ** Key bindings configurations (=cur-config-bindings.el=)
@@ -511,22 +550,6 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
 
   (provide 'cur-config-bindings)
   ;;; cur-config-bindings.el ends here
-#+end_src
-
-** Isearch (=cur-config-isearch.el=)
-:PROPERTIES:
-:header-args:emacs-lisp: :tangle ./cur-config/cur-config-isearch.el
-:END:
-
-#+begin_src emacs-lisp
-  (use-package isearch
-    :custom
-    (isearch-wrap-pause 'no-ding)
-    (isearch-repeat-on-direction-change t))
-
-  (use-package cur-isearch-meow)
-
-  (provide 'cur-config-isearch)
 #+end_src
 
 ** Help configurations (=cur-config-help.el=)
