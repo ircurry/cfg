@@ -82,6 +82,7 @@
   ;; ===Essentials===
   (require 'cur-config-essentials)
   (require 'cur-config-bindings)
+  (require 'cur-config-isearch)
   (require 'cur-config-help)
   (require 'cur-config-dired)
 
@@ -220,7 +221,7 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
 #+begin_src emacs-lisp
   ;; ===Meow Setup===
   (use-package meow
-    :after (hydra isearch)
+    :after (hydra)
     :demand t
     :preface
     (defvar cur/sub-leader-keymap
@@ -514,14 +515,18 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
 
 ** Isearch (=cur-config-isearch.el=)
 :PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-isearch.el
+:END:
 
 #+begin_src emacs-lisp
   (use-package isearch
     :custom
     (isearch-wrap-pause 'no-ding)
     (isearch-repeat-on-direction-change t))
-  
+
   (use-package cur-isearch-meow)
+
+  (provide 'cur-config-isearch)
 #+end_src
 
 ** Help configurations (=cur-config-help.el=)

@@ -52,6 +52,7 @@
 ;; ===Essentials===
 (require 'cur-config-essentials)
 (require 'cur-config-bindings)
+(require 'cur-config-isearch)
 (require 'cur-config-help)
 (require 'cur-config-dired)
 

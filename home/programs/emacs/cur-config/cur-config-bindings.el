@@ -10,7 +10,7 @@
 
 ;; ===Meow Setup===
 (use-package meow
-  :after (hydra isearch)
+  :after (hydra)
   :demand t
   :preface
   (defvar cur/sub-leader-keymap
