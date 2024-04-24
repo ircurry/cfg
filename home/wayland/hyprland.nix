@@ -114,6 +114,7 @@ in
     # ===Actual Hyprland Config===
     wayland.windowManager.hyprland = {
       enable = true;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
       settings = {
         "$terminal" = "${term-cfg.exec}";
         "$editor" = "${ed-cfg.exec}";
