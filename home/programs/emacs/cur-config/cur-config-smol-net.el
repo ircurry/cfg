@@ -6,11 +6,14 @@
 
 ;; ===Gemini-Mode===
 (use-package gemini-mode)
-  ;:ensure t)
 
 ;; ===Org Gemini Exporter==
 (use-package ox-gemini)
-  ;:ensure t)
+
+;; ===Elpher Gemini/Gopher Client===
+(use-package elpher
+  :custom
+  (elpher-default-url-type "gemini"))
 
 (provide 'cur-config-smol-net)
 ;;; cur-config-smol-net.el ends here

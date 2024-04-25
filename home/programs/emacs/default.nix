@@ -97,6 +97,7 @@ let
       # ===Smol-net===
       epkgs.gemini-mode
       epkgs.ox-gemini
+      epkgs.elpher
 
       # ===Windows===
 
