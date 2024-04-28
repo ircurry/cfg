@@ -20,13 +20,14 @@
     (variable-pitch-mode 0)
     (visual-line-mode 1)
     (flyspell-mode 1))
-  (defun cur/org-font-setup ()
-    ;; Replace list hyphen with dot
-    (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•")))))))
   :custom
   (org-ellipsis " ▾" "Readable ellipsis")
+  (org-adapt-indentation nil)
+  (org-special-ctrl-a/e nil)
+  (org-M-RET-may-split-line '((default . nil)))
+  (org-hide-emphasis-markers nil)
+  (org-hide-macro-markers nil)
+  (org-hide-leading-stars nil)
   (org-agenda-start-with-log-mode t)
   (org-log-done 'time)
   (org-log-into-drawer t)
@@ -37,17 +38,8 @@
   (setq org-agenda-time-grid '((daily today require-timed)
                                (400 600 800 1000 1200 1400 1600 1800 2000 2200)
                                "......" "----------------"))
-  (setq org-format-latex-options '(:foreground "#e5e9e9" :scale 1.0))
-  (cur/org-font-setup))
-
-;; ===Org Bullets===
-(use-package org-bullets
-  ;:ensure t
-  :after org
-  :hook (org-mode . org-bullets-mode)
-  :custom
-  (org-bullets-bullet-list '("" "●" "○" "●" "○" "●" "○" "●" "○")))
-;;  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+  (setq org-format-latex-options '(:foreground "#e5e9e9" :scale 1.0)))
+  ;; (cur/org-font-setup))
 
 ;; ===Org Tempo and SRC Blocks===
 (use-package org-tempo
