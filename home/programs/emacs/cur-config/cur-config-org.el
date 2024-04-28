@@ -1,9 +1,3 @@
-;;; cur-config-org.el --- configurations for org-mode
-
-;;; Commentary:
-
-;;; Code:
-
 ;; ===Org-Mode===
 (use-package org
   :ensure nil
@@ -71,4 +65,3 @@
   ;; (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'cur/org-babel-tangle-config))))
 
 (provide 'cur-config-org)
-;;; cur-config-org.el ends here

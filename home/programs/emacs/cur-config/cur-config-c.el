@@ -1,9 +1,3 @@
-;;; cur-config-c.el --- configuration for c
-
-;;; Commentary:
-
-;;; Code:
-
 ;; ===C Tree-Sitter Mode===
 (use-package c-ts-mode
   :after (cc-mode)
@@ -24,4 +18,3 @@
   :after (cc-mode c-ts-mode))
 
 (provide 'cur-config-c)
-;;; cur-config-c.el ends here

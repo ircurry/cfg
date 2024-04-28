@@ -1,12 +1,3 @@
-;;; cur-config-ide.el --- configuration to make emacs ide like
-
-;;; Commentary:
-;; The packages and configurations required to turn Emacs into an ide.
-;; Primarily this means an lsp client, a completion system, a syntax
-;; checker, and a dap client (yet to be included/configured).
-
-;;; Code:
-
 ;; ===LSP Mode===
 (use-package lsp-mode
   :demand t
@@ -115,4 +106,3 @@
 (use-package rg)
 
 (provide 'cur-config-ide)
-;;; cur-config-ide.el ends here

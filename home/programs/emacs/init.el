@@ -1,9 +1,3 @@
-;;; init.el --- init.el
-
-;;; Commentary:
-
-;;; Code:
-
 ;; ===Check Emacs Version===
 (when (version< emacs-version "29.1")
   (error "This setup is only guarunteed to work on 29.1, disable this line to load anyways."))
@@ -88,4 +82,3 @@
 (require 'cur-config-direnv)
 
 (provide 'init)
-;;; init.el ends here

@@ -1,9 +1,3 @@
-;;; cur-config-essentials.el --- essentials for emacs
-
-;;; Commentary:
-
-;;; Code:
-
 ;; ===Parens===
 (use-package paren
   :ensure nil
@@ -26,4 +20,3 @@
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (provide 'cur-config-essentials)
-;;; cur-config-essentials.el ends here

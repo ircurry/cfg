@@ -1,9 +1,3 @@
-;;; cur-config-shell.el --- accessing the shell in emacs
-
-;;; Commentary:
-
-;;; Code:
-
 ;; ===Vterm===
 (use-package vterm
   :ensure nil
@@ -71,4 +65,3 @@ if no directory is specified"
 (use-package zoxide)
 
 (provide 'cur-config-shell)
-;;; cur-config-shell.el ends here

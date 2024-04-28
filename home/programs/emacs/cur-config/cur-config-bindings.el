@@ -1,9 +1,3 @@
-;;; cur-config-bindings.el --- emacs keybindings
-
-;;; Commentary:
-
-;;; Code:
-
 ;; ===Hydra===
 (use-package hydra
   :demand t)
@@ -299,4 +293,3 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
   (meow-global-mode 1))
 
 (provide 'cur-config-bindings)
-;;; cur-config-bindings.el ends here

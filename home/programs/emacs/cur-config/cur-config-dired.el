@@ -1,9 +1,3 @@
-;;; cur-config-dired.el --- configurations for dired
-
-;;; Commentary:
-
-;;; Code:
-
 ;; ===Dired Icons===
 (use-package nerd-icons-dired
   :after (dired)
@@ -125,4 +119,3 @@
   (setq dired-mouse-drag-files t))
 
 (provide 'cur-config-dired)
-;;; cur-config-dired.el ends here

@@ -1,9 +1,3 @@
-;;; cur-config-java.el --- configuration for java
-
-;;; Commentary:
-
-;;; Code:
-
 ;; ===Java Tree-Sitter Mode===
 (use-package java-ts-mode
   :mode "\\.java\\'")
@@ -29,4 +23,3 @@
       (append (list (concat jdtls-path "/bin/jdtls")) jdtls-exec-options))))
 
 (provide 'cur-config-java)
-;;; cur-config-java.el ends here

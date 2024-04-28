@@ -1,9 +1,3 @@
-;;; cur-config-smol-net.el --- emacs keybindings
-
-;;; Commentary:
-
-;;; Code:
-
 ;; ===Gemini-Mode===
 (use-package gemini-mode)
 
@@ -16,4 +10,3 @@
   (elpher-default-url-type "gemini"))
 
 (provide 'cur-config-smol-net)
-;;; cur-config-smol-net.el ends here

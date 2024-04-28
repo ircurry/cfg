@@ -1,13 +1,3 @@
-;;; cur-config-completion.el --- configurations emacs completion
-
-;;; Commentary:
-;; This file does not contain code completion.  Rather, this
-;; is my configuration for Emacs' completion system and
-;; the main interfaces that use them.  For code completion
-;; please go see `cur-config-ide.el' and company mode.
-
-;;; Code:
-
 ;; ===Counsel==
 (use-package counsel
   :demand t
@@ -47,4 +37,3 @@
   (ivy-rich-mode 1))
 
 (provide 'cur-config-completion)
-;;; cur-config-completion.el ends here

@@ -1,9 +1,3 @@
-;;; cur-config-help.el --- help configurations
-
-;;; Commentary:
-
-;;; Code:
-
 ;; ===which-key===
 (use-package which-key
   :demand t
@@ -72,4 +66,3 @@
   (add-hook 'Info-mode-hook #'meow-info-mode))
 
 (provide 'cur-config-help)
-;;; cur-config-help.el ends here

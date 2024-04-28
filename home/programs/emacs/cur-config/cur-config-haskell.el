@@ -1,9 +1,3 @@
-;;; cur-config-haskell.el --- haskell language configurations
-
-;;; Commentary:
-
-;;; Code:
-
 ;; ===Haskell-Mode===
 (use-package haskell-mode)
 
@@ -20,4 +14,3 @@
   (push 'company-ghci company-backends))
 
 (provide 'cur-config-haskell)
-;;; cur-config-haskell.el ends here

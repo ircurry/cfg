@@ -1,9 +1,3 @@
-;;; cur-config-faces.el --- faces configuration
-
-;;; Commentary:
-
-;;; Code:
-
 ;; ===Default Font===
 (add-to-list 'default-frame-alist
              '(font . "JetBrains Mono Nerd Font-11"))
@@ -74,4 +68,3 @@ check for overrides with `cur/theme-override'."
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
 (provide 'cur-config-faces)
-;;; cur-config-faces.el ends here

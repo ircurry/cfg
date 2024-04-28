@@ -1,9 +1,3 @@
-;;; cur-config-elisp.el --- configurations for working with elisp
-
-;;; Commentary:
-
-;;; Code:
-
 ;; ===rainbow-delimiters===
 (use-package rainbow-delimiters
   ;:ensure t
@@ -44,4 +38,3 @@ This does not set the variable to be a new value."
       (push pair alist))))
 
 (provide 'cur-config-elisp)
-;;; cur-config-elisp.el ends here
