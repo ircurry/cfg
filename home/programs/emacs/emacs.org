@@ -883,7 +883,7 @@ Doom themes are a theme pack specifically for the Doom Emacs distribution, but w
     :bind (:map cur/toggle-map
                 ("C-t" . cur/load-theme))
     :config
-    (cur/load-theme 'catppuccin))
+    (cur/load-theme 'doom-nord-aurora))
 #+end_src
 
 *** Autothemer

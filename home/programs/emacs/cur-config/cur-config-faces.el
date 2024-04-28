@@ -48,7 +48,7 @@ check for overrides with `cur/theme-override'."
   :bind (:map cur/toggle-map
               ("C-t" . cur/load-theme))
   :config
-  (cur/load-theme 'catppuccin))
+  (cur/load-theme 'doom-nord-aurora))
 
 ;; ===Autothemer===
 (use-package autothemer)
