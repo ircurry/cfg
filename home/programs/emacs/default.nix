@@ -51,6 +51,7 @@ let
       epkgs.catppuccin-theme
       epkgs.ef-themes
       epkgs.nerd-icons-ibuffer
+      epkgs.spacious-padding
 
       # ===Haskell===
       epkgs.haskell-mode

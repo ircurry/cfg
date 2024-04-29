@@ -67,4 +67,18 @@ check for overrides with `cur/theme-override'."
 (use-package nerd-icons-ibuffer
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
+;; ===Spacious Padding===
+(use-package spacious-padding
+  :config
+  (setq spacious-padding-widths
+        '(:internal-border-width 8
+          :header-line-width 0
+          :mode-line-width 0
+          :tab-width 0
+          :right-divider-width 18
+          :scroll-bar-width 0
+          :fringe-width 0))
+  (setq spacious-padding-subtle-mode-line nil)
+  (spacious-padding-mode 1))
+
 (provide 'cur-config-faces)

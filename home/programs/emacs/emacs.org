@@ -763,7 +763,7 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
   (provide 'cur-config-dired)
 #+end_src
 
-** Faces and theme configurations (=cur-config-faces.el=)
+** Faces, themes, and eye candy configurations (=cur-config-faces.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-faces.el
 :END:
@@ -885,6 +885,26 @@ Adds Icons to ~ibuffer~. Not really a face thing but I don't have a dedicated ~i
   ;; ===Ibuffer Icons===
   (use-package nerd-icons-ibuffer
     :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
+#+end_src
+
+*** Spacious Padding
+
+It adds padding and makes emacs look better.
+
+#+begin_src emacs-lisp
+  ;; ===Spacious Padding===
+  (use-package spacious-padding
+    :config
+    (setq spacious-padding-widths
+          '(:internal-border-width 8
+            :header-line-width 0
+            :mode-line-width 0
+            :tab-width 0
+            :right-divider-width 18
+            :scroll-bar-width 0
+            :fringe-width 0))
+    (setq spacious-padding-subtle-mode-line nil)
+    (spacious-padding-mode 1))
 
   (provide 'cur-config-faces)
 #+end_src
