@@ -1298,15 +1298,14 @@ Mostly just ~yaml-mode~.
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-nix.el
 :END:
 
+My configurations for the Nix language, which mostly boils down to "start the lsp server".
+
 #+begin_src emacs-lisp
   ;; ===nix-mode===
   (use-package nix-mode
     :hook
     ((nix-mode) . lsp-deferred))
-    ;:ensure t)
-#+end_src
 
-#+begin_src emacs-lisp
   (provide 'cur-config-nix)
 #+end_src
 
