@@ -2,6 +2,7 @@
 {
   imports = [
     ./alacritty.nix
+    ./anki.nix
     ./brave.nix
     ./discord.nix
     ./emacs

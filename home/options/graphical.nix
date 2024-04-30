@@ -86,6 +86,7 @@
         default = config.nocturne.themes.colors.base05;
       };
     };
+    anki.enable = lib.mkEnableOption "Enable Anki Flash Card Program";
     brave.enable = lib.mkEnableOption "Enable Brave Browser";
     discord.enable = lib.mkEnableOption "Enable Vesktop Discord Client";
     emacs = {

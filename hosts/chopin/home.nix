@@ -21,6 +21,7 @@
     #themes.theme = "nord-light";
     graphical = {
       alacritty.enable = true;
+      anki.enable = true;
       brave.enable = false;
       discord.enable = true;
       emacs.enable = true;
