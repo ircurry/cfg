@@ -1283,21 +1283,13 @@ I also have lsp-java set up for better integrating ~lsp-mode~ into ~java-ts-mode
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-markup.el
 :END:
 
+Mostly just ~yaml-mode~.
+
 #+begin_src emacs-lisp
   ;; ===YAML===
   (use-package yaml-mode
-    ;:ensure t
     :commands (yaml-mode))
-#+end_src
 
-#+begin_src emacs-lisp
-  ;; ===EWW/Yuck Configuration===
-  (use-package yuck-mode
-    ;:ensure t
-    :commands (yuck-mode))
-#+end_src
-
-#+begin_src emacs-lisp
   (provide 'cur-config-markup)
 #+end_src
 
