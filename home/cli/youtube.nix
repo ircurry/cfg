@@ -52,8 +52,7 @@ in
           ###############
           ### General ###
           ###############
-          #invidious_instance="https://invidious.nerdvpn.de"
-          invidious_instance="https://invidious.slipfox.xyz"
+          invidious_instance="https://invidious.nerdvpn.de"
           #invidious_instance="https://vid.puffyan.us"
           #invidious_instance="https://invidious.no-logs.com"
           is_detach=0
