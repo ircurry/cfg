@@ -1414,6 +1414,10 @@ My configurations for the Nix language, which mostly boils down to "start the ls
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-shell.el
 :END:
 
+*** Vterm
+
+Vterm is a terminal emulator for emacs. It is faster than ~term~ and ~ansi-term~ but the downside is that it is not written entirely in elisp so its cross platform. ~cur/meow-vterm~ and ~cur/meow-vterm-other-window~ help make vterm more "intuitive". ~cur/vterm-kill~ kills the vterm buffer cleanly and without prompting.
+
 #+begin_src emacs-lisp
   ;; ===Vterm===
   (use-package vterm
@@ -1443,12 +1447,20 @@ My configurations for the Nix language, which mostly boils down to "start the ls
     (setq vterm-max-scrollback 10000))
 #+end_src
 
+*** Eat
+
+Eat is just a better elisp terminal emulator. I mostly use this so that elisp can run TUI programs.
+
 #+begin_src emacs-lisp
   ;; ===Eat===
   (use-package eat
     :config
     (eat-eshell-mode 1))
 #+end_src
+
+*** Eshell
+
+Eshell is an shell for Emacs like bash or sh, but written in elisp and has its own ways of doing things. Note: not POSIX compliant.
 
 #+begin_src emacs-lisp
   ;; ===Eshell===
@@ -1483,12 +1495,14 @@ My configurations for the Nix language, which mostly boils down to "start the ls
     (eshell-prompt-function 'cur/eshell-prompt "Set custom prompt for eshell"))
 #+end_src
 
+*** Zoxide
+
+Interfacing with Zoxide from emacs.
+
 #+begin_src emacs-lisp
   ;; ===Zoxide===
   (use-package zoxide)
-#+end_src
 
-#+begin_src emacs-lisp
   (provide 'cur-config-shell)
 #+end_src
 
