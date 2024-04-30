@@ -1319,9 +1319,7 @@ My configurations for the Nix language, which mostly boils down to "start the ls
   (use-package rustic
     :after (lsp-mode)
     :hook (rustic . lsp-deferred))
-#+end_src
 
-#+begin_src emacs-lisp
   (provide 'cur-config-rust)
 #+end_src
 
@@ -1345,9 +1343,7 @@ My configurations for the Nix language, which mostly boils down to "start the ls
     :custom (company-ghc-show-info t)
     :config
     (push 'company-ghci company-backends))
-#+end_src
 
-#+begin_src emacs-lisp
   (provide 'cur-config-haskell)
 #+end_src
 
@@ -1355,6 +1351,8 @@ My configurations for the Nix language, which mostly boils down to "start the ls
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-c.el
 :END:
+
+I use tree-sitter for C, which unfortunately is not currently integrated into the default C major mode for emacs. I have also changed the ~c-default-style~ for C to be "linux", which is 8 spaces for indentation instead of the default of 2.
 
 #+begin_src emacs-lisp
   ;; ===C Tree-Sitter Mode===
@@ -1375,9 +1373,7 @@ My configurations for the Nix language, which mostly boils down to "start the ls
   ;; ===CCLS Mode===
   (use-package ccls
     :after (cc-mode c-ts-mode))
-#+end_src
 
-#+begin_src emacs-lisp
   (provide 'cur-config-c)
 #+end_src
 
