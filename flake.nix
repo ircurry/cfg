@@ -12,7 +12,8 @@
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
 
     hyprland = {
-      url = "github:hyprwm/Hyprland/";
+      #url = "github:hyprwm/Hyprland/";
+      url = "github:hyprwm/Hyprland/4540d8ccd51e485485af364a951ea7df240585be";
     };
 
     nh = {
