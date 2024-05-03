@@ -15,6 +15,7 @@ inputs.devenv.lib.mkShell {
         packages = [
           pkgs.age
           pkgs.nh
+          pkgs.just
           pkgs.sops
           pkgs.ssh-to-age
           pkgs.nil

@@ -73,6 +73,8 @@ let
       epkgs.projectile
       epkgs.rg
       epkgs.envrc
+      epkgs.just-mode
+      epkgs.justl
 
       # ===Java===
       epkgs.lsp-java

@@ -1177,9 +1177,23 @@ Projectile provides many commands to help manage and do things in a project, suc
 
   ;; Need ripgrep wrapper for `projectile-ripgrep'
   (use-package rg)
+#+end_src
+
+*** Just
+
+[[https:github.com/casey/just][Just]] is just a command runner. Think of it sort of like make but simplified. This is my configuration for working and interacting with it from emacs.
+
+#+begin_src emacs-lisp
+  (use-package just-mode)
+
+  (use-package justl
+    :bind (:map cur/projectile-map
+                ("C-j" . justl-exec-eshell)
+                ("j"   . justl)))
 
   (provide 'cur-config-ide)
 #+end_src
+
 
 ** Configurations for Emacs Lisp (=cur-config-elisp.el=)
 :PROPERTIES:

@@ -105,4 +105,11 @@
 ;; Need ripgrep wrapper for `projectile-ripgrep'
 (use-package rg)
 
+(use-package just-mode)
+
+(use-package justl
+  :bind (:map cur/projectile-map
+              ("C-j" . justl-exec-eshell)
+              ("j"   . justl)))
+
 (provide 'cur-config-ide)
