@@ -1188,8 +1188,7 @@ Projectile provides many commands to help manage and do things in a project, suc
 
   (use-package justl
     :bind (:map cur/projectile-map
-                ("C-j" . justl-exec-eshell)
-                ("j"   . justl)))
+                ("C-j" . justl)))
 
   (provide 'cur-config-ide)
 #+end_src
