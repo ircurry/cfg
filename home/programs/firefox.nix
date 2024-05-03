@@ -271,6 +271,20 @@ in
             ublock-origin
           ];
         };
+        profiles.banking = {
+          isDefault = false;
+          id = 4;
+
+          search = {
+            default = "DuckDuckGo";
+            force = true;
+          };
+
+          extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
+            multi-account-containers
+            ublock-origin
+          ];
+        };
       };
     })
     (lib.mkIf (way-cfg.name == "firefox") {
