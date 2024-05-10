@@ -1,6 +1,9 @@
 selrb := 'switch'
 selin := 'nixpkgs'
 
+test:
+	nh os test .
+
 rb:
 	nh os {{ selrb }} .
 
