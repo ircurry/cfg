@@ -33,6 +33,8 @@ let
       epkgs.swiper
       epkgs.ivy
       epkgs.ivy-rich
+      epkgs.vertico
+      epkgs.marginalia
 
       # ===Dired===
       epkgs.nerd-icons-dired
