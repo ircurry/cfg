@@ -68,13 +68,6 @@
   :config
   (treemacs-follow-mode))
 
-;; ===xref-ivy===
-(use-package ivy-xref
-  :after (ivy)
-  :init
-  (setq xref-show-definitions-function #'ivy-xref-show-defs)
-  (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
-
 ;; ===Magit===
 (use-package magit
   :bind (:map cur/sub-leader-keymap

@@ -106,7 +106,7 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
 
   ;; ===Interfaces===
   (require 'cur-config-faces)
-  (require 'cur-config-completion)
+  ;(require 'cur-config-completion)
   (require 'cur-config-windows)
   (require 'cur-modeline)
 
@@ -345,21 +345,21 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
        ;'("a" . )
        '("s" . save-buffer)
        '("d" . kill-current-buffer)
-       '("f" . counsel-find-file)
+       '("f" . find-file)
        ;'("g" . )
        ;'("h" . )
        '("j" . other-window)
        '("k" . cur/other-window-reverse)
        ;'("l" . )
        (cons ";" cur/sub-leader-keymap)
-       '("RET"   . counsel-M-x)
+       '("RET"   . "M-x")
 
        ;; ===4th Row===
        (cons "z" cur/alignment-map)
        ;'("x" . )
        ;'("c" . )
        ;'("v" . )
-       '("b" . counsel-switch-buffer)
+       '("b" . switch-to-buffer)
        '("B" . ibuffer)
        ;'("n" . )
        ;'("m" . )
@@ -554,13 +554,13 @@ Provides additional info help.
 #+begin_src emacs-lisp
   ;; ===helpful===
   (use-package helpful
-    :custom
-    (counsel-describe-function-function #'helpful-callable)
-    (counsel-describe-variable-function #'helpful-variable)
+    ;; :custom
+    ;; (counsel-describe-function-function #'helpful-callable)
+    ;; (counsel-describe-variable-function #'helpful-variable)
     :bind
-    ([remap describe-function] . counsel-describe-function)
+    ;; ([remap describe-function] . counsel-describe-function)
     ([remap describe-command] . helpful-command)
-    ([remap describe-variable] . counsel-describe-variable)
+    ;; ([remap describe-variable] . counsel-describe-variable)
     ([remap describe-key] . helpful-key))
 #+end_src
 
@@ -922,7 +922,7 @@ Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]
 
 Counsel is a package that provides replacement functions for common emacs tasks that better integrates with ivy.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   ;; ===Counsel==
   (use-package counsel
     :demand t
@@ -937,7 +937,7 @@ Counsel is a package that provides replacement functions for common emacs tasks 
 
 Basically isearch with a nice ui.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   ;; ===Swiper===
   (use-package swiper
     :commands (swiper))
@@ -947,7 +947,7 @@ Basically isearch with a nice ui.
 
 A better completion system for emacs. Much of the ivy config is just setting keybindings for the minibuffer.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   ;; ===Ivy===
   (use-package ivy
     :demand t
@@ -973,7 +973,7 @@ A better completion system for emacs. Much of the ivy config is just setting key
 
 A better interface for ivy.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (use-package ivy-rich
     :after (counsel ivy)
     :config
@@ -1128,7 +1128,7 @@ Project tree, I don't use this all that often.
 
 This lets us use ivy to select xref candidates.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   ;; ===xref-ivy===
   (use-package ivy-xref
     :after (ivy)
