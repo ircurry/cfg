@@ -10,6 +10,7 @@
     ./flatpak.nix
     ./imv.nix
     ./keepassxc.nix
+    ./keymapp.nix
     ./kid3.nix
     ./libreoffice.nix
     ./mpv.nix

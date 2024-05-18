@@ -15,6 +15,7 @@
     ./printing.nix
     ./secrets.nix
     ./timezone.nix
+    ./udev.nix
     ./user.nix
   ];
 }

@@ -108,6 +108,7 @@
       description = "Enable imv";
     };
     keepassxc.enable = lib.mkEnableOption "Enable KeepassXC";
+    keymapp.enable = lib.mkEnableOption "Enable ZSA's Keymapp";
     kid3.enable = lib.mkEnableOption "Enable kid3";
     libreoffice.enable = lib.mkEnableOption "Enable LibreOffice";
     mullvadBrowser.enable = lib.mkEnableOption "Enable Mullvad Browser";
