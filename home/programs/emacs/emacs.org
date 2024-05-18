@@ -106,7 +106,7 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
 
   ;; ===Interfaces===
   (require 'cur-config-faces)
-  ;(require 'cur-config-completion)
+  (require 'cur-config-completion)
   (require 'cur-config-windows)
   (require 'cur-modeline)
 
@@ -345,7 +345,7 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
        ;'("a" . )
        '("s" . save-buffer)
        '("d" . kill-current-buffer)
-       '("f" . find-file)
+       '("f" . "C-x f")
        ;'("g" . )
        ;'("h" . )
        '("j" . other-window)
@@ -359,8 +359,8 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
        ;'("x" . )
        ;'("c" . )
        ;'("v" . )
-       '("b" . switch-to-buffer)
-       '("B" . ibuffer)
+       '("b" . "C-x b")
+       ;'("B" . ibuffer)
        ;'("n" . )
        ;'("m" . )
        '("," . meow-bounds-of-thing)
@@ -978,6 +978,56 @@ A better interface for ivy.
     :after (counsel ivy)
     :config
     (ivy-rich-mode 1))
+#+end_src
+
+*** Completions Styles
+
+#+begin_src emacs-lisp
+  (use-package minibuffer
+    :config
+    (setq completion-styles '(basic substring orderless))
+    (setq completion-category-overrides
+          '((file      (styles . (basic partial-completion orderless)))
+            (kill-ring (styles . (emacs22 orderless))))))
+
+  (use-package orderless
+    :bind ( :map minibuffer-local-completion-map
+            ("SPC" . nil)
+            ("?" . nil))
+    :config
+    (setq orderless-matching-styles '(orderless-prefixes orderless-regexp)))
+#+end_src
+
+*** Vertico
+
+#+begin_src emacs-lisp
+  (use-package vertico
+    :config
+    (vertico-mode 1))
+#+end_src
+
+*** Marginalia
+
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :config
+    (marginalia-mode 1))
+#+end_src
+
+*** Vertico Posframe
+
+#+begin_src emacs-lisp
+  (use-package vertico-posframe
+    :config
+    (vertico-posframe-mode 1))
+#+end_src
+
+*** Consult
+
+#+begin_src emacs-lisp
+  (use-package consult
+    :demand t
+    :bind (("C-x b" . consult-buffer)))
 
   (provide 'cur-config-completion)
 #+end_src

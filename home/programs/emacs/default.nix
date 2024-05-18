@@ -35,6 +35,10 @@ let
       epkgs.ivy-rich
       epkgs.vertico
       epkgs.marginalia
+      epkgs.consult
+      epkgs.orderless
+      epkgs.vertico-posframe
+      epkgs.embark
 
       # ===Dired===
       epkgs.nerd-icons-dired
