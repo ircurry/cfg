@@ -13,11 +13,12 @@
   nocturne = {
     #themes.theme = "basic-dark";
     #themes.theme = "catppuccin-mocha";
+    themes.theme = "grimshaw";
     #themes.theme = "gruvbox-dark";
     #themes.theme = "gruvbox-dark-bright";
     #themes.theme = "gruvbox-light";
     #themes.theme = "kanagawa-wave";
-    themes.theme = "nord-aurora";
+    #themes.theme = "nord-aurora";
     #themes.theme = "nord-light";
     graphical = {
       alacritty.enable = true;

@@ -8,6 +8,7 @@
     # ===Themes===
     ./basic-dark.nix
     ./catppuccin-mocha.nix
+    ./grimshaw.nix
     ./gruvbox.nix
     ./gruvbox-dark-bright.nix
     ./gruvbox-light.nix
