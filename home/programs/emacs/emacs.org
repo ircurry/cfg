@@ -1026,7 +1026,9 @@ A better interface for ivy.
 #+begin_src emacs-lisp
   (use-package consult
     :demand t
-    :bind (("C-x b" . consult-buffer)))
+    :bind (("C-x b" . consult-buffer)
+           ("M-g i" . consult-imenu)
+           ("M-y" . consult-yank-pop)))
 
   (provide 'cur-config-completion)
 #+end_src
@@ -1214,9 +1216,9 @@ Projectile provides many commands to help manage and do things in a project, suc
                 ("C-d"   . projectile-find-dir)
                 ("d"     . projectile-dired)
                 ("C-f"   . projectile-find-file)
-                ("C-r"   . projectile-ripgrep)
+                ("C-r"   . consult-ripgrep)
                 ("C-c"   . projectile-compile-project)
-                ("C-b"   . projectile-switch-to-buffer)
+                ("C-b"   . consult-project-buffer)
                 ("C-l"   . projectile-ibuffer)
                 ("C-k"   . projectile-kill-buffers)
                 ("C-v"   . projectile-vc)
@@ -1241,7 +1243,6 @@ Projectile provides many commands to help manage and do things in a project, suc
 
   (provide 'cur-config-ide)
 #+end_src
-
 
 ** Configurations for Emacs Lisp (=cur-config-elisp.el=)
 :PROPERTIES:

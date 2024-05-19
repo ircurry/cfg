@@ -26,6 +26,8 @@
 
 (use-package consult
   :demand t
-  :bind (("C-x b" . consult-buffer)))
+  :bind (("C-x b" . consult-buffer)
+         ("M-g i" . consult-imenu)
+         ("M-y" . consult-yank-pop)))
 
 (provide 'cur-config-completion)
