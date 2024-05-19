@@ -324,30 +324,30 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
        ;'("7" . )
        ;'("8" . )
        ;'("9" . )
-       '("0" . delete-window)
+       '("0" . "C-x 0") ; delete window
 
        ;; ===2nd Row===
        ;'("TAB"  . )
-       '("q" . comment-dwim)
+       '("q" . "M-;") ; comment dwim
        '("w" . cur/window/body)
        ;'("e" . )
        '("r" . query-replace)
        (cons "t" cur/toggle-map)
        ;'("y" . )
-       '("u" . universal-argument)
-       ;'("i" . )
-       ;'("o" . )
+       '("u" . "C-u")   ; universal argument
+       '("i" . "M-g i") ; imenu
+       '("o" . "C-x o") ; other window
        (cons "p" cur/projectile-map)
        ;'("-" . )
 
        ;; ===3rd Row===
        ;'("<escape>" . )
        ;'("a" . )
-       '("s" . save-buffer)
+       '("s" . "C-x C-s") ; save buffer
        '("d" . kill-current-buffer)
-       '("f" . "C-x f")
-       ;'("g" . )
-       ;'("h" . )
+       '("f" . "C-x C-f") ; find file
+       ;'("g" . ) ; C-M- map
+       ;'("h" . ) ; C-h map
        '("j" . other-window)
        '("k" . cur/other-window-reverse)
        ;'("l" . )
@@ -356,13 +356,12 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
 
        ;; ===4th Row===
        (cons "z" cur/alignment-map)
-       ;'("x" . )
-       ;'("c" . )
+       ;'("x" . ) ; C-x map
+       ;'("c" . ) ; C-c map
        ;'("v" . )
        '("b" . "C-x b")
-       ;'("B" . ibuffer)
        ;'("n" . )
-       ;'("m" . )
+       ;'("m" . ) ; M- map
        '("," . meow-bounds-of-thing)
        '("." . meow-inner-of-thing)
        '("/" . rg)
