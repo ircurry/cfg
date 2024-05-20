@@ -1,10 +1,10 @@
 { config, lib, ... }:
 let
   theme = config.nocturne.themes.theme;
-  bg0 = "1C1F32";
-  bg1 = "25283D";
-  bg2 = "2B2F45";
-  bg3 = "35384E";
+  bg0 = "171926";
+  bg1 = "1C1F32";
+  bg2 = "25283D";
+  bg3 = "2B2F45";
   fg0 = "D9E1D3";
   fg1 = "D5D7E0";
   fg2 = "A6A9C4";
@@ -46,6 +46,9 @@ in
         base0D = blue; # blue
         base0E = purple; # purple
         base0F = brown; # brown
+      };
+      wayland.waybar = {
+        default-bg = bg0;
       };
     };
   };
