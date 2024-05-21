@@ -40,9 +40,7 @@ check for overrides with `cur/theme-override'."
           (cur/theme-override))
       (error "Problem loading theme %s" theme)))
   :bind (:map cur/toggle-map
-              ("C-t" . cur/load-theme))
-  :config
-  (cur/load-theme 'doom-nord-aurora))
+              ("C-t" . cur/load-theme)))
 
 ;; ===Autothemer===
 (use-package autothemer)
@@ -61,7 +59,9 @@ check for overrides with `cur/theme-override'."
 (define-key cur/toggle-map (kbd "C-s") 'hydra-text-scale/body)
 
 ;; ===Ef-Themes===
-(use-package ef-themes)
+(use-package ef-themes
+  :config
+  (cur/load-theme 'ef-tritanopia-dark))
 
 ;; ===Ibuffer Icons===
 (use-package nerd-icons-ibuffer
