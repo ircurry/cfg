@@ -1347,7 +1347,7 @@ I also have lsp-java set up for better integrating ~lsp-mode~ into ~java-ts-mode
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-markup.el
 :END:
 
-Mostly just ~yaml-mode~.
+Literally just ~yaml-mode~.
 
 #+begin_src emacs-lisp
   ;; ===YAML===
@@ -1362,7 +1362,7 @@ Mostly just ~yaml-mode~.
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-nix.el
 :END:
 
-My configurations for the Nix language, which mostly boils down to "start the lsp server".
+My configurations for the Nix language, which boils down to "start the lsp server".
 
 #+begin_src emacs-lisp
   ;; ===nix-mode===
