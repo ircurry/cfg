@@ -2,7 +2,7 @@
 #+author: icurry
 #+language: en
 #+options: toc:2 num:t author:t
-#+startup: content
+#+startup: show2levels
 
 * Introduction and Overview
 
