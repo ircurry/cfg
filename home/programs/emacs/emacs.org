@@ -918,68 +918,6 @@ This section is not about code completion. Rather, this is my configuration for 
 
 Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]] suite for doing completions in emacs. I like it but I know that the vertico/marginelia/consult/embark chain is better, faster, and more modern. I plan to make the switch at some point but for now I sticking with ivy.
 
-*** Counsel
-
-Counsel is a package that provides replacement functions for common emacs tasks that better integrates with ivy.
-
-#+begin_src emacs-lisp :tangle no
-  ;; ===Counsel==
-  (use-package counsel
-    :demand t
-    :bind (("M-x" . counsel-M-x)
-           ("C-x b" . counsel-switch-buffer)
-           ("C-x C-f" . counsel-find-file)
-           :map minibuffer-local-map
-           ("C-r" . 'counsel-minibuffer-history)))
-#+end_src
-
-*** Swiper
-
-Basically isearch with a nice ui.
-
-#+begin_src emacs-lisp :tangle no
-  ;; ===Swiper===
-  (use-package swiper
-    :commands (swiper))
-#+end_src
-
-*** Ivy
-
-A better completion system for emacs. Much of the ivy config is just setting keybindings for the minibuffer.
-
-#+begin_src emacs-lisp :tangle no
-  ;; ===Ivy===
-  (use-package ivy
-    :demand t
-    :after (counsel)
-    :bind (("C-s" . swiper)
-           :map ivy-minibuffer-map
-           ("TAB" . ivy-alt-done)
-           ("C-l" . ivy-alt-done)
-           ("C-j" . ivy-next-line)
-           ("C-k" . ivy-previous-line)
-           :map ivy-switch-buffer-map
-           ("C-k" . ivy-previous-line)
-           ("C-l" . ivy-done)
-           ("C-d" . ivy-switch-buffer-kill)
-           :map ivy-reverse-i-search-map
-           ("C-k" . ivy-previous-line)
-           ("C-d" . ivy-reverse-i-search-kill))
-    :config
-    (ivy-mode 1))
-#+end_src
-
-*** Ivy-rich
-
-A better interface for ivy.
-
-#+begin_src emacs-lisp :tangle no
-  (use-package ivy-rich
-    :after (counsel ivy)
-    :config
-    (ivy-rich-mode 1))
-#+end_src
-
 *** Completions Styles
 
 #+begin_src emacs-lisp
@@ -1174,19 +1112,6 @@ Project tree, I don't use this all that often.
           ("C-t" . treemacs-select-window))
     :config
     (treemacs-follow-mode))
-#+end_src
-
-*** Ivy-xref
-
-This lets us use ivy to select xref candidates.
-
-#+begin_src emacs-lisp :tangle no
-  ;; ===xref-ivy===
-  (use-package ivy-xref
-    :after (ivy)
-    :init
-    (setq xref-show-definitions-function #'ivy-xref-show-defs)
-    (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 #+end_src
 
 *** Magit
@@ -1608,17 +1533,6 @@ Interfacing with Zoxide from emacs.
                                  "......" "----------------"))
     (setq org-format-latex-options '(:foreground "#e5e9e9" :scale 1.0)))
     ;; (cur/org-font-setup))
-#+end_src
-
-#+begin_src emacs-lisp :tangle no
-  ;; ===Org Bullets===
-  (use-package org-bullets
-    ;:ensure t
-    :after org
-    :hook (org-mode . org-bullets-mode)
-    :custom
-    (org-bullets-bullet-list '("" "●" "○" "●" "○" "●" "○" "●" "○")))
-  ;;  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 #+end_src
 
 #+begin_src emacs-lisp
