@@ -138,7 +138,7 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
   (provide 'init)
 #+end_src
 
-* Configuration Modules
+* Configuration Modules (=cur-config=)
 
 ** Essential configuration (=cur-config-essentials.el=)
 :PROPERTIES:
@@ -1615,7 +1615,7 @@ Interfacing with Zoxide from emacs.
   (provide 'cur-config-direnv)
 #+end_src
 
-* Custom Library Modules
+* Custom Library Modules (=cur-lisp=)
 
 ** Custom modeline (=cur-modline.el=)
 :PROPERTIES:
