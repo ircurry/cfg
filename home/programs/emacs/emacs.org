@@ -780,6 +780,16 @@ JetBrains Mono supremacy.
                '(font . "JetBrains Mono Nerd Font-11"))
 #+end_src
 
+*** Default Opacity
+
+I have this transparency set to be the same as with my Alacritty config. This adds more consistency to my computing experience. It also just looks really cool.
+
+#+begin_src emacs-lisp
+  ;; ===Default Opacity===
+  (add-to-list 'default-frame-alist
+               '(alpha-background . 85))
+#+end_src
+
 *** TODO Custom themes
 
 I have several custom themes in a directory weirdly named themes. These are the =everforest= and =kanagawa= themes. I have changed these from the originals. TODO: add the links to the original themes.
