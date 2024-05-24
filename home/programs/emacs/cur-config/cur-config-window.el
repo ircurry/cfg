@@ -1,4 +1,4 @@
-;;; cur-config-windows.el --- emacs windows configuration
+;;; cur-config-window.el --- emacs windows configuration
 
 ;;; Commentary:
 
@@ -21,5 +21,5 @@
   (interactive)
   (other-window -1))
 
-(provide 'cur-config-windows)
-;;; cur-config-windows.el ends here
+(provide 'cur-config-window)
+;;; cur-config-window.el ends here

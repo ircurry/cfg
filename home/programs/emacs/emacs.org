@@ -107,7 +107,7 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
   ;; ===Interfaces===
   (require 'cur-config-faces)
   (require 'cur-config-completion)
-  (require 'cur-config-windows)
+  (require 'cur-config-window)
   (require 'cur-modeline)
 
   ;; ===Languages===
@@ -982,15 +982,15 @@ Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]
   (provide 'cur-config-completion)
 #+end_src
 
-** Window management configurations (=cur-config-windows.el=)
+** Window management configurations (=cur-config-window.el=)
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ./cur-config/cur-config-windows.el
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-window.el
 :END:
 
 The default window functions only split the window and don't jump to the newly created window like you would expect in say a tiling window manager. These functions are provide that kind of functionality.
 
 #+begin_src emacs-lisp
-  ;;; cur-config-windows.el --- emacs windows configuration
+  ;;; cur-config-window.el --- emacs windows configuration
 
   ;;; Commentary:
 
@@ -1013,8 +1013,8 @@ The default window functions only split the window and don't jump to the newly c
     (interactive)
     (other-window -1))
 
-  (provide 'cur-config-windows)
-  ;;; cur-config-windows.el ends here
+  (provide 'cur-config-window)
+  ;;; cur-config-window.el ends here
 #+end_src
 
 ** IDE configurations (=cur-config-ide.el=)

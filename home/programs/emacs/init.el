@@ -53,7 +53,7 @@
 ;; ===Interfaces===
 (require 'cur-config-faces)
 (require 'cur-config-completion)
-(require 'cur-config-windows)
+(require 'cur-config-window)
 (require 'cur-modeline)
 
 ;; ===Languages===
