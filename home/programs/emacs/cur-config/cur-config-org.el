@@ -23,6 +23,7 @@
   (org-hide-macro-markers nil)
   (org-hide-leading-stars nil)
   (org-agenda-start-with-log-mode t)
+  (org-src-window-setup 'plain) ; don't override `display-buffer-alist'
   (org-log-done 'time)
   (org-log-into-drawer t)
   (org-agenda-window-setup 'current-window "Have org-agenda pop up in the current window")

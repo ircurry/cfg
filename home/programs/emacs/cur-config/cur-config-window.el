@@ -1,8 +1,28 @@
-;;; cur-config-window.el --- emacs windows configuration
-
-;;; Commentary:
-
-;;; Code:
+(use-package cur-window
+  :config
+  (setq window-sides-slots
+        '(1 1 1 1))
+  (setq display-buffer-alist
+        '(("\\*Org Src.*"
+           (display-buffer-same-window))
+          ("\\*Help.*"
+           (display-buffer-reuse-window
+            display-buffer-below-selected)
+           (body-function . select-window))
+          ("\\*Occur\\*"
+           (display-buffer-reuse-window
+            display-buffer-below-selected)
+           (body-function . cur-window-select-fit-to-size))
+          ((or  (derived-mode . eshell-mode)
+                (derived-mode . vterm-mode)
+                (derived-mode . eat-mode)
+                (derived-mode . justl-mode)
+                "justl - .*"
+                "\\*\\(vterm\\|eshell.*\\)\\*")
+           (display-buffer-in-side-window)
+           (side . top)
+           (slot . 0)
+           (body-function . cur-window-select-fit-to-size)))))
 
 ;; ===Window Functions===
 (defun cur/split-and-follow-horizontally ()
@@ -22,4 +42,3 @@
   (other-window -1))
 
 (provide 'cur-config-window)
-;;; cur-config-window.el ends here
