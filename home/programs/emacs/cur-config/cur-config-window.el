@@ -8,9 +8,11 @@
           ("\\*Org Src.*"
            (display-buffer-same-window))
           ((or (derived-mode . compilation-mode)
-               (derived-mode . help-mode)
                (derived-mode . grep-mode)
-               (derived-mode . rg-mode))
+               (derived-mode . help-mode)
+               (derived-mode . Info-mode)
+               (derived-mode . rg-mode)
+               (derived-mode . woman-mode))
            (cur-window-display-buffer-below-or-pop)
            (body-function . cur-window-select-fit-to-size))
           ((derived-mode . occur-mode)
