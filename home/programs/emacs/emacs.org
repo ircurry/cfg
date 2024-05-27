@@ -1721,6 +1721,9 @@ Interfacing with Zoxide from emacs.
 #+end_src
 
 ** Window Management (=cur-window.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-lisp/cur-window.el
+:END:
 
 #+begin_src emacs-lisp
   ;;; cur-window.el --- Customization and helper functions for window management
