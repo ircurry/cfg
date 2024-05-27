@@ -99,7 +99,7 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
 
   ;; ===Essentials===
   (require 'cur-config-essentials)
-  (require 'cur-config-isearch)
+  (require 'cur-config-search)
   (require 'cur-config-bindings)
   (require 'cur-config-help)
   (require 'cur-config-dired)
@@ -182,9 +182,9 @@ I like having absolute line numbers, especially since the meow number selection 
   (provide 'cur-config-essentials)
 #+end_src
 
-** Isearch (=cur-config-isearch.el=)
+** Search configuration (=cur-config-search.el=)
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ./cur-config/cur-config-isearch.el
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-search.el
 :END:
 
 #+begin_src emacs-lisp
@@ -193,10 +193,7 @@ I like having absolute line numbers, especially since the meow number selection 
     (isearch-wrap-pause 'no-ding)
     (isearch-repeat-on-direction-change t))
 
-  (use-package cur-isearch-meow
-    :disabled t)
-
-  (provide 'cur-config-isearch)
+  (provide 'cur-config-search)
 #+end_src
 
 ** Key bindings configurations (=cur-config-bindings.el=)
