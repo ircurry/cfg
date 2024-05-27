@@ -3,26 +3,30 @@
   (setq window-sides-slots
         '(1 1 1 1))
   (setq display-buffer-alist
-        '(("\\*Org Src.*"
+        '(("\\`\\*Async Shell Command\\*\\'"
+           (display-buffer-no-window))
+          ("\\*Org Src.*"
            (display-buffer-same-window))
-          ("\\*Help.*"
-           (display-buffer-reuse-window
-            display-buffer-below-selected)
-           (body-function . select-window))
-          ("\\*Occur\\*"
-           (display-buffer-reuse-window
-            display-buffer-below-selected)
+          ((or (derived-mode . compilation-mode)
+               (derived-mode . help-mode)
+               (derived-mode . grep-mode)
+               (derived-mode . rg-mode))
+           (cur-window-display-buffer-below-or-pop)
            (body-function . cur-window-select-fit-to-size))
-          ((or  (derived-mode . eshell-mode)
-                (derived-mode . vterm-mode)
-                (derived-mode . eat-mode)
-                (derived-mode . justl-mode)
-                "justl - .*"
-                "\\*\\(vterm\\|eshell.*\\)\\*")
-           (display-buffer-in-side-window)
-           (side . top)
-           (slot . 0)
-           (body-function . cur-window-select-fit-to-size)))))
+          ((derived-mode . occur-mode)
+           (display-buffer-reuse-window
+            display-buffer-below-selected)
+           (dedicated . t)
+           (body-function . cur-window-select-fit-to-size))
+          ((or (derived-mode . justl-mode)
+               "\\*eshell .*"
+               "\\*vterm.*"
+               "\\*.*-eat\\*"
+               "justl - .*")
+           (display-buffer-reuse-window
+            display-buffer-at-bottom)
+           (dedicated . t)
+           (window-height . 0.25)))))
 
 ;; ===Window Functions===
 (defun cur/split-and-follow-horizontally ()
