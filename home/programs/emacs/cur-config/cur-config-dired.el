@@ -35,8 +35,8 @@
           ;; ===2nd Row===
           ;; ("TAB"  . )
           ;; ("BTAB" . )
-          ("q" . kmacro-end-and-call-macro)
-          ("Q" . cur/kmacro-toggle)
+          ("q" . quit-window)
+          ;; ("Q" . )
           ;; ("w" . )
           ;; ("W" . )
           ;; ("e" . )
