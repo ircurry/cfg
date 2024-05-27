@@ -1659,6 +1659,28 @@ Interfacing with Zoxide from emacs.
 
 * Custom Library Modules (=cur-lisp=)
 
+** Base Values and Functions (=cur-base.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-lisp/cur-base.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; cur-base.el --- The base of my customizations for emacs
+
+  ;;; Commentary:
+  ;; This is the base of my extensions to Emac's functionality.
+  ;; Do try this at home kids.
+
+  ;;; Code:
+
+  (defgroup cur-base ()
+    "Base functions and variables for my Emacs configuration."
+    :group 'editing)
+
+  (provide 'cur-base)
+  ;;; cur-base.el ends here
+#+end_src
+
 ** Custom modeline (=cur-modline.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-modeline.el
