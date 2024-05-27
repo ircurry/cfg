@@ -44,8 +44,8 @@ _o_: other window
     ("w" other-window "other window" :exit t)
     ("." delete-other-windows "only window" :exit t)
     ("f" find-file-other-window "file in new window" :exit t)
-    ("v" cur/split-and-follow-vertically "split vertical" :exit t)
-    (";" cur/split-and-follow-horizontally "split horizontal" :exit t)
+    ("v" split-window-right "split vertical" :exit t)
+    (";" split-window-below "split horizontal" :exit t)
     ("c" delete-window "delete window" :exit t)
 
     ("o" other-window)
@@ -55,8 +55,8 @@ _o_: other window
     ("l" windmove-right)
 
     ("1" delete-other-windows)
-    ("2" cur/split-and-follow-vertically)
-    ("3" cur/split-and-follow-horizontally)
+    ("2" split-window-right)
+    ("3" split-window-below)
     ("0" delete-window)
 
     ("H" windmove-swap-states-left)
@@ -85,8 +85,8 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
     (meow-leader-define-key
      ;; ===Top Row===
      '("1" . delete-other-windows)
-     '("2" . cur/split-and-follow-vertically)
-     '("3" . cur/split-and-follow-horizontally)
+     '("2" . split-window-right)
+     '("3" . split-window-below)
      ;'("4" . )
      ;'("5" . )
      ;'("6" . )
@@ -117,8 +117,8 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("f" . "C-x C-f") ; find file
      ;'("g" . ) ; C-M- map
      ;'("h" . ) ; C-h map
-     '("j" . other-window)
-     '("k" . cur/other-window-reverse)
+     ;'("j" . )
+     ;'("k" . )
      ;'("l" . )
      (cons ";" cur/sub-leader-keymap)
      '("RET"   . "M-x")
