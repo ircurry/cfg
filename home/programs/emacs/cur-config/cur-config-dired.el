@@ -106,6 +106,8 @@
           ;; ("?" . )
           ;; ("'"  . )
           ;; ("\"" . )
+          :map cur/sub-leader-keymap
+          ("d" . dired)
           )
   :config
   (setq delete-by-moving-to-trash t)
