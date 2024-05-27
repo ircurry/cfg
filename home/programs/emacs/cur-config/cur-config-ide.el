@@ -82,8 +82,8 @@
   :bind (:map cur/projectile-map
               ("C-p"   . projectile-switch-project)
               ("C-a"   . projectile-add-known-project)
-              ("C-d"   . projectile-find-dir)
-              ("d"     . projectile-dired)
+              ("C-d"   . projectile-dired)
+              ("d"     . projectile-find-dir)
               ("C-f"   . projectile-find-file)
               ("C-r"   . consult-ripgrep)
               ("C-c"   . projectile-compile-project)
