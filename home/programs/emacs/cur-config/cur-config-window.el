@@ -8,6 +8,7 @@
           ("\\*Org Src.*"
            (display-buffer-same-window))
           ((or (derived-mode . compilation-mode)
+               (derived-mode . geiser-mode)
                (derived-mode . grep-mode)
                (derived-mode . help-mode)
                (derived-mode . Info-mode)

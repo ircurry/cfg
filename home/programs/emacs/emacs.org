@@ -112,7 +112,7 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
 
   ;; ===Languages===
   (require 'cur-config-ide)
-  (require 'cur-config-elisp)
+  (require 'cur-config-lisp)
   (require 'cur-config-java)
   (require 'cur-config-markup)
   (require 'cur-config-nix)
@@ -1001,6 +1001,7 @@ These are my settings for ~display-buffer-alist~ so windows just Do What I Mean.
             ("\\*Org Src.*"
              (display-buffer-same-window))
             ((or (derived-mode . compilation-mode)
+                 (derived-mode . geiser-mode)
                  (derived-mode . grep-mode)
                  (derived-mode . help-mode)
                  (derived-mode . Info-mode)
@@ -1189,12 +1190,12 @@ Projectile provides many commands to help manage and do things in a project, suc
   (provide 'cur-config-ide)
 #+end_src
 
-** Configurations for Emacs Lisp (=cur-config-elisp.el=)
+** Configurations for Lisp (=cur-config-lisp.el=)
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ./cur-config/cur-config-elisp.el
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-lisp.el
 :END:
 
-These are my configurations for working with emacs lisp. Truth be told, a lot could be improved here and I intend to do so eventually.
+These are my configurations for working with Lisp languages.
 
 *** Rainbow Delimiters
 
@@ -1207,46 +1208,20 @@ This color codes opening and closing delimiters such as parentheses and square b
     :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
-*** Helper Functions
-
-These are some helper functions that I don't really use anymore. They are mostly about alists and I think some of them just replicate behavior of built in functions. I plan to either fix and move or just remove them at some point.
+*** Paredit
 
 #+begin_src emacs-lisp
-  ;; ===Helpful Emacs-Lisp Functions===
-  (defun cur/alist-add-or-replace (pair alist)
-    "Function to add or replace a PAIR to ALIST and return ALIST.
+  ;; ===Paredit===
+  (use-package paredit
+    :config
+    (paredit-mode 1))
+#+end_src
 
-  This does not set the variable to be a new value."
-    (let* ((pair-key     (car pair))
-           (alist-result (assoc pair-key alist)))
-      (if alist-result
-          (let ((new-alist (assoc-delete-all pair-key alist)))
-            (push pair new-alist))
-        (push pair alist))))
+*** Geiser
+#+begin_src emacs-lisp
+  ;; ===Geiser===
 
-  (defun cur/alist-add-if-pair-not-exist (pair alist)
-    "Function to add a PAIR to ALIST if PAIR is not in ALIST and return ALIST.
-
-  This does not set the variable to be a new value."
-    (let* ((pair-key     (car pair))
-           (pair-value   (cdr pair))
-           (alist-result (assoc pair-key alist)))
-      (if (and alist-result (equal pair-value alist-result))
-          nil
-        (push pair alist))))
-
-  (defun cur/alist-add-if-key-not-exist (pair alist)
-    "Function to add a PAIR to ALIST if the key in PAIR is not in ALIST.
-  Returns ALIST.
-
-  This does not set the variable to be a new value."
-    (let* ((pair-key     (car pair))
-           (alist-result (assoc pair-key alist)))
-      (if alist-result
-          nil
-        (push pair alist))))
-
-  (provide 'cur-config-elisp)
+  (provide 'cur-config-lisp)
 #+end_src
 
 ** Configurations for Java (=cur-config-java.el=)

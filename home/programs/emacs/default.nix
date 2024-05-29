@@ -48,6 +48,20 @@ let
 
       # ===Elisp===
       epkgs.rainbow-delimiters
+      epkgs.geiser
+      epkgs.geiser-chez
+      epkgs.geiser-chibi
+      epkgs.geiser-chicken
+      epkgs.geiser-gambit
+      epkgs.geiser-gauche
+      epkgs.geiser-guile
+      epkgs.geiser-kawa
+      epkgs.geiser-mit
+      epkgs.geiser-racket
+      epkgs.geiser-stklos
+      epkgs.macrostep
+      epkgs.macrostep-geiser
+      epkgs.paredit
 
       # ===Essentials===
 
@@ -135,6 +149,10 @@ in
         libvterm
         nerdfonts
         texliveFull
+
+        guile
+        mitscheme
+        racket
       ];
 
       home.file = {

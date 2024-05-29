@@ -58,7 +58,7 @@
 
 ;; ===Languages===
 (require 'cur-config-ide)
-(require 'cur-config-elisp)
+(require 'cur-config-lisp)
 (require 'cur-config-java)
 (require 'cur-config-markup)
 (require 'cur-config-nix)
