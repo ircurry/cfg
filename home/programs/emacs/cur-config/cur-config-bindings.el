@@ -259,7 +259,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      (eshell-mode . insert)
      (gud-mode . normal)
      (haskell-interactive-mode . normal)
-     (help-mode . normal)
+     (help-mode . motion)
      (helpful-mode . normal)
      (json-mode . normal)
      (jupyter-repl-mode . normal)
@@ -285,7 +285,8 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
   (meow-keypad-describe-delay 0.0 "No delay in keypad help popup")
   (meow-cheats-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
   :bind (:map cur/sub-leader-keymap
-              ("C-b"   . ibuffer))
+              ("C-b" . ibuffer)
+              ("C-n" . meow-temp-normal))
   :config
   (setq meow-kteypad-leader-dispatch nil)
   (meow-setup)

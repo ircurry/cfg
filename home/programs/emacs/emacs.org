@@ -488,7 +488,7 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
        (eshell-mode . insert)
        (gud-mode . normal)
        (haskell-interactive-mode . normal)
-       (help-mode . normal)
+       (help-mode . motion)
        (helpful-mode . normal)
        (json-mode . normal)
        (jupyter-repl-mode . normal)
@@ -514,7 +514,8 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
     (meow-keypad-describe-delay 0.0 "No delay in keypad help popup")
     (meow-cheats-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
     :bind (:map cur/sub-leader-keymap
-                ("C-b"   . ibuffer))
+                ("C-b" . ibuffer)
+                ("C-n" . meow-temp-normal))
     :config
     (setq meow-kteypad-leader-dispatch nil)
     (meow-setup)
