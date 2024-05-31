@@ -5,7 +5,7 @@
 
 ;; ===Paredit===
 (use-package paredit
-  :hook ((emacs-lisp-mode scheme-mode) .
+  :hook ((emacs-lisp-mode lisp-interaction-mode scheme-mode) .
          (lambda () (paredit-mode 1))))
 
 ;; ===Geiser===
