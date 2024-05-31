@@ -5,8 +5,8 @@
 
 ;; ===Paredit===
 (use-package paredit
-  :config
-  (paredit-mode 1))
+  :hook ((emacs-lisp-mode scheme-mode) .
+         (lambda () (paredit-mode 1))))
 
 ;; ===Geiser===
 

@@ -1213,8 +1213,8 @@ This color codes opening and closing delimiters such as parentheses and square b
 #+begin_src emacs-lisp
   ;; ===Paredit===
   (use-package paredit
-    :config
-    (paredit-mode 1))
+    :hook ((emacs-lisp-mode scheme-mode) .
+           (lambda () (paredit-mode 1))))
 #+end_src
 
 *** Geiser
