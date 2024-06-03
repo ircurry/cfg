@@ -32,6 +32,7 @@
         {
           devenv.shells.default = {
             packages = with pkgs; [
+              just
               ghcid
               hlint
             ];

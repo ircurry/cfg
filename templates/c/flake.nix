@@ -31,7 +31,7 @@
         }:
         {
           devenv.shells.default = {
-            packages = with pkgs; [ ];
+            packages = with pkgs; [ just ];
             languages.nix.enable = true;
             languages.c.enable = true;
           };
