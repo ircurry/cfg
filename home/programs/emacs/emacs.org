@@ -1369,7 +1369,8 @@ I use tree-sitter for C, which unfortunately is not currently integrated into th
 
 #+begin_src emacs-lisp
   ;; ===Zig Mode===
-  (use-package zig-mode)
+  (use-package zig-mode
+    :hook (zig-mode . lsp-deferred))
 
   (provide 'cur-config-zig)
 #+end_src
