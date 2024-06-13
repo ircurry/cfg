@@ -1,8 +1,4 @@
-{
-  fetchFromGitHub,
-  lib,
-  stdenv,
-}:
+{ fetchFromGitHub, stdenv }:
 stdenv.mkDerivation {
   name = "id3";
   version = "0.81";
