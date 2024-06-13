@@ -181,7 +181,7 @@ in
         };
         master = {
           new_is_master = true;
-          orientation = "top";
+          orientation = "center";
         };
         gestures.workspace_swipe = "off";
         misc = {
