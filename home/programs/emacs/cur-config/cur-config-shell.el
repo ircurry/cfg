@@ -31,35 +31,12 @@
   (eat-eshell-mode 1))
 
 ;; ===Eshell===
-(use-package eshell
-  :init
-  (defun cur/eshell-prompt ()
-    (concat
-     (propertize "[" 'face 'ansi-color-red)
-     (propertize (eshell/whoami) 'face 'ansi-color-yellow)
-     (propertize "@" 'face 'ansi-color-green)
-     (propertize (system-name) 'face 'ansi-color-blue)
-     " "
-     (propertize (concat (eshell/pwd)) 'face 'ansi-color-magenta)
-     (propertize "]" 'face 'ansi-color-red)
-     (propertize "$ " 'face 'bold)))
-  (defun eshell/ff (&optional file)
-    "Eshell alias to open FILE. Will call `find-file' interactively if no file is
-specified."
-    (cond (file
-           (find-file file))
-          (t
-           (call-interactively 'find-file))))
-  (defun eshell/dir (&optional dir)
-    "Eshell alias to open `dired' at DIR. Will call `dired' on current directory
-if no directory is specified"
-    (cond (dir
-           (dired dir))
-          (t
-           (dired "."))))
+(use-package eshell)
+
+(use-package cur-eshell
   :custom
-  (eshell-prompt-regexp "^\\[[^]]*\\]\\[?[[:digit:]]*\\]?[#$λ] " "Regex for custom eshell prompt")
-  (eshell-prompt-function 'cur/eshell-prompt "Set custom prompt for eshell"))
+  (eshell-prompt-regexp cur-eshell-prompt-regexp "Regex for custom eshell prompt")
+  (eshell-prompt-function 'cur-eshell-prompt "Set custom prompt for eshell"))
 
 ;; ===Zoxide===
 (use-package zoxide)
