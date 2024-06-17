@@ -153,5 +153,18 @@ When switching, the first window with that name is chosen."
             (t
              (cur-tmux--new-window project-name cur-tmux-default-command project-dir))))))
 
+(defun cur-tmux-new-window (window command &optional directory)
+  "Create a new window called WINDOW and run COMMAND.
+If DIRECTORY is not nil, run COMMAND in DIRECTORY."
+  (interactive
+   (let ((win (read-string "Window Name: " nil nil "scratch"))
+         (cmd (read-shell-command "Command: "))
+         (dir (read-directory-name "Directory: " nil default-directory)))
+     (list win cmd dir)))
+  (cur-tmux--create-session)
+  (if (not (equal command ""))
+      (cur-tmux--new-window window command directory)
+    (cur-tmux--new-window window cur-tmux-default-command directory)))
+
 (provide 'cur-tmux)
 ;;; cur-tmux.el ends here
