@@ -43,35 +43,40 @@ If COMMAND is not nil, it will be passed as the initial shell command to tmux."
           t
         (error "Tmux was unable to create a new session with that name")))))
 
-;; TODO: make it so that you can set the directory of the shell.
-(defun cur-tmux--exec-command-with-code (args &optional buffer)
+(defun cur-tmux--exec-command-with-code (args &optional buffer dir)
   "Call tmux with ARGS, output to BUFFER and return exit code.
-ARGS must be a list strings that corespond to tmux flags and arguments."
-  (apply 'call-process "tmux" nil buffer nil args))
+ARGS must be a list strings that corespond to tmux flags and arguments.
 
-(defun cur-tmux--exec-command (args &optional buffer)
-  "Call `cur-tmux--exec-command' with ARGS and BUFFER, return t or nil.
+If DIR is not nil, set the directory to of the tmux window to DIR."
+  (let ((default-directory (if dir
+                               (expand-file-name dir)
+                             default-directory)))
+    (apply 'call-process "tmux" nil buffer nil args)))
+
+(defun cur-tmux--exec-command (args &optional buffer dir)
+  "Call `cur-tmux--exec-command' with ARGS, BUFFER, and DIR, return t or nil.
 Nil is returned if there is an error and t is returned if there is no error.
 ARGS must be a list strings that corespond to tmux flags and arguments."
-  (let ((exit-code (cur-tmux--exec-command-with-code args buffer)))
+  (let ((exit-code (cur-tmux--exec-command-with-code args buffer dir)))
     (if (> exit-code 0)
         nil
       t)))
 
-(defun cur-tmux--exec-command-err-on-err (args &optional buffer)
-  "Call `cur-tmux--exec-command' with ARGS and BUFFER, `error' on error."
-  (let* ((exit-code (cur-tmux--exec-command-with-code args buffer)))
+(defun cur-tmux--exec-command-err-on-err (args &optional buffer dir)
+  "Call `cur-tmux--exec-command' with ARGS, BUFFER and DIR, `error' on error."
+  (let* ((exit-code (cur-tmux--exec-command-with-code args buffer dir)))
     (if (= exit-code 0)
         t
       (error "Tmux terminated with exit code %d" exit-code))))
 
-(defun cur-tmux--new-window (window-name &optional command)
-  "New window named WINDOW-NAME, executing COMMAND if it is non nil."
+(defun cur-tmux--new-window (window-name &optional command dir)
+  "New window named WINDOW-NAME, executing COMMAND if it is non nil.
+If DIR is not nil, command is executed in DIR."
   (let* ((args (list "new-window" "-n" window-name "-t" cur-tmux-session-name))
          (args* (if command
                     (append args (list command))
                   args)))
-    (cur-tmux--exec-command-err-on-err args*)))
+    (cur-tmux--exec-command-err-on-err args* nil dir)))
 
 (defun cur-tmux--list-windows (&optional index)
   "List windows in `cur-tmux-session-name'.
