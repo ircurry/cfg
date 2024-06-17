@@ -142,6 +142,7 @@ If WINDOW is a number, access the window with that number."
   "Switch or add window coresponding to current project.
 The name of the window is the value of `projectile-project-name'.
 When switching, the first window with that name is chosen."
+  (interactive)
   (when (not (cur-tmux-emacs-session-p))
     (cur-tmux--create-session))
   (when (projectile-project-p)
