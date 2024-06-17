@@ -105,3 +105,7 @@
               ("C-j" . justl)))
 
 (provide 'cur-config-ide)
+
+(use-package cur-tmux
+  :hook
+  (projectile-after-switch-project . cur-tmux-switch-add-project-window))

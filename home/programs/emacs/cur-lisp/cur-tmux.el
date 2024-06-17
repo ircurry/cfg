@@ -4,9 +4,15 @@
 
 ;;; Code:
 
+(require 'projectile)
+
 (defvar cur-tmux-session-name
   "emacs"
   "The name of the session Emacs will try to connect to and manipulate.")
+
+(defvar cur-tmux-default-command
+  "fish"
+  "The default command to run when creating a new window.")
 
 (defun cur-tmux--remove-ansi-escape-colors (str)
   "Remove ansi escape color codes from STR."
@@ -91,6 +97,18 @@ If INDEX is not nil, output the with format \"#{window_index}: #{window_name}\".
        (buffer-string))
      "\n" t)))
 
+(defun cur-tmux--get-window-number (window)
+  "Get the number associated with WINDOW from `cur-tmux-session-name' session."
+  (car
+   (rassoc
+    (list window)
+    (let* ((window-list (cur-tmux--list-windows t))
+           (window-alist (mapcar (lambda (line)
+                                   (string-split line "[ :]+" t))
+                                 window-list)))
+      ;; (rassoc window window-alist)
+      window-alist))))
+
 (defun cur-tmux-window-exists-p (window &optional index)
   "Check if WINDOW is a window in `cur-tmux-session-name'.
 If INDEX is not nil, check if there is a window named WINDOW with number INDEX.
@@ -102,6 +120,37 @@ The behavior is similar to that of `member'."
    (t (if (member window (cur-tmux--list-windows))
           t
         nil))))
+
+(defun cur-tmux--switch-to-window (window)
+  "Switch to WINDOW in `cur-tmux-session-name' session.
+If WINDOW is a string, look up and select the first window number
+named WINDOW
+If WINDOW is a number, access the window with that number."
+  (cond ((numberp window)
+         (cur-tmux--exec-command-err-on-err
+          (list "selectw" "-t"
+                (concat cur-tmux-session-name (format "%d" window)))))
+        ((stringp window)
+         (cur-tmux--exec-command-err-on-err
+              (list "selectw" "-t"
+                    (concat cur-tmux-session-name
+                            ":" (cur-tmux--get-window-number project-name)))))
+        (t
+         (error "WINDOW is not a valid type"))))
+
+(defun cur-tmux-switch-add-project-window ()
+  "Switch or add window coresponding to current project.
+The name of the window is the value of `projectile-project-name'.
+When switching, the first window with that name is chosen."
+  (when (not (cur-tmux-emacs-session-p))
+    (cur-tmux--create-session))
+  (when (projectile-project-p)
+    (let ((project-name (projectile-project-name))
+          (project-dir (projectile-project-root)))
+      (cond ((cur-tmux-window-exists-p project-name)
+             (cur-tmux--switch-to-window project-name))
+            (t
+             (cur-tmux--new-window project-name cur-tmux-default-command project-dir))))))
 
 (provide 'cur-tmux)
 ;;; cur-tmux.el ends here
