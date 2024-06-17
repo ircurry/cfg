@@ -46,7 +46,7 @@ check for overrides with `cur/theme-override'."
   :bind (:map cur/toggle-map
               ("C-t" . cur/load-theme))
   :config
-  (cur/load-theme 'doom-oceanic-next))
+  (cur/load-theme 'doom-nord))
 
 ;; ===Autothemer===
 (use-package autothemer)
