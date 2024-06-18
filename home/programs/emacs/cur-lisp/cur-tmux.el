@@ -32,19 +32,20 @@
       t
     nil))
 
-(defun cur-tmux--create-session (&optional command)
+(defun cur-tmux-create-session (&optional command)
   "Create session named after `cur-tmux-session-name' if one does not exist.
 Will return nil if session exists and will return t if session is
 created successfully.  Will error if tmux is not found or if tmux
 returns an error value.
-If COMMAND is not nil, it will be passed as the initial shell command to tmux."
+If COMMAND is not nil, it will be passed as the initial shell command to tmux.
+If COMMAND is nil, `cur-tmux-default-command' will be used."
   (if (cur-tmux-emacs-session-p)
       nil
     (let* ((exit-code (cond
                        (command (call-process "tmux" nil nil nil
                                               "new" "-d" "-s" cur-tmux-session-name command))
                        (t (call-process "tmux" nil nil nil
-                                        "new" "-d" "-s" cur-tmux-session-name)))))
+                                        "new" "-d" "-s" cur-tmux-session-name cur-tmux-default-command)))))
       (if (= exit-code 0)
           t
         (error "Tmux was unable to create a new session with that name")))))
@@ -144,7 +145,7 @@ The name of the window is the value of `projectile-project-name'.
 When switching, the first window with that name is chosen."
   (interactive)
   (when (not (cur-tmux-emacs-session-p))
-    (cur-tmux--create-session))
+    (cur-tmux-create-session))
   (when (projectile-project-p)
     (let ((project-name (projectile-project-name))
           (project-dir (projectile-project-root)))
@@ -161,7 +162,7 @@ If DIRECTORY is not nil, run COMMAND in DIRECTORY."
          (cmd (read-shell-command "Command: "))
          (dir (read-directory-name "Directory: " nil default-directory)))
      (list win cmd dir)))
-  (cur-tmux--create-session)
+  (cur-tmux-create-session)
   (if (not (equal command ""))
       (cur-tmux--new-window window command directory)
     (cur-tmux--new-window window cur-tmux-default-command directory)))
