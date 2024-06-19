@@ -83,7 +83,7 @@
               ("C-p"   . projectile-switch-project)
               ("C-a"   . projectile-add-known-project)
               ("C-d"   . projectile-dired)
-              ("d"     . projectile-find-dir)
+              ("M-d"   . projectile-find-dir)
               ("C-f"   . projectile-find-file)
               ("C-r"   . consult-ripgrep)
               ("C-c"   . projectile-compile-project)
@@ -107,5 +107,7 @@
 (provide 'cur-config-ide)
 
 (use-package cur-tmux
+  :bind ( :map cur/sub-leader-keymap
+          ("M-t" . cur-tmux-new-window))
   :hook
   (projectile-after-switch-project . cur-tmux-switch-add-project-window))
