@@ -55,7 +55,8 @@ in
       };
       graphical = {
         alacritty = {
-          bg = "32302f";
+          # bg = "32302f";
+          bg = bg0;
           red = light-red;
           yellow = light-yellow;
           green = light-green;
