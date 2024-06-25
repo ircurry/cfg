@@ -18,6 +18,11 @@
           user = "git";
           identityFile = "~/.ssh/id_github";
         };
+        "gitlab.com" = {
+          host = "gitlab.com";
+          user = "git";
+          identityFile = "~/.ssh/id_gitlab";
+        };
       };
     };
   };
