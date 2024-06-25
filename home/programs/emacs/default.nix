@@ -105,6 +105,7 @@ let
 
       # ===Nix===
       epkgs.nix-mode
+      epkgs.nix-ts-mode
 
       # ===Org===
       epkgs.org-bullets
