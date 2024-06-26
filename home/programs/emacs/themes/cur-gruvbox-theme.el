@@ -226,10 +226,20 @@ for FRAME (defaults to the current frame)."
    `(rainbow-delimiters-depth-8-face    ((t (:foreground ,red))))
    `(rainbow-delimiters-depth-9-face    ((t (:foreground ,green))))
 
-;;; Languages
+;;; Languages and IDE Packages
 
-   ;; 
-    
+   ;; Flycheck
+   `(flycheck-error          ((t (:background ,bg1 :underline (:style wave :color ,light-red)))))
+   `(flycheck-info           ((t (:background ,bg1 :underline (:style wave :color ,light-blue)))))
+   `(flycheck-warning        ((t (:background ,bg1 :underline (:style wave :color ,light-yellow)))))
+   `(flycheck-fringe-error   ((t (:inherit fringe :foreground ,light-red))))
+   `(flycheck-fringe-info    ((t (:inherit fringe :foreground ,light-yellow))))
+   `(flycheck-fringe-warning ((t (:inherit fringe :foreground ,light-green))))
+
+   ;; Flyspell
+   `(flyspell-duplicate ((t (:underline (:style wave :color ,light-yellow)))))
+   `(flyspell-incorrect ((t (:underline (:style wave :color ,light-red)))))
+   
 
 ;;; Internet Modes
 
