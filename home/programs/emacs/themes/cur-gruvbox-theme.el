@@ -278,13 +278,33 @@ for FRAME (defaults to the current frame)."
 ;;; Org
 
    ;; Org General
-   `(org-code      ((t (:foreground ,light-orange :inherit org-block))))
-   `(org-drawer    ((t (:foreground ,(cur-theme-lighten light-aqua 0.4)))))
-   `(org-ellipsis  ((t (:foreground ,light-orange))))
-   `(org-formula   ((t (:foreground ,light-green))))
-   `(org-meta-line ((t (:foreground ,grey))))
-   `(org-table     ((t (:foreground ,light-aqua))))
-   `(org-verbatim  ((t (:foreground ,light-yellow))))
+   `(org-archived                 ((t (:foreground ,bg4))))
+   `(org-block                    ((t (:background ,bg1 :extend t))))
+   `(org-block-begin-line         ((t (:foreground ,grey :inherit (org-block)))))
+   `(org-block-end-line           ((t (:inherit (org-block-begin-line)))))
+   `(org-code                     ((t (:foreground ,light-orange :inherit org-block))))
+   `(org-checkbox-statistics-done ((t (:inherit org-done))))
+   `(org-checkbox-statistics-todo ((t (:inherit org-todo))))
+   `(org-checkbox                 ((t (:inherit org-todo))))
+   `(org-date                     ((t (:foreground ,light-green))))
+   `(org-drawer                   ((t (:foreground ,(cur-theme-lighten light-aqua 0.4)))))
+   `(org-done                     ((t (:inherit org-headline-done :weight bold))))
+   `(org-ellipsis                 ((t (:foreground ,light-orange))))
+   `(org-footnote                 ((t (:foreground ,light-orange))))
+   `(org-formula                  ((t (:foreground ,light-green))))
+   `(org-headline-done            ((t (:foreground ,bg4))))
+   `(org-headline-todo            ((t (:foreground ,light-green))))
+   `(org-link                     ((t (:foreground ,light-yellow :inherit link))))
+   `(org-list-dt                  ((t (:foreground ,light-aqua))))
+   `(org-meta-line                ((t (:foreground ,grey))))
+   `(org-priority                 ((t (:foreground ,light-red))))
+   `(org-property-value           ((t (:inherit default))))
+   `(org-quote                    ((t (:foreground ,fg2  :inherit (italic org-block)))))
+   `(org-special-keyword          ((t (:foreground ,(cur-theme-lighten light-aqua 0.15)))))
+   `(org-table                    ((t (:foreground ,light-aqua))))
+   `(org-tag                      ((t (:foreground ,bg4 :weight normal))))
+   `(org-todo                     ((t (:inherit org-headline-todo :weight bold))))
+   `(org-verbatim                 ((t (:foreground ,light-yellow))))
 
    ;; Outline N and Org Heading Levels
    `(outline-1 ((t (:foreground ,light-purple :weight bold :extend t))))
@@ -296,12 +316,6 @@ for FRAME (defaults to the current frame)."
    `(outline-7 ((t (:foreground ,(cur-theme-lighten aqua 0.5) :weight bold :extend t))))
    `(outline-8 ((t (:foreground ,(cur-theme-lighten light-aqua 0.6) :weight bold :extend t))))
    
-   ;; Org Blocks
-   `(org-block            ((t (:background ,bg1 :extend t :inherit (default)))))
-   `(org-block-begin-line ((t (:foreground ,grey :inherit (org-block)))))
-   `(org-block-end-line   ((t (:inherit (org-block-begin-line)))))
-   `(org-quote     ((t (:foreground ,fg2  :inherit (italic org-block)))))
-
    `(nerd-icons-blue       ((t (:foreground ,light-blue))))
    `(nerd-icons-blue-alt   ((t (:foreground ,light-aqua))))
    `(nerd-icons-cyan       ((t (:foreground ,light-aqua))))
