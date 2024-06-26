@@ -22,8 +22,9 @@
            (dedicated . t)
            (body-function . cur-window-select-fit-to-size))
           ((or (derived-mode . justl-mode)
+               (derived-mode . vterm-mode)
                "\\*eshell .*"
-               "\\*vterm.*"
+               "\\*vterm.*\\*"
                "\\*.*-eat\\*"
                "justl - .*")
            (display-buffer-reuse-window

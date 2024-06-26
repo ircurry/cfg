@@ -1,29 +1,20 @@
 ;; ===Vterm===
 (use-package vterm
-  :ensure nil
-  :commands (vterm cur/meow-vterm-other-window cur/meow-vterm)
-  :bind (:map vterm-mode-map
-         ("C-c C-k" . cur/vterm-kill)
-         :map cur/sub-leader-keymap
-         ("C-RET" . cur/meow-vterm-other-window)
-         ("RET"   . cur/meow-vterm))
-  :init
-  (defun cur/meow-vterm ()
-    (interactive)
-    (vterm)
-    (meow-insert-mode))
-  (defun cur/meow-vterm-other-window ()
-    (interactive)
-    (vterm-other-window)
-    (meow-insert-mode))
-  (defun cur/vterm-kill ()
-    (interactive)
-    (when (equal (buffer-name) "*vterm*")
-      (let ((kill-buffer-query-functions nil))
-        (kill-buffer-and-window))))
+  :bind ( :map cur/sub-leader-keymap
+          ("C-RET" . vterm)
+          :map cur/projectile-map
+          ("C-t" . projectile-run-vterm-other-window))
+  :custom
+  (vterm-shell "fish")
   :config
   (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
   (setq vterm-max-scrollback 10000))
+
+(use-package cur-vterm
+  :after (vterm)
+  :bind ( :map vterm-mode-map
+          ("C-c C-RET"      . cur-vterm-enter-password)
+          ("C-c C-<return>" . cur-vterm-enter-password)))
 
 ;; ===Eat===
 (use-package eat

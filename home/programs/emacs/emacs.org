@@ -501,7 +501,7 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
        (telega-chat-mode . normal)
        (term-mode . normal)
        (text-mode . normal)
-       (vterm-mode . normal)
+       (vterm-mode . insert)
        (Custom-mode . normal))
      "Default meow states for modes")
     (meow-selection-command-fallback
@@ -1019,8 +1019,9 @@ These are my settings for ~display-buffer-alist~ so windows just Do What I Mean.
              (dedicated . t)
              (body-function . cur-window-select-fit-to-size))
             ((or (derived-mode . justl-mode)
+                 (derived-mode . vterm-mode)
                  "\\*eshell .*"
-                 "\\*vterm.*"
+                 "\\*vterm.*\\*"
                  "\\*.*-eat\\*"
                  "justl - .*")
              (display-buffer-reuse-window
@@ -1420,30 +1421,21 @@ Vterm is a terminal emulator for emacs. It is faster than ~term~ and ~ansi-term~
 #+begin_src emacs-lisp
   ;; ===Vterm===
   (use-package vterm
-    :ensure nil
-    :commands (vterm cur/meow-vterm-other-window cur/meow-vterm)
-    :bind (:map vterm-mode-map
-           ("C-c C-k" . cur/vterm-kill)
-           :map cur/sub-leader-keymap
-           ("C-RET" . cur/meow-vterm-other-window)
-           ("RET"   . cur/meow-vterm))
-    :init
-    (defun cur/meow-vterm ()
-      (interactive)
-      (vterm)
-      (meow-insert-mode))
-    (defun cur/meow-vterm-other-window ()
-      (interactive)
-      (vterm-other-window)
-      (meow-insert-mode))
-    (defun cur/vterm-kill ()
-      (interactive)
-      (when (equal (buffer-name) "*vterm*")
-        (let ((kill-buffer-query-functions nil))
-          (kill-buffer-and-window))))
+    :bind ( :map cur/sub-leader-keymap
+            ("C-RET" . vterm)
+            :map cur/projectile-map
+            ("C-t" . projectile-run-vterm-other-window))
+    :custom
+    (vterm-shell "fish")
     :config
     (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
     (setq vterm-max-scrollback 10000))
+
+  (use-package cur-vterm
+    :after (vterm)
+    :bind ( :map vterm-mode-map
+            ("C-c C-RET"      . cur-vterm-enter-password)
+            ("C-c C-<return>" . cur-vterm-enter-password)))
 #+end_src
 
 *** Eat
@@ -2060,3 +2052,30 @@ Interfacing with Zoxide from emacs.
   (provide 'cur-window)
   ;;; cur-window.el ends here
 #+end_src
+
+** Vterm extension (=cur-vterm.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-lisp/cur-vterm.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; cur-vterm.el --- Customization and helper functions for vterm
+
+  ;;; Commentary:
+
+  ;;; Code:
+
+  (require 'vterm)
+
+  (defun cur-vterm-enter-password ()
+    (declare (interactive-only t))
+    (interactive)
+    (unless (equal major-mode 'vterm-mode)
+      (user-error "Not in a VTerm Terminal"))
+    (vterm-insert (read-passwd "Password: "))
+    (vterm-send-return))
+
+  (provide 'cur-vterm)
+  ;;; cur-vterm.el ends here
+#+end_src
+
