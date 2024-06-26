@@ -127,6 +127,7 @@ for FRAME (defaults to the current frame)."
    `(font-lock-variable-name-face     ((t (:foreground ,light-blue))))
    `(font-lock-warning-face           ((t (:inherit warning))))
    `(font-lock-negation-char-face     ((t (:foreground ,fg1 :weight bold))))
+   `(font-lock-number-face            ((t (:foreground ,light-purple))))
 
    ;; Mode Line
 
