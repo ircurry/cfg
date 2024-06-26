@@ -952,6 +952,7 @@ Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]
 
 #+begin_src emacs-lisp
   (use-package vertico
+    :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
     :config
     (vertico-mode 1))
 #+end_src
