@@ -285,11 +285,15 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
   (meow-keypad-describe-delay 0.0 "No delay in keypad help popup")
   (meow-cheats-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
   :bind (:map cur/sub-leader-keymap
-              ("C-b" . ibuffer)
-              ("C-n" . meow-temp-normal))
+              ("C-b" . ibuffer))
   :config
   (setq meow-kteypad-leader-dispatch nil)
   (meow-setup)
   (meow-global-mode 1))
+
+(use-package cur-meow
+  :after (meow)
+  :bind ( :map cur/sub-leader-keymap
+          ("C-n" . cur-meow-toggle-temp-normal-motion)))
 
 (provide 'cur-config-bindings)
