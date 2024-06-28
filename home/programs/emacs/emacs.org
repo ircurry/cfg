@@ -1938,6 +1938,32 @@ Interfacing with Zoxide from emacs.
   ;;; cur-theme.el ends here
 #+end_src
 
+** Meow Extension (=cur-meow.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-lisp/cur-meow.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; cur-meow.el --- Extending Meow's Capabilities -*- lexical-binding: t -*-
+
+  ;;; Commentary:
+  ;;
+
+  ;;; Code:
+  (require 'meow)
+
+  (defun cur-meow-toggle-temp-normal-motion ()
+    "Toggle normal and motion mode.
+  If in neither of the two states, return nil."
+    (interactive)
+    (cond ((meow-normal-mode-p) (call-interactively 'meow-motion-mode))
+          ((meow-motion-mode-p) (call-interactively 'meow-normal-mode))
+          (t nil)))
+
+  (provide 'cur-meow)
+  ;;; cur-meow.el ends here
+#+end_src
+
 ** Window Management (=cur-window.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-window.el
