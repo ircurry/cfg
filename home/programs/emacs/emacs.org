@@ -229,7 +229,9 @@ The meow states, what vim/nvim call modes, are as follows:
 Also of note, I find it easier to think about the cursor in normal mode as being a single character selection. This is how helix does it and I really like it so I have a lot of the meow fallback commands to operate on the char after the cursor.
 
 A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
-  
+
+NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-sitter]] to see if its worth using.
+
 #+begin_src emacs-lisp
   ;; ===Meow Setup===
   (use-package meow
