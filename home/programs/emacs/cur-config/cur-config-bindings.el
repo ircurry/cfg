@@ -272,7 +272,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      (telega-chat-mode . normal)
      (term-mode . normal)
      (text-mode . normal)
-     (vterm-mode . normal)
+     (vterm-mode . insert)
      (Custom-mode . normal))
    "Default meow states for modes")
   (meow-selection-command-fallback

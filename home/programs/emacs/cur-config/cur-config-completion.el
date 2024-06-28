@@ -13,6 +13,7 @@
   (setq orderless-matching-styles '(orderless-prefixes orderless-regexp)))
 
 (use-package vertico
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
   :config
   (vertico-mode 1))
 
