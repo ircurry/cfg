@@ -11,127 +11,129 @@ let
   way-cfg = config.nocturne.wayland.editor;
   emacs-package =
     with pkgs;
-    ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs: [
-      ##########################
-      ## Tree-Sitter Grammars ##
-      ##########################
-      epkgs.treesit-grammars.with-all-grammars
+    ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (
+      epkgs: with epkgs; [
+        ##########################
+        ## Tree-Sitter Grammars ##
+        ##########################
+        treesit-grammars.with-all-grammars
 
-      ########################################
-      ## Configuration Modules Dependencies ##
-      ########################################
+        ########################################
+        ## Configuration Modules Dependencies ##
+        ########################################
 
-      # ===Bindings===
-      epkgs.hydra
-      epkgs.meow
+        # ===Bindings===
+        hydra
+        meow
 
-      # ===C===
-      epkgs.ccls
+        # ===C===
+        ccls
 
-      # ===Completion===
-      epkgs.counsel
-      epkgs.swiper
-      epkgs.ivy
-      epkgs.ivy-rich
-      epkgs.vertico
-      epkgs.marginalia
-      epkgs.consult
-      epkgs.orderless
-      epkgs.vertico-posframe
-      epkgs.embark
+        # ===Completion===
+        counsel
+        swiper
+        ivy
+        ivy-rich
+        vertico
+        marginalia
+        consult
+        orderless
+        vertico-posframe
+        embark
 
-      # ===Dired===
-      epkgs.nerd-icons-dired
+        # ===Dired===
+        nerd-icons-dired
 
-      # ===Elcord===
-      epkgs.elcord
+        # ===Elcord===
+        elcord
 
-      # ===Elisp===
-      epkgs.rainbow-delimiters
-      epkgs.geiser
-      epkgs.geiser-chez
-      epkgs.geiser-chibi
-      epkgs.geiser-chicken
-      epkgs.geiser-gambit
-      epkgs.geiser-gauche
-      epkgs.geiser-guile
-      epkgs.geiser-kawa
-      epkgs.geiser-mit
-      epkgs.geiser-racket
-      epkgs.geiser-stklos
-      epkgs.macrostep
-      epkgs.macrostep-geiser
-      epkgs.paredit
+        # ===Elisp===
+        rainbow-delimiters
+        geiser
+        geiser-chez
+        geiser-chibi
+        geiser-chicken
+        geiser-gambit
+        geiser-gauche
+        geiser-guile
+        geiser-kawa
+        geiser-mit
+        geiser-racket
+        geiser-stklos
+        macrostep
+        macrostep-geiser
+        paredit
 
-      # ===Essentials===
+        # ===Essentials===
 
-      # ===Faces===
-      epkgs.doom-themes
-      epkgs.autothemer
-      epkgs.catppuccin-theme
-      epkgs.ef-themes
-      epkgs.nerd-icons-ibuffer
-      epkgs.spacious-padding
+        # ===Faces===
+        doom-themes
+        autothemer
+        catppuccin-theme
+        ef-themes
+        nerd-icons-ibuffer
+        spacious-padding
 
-      # ===Haskell===
-      epkgs.haskell-mode
-      epkgs.lsp-haskell
-      epkgs.company-ghci
+        # ===Haskell===
+        haskell-mode
+        lsp-haskell
+        company-ghci
 
-      # ===Help===
-      epkgs.helpful
-      epkgs.which-key
+        # ===Help===
+        helpful
+        which-key
 
-      # ===IDE===
-      epkgs.lsp-mode
-      epkgs.lsp-ui
-      epkgs.company
-      epkgs.flycheck
-      epkgs.treemacs
-      epkgs.ivy-xref
-      epkgs.magit
-      epkgs.projectile
-      epkgs.rg
-      epkgs.envrc
-      epkgs.just-mode
-      epkgs.justl
+        # ===IDE===
+        lsp-mode
+        lsp-ui
+        company
+        flycheck
+        treemacs
+        ivy-xref
+        magit
+        projectile
+        rg
+        envrc
+        just-mode
+        justl
 
-      # ===Java===
-      epkgs.lsp-java
+        # ===Java===
+        lsp-java
 
-      # ===Markup===
-      epkgs.yaml-mode
-      epkgs.yuck-mode
+        # ===Markup===
+        yaml-mode
+        yuck-mode
 
-      # ===Nix===
-      epkgs.nix-mode
-      epkgs.nix-ts-mode
+        # ===Nix===
+        nix-mode
+        nix-ts-mode
 
-      # ===Org===
-      epkgs.org-bullets
+        # ===Org===
+        org-bullets
 
-      # ===Rust===
-      epkgs.rustic
+        # ===Rust===
+        rustic
 
-      # ===Shell===
-      epkgs.vterm
-      epkgs.eat
-      epkgs.zoxide
+        # ===Shell===
+        vterm
+        eat
+        zoxide
 
-      # ===Smol-net===
-      epkgs.gemini-mode
-      epkgs.ox-gemini
-      epkgs.elpher
+        # ===Smol-net===
+        gemini-mode
+        ox-gemini
+        elpher
 
-      # ===Windows===
+        # ===Windows===
 
-      # ===Zig===
-      epkgs.zig-mode
+        # ===Zig===
+        zig-mode
 
-      ###############################
-      ## Lisp Modules Dependencies ##
-      ###############################
-    ]));
+        ###############################
+        ## Lisp Modules Dependencies ##
+        ###############################
+      ]
+    ));
 in
 {
   config = lib.mkMerge [
