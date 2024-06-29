@@ -16,7 +16,8 @@
                (derived-mode . woman-mode))
            (cur-window-display-buffer-below-or-pop)
            (body-function . cur-window-select-fit-to-size))
-          ((derived-mode . occur-mode)
+          ((or (derived-mode . occur-mode)
+               (derived-mode . xref--xref-buffer-mode))
            (display-buffer-reuse-window
             display-buffer-below-selected)
            (dedicated . t)
