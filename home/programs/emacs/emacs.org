@@ -1615,7 +1615,7 @@ Interfacing with Zoxide from emacs.
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-base.el --- The base of my customizations for emacs
+  ;;; cur-base.el --- The base of my customizations for emacs -*- lexical-binding: t -*-
 
   ;;; Commentary:
   ;; This is the base of my extensions to Emac's functionality.
@@ -1637,7 +1637,7 @@ Interfacing with Zoxide from emacs.
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-eshell.el --- My exensions of the Emacs Shell
+  ;;; cur-eshell.el --- My exensions of the Emacs Shell -*- lexical-binding: t -*-
 
   ;;; Commentary:
 
@@ -1690,7 +1690,7 @@ Interfacing with Zoxide from emacs.
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-tmux.el --- Integrating Emacs with a tmux
+  ;;; cur-tmux.el --- Integrating Emacs with a tmux -*- lexical-binding: t -*-
 
   ;;; Commentary:
 
@@ -1976,7 +1976,7 @@ Interfacing with Zoxide from emacs.
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-window.el --- Customization and helper functions for window management
+  ;;; cur-window.el --- Customization and helper functions for window management -*- lexical-binding: t -*-
 
   ;;; Commentary:
   ;; Custom functions and variables for managing windows.  In particular, setting `display-buffer-alist'

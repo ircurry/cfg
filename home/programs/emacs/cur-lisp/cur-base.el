@@ -1,4 +1,4 @@
-;;; cur-base.el --- The base of my customizations for emacs
+;;; cur-base.el --- The base of my customizations for emacs -*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; This is the base of my extensions to Emac's functionality.

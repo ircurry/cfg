@@ -1,4 +1,4 @@
-;;; cur-tmux.el --- Integrating Emacs with a tmux
+;;; cur-tmux.el --- Integrating Emacs with a tmux -*- lexical-binding: t -*-
 
 ;;; Commentary:
 

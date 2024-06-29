@@ -1,4 +1,4 @@
-;;; cur-eshell.el --- My exensions of the Emacs Shell
+;;; cur-eshell.el --- My exensions of the Emacs Shell -*- lexical-binding: t -*-
 
 ;;; Commentary:
 
