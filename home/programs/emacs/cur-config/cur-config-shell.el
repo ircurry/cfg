@@ -1,7 +1,7 @@
 ;; ===Vterm===
 (use-package vterm
   :bind ( :map cur/sub-leader-keymap
-          ("C-RET" . vterm)
+          ("C-t" . vterm)
           :map cur/projectile-map
           ("C-t" . projectile-run-vterm-other-window))
   :custom
@@ -22,7 +22,9 @@
   (eat-eshell-mode 1))
 
 ;; ===Eshell===
-(use-package eshell)
+(use-package eshell
+  :bind ( :map cur/sub-leader-keymap
+          ("C-e" . eshell)))
 
 (use-package cur-eshell
   :custom

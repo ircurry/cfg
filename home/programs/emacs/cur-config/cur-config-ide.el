@@ -62,16 +62,13 @@
 
 ;; ===Treemacs==
 (use-package treemacs
-  :bind
-  (:map cur/sub-leader-keymap
-        ("C-t" . treemacs-select-window))
   :config
   (treemacs-follow-mode))
 
 ;; ===Magit===
 (use-package magit
   :bind (:map cur/sub-leader-keymap
-              ("C-M-g" . magit))
+              ("C-v" . magit))
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   (transient-default-level 5 "Allowing for commit signing"))
@@ -107,7 +104,5 @@
 (provide 'cur-config-ide)
 
 (use-package cur-tmux
-  :bind ( :map cur/sub-leader-keymap
-          ("M-t" . cur-tmux-new-window))
   :hook
   (projectile-after-switch-project . cur-tmux-switch-add-project-window))

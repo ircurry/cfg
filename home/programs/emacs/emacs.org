@@ -516,7 +516,7 @@ NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-s
     (meow-keypad-describe-delay 0.0 "No delay in keypad help popup")
     (meow-cheats-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
     :bind (:map cur/sub-leader-keymap
-                ("C-b" . ibuffer))
+                ("C-l" . ibuffer))
     :config
     (setq meow-kteypad-leader-dispatch nil)
     (meow-setup)
@@ -1139,9 +1139,6 @@ Project tree, I don't use this all that often.
 #+begin_src emacs-lisp
   ;; ===Treemacs==
   (use-package treemacs
-    :bind
-    (:map cur/sub-leader-keymap
-          ("C-t" . treemacs-select-window))
     :config
     (treemacs-follow-mode))
 #+end_src
@@ -1154,7 +1151,7 @@ Magit is a git interface, probably the best one I have ever seen or had the plea
   ;; ===Magit===
   (use-package magit
     :bind (:map cur/sub-leader-keymap
-                ("C-M-g" . magit))
+                ("C-v" . magit))
     :custom
     (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
     (transient-default-level 5 "Allowing for commit signing"))
@@ -1206,8 +1203,6 @@ Projectile provides many commands to help manage and do things in a project, suc
 
 #+begin_src emacs-lisp
   (use-package cur-tmux
-    :bind ( :map cur/sub-leader-keymap
-            ("M-t" . cur-tmux-new-window))
     :hook
     (projectile-after-switch-project . cur-tmux-switch-add-project-window))
 #+end_src
@@ -1429,7 +1424,7 @@ Vterm is a terminal emulator for emacs. It is faster than ~term~ and ~ansi-term~
   ;; ===Vterm===
   (use-package vterm
     :bind ( :map cur/sub-leader-keymap
-            ("C-RET" . vterm)
+            ("C-t" . vterm)
             :map cur/projectile-map
             ("C-t" . projectile-run-vterm-other-window))
     :custom
@@ -1462,7 +1457,9 @@ Eshell is an shell for Emacs like bash or sh, but written in elisp and has its o
 
 #+begin_src emacs-lisp
   ;; ===Eshell===
-  (use-package eshell)
+  (use-package eshell
+    :bind ( :map cur/sub-leader-keymap
+            ("C-e" . eshell)))
 
   (use-package cur-eshell
     :custom
