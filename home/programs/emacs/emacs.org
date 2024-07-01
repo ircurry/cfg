@@ -555,7 +555,7 @@ Which-key shows you what keybindings are available in a keychord. Super helpful 
 
 Provides additional info help.
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   ;; ===helpful===
   (use-package helpful
     ;; :custom
