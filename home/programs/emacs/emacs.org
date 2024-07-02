@@ -1442,7 +1442,7 @@ Vterm is a terminal emulator for emacs. It is faster than ~term~ and ~ansi-term~
 
 *** Eat
 
-Eat is just a better elisp terminal emulator. I mostly use this so that elisp can run TUI programs.
+Eat is just a better elisp terminal emulator. I mostly use this so that eshell can run TUI programs.
 
 #+begin_src emacs-lisp
   ;; ===Eat===
