@@ -152,10 +152,6 @@ in
         libvterm
         nerdfonts
         texliveFull
-
-        guile
-        mitscheme
-        racket
       ];
 
       home.file = {
