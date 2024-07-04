@@ -29,6 +29,19 @@
   :demand t
   :bind (("C-x b" . consult-buffer)
          ("M-g i" . consult-imenu)
-         ("M-y"   . consult-yank-pop)))
+         ("M-y"   . consult-yank-pop)
+         :map cur/projectile-map
+         ("C-r"   . consult-ripgrep)
+         ("C-b"   . consult-project-buffer))
+  :custom
+  (consult-preview-allowed-hooks '(global-font-lock-mode
+                                   save-place-find-file-hook
+                                   ;; Dired
+                                   dired-hide-details-mode
+                                   hl-line-mode
+                                   nerd-icons-dired-mode))
+  :config
+  (setq xref-show-xrefs-function       #'consult-xref
+        xref-show-definitions-function #'consult-xref))
 
 (provide 'cur-config-completion)

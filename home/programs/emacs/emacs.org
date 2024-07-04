@@ -986,7 +986,20 @@ Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]
     :demand t
     :bind (("C-x b" . consult-buffer)
            ("M-g i" . consult-imenu)
-           ("M-y"   . consult-yank-pop)))
+           ("M-y"   . consult-yank-pop)
+           :map cur/projectile-map
+           ("C-r"   . consult-ripgrep)
+           ("C-b"   . consult-project-buffer))
+    :custom
+    (consult-preview-allowed-hooks '(global-font-lock-mode
+                                     save-place-find-file-hook
+                                     ;; Dired
+                                     dired-hide-details-mode
+                                     hl-line-mode
+                                     nerd-icons-dired-mode))
+    :config
+    (setq xref-show-xrefs-function       #'consult-xref
+          xref-show-definitions-function #'consult-xref))
 
   (provide 'cur-config-completion)
 #+end_src
@@ -1171,9 +1184,7 @@ Projectile provides many commands to help manage and do things in a project, suc
                 ("C-d"   . projectile-dired)
                 ("M-d"   . projectile-find-dir)
                 ("C-f"   . projectile-find-file)
-                ("C-r"   . consult-ripgrep)
                 ("C-c"   . projectile-compile-project)
-                ("C-b"   . consult-project-buffer)
                 ("C-l"   . projectile-ibuffer)
                 ("C-k"   . projectile-kill-buffers)
                 ("C-v"   . projectile-vc)
@@ -1628,6 +1639,218 @@ Interfacing with Zoxide from emacs.
   ;;; cur-base.el ends here
 #+end_src
 
+** Consult-Projectile (=cur-consult-projectile.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-lisp/cur-consult-projectile.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; cur-consult-projectile.el --- Integrating Consult and Projectile -*- lexical-binding: t -*-
+
+  ;;; Commentary:
+
+  ;;; Code:
+
+  (require 'cur-base)
+  (require 'consult)
+  (require 'projectile)
+
+  (defgroup cur-consult-projectile ()
+      "Integrate Consult and Projectile."
+      :group 'consult
+      :group 'projectile
+      :prefix "cur-consult-projectile-")
+
+  (defvar cur-consult-projectile--files
+    `( :name "Directories"
+       :narrow ?d
+       :default nil
+       :category file
+       :state ,#'consult--file-state
+       :items ,(append '("./")
+                       (projectile-project-dirs (projectile-project-root)))))
+
+  (defvar cur-consult-projectile--dirs
+    `( :name "Files"
+       :narrow ?f
+       :default nil
+       :category file
+       :state ,#'consult--file-state
+       :items ,(projectile-project-files (projectile-project-root))))
+
+  (defvar cur-consult-projectile--buffers
+    `( :name     "Buffers"
+       :narrow   ?b
+       :category buffer
+       :face     consult-buffer
+       :history  buffer-name-history
+       :default  t
+       :state    ,#'consult--buffer-state
+       :items    ,(lambda ()
+                    (let ((root (projectile-project-root)))
+                      (consult--buffer-query
+                       :sort 'visibility
+                       :directory root
+                       :as #'consult--buffer-pair)
+                      ;; Alternative Implementation
+                      ;; (mapcar (lambda (buffer)
+                      ;;           (cons (buffer-name buffer) buffer))
+                      ;;         (projectile-project-buffers))
+                      ))))
+
+  (defcustom cur-consult-projectile-buffer-sources
+    '(cur-consult-projectile--buffers)
+    "Sources used by `cur-consult-projectile-buffer'.
+  See `consult--multi' for a description of the source data structure."
+    :type '(repeat symbol)
+    :group 'cur-consult-projectile)
+
+  (defun cur-consult-projectile-buffer ()
+    "Switch to buffer in project.
+  The default list of sources is frome `cur-consult-projectile--buffers'."
+    (interactive)
+    (consult-buffer cur-consult-projectile-buffer-sources))
+
+  ;; (defcustom cur-consult-projectile-find-file-sources
+  ;;   '(cur-consult-projectile--buffers)
+  ;;   "Sources used by `consult-buffer'.
+  ;; See also `consult-project-buffer-sources'.
+  ;; See `consult--multi' for a description of the source data structure."
+  ;;   :type '(repeat symbol)
+  ;;   :group 'cur-consult-projectile)
+
+  ;; (defun cur-consult-projectile-find-file ()
+  ;;   ""
+  ;;   (interactive)
+  ;;   (let ((default-directory (projectile-project-root)))
+  ;;     (consult--multi '(cur-consult-projectile--dirs
+  ;; 		      cur-consult-projectile--files)
+  ;; 		    :sort t)))
+
+  ;; (defun cur-consult-projectile--select-multi ()
+  ;;   (consult--multi `(( :name     "Buffers"
+  ;;                       :narrow   ?b
+  ;;                       :category buffer
+  ;;                       :face     consult-buffer
+  ;;                       :history  buffer-name-history
+  ;;                       :default  t
+  ;;                       :state    ,#'consult--buffer-state
+  ;;                       :items    ,(lambda ()
+  ;;                                    (let ((root (projectile-project-root)))
+  ;;                                      (consult--buffer-query
+  ;;                                       :sort 'visibility
+  ;;                                       :directory root
+  ;;                                       :as #'consult--buffer-pair)
+  ;;                                      ;; Alternative Implementation
+  ;;                                      ;; (mapcar (lambda (buffer)
+  ;;                                      ;;           (cons (buffer-name buffer) buffer))
+  ;;                                      ;;         (projectile-project-buffers))
+  ;;                                      )))
+  ;;                     ( :name "Directories"
+  ;;                       :narrow ?d
+  ;;                       :default nil
+  ;;                       :category file
+  ;;                       :state ,#'consult--file-state
+  ;;                       :items ,(append '("./")
+  ;;                                       (projectile-project-dirs (projectile-project-root))))
+
+  ;;                     ( :name "Files"
+  ;;                       :narrow ?f
+  ;;                       :default nil
+  ;;                       :category file
+  ;;                       :state ,#'consult--file-state
+  ;;                       :items ,(projectile-project-files (projectile-project-root))))
+  ;;                   :sort t))
+
+  ;; (defun cur-consult-projectile-switch ()
+  ;;   "Call `projectile-switch-project' and select from candidates.
+
+  ;; The candidates are as follows:
+  ;;   - Buffers
+  ;;   - Files
+  ;;   - Directories
+  ;;   - Actions"
+  ;;   (interactive)
+  ;;   ;; (let* ((selection (consult--multi
+  ;;   ;; 			     `(( :name "Projects"
+  ;;   ;; 				 :narrow ?p
+  ;;   ;; 				 :category file
+  ;;   ;; 				 :items ,(projectile-relevant-known-projects)))))
+  ;;   ;; 	 (root )))
+  ;;   (let ((projectile-switch-project-action 'cur-consult-projectile-find-file))
+  ;;     (projectile-switch-project))
+  ;;   )
+
+
+  (provide 'cur-consult-projectile)
+  ;;; cur-consult-projectile.el ends here
+#+end_src
+
+** Custom modeline (=cur-modline.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-lisp/cur-modeline.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; cur/modeline.el --- My custom modeline -*- lexical-binding: t -*-
+
+  ;;; Commentary:
+  ;;
+  ;; This is my custom modeline.  This is here bascially because I don't want to
+  ;; use doom modeline.
+
+  ;;; Code:
+  (defgroup cur-modeline nil
+    "My custom modeline that tries to be minimal."
+    :group 'mode-line)
+  
+  (defgroup cur-modeline-faces nil
+    "The faces for my custom modeline."
+    :group 'cur-modeline)
+
+  (defun cur-mode-line/padding ()
+    "Function to return padding so `mode-line-end-spaces' will be right aligned."
+    (let ((r-length (length (format-mode-line mode-line-end-spaces))))
+      (propertize " "
+                  'display `(space :align-to (- right ,r-length)))))
+
+  (setq-default mode-line-format
+                '("%e"
+                  (:eval
+                   (when (and (mode-line-window-selected-p) defining-kbd-macro)
+                     (propertize "  KMACRO  " 'face 'font-lock-string-face)))
+                  (:eval
+                   (when (and (mode-line-window-selected-p)
+                              (buffer-narrowed-p)
+                              (not (derived-mode-p 'Info-mode 'help-mode 'special-mode 'message-mode)))
+                     (propertize "  NARROWED  " 'face 'font-lock-constant-face)))
+                  (:eval
+                   (when (and (member 'meow features) (mode-line-window-selected-p))
+                     (propertize (format "  %s  " (upcase (symbol-name meow--current-state)))
+                                 'face 'highlight)))
+                  "  "
+                  (:eval
+                   (when (mode-line-window-selected-p)
+                     (cond (buffer-read-only
+                            (propertize "RO" 'face 'shadow))
+                           ((buffer-modified-p)
+                            (propertize "**" 'face 'shadow))
+                           (t
+                            (propertize "RW" 'face 'shadow)))))
+                  "  "
+                  (:eval
+                   (propertize (format "%s" (buffer-name)) 'face 'bold))
+                  "  "
+                  (:eval
+                   (if (mode-line-window-selected-p)
+                     (propertize (capitalize (symbol-name major-mode)) 'face 'warning)
+                     (propertize (capitalize (symbol-name major-mode)) 'face 'shadow)))
+                  (:eval (cur-mode-line/padding))))
+
+  (provide 'cur-modeline)
+  ;;; cur-modeline.el ends here
+#+end_src
+
 ** Eshell aliases and extensions (=cur-eshell.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-eshell.el
@@ -1686,6 +1909,48 @@ Interfacing with Zoxide from emacs.
 
   (provide 'cur-eshell)
   ;;; cur-base.el ends here
+#+end_src
+
+** Meow Extension (=cur-meow.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-lisp/cur-meow.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; cur-meow.el --- Extending Meow's Capabilities -*- lexical-binding: t -*-
+
+  ;;; Commentary:
+  ;;
+
+  ;;; Code:
+  (require 'meow)
+
+  (defun cur-meow-toggle-temp-normal-motion ()
+    "Toggle normal and motion mode.
+  If in neither of the two states, return nil."
+    (interactive)
+    (cond ((meow-normal-mode-p) (call-interactively 'meow-motion-mode))
+          ((meow-motion-mode-p) (call-interactively 'meow-normal-mode))
+          (t nil)))
+
+  (provide 'cur-meow)
+  ;;; cur-meow.el ends here
+#+end_src
+
+** Theme Helpers (=cur-theme.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-lisp/cur-theme.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; cur-theme.el --- Helper functions for theming -*- lexical-binding: t -*-
+
+  ;;; Commentary:
+  ;;
+
+  ;;; Code:
+  (provide 'cur-theme)
+  ;;; cur-theme.el ends here
 #+end_src
 
 ** Tmux Integration (=cur-tmux.el=)
@@ -1865,113 +2130,6 @@ Interfacing with Zoxide from emacs.
 
   (provide 'cur-tmux)
   ;;; cur-tmux.el ends here
-#+end_src
-
-** Custom modeline (=cur-modline.el=)
-:PROPERTIES:
-:header-args:emacs-lisp: :tangle ./cur-lisp/cur-modeline.el
-:END:
-
-#+begin_src emacs-lisp
-  ;;; cur/modeline.el --- My custom modeline -*- lexical-binding: t -*-
-
-  ;;; Commentary:
-  ;;
-  ;; This is my custom modeline.  This is here bascially because I don't want to
-  ;; use doom modeline.
-
-  ;;; Code:
-  (defgroup cur-modeline nil
-    "My custom modeline that tries to be minimal."
-    :group 'mode-line)
-  
-  (defgroup cur-modeline-faces nil
-    "The faces for my custom modeline."
-    :group 'cur-modeline)
-
-  (defun cur-mode-line/padding ()
-    "Function to return padding so `mode-line-end-spaces' will be right aligned."
-    (let ((r-length (length (format-mode-line mode-line-end-spaces))))
-      (propertize " "
-                  'display `(space :align-to (- right ,r-length)))))
-
-  (setq-default mode-line-format
-                '("%e"
-                  (:eval
-                   (when (and (mode-line-window-selected-p) defining-kbd-macro)
-                     (propertize "  KMACRO  " 'face 'font-lock-string-face)))
-                  (:eval
-                   (when (and (mode-line-window-selected-p)
-                              (buffer-narrowed-p)
-                              (not (derived-mode-p 'Info-mode 'help-mode 'special-mode 'message-mode)))
-                     (propertize "  NARROWED  " 'face 'font-lock-constant-face)))
-                  (:eval
-                   (when (and (member 'meow features) (mode-line-window-selected-p))
-                     (propertize (format "  %s  " (upcase (symbol-name meow--current-state)))
-                                 'face 'highlight)))
-                  "  "
-                  (:eval
-                   (when (mode-line-window-selected-p)
-                     (cond (buffer-read-only
-                            (propertize "RO" 'face 'shadow))
-                           ((buffer-modified-p)
-                            (propertize "**" 'face 'shadow))
-                           (t
-                            (propertize "RW" 'face 'shadow)))))
-                  "  "
-                  (:eval
-                   (propertize (format "%s" (buffer-name)) 'face 'bold))
-                  "  "
-                  (:eval
-                   (if (mode-line-window-selected-p)
-                     (propertize (capitalize (symbol-name major-mode)) 'face 'warning)
-                     (propertize (capitalize (symbol-name major-mode)) 'face 'shadow)))
-                  (:eval (cur-mode-line/padding))))
-
-  (provide 'cur-modeline)
-  ;;; cur-modeline.el ends here
-#+end_src
-
-** Theme Helpers (=cur-theme.el=)
-:PROPERTIES:
-:header-args:emacs-lisp: :tangle ./cur-lisp/cur-theme.el
-:END:
-
-#+begin_src emacs-lisp
-  ;;; cur-theme.el --- Helper functions for theming -*- lexical-binding: t -*-
-
-  ;;; Commentary:
-  ;;
-
-  ;;; Code:
-  (provide 'cur-theme)
-  ;;; cur-theme.el ends here
-#+end_src
-
-** Meow Extension (=cur-meow.el=)
-:PROPERTIES:
-:header-args:emacs-lisp: :tangle ./cur-lisp/cur-meow.el
-:END:
-
-#+begin_src emacs-lisp
-  ;;; cur-meow.el --- Extending Meow's Capabilities -*- lexical-binding: t -*-
-
-  ;;; Commentary:
-  ;;
-
-  ;;; Code:
-  (require 'meow)
-
-  (defun cur-meow-toggle-temp-normal-motion ()
-    "Toggle normal and motion mode.
-  If in neither of the two states, return nil."
-    (interactive)
-    (cond ((meow-normal-mode-p) (call-interactively 'meow-motion-mode))
-          ((meow-motion-mode-p) (call-interactively 'meow-normal-mode))
-          (t nil)))
-
-  (provide 'cur-meow)
-  ;;; cur-meow.el ends here
 #+end_src
 
 ** Window Management (=cur-window.el=)
