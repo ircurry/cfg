@@ -1661,22 +1661,39 @@ Interfacing with Zoxide from emacs.
       :group 'projectile
       :prefix "cur-consult-projectile-")
 
-  (defvar cur-consult-projectile--files
-    `( :name "Directories"
-       :narrow ?d
-       :default nil
-       :category file
-       :state ,#'consult--file-state
-       :items ,(append '("./")
-                       (projectile-project-dirs (projectile-project-root)))))
+  ;; TODO: Make the preview work here without opening a file called dir/dir
+  ;; (defun cur-consult-projectile--dir-preview ()
+  ;;   ""
+  ;;   (let ((open (consult--temporary-files))
+  ;;         ())
+  ;;     (lambda (action cand)
+  ;;       (cond ((equal action 'setup))
+  ;;             ((and (equal action 'preview) cand))
+  ;;             ((and (equal action 'preview) (not cand)))
+  ;;             ((equal action 'exit))
+  ;;             ((equal action 'return))
+  ;;             ))))
 
-  (defvar cur-consult-projectile--dirs
+  ;; (defvar cur-consult-projectile--dirs
+  ;;   `( :name "Directories"
+  ;;      :narrow ?d
+  ;;      :default nil
+  ;;      :category file
+  ;;      :state  ,#'consult--file-state
+  ;;      :action ,#'cur-consult-projectile--dir-action
+  ;;      :items  ,#'(lambda ()
+  ;;                   (append '("./")
+  ;;                           (projectile-project-dirs (projectile-project-root))))))
+
+  (defvar cur-consult-projectile--files
     `( :name "Files"
        :narrow ?f
        :default nil
        :category file
-       :state ,#'consult--file-state
-       :items ,(projectile-project-files (projectile-project-root))))
+       :state  ,#'consult--file-state
+       :action ,#'consult--file-action
+       :items  ,#'(lambda ()
+                    (projectile-project-files (projectile-project-root)))))
 
   (defvar cur-consult-projectile--buffers
     `( :name     "Buffers"
@@ -1686,17 +1703,18 @@ Interfacing with Zoxide from emacs.
        :history  buffer-name-history
        :default  t
        :state    ,#'consult--buffer-state
-       :items    ,(lambda ()
-                    (let ((root (projectile-project-root)))
-                      (consult--buffer-query
-                       :sort 'visibility
-                       :directory root
-                       :as #'consult--buffer-pair)
-                      ;; Alternative Implementation
-                      ;; (mapcar (lambda (buffer)
-                      ;;           (cons (buffer-name buffer) buffer))
-                      ;;         (projectile-project-buffers))
-                      ))))
+       :action   ,#'consult--buffer-action
+       :items    ,#'(lambda ()
+                      (let ((root (projectile-project-root)))
+                        (consult--buffer-query
+                         :sort 'visibility
+                         :directory root
+                         :as #'consult--buffer-pair)
+                        ;; Alternative Implementation
+                        ;; (mapcar (lambda (buffer)
+                        ;;           (cons (buffer-name buffer) buffer))
+                        ;;         (projectile-project-buffers))
+                        ))))
 
   (defcustom cur-consult-projectile-buffer-sources
     '(cur-consult-projectile--buffers)
@@ -1707,26 +1725,31 @@ Interfacing with Zoxide from emacs.
 
   (defun cur-consult-projectile-buffer ()
     "Switch to buffer in project.
-  The default list of sources is frome `cur-consult-projectile--buffers'."
+  The default list of sources is from `cur-consult-projectile--buffers'."
     (interactive)
     (consult-buffer cur-consult-projectile-buffer-sources))
 
-  ;; (defcustom cur-consult-projectile-find-file-sources
-  ;;   '(cur-consult-projectile--buffers)
-  ;;   "Sources used by `consult-buffer'.
-  ;; See also `consult-project-buffer-sources'.
-  ;; See `consult--multi' for a description of the source data structure."
-  ;;   :type '(repeat symbol)
-  ;;   :group 'cur-consult-projectile)
+  (defcustom cur-consult-projectile-find-file-sources
+    '(cur-consult-projectile--files
+      ;; TODO: get the preview working
+      ;; cur-consult-projectile--dirs
+      )
+    "Sources used by `consult-buffer'.
+  See also `consult-project-buffer-sources'.
+  See `consult--multi' for a description of the source data structure."
+    :type '(repeat symbol)
+    :group 'cur-consult-projectile)
 
-  ;; (defun cur-consult-projectile-find-file ()
-  ;;   ""
-  ;;   (interactive)
-  ;;   (let ((default-directory (projectile-project-root)))
-  ;;     (consult--multi '(cur-consult-projectile--dirs
-  ;; 		      cur-consult-projectile--files)
-  ;; 		    :sort t)))
+  (defun cur-consult-projectile-find-file ()
+    "Open file in project.
+  The default list of sources is from `cur-consult-projectile-find-file-sources'."
+    (interactive)
+    ;; Make this work if not in a project
+    (let* ((default-directory (projectile-project-root)))
+      (consult--multi cur-consult-projectile-find-file-sources
+                      :prompt "Find File: ")))
 
+  ;; TODO: Make alternative to `projectile-switch-project'
   ;; (defun cur-consult-projectile--select-multi ()
   ;;   (consult--multi `(( :name     "Buffers"
   ;;                       :narrow   ?b
@@ -1778,9 +1801,7 @@ Interfacing with Zoxide from emacs.
   ;;   ;; 				 :items ,(projectile-relevant-known-projects)))))
   ;;   ;; 	 (root )))
   ;;   (let ((projectile-switch-project-action 'cur-consult-projectile-find-file))
-  ;;     (projectile-switch-project))
-  ;;   )
-
+  ;;     (projectile-switch-project)))
 
   (provide 'cur-consult-projectile)
   ;;; cur-consult-projectile.el ends here
