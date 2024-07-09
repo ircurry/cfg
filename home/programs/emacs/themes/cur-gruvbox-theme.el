@@ -4,7 +4,7 @@
 
 ;;; Code:
 
-;; (require 'autothemer)
+(require 'cur-theme)
 
 ;; (add-to-list 'custom-theme-load-path (locate-user-emacs-file "/home/recur/cfg/home/programs/emacs/themes"))
 
