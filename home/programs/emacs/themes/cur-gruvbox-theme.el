@@ -71,7 +71,7 @@ for FRAME (defaults to the current frame)."
       (pale-purple (cur-theme-blend "#d3869b" "#ebdbb2" 0.6))
       (pale-aqua   (cur-theme-blend "#8ec07c" "#ebdbb2" 0.6))
       (pale-orange (cur-theme-blend "#fe8019" "#ebdbb2" 0.6))
-      
+
       ;; Background colours
       (bg-sp1   "#0d1011")
       (bg0h     "#1d2021") ;; Darkest
@@ -149,7 +149,7 @@ for FRAME (defaults to the current frame)."
    `(isearch-group-1 ((t (:foreground ,bg0h :background ,light-orange))))
    `(isearch-group-2 ((t (:foreground ,bg0h :background ,orange))))
    `(lazy-highlight  ((t (:foreground ,bg0h :background ,light-yellow))))
-    
+
 ;;; Minibuffer and Completions
 
    ;; Match and Completions
@@ -163,7 +163,7 @@ for FRAME (defaults to the current frame)."
    `(orderless-match-face-1 ((t (:foreground ,pale-red :background ,bg-red))))
    `(orderless-match-face-2 ((t (:foreground ,pale-green :background ,bg-green))))
    `(orderless-match-face-3 ((t (:foreground ,pale-yellow :background ,bg-yellow))))
-    
+
    ;; Vertico
 
    `(vertico-current         ((t (:background ,bg2))))
@@ -179,10 +179,10 @@ for FRAME (defaults to the current frame)."
    `(vertico-posframe-border-3        ((t (:background ,light-green))))
    `(vertico-posframe-border-4        ((t (:background ,light-blue))))
    `(vertico-posframe-border-fallback ((t (:background ,light-yellow))))
-    
-    
+
+
 ;;; Terminal and Shell Colors
-    
+
    ;; Ansi Colors
 
    `(ansi-color-black          ((t (:foreground ,bg0h :background ,bg0h))))
@@ -203,13 +203,13 @@ for FRAME (defaults to the current frame)."
    `(ansi-color-bright-white   ((t (:foreground ,fg1 :background ,fg1))))
 
 ;;; Programming Auxiliary
-    
+
    ;; Paren Mode
 
    `(show-paren-match            ((t (:background ,bg4))))
    `(show-paren-match-expression ((t (:inherit show-paren-match))))
    `(show-paren-mismatch         ((t (:foreground ,fg0 :background ,light-red :weight bold))))
-    
+
    ;; Rainbow Delimiters
 
    `(rainbow-delimiters-base-face       ((t (:inherit default))))
@@ -239,7 +239,7 @@ for FRAME (defaults to the current frame)."
    ;; Flyspell
    `(flyspell-duplicate ((t (:underline (:style wave :color ,light-yellow)))))
    `(flyspell-incorrect ((t (:underline (:style wave :color ,light-red)))))
-   
+
 
 ;;; Internet Modes
 
@@ -315,7 +315,7 @@ for FRAME (defaults to the current frame)."
    `(outline-6 ((t (:foreground ,(cur-theme-lighten light-purple 0.4) :weight bold :extend t))))
    `(outline-7 ((t (:foreground ,(cur-theme-lighten aqua 0.5) :weight bold :extend t))))
    `(outline-8 ((t (:foreground ,(cur-theme-lighten light-aqua 0.6) :weight bold :extend t))))
-   
+
    `(nerd-icons-blue       ((t (:foreground ,light-blue))))
    `(nerd-icons-blue-alt   ((t (:foreground ,light-aqua))))
    `(nerd-icons-cyan       ((t (:foreground ,light-aqua))))
