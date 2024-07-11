@@ -339,7 +339,7 @@ NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-s
        (cons "t" cur/toggle-map)
        ;'("y" . )
        '("u" . "C-u")   ; universal argument
-       '("i" . "M-g i") ; imenu
+       ;'("i" . )
        '("o" . "C-x o") ; other window
        (cons "p" cur/projectile-map)
        ;'("-" . )

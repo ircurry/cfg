@@ -108,7 +108,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      (cons "t" cur/toggle-map)
      ;'("y" . )
      '("u" . "C-u")   ; universal argument
-     '("i" . "M-g i") ; imenu
+     ;'("i" . )
      '("o" . "C-x o") ; other window
      (cons "p" cur/projectile-map)
      ;'("-" . )
