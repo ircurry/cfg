@@ -23,6 +23,10 @@
     (let ((map (make-sparse-keymap)))
       map)
     "Keymap for commands that change alignment and cursor display.")
+  (defvar cur/register-map
+    (let ((map (make-sparse-keymap)))
+      map)
+    "Keymap for commands that use registers.")
   (defun cur/kmacro-toggle ()
     (interactive)
     (cond
@@ -97,10 +101,10 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
 
      ;; ===2nd Row===
      ;'("TAB"  . )
-     '("q" . "M-;") ; comment dwim
+     '("q" . meow-comment) ; comment dwim
      '("w" . cur/window/body)
      ;'("e" . )
-     '("r" . query-replace)
+     (cons "r" cur/register-map)
      (cons "t" cur/toggle-map)
      ;'("y" . )
      '("u" . "C-u")   ; universal argument
@@ -169,7 +173,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("e" . meow-next-word)
      '("E" . meow-next-symbol)
      '("r" . meow-replace)
-     ;'("R" . )
+     '("R" . meow-query-replace)
      '("t" . meow-till)
      '("T" . meow-till-expand)
      '("y" . meow-save)
@@ -217,19 +221,19 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("X" . meow-line-expand)
      '("c" . meow-change)
      ;'("C" . )
-     ;'("v" . )
+     (cons "v" goto-map)
      ;'("V" . )
      '("b" . meow-back-word)
      '("B" . meow-back-symbol)
      '("n" . meow-search)
-     '("N" . meow-goto-line)
+     '("N" . meow-visit)
      '("m" . meow-join)
      ;'("M" . )
-     '("," . meow-beginning-of-thing)
-     '("<" . meow-bounds-of-thing)
-     '("." . meow-end-of-thing)
-     '(">" . meow-inner-of-thing)
-     '("/" . isearch-meow-wrapper)
+     '("," . meow-bounds-of-thing)
+     '("<" . meow-beginning-of-thing)
+     '("." . meow-inner-of-thing)
+     '(">" . meow-end-of-thing)
+     (cons "/" search-map)
      '("?" . meow-page-down)
      '("'"  . meow-block)
      '("\"" . meow-to-block)))
@@ -284,8 +288,27 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
    "Meow fallback commands")
   (meow-keypad-describe-delay 0.0 "No delay in keypad help popup")
   (meow-cheats-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
-  :bind (:map cur/sub-leader-keymap
-              ("C-l" . ibuffer))
+  :bind ( :map cur/sub-leader-keymap
+          ("C-l" . ibuffer)
+          :map cur/register-map
+          ("C-j" . jump-to-register)
+          ("C-s" . point-to-register)
+          ("C-." . point-to-register)
+          ("C-y" . copy-to-register)
+          ("C-p" . insert-register)
+          ("C-w" . window-configuration-to-register)
+          ("C-n" . number-to-register)
+          ("C-+" . increment-register)
+          ("C-q" . kmacro-to-register)
+          :map goto-map
+          ("e a" . first-error)
+          ("e n" . next-error)
+          ("e p" . previous-error)
+          (","   . xref-go-back)
+          ("d"   . xref-find-definitions)
+          ("r"   . xref-find-references)
+          :map search-map
+          ("n" . meow-visit))
   :config
   (setq meow-kteypad-leader-dispatch nil)
   (meow-setup)
@@ -294,6 +317,9 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
 (use-package cur-meow
   :after (meow)
   :bind ( :map cur/sub-leader-keymap
-          ("C-n" . cur-meow-toggle-temp-normal-motion)))
+          ("C-n" . cur-meow-toggle-temp-normal-motion)
+          :map search-map
+          ("/" . isearch-forward)
+          ("?" . isearch-backward)))
 
 (provide 'cur-config-bindings)
