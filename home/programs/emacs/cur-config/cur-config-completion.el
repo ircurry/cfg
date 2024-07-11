@@ -14,16 +14,12 @@
 
 (use-package vertico
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
-  :config
+  :init
   (vertico-mode 1))
 
 (use-package marginalia
   :config
   (marginalia-mode 1))
-
-(use-package vertico-posframe
-  :config
-  (vertico-posframe-mode 1))
 
 (use-package consult
   :demand t

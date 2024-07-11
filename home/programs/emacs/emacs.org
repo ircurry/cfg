@@ -985,7 +985,7 @@ Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]
 #+begin_src emacs-lisp
   (use-package vertico
     :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
-    :config
+    :init
     (vertico-mode 1))
 #+end_src
 
@@ -999,7 +999,7 @@ Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]
 
 *** Vertico Posframe
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (use-package vertico-posframe
     :config
     (vertico-posframe-mode 1))
