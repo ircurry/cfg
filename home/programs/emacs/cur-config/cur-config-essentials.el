@@ -30,9 +30,14 @@
   (setq bookmark-save-flag 1))
 
 (use-package isearch
+  :demand t
   :custom
   (isearch-wrap-pause 'no-ding)
-  (isearch-repeat-on-direction-change t))
+  (isearch-repeat-on-direction-change t)
+  :config
+  (setq isearch-lazy-count t)
+  (setq lazy-count-prefix-format "(%s/%s) ")
+  (setq lazy-count-suffix-format nil))
 
 (use-package server
   :config

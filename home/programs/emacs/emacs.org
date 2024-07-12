@@ -198,9 +198,14 @@ I like having absolute line numbers, especially since the meow number selection 
 
 #+begin_src emacs-lisp
   (use-package isearch
+    :demand t
     :custom
     (isearch-wrap-pause 'no-ding)
-    (isearch-repeat-on-direction-change t))
+    (isearch-repeat-on-direction-change t)
+    :config
+    (setq isearch-lazy-count t)
+    (setq lazy-count-prefix-format "(%s/%s) ")
+    (setq lazy-count-suffix-format nil))
 #+end_src
 
 *** Emacs Server
