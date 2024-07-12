@@ -143,7 +143,7 @@ in
         package = emacs-package;
       };
 
-      services.emacs.enable = true;
+      services.emacs.enable = false;
 
       home.sessionVariables.JDTLS_PATH = "${pkgs.jdt-language-server}";
       home.packages = with pkgs; [

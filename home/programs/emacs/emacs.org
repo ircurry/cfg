@@ -201,6 +201,16 @@ I like having absolute line numbers, especially since the meow number selection 
     :custom
     (isearch-wrap-pause 'no-ding)
     (isearch-repeat-on-direction-change t))
+#+end_src
+
+*** Emacs Server
+
+#+begin_src emacs-lisp
+  (use-package server
+    :config
+    (setq server-client-instructions nil)
+    (unless (server-running-p)
+      (server-start)))
   
   (provide 'cur-config-essentials)
 #+end_src

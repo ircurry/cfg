@@ -34,4 +34,10 @@
   (isearch-wrap-pause 'no-ding)
   (isearch-repeat-on-direction-change t))
 
+(use-package server
+  :config
+  (setq server-client-instructions nil)
+  (unless (server-running-p)
+    (server-start)))
+
 (provide 'cur-config-essentials)
