@@ -212,6 +212,7 @@ I like having absolute line numbers, especially since the meow number selection 
 
 #+begin_src emacs-lisp
   (use-package server
+    :defer 1
     :config
     (setq server-client-instructions nil)
     (unless (server-running-p)

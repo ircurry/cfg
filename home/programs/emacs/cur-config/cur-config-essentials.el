@@ -40,6 +40,7 @@
   (setq lazy-count-suffix-format nil))
 
 (use-package server
+  :defer 1
   :config
   (setq server-client-instructions nil)
   (unless (server-running-p)
