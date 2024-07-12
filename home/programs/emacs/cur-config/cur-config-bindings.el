@@ -309,7 +309,9 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
           ("d"   . xref-find-definitions)
           ("r"   . xref-find-references)
           :map search-map
-          ("n" . meow-visit))
+          ("n" . meow-visit)
+          ("/" . isearch-forward)
+          ("?" . isearch-backward))
   :config
   (setq meow-kteypad-leader-dispatch nil)
   (meow-setup)
@@ -318,9 +320,6 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
 (use-package cur-meow
   :after (meow)
   :bind ( :map cur/sub-leader-keymap
-          ("C-n" . cur-meow-toggle-temp-normal-motion)
-          :map search-map
-          ("/" . isearch-forward)
-          ("?" . isearch-backward)))
+          ("C-n" . cur-meow-toggle-temp-normal-motion)))
 
 (provide 'cur-config-bindings)

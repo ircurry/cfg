@@ -564,7 +564,9 @@ NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-s
             ("d"   . xref-find-definitions)
             ("r"   . xref-find-references)
             :map search-map
-            ("n" . meow-visit))
+            ("n" . meow-visit)
+            ("/" . isearch-forward)
+            ("?" . isearch-backward))
     :config
     (setq meow-kteypad-leader-dispatch nil)
     (meow-setup)
@@ -573,10 +575,7 @@ NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-s
   (use-package cur-meow
     :after (meow)
     :bind ( :map cur/sub-leader-keymap
-            ("C-n" . cur-meow-toggle-temp-normal-motion)
-            :map search-map
-            ("/" . isearch-forward)
-            ("?" . isearch-backward)))
+            ("C-n" . cur-meow-toggle-temp-normal-motion)))
 
   (provide 'cur-config-bindings)
 #+end_src
