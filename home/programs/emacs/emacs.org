@@ -99,7 +99,6 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
 
   ;; ===Essentials===
   (require 'cur-config-essentials)
-  (require 'cur-config-search)
   (require 'cur-config-bindings)
   (require 'cur-config-help)
   (require 'cur-config-dired)
@@ -193,22 +192,17 @@ I like having absolute line numbers, especially since the meow number selection 
     :hook (bookmark-bmenu-mode . hl-line-mode)
     :config
     (setq bookmark-save-flag 1))
-  
-  (provide 'cur-config-essentials)
 #+end_src
 
-** Search configuration (=cur-config-search.el=)
-:PROPERTIES:
-:header-args:emacs-lisp: :tangle ./cur-config/cur-config-search.el
-:END:
+*** Isearch configuration
 
 #+begin_src emacs-lisp
   (use-package isearch
     :custom
     (isearch-wrap-pause 'no-ding)
     (isearch-repeat-on-direction-change t))
-
-  (provide 'cur-config-search)
+  
+  (provide 'cur-config-essentials)
 #+end_src
 
 ** Key bindings configurations (=cur-config-bindings.el=)

@@ -45,7 +45,6 @@
 
 ;; ===Essentials===
 (require 'cur-config-essentials)
-(require 'cur-config-search)
 (require 'cur-config-bindings)
 (require 'cur-config-help)
 (require 'cur-config-dired)
