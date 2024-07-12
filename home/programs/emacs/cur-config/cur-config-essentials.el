@@ -10,7 +10,8 @@
 (global-display-line-numbers-mode t)
 (setq display-line-numbers-type t)
 ;; Disable line numbers for terminal modes
-(dolist (mode '(org-mode-hook
+(dolist (mode '(bookmark-bmenu-mode-hook
+                org-mode-hook
                 dired-mode-hook
                 term-mode-hook
                 vterm-mode-hook
@@ -18,5 +19,14 @@
                 eshell-mode-hook
                 eat-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+(use-package bookmark
+  :commands (bookmark-set
+             bookmark-set-no-overwrite
+             bookmark-jump
+             bookmark-bmenu-list)
+  :hook (bookmark-bmenu-mode . hl-line-mode)
+  :config
+  (setq bookmark-save-flag 1))
 
 (provide 'cur-config-essentials)

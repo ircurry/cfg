@@ -290,6 +290,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
   (meow-cheats-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
   :bind ( :map cur/sub-leader-keymap
           ("C-l" . ibuffer)
+          ("C-b" . bookmark-set-no-overwrite)
           :map cur/register-map
           ("C-j" . jump-to-register)
           ("C-s" . point-to-register)

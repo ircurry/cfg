@@ -170,7 +170,8 @@ I like having absolute line numbers, especially since the meow number selection 
   (global-display-line-numbers-mode t)
   (setq display-line-numbers-type t)
   ;; Disable line numbers for terminal modes
-  (dolist (mode '(org-mode-hook
+  (dolist (mode '(bookmark-bmenu-mode-hook
+                  org-mode-hook
                   dired-mode-hook
                   term-mode-hook
                   vterm-mode-hook
@@ -179,6 +180,20 @@ I like having absolute line numbers, especially since the meow number selection 
                   eat-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
+#+end_src
+
+*** Bookmark Settings
+
+#+begin_src emacs-lisp
+  (use-package bookmark
+    :commands (bookmark-set
+               bookmark-set-no-overwrite
+               bookmark-jump
+               bookmark-bmenu-list)
+    :hook (bookmark-bmenu-mode . hl-line-mode)
+    :config
+    (setq bookmark-save-flag 1))
+  
   (provide 'cur-config-essentials)
 #+end_src
 
@@ -521,6 +536,7 @@ NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-s
     (meow-cheats-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
     :bind ( :map cur/sub-leader-keymap
             ("C-l" . ibuffer)
+            ("C-b" . bookmark-set-no-overwrite)
             :map cur/register-map
             ("C-j" . jump-to-register)
             ("C-s" . point-to-register)
@@ -1010,13 +1026,16 @@ Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]
 #+begin_src emacs-lisp
   (use-package consult
     :demand t
-    :bind (("C-x b"           . consult-buffer)
-           ("M-g i"           . consult-imenu)
-           ("M-y"             . consult-yank-pop)
-           ([remap goto-line] . consult-goto-line)
+    :bind (("C-x b"               . consult-buffer)
+           ("M-g i"               . consult-imenu)
+           ("M-y"                 . consult-yank-pop)
+           ([remap goto-line]     . consult-goto-line)
+           ([remap bookmark-jump] . consult-bookmark)
+           :map consult-narrow-map
+           ("?" . consult-narrow-help)
            :map cur/projectile-map
-           ("C-r"   . consult-ripgrep)
-           ("C-b"   . consult-project-buffer)
+           ("C-r" . consult-ripgrep)
+           ("C-b" . consult-project-buffer)
            :map goto-map
            ("m" . consult-mark)
            ("M" . consult-global-mark)
