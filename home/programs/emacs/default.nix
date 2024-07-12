@@ -169,7 +169,7 @@ in
           message = "emacs is set as the default editor on wayland but is not ebabled";
         }
       ];
-      nocturne.wayland.editor.exec = "${config.programs.emacs.package}/bin/emacsclient -c -a 'emacs'";
+      nocturne.wayland.editor.exec = "${config.programs.emacs.package}/bin/emacsclient -c -a '${config.programs.emacs.package}/bin/emacs'";
       nocturne.wayland.editor.exec-reuse = "${config.programs.emacs.package}/bin/emacsclient -r";
       nocturne.wayland.editor.exec-start = "${config.programs.emacs.package}/bin/emacs --daemon";
     })
