@@ -232,6 +232,10 @@ I use [[https:github.com/meow-edit/meow][meow]], a modal editing layer designed 
 
 I use hydras for repeat keybindings. I plan to switch to use the built in repeat keymap more in the future but they are very helpful for creating something almost like a mini meow state, just for one particular task.
 
+#+begin_src text :tangle ./packages.txt :padline no
+hydra
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Hydra===
   (use-package hydra
@@ -256,6 +260,10 @@ Also of note, I find it easier to think about the cursor in normal mode as being
 A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
 
 NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-sitter]] to see if its worth using.
+
+#+begin_src text :tangle ./packages.txt :padline no
+meow
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Meow Setup===
@@ -592,6 +600,10 @@ Enhancing the help mechanisms in emacs.
 
 Which-key shows you what keybindings are available in a keychord. Super helpful and a must have in emacs.
 
+#+begin_src text :tangle ./packages.txt :padline no
+which-key
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===which-key===
   (use-package which-key
@@ -605,6 +617,10 @@ Which-key shows you what keybindings are available in a keychord. Super helpful 
 *** Helpful
 
 Provides additional info help.
+
+#+begin_src text :tangle ./packages.txt :padline no
+helpful
+#+end_src
 
 #+begin_src emacs-lisp :tangle no
   ;; ===helpful===
@@ -685,6 +701,10 @@ Dired is the built in file manager in emacs. Its very capable and very hackable 
 *** Nerd Icons Dired
 
 Adds icons to make dired a bit more pretty and gives a visual sense of what files are what. 
+
+#+begin_src text :tangle ./packages.txt :padline no
+nerd-icons-dired
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Dired Icons===
@@ -860,6 +880,10 @@ I have several custom themes in a directory weirdly named themes. These are the 
 
 Doom themes are a theme pack specifically for the Doom Emacs distribution, but work well without doom as well. I have a function that sets some faces based on the theme in ~custom-enabled-themes~. This function is more than just a little jank and I plan on creating my own themes instead of trying to hack around ones made by someone else.
 
+#+begin_src text :tangle ./packages.txt :padline no
+doom-themes
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Doom Emacs Themes===
   (use-package doom-themes
@@ -905,6 +929,10 @@ Doom themes are a theme pack specifically for the Doom Emacs distribution, but w
 
 A library used by =catppuccin= and =kanagawa=.
 
+#+begin_src text :tangle ./packages.txt :padline no
+autothemer
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Autothemer===
   (use-package autothemer)
@@ -913,6 +941,10 @@ A library used by =catppuccin= and =kanagawa=.
 *** Catppuccin Theme
 
 [[https:github.com/catppuccin/catppuccin][Link]] to the catppuccin theme.
+
+#+begin_src text :tangle ./packages.txt :padline no
+catppuccin-theme
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Catppuccin Theme===
@@ -939,6 +971,10 @@ A simple hydra that allows me to interactively set the size of the text in a buf
 
 Themes made by Protesilaos, also known as Prot.
 
+#+begin_src text :tangle ./packages.txt :padline no
+ef-themes
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Ef-Themes===
   (use-package ef-themes)
@@ -950,6 +986,10 @@ Themes made by Protesilaos, also known as Prot.
 
 Adds Icons to ~ibuffer~. Not really a face thing but I don't have a dedicated ~ibuffer~ module so it goes here instead.
 
+#+begin_src text :tangle ./packages.txt :padline no
+nerd-icons-ibuffer
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Ibuffer Icons===
   (use-package nerd-icons-ibuffer
@@ -959,6 +999,10 @@ Adds Icons to ~ibuffer~. Not really a face thing but I don't have a dedicated ~i
 *** Spacious Padding
 
 It adds padding and makes emacs look better.
+
+#+begin_src text :tangle ./packages.txt :padline no
+spacious-padding
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Spacious Padding===
@@ -987,7 +1031,15 @@ This section is not about code completion. Rather, this is my configuration for 
 
 Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]] suite for doing completions in emacs. I like it but I know that the vertico/marginelia/consult/embark chain is better, faster, and more modern. I plan to make the switch at some point but for now I sticking with ivy.
 
+#+begin_src text :tangle ./packages.txt :padline no
+embark
+#+end_src
+
 *** Completions Styles
+
+#+begin_src text :tangle ./packages.txt :padline no
+orderless
+#+end_src
 
 #+begin_src emacs-lisp
   (use-package minibuffer
@@ -1007,6 +1059,10 @@ Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]
 
 *** Vertico
 
+#+begin_src text :tangle ./packages.txt :padline no
+vertico
+#+end_src
+
 #+begin_src emacs-lisp
   (use-package vertico
     :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
@@ -1016,6 +1072,10 @@ Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]
 
 *** Marginalia
 
+#+begin_src text :tangle ./packages.txt :padline no
+marginalia
+#+end_src
+
 #+begin_src emacs-lisp
   (use-package marginalia
     :config
@@ -1024,6 +1084,10 @@ Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]
 
 *** Vertico Posframe
 
+#+begin_src text :tangle ./packages.txt :padline no
+vertico-posframe
+#+end_src
+
 #+begin_src emacs-lisp :tangle no
   (use-package vertico-posframe
     :config
@@ -1031,6 +1095,10 @@ Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]
 #+end_src
 
 *** Consult
+
+#+begin_src text :tangle ./packages.txt :padline no
+consult
+#+end_src
 
 #+begin_src emacs-lisp
   (use-package consult
@@ -1122,6 +1190,10 @@ Emacs can be made to have all the features of a modern text editor and then some
 
 Lsp-mode is my chosen language server protocol support package. I chose this over eglot because of the richer features and (at the time that I started using lsp) more mature state. I will revisit elgot in the future but for now I am perfectly happy with lsp-mode.
 
+#+begin_src text :tangle ./packages.txt :padline no
+lsp-mode
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===LSP Mode===
   (use-package lsp-mode
@@ -1147,6 +1219,10 @@ Lsp-mode is my chosen language server protocol support package. I chose this ove
 *** LSP UI
 
 Lsp-ui provides some ui enhancements and extra features to lsp. Probably the best one is the doc feature to view documentation in the editor.
+
+#+begin_src text :tangle ./packages.txt :padline no
+lsp-ui
+#+end_src
 
 #+begin_src emacs-lisp
   (use-package lsp-ui
@@ -1175,6 +1251,10 @@ Lsp-ui provides some ui enhancements and extra features to lsp. Probably the bes
 
 The code completion system. This is different from completions systems like ivy or vertico, this is for interactively completing a symbol while programming.
 
+#+begin_src text :tangle ./packages.txt :padline no
+company
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Company Mode===
   (use-package company
@@ -1196,6 +1276,10 @@ The code completion system. This is different from completions systems like ivy 
 
 Code error checking with a nice UI.
 
+#+begin_src text :tangle ./packages.txt :padline no
+flycheck
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Flycheck===
   (use-package flycheck
@@ -1208,6 +1292,10 @@ Code error checking with a nice UI.
 
 Project tree, I don't use this all that often.
 
+#+begin_src text :tangle ./packages.txt :padline no
+treemacs
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Treemacs==
   (use-package treemacs
@@ -1218,6 +1306,10 @@ Project tree, I don't use this all that often.
 *** Magit
 
 Magit is a git interface, probably the best one I have ever seen or had the pleasure of using. I consider magit to be one of emacs' "killer features", right up there with org-mode.
+
+#+begin_src text :tangle ./packages.txt :padline no
+magit
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Magit===
@@ -1232,6 +1324,11 @@ Magit is a git interface, probably the best one I have ever seen or had the plea
 *** Projectile
 
 Projectile provides many commands to help manage and do things in a project, such as compile a project from its root, list all files in the project, or run grep or ripgrep on all the files in the project. I also use it's project switching aspect as sort of a bookmark like system.
+
+#+begin_src text :tangle ./packages.txt :padline no
+projectile
+rg
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Projectile===
@@ -1258,6 +1355,11 @@ Projectile provides many commands to help manage and do things in a project, suc
 *** Just
 
 [[https:github.com/casey/just][Just]] is just a command runner. Think of it sort of like make but simplified. This is my configuration for working and interacting with it from emacs.
+
+#+begin_src text :tangle ./packages.txt :padline no
+just-mode
+justl
+#+end_src
 
 #+begin_src emacs-lisp
   (use-package just-mode)
@@ -1288,6 +1390,10 @@ These are my configurations for working with Lisp languages.
 
 This color codes opening and closing delimiters such as parentheses and square brackets.
 
+#+begin_src text :tangle ./packages.txt :padline no
+rainbow-delimiters
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===rainbow-delimiters===
   (use-package rainbow-delimiters
@@ -1297,6 +1403,10 @@ This color codes opening and closing delimiters such as parentheses and square b
 
 *** Paredit
 
+#+begin_src text :tangle ./packages.txt :padline no
+paredit
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Paredit===
   (use-package paredit
@@ -1305,6 +1415,22 @@ This color codes opening and closing delimiters such as parentheses and square b
 #+end_src
 
 *** Geiser
+
+#+begin_src text :tangle ./packages.txt :padline no
+geiser
+geiser-chez
+geiser-chibi
+geiser-chicken
+geiser-gambit
+geiser-gauche
+geiser-guile
+geiser-kawa
+geiser-mit
+geiser-racket
+geiser-stklos
+macrostep
+macrostep-geiser
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Geiser===
@@ -1320,6 +1446,10 @@ This color codes opening and closing delimiters such as parentheses and square b
 My configurations for working with the Java language. I have ~java-ts-mode~, the tree sitter version of the normal ~java-mode~, as the mode for editing =.java= files. I have found that either tree sitter provides exactly the same or better syntax highlighting and the possibility of better movement once it gets better integrated into emacs.
 
 I also have lsp-java set up for better integrating ~lsp-mode~ into ~java-ts-mode~. Note because I have =direnv= integration with ~envrc~, the hooks I add to start ~lsp~ must be ~lsp-defered~. ~lsp-defered~ does not start ~lsp-mode~ until after the buffer has visually loaded. We want this because ~envrc~ will change the ~exec-path~ to what =direnv= would change it to. For instance, if I have a devshell that says "here is the lsp-server, the build tool, and external libraries with these exact versions", envrc will make sure that ~exec-path~ contains exactly those versions of those programs in the nix store.
+
+#+begin_src text :tangle ./packages.txt :padline no
+lsp-java
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Java Tree-Sitter Mode===
@@ -1356,6 +1486,10 @@ I also have lsp-java set up for better integrating ~lsp-mode~ into ~java-ts-mode
 
 Literally just ~yaml-mode~.
 
+#+begin_src text :tangle ./packages.txt :padline no
+yaml-mode
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===YAML===
   (use-package yaml-mode
@@ -1371,6 +1505,11 @@ Literally just ~yaml-mode~.
 
 My configurations for the Nix language, which boils down to "start the lsp server".
 
+#+begin_src text :tangle ./packages.txt :padline no
+nix-mode
+nix-ts-mode
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===nix-mode===
   (use-package nix-mode
@@ -1385,6 +1524,10 @@ My configurations for the Nix language, which boils down to "start the lsp serve
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-rust.el
 :END:
 
+#+begin_src text :tangle ./packages.txt :padline no
+rustic
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Rust-Mode===
   (use-package rustic
@@ -1398,6 +1541,11 @@ My configurations for the Nix language, which boils down to "start the lsp serve
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-haskell.el
 :END:
+
+#+begin_src text :tangle ./packages.txt :padline no
+haskell-mode
+company-ghci
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Haskell-Mode===
@@ -1424,6 +1572,10 @@ My configurations for the Nix language, which boils down to "start the lsp serve
 :END:
 
 I use tree-sitter for C, which unfortunately is not currently integrated into the default C major mode for emacs. I have also changed the ~c-default-style~ for C to be "linux", which is 8 spaces for indentation instead of the default of 2.
+
+#+begin_src text :tangle ./packages.txt :padline no
+ccls
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===C Tree-Sitter Mode===
@@ -1452,6 +1604,10 @@ I use tree-sitter for C, which unfortunately is not currently integrated into th
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-zig.el
 :END:
+
+#+begin_src text :tangle ./packages.txt :padline no
+zig-mode
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Zig Mode===
@@ -1490,6 +1646,10 @@ I use tree-sitter for C, which unfortunately is not currently integrated into th
 
 Vterm is a terminal emulator for emacs. It is faster than ~term~ and ~ansi-term~ but the downside is that it is not written entirely in elisp so its cross platform. ~cur/meow-vterm~ and ~cur/meow-vterm-other-window~ help make vterm more "intuitive". ~cur/vterm-kill~ kills the vterm buffer cleanly and without prompting.
 
+#+begin_src text :tangle ./packages.txt :padline no
+vterm
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Vterm===
   (use-package vterm
@@ -1513,6 +1673,10 @@ Vterm is a terminal emulator for emacs. It is faster than ~term~ and ~ansi-term~
 *** Eat
 
 Eat is just a better elisp terminal emulator. I mostly use this so that eshell can run TUI programs.
+
+#+begin_src text :tangle ./packages.txt :padline no
+eat
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Eat===
@@ -1541,6 +1705,10 @@ Eshell is an shell for Emacs like bash or sh, but written in elisp and has its o
 
 Interfacing with Zoxide from emacs.
 
+#+begin_src text :tangle ./packages.txt :padline no
+zoxide
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Zoxide===
   (use-package zoxide)
@@ -1552,6 +1720,10 @@ Interfacing with Zoxide from emacs.
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-org.el
 :END:
+
+#+begin_src text :tangle ./packages.txt :padline no
+org-bullets
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Org-Mode===
@@ -1634,6 +1806,12 @@ Interfacing with Zoxide from emacs.
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-smol-net.el
 :END:
 
+#+begin_src text :tangle ./packages.txt :padline no
+gemini-mode
+ox-gemini
+elpher
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Gemini-Mode===
   (use-package gemini-mode)
@@ -1654,6 +1832,10 @@ Interfacing with Zoxide from emacs.
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-elcord.el
 :END:
 
+#+begin_src text :tangle ./packages.txt :padline no
+elcord
+#+end_src
+
 #+begin_src emacs-lisp
   (use-package elcord)
 
@@ -1664,6 +1846,10 @@ Interfacing with Zoxide from emacs.
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-direnv.el
 :END:
+
+#+begin_src text :tangle ./packages.txt :padline no
+envrc
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Envrc===
