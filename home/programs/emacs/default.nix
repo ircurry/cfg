@@ -15,8 +15,8 @@ let
     ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (
       epkgs:
       let
-        packageNames = mylib.removeEmptyLeft (
-          lib.strings.splitString "\n" (builtins.readFile ./packages.txt)
+        packageNames = mylib.filterStrList (str: !mylib.startsWithHash str) (
+          mylib.removeEmpty (lib.strings.splitString "\n" (builtins.readFile ./packages.txt))
         );
       in
       (lib.foldl (acc: x: acc ++ [ epkgs."${x}" ]) [ ] packageNames)
