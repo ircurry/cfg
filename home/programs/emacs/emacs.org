@@ -574,8 +574,8 @@ meow
             ("r"   . xref-find-references)
             :map search-map
             ("n" . meow-visit)
-            ("/" . isearch-forward)
-            ("?" . isearch-backward))
+            ("s" . isearch-forward)
+            ("r" . isearch-backward))
     :config
     (setq meow-kteypad-leader-dispatch nil)
     (meow-setup)
@@ -1116,7 +1116,10 @@ consult
            :map goto-map
            ("m" . consult-mark)
            ("M" . consult-global-mark)
-           ("o" . consult-outline))
+           ("o" . consult-outline)
+           :map search-map
+           ("/" . consult-line)
+           ("?" . consult-line-multi))
     :custom
     (consult-preview-allowed-hooks '(global-font-lock-mode
                                      save-place-find-file-hook

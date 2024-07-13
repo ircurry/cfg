@@ -310,8 +310,8 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
           ("r"   . xref-find-references)
           :map search-map
           ("n" . meow-visit)
-          ("/" . isearch-forward)
-          ("?" . isearch-backward))
+          ("s" . isearch-forward)
+          ("r" . isearch-backward))
   :config
   (setq meow-kteypad-leader-dispatch nil)
   (meow-setup)

@@ -36,7 +36,10 @@
          :map goto-map
          ("m" . consult-mark)
          ("M" . consult-global-mark)
-         ("o" . consult-outline))
+         ("o" . consult-outline)
+         :map search-map
+         ("/" . consult-line)
+         ("?" . consult-line-multi))
   :custom
   (consult-preview-allowed-hooks '(global-font-lock-mode
                                    save-place-find-file-hook
