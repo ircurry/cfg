@@ -9,7 +9,6 @@
   (setq vterm-max-scrollback 10000))
 
 (use-package cur-vterm
-  :after (vterm)
   :bind ( :map vterm-mode-map
           ("C-c C-RET"      . cur-vterm-enter-password)
           ("C-c C-<return>" . cur-vterm-enter-password)
