@@ -13,8 +13,8 @@
   :bind ( :map vterm-mode-map
           ("C-c C-RET"      . cur-vterm-enter-password)
           ("C-c C-<return>" . cur-vterm-enter-password)
-          :map cur/projectile-map
-          ("C-t" . cur-vterm-project-other-window)))
+          :map project-prefix-map
+          ("t" . cur-vterm-project-other-window)))
 
 ;; ===Eat===
 (use-package eat

@@ -275,10 +275,6 @@ NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-s
       (let ((map (make-sparse-keymap)))
         map)
       "The keymap for quick command/function execution.")
-    (defvar cur/projectile-map
-      (let ((map (make-sparse-keymap)))
-        map)
-      "Keymap for projectile command execution from the leader key.")
     (defvar cur/toggle-map
       (let ((map (make-sparse-keymap)))
         map)
@@ -374,7 +370,7 @@ NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-s
        '("u" . "C-u")   ; universal argument
        ;'("i" . )
        '("o" . "C-x o") ; other window
-       (cons "p" cur/projectile-map)
+       (cons "p" project-prefix-map)
        ;'("-" . )
 
        ;; ===3rd Row===
@@ -1103,24 +1099,25 @@ consult
 #+begin_src emacs-lisp
   (use-package consult
     :demand t
-    :bind (("C-x b"                    . consult-buffer)
-           ("M-g i"                    . consult-imenu)
-           ("M-y"                      . consult-yank-pop)
-           ([remap goto-line]          . consult-goto-line)
-           ([remap bookmark-jump]      . consult-bookmark)
-           ([remap projectile-ripgrep] . consult-ripgrep)
-           ([remap rg]                 . consult-ripgrep)
+    :bind (("C-x b"               . consult-buffer)
+           ("M-g i"               . consult-imenu)
+           ("M-y"                 . consult-yank-pop)
+           ([remap goto-line]     . consult-goto-line)
+           ([remap bookmark-jump] . consult-bookmark)
+           ([remap rg-project]    . consult-ripgrep)
+           ([remap rg]            . consult-ripgrep)
+           ([remap project-switch-to-buffer] . consult-project-buffer)
            :map consult-narrow-map
            ("?" . consult-narrow-help)
-           :map cur/projectile-map
-           ("C-b" . consult-project-buffer)
            :map goto-map
            ("m" . consult-mark)
            ("M" . consult-global-mark)
            ("o" . consult-outline)
            :map search-map
            ("/" . consult-line)
-           ("?" . consult-line-multi))
+           ("?" . consult-line-multi)
+           :map org-mode-map
+           ([remap consult-imenu] . consult-org-heading))
     :custom
     (consult-preview-allowed-hooks '(global-font-lock-mode
                                      save-place-find-file-hook
@@ -1130,22 +1127,7 @@ consult
                                      nerd-icons-dired-mode))
     :config
     (setq xref-show-xrefs-function       #'consult-xref
-          xref-show-definitions-function #'consult-xref)
-    ;; add `consult-project-buffer' to `project-switch-commands' if not already in
-  )
-
-  (use-package consult
-    :after (project)
-    :config
-    (if (let (command-in-list)
-          (dolist (command project-switch-commands)
-            (if (equal (car command) #'consult-project-buffer)
-                (setq command-in-list t)
-              nil))
-          command-in-list)
-        nil
-      (setq project-switch-commands
-            (append project-switch-commands '((consult-project-buffer "Buffer" "b"))))))
+          xref-show-definitions-function #'consult-xref))
 
   (provide 'cur-config-completion)
 #+end_src
@@ -1337,8 +1319,10 @@ magit
   (use-package magit
     :bind ( :map cur/sub-leader-keymap
             ("C-v" . magit)
-            :map cur/projectile-map
-            ("C-v" . magit-project-status))
+            :map project-prefix-map
+            ("C-v" . nil)
+            ("v" . magit-project-status)
+            ("V" . project-vc-dir))
     :custom
     (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
     (transient-default-level 5 "Allowing for commit signing"))
@@ -1348,22 +1332,21 @@ magit
 
 #+begin_src emacs-lisp
   (use-package project
-    :bind ( :map cur/projectile-map
-            ("C-p"   . project-switch-project)
-            ("C-d"   . project-dired)
-            ("M-d"   . project-find-dir)
-            ("C-f"   . project-find-file)
-            ("C-c"   . project-compile)
-            ("C-l"   . project-list-buffers)
-            ("C-k"   . project-kill-buffers)
-            ("C-e"   . project-eshell))
+    :bind ( :map project-prefix-map
+            ("d"   . project-dired)
+            ("D"   . project-find-dir)
+            ("b"   . project-switch-to-buffer)
+            ("l"   . project-list-buffers))
     :config
     (setq project-buffers-viewer #'project-list-buffers-ibuffer))
+#+end_src
 
-  ;; Need ripgrep wrapper for `projectile-ripgrep'
-  (use-package rg
-    :bind ( :map cur/projectile-map
-            ("C-r" . rg-project)))
+*** Ripgrep
+
+Ripgrep go burrr.
+
+#+begin_src emacs-lisp
+  (use-package rg)
 #+end_src
 
 *** Projectile
@@ -1408,8 +1391,8 @@ Projectile provides many commands to help manage and do things in a project, suc
   (use-package just-mode)
 
   (use-package justl
-    :bind (:map cur/projectile-map
-                ("C-j" . justl)))
+    :bind (:map project-prefix-map
+                ("j" . justl)))
 
   (provide 'cur-config-ide)
 #+end_src
@@ -1709,8 +1692,8 @@ Vterm is a terminal emulator for emacs. It is faster than ~term~ and ~ansi-term~
     :bind ( :map vterm-mode-map
             ("C-c C-RET"      . cur-vterm-enter-password)
             ("C-c C-<return>" . cur-vterm-enter-password)
-            :map cur/projectile-map
-            ("C-t" . cur-vterm-project-other-window)))
+            :map project-prefix-map
+            ("t" . cur-vterm-project-other-window)))
 #+end_src
 
 *** Eat

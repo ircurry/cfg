@@ -23,24 +23,25 @@
 
 (use-package consult
   :demand t
-  :bind (("C-x b"                    . consult-buffer)
-         ("M-g i"                    . consult-imenu)
-         ("M-y"                      . consult-yank-pop)
-         ([remap goto-line]          . consult-goto-line)
-         ([remap bookmark-jump]      . consult-bookmark)
-         ([remap projectile-ripgrep] . consult-ripgrep)
-         ([remap rg]                 . consult-ripgrep)
+  :bind (("C-x b"               . consult-buffer)
+         ("M-g i"               . consult-imenu)
+         ("M-y"                 . consult-yank-pop)
+         ([remap goto-line]     . consult-goto-line)
+         ([remap bookmark-jump] . consult-bookmark)
+         ([remap rg-project]    . consult-ripgrep)
+         ([remap rg]            . consult-ripgrep)
+         ([remap project-switch-to-buffer] . consult-project-buffer)
          :map consult-narrow-map
          ("?" . consult-narrow-help)
-         :map cur/projectile-map
-         ("C-b" . consult-project-buffer)
          :map goto-map
          ("m" . consult-mark)
          ("M" . consult-global-mark)
          ("o" . consult-outline)
          :map search-map
          ("/" . consult-line)
-         ("?" . consult-line-multi))
+         ("?" . consult-line-multi)
+         :map org-mode-map
+         ([remap consult-imenu] . consult-org-heading))
   :custom
   (consult-preview-allowed-hooks '(global-font-lock-mode
                                    save-place-find-file-hook
@@ -50,21 +51,6 @@
                                    nerd-icons-dired-mode))
   :config
   (setq xref-show-xrefs-function       #'consult-xref
-        xref-show-definitions-function #'consult-xref)
-  ;; add `consult-project-buffer' to `project-switch-commands' if not already in
-)
-
-(use-package consult
-  :after (project)
-  :config
-  (if (let (command-in-list)
-        (dolist (command project-switch-commands)
-          (if (equal (car command) #'consult-project-buffer)
-              (setq command-in-list t)
-            nil))
-        command-in-list)
-      nil
-    (setq project-switch-commands
-          (append project-switch-commands '((consult-project-buffer "Buffer" "b"))))))
+        xref-show-definitions-function #'consult-xref))
 
 (provide 'cur-config-completion)

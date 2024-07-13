@@ -69,35 +69,30 @@
 (use-package magit
   :bind ( :map cur/sub-leader-keymap
           ("C-v" . magit)
-          :map cur/projectile-map
-          ("C-v" . magit-project-status))
+          :map project-prefix-map
+          ("C-v" . nil)
+          ("v" . magit-project-status)
+          ("V" . project-vc-dir))
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   (transient-default-level 5 "Allowing for commit signing"))
 
 (use-package project
-  :bind ( :map cur/projectile-map
-          ("C-p"   . project-switch-project)
-          ("C-d"   . project-dired)
-          ("M-d"   . project-find-dir)
-          ("C-f"   . project-find-file)
-          ("C-c"   . project-compile)
-          ("C-l"   . project-list-buffers)
-          ("C-k"   . project-kill-buffers)
-          ("C-e"   . project-eshell))
+  :bind ( :map project-prefix-map
+          ("d"   . project-dired)
+          ("D"   . project-find-dir)
+          ("b"   . project-switch-to-buffer)
+          ("l"   . project-list-buffers))
   :config
   (setq project-buffers-viewer #'project-list-buffers-ibuffer))
 
-;; Need ripgrep wrapper for `projectile-ripgrep'
-(use-package rg
-  :bind ( :map cur/projectile-map
-          ("C-r" . rg-project)))
+(use-package rg)
 
 (use-package just-mode)
 
 (use-package justl
-  :bind (:map cur/projectile-map
-              ("C-j" . justl)))
+  :bind (:map project-prefix-map
+              ("j" . justl)))
 
 (provide 'cur-config-ide)
 

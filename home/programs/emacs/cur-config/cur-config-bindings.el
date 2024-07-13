@@ -11,10 +11,6 @@
     (let ((map (make-sparse-keymap)))
       map)
     "The keymap for quick command/function execution.")
-  (defvar cur/projectile-map
-    (let ((map (make-sparse-keymap)))
-      map)
-    "Keymap for projectile command execution from the leader key.")
   (defvar cur/toggle-map
     (let ((map (make-sparse-keymap)))
       map)
@@ -110,7 +106,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("u" . "C-u")   ; universal argument
      ;'("i" . )
      '("o" . "C-x o") ; other window
-     (cons "p" cur/projectile-map)
+     (cons "p" project-prefix-map)
      ;'("-" . )
 
      ;; ===3rd Row===
