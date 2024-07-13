@@ -67,32 +67,31 @@
 
 ;; ===Magit===
 (use-package magit
-  :bind (:map cur/sub-leader-keymap
-              ("C-v" . magit))
+  :bind ( :map cur/sub-leader-keymap
+          ("C-v" . magit)
+          :map cur/projectile-map
+          ("C-v" . magit-project-status))
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   (transient-default-level 5 "Allowing for commit signing"))
 
-;; ===Projectile===
-(use-package projectile
-  :after (rg)
-  :bind (:map cur/projectile-map
-              ("C-p"   . projectile-switch-project)
-              ("C-a"   . projectile-add-known-project)
-              ("C-d"   . projectile-dired)
-              ("M-d"   . projectile-find-dir)
-              ("C-f"   . projectile-find-file)
-              ("C-c"   . projectile-compile-project)
-              ("C-l"   . projectile-ibuffer)
-              ("C-k"   . projectile-kill-buffers)
-              ("C-v"   . projectile-vc)
-              ("C-e"   . projectile-run-eshell)
-              ("C-r"   . projectile-ripgrep))
+(use-package project
+  :bind ( :map cur/projectile-map
+          ("C-p"   . project-switch-project)
+          ("C-d"   . project-dired)
+          ("M-d"   . project-find-dir)
+          ("C-f"   . project-find-file)
+          ("C-c"   . project-compile)
+          ("C-l"   . project-list-buffers)
+          ("C-k"   . project-kill-buffers)
+          ("C-e"   . project-eshell))
   :config
-  (projectile-mode 1))
+  (setq project-buffers-viewer #'project-list-buffers-ibuffer))
 
 ;; Need ripgrep wrapper for `projectile-ripgrep'
-(use-package rg)
+(use-package rg
+  :bind ( :map cur/projectile-map
+          ("C-r" . rg-project)))
 
 (use-package just-mode)
 

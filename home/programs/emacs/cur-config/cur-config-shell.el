@@ -1,9 +1,7 @@
 ;; ===Vterm===
 (use-package vterm
   :bind ( :map cur/sub-leader-keymap
-          ("C-t" . vterm)
-          :map cur/projectile-map
-          ("C-t" . projectile-run-vterm-other-window))
+          ("C-t" . vterm))
   :custom
   (vterm-shell "fish")
   :config
@@ -14,7 +12,9 @@
   :after (vterm)
   :bind ( :map vterm-mode-map
           ("C-c C-RET"      . cur-vterm-enter-password)
-          ("C-c C-<return>" . cur-vterm-enter-password)))
+          ("C-c C-<return>" . cur-vterm-enter-password)
+          :map cur/projectile-map
+          ("C-t" . cur-vterm-project-other-window)))
 
 ;; ===Eat===
 (use-package eat

@@ -1130,7 +1130,22 @@ consult
                                      nerd-icons-dired-mode))
     :config
     (setq xref-show-xrefs-function       #'consult-xref
-          xref-show-definitions-function #'consult-xref))
+          xref-show-definitions-function #'consult-xref)
+    ;; add `consult-project-buffer' to `project-switch-commands' if not already in
+  )
+
+  (use-package consult
+    :after (project)
+    :config
+    (if (let (command-in-list)
+          (dolist (command project-switch-commands)
+            (if (equal (car command) #'consult-project-buffer)
+                (setq command-in-list t)
+              nil))
+          command-in-list)
+        nil
+      (setq project-switch-commands
+            (append project-switch-commands '((consult-project-buffer "Buffer" "b"))))))
 
   (provide 'cur-config-completion)
 #+end_src
@@ -1172,7 +1187,9 @@ These are my settings for ~display-buffer-alist~ so windows just Do What I Mean.
             ((or (derived-mode . justl-mode)
                  (derived-mode . vterm-mode)
                  "\\*eshell .*"
+                 "\\*.*-eshell*"
                  "\\*vterm.*\\*"
+                 "\\*.*-vterm\\*"
                  "\\*.*-eat\\*"
                  "justl - .*")
              (display-buffer-reuse-window
@@ -1318,11 +1335,35 @@ magit
 #+begin_src emacs-lisp
   ;; ===Magit===
   (use-package magit
-    :bind (:map cur/sub-leader-keymap
-                ("C-v" . magit))
+    :bind ( :map cur/sub-leader-keymap
+            ("C-v" . magit)
+            :map cur/projectile-map
+            ("C-v" . magit-project-status))
     :custom
     (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
     (transient-default-level 5 "Allowing for commit signing"))
+#+end_src
+
+*** Project.el
+
+#+begin_src emacs-lisp
+  (use-package project
+    :bind ( :map cur/projectile-map
+            ("C-p"   . project-switch-project)
+            ("C-d"   . project-dired)
+            ("M-d"   . project-find-dir)
+            ("C-f"   . project-find-file)
+            ("C-c"   . project-compile)
+            ("C-l"   . project-list-buffers)
+            ("C-k"   . project-kill-buffers)
+            ("C-e"   . project-eshell))
+    :config
+    (setq project-buffers-viewer #'project-list-buffers-ibuffer))
+
+  ;; Need ripgrep wrapper for `projectile-ripgrep'
+  (use-package rg
+    :bind ( :map cur/projectile-map
+            ("C-r" . rg-project)))
 #+end_src
 
 *** Projectile
@@ -1330,11 +1371,11 @@ magit
 Projectile provides many commands to help manage and do things in a project, such as compile a project from its root, list all files in the project, or run grep or ripgrep on all the files in the project. I also use it's project switching aspect as sort of a bookmark like system.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  projectile
+  # projectile
   rg
 #+end_src
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   ;; ===Projectile===
   (use-package projectile
     :after (rg)
@@ -1352,9 +1393,6 @@ Projectile provides many commands to help manage and do things in a project, suc
                 ("C-r"   . projectile-ripgrep))
     :config
     (projectile-mode 1))
-
-  ;; Need ripgrep wrapper for `projectile-ripgrep'
-  (use-package rg)
 #+end_src
 
 *** Just
@@ -1659,9 +1697,7 @@ Vterm is a terminal emulator for emacs. It is faster than ~term~ and ~ansi-term~
   ;; ===Vterm===
   (use-package vterm
     :bind ( :map cur/sub-leader-keymap
-            ("C-t" . vterm)
-            :map cur/projectile-map
-            ("C-t" . projectile-run-vterm-other-window))
+            ("C-t" . vterm))
     :custom
     (vterm-shell "fish")
     :config
@@ -1672,7 +1708,9 @@ Vterm is a terminal emulator for emacs. It is faster than ~term~ and ~ansi-term~
     :after (vterm)
     :bind ( :map vterm-mode-map
             ("C-c C-RET"      . cur-vterm-enter-password)
-            ("C-c C-<return>" . cur-vterm-enter-password)))
+            ("C-c C-<return>" . cur-vterm-enter-password)
+            :map cur/projectile-map
+            ("C-t" . cur-vterm-project-other-window)))
 #+end_src
 
 *** Eat
@@ -2541,6 +2579,24 @@ elcord
       (user-error "Not in a VTerm Terminal"))
     (vterm-insert (read-passwd "Password: "))
     (vterm-send-return))
+
+  (defun cur-vterm-project (&optional other-window)
+    (interactive)
+    (if-let* ((current-project (project-current))
+              (default-directory (project-root current-project))
+              (buffer-name (format "*%s-%s*" (project-name current-project) "vterm")))
+        (if (buffer-live-p (get-buffer buffer-name))
+            (if other-window
+                (switch-to-buffer-other-window buffer-name)
+              (switch-to-buffer buffer-name))
+          (if other-window
+              (vterm-other-window buffer-name)
+            (vterm buffer-name)))
+      (user-error "Cannot create vterm buffer in %s" (cdr current-project))))
+
+  (defun cur-vterm-project-other-window ()
+    (interactive)
+    (cur-vterm-project t))
 
   (provide 'cur-vterm)
   ;;; cur-vterm.el ends here

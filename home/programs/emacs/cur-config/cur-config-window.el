@@ -25,7 +25,9 @@
           ((or (derived-mode . justl-mode)
                (derived-mode . vterm-mode)
                "\\*eshell .*"
+               "\\*.*-eshell*"
                "\\*vterm.*\\*"
+               "\\*.*-vterm\\*"
                "\\*.*-eat\\*"
                "justl - .*")
            (display-buffer-reuse-window

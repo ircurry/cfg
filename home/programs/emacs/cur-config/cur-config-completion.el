@@ -50,6 +50,21 @@
                                    nerd-icons-dired-mode))
   :config
   (setq xref-show-xrefs-function       #'consult-xref
-        xref-show-definitions-function #'consult-xref))
+        xref-show-definitions-function #'consult-xref)
+  ;; add `consult-project-buffer' to `project-switch-commands' if not already in
+)
+
+(use-package consult
+  :after (project)
+  :config
+  (if (let (command-in-list)
+        (dolist (command project-switch-commands)
+          (if (equal (car command) #'consult-project-buffer)
+              (setq command-in-list t)
+            nil))
+        command-in-list)
+      nil
+    (setq project-switch-commands
+          (append project-switch-commands '((consult-project-buffer "Buffer" "b"))))))
 
 (provide 'cur-config-completion)

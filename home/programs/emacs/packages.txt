@@ -21,7 +21,7 @@ company
 flycheck
 treemacs
 magit
-projectile
+# projectile
 rg
 just-mode
 justl
