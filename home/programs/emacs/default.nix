@@ -3,6 +3,7 @@
   pkgs,
   lib,
   inputs,
+  mylib,
   ...
 }:
 
@@ -12,127 +13,14 @@ let
   emacs-package =
     with pkgs;
     ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (
-      epkgs: with epkgs; [
-        ##########################
-        ## Tree-Sitter Grammars ##
-        ##########################
-        treesit-grammars.with-all-grammars
-
-        ########################################
-        ## Configuration Modules Dependencies ##
-        ########################################
-
-        # ===Bindings===
-        hydra
-        meow
-
-        # ===C===
-        ccls
-
-        # ===Completion===
-        counsel
-        swiper
-        ivy
-        ivy-rich
-        vertico
-        marginalia
-        consult
-        orderless
-        vertico-posframe
-        embark
-
-        # ===Dired===
-        nerd-icons-dired
-
-        # ===Elcord===
-        elcord
-
-        # ===Elisp===
-        rainbow-delimiters
-        geiser
-        geiser-chez
-        geiser-chibi
-        geiser-chicken
-        geiser-gambit
-        geiser-gauche
-        geiser-guile
-        geiser-kawa
-        geiser-mit
-        geiser-racket
-        geiser-stklos
-        macrostep
-        macrostep-geiser
-        paredit
-
-        # ===Essentials===
-
-        # ===Faces===
-        doom-themes
-        autothemer
-        catppuccin-theme
-        ef-themes
-        nerd-icons-ibuffer
-        spacious-padding
-
-        # ===Haskell===
-        haskell-mode
-        lsp-haskell
-        company-ghci
-
-        # ===Help===
-        helpful
-        which-key
-
-        # ===IDE===
-        lsp-mode
-        lsp-ui
-        company
-        flycheck
-        treemacs
-        ivy-xref
-        magit
-        projectile
-        rg
-        envrc
-        just-mode
-        justl
-
-        # ===Java===
-        lsp-java
-
-        # ===Markup===
-        yaml-mode
-        yuck-mode
-
-        # ===Nix===
-        nix-mode
-        nix-ts-mode
-
-        # ===Org===
-        org-bullets
-
-        # ===Rust===
-        rustic
-
-        # ===Shell===
-        vterm
-        eat
-        zoxide
-
-        # ===Smol-net===
-        gemini-mode
-        ox-gemini
-        elpher
-
-        # ===Windows===
-
-        # ===Zig===
-        zig-mode
-
-        ###############################
-        ## Lisp Modules Dependencies ##
-        ###############################
-      ]
+      epkgs:
+      let
+        packageNames = mylib.removeEmptyLeft (
+          lib.strings.splitString "\n" (builtins.readFile ./packages.txt)
+        );
+      in
+      (lib.foldl (acc: x: acc ++ [ epkgs."${x}" ]) [ ] packageNames)
+      ++ [ epkgs.treesit-grammars.with-all-grammars ]
     ));
 in
 {
