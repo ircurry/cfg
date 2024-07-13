@@ -10,11 +10,14 @@ ef-themes
 nerd-icons-ibuffer
 spacious-padding
 embark
+embark-consult
 orderless
 vertico
 marginalia
 vertico-posframe
 consult
+embark
+embark-consult
 lsp-mode
 lsp-ui
 company

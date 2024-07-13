@@ -57,3 +57,9 @@
           ([remap consult-imenu] . consult-org-heading)))
 
 (provide 'cur-config-completion)
+
+(use-package emabark
+  :bind ( :map global-map
+          ("C-." . embark-act)
+          :map minibuffer-local-map
+          ("C-;" . embark-act)))

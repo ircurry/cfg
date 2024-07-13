@@ -495,9 +495,8 @@ NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-s
        '(">" . meow-end-of-thing)
        (cons "/" search-map)
        '("?" . meow-page-down)
-       ;; '("'"  . meow-block)
-       ;; '("\"" . meow-to-block)
-       ))
+       '("'"  . embark-act)
+       '("\"" . embark-dwim)))
     :init
     (defhydra cur/hydra-buffer-cycle (:timeout 4)
       "tab through buffers"
@@ -1030,6 +1029,7 @@ Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]
 
 #+begin_src text :tangle ./packages.txt :padline no
   embark
+  embark-consult
 #+end_src
 
 *** Completions Styles
@@ -1134,6 +1134,21 @@ consult
             ([remap consult-imenu] . consult-org-heading)))
 
   (provide 'cur-config-completion)
+#+end_src
+
+*** Embark
+
+#+begin_src text :tangle ./packages.txt :padline no
+  embark
+  embark-consult
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package emabark
+    :bind ( :map global-map
+            ("C-." . embark-act)
+            :map minibuffer-local-map
+            ("C-;" . embark-act)))
 #+end_src
 
 ** Window management configurations (=cur-config-window.el=)

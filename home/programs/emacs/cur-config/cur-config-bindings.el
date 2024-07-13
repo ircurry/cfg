@@ -231,9 +231,8 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '(">" . meow-end-of-thing)
      (cons "/" search-map)
      '("?" . meow-page-down)
-     ;; '("'"  . meow-block)
-     ;; '("\"" . meow-to-block)
-     ))
+     '("'"  . embark-act)
+     '("\"" . embark-dwim)))
   :init
   (defhydra cur/hydra-buffer-cycle (:timeout 4)
     "tab through buffers"
