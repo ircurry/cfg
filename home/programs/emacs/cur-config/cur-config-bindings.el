@@ -177,9 +177,9 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("u" . meow-undo)
      ;'("U" . )
      '("i" . meow-insert)
-     ;'("I" . )
-     '("o" . meow-open-below)
-     '("O" . meow-open-above)
+     '("I" . meow-open-below)
+     '("o" . meow-block)
+     '("O" . meow-to-block)
      '("p" . meow-yank)
      '("P" . meow-clipboard-yank)
      '("-" . negative-argument)
@@ -188,7 +188,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      ;; ===3rd Row===
      '("<escape>" . keyboard-quit)
      '("a" . meow-append)
-     ;'("A" . )
+     '("A" . meow-open-above)
      '("s" . repeat)
      ;'("S" . )
      '("d" . meow-kill)
@@ -231,8 +231,9 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '(">" . meow-end-of-thing)
      (cons "/" search-map)
      '("?" . meow-page-down)
-     '("'"  . meow-block)
-     '("\"" . meow-to-block)))
+     ;; '("'"  . meow-block)
+     ;; '("\"" . meow-to-block)
+     ))
   :init
   (defhydra cur/hydra-buffer-cycle (:timeout 4)
     "tab through buffers"
