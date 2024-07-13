@@ -81,10 +81,12 @@
   :bind ( :map project-prefix-map
           ("d"   . project-dired)
           ("D"   . project-find-dir)
+          ("C-b" . nil)
           ("b"   . project-switch-to-buffer)
           ("l"   . project-list-buffers))
-  :config
-  (setq project-buffers-viewer #'project-list-buffers-ibuffer))
+  :custom
+  (project-buffers-viewer #'project-list-buffers-ibuffer)
+  (project-switch-use-entire-map t))
 
 (use-package rg)
 
