@@ -86,7 +86,8 @@
               ("C-l"   . projectile-ibuffer)
               ("C-k"   . projectile-kill-buffers)
               ("C-v"   . projectile-vc)
-              ("C-e"   . projectile-run-eshell))
+              ("C-e"   . projectile-run-eshell)
+              ("C-r"   . projectile-ripgrep))
   :config
   (projectile-mode 1))
 

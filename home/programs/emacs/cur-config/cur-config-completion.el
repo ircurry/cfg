@@ -23,15 +23,16 @@
 
 (use-package consult
   :demand t
-  :bind (("C-x b"               . consult-buffer)
-         ("M-g i"               . consult-imenu)
-         ("M-y"                 . consult-yank-pop)
-         ([remap goto-line]     . consult-goto-line)
-         ([remap bookmark-jump] . consult-bookmark)
+  :bind (("C-x b"                    . consult-buffer)
+         ("M-g i"                    . consult-imenu)
+         ("M-y"                      . consult-yank-pop)
+         ([remap goto-line]          . consult-goto-line)
+         ([remap bookmark-jump]      . consult-bookmark)
+         ([remap projectile-ripgrep] . consult-ripgrep)
+         ([remap rg]                 . consult-ripgrep)
          :map consult-narrow-map
          ("?" . consult-narrow-help)
          :map cur/projectile-map
-         ("C-r" . consult-ripgrep)
          ("C-b" . consult-project-buffer)
          :map goto-map
          ("m" . consult-mark)
