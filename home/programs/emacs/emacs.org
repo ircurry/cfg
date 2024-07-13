@@ -262,7 +262,7 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
 NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-sitter]] to see if its worth using.
 
 #+begin_src text :tangle ./packages.txt :padline no
-meow
+  meow
 #+end_src
 
 #+begin_src emacs-lisp
@@ -619,7 +619,7 @@ which-key
 Provides additional info help.
 
 #+begin_src text :tangle ./packages.txt :padline no
-helpful
+  helpful
 #+end_src
 
 #+begin_src emacs-lisp :tangle no
@@ -881,7 +881,7 @@ I have several custom themes in a directory weirdly named themes. These are the 
 Doom themes are a theme pack specifically for the Doom Emacs distribution, but work well without doom as well. I have a function that sets some faces based on the theme in ~custom-enabled-themes~. This function is more than just a little jank and I plan on creating my own themes instead of trying to hack around ones made by someone else.
 
 #+begin_src text :tangle ./packages.txt :padline no
-doom-themes
+  doom-themes
 #+end_src
 
 #+begin_src emacs-lisp
@@ -943,7 +943,7 @@ autothemer
 [[https:github.com/catppuccin/catppuccin][Link]] to the catppuccin theme.
 
 #+begin_src text :tangle ./packages.txt :padline no
-catppuccin-theme
+  catppuccin-theme
 #+end_src
 
 #+begin_src emacs-lisp
@@ -987,7 +987,7 @@ ef-themes
 Adds Icons to ~ibuffer~. Not really a face thing but I don't have a dedicated ~ibuffer~ module so it goes here instead.
 
 #+begin_src text :tangle ./packages.txt :padline no
-nerd-icons-ibuffer
+  nerd-icons-ibuffer
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1032,7 +1032,7 @@ This section is not about code completion. Rather, this is my configuration for 
 Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]] suite for doing completions in emacs. I like it but I know that the vertico/marginelia/consult/embark chain is better, faster, and more modern. I plan to make the switch at some point but for now I sticking with ivy.
 
 #+begin_src text :tangle ./packages.txt :padline no
-embark
+  embark
 #+end_src
 
 *** Completions Styles
@@ -1060,7 +1060,7 @@ orderless
 *** Vertico
 
 #+begin_src text :tangle ./packages.txt :padline no
-vertico
+  vertico
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1085,7 +1085,7 @@ marginalia
 *** Vertico Posframe
 
 #+begin_src text :tangle ./packages.txt :padline no
-vertico-posframe
+  vertico-posframe
 #+end_src
 
 #+begin_src emacs-lisp :tangle no
@@ -1195,7 +1195,7 @@ Emacs can be made to have all the features of a modern text editor and then some
 Lsp-mode is my chosen language server protocol support package. I chose this over eglot because of the richer features and (at the time that I started using lsp) more mature state. I will revisit elgot in the future but for now I am perfectly happy with lsp-mode.
 
 #+begin_src text :tangle ./packages.txt :padline no
-lsp-mode
+  lsp-mode
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1256,7 +1256,7 @@ lsp-ui
 The code completion system. This is different from completions systems like ivy or vertico, this is for interactively completing a symbol while programming.
 
 #+begin_src text :tangle ./packages.txt :padline no
-company
+  company
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1297,7 +1297,7 @@ flycheck
 Project tree, I don't use this all that often.
 
 #+begin_src text :tangle ./packages.txt :padline no
-treemacs
+  treemacs
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1330,8 +1330,8 @@ magit
 Projectile provides many commands to help manage and do things in a project, such as compile a project from its root, list all files in the project, or run grep or ripgrep on all the files in the project. I also use it's project switching aspect as sort of a bookmark like system.
 
 #+begin_src text :tangle ./packages.txt :padline no
-projectile
-rg
+  projectile
+  rg
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1362,8 +1362,8 @@ rg
 [[https:github.com/casey/just][Just]] is just a command runner. Think of it sort of like make but simplified. This is my configuration for working and interacting with it from emacs.
 
 #+begin_src text :tangle ./packages.txt :padline no
-just-mode
-justl
+  just-mode
+  justl
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1396,7 +1396,7 @@ These are my configurations for working with Lisp languages.
 This color codes opening and closing delimiters such as parentheses and square brackets.
 
 #+begin_src text :tangle ./packages.txt :padline no
-rainbow-delimiters
+  rainbow-delimiters
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1409,7 +1409,7 @@ rainbow-delimiters
 *** Paredit
 
 #+begin_src text :tangle ./packages.txt :padline no
-paredit
+  paredit
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1422,19 +1422,19 @@ paredit
 *** Geiser
 
 #+begin_src text :tangle ./packages.txt :padline no
-geiser
-geiser-chez
-geiser-chibi
-geiser-chicken
-geiser-gambit
-geiser-gauche
-geiser-guile
-geiser-kawa
-geiser-mit
-geiser-racket
-geiser-stklos
-macrostep
-macrostep-geiser
+  geiser
+  geiser-chez
+  geiser-chibi
+  geiser-chicken
+  geiser-gambit
+  geiser-gauche
+  geiser-guile
+  geiser-kawa
+  geiser-mit
+  geiser-racket
+  geiser-stklos
+  macrostep
+  macrostep-geiser
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1492,7 +1492,7 @@ lsp-java
 Literally just ~yaml-mode~.
 
 #+begin_src text :tangle ./packages.txt :padline no
-yaml-mode
+  yaml-mode
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1530,7 +1530,7 @@ nix-ts-mode
 :END:
 
 #+begin_src text :tangle ./packages.txt :padline no
-rustic
+  rustic
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1579,7 +1579,7 @@ company-ghci
 I use tree-sitter for C, which unfortunately is not currently integrated into the default C major mode for emacs. I have also changed the ~c-default-style~ for C to be "linux", which is 8 spaces for indentation instead of the default of 2.
 
 #+begin_src text :tangle ./packages.txt :padline no
-ccls
+  ccls
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1652,7 +1652,7 @@ zig-mode
 Vterm is a terminal emulator for emacs. It is faster than ~term~ and ~ansi-term~ but the downside is that it is not written entirely in elisp so its cross platform. ~cur/meow-vterm~ and ~cur/meow-vterm-other-window~ help make vterm more "intuitive". ~cur/vterm-kill~ kills the vterm buffer cleanly and without prompting.
 
 #+begin_src text :tangle ./packages.txt :padline no
-vterm
+  vterm
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1711,7 +1711,7 @@ Eshell is an shell for Emacs like bash or sh, but written in elisp and has its o
 Interfacing with Zoxide from emacs.
 
 #+begin_src text :tangle ./packages.txt :padline no
-zoxide
+  zoxide
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1812,9 +1812,9 @@ org-bullets
 :END:
 
 #+begin_src text :tangle ./packages.txt :padline no
-gemini-mode
-ox-gemini
-elpher
+  gemini-mode
+  ox-gemini
+  elpher
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1853,7 +1853,7 @@ elcord
 :END:
 
 #+begin_src text :tangle ./packages.txt :padline no
-envrc
+  envrc
 #+end_src
 
 #+begin_src emacs-lisp
