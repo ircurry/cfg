@@ -1115,9 +1115,7 @@ consult
            ("o" . consult-outline)
            :map search-map
            ("/" . consult-line)
-           ("?" . consult-line-multi)
-           :map org-mode-map
-           ([remap consult-imenu] . consult-org-heading))
+           ("?" . consult-line-multi))
     :custom
     (consult-preview-allowed-hooks '(global-font-lock-mode
                                      save-place-find-file-hook
@@ -1128,6 +1126,11 @@ consult
     :config
     (setq xref-show-xrefs-function       #'consult-xref
           xref-show-definitions-function #'consult-xref))
+
+  (use-package consult
+    :after (org)
+    :bind ( :map org-mode-map
+            ([remap consult-imenu] . consult-org-heading)))
 
   (provide 'cur-config-completion)
 #+end_src
