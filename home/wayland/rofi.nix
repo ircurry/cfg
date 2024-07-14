@@ -51,8 +51,8 @@ in
           kb-remove-char-back = "BackSpace,Shift+BackSpace";
           kb-accept-entry = "Return,KP_Enter";
           kb-primary-paste = "Alt-v";
-          kb-row-up = "Up,Control-k";
-          kb-row-down = "Down,Control-j";
+          kb-row-up = "Up,Control-p,Control-k";
+          kb-row-down = "Down,Control-n,Control-j";
           kb-row-left = "Control-h";
           kb-row-right = "Control-l";
         };
