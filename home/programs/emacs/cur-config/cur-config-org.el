@@ -66,4 +66,9 @@
   ;; 
   ;; (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'cur/org-babel-tangle-config))))
 
+(use-package flyspell
+  :bind ( :map flyspell-mode-map
+          ("C-." . nil)
+          ("C-," . nil)))
+
 (provide 'cur-config-org)

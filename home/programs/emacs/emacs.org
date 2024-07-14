@@ -1843,7 +1843,14 @@ org-bullets
     ;;       (org-babel-tangle))))
     ;; 
     ;; (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'cur/org-babel-tangle-config))))
+#+end_src
 
+#+begin_src emacs-lisp
+  (use-package flyspell
+    :bind ( :map flyspell-mode-map
+            ("C-." . nil)
+            ("C-," . nil)))
+  
   (provide 'cur-config-org)
 #+end_src
 
