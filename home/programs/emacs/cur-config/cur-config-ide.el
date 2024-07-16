@@ -5,6 +5,7 @@
   (lsp-mode  . lsp-enable-which-key-integration)
   :custom
   (lsp-keymap-prefix "C-c C-M-l" "lsp mode keymap")
+  (lsp-file-watch-threshold 1750)
   :bind (:map lsp-mode-map
               ("C-c C-a" . lsp-execute-code-action)  ; code actions
               ("C-c C-e" . lsp-treemacs-errors-list) ; treemacs error list
