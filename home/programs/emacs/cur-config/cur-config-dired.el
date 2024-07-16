@@ -5,6 +5,7 @@
 
 ;; ===Dired===
 (use-package dired
+  :ensure nil
   :hook
   (dired-mode . dired-hide-details-mode) ; don't show file details by default
   (dired-mode . hl-line-mode) ; Highlight the line the cursor is on
@@ -12,7 +13,7 @@
   :bind ( :map dired-mode-map
           ;; ===Top Row===
           ;; ("1" . )
-          ;; ("!" . )
+          ("!" . dired-do-shell-command)
           ;; ("2" . )
           ;; ("@" . )
           ;; ("3" . )
@@ -24,7 +25,7 @@
           ;; ("6" . )
           ;; ("^" . )
           ;; ("7" . )
-          ;; ("&" . )
+          ("&" . dired-do-async-shell-command)
           ;; ("8" . )
           ;; ("*" . )
           ;; ("9" . )
@@ -80,7 +81,7 @@
           ("L" . dired-find-file-other-window)
           ;; (";" . )
           ;; (":" . )
-          ("RET" . dired-find-file)
+          ("RET" . dired-do-async-shell-command)
           ;; ("S-RET" . )
 
           ;; ===4th Row===
@@ -104,18 +105,23 @@
           ;; (">" . )
           ("/" . dired-goto-file)
           ;; ("?" . )
-          ;; ("'"  . )
-          ;; ("\"" . )
+          ;; ("'"  . ) ; Leave these blank, usually embark-act
+          ;; ("\"" . ) ; Leave these blank, usually embark-dwim
           :map cur/sub-leader-keymap
-          ("d" . dired)
-          )
+          ("d" . dired))
+  :custom
+  (dired-recursive-copies 'always)
+  (dired-recursive-deletes 'always)
+  (delete-by-moving-to-trash t)
+  (dired-dwim-target t)
+  (dired-listing-switches "-A -G -F -h -l -v --group-directories-first --time-style=long-iso")
+  (dired-guess-shell-alist-user '(("\\.\\(png\\|jpe?g\\|tiff\\|gif\\)" "xdg-open" "imv" "feh")
+                                  ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\|mov\\)" "xdg-open" "mpv" "vlc")
+                                  ("\\.pdf" "zathura" "xdg-open")
+                                  (".*" "xdg-open")))
+  (dired-auto-revert-buffer #'dired-directory-changed-p)
   :config
-  (setq delete-by-moving-to-trash t)
-  (setq dired-recursive-copies t)
-  (setq dired-recursive-deletes t)
-  (setq dired-listing-switches "-A -G -F -h -l -v --group-directories-first --time-style=long-iso")
-  (setq dired-dwim-target t)
-  (setq dired-auto-revert-buffer #'dired-directory-changed-p)
+  (setq dired-deletion-confirmer 'y-or-n-p)
   (setq dired-free-space nil)
   (setq dired-make-directory-clickable t)
   (setq dired-mouse-drag-files t))
