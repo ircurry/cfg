@@ -208,6 +208,20 @@ I like having absolute line numbers, especially since the meow number selection 
     (setq lazy-count-suffix-format nil))
 #+end_src
 
+*** Proced
+
+#+begin_src emacs-lisp
+  (use-package proced
+    :ensure nil
+    :commands (proced)
+    :custom
+    (proced-auto-update-flag t)
+    (proced-enable-color-flag t)
+    (proced-auto-update-interval 2)
+    (proced-descend t)
+    (proced-filter 'user))
+#+end_src
+
 *** Emacs Server
 
 #+begin_src emacs-lisp

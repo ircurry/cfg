@@ -39,6 +39,16 @@
   (setq lazy-count-prefix-format "(%s/%s) ")
   (setq lazy-count-suffix-format nil))
 
+(use-package proced
+  :ensure nil
+  :commands (proced)
+  :custom
+  (proced-auto-update-flag t)
+  (proced-enable-color-flag t)
+  (proced-auto-update-interval 2)
+  (proced-descend t)
+  (proced-filter 'user))
+
 (use-package server
   :defer 1
   :config
