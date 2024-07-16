@@ -62,4 +62,7 @@
   :bind ( :map global-map
           ("C-." . embark-act)
           :map minibuffer-local-map
-          ("C-;" . embark-act)))
+          ("C-." . embark-act)
+          :map dired-mode-map
+          ("'"  . embark-act)
+          ("\"" . embark-dwim)))
