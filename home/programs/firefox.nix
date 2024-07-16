@@ -296,6 +296,10 @@ in
           DEFAULT_BROWSER = firefox-exe;
           BROWSER = firefox-exe;
         };
+      xdg.mimeApps.defaultApplications = {
+        "x-scheme-handler/http" = "firefox.desktop";
+        "x-scheme-handler/https" = "firefox.desktop";
+      };
     })
   ];
 }

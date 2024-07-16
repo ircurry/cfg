@@ -32,6 +32,7 @@
           templates = "${config.home.homeDirectory}/tmpl";
           videos = "${config.home.homeDirectory}/vid";
         };
+        mimeApps.enable = true;
       };
     }
 
