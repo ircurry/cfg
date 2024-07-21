@@ -6,6 +6,7 @@
     ./mako.nix
     ./rofi-logout.nix
     ./rofi.nix
+    ./swayidle.nix
     ./swaylock.nix
     ./waybar.nix
   ];

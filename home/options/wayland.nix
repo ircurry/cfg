@@ -45,6 +45,18 @@
       exec-reuse = lib.mkOption { type = lib.types.nullOr lib.types.str; };
       exec-start = lib.mkOption { type = lib.types.nullOr lib.types.str; };
     };
+    idleManager = {
+      name = lib.mkOption {
+        type = lib.types.nullOr (lib.types.enum [ "swayidle" ]);
+        default = "swayidle";
+        example = "swayidle";
+        description = "Which idle manager to use, if any";
+      };
+      exec = lib.mkOption {
+        type = lib.types.str;
+        description = "Command to execute idle manager";
+      };
+    };
     image = {
       name = lib.mkOption {
         type = lib.types.enum [ "imv" ];
