@@ -134,7 +134,7 @@ in
             "[workspace 2 silent] $terminal"
             "[workspace 3 silent] $editor"
           ]
-          ++ lib.optionals (config.nocturne.wayland.idleManager != null) [
+          ++ lib.optionals (config.nocturne.wayland.idleManager.name != null) [
             "${config.nocturne.wayland.idleManager.exec}"
           ]
           ++ lib.optionals (config.nocturne.graphical.firefox.enable) [ "[workspace 4 silent] firefox" ]
