@@ -938,7 +938,7 @@ Doom themes are a theme pack specifically for the Doom Emacs distribution, but w
     :bind (:map cur/toggle-map
                 ("C-t" . cur/load-theme))
     :config
-    (cur/load-theme 'doom-gruvbox))
+    (cur/load-theme 'doom-nord))
 #+end_src
 
 *** Autothemer
