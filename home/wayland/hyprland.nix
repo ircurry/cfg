@@ -20,6 +20,7 @@ let
   # ===Border Colors===
   col_active_border1 = config.nocturne.wayland.hyprland.col-active-border1;
   col_active_border2 = config.nocturne.wayland.hyprland.col-active-border2;
+  col_background = config.nocturne.wayland.hyprland.col-background;
   col_inactive_border = config.nocturne.wayland.hyprland.col-inactive-border;
 
   # ===Monitor Configurations===
@@ -189,6 +190,8 @@ in
         misc = {
           # Anime lady hehe
           force_default_wallpaper = -1;
+          disable_hyprland_logo = true;
+          background_color = "rgba(${col_background})";
           enable_swallow = true;
           swallow_regex = [ "^(Alacritty)$" ];
         };

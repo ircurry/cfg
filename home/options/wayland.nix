@@ -152,6 +152,10 @@
         type = lib.types.str;
         default = config.nocturne.themes.colors.base0C + "ee";
       };
+      col-background = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base00 + "ff";
+      };
       col-inactive-border = lib.mkOption {
         type = lib.types.str;
         default = config.nocturne.themes.colors.base03 + "aa";
