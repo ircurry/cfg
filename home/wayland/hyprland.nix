@@ -141,7 +141,7 @@ in
           ++ lib.optionals (config.nocturne.graphical.firefox.enable) [ "[workspace 4 silent] firefox" ]
           ++ lib.optionals (term-cfg.exec-start != null) [ "${term-cfg.exec-start}" ];
         general = {
-          gaps_in = 5;
+          gaps_in = 3;
           gaps_out = 5;
           border_size = 2;
           "col.active_border" = "rgba(${col_active_border1}) rgba(${col_active_border2}) 45deg";
