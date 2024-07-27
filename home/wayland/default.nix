@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./fuzzel.nix
     ./grim-slurp.nix
     ./hyprland.nix
     ./mako.nix

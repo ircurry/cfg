@@ -10,7 +10,7 @@ let
 in
 {
   config = lib.mkMerge [
-    (lib.mkIf (way-cfg == "rofi-wayland" || cfg.enable) {
+    (lib.mkIf (way-cfg == "rofi") {
       # Warnings
       warnings =
         lib.optionals ((way-cfg == "rofi-wayland") && (cfg.enable == false)) [
@@ -25,9 +25,10 @@ in
         pkgs.rofi-wayland
       ];
       nocturne.wayland.menu = {
-        drun = "${pkgs.rofi-wayland}/bin/rofi -show drun";
-        run = "${pkgs.rofi-wayland}/bin/rofi -show run";
-        window = "${pkgs.rofi-wayland}/bin/rofi -show window";
+        promptSwitch = "-p";
+        exec = "${pkgs.rofi-wayland}/bin/rofi -show drun";
+        exec-run = "${pkgs.rofi-wayland}/bin/rofi -show run";
+        exec-dmenu = "${pkgs.rofi-wayland}/bin/rofi -dmenu -i";
       };
       programs.rofi = {
         enable = true;

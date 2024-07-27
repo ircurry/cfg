@@ -113,6 +113,7 @@
     libreoffice.enable = lib.mkEnableOption "Enable LibreOffice";
     mullvadBrowser.enable = lib.mkEnableOption "Enable Mullvad Browser";
     obs.enable = lib.mkEnableOption "Enable OBS";
+    # TODO: DEPRICATED: will be moved to wayland option attr set
     rofi = {
       enable = lib.mkEnableOption "Enable Rofi";
       bg = lib.mkOption {

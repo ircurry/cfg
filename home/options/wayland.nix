@@ -76,25 +76,21 @@
       };
       exec = lib.mkOption { type = lib.types.str; };
     };
-    logout = {
-      name = lib.mkOption {
-        type = lib.types.enum [ "rofi-logout" ];
-        default = "rofi-logout";
-        example = "rofi-logout";
-        description = "Which logout program to use";
-      };
-      exec = lib.mkOption { type = lib.types.str; };
-    };
     menu = {
       name = lib.mkOption {
-        type = lib.types.enum [ "rofi-wayland" ];
-        default = "rofi-wayland";
-        example = "rofi-wayland";
+        type = lib.types.enum [
+          "fuzzel"
+          "rofi"
+        ];
+        default = "fuzzel";
+        example = "rofi";
         description = "Which menu program to use";
       };
-      drun = lib.mkOption { type = lib.types.str; };
-      run = lib.mkOption { type = lib.types.str; };
-      window = lib.mkOption { type = lib.types.str; };
+      promptSwitch = lib.mkOption { type = lib.types.str; };
+      exec = lib.mkOption { type = lib.types.str; };
+      exec-run = lib.mkOption { type = lib.types.str; };
+      exec-dmenu = lib.mkOption { type = lib.types.str; };
+      exec-logout = lib.mkOption { type = lib.types.str; };
     };
     monitors = lib.mkOption {
       type = lib.types.listOf (

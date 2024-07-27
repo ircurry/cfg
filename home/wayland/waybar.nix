@@ -250,7 +250,7 @@ in
             "custom/launcher" = {
               format = "󱄅";
               tooltip = false;
-              on-click = "sleep 0.1 && ${config.nocturne.wayland.menu.drun}";
+              on-click = "sleep 0.1 && ${config.nocturne.wayland.menu.exec}";
             };
             # margin-top = 5;
             "hyprland/workspaces" = {
@@ -358,7 +358,7 @@ in
             "custom/power" = {
               format = "󰐥";
               tooltip = false;
-              on-click = "sleep 0.1 && ${config.nocturne.wayland.logout.exec}";
+              on-click = "sleep 0.1 && ${config.nocturne.wayland.menu.exec-logout}";
             };
             cpu = {
               format = "󰻠 {usage}%";
@@ -624,7 +624,7 @@ in
             "custom/launcher" = {
               format = "󱄅";
               tooltip = false;
-              on-click = "sleep 0.1 && ${config.nocturne.wayland.menu.drun}";
+              on-click = "sleep 0.1 && ${config.nocturne.wayland.menu.exec}";
             };
             margin-top = 5;
             "hyprland/workspaces" = {
@@ -731,7 +731,7 @@ in
             "custom/power" = {
               format = "󰐥";
               tooltip = false;
-              on-click = "sleep 0.1 && ${config.nocturne.wayland.logout.exec}";
+              on-click = "sleep 0.1 && ${config.nocturne.wayland.menu.exec-logout}";
             };
             cpu = {
               format = "󰻠 {usage}%";

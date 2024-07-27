@@ -7,9 +7,9 @@
 }:
 let
   # ===Application Launcher(s)===
-  menu-drun = config.nocturne.wayland.menu.drun;
-  menu-run = config.nocturne.wayland.menu.run;
-  menu-window = config.nocturne.wayland.menu.window;
+  menu-drun = config.nocturne.wayland.menu.exec;
+  menu-run = config.nocturne.wayland.menu.exec-run;
+  # menu-window = config.nocturne.wayland.menu.window;
 
   # ===Editor===
   ed-cfg = config.nocturne.wayland.editor;
@@ -121,7 +121,7 @@ in
         "$fileManager" = "dolphin";
         "$menu-drun" = menu-drun;
         "$menu-run" = menu-run;
-        "$menu-window" = menu-window;
+        # "$menu-window" = menu-window;
         "$MOD" = "SUPER";
 
         env = [ "XCURSOR_SIZE,24" ];
@@ -227,14 +227,14 @@ in
             "$MOD, E, exec, $editor"
             "$MOD, R, exec, $menu-run"
             "$MOD, P, exec, $menu-drun"
-            "$MOD, code:61, exec, $menu-window"
+            # "$MOD, code:61, exec, $menu-window"
             "$MOD, B, exec, killall '.waybar-wrapped' || waybar"
             "$MOD_SHIFT, C, killactive, "
             "$MOD, C, killactive, "
             "$MOD_SHIFT, Q, exit,"
             ## Logout (semi-colon)
-            "$MOD_CTRL, code:47, exec, ${config.nocturne.wayland.logout.exec}"
-            "$MOD, code:47, exec, ${config.nocturne.wayland.logout.exec}"
+            "$MOD_CTRL, code:47, exec, ${config.nocturne.wayland.menu.exec-logout}"
+            "$MOD, code:47, exec, ${config.nocturne.wayland.menu.exec-logout}"
 
             # Window Manipulation
             "$MOD, H, layoutmsg, swapprev"
