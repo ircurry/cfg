@@ -209,7 +209,7 @@
       };
       border-color = lib.mkOption {
         type = lib.types.str;
-        default = config.nocturne.themes.colors.base03 + "FF";
+        default = config.nocturne.themes.colors.base0D + "FF";
       };
       progress-color = lib.mkOption {
         type = lib.types.str;
