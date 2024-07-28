@@ -6,13 +6,13 @@
 }:
 let
   cfg = config.nocturne.wayland.menu;
-  background = config.nocturne.themes.colors.base00 + "dd";
-  text = config.nocturne.themes.colors.base05 + "ff";
-  match = config.nocturne.themes.colors.base08 + "ff";
-  selection = config.nocturne.themes.colors.base01 + "dd";
-  selection-text = text;
-  selection-match = match;
-  border = config.nocturne.themes.colors.base0D + "ee";
+  background = config.nocturne.wayland.fuzzel.background + "dd";
+  text = config.nocturne.wayland.fuzzel.text + "ff";
+  match = config.nocturne.wayland.fuzzel.match + "ff";
+  selection = config.nocturne.wayland.fuzzel.selection + "dd";
+  selection-text = config.nocturne.wayland.fuzzel.selection-text + "ff";
+  selection-match = config.nocturne.wayland.fuzzel.selection-match + "ff";
+  border = config.nocturne.wayland.fuzzel.border + "ee";
   logout = pkgs.writeShellScriptBin "rofi-logout" ''
     op=$( echo -e " Lock\n Logout\n Poweroff\n Reboot\n Suspend" | ${cfg.exec-dmenu} ${cfg.promptSwitch} "Power Menu: " | awk '{print tolower($2)}' )
 

@@ -146,6 +146,36 @@
     };
 
     # ===Program Options===
+    fuzzel = {
+      background = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base00;
+      };
+      text = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base05;
+      };
+      match = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base08;
+      };
+      selection = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base01;
+      };
+      selection-text = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.wayland.fuzzel.text;
+      };
+      selection-match = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.wayland.fuzzel.match;
+      };
+      border = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0D;
+      };
+    };
     hyprland = {
       col-active-border1 = lib.mkOption {
         type = lib.types.str;
