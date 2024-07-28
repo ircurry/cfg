@@ -52,7 +52,6 @@ in
       };
       wayland.mako = {
         bg = surface0 + "AA";
-        border-color = surface1 + "FF";
         progress-color = "7287fd" + "FF";
       };
       wayland.hyprland = {
