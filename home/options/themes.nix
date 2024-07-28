@@ -18,6 +18,7 @@
         "kanagawa-wave"
         "nord-aurora"
         "nord-light"
+        "oceanic-next"
       ];
       default = "nord-aurora";
       description = "Which theme for the system to use";
