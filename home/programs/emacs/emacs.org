@@ -1155,7 +1155,9 @@ consult
   (provide 'cur-config-completion)
 #+end_src
 
-*** Embark
+*** TODO Consult Directory
+
+*** TODO Embark
 
 #+begin_src text :tangle ./packages.txt :padline no
   embark
@@ -1294,6 +1296,8 @@ lsp-ui
     (lsp-mode . lsp-ui-mode))
 #+end_src
 
+*** TODO Eglot
+
 *** Company
 
 The code completion system. This is different from completions systems like ivy or vertico, this is for interactively completing a symbol while programming.
@@ -1319,6 +1323,8 @@ The code completion system. This is different from completions systems like ivy 
   ;;(company-tng-configure-default))
 #+end_src
 
+*** TODO Corfu
+
 *** Flycheck
 
 Code error checking with a nice UI.
@@ -1334,6 +1340,8 @@ flycheck
     (prog-mode . flycheck-mode)
     (lsp-mode  . flycheck-mode))
 #+end_src
+
+*** TODO Flymake
 
 *** Treemacs
 

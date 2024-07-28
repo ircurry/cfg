@@ -8,7 +8,7 @@ My poorly constructed configurations for [[https://nixos.org/][NixOS]] using [[h
 Here are some specs you've seen a trillion times:
 - *WM*: Hyprland
 - *Bar*: Waybar
-- *Launcher/Menu*: Rofi-Wayland
+- *Launcher/Menu*: Rofi-Wayland and/or Fuzzel
 - *Editor*: Emacs
 - *Terminal*: Alacritty
 - *Shell*: Fish
@@ -90,24 +90,17 @@ I have themes for:
   - [-] Make Stand Alone Home Manager Work
 - [X] Create Custom Packages Directory [100%]
   - [X] Move Scripts to Custom Packages
-- [-] Emacs [6%]
-  - [ ] migrate to literate config?
-  - [ ] switch to vertico/marginalia/consult/embark
-    - [ ] vertico
-    - [ ] marginalia
-    - [ ] consult
-    - [ ] embark
-  - [ ] Eshell
-    - [ ] my aliases
-  - [ ] isearch (and search and replace in general)
-  - [ ] imenu
-  - [ ] mark and register
-  - [ ] custom themes
-  - [ ] keyboard macros
-  - [ ] meow things [0%]
-    - [ ] real functions
-    - [ ] var definition
-    - [ ] window
+- [-] Emacs [50%]
+  - [X] migrate to literate config?
+  - [-] switch to vertico/marginalia/consult/embark
+    - [X] vertico
+    - [X] marginalia
+    - [X] consult
+    - [-] embark
+  - [X] isearch (and search and replace in general)
+  - [X] imenu
+  - [-] custom themes
+  - [X] keyboard macros
   - [ ] dired [0%]
     - [ ] open-dwim
     - [ ] preview
@@ -124,9 +117,7 @@ I have themes for:
       - [ ] give date command
     - [ ] zoxide (or zoxide like) directory changing
     - [ ] cycle through images in dir
-  - [ ] bookmarks
-  - [ ] occur
-  - [ ] dashboard?
+  - [X] occur
   - [ ] modeline [0%]
     - [ ] time
     - [ ] last/current command
