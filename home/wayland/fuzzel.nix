@@ -33,7 +33,7 @@ in
         enable = true;
         settings = {
           main = {
-            font = "JetBrainsMono Nerd Font:size=12";
+            font = "JetBrainsMono Nerd Font:size=13";
             fields = "name,filename,generic,keywords";
             terminal = "${config.nocturne.wayland.terminal.exec-center}";
 
