@@ -44,16 +44,17 @@ check for overrides with `cur/theme-override'."
           (cur/theme-override))
       (error "Problem loading theme %s" theme)))
   :bind (:map cur/toggle-map
-              ("C-t" . cur/load-theme))
-  :config
-  (cur/load-theme 'doom-nord))
+              ("C-t" . cur/load-theme)))
+  ;; :config
+  ;; (cur/load-theme 'doom-nord))
 
 ;; ===Autothemer===
 (use-package autothemer)
 
 ;; ===Catppuccin Theme===
 (use-package catppuccin-theme
-  :after (autothemer))
+  :after (autothemer)
+  :config (cur/load-theme 'catppuccin))
 
 ;; ===Text Scaling===
 (defhydra hydra-text-scale (:timeout 4)
