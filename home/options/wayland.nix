@@ -109,8 +109,11 @@
     };
     notification = {
       daemon = lib.mkOption {
-        type = lib.types.enum [ "mako" ];
-        default = "mako";
+        type = lib.types.enum [
+          "dunst"
+          "mako"
+        ];
+        default = "dunst";
         example = "mako";
         description = "Which notification daemon to use";
       };
@@ -146,6 +149,24 @@
     };
 
     # ===Program Options===
+    dunst = {
+      frameColor = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0D;
+      };
+      bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base02;
+      };
+      fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base05;
+      };
+      critical = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base08;
+      };
+    };
     fuzzel = {
       background = lib.mkOption {
         type = lib.types.str;

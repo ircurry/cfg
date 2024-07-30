@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./dunst.nix
     ./fuzzel.nix
     ./grim-slurp.nix
     ./hyprland.nix
