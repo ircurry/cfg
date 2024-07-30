@@ -15,6 +15,8 @@ let
   volup = config.nocturne.wayland.notification.exec-volup;
   voldown = config.nocturne.wayland.notification.exec-voldown;
   volmute = config.nocturne.wayland.notification.exec-volmute;
+  brightup = config.nocturne.wayland.notification.exec-brightup;
+  brightdown = config.nocturne.wayland.notification.exec-brightdown;
 
   # ===Editor===
   ed-cfg = config.nocturne.wayland.editor;
@@ -280,8 +282,8 @@ in
           ", XF86AudioLowerVolume, exec, ${voldown}"
           ", XF86AudioRaiseVolume, exec, ${volup}"
           ", XF86AudioMute, exec, ${volmute}"
-          ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +1%"
-          ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 1%-"
+          ", XF86MonBrightnessUp, exec, ${brightup}"
+          ", XF86MonBrightnessDown, exec, ${brightdown}"
         ];
         bindm = [
           # Mouse Keybindings

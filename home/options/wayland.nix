@@ -121,8 +121,8 @@
       exec-volup = lib.mkOption { type = lib.types.str; };
       exec-voldown = lib.mkOption { type = lib.types.str; };
       exec-volmute = lib.mkOption { type = lib.types.str; };
-      # exec-brightup = lib.mkOption { type = lib.types.str; };
-      # exec-brightdown = lib.mkOption { type = lib.types.str; };
+      exec-brightup = lib.mkOption { type = lib.types.str; };
+      exec-brightdown = lib.mkOption { type = lib.types.str; };
     };
     screenshot = {
       name = lib.mkOption {

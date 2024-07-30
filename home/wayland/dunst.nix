@@ -71,6 +71,34 @@ let
         fi
     '';
   };
+  brightup = pkgs.writeShellApplication {
+    name = "brightup";
+    runtimeInputs = with pkgs; [
+      config.services.dunst.package
+      brightnessctl
+      bc
+    ];
+    text = ''
+      brightnessctl s +1%
+      FG_COLOR="#${increaseColor}"
+      BRIGHTNESS="$(echo "scale = 2; ($(brightnessctl get)/$(brightnessctl max)) * 100" | bc | sed 's/\..*//g')"
+      dunstify -u low "Brightness: ''${BRIGHTNESS}%" -h int:value:"$BRIGHTNESS" -h string:fgcolor:"$FG_COLOR" -r 9993 -t 2000
+    '';
+  };
+  brightdown = pkgs.writeShellApplication {
+    name = "brightdown";
+    runtimeInputs = with pkgs; [
+      config.services.dunst.package
+      brightnessctl
+      bc
+    ];
+    text = ''
+      brightnessctl s 1%-
+      FG_COLOR="#${decreaseColor}"
+      BRIGHTNESS="$(echo "scale = 2; ($(brightnessctl get)/$(brightnessctl max)) * 100" | bc | sed 's/\..*//g')"
+      dunstify -u low "Brightness: ''${BRIGHTNESS}%" -h int:value:"$BRIGHTNESS" -h string:fgcolor:"$FG_COLOR" -r 9993 -t 2000
+    '';
+  };
 in
 {
   config = lib.mkIf (cfg.daemon == "dunst") {
@@ -78,6 +106,8 @@ in
       volup
       voldown
       volmute
+      brightup
+      brightdown
       pkgs.nerdfonts
       pkgs.libnotify
     ];
@@ -138,5 +168,7 @@ in
     nocturne.wayland.notification.exec-volup = "${lib.getExe volup}";
     nocturne.wayland.notification.exec-voldown = "${lib.getExe voldown}";
     nocturne.wayland.notification.exec-volmute = "${lib.getExe volmute}";
+    nocturne.wayland.notification.exec-brightup = "${lib.getExe brightup}";
+    nocturne.wayland.notification.exec-brightdown = "${lib.getExe brightdown}";
   };
 }
