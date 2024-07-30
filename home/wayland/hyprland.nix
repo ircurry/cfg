@@ -11,6 +11,11 @@ let
   menu-run = config.nocturne.wayland.menu.exec-run;
   # menu-window = config.nocturne.wayland.menu.window;
 
+  # ===Notification Scripts===
+  volup = config.nocturne.wayland.notification.exec-volup;
+  voldown = config.nocturne.wayland.notification.exec-voldown;
+  volmute = config.nocturne.wayland.notification.exec-volmute;
+
   # ===Editor===
   ed-cfg = config.nocturne.wayland.editor;
 
@@ -272,9 +277,9 @@ in
 
         binde = [
           # Volume and Brightness
-          ", XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d 1"
-          ", XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer -i 1"
-          ", XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t"
+          ", XF86AudioLowerVolume, exec, ${voldown}"
+          ", XF86AudioRaiseVolume, exec, ${volup}"
+          ", XF86AudioMute, exec, ${volmute}"
           ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +1%"
           ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 1%-"
         ];

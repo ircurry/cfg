@@ -14,6 +14,9 @@ in
       pkgs.libnotify
     ];
     nocturne.wayland.notification.exec-start = "${lib.getExe pkgs.mako}";
+    nocturne.wayland.notification.exec-volup = "${lib.getExe pkgs.pamixer} -i 1";
+    nocturne.wayland.notification.exec-voldown = "${lib.getExe pkgs.pamixer} -d 1";
+    nocturne.wayland.notification.exec-volmute = "${lib.getExe pkgs.pamixer} -t";
     services.mako =
       let
         bg = config.nocturne.wayland.mako.bg;

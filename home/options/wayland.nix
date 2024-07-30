@@ -118,6 +118,11 @@
         description = "Which notification daemon to use";
       };
       exec-start = lib.mkOption { type = lib.types.str; };
+      exec-volup = lib.mkOption { type = lib.types.str; };
+      exec-voldown = lib.mkOption { type = lib.types.str; };
+      exec-volmute = lib.mkOption { type = lib.types.str; };
+      # exec-brightup = lib.mkOption { type = lib.types.str; };
+      # exec-brightdown = lib.mkOption { type = lib.types.str; };
     };
     screenshot = {
       name = lib.mkOption {
@@ -165,6 +170,18 @@
       critical = lib.mkOption {
         type = lib.types.str;
         default = config.nocturne.themes.colors.base08;
+      };
+      increaseColor = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0B;
+      };
+      decreaseColor = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0A;
+      };
+      mutedColor = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base0D;
       };
     };
     fuzzel = {
