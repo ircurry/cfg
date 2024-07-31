@@ -193,6 +193,13 @@ I like having absolute line numbers, especially since the meow number selection 
     (setq bookmark-save-flag 1))
 #+end_src
 
+*** Recent Files
+
+#+begin_src emacs-lisp
+  (use-package recentf
+    :hook (emacs-startup . recentf-mode))
+#+end_src
+
 *** Isearch configuration
 
 #+begin_src emacs-lisp

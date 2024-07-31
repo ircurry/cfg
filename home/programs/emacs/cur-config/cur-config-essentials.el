@@ -29,6 +29,9 @@
   :config
   (setq bookmark-save-flag 1))
 
+(use-package recentf
+  :hook (emacs-startup . recentf-mode))
+
 (use-package isearch
   :demand t
   :custom
