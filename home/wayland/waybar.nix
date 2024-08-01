@@ -24,42 +24,44 @@ in
             stdMargin = builtins.toString config.nocturne.wayland.waybar.stdMargin;
             stdPadding = builtins.toString config.nocturne.wayland.waybar.stdPadding;
             stdFontSize = builtins.toString config.nocturne.wayland.waybar.stdFontSize;
-            default-bg = config.nocturne.wayland.waybar.simple.default-bg;
-            default-fg = config.nocturne.wayland.waybar.simple.default-fg;
-            workspace-bg = config.nocturne.wayland.waybar.simple.workspace-bg;
-            workspace-hover-bg = config.nocturne.wayland.waybar.simple.workspace-hover-bg;
-            workspace-fg = config.nocturne.wayland.waybar.simple.workspace-fg;
-            workspace-empty = config.nocturne.wayland.waybar.simple.workspace-empty;
-            workspace-urgent = config.nocturne.wayland.waybar.simple.workspace-urgent;
-            workspace-visible = config.nocturne.wayland.waybar.simple.workspace-visible;
             launcher-font-size = builtins.toString config.nocturne.wayland.waybar.simple.launcher-font-size;
-            launcher-fg = config.nocturne.wayland.waybar.simple.launcher-fg;
-            launcher-bg = config.nocturne.wayland.waybar.simple.launcher-bg;
-            battery-fg = config.nocturne.wayland.waybar.simple.battery-fg;
-            battery-bg = config.nocturne.wayland.waybar.simple.battery-bg;
-            battery-warning = config.nocturne.wayland.waybar.simple.battery-warning;
-            battery-critical = config.nocturne.wayland.waybar.simple.battery-critical;
-            clock-fg = config.nocturne.wayland.waybar.simple.clock-fg;
-            clock-bg = config.nocturne.wayland.waybar.simple.clock-bg;
-            tray-bg = config.nocturne.wayland.waybar.simple.tray-bg;
-            backlight-fg = config.nocturne.wayland.waybar.simple.backlight-fg;
-            backlight-bg = config.nocturne.wayland.waybar.simple.backlight-bg;
-            audio-fg = config.nocturne.wayland.waybar.simple.audio-fg;
-            audio-bg = config.nocturne.wayland.waybar.simple.audio-bg;
-            network-fg = config.nocturne.wayland.waybar.simple.network-fg;
-            network-bg = config.nocturne.wayland.waybar.simple.network-bg;
-            network-disconnected = config.nocturne.wayland.waybar.simple.network-disconnected;
             power-font-size = builtins.toString config.nocturne.wayland.waybar.simple.power-font-size;
-            power-fg = config.nocturne.wayland.waybar.simple.power-fg;
-            power-bg = config.nocturne.wayland.waybar.simple.power-bg;
-            cpu-fg = config.nocturne.wayland.waybar.simple.cpu-fg;
-            cpu-bg = config.nocturne.wayland.waybar.simple.cpu-bg;
-            memory-fg = config.nocturne.wayland.waybar.simple.memory-fg;
-            memory-bg = config.nocturne.wayland.waybar.simple.memory-bg;
-            mpd-fg = config.nocturne.wayland.waybar.simple.mpd-fg;
-            mpd-bg = config.nocturne.wayland.waybar.simple.mpd-bg;
-            tooltip-bg = config.nocturne.wayland.waybar.simple.tooltip-bg;
-            tooltip-fg = config.nocturne.wayland.waybar.simple.tooltip-fg;
+            inherit (config.nocturne.wayland.waybar.simple)
+              default-bg
+              default-fg
+              workspace-bg
+              workspace-hover-bg
+              workspace-fg
+              workspace-empty
+              workspace-urgent
+              workspace-visible
+              launcher-fg
+              launcher-bg
+              battery-fg
+              battery-bg
+              battery-warning
+              battery-critical
+              clock-fg
+              clock-bg
+              tray-bg
+              backlight-fg
+              backlight-bg
+              audio-fg
+              audio-bg
+              network-fg
+              network-bg
+              network-disconnected
+              power-fg
+              power-bg
+              cpu-fg
+              cpu-bg
+              memory-fg
+              memory-bg
+              mpd-fg
+              mpd-bg
+              tooltip-bg
+              tooltip-fg
+              ;
           in
           ''
             * {
@@ -394,40 +396,42 @@ in
             stdMargin = builtins.toString config.nocturne.wayland.waybar.stdMargin;
             stdPadding = builtins.toString config.nocturne.wayland.waybar.stdPadding;
             stdFontSize = builtins.toString config.nocturne.wayland.waybar.stdFontSize;
-            workspace-bg = config.nocturne.wayland.waybar.workspace-bg;
-            workspace-hover-bg = config.nocturne.wayland.waybar.workspace-hover-bg;
-            workspace-fg = config.nocturne.wayland.waybar.workspace-fg;
-            workspace-empty = config.nocturne.wayland.waybar.workspace-empty;
-            workspace-urgent = config.nocturne.wayland.waybar.workspace-urgent;
-            workspace-visible = config.nocturne.wayland.waybar.workspace-visible;
             launcher-font-size = builtins.toString config.nocturne.wayland.waybar.launcher-font-size;
-            launcher-fg = config.nocturne.wayland.waybar.launcher-fg;
-            launcher-bg = config.nocturne.wayland.waybar.launcher-bg;
-            battery-fg = config.nocturne.wayland.waybar.battery-fg;
-            battery-bg = config.nocturne.wayland.waybar.battery-bg;
-            battery-warning = config.nocturne.wayland.waybar.battery-warning;
-            battery-critical = config.nocturne.wayland.waybar.battery-critical;
-            clock-fg = config.nocturne.wayland.waybar.clock-fg;
-            clock-bg = config.nocturne.wayland.waybar.clock-bg;
-            tray-bg = config.nocturne.wayland.waybar.tray-bg;
-            backlight-fg = config.nocturne.wayland.waybar.backlight-fg;
-            backlight-bg = config.nocturne.wayland.waybar.backlight-bg;
-            audio-fg = config.nocturne.wayland.waybar.audio-fg;
-            audio-bg = config.nocturne.wayland.waybar.audio-bg;
-            network-fg = config.nocturne.wayland.waybar.network-fg;
-            network-bg = config.nocturne.wayland.waybar.network-bg;
-            network-disconnected = config.nocturne.wayland.waybar.network-disconnected;
             power-font-size = builtins.toString config.nocturne.wayland.waybar.power-font-size;
-            power-fg = config.nocturne.wayland.waybar.power-fg;
-            power-bg = config.nocturne.wayland.waybar.power-bg;
-            cpu-fg = config.nocturne.wayland.waybar.cpu-fg;
-            cpu-bg = config.nocturne.wayland.waybar.cpu-bg;
-            memory-fg = config.nocturne.wayland.waybar.memory-fg;
-            memory-bg = config.nocturne.wayland.waybar.memory-bg;
-            mpd-fg = config.nocturne.wayland.waybar.mpd-fg;
-            mpd-bg = config.nocturne.wayland.waybar.mpd-bg;
-            tooltip-bg = config.nocturne.wayland.waybar.tooltip-bg;
-            tooltip-fg = config.nocturne.wayland.waybar.tooltip-fg;
+            inherit (config.nocturne.wayland.waybar)
+              workspace-bg
+              workspace-hover-bg
+              workspace-fg
+              workspace-empty
+              workspace-urgent
+              workspace-visible
+              launcher-fg
+              launcher-bg
+              battery-fg
+              battery-bg
+              battery-warning
+              battery-critical
+              clock-fg
+              clock-bg
+              tray-bg
+              backlight-fg
+              backlight-bg
+              audio-fg
+              audio-bg
+              network-fg
+              network-bg
+              network-disconnected
+              power-fg
+              power-bg
+              cpu-fg
+              cpu-bg
+              memory-fg
+              memory-bg
+              mpd-fg
+              mpd-bg
+              tooltip-bg
+              tooltip-fg
+              ;
           in
           ''
             * {
