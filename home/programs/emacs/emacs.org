@@ -106,7 +106,7 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
   (require 'cur-config-faces)
   (require 'cur-config-completion)
   (require 'cur-config-window)
-  (require 'cur-modeline)
+  ;; (require 'cur-modeline)
 
   ;; ===Languages===
   (require 'cur-config-ide)
@@ -1043,6 +1043,19 @@ spacious-padding
     (spacious-padding-mode 1))
 
   (provide 'cur-config-faces)
+#+end_src
+
+*** Doom Modeline
+
+I will one day make my own modeline that is featureful and awesome. Today is not that day.
+
+#+begin_src text :tangle ./packages.txt :padline no
+doom-modeline
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package doom-modeline
+    :hook (emacs-startup . doom-modeline-mode))
 #+end_src
 
 ** Completion system configurations (=cur-config-completion.el=)

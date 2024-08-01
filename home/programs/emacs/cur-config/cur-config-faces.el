@@ -89,3 +89,6 @@ check for overrides with `cur/theme-override'."
   (spacious-padding-mode 1))
 
 (provide 'cur-config-faces)
+
+(use-package doom-modeline
+  :hook (emacs-startup . doom-modeline-mode))

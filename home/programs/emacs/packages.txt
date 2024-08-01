@@ -9,6 +9,7 @@ catppuccin-theme
 ef-themes
 nerd-icons-ibuffer
 spacious-padding
+doom-modeline
 embark
 embark-consult
 orderless
