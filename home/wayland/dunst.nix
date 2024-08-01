@@ -59,16 +59,15 @@ let
       pamixer
     ];
     text = ''
-        pamixer -t
-        FG_COLOR="#${mutedColor}"
-        VOLUME="$(pamixer --get-volume)"
-        if [ "$(pamixer --get-mute)" = "true" ]; then
-            MUTED_STRING="Muted"
-      	    dunstify -u low "Volume: ''${MUTED_STRING}" -h string:fgcolor:"$FG_COLOR" -r 9993 -t 2000
-        else
-            MUTED_STRING="Unmuted"
-            dunstify -u low "Volume: ''${MUTED_STRING}" -h int:value:"$VOLUME" -h string:fgcolor:"$FG_COLOR" -r 9993 -t 2000
-        fi
+      pamixer -t
+      FG_COLOR="#${mutedColor}"
+      VOLUME="$(pamixer --get-volume)"
+      if [ "$(pamixer --get-mute)" = "true" ]; then
+          MUTED_STRING="Muted"
+      else
+          MUTED_STRING="Unmuted"
+      fi
+      dunstify -u low "Volume: ''${MUTED_STRING}" -h int:value:"$VOLUME" -h string:fgcolor:"$FG_COLOR" -r 9993 -t 2000
     '';
   };
   brightup = pkgs.writeShellApplication {
