@@ -21,10 +21,10 @@ in
       gtk = {
         enable = true;
 
-        theme.package = pkgs.gnome.gnome-themes-extra;
+        theme.package = pkgs.gnome-themes-extra;
         theme.name = "Adwaita";
 
-        iconTheme.package = pkgs.gnome.adwaita-icon-theme;
+        iconTheme.package = pkgs.adwaita-icon-theme;
         iconTheme.name = "Adwaita";
 
         font.package = pkgs.dejavu_fonts;
