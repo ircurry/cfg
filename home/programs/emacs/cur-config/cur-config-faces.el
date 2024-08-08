@@ -76,6 +76,7 @@ check for overrides with `cur/theme-override'."
 
 ;; ===Spacious Padding===
 (use-package spacious-padding
+  :disabled t
   :config
   (setq spacious-padding-widths
         '(:internal-border-width 8
