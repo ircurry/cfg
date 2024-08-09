@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}:
+{ ... }:
 
 {
   # ===Import Home Configuration Modules===
@@ -12,14 +7,15 @@
   # ===Nocturne Home Configuration===
   nocturne = {
     # themes.theme = "basic-dark";
-    # themes.theme = "catppuccin-mocha";
+    themes.theme = "catppuccin-mocha";
     # themes.theme = "grimshaw";
     # themes.theme = "gruvbox-dark";
-    themes.theme = "gruvbox-dark-bright";
+    # themes.theme = "gruvbox-dark-bright";
     # themes.theme = "gruvbox-light";
     # themes.theme = "kanagawa-wave";
     # themes.theme = "nord-aurora";
     # themes.theme = "nord-light";
+    # themes.theme = "oceanic-next";
     graphical = {
       alacritty.enable = true;
       anki.enable = true;
@@ -50,28 +46,32 @@
       shell.name = "fish";
       youtube.enable = true;
     };
-    wayland.monitors = [
-      {
-        name = "eDP-1";
-        width = 2256;
-        height = 1504;
-        refreshRate = 60;
-        x = 0;
-        y = 0;
-        scale = 2;
-      }
-    ];
-    wayland.docked-monitors = [
-      {
-        name = "DP-2";
-        width = 1920;
-        height = 1080;
-        refreshRate = 60;
-        x = 0;
-        y = 0;
-        scale = 1;
-      }
-    ];
+    wayland = {
+      idleManager.name = null;
+      uiStyle = "fancy";
+      monitors = [
+        {
+          name = "eDP-1";
+          width = 2256;
+          height = 1504;
+          refreshRate = 60;
+          x = 0;
+          y = 0;
+          scale = 2;
+        }
+      ];
+      docked-monitors = [
+        {
+          name = "DP-2";
+          width = 1920;
+          height = 1080;
+          refreshRate = 60;
+          x = 0;
+          y = 0;
+          scale = 1;
+        }
+      ];
+    };
   };
 
   # ===Don't Change Please===

@@ -27,6 +27,7 @@
   (org-log-done 'time)
   (org-log-into-drawer t)
   (org-agenda-window-setup 'current-window "Have org-agenda pop up in the current window")
+  (org-imenu-depth 4)
   :config
   (load-library "find-lisp")
   ;; (setq org-agenda-files (find-lisp-find-files "~/dox/agenda" "\.org$"))
@@ -64,5 +65,10 @@
   ;;       (org-babel-tangle))))
   ;; 
   ;; (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'cur/org-babel-tangle-config))))
+
+(use-package flyspell
+  :bind ( :map flyspell-mode-map
+          ("C-." . nil)
+          ("C-," . nil)))
 
 (provide 'cur-config-org)

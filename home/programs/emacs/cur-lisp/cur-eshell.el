@@ -1,4 +1,4 @@
-;;; cur-eshell.el --- My exensions of the Emacs Shell
+;;; cur-eshell.el --- My exensions of the Emacs Shell -*- lexical-binding: t -*-
 
 ;;; Commentary:
 
@@ -11,15 +11,22 @@
 (defun cur-eshell-prompt ()
   "A minimal and colourful prompt for `eshell'.
 Set `eshell-prompt-function' to this function to enable."
-  (concat
-   (propertize "[" 'face 'ansi-color-red)
-   (propertize (eshell/whoami) 'face 'ansi-color-yellow)
-   (propertize "@" 'face 'ansi-color-green)
-   (propertize (system-name) 'face 'ansi-color-blue)
-   " "
-   (propertize (concat (eshell/pwd)) 'face 'ansi-color-magenta)
-   (propertize "]" 'face 'ansi-color-red)
-   (propertize "$ " 'face 'bold)))
+  (let* ((red     (face-foreground 'ansi-color-red))
+         (green   (face-foreground 'ansi-color-green))
+         (yellow  (face-foreground 'ansi-color-yellow))
+         (blue    (face-foreground 'ansi-color-blue))
+         (magenta (face-foreground 'ansi-color-magenta))
+         (cyan    (face-foreground 'ansi-color-cyan))
+         (white   (face-foreground 'ansi-color-white)))
+    (concat
+     (propertize "["                   'face `(:weight bold :foreground ,red))
+     (propertize (eshell/whoami)       'face `(:weight bold :foreground ,yellow))
+     (propertize "@"                   'face `(:weight bold :foreground ,green))
+     (propertize (system-name)         'face `(:weight bold :foreground ,blue))
+     " "
+     (propertize (concat (eshell/pwd)) 'face `(:weight bold :foreground ,magenta))
+     (propertize "]"                   'face `(:weight bold :foreground ,red))
+     (propertize "$ "                  'face `(:weight bold :foreground ,white)))))
 
 (defun eshell/ff (&optional file)
   "Eshell alias to open FILE.

@@ -3,6 +3,7 @@
   pkgs,
   lib,
   inputs,
+  mylib,
   ...
 }:
 
@@ -11,127 +12,16 @@ let
   way-cfg = config.nocturne.wayland.editor;
   emacs-package =
     with pkgs;
-    ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (epkgs: [
-      ##########################
-      ## Tree-Sitter Grammars ##
-      ##########################
-      epkgs.treesit-grammars.with-all-grammars
-
-      ########################################
-      ## Configuration Modules Dependencies ##
-      ########################################
-
-      # ===Bindings===
-      epkgs.hydra
-      epkgs.meow
-
-      # ===C===
-      epkgs.ccls
-
-      # ===Completion===
-      epkgs.counsel
-      epkgs.swiper
-      epkgs.ivy
-      epkgs.ivy-rich
-      epkgs.vertico
-      epkgs.marginalia
-      epkgs.consult
-      epkgs.orderless
-      epkgs.vertico-posframe
-      epkgs.embark
-
-      # ===Dired===
-      epkgs.nerd-icons-dired
-
-      # ===Elcord===
-      epkgs.elcord
-
-      # ===Elisp===
-      epkgs.rainbow-delimiters
-      epkgs.geiser
-      epkgs.geiser-chez
-      epkgs.geiser-chibi
-      epkgs.geiser-chicken
-      epkgs.geiser-gambit
-      epkgs.geiser-gauche
-      epkgs.geiser-guile
-      epkgs.geiser-kawa
-      epkgs.geiser-mit
-      epkgs.geiser-racket
-      epkgs.geiser-stklos
-      epkgs.macrostep
-      epkgs.macrostep-geiser
-      epkgs.paredit
-
-      # ===Essentials===
-
-      # ===Faces===
-      epkgs.doom-themes
-      epkgs.autothemer
-      epkgs.catppuccin-theme
-      epkgs.ef-themes
-      epkgs.nerd-icons-ibuffer
-      epkgs.spacious-padding
-
-      # ===Haskell===
-      epkgs.haskell-mode
-      epkgs.lsp-haskell
-      epkgs.company-ghci
-
-      # ===Help===
-      epkgs.helpful
-      epkgs.which-key
-
-      # ===IDE===
-      epkgs.lsp-mode
-      epkgs.lsp-ui
-      epkgs.company
-      epkgs.flycheck
-      epkgs.treemacs
-      epkgs.ivy-xref
-      epkgs.magit
-      epkgs.projectile
-      epkgs.rg
-      epkgs.envrc
-      epkgs.just-mode
-      epkgs.justl
-
-      # ===Java===
-      epkgs.lsp-java
-
-      # ===Markup===
-      epkgs.yaml-mode
-      epkgs.yuck-mode
-
-      # ===Nix===
-      epkgs.nix-mode
-      epkgs.nix-ts-mode
-
-      # ===Org===
-      epkgs.org-bullets
-
-      # ===Rust===
-      epkgs.rustic
-
-      # ===Shell===
-      epkgs.vterm
-      epkgs.eat
-      epkgs.zoxide
-
-      # ===Smol-net===
-      epkgs.gemini-mode
-      epkgs.ox-gemini
-      epkgs.elpher
-
-      # ===Windows===
-
-      # ===Zig===
-      epkgs.zig-mode
-
-      ###############################
-      ## Lisp Modules Dependencies ##
-      ###############################
-    ]));
+    ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (
+      epkgs:
+      let
+        packageNames = mylib.filterStrList (str: !mylib.startsWithHash str) (
+          mylib.removeEmpty (lib.strings.splitString "\n" (builtins.readFile ./packages.txt))
+        );
+      in
+      (lib.foldl (acc: x: acc ++ [ epkgs."${x}" ]) [ ] packageNames)
+      ++ [ epkgs.treesit-grammars.with-all-grammars ]
+    ));
 in
 {
   config = lib.mkMerge [
@@ -141,7 +31,7 @@ in
         package = emacs-package;
       };
 
-      services.emacs.enable = true;
+      services.emacs.enable = false;
 
       home.sessionVariables.JDTLS_PATH = "${pkgs.jdt-language-server}";
       home.packages = with pkgs; [
@@ -150,10 +40,6 @@ in
         libvterm
         nerdfonts
         texliveFull
-
-        guile
-        mitscheme
-        racket
       ];
 
       home.file = {
@@ -171,7 +57,7 @@ in
           message = "emacs is set as the default editor on wayland but is not ebabled";
         }
       ];
-      nocturne.wayland.editor.exec = "${config.programs.emacs.package}/bin/emacsclient -c -a 'emacs'";
+      nocturne.wayland.editor.exec = "${config.programs.emacs.package}/bin/emacsclient -c -a '${config.programs.emacs.package}/bin/emacs'";
       nocturne.wayland.editor.exec-reuse = "${config.programs.emacs.package}/bin/emacsclient -r";
       nocturne.wayland.editor.exec-start = "${config.programs.emacs.package}/bin/emacs --daemon";
     })

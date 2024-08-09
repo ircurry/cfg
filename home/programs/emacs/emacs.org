@@ -2,7 +2,6 @@
 #+author: icurry
 #+language: en
 #+options: toc:2 num:t author:t
-#+startup: show2levels
 
 * Introduction and Overview
 
@@ -99,7 +98,6 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
 
   ;; ===Essentials===
   (require 'cur-config-essentials)
-  (require 'cur-config-search)
   (require 'cur-config-bindings)
   (require 'cur-config-help)
   (require 'cur-config-dired)
@@ -108,7 +106,7 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
   (require 'cur-config-faces)
   (require 'cur-config-completion)
   (require 'cur-config-window)
-  (require 'cur-modeline)
+  ;; (require 'cur-modeline)
 
   ;; ===Languages===
   (require 'cur-config-ide)
@@ -170,7 +168,8 @@ I like having absolute line numbers, especially since the meow number selection 
   (global-display-line-numbers-mode t)
   (setq display-line-numbers-type t)
   ;; Disable line numbers for terminal modes
-  (dolist (mode '(org-mode-hook
+  (dolist (mode '(bookmark-bmenu-mode-hook
+                  org-mode-hook
                   dired-mode-hook
                   term-mode-hook
                   vterm-mode-hook
@@ -179,21 +178,67 @@ I like having absolute line numbers, especially since the meow number selection 
                   eat-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-  (provide 'cur-config-essentials)
 #+end_src
 
-** Search configuration (=cur-config-search.el=)
-:PROPERTIES:
-:header-args:emacs-lisp: :tangle ./cur-config/cur-config-search.el
-:END:
+*** Bookmark Settings
+
+#+begin_src emacs-lisp
+  (use-package bookmark
+    :commands (bookmark-set
+               bookmark-set-no-overwrite
+               bookmark-jump
+               bookmark-bmenu-list)
+    :hook (bookmark-bmenu-mode . hl-line-mode)
+    :config
+    (setq bookmark-save-flag 1))
+#+end_src
+
+*** Recent Files
+
+#+begin_src emacs-lisp
+  (use-package recentf
+    :hook (emacs-startup . recentf-mode))
+#+end_src
+
+*** Isearch configuration
 
 #+begin_src emacs-lisp
   (use-package isearch
+    :demand t
     :custom
     (isearch-wrap-pause 'no-ding)
-    (isearch-repeat-on-direction-change t))
+    (isearch-repeat-on-direction-change t)
+    :config
+    (setq isearch-lazy-count t)
+    (setq lazy-count-prefix-format "(%s/%s) ")
+    (setq lazy-count-suffix-format nil))
+#+end_src
 
-  (provide 'cur-config-search)
+*** Proced
+
+#+begin_src emacs-lisp
+  (use-package proced
+    :ensure nil
+    :commands (proced)
+    :custom
+    (proced-auto-update-flag t)
+    (proced-enable-color-flag t)
+    (proced-auto-update-interval 2)
+    (proced-descend t)
+    (proced-filter 'user))
+#+end_src
+
+*** Emacs Server
+
+#+begin_src emacs-lisp
+  (use-package server
+    :defer 1
+    :config
+    (setq server-client-instructions nil)
+    (unless (server-running-p)
+      (server-start)))
+  
+  (provide 'cur-config-essentials)
 #+end_src
 
 ** Key bindings configurations (=cur-config-bindings.el=)
@@ -206,6 +251,10 @@ I use [[https:github.com/meow-edit/meow][meow]], a modal editing layer designed 
 *** Hydra 
 
 I use hydras for repeat keybindings. I plan to switch to use the built in repeat keymap more in the future but they are very helpful for creating something almost like a mini meow state, just for one particular task.
+
+#+begin_src text :tangle ./packages.txt :padline no
+hydra
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Hydra===
@@ -229,7 +278,13 @@ The meow states, what vim/nvim call modes, are as follows:
 Also of note, I find it easier to think about the cursor in normal mode as being a single character selection. This is how helix does it and I really like it so I have a lot of the meow fallback commands to operate on the char after the cursor.
 
 A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
-  
+
+NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-sitter]] to see if its worth using.
+
+#+begin_src text :tangle ./packages.txt :padline no
+  meow
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Meow Setup===
   (use-package meow
@@ -240,10 +295,6 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
       (let ((map (make-sparse-keymap)))
         map)
       "The keymap for quick command/function execution.")
-    (defvar cur/projectile-map
-      (let ((map (make-sparse-keymap)))
-        map)
-      "Keymap for projectile command execution from the leader key.")
     (defvar cur/toggle-map
       (let ((map (make-sparse-keymap)))
         map)
@@ -252,6 +303,10 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
       (let ((map (make-sparse-keymap)))
         map)
       "Keymap for commands that change alignment and cursor display.")
+    (defvar cur/register-map
+      (let ((map (make-sparse-keymap)))
+        map)
+      "Keymap for commands that use registers.")
     (defun cur/kmacro-toggle ()
       (interactive)
       (cond
@@ -326,16 +381,16 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
 
        ;; ===2nd Row===
        ;'("TAB"  . )
-       '("q" . "M-;") ; comment dwim
+       '("q" . meow-comment) ; comment dwim
        '("w" . cur/window/body)
        ;'("e" . )
-       '("r" . query-replace)
+       (cons "r" cur/register-map)
        (cons "t" cur/toggle-map)
        ;'("y" . )
        '("u" . "C-u")   ; universal argument
-       '("i" . "M-g i") ; imenu
+       ;'("i" . )
        '("o" . "C-x o") ; other window
-       (cons "p" cur/projectile-map)
+       (cons "p" project-prefix-map)
        ;'("-" . )
 
        ;; ===3rd Row===
@@ -398,7 +453,7 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
        '("e" . meow-next-word)
        '("E" . meow-next-symbol)
        '("r" . meow-replace)
-       ;'("R" . )
+       '("R" . meow-query-replace)
        '("t" . meow-till)
        '("T" . meow-till-expand)
        '("y" . meow-save)
@@ -406,9 +461,9 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
        '("u" . meow-undo)
        ;'("U" . )
        '("i" . meow-insert)
-       ;'("I" . )
-       '("o" . meow-open-below)
-       '("O" . meow-open-above)
+       '("I" . meow-open-below)
+       '("o" . meow-block)
+       '("O" . meow-to-block)
        '("p" . meow-yank)
        '("P" . meow-clipboard-yank)
        '("-" . negative-argument)
@@ -417,7 +472,7 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
        ;; ===3rd Row===
        '("<escape>" . keyboard-quit)
        '("a" . meow-append)
-       ;'("A" . )
+       '("A" . meow-open-above)
        '("s" . repeat)
        ;'("S" . )
        '("d" . meow-kill)
@@ -446,22 +501,22 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
        '("X" . meow-line-expand)
        '("c" . meow-change)
        ;'("C" . )
-       ;'("v" . )
+       (cons "v" goto-map)
        ;'("V" . )
        '("b" . meow-back-word)
        '("B" . meow-back-symbol)
        '("n" . meow-search)
-       '("N" . meow-goto-line)
+       '("N" . meow-visit)
        '("m" . meow-join)
        ;'("M" . )
-       '("," . meow-beginning-of-thing)
-       '("<" . meow-bounds-of-thing)
-       '("." . meow-end-of-thing)
-       '(">" . meow-inner-of-thing)
-       '("/" . isearch-meow-wrapper)
+       '("," . meow-bounds-of-thing)
+       '("<" . meow-beginning-of-thing)
+       '("." . meow-inner-of-thing)
+       '(">" . meow-end-of-thing)
+       (cons "/" search-map)
        '("?" . meow-page-down)
-       '("'"  . meow-block)
-       '("\"" . meow-to-block)))
+       '("'"  . embark-act)
+       '("\"" . embark-dwim)))
     :init
     (defhydra cur/hydra-buffer-cycle (:timeout 4)
       "tab through buffers"
@@ -513,13 +568,39 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
      "Meow fallback commands")
     (meow-keypad-describe-delay 0.0 "No delay in keypad help popup")
     (meow-cheats-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
-    :bind (:map cur/sub-leader-keymap
-                ("C-b" . ibuffer)
-                ("C-n" . meow-temp-normal))
+    :bind ( :map cur/sub-leader-keymap
+            ("C-l" . ibuffer)
+            ("C-b" . bookmark-set-no-overwrite)
+            :map cur/register-map
+            ("C-j" . jump-to-register)
+            ("C-s" . point-to-register)
+            ("C-." . point-to-register)
+            ("C-y" . copy-to-register)
+            ("C-p" . insert-register)
+            ("C-w" . window-configuration-to-register)
+            ("C-n" . number-to-register)
+            ("C-+" . increment-register)
+            ("C-q" . kmacro-to-register)
+            :map goto-map
+            ("e a" . first-error)
+            ("e n" . next-error)
+            ("e p" . previous-error)
+            (","   . xref-go-back)
+            ("d"   . xref-find-definitions)
+            ("r"   . xref-find-references)
+            :map search-map
+            ("n" . meow-visit)
+            ("s" . isearch-forward)
+            ("r" . isearch-backward))
     :config
     (setq meow-kteypad-leader-dispatch nil)
     (meow-setup)
     (meow-global-mode 1))
+
+  (use-package cur-meow
+    :after (meow)
+    :bind ( :map cur/sub-leader-keymap
+            ("C-n" . cur-meow-toggle-temp-normal-motion)))
 
   (provide 'cur-config-bindings)
 #+end_src
@@ -535,6 +616,10 @@ Enhancing the help mechanisms in emacs.
 
 Which-key shows you what keybindings are available in a keychord. Super helpful and a must have in emacs.
 
+#+begin_src text :tangle ./packages.txt :padline no
+which-key
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===which-key===
   (use-package which-key
@@ -549,7 +634,11 @@ Which-key shows you what keybindings are available in a keychord. Super helpful 
 
 Provides additional info help.
 
-#+begin_src emacs-lisp
+#+begin_src text :tangle ./packages.txt :padline no
+  helpful
+#+end_src
+
+#+begin_src emacs-lisp :tangle no
   ;; ===helpful===
   (use-package helpful
     ;; :custom
@@ -629,6 +718,10 @@ Dired is the built in file manager in emacs. Its very capable and very hackable 
 
 Adds icons to make dired a bit more pretty and gives a visual sense of what files are what. 
 
+#+begin_src text :tangle ./packages.txt :padline no
+nerd-icons-dired
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Dired Icons===
   (use-package nerd-icons-dired
@@ -645,6 +738,7 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
 #+begin_src emacs-lisp
   ;; ===Dired===
   (use-package dired
+    :ensure nil
     :hook
     (dired-mode . dired-hide-details-mode) ; don't show file details by default
     (dired-mode . hl-line-mode) ; Highlight the line the cursor is on
@@ -652,7 +746,7 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
     :bind ( :map dired-mode-map
             ;; ===Top Row===
             ;; ("1" . )
-            ;; ("!" . )
+            ("!" . dired-do-shell-command)
             ;; ("2" . )
             ;; ("@" . )
             ;; ("3" . )
@@ -664,7 +758,7 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
             ;; ("6" . )
             ;; ("^" . )
             ;; ("7" . )
-            ;; ("&" . )
+            ("&" . dired-do-async-shell-command)
             ;; ("8" . )
             ;; ("*" . )
             ;; ("9" . )
@@ -720,7 +814,7 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
             ("L" . dired-find-file-other-window)
             ;; (";" . )
             ;; (":" . )
-            ("RET" . dired-find-file)
+            ("RET" . dired-do-async-shell-command)
             ;; ("S-RET" . )
 
             ;; ===4th Row===
@@ -744,18 +838,23 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
             ;; (">" . )
             ("/" . dired-goto-file)
             ;; ("?" . )
-            ;; ("'"  . )
-            ;; ("\"" . )
+            ;; ("'"  . ) ; Leave these blank, usually embark-act
+            ;; ("\"" . ) ; Leave these blank, usually embark-dwim
             :map cur/sub-leader-keymap
-            ("d" . dired)
-            )
+            ("d" . dired))
+    :custom
+    (dired-recursive-copies 'always)
+    (dired-recursive-deletes 'always)
+    (delete-by-moving-to-trash t)
+    (dired-dwim-target t)
+    (dired-listing-switches "-A -G -F -h -l -v --group-directories-first --time-style=long-iso")
+    (dired-guess-shell-alist-user '(("\\.\\(png\\|jpe?g\\|tiff\\|gif\\)" "xdg-open" "imv" "feh")
+                                    ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\|mov\\)" "xdg-open" "mpv" "vlc")
+                                    ("\\.pdf" "zathura" "xdg-open")
+                                    (".*" "xdg-open")))
+    (dired-auto-revert-buffer #'dired-directory-changed-p)
     :config
-    (setq delete-by-moving-to-trash t)
-    (setq dired-recursive-copies t)
-    (setq dired-recursive-deletes t)
-    (setq dired-listing-switches "-A -G -F -h -l -v --group-directories-first --time-style=long-iso")
-    (setq dired-dwim-target t)
-    (setq dired-auto-revert-buffer #'dired-directory-changed-p)
+    (setq dired-deletion-confirmer 'y-or-n-p)
     (setq dired-free-space nil)
     (setq dired-make-directory-clickable t)
     (setq dired-mouse-drag-files t))
@@ -803,6 +902,10 @@ I have several custom themes in a directory weirdly named themes. These are the 
 
 Doom themes are a theme pack specifically for the Doom Emacs distribution, but work well without doom as well. I have a function that sets some faces based on the theme in ~custom-enabled-themes~. This function is more than just a little jank and I plan on creating my own themes instead of trying to hack around ones made by someone else.
 
+#+begin_src text :tangle ./packages.txt :padline no
+  doom-themes
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Doom Emacs Themes===
   (use-package doom-themes
@@ -839,14 +942,18 @@ Doom themes are a theme pack specifically for the Doom Emacs distribution, but w
             (cur/theme-override))
         (error "Problem loading theme %s" theme)))
     :bind (:map cur/toggle-map
-                ("C-t" . cur/load-theme))
-    :config
-    (cur/load-theme 'doom-gruvbox))
+                ("C-t" . cur/load-theme)))
+    ;; :config
+    ;; (cur/load-theme 'doom-nord))
 #+end_src
 
 *** Autothemer
 
 A library used by =catppuccin= and =kanagawa=.
+
+#+begin_src text :tangle ./packages.txt :padline no
+autothemer
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Autothemer===
@@ -857,10 +964,15 @@ A library used by =catppuccin= and =kanagawa=.
 
 [[https:github.com/catppuccin/catppuccin][Link]] to the catppuccin theme.
 
+#+begin_src text :tangle ./packages.txt :padline no
+  catppuccin-theme
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Catppuccin Theme===
   (use-package catppuccin-theme
-    :after (autothemer))
+    :after (autothemer)
+    :config (cur/load-theme 'catppuccin))
 #+end_src
 
 *** Text Scaling Hydra
@@ -882,6 +994,10 @@ A simple hydra that allows me to interactively set the size of the text in a buf
 
 Themes made by Protesilaos, also known as Prot.
 
+#+begin_src text :tangle ./packages.txt :padline no
+ef-themes
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Ef-Themes===
   (use-package ef-themes)
@@ -893,6 +1009,10 @@ Themes made by Protesilaos, also known as Prot.
 
 Adds Icons to ~ibuffer~. Not really a face thing but I don't have a dedicated ~ibuffer~ module so it goes here instead.
 
+#+begin_src text :tangle ./packages.txt :padline no
+  nerd-icons-ibuffer
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Ibuffer Icons===
   (use-package nerd-icons-ibuffer
@@ -903,9 +1023,14 @@ Adds Icons to ~ibuffer~. Not really a face thing but I don't have a dedicated ~i
 
 It adds padding and makes emacs look better.
 
+#+begin_src text :tangle ./packages.txt :padline no
+spacious-padding
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Spacious Padding===
   (use-package spacious-padding
+    :disabled t
     :config
     (setq spacious-padding-widths
           '(:internal-border-width 8
@@ -921,6 +1046,19 @@ It adds padding and makes emacs look better.
   (provide 'cur-config-faces)
 #+end_src
 
+*** Doom Modeline
+
+I will one day make my own modeline that is featureful and awesome. Today is not that day.
+
+#+begin_src text :tangle ./packages.txt :padline no
+doom-modeline
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package doom-modeline
+    :hook (emacs-startup . doom-modeline-mode))
+#+end_src
+
 ** Completion system configurations (=cur-config-completion.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-completion.el
@@ -930,7 +1068,16 @@ This section is not about code completion. Rather, this is my configuration for 
 
 Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]] suite for doing completions in emacs. I like it but I know that the vertico/marginelia/consult/embark chain is better, faster, and more modern. I plan to make the switch at some point but for now I sticking with ivy.
 
+#+begin_src text :tangle ./packages.txt :padline no
+  embark
+  embark-consult
+#+end_src
+
 *** Completions Styles
+
+#+begin_src text :tangle ./packages.txt :padline no
+orderless
+#+end_src
 
 #+begin_src emacs-lisp
   (use-package minibuffer
@@ -950,14 +1097,22 @@ Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]
 
 *** Vertico
 
+#+begin_src text :tangle ./packages.txt :padline no
+  vertico
+#+end_src
+
 #+begin_src emacs-lisp
   (use-package vertico
     :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
-    :config
+    :init
     (vertico-mode 1))
 #+end_src
 
 *** Marginalia
+
+#+begin_src text :tangle ./packages.txt :padline no
+marginalia
+#+end_src
 
 #+begin_src emacs-lisp
   (use-package marginalia
@@ -967,7 +1122,11 @@ Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]
 
 *** Vertico Posframe
 
-#+begin_src emacs-lisp
+#+begin_src text :tangle ./packages.txt :padline no
+  vertico-posframe
+#+end_src
+
+#+begin_src emacs-lisp :tangle no
   (use-package vertico-posframe
     :config
     (vertico-posframe-mode 1))
@@ -975,14 +1134,67 @@ Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]
 
 *** Consult
 
+#+begin_src text :tangle ./packages.txt :padline no
+consult
+#+end_src
+
 #+begin_src emacs-lisp
   (use-package consult
     :demand t
-    :bind (("C-x b" . consult-buffer)
-           ("M-g i" . consult-imenu)
-           ("M-y"   . consult-yank-pop)))
+    :bind (("C-x b"               . consult-buffer)
+           ("M-g i"               . consult-imenu)
+           ("M-y"                 . consult-yank-pop)
+           ([remap goto-line]     . consult-goto-line)
+           ([remap bookmark-jump] . consult-bookmark)
+           ([remap rg-project]    . consult-ripgrep)
+           ([remap rg]            . consult-ripgrep)
+           ([remap project-switch-to-buffer] . consult-project-buffer)
+           :map consult-narrow-map
+           ("?" . consult-narrow-help)
+           :map goto-map
+           ("m" . consult-mark)
+           ("M" . consult-global-mark)
+           ("o" . consult-outline)
+           :map search-map
+           ("/" . consult-line)
+           ("?" . consult-line-multi))
+    :custom
+    (consult-preview-allowed-hooks '(global-font-lock-mode
+                                     save-place-find-file-hook
+                                     ;; Dired
+                                     dired-hide-details-mode
+                                     hl-line-mode
+                                     nerd-icons-dired-mode))
+    :config
+    (setq xref-show-xrefs-function       #'consult-xref
+          xref-show-definitions-function #'consult-xref))
+
+  (use-package consult
+    :after (org)
+    :bind ( :map org-mode-map
+            ([remap consult-imenu] . consult-org-heading)))
 
   (provide 'cur-config-completion)
+#+end_src
+
+*** TODO Consult Directory
+
+*** TODO Embark
+
+#+begin_src text :tangle ./packages.txt :padline no
+  embark
+  embark-consult
+#+end_src
+
+#+begin_src emacs-lisp
+  (use-package emabark
+    :bind ( :map global-map
+            ("C-." . embark-act)
+            :map minibuffer-local-map
+            ("C-." . embark-act)
+            :map dired-mode-map
+            ("'"  . embark-act)
+            ("\"" . embark-dwim)))
 #+end_src
 
 ** Window management configurations (=cur-config-window.el=)
@@ -1013,21 +1225,26 @@ These are my settings for ~display-buffer-alist~ so windows just Do What I Mean.
                  (derived-mode . woman-mode))
              (cur-window-display-buffer-below-or-pop)
              (body-function . cur-window-select-fit-to-size))
-            ((derived-mode . occur-mode)
+            ((or (derived-mode . occur-mode)
+                 (derived-mode . xref--xref-buffer-mode))
              (display-buffer-reuse-window
               display-buffer-below-selected)
              (dedicated . t)
              (body-function . cur-window-select-fit-to-size))
             ((or (derived-mode . justl-mode)
-                 (derived-mode . vterm-mode)
                  "\\*eshell .*"
-                 "\\*vterm.*\\*"
+                 "\\*.*-eshell*"
                  "\\*.*-eat\\*"
                  "justl - .*")
              (display-buffer-reuse-window
               display-buffer-at-bottom)
              (dedicated . t)
-             (window-height . 0.25)))))
+             (window-height . 0.25))
+            ((or (derived-mode . vterm-mode)
+                 "\\*vterm.*\\*"
+                 "\\*.*-vterm\\*")
+             (display-buffer-reuse-mode-window
+              display-buffer-same-window)))))
 
   (provide 'cur-config-window)
 #+end_src
@@ -1043,6 +1260,10 @@ Emacs can be made to have all the features of a modern text editor and then some
 
 Lsp-mode is my chosen language server protocol support package. I chose this over eglot because of the richer features and (at the time that I started using lsp) more mature state. I will revisit elgot in the future but for now I am perfectly happy with lsp-mode.
 
+#+begin_src text :tangle ./packages.txt :padline no
+  lsp-mode
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===LSP Mode===
   (use-package lsp-mode
@@ -1051,6 +1272,7 @@ Lsp-mode is my chosen language server protocol support package. I chose this ove
     (lsp-mode  . lsp-enable-which-key-integration)
     :custom
     (lsp-keymap-prefix "C-c C-M-l" "lsp mode keymap")
+    (lsp-file-watch-threshold 1750)
     :bind (:map lsp-mode-map
                 ("C-c C-a" . lsp-execute-code-action)  ; code actions
                 ("C-c C-e" . lsp-treemacs-errors-list) ; treemacs error list
@@ -1068,6 +1290,10 @@ Lsp-mode is my chosen language server protocol support package. I chose this ove
 *** LSP UI
 
 Lsp-ui provides some ui enhancements and extra features to lsp. Probably the best one is the doc feature to view documentation in the editor.
+
+#+begin_src text :tangle ./packages.txt :padline no
+lsp-ui
+#+end_src
 
 #+begin_src emacs-lisp
   (use-package lsp-ui
@@ -1092,9 +1318,15 @@ Lsp-ui provides some ui enhancements and extra features to lsp. Probably the bes
     (lsp-mode . lsp-ui-mode))
 #+end_src
 
+*** TODO Eglot
+
 *** Company
 
 The code completion system. This is different from completions systems like ivy or vertico, this is for interactively completing a symbol while programming.
+
+#+begin_src text :tangle ./packages.txt :padline no
+  company
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Company Mode===
@@ -1113,9 +1345,15 @@ The code completion system. This is different from completions systems like ivy 
   ;;(company-tng-configure-default))
 #+end_src
 
+*** TODO Corfu
+
 *** Flycheck
 
 Code error checking with a nice UI.
+
+#+begin_src text :tangle ./packages.txt :padline no
+flycheck
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Flycheck===
@@ -1125,16 +1363,19 @@ Code error checking with a nice UI.
     (lsp-mode  . flycheck-mode))
 #+end_src
 
+*** TODO Flymake
+
 *** Treemacs
 
 Project tree, I don't use this all that often.
 
+#+begin_src text :tangle ./packages.txt :padline no
+  treemacs
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Treemacs==
   (use-package treemacs
-    :bind
-    (:map cur/sub-leader-keymap
-          ("C-t" . treemacs-select-window))
     :config
     (treemacs-follow-mode))
 #+end_src
@@ -1143,21 +1384,57 @@ Project tree, I don't use this all that often.
 
 Magit is a git interface, probably the best one I have ever seen or had the pleasure of using. I consider magit to be one of emacs' "killer features", right up there with org-mode.
 
+#+begin_src text :tangle ./packages.txt :padline no
+magit
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Magit===
   (use-package magit
-    :bind (:map cur/sub-leader-keymap
-                ("C-M-g" . magit))
+    :bind ( :map cur/sub-leader-keymap
+            ("C-v" . magit)
+            :map project-prefix-map
+            ("C-v" . nil)
+            ("v" . magit-project-status)
+            ("V" . project-vc-dir))
     :custom
     (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
     (transient-default-level 5 "Allowing for commit signing"))
+#+end_src
+
+*** Project.el
+
+#+begin_src emacs-lisp
+  (use-package project
+    :bind ( :map project-prefix-map
+            ("d"   . project-dired)
+            ("D"   . project-find-dir)
+            ("C-b" . nil)
+            ("b"   . project-switch-to-buffer)
+            ("l"   . project-list-buffers))
+    :custom
+    (project-buffers-viewer #'project-list-buffers-ibuffer)
+    (project-switch-use-entire-map t))
+#+end_src
+
+*** Ripgrep
+
+Ripgrep go burrr.
+
+#+begin_src emacs-lisp
+  (use-package rg)
 #+end_src
 
 *** Projectile
 
 Projectile provides many commands to help manage and do things in a project, such as compile a project from its root, list all files in the project, or run grep or ripgrep on all the files in the project. I also use it's project switching aspect as sort of a bookmark like system.
 
-#+begin_src emacs-lisp
+#+begin_src text :tangle ./packages.txt :padline no
+  # projectile
+  rg
+#+end_src
+
+#+begin_src emacs-lisp :tangle no
   ;; ===Projectile===
   (use-package projectile
     :after (rg)
@@ -1167,30 +1444,31 @@ Projectile provides many commands to help manage and do things in a project, suc
                 ("C-d"   . projectile-dired)
                 ("M-d"   . projectile-find-dir)
                 ("C-f"   . projectile-find-file)
-                ("C-r"   . consult-ripgrep)
                 ("C-c"   . projectile-compile-project)
-                ("C-b"   . consult-project-buffer)
                 ("C-l"   . projectile-ibuffer)
                 ("C-k"   . projectile-kill-buffers)
                 ("C-v"   . projectile-vc)
-                ("C-e"   . projectile-run-eshell))
+                ("C-e"   . projectile-run-eshell)
+                ("C-r"   . projectile-ripgrep))
     :config
     (projectile-mode 1))
-
-  ;; Need ripgrep wrapper for `projectile-ripgrep'
-  (use-package rg)
 #+end_src
 
 *** Just
 
 [[https:github.com/casey/just][Just]] is just a command runner. Think of it sort of like make but simplified. This is my configuration for working and interacting with it from emacs.
 
+#+begin_src text :tangle ./packages.txt :padline no
+  just-mode
+  justl
+#+end_src
+
 #+begin_src emacs-lisp
   (use-package just-mode)
 
   (use-package justl
-    :bind (:map cur/projectile-map
-                ("C-j" . justl)))
+    :bind (:map project-prefix-map
+                ("j" . justl)))
 
   (provide 'cur-config-ide)
 #+end_src
@@ -1199,8 +1477,6 @@ Projectile provides many commands to help manage and do things in a project, suc
 
 #+begin_src emacs-lisp
   (use-package cur-tmux
-    :bind ( :map cur/sub-leader-keymap
-            ("M-t" . cur-tmux-new-window))
     :hook
     (projectile-after-switch-project . cur-tmux-switch-add-project-window))
 #+end_src
@@ -1216,6 +1492,10 @@ These are my configurations for working with Lisp languages.
 
 This color codes opening and closing delimiters such as parentheses and square brackets.
 
+#+begin_src text :tangle ./packages.txt :padline no
+  rainbow-delimiters
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===rainbow-delimiters===
   (use-package rainbow-delimiters
@@ -1225,6 +1505,10 @@ This color codes opening and closing delimiters such as parentheses and square b
 
 *** Paredit
 
+#+begin_src text :tangle ./packages.txt :padline no
+  paredit
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Paredit===
   (use-package paredit
@@ -1233,6 +1517,22 @@ This color codes opening and closing delimiters such as parentheses and square b
 #+end_src
 
 *** Geiser
+
+#+begin_src text :tangle ./packages.txt :padline no
+  geiser
+  geiser-chez
+  geiser-chibi
+  geiser-chicken
+  geiser-gambit
+  geiser-gauche
+  geiser-guile
+  geiser-kawa
+  geiser-mit
+  geiser-racket
+  geiser-stklos
+  macrostep
+  macrostep-geiser
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Geiser===
@@ -1248,6 +1548,10 @@ This color codes opening and closing delimiters such as parentheses and square b
 My configurations for working with the Java language. I have ~java-ts-mode~, the tree sitter version of the normal ~java-mode~, as the mode for editing =.java= files. I have found that either tree sitter provides exactly the same or better syntax highlighting and the possibility of better movement once it gets better integrated into emacs.
 
 I also have lsp-java set up for better integrating ~lsp-mode~ into ~java-ts-mode~. Note because I have =direnv= integration with ~envrc~, the hooks I add to start ~lsp~ must be ~lsp-defered~. ~lsp-defered~ does not start ~lsp-mode~ until after the buffer has visually loaded. We want this because ~envrc~ will change the ~exec-path~ to what =direnv= would change it to. For instance, if I have a devshell that says "here is the lsp-server, the build tool, and external libraries with these exact versions", envrc will make sure that ~exec-path~ contains exactly those versions of those programs in the nix store.
+
+#+begin_src text :tangle ./packages.txt :padline no
+lsp-java
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Java Tree-Sitter Mode===
@@ -1284,6 +1588,10 @@ I also have lsp-java set up for better integrating ~lsp-mode~ into ~java-ts-mode
 
 Literally just ~yaml-mode~.
 
+#+begin_src text :tangle ./packages.txt :padline no
+  yaml-mode
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===YAML===
   (use-package yaml-mode
@@ -1299,6 +1607,11 @@ Literally just ~yaml-mode~.
 
 My configurations for the Nix language, which boils down to "start the lsp server".
 
+#+begin_src text :tangle ./packages.txt :padline no
+nix-mode
+nix-ts-mode
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===nix-mode===
   (use-package nix-mode
@@ -1313,6 +1626,10 @@ My configurations for the Nix language, which boils down to "start the lsp serve
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-rust.el
 :END:
 
+#+begin_src text :tangle ./packages.txt :padline no
+  rustic
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Rust-Mode===
   (use-package rustic
@@ -1326,6 +1643,11 @@ My configurations for the Nix language, which boils down to "start the lsp serve
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-haskell.el
 :END:
+
+#+begin_src text :tangle ./packages.txt :padline no
+haskell-mode
+company-ghci
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Haskell-Mode===
@@ -1352,6 +1674,10 @@ My configurations for the Nix language, which boils down to "start the lsp serve
 :END:
 
 I use tree-sitter for C, which unfortunately is not currently integrated into the default C major mode for emacs. I have also changed the ~c-default-style~ for C to be "linux", which is 8 spaces for indentation instead of the default of 2.
+
+#+begin_src text :tangle ./packages.txt :padline no
+  ccls
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===C Tree-Sitter Mode===
@@ -1381,6 +1707,10 @@ I use tree-sitter for C, which unfortunately is not currently integrated into th
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-zig.el
 :END:
 
+#+begin_src text :tangle ./packages.txt :padline no
+zig-mode
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Zig Mode===
   (use-package zig-mode
@@ -1399,7 +1729,7 @@ I use tree-sitter for C, which unfortunately is not currently integrated into th
   (use-package go-ts-mode
     :mode
     ("\\.go\\'" . go-ts-mode)
-    ("^go\\.mod\\'" . go-mod-ts-mode)
+    ("go\\.mod\\'" . go-mod-ts-mode)
     :custom
     (go-ts-mode-indent-offset 4 "Set the indentation to 4")
     :hook
@@ -1418,13 +1748,15 @@ I use tree-sitter for C, which unfortunately is not currently integrated into th
 
 Vterm is a terminal emulator for emacs. It is faster than ~term~ and ~ansi-term~ but the downside is that it is not written entirely in elisp so its cross platform. ~cur/meow-vterm~ and ~cur/meow-vterm-other-window~ help make vterm more "intuitive". ~cur/vterm-kill~ kills the vterm buffer cleanly and without prompting.
 
+#+begin_src text :tangle ./packages.txt :padline no
+  vterm
+#+end_src
+
 #+begin_src emacs-lisp
   ;; ===Vterm===
   (use-package vterm
     :bind ( :map cur/sub-leader-keymap
-            ("C-RET" . vterm)
-            :map cur/projectile-map
-            ("C-t" . projectile-run-vterm-other-window))
+            ("C-t" . vterm))
     :custom
     (vterm-shell "fish")
     :config
@@ -1432,15 +1764,20 @@ Vterm is a terminal emulator for emacs. It is faster than ~term~ and ~ansi-term~
     (setq vterm-max-scrollback 10000))
 
   (use-package cur-vterm
-    :after (vterm)
     :bind ( :map vterm-mode-map
             ("C-c C-RET"      . cur-vterm-enter-password)
-            ("C-c C-<return>" . cur-vterm-enter-password)))
+            ("C-c C-<return>" . cur-vterm-enter-password)
+            :map project-prefix-map
+            ("t" . cur-vterm-project-other-window)))
 #+end_src
 
 *** Eat
 
-Eat is just a better elisp terminal emulator. I mostly use this so that elisp can run TUI programs.
+Eat is just a better elisp terminal emulator. I mostly use this so that eshell can run TUI programs.
+
+#+begin_src text :tangle ./packages.txt :padline no
+eat
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Eat===
@@ -1455,7 +1792,9 @@ Eshell is an shell for Emacs like bash or sh, but written in elisp and has its o
 
 #+begin_src emacs-lisp
   ;; ===Eshell===
-  (use-package eshell)
+  (use-package eshell
+    :bind ( :map cur/sub-leader-keymap
+            ("C-e" . eshell)))
 
   (use-package cur-eshell
     :custom
@@ -1466,6 +1805,10 @@ Eshell is an shell for Emacs like bash or sh, but written in elisp and has its o
 *** Zoxide
 
 Interfacing with Zoxide from emacs.
+
+#+begin_src text :tangle ./packages.txt :padline no
+  zoxide
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Zoxide===
@@ -1478,6 +1821,10 @@ Interfacing with Zoxide from emacs.
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-org.el
 :END:
+
+#+begin_src text :tangle ./packages.txt :padline no
+org-bullets
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Org-Mode===
@@ -1509,6 +1856,7 @@ Interfacing with Zoxide from emacs.
     (org-log-done 'time)
     (org-log-into-drawer t)
     (org-agenda-window-setup 'current-window "Have org-agenda pop up in the current window")
+    (org-imenu-depth 4)
     :config
     (load-library "find-lisp")
     ;; (setq org-agenda-files (find-lisp-find-files "~/dox/agenda" "\.org$"))
@@ -1550,7 +1898,14 @@ Interfacing with Zoxide from emacs.
     ;;       (org-babel-tangle))))
     ;; 
     ;; (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'cur/org-babel-tangle-config))))
+#+end_src
 
+#+begin_src emacs-lisp
+  (use-package flyspell
+    :bind ( :map flyspell-mode-map
+            ("C-." . nil)
+            ("C-," . nil)))
+  
   (provide 'cur-config-org)
 #+end_src
 
@@ -1558,6 +1913,12 @@ Interfacing with Zoxide from emacs.
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-smol-net.el
 :END:
+
+#+begin_src text :tangle ./packages.txt :padline no
+  gemini-mode
+  ox-gemini
+  elpher
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Gemini-Mode===
@@ -1579,6 +1940,10 @@ Interfacing with Zoxide from emacs.
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-elcord.el
 :END:
 
+#+begin_src text :tangle ./packages.txt :padline no
+elcord
+#+end_src
+
 #+begin_src emacs-lisp
   (use-package elcord)
 
@@ -1589,6 +1954,10 @@ Interfacing with Zoxide from emacs.
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-direnv.el
 :END:
+
+#+begin_src text :tangle ./packages.txt :padline no
+  envrc
+#+end_src
 
 #+begin_src emacs-lisp
   ;; ===Envrc===
@@ -1607,7 +1976,7 @@ Interfacing with Zoxide from emacs.
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-base.el --- The base of my customizations for emacs
+  ;;; cur-base.el --- The base of my customizations for emacs -*- lexical-binding: t -*-
 
   ;;; Commentary:
   ;; This is the base of my extensions to Emac's functionality.
@@ -1623,13 +1992,246 @@ Interfacing with Zoxide from emacs.
   ;;; cur-base.el ends here
 #+end_src
 
+** Consult-Projectile (=cur-consult-projectile.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-lisp/cur-consult-projectile.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; cur-consult-projectile.el --- Integrating Consult and Projectile -*- lexical-binding: t -*-
+
+  ;;; Commentary:
+
+  ;;; Code:
+
+  (require 'cur-base)
+  (require 'consult)
+  (require 'projectile)
+
+  (defgroup cur-consult-projectile ()
+      "Integrate Consult and Projectile."
+      :group 'consult
+      :group 'projectile
+      :prefix "cur-consult-projectile-")
+
+  ;; TODO: Make the preview work here without opening a file called dir/dir
+  ;; (defun cur-consult-projectile--dir-preview ()
+  ;;   ""
+  ;;   (let ((open (consult--temporary-files))
+  ;;         ())
+  ;;     (lambda (action cand)
+  ;;       (cond ((equal action 'setup))
+  ;;             ((and (equal action 'preview) cand))
+  ;;             ((and (equal action 'preview) (not cand)))
+  ;;             ((equal action 'exit))
+  ;;             ((equal action 'return))
+  ;;             ))))
+
+  ;; (defvar cur-consult-projectile--dirs
+  ;;   `( :name "Directories"
+  ;;      :narrow ?d
+  ;;      :default nil
+  ;;      :category file
+  ;;      :state  ,#'consult--file-state
+  ;;      :action ,#'cur-consult-projectile--dir-action
+  ;;      :items  ,#'(lambda ()
+  ;;                   (append '("./")
+  ;;                           (projectile-project-dirs (projectile-project-root))))))
+
+  (defvar cur-consult-projectile--files
+    `( :name "Files"
+       :narrow ?f
+       :default nil
+       :category file
+       :state  ,#'consult--file-state
+       :action ,#'consult--file-action
+       :items  ,#'(lambda ()
+                    (projectile-project-files (projectile-project-root)))))
+
+  (defvar cur-consult-projectile--buffers
+    `( :name     "Buffers"
+       :narrow   ?b
+       :category buffer
+       :face     consult-buffer
+       :history  buffer-name-history
+       :default  t
+       :state    ,#'consult--buffer-state
+       :action   ,#'consult--buffer-action
+       :items    ,#'(lambda ()
+                      (let ((root (projectile-project-root)))
+                        (consult--buffer-query
+                         :sort 'visibility
+                         :directory root
+                         :as #'consult--buffer-pair)
+                        ;; Alternative Implementation
+                        ;; (mapcar (lambda (buffer)
+                        ;;           (cons (buffer-name buffer) buffer))
+                        ;;         (projectile-project-buffers))
+                        ))))
+
+  (defcustom cur-consult-projectile-buffer-sources
+    '(cur-consult-projectile--buffers)
+    "Sources used by `cur-consult-projectile-buffer'.
+  See `consult--multi' for a description of the source data structure."
+    :type '(repeat symbol)
+    :group 'cur-consult-projectile)
+
+  (defun cur-consult-projectile-buffer ()
+    "Switch to buffer in project.
+  The default list of sources is from `cur-consult-projectile--buffers'."
+    (interactive)
+    (consult-buffer cur-consult-projectile-buffer-sources))
+
+  (defcustom cur-consult-projectile-find-file-sources
+    '(cur-consult-projectile--files
+      ;; TODO: get the preview working
+      ;; cur-consult-projectile--dirs
+      )
+    "Sources used by `consult-buffer'.
+  See also `consult-project-buffer-sources'.
+  See `consult--multi' for a description of the source data structure."
+    :type '(repeat symbol)
+    :group 'cur-consult-projectile)
+
+  (defun cur-consult-projectile-find-file ()
+    "Open file in project.
+  The default list of sources is from `cur-consult-projectile-find-file-sources'."
+    (interactive)
+    ;; Make this work if not in a project
+    (let* ((default-directory (projectile-project-root)))
+      (consult--multi cur-consult-projectile-find-file-sources
+                      :prompt "Find File: ")))
+
+  ;; TODO: Make alternative to `projectile-switch-project'
+  ;; (defun cur-consult-projectile--select-multi ()
+  ;;   (consult--multi `(( :name     "Buffers"
+  ;;                       :narrow   ?b
+  ;;                       :category buffer
+  ;;                       :face     consult-buffer
+  ;;                       :history  buffer-name-history
+  ;;                       :default  t
+  ;;                       :state    ,#'consult--buffer-state
+  ;;                       :items    ,(lambda ()
+  ;;                                    (let ((root (projectile-project-root)))
+  ;;                                      (consult--buffer-query
+  ;;                                       :sort 'visibility
+  ;;                                       :directory root
+  ;;                                       :as #'consult--buffer-pair)
+  ;;                                      ;; Alternative Implementation
+  ;;                                      ;; (mapcar (lambda (buffer)
+  ;;                                      ;;           (cons (buffer-name buffer) buffer))
+  ;;                                      ;;         (projectile-project-buffers))
+  ;;                                      )))
+  ;;                     ( :name "Directories"
+  ;;                       :narrow ?d
+  ;;                       :default nil
+  ;;                       :category file
+  ;;                       :state ,#'consult--file-state
+  ;;                       :items ,(append '("./")
+  ;;                                       (projectile-project-dirs (projectile-project-root))))
+
+  ;;                     ( :name "Files"
+  ;;                       :narrow ?f
+  ;;                       :default nil
+  ;;                       :category file
+  ;;                       :state ,#'consult--file-state
+  ;;                       :items ,(projectile-project-files (projectile-project-root))))
+  ;;                   :sort t))
+
+  ;; (defun cur-consult-projectile-switch ()
+  ;;   "Call `projectile-switch-project' and select from candidates.
+
+  ;; The candidates are as follows:
+  ;;   - Buffers
+  ;;   - Files
+  ;;   - Directories
+  ;;   - Actions"
+  ;;   (interactive)
+  ;;   ;; (let* ((selection (consult--multi
+  ;;   ;; 			     `(( :name "Projects"
+  ;;   ;; 				 :narrow ?p
+  ;;   ;; 				 :category file
+  ;;   ;; 				 :items ,(projectile-relevant-known-projects)))))
+  ;;   ;; 	 (root )))
+  ;;   (let ((projectile-switch-project-action 'cur-consult-projectile-find-file))
+  ;;     (projectile-switch-project)))
+
+  (provide 'cur-consult-projectile)
+  ;;; cur-consult-projectile.el ends here
+#+end_src
+
+** Custom modeline (=cur-modline.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-lisp/cur-modeline.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; cur/modeline.el --- My custom modeline -*- lexical-binding: t -*-
+
+  ;;; Commentary:
+  ;;
+  ;; This is my custom modeline.  This is here bascially because I don't want to
+  ;; use doom modeline.
+
+  ;;; Code:
+  (defgroup cur-modeline nil
+    "My custom modeline that tries to be minimal."
+    :group 'mode-line)
+  
+  (defgroup cur-modeline-faces nil
+    "The faces for my custom modeline."
+    :group 'cur-modeline)
+
+  (defun cur-mode-line/padding ()
+    "Function to return padding so `mode-line-end-spaces' will be right aligned."
+    (let ((r-length (length (format-mode-line mode-line-end-spaces))))
+      (propertize " "
+                  'display `(space :align-to (- right ,r-length)))))
+
+  (setq-default mode-line-format
+                '("%e"
+                  (:eval
+                   (when (and (mode-line-window-selected-p) defining-kbd-macro)
+                     (propertize "  KMACRO  " 'face 'font-lock-string-face)))
+                  (:eval
+                   (when (and (mode-line-window-selected-p)
+                              (buffer-narrowed-p)
+                              (not (derived-mode-p 'Info-mode 'help-mode 'special-mode 'message-mode)))
+                     (propertize "  NARROWED  " 'face 'font-lock-constant-face)))
+                  (:eval
+                   (when (and (member 'meow features) (mode-line-window-selected-p))
+                     (propertize (format "  %s  " (upcase (symbol-name meow--current-state)))
+                                 'face 'highlight)))
+                  "  "
+                  (:eval
+                   (when (mode-line-window-selected-p)
+                     (cond (buffer-read-only
+                            (propertize "RO" 'face 'shadow))
+                           ((buffer-modified-p)
+                            (propertize "**" 'face 'shadow))
+                           (t
+                            (propertize "RW" 'face 'shadow)))))
+                  "  "
+                  (:eval
+                   (propertize (format "%s" (buffer-name)) 'face 'bold))
+                  "  "
+                  (:eval
+                   (if (mode-line-window-selected-p)
+                     (propertize (capitalize (symbol-name major-mode)) 'face 'warning)
+                     (propertize (capitalize (symbol-name major-mode)) 'face 'shadow)))
+                  (:eval (cur-mode-line/padding))))
+
+  (provide 'cur-modeline)
+  ;;; cur-modeline.el ends here
+#+end_src
+
 ** Eshell aliases and extensions (=cur-eshell.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-eshell.el
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-eshell.el --- My exensions of the Emacs Shell
+  ;;; cur-eshell.el --- My exensions of the Emacs Shell -*- lexical-binding: t -*-
 
   ;;; Commentary:
 
@@ -1642,15 +2244,22 @@ Interfacing with Zoxide from emacs.
   (defun cur-eshell-prompt ()
     "A minimal and colourful prompt for `eshell'.
   Set `eshell-prompt-function' to this function to enable."
-    (concat
-     (propertize "[" 'face 'ansi-color-red)
-     (propertize (eshell/whoami) 'face 'ansi-color-yellow)
-     (propertize "@" 'face 'ansi-color-green)
-     (propertize (system-name) 'face 'ansi-color-blue)
-     " "
-     (propertize (concat (eshell/pwd)) 'face 'ansi-color-magenta)
-     (propertize "]" 'face 'ansi-color-red)
-     (propertize "$ " 'face 'bold)))
+    (let* ((red     (face-foreground 'ansi-color-red))
+           (green   (face-foreground 'ansi-color-green))
+           (yellow  (face-foreground 'ansi-color-yellow))
+           (blue    (face-foreground 'ansi-color-blue))
+           (magenta (face-foreground 'ansi-color-magenta))
+           (cyan    (face-foreground 'ansi-color-cyan))
+           (white   (face-foreground 'ansi-color-white)))
+      (concat
+       (propertize "["                   'face `(:weight bold :foreground ,red))
+       (propertize (eshell/whoami)       'face `(:weight bold :foreground ,yellow))
+       (propertize "@"                   'face `(:weight bold :foreground ,green))
+       (propertize (system-name)         'face `(:weight bold :foreground ,blue))
+       " "
+       (propertize (concat (eshell/pwd)) 'face `(:weight bold :foreground ,magenta))
+       (propertize "]"                   'face `(:weight bold :foreground ,red))
+       (propertize "$ "                  'face `(:weight bold :foreground ,white)))))
 
   (defun eshell/ff (&optional file)
     "Eshell alias to open FILE.
@@ -1676,13 +2285,55 @@ Interfacing with Zoxide from emacs.
   ;;; cur-base.el ends here
 #+end_src
 
+** Meow Extension (=cur-meow.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-lisp/cur-meow.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; cur-meow.el --- Extending Meow's Capabilities -*- lexical-binding: t -*-
+
+  ;;; Commentary:
+  ;;
+
+  ;;; Code:
+  (require 'meow)
+
+  (defun cur-meow-toggle-temp-normal-motion ()
+    "Toggle normal and motion mode.
+  If in neither of the two states, return nil."
+    (interactive)
+    (cond ((meow-normal-mode-p) (call-interactively 'meow-motion-mode))
+          ((meow-motion-mode-p) (call-interactively 'meow-normal-mode))
+          (t nil)))
+
+  (provide 'cur-meow)
+  ;;; cur-meow.el ends here
+#+end_src
+
+** Theme Helpers (=cur-theme.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-lisp/cur-theme.el
+:END:
+
+#+begin_src emacs-lisp
+  ;;; cur-theme.el --- Helper functions for theming -*- lexical-binding: t -*-
+
+  ;;; Commentary:
+  ;;
+
+  ;;; Code:
+  (provide 'cur-theme)
+  ;;; cur-theme.el ends here
+#+end_src
+
 ** Tmux Integration (=cur-tmux.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-tmux.el
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-tmux.el --- Integrating Emacs with a tmux
+  ;;; cur-tmux.el --- Integrating Emacs with a tmux -*- lexical-binding: t -*-
 
   ;;; Commentary:
 
@@ -1855,71 +2506,6 @@ Interfacing with Zoxide from emacs.
   ;;; cur-tmux.el ends here
 #+end_src
 
-** Custom modeline (=cur-modline.el=)
-:PROPERTIES:
-:header-args:emacs-lisp: :tangle ./cur-lisp/cur-modeline.el
-:END:
-
-#+begin_src emacs-lisp
-  ;;; cur/modeline.el --- My custom modeline -*- lexical-binding: t -*-
-
-  ;;; Commentary:
-  ;;
-  ;; This is my custom modeline.  This is here bascially because I don't want to
-  ;; use doom modeline.
-
-  ;;; Code:
-  (defgroup cur-modeline nil
-    "My custom modeline that tries to be minimal."
-    :group 'mode-line)
-  
-  (defgroup cur-modeline-faces nil
-    "The faces for my custom modeline."
-    :group 'cur-modeline)
-
-  (defun cur-mode-line/padding ()
-    "Function to return padding so `mode-line-end-spaces' will be right aligned."
-    (let ((r-length (length (format-mode-line mode-line-end-spaces))))
-      (propertize " "
-                  'display `(space :align-to (- right ,r-length)))))
-
-  (setq-default mode-line-format
-                '("%e"
-                  (:eval
-                   (when (and (mode-line-window-selected-p) defining-kbd-macro)
-                     (propertize "  KMACRO  " 'face 'font-lock-string-face)))
-                  (:eval
-                   (when (and (mode-line-window-selected-p)
-                              (buffer-narrowed-p)
-                              (not (derived-mode-p 'Info-mode 'help-mode 'special-mode 'message-mode)))
-                     (propertize "  NARROWED  " 'face 'font-lock-constant-face)))
-                  (:eval
-                   (when (and (member 'meow features) (mode-line-window-selected-p))
-                     (propertize (format "  %s  " (upcase (symbol-name meow--current-state)))
-                                 'face 'highlight)))
-                  "  "
-                  (:eval
-                   (when (mode-line-window-selected-p)
-                     (cond (buffer-read-only
-                            (propertize "RO" 'face 'shadow))
-                           ((buffer-modified-p)
-                            (propertize "**" 'face 'shadow))
-                           (t
-                            (propertize "RW" 'face 'shadow)))))
-                  "  "
-                  (:eval
-                   (propertize (format "%s" (buffer-name)) 'face 'bold))
-                  "  "
-                  (:eval
-                   (if (mode-line-window-selected-p)
-                     (propertize (capitalize (symbol-name major-mode)) 'face 'warning)
-                     (propertize (capitalize (symbol-name major-mode)) 'face 'shadow)))
-                  (:eval (cur-mode-line/padding))))
-
-  (provide 'cur-modeline)
-  ;;; cur-modeline.el ends here
-#+end_src
-
 ** Theme Helpers (=cur-theme.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-theme.el
@@ -1993,7 +2579,7 @@ Interfacing with Zoxide from emacs.
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-window.el --- Customization and helper functions for window management
+  ;;; cur-window.el --- Customization and helper functions for window management -*- lexical-binding: t -*-
 
   ;;; Commentary:
   ;; Custom functions and variables for managing windows.  In particular, setting `display-buffer-alist'
@@ -2125,6 +2711,24 @@ Interfacing with Zoxide from emacs.
       (user-error "Not in a VTerm Terminal"))
     (vterm-insert (read-passwd "Password: "))
     (vterm-send-return))
+
+  (defun cur-vterm-project (&optional other-window)
+    (interactive)
+    (if-let* ((current-project (project-current))
+              (default-directory (project-root current-project))
+              (buffer-name (format "*%s-%s*" (project-name current-project) "vterm")))
+        (if (buffer-live-p (get-buffer buffer-name))
+            (if other-window
+                (switch-to-buffer-other-window buffer-name)
+              (switch-to-buffer buffer-name))
+          (if other-window
+              (vterm-other-window buffer-name)
+            (vterm buffer-name)))
+      (user-error "Cannot create vterm buffer in %s" (cdr current-project))))
+
+  (defun cur-vterm-project-other-window ()
+    (interactive)
+    (cur-vterm-project t))
 
   (provide 'cur-vterm)
   ;;; cur-vterm.el ends here

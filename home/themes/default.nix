@@ -15,5 +15,6 @@
     ./kanagawa-wave.nix
     ./nord-aurora.nix
     ./nord-light.nix
+    ./oceanic-next.nix
   ];
 }

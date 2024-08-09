@@ -5,6 +5,7 @@
   (lsp-mode  . lsp-enable-which-key-integration)
   :custom
   (lsp-keymap-prefix "C-c C-M-l" "lsp mode keymap")
+  (lsp-file-watch-threshold 1750)
   :bind (:map lsp-mode-map
               ("C-c C-a" . lsp-execute-code-action)  ; code actions
               ("C-c C-e" . lsp-treemacs-errors-list) ; treemacs error list
@@ -62,52 +63,42 @@
 
 ;; ===Treemacs==
 (use-package treemacs
-  :bind
-  (:map cur/sub-leader-keymap
-        ("C-t" . treemacs-select-window))
   :config
   (treemacs-follow-mode))
 
 ;; ===Magit===
 (use-package magit
-  :bind (:map cur/sub-leader-keymap
-              ("C-M-g" . magit))
+  :bind ( :map cur/sub-leader-keymap
+          ("C-v" . magit)
+          :map project-prefix-map
+          ("C-v" . nil)
+          ("v" . magit-project-status)
+          ("V" . project-vc-dir))
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   (transient-default-level 5 "Allowing for commit signing"))
 
-;; ===Projectile===
-(use-package projectile
-  :after (rg)
-  :bind (:map cur/projectile-map
-              ("C-p"   . projectile-switch-project)
-              ("C-a"   . projectile-add-known-project)
-              ("C-d"   . projectile-dired)
-              ("M-d"   . projectile-find-dir)
-              ("C-f"   . projectile-find-file)
-              ("C-r"   . consult-ripgrep)
-              ("C-c"   . projectile-compile-project)
-              ("C-b"   . consult-project-buffer)
-              ("C-l"   . projectile-ibuffer)
-              ("C-k"   . projectile-kill-buffers)
-              ("C-v"   . projectile-vc)
-              ("C-e"   . projectile-run-eshell))
-  :config
-  (projectile-mode 1))
+(use-package project
+  :bind ( :map project-prefix-map
+          ("d"   . project-dired)
+          ("D"   . project-find-dir)
+          ("C-b" . nil)
+          ("b"   . project-switch-to-buffer)
+          ("l"   . project-list-buffers))
+  :custom
+  (project-buffers-viewer #'project-list-buffers-ibuffer)
+  (project-switch-use-entire-map t))
 
-;; Need ripgrep wrapper for `projectile-ripgrep'
 (use-package rg)
 
 (use-package just-mode)
 
 (use-package justl
-  :bind (:map cur/projectile-map
-              ("C-j" . justl)))
+  :bind (:map project-prefix-map
+              ("j" . justl)))
 
 (provide 'cur-config-ide)
 
 (use-package cur-tmux
-  :bind ( :map cur/sub-leader-keymap
-          ("M-t" . cur-tmux-new-window))
   :hook
   (projectile-after-switch-project . cur-tmux-switch-add-project-window))

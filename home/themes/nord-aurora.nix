@@ -60,6 +60,9 @@ in
         key-press = nord10;
         ring-ver = nord10;
       };
+      wayland.fuzzel = {
+        border = nord10;
+      };
     };
   };
 }

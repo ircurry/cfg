@@ -1,4 +1,4 @@
-;;; cur-window.el --- Customization and helper functions for window management
+;;; cur-window.el --- Customization and helper functions for window management -*- lexical-binding: t -*-
 
 ;;; Commentary:
 ;; Custom functions and variables for managing windows.  In particular, setting `display-buffer-alist'

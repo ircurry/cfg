@@ -44,16 +44,17 @@ check for overrides with `cur/theme-override'."
           (cur/theme-override))
       (error "Problem loading theme %s" theme)))
   :bind (:map cur/toggle-map
-              ("C-t" . cur/load-theme))
-  :config
-  (cur/load-theme 'doom-gruvbox))
+              ("C-t" . cur/load-theme)))
+  ;; :config
+  ;; (cur/load-theme 'doom-nord))
 
 ;; ===Autothemer===
 (use-package autothemer)
 
 ;; ===Catppuccin Theme===
 (use-package catppuccin-theme
-  :after (autothemer))
+  :after (autothemer)
+  :config (cur/load-theme 'catppuccin))
 
 ;; ===Text Scaling===
 (defhydra hydra-text-scale (:timeout 4)
@@ -75,6 +76,7 @@ check for overrides with `cur/theme-override'."
 
 ;; ===Spacious Padding===
 (use-package spacious-padding
+  :disabled t
   :config
   (setq spacious-padding-widths
         '(:internal-border-width 8
@@ -88,3 +90,6 @@ check for overrides with `cur/theme-override'."
   (spacious-padding-mode 1))
 
 (provide 'cur-config-faces)
+
+(use-package doom-modeline
+  :hook (emacs-startup . doom-modeline-mode))

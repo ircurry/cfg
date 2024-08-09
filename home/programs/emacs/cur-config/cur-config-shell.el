@@ -1,9 +1,7 @@
 ;; ===Vterm===
 (use-package vterm
   :bind ( :map cur/sub-leader-keymap
-          ("C-RET" . vterm)
-          :map cur/projectile-map
-          ("C-t" . projectile-run-vterm-other-window))
+          ("C-t" . vterm))
   :custom
   (vterm-shell "fish")
   :config
@@ -11,10 +9,11 @@
   (setq vterm-max-scrollback 10000))
 
 (use-package cur-vterm
-  :after (vterm)
   :bind ( :map vterm-mode-map
           ("C-c C-RET"      . cur-vterm-enter-password)
-          ("C-c C-<return>" . cur-vterm-enter-password)))
+          ("C-c C-<return>" . cur-vterm-enter-password)
+          :map project-prefix-map
+          ("t" . cur-vterm-project-other-window)))
 
 ;; ===Eat===
 (use-package eat
@@ -22,7 +21,9 @@
   (eat-eshell-mode 1))
 
 ;; ===Eshell===
-(use-package eshell)
+(use-package eshell
+  :bind ( :map cur/sub-leader-keymap
+          ("C-e" . eshell)))
 
 (use-package cur-eshell
   :custom

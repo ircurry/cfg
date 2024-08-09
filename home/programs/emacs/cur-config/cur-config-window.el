@@ -16,20 +16,25 @@
                (derived-mode . woman-mode))
            (cur-window-display-buffer-below-or-pop)
            (body-function . cur-window-select-fit-to-size))
-          ((derived-mode . occur-mode)
+          ((or (derived-mode . occur-mode)
+               (derived-mode . xref--xref-buffer-mode))
            (display-buffer-reuse-window
             display-buffer-below-selected)
            (dedicated . t)
            (body-function . cur-window-select-fit-to-size))
           ((or (derived-mode . justl-mode)
-               (derived-mode . vterm-mode)
                "\\*eshell .*"
-               "\\*vterm.*\\*"
+               "\\*.*-eshell*"
                "\\*.*-eat\\*"
                "justl - .*")
            (display-buffer-reuse-window
             display-buffer-at-bottom)
            (dedicated . t)
-           (window-height . 0.25)))))
+           (window-height . 0.25))
+          ((or (derived-mode . vterm-mode)
+               "\\*vterm.*\\*"
+               "\\*.*-vterm\\*")
+           (display-buffer-reuse-mode-window
+            display-buffer-same-window)))))
 
 (provide 'cur-config-window)

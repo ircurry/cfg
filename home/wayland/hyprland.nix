@@ -2,15 +2,21 @@
   config,
   pkgs,
   lib,
-  inputs,
   isLaptop,
   ...
 }:
 let
   # ===Application Launcher(s)===
-  menu-drun = config.nocturne.wayland.menu.drun;
-  menu-run = config.nocturne.wayland.menu.run;
-  menu-window = config.nocturne.wayland.menu.window;
+  menu-drun = config.nocturne.wayland.menu.exec;
+  menu-run = config.nocturne.wayland.menu.exec-run;
+  # menu-window = config.nocturne.wayland.menu.window;
+
+  # ===Notification Scripts===
+  volup = config.nocturne.wayland.notification.exec-volup;
+  voldown = config.nocturne.wayland.notification.exec-voldown;
+  volmute = config.nocturne.wayland.notification.exec-volmute;
+  brightup = config.nocturne.wayland.notification.exec-brightup;
+  brightdown = config.nocturne.wayland.notification.exec-brightdown;
 
   # ===Editor===
   ed-cfg = config.nocturne.wayland.editor;
@@ -21,6 +27,7 @@ let
   # ===Border Colors===
   col_active_border1 = config.nocturne.wayland.hyprland.col-active-border1;
   col_active_border2 = config.nocturne.wayland.hyprland.col-active-border2;
+  col_background = config.nocturne.wayland.hyprland.col-background;
   col_inactive_border = config.nocturne.wayland.hyprland.col-inactive-border;
 
   # ===Monitor Configurations===
@@ -121,7 +128,7 @@ in
         "$fileManager" = "dolphin";
         "$menu-drun" = menu-drun;
         "$menu-run" = menu-run;
-        "$menu-window" = menu-window;
+        # "$menu-window" = menu-window;
         "$MOD" = "SUPER";
 
         env = [ "XCURSOR_SIZE,24" ];
@@ -129,16 +136,19 @@ in
         exec-once =
           [
             "waybar"
-            "${pkgs.swayidle}/bin/swayidle -w timeout 300 '${config.nocturne.wayland.lock.exec} -f' timeout 360 'systemctl suspend'"
             "${pkgs.swww}/bin/swww init"
             "${config.nocturne.wayland.notification.exec-start}"
             "${pkgs.networkmanagerapplet}/bin/nm-applet"
             "[workspace 2 silent] $terminal"
+            "[workspace 3 silent] $editor"
+          ]
+          ++ lib.optionals (config.nocturne.wayland.idleManager.name != null) [
+            "${config.nocturne.wayland.idleManager.exec}"
           ]
           ++ lib.optionals (config.nocturne.graphical.firefox.enable) [ "[workspace 4 silent] firefox" ]
           ++ lib.optionals (term-cfg.exec-start != null) [ "${term-cfg.exec-start}" ];
         general = {
-          gaps_in = 5;
+          gaps_in = 3;
           gaps_out = 5;
           border_size = 2;
           "col.active_border" = "rgba(${col_active_border1}) rgba(${col_active_border2}) 45deg";
@@ -180,13 +190,15 @@ in
           preserve_split = "yes";
         };
         master = {
-          new_is_master = true;
+          new_status = "master";
           orientation = "center";
         };
         gestures.workspace_swipe = "off";
         misc = {
           # Anime lady hehe
           force_default_wallpaper = -1;
+          disable_hyprland_logo = true;
+          background_color = "rgba(${col_background})";
           enable_swallow = true;
           swallow_regex = [ "^(Alacritty)$" ];
         };
@@ -222,14 +234,14 @@ in
             "$MOD, E, exec, $editor"
             "$MOD, R, exec, $menu-run"
             "$MOD, P, exec, $menu-drun"
-            "$MOD, code:61, exec, $menu-window"
+            # "$MOD, code:61, exec, $menu-window"
             "$MOD, B, exec, killall '.waybar-wrapped' || waybar"
             "$MOD_SHIFT, C, killactive, "
             "$MOD, C, killactive, "
             "$MOD_SHIFT, Q, exit,"
             ## Logout (semi-colon)
-            "$MOD_CTRL, code:47, exec, ${config.nocturne.wayland.logout.exec}"
-            "$MOD, code:47, exec, ${config.nocturne.wayland.logout.exec}"
+            "$MOD_CTRL, code:47, exec, ${config.nocturne.wayland.menu.exec-logout}"
+            "$MOD, code:47, exec, ${config.nocturne.wayland.menu.exec-logout}"
 
             # Window Manipulation
             "$MOD, H, layoutmsg, swapprev"
@@ -267,11 +279,11 @@ in
 
         binde = [
           # Volume and Brightness
-          ", XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d 1"
-          ", XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer -i 1"
-          ", XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t"
-          ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +1%"
-          ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 1%-"
+          ", XF86AudioLowerVolume, exec, ${voldown}"
+          ", XF86AudioRaiseVolume, exec, ${volup}"
+          ", XF86AudioMute, exec, ${volmute}"
+          ", XF86MonBrightnessUp, exec, ${brightup}"
+          ", XF86MonBrightnessDown, exec, ${brightdown}"
         ];
         bindm = [
           # Mouse Keybindings

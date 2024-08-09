@@ -45,7 +45,6 @@
 
 ;; ===Essentials===
 (require 'cur-config-essentials)
-(require 'cur-config-search)
 (require 'cur-config-bindings)
 (require 'cur-config-help)
 (require 'cur-config-dired)
@@ -54,7 +53,7 @@
 (require 'cur-config-faces)
 (require 'cur-config-completion)
 (require 'cur-config-window)
-(require 'cur-modeline)
+;; (require 'cur-modeline)
 
 ;; ===Languages===
 (require 'cur-config-ide)
