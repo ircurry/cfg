@@ -2311,22 +2311,6 @@ elcord
   ;;; cur-meow.el ends here
 #+end_src
 
-** Theme Helpers (=cur-theme.el=)
-:PROPERTIES:
-:header-args:emacs-lisp: :tangle ./cur-lisp/cur-theme.el
-:END:
-
-#+begin_src emacs-lisp
-  ;;; cur-theme.el --- Helper functions for theming -*- lexical-binding: t -*-
-
-  ;;; Commentary:
-  ;;
-
-  ;;; Code:
-  (provide 'cur-theme)
-  ;;; cur-theme.el ends here
-#+end_src
-
 ** Tmux Integration (=cur-tmux.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-tmux.el
