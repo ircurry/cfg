@@ -2513,6 +2513,10 @@ elcord
     "A theme that will conditionally override aspects of your current theme."
     :group 'cur-theme)
 
+  (defvar cur-theme--default-face-defs
+    '(())
+    "The default definitions for theme faces.")
+
   (defun cur-theme-name-to-rgb (color)
     "Retrieves the hexidecimal string repesented the named COLOR (e.g. \"red\")
   for FRAME (defaults to the current frame)."
@@ -2548,13 +2552,32 @@ elcord
          `(list ',face ,`(list (list t (list ,@def))))))
      face-defs))
 
+  (defun cur-theme--get-face (face-name face-defs)
+    "Return face-def with FACE-NAME in FACE-DEFS.
+  FACE-NAME should be a symbol."
+    (cl-loop for face-def in face-defs
+             when (equal face-name (car face-def))
+             return face-def))
+
+  (defun cur-theme--merge-faces (prev-list new-list)
+    "Take PREV-LIST of face defs and overlay NEW-LIST on top."
+    (let (overridden)
+      (setq overridden prev-list)
+      (dolist (face-override new-list)
+        (let ((face (car face-override))
+              (definition (cdr face-override)))
+          (setcdr (cur-theme--get-face face overridden) definition)))
+      overridden))
+
   (defmacro cur-theme-def (theme-name doc default-colors custom-colors faces)
     "Generate custom theme named THEME-NAME.
   DOC is the documentation string.  DEFAULT-COLORS is a list of lists,
   where the first element is a symbol and the second is a string that is the hex
   value of the color.  The names should corespond to the default-colors schema.
-  CUSTOM-COLORS is the same as DEFAULT-COLORS but with no schema.  FACES is a list
-  of faces."
+  For the default schema definition please consult the doc string of
+  `cur-theme--check-default-schema'.  CUSTOM-COLORS is the same as DEFAULT-COLORS
+  but with no schema.  FACES is a list of faces in the form (FACE PROPERTIES).
+  For example, (bold :background bg :foreground fg :weight 'bold)."
     (declare (indent 1))
     `(let* (,@default-colors
             ,@custom-colors)
@@ -2562,7 +2585,8 @@ elcord
          ,doc)
        (custom-theme-set-faces
         ',theme-name
-        ,@(cur-theme--expand-faces faces))))
+        ,@(cur-theme--expand-faces
+           (cur-theme--merge-faces cur-theme--default-face-defs faces)))))
 
   (provide 'cur-theme)
   ;;; cur-theme.el ends here
