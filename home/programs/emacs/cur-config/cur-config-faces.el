@@ -23,11 +23,6 @@
                      (haskell-constructor-face :background (doom-color 'fw-orange-blend)
                                                :foreground (doom-color 'fw-orange-text))))))
 
-;; (use-package cur-theme
-;;   :after (consult)
-;;   :custom
-;;   (cur-override-theme-load-function #'consult-theme))
-
 ;; ===Doom Emacs Themes===
 (use-package doom-themes
   :demand t)
@@ -39,7 +34,9 @@
 
 ;; ===Catppuccin Theme===
 (use-package catppuccin-theme
-  :after (autothemer))
+  :after (autothemer cur-theme)
+  :config
+  (cur-override-theme-load-theme 'catppuccin))
 
 ;; ===Text Scaling===
 (defhydra hydra-text-scale (:timeout 4)

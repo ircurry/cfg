@@ -910,11 +910,6 @@ I have several custom themes in a directory weirdly named themes. These are the 
                                           :foreground (doom-color 'fw-teal-text))
                        (haskell-constructor-face :background (doom-color 'fw-orange-blend)
                                                  :foreground (doom-color 'fw-orange-text))))))
-
-  ;; (use-package cur-theme
-  ;;   :after (consult)
-  ;;   :custom
-  ;;   (cur-override-theme-load-function #'consult-theme))
 #+end_src
 
 *** Doom themes
@@ -957,7 +952,9 @@ autothemer
 #+begin_src emacs-lisp
   ;; ===Catppuccin Theme===
   (use-package catppuccin-theme
-    :after (autothemer))
+    :after (autothemer cur-theme)
+    :config
+    (cur-override-theme-load-theme 'catppuccin))
 #+end_src
 
 *** Text Scaling Hydra
