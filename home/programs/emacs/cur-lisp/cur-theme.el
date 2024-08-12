@@ -208,12 +208,14 @@ Please disable all but one theme or change the value of `cur-override-theme-them
   :group 'cur-override-theme
   :type '(function))
 
-(defun cur-override-theme-load-theme ()
-  "Load a theme and then load the `cur-override' theme.
-The function to load a theme can be changed with
+(defun cur-override-theme-load-theme (theme)
+  "Load a THEME and then load the `cur-override' theme.
+If THEME is nil then call interactively the function
 `cur-override-theme-load-function'."
-  (interactive)
-  (call-interactively cur-override-theme-load-function)
+  (interactive (list nil))
+  (if theme
+      (cur-theme-load-theme theme)
+    (call-interactively cur-override-theme-load-function))
   (load-theme 'cur-override t))
 
 (provide 'cur-theme)
