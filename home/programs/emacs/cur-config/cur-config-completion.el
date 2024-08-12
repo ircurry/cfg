@@ -57,6 +57,11 @@
   :bind ( :map org-mode-map
           ([remap consult-imenu] . consult-org-heading)))
 
+(use-package cur-consult
+  :after (consult)
+  :custom
+  (cur-override-theme-load-function #'cur-consult-theme))
+
 (provide 'cur-config-completion)
 
 (use-package emabark
