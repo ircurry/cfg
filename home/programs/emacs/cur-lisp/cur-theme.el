@@ -189,5 +189,32 @@ Please disable all but one theme or change the value of `cur-override-theme-them
               overrides
             '(nil)))))
 
+(defun cur-theme-load-theme (theme)
+  "Load THEME, disabling all other currently enabled themes."
+  (interactive
+   (list
+    (intern (completing-read "Custom Themes: "
+                             (mapcar #'symbol-name
+                                     (custom-available-themes))))))
+  (condition-case nil
+      (progn
+        (mapc #'disable-theme custom-enabled-themes)
+        (load-theme theme t))
+    (error "Problem loading theme %s" theme)))
+
+(defcustom cur-override-theme-load-function
+  #'cur-theme-load-theme
+  "The function to set a theme or themes."
+  :group 'cur-override-theme
+  :type '(function))
+
+(defun cur-override-theme-load-theme ()
+  "Load a theme and then load the `cur-override' theme.
+The function to load a theme can be changed with
+`cur-override-theme-load-function'."
+  (interactive)
+  (call-interactively cur-override-theme-load-function)
+  (load-theme 'cur-override t))
+
 (provide 'cur-theme)
 ;;; cur-theme.el ends here
