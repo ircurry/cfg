@@ -47,6 +47,7 @@
                                    dired-hide-details-mode
                                    hl-line-mode
                                    nerd-icons-dired-mode))
+
   :config
   (setq xref-show-xrefs-function       #'consult-xref
         xref-show-definitions-function #'consult-xref))

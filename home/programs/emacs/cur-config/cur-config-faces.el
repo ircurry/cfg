@@ -9,42 +9,28 @@
 ;; ===Themes Path===
 (add-to-list 'custom-theme-load-path (locate-user-emacs-file "themes"))
 
+;; ===Theme Library===
+(use-package cur-theme
+  :bind ( :map cur/toggle-map
+          ("C-t" . cur-override-theme-load-theme))
+  :custom
+  (cur-override-theme-overrides
+   '((doom-gruvbox (secondary-selection :background "#504945"))
+     (doom-flatwhite (haskell-operator-face :background (doom-color 'bg)
+                                            :foreground (doom-color 'fg))
+                     (haskell-type-face :background (doom-color 'fw-teal-blend)
+                                        :foreground (doom-color 'fw-teal-text))
+                     (haskell-constructor-face :background (doom-color 'fw-orange-blend)
+                                               :foreground (doom-color 'fw-orange-text))))))
+
+;; (use-package cur-theme
+;;   :after (consult)
+;;   :custom
+;;   (cur-override-theme-load-function #'consult-theme))
+
 ;; ===Doom Emacs Themes===
 (use-package doom-themes
-  :demand t
-  :init
-  (defun cur/theme-override ()
-    "Change faces depending on what the value of `custom-enabled-themes' is."
-    (cond ((member 'doom-gruvbox custom-enabled-themes)
-           (set-face-attribute 'secondary-selection nil
-                               :background "#504945"))
-          ((member 'doom-flatwhite custom-enabled-themes)
-           (set-face-attribute 'haskell-operator-face nil
-                               :background (doom-color 'bg)
-                               :foreground (doom-color 'fg))
-           (set-face-attribute 'haskell-type-face nil
-                               :background (doom-color 'fw-teal-blend)
-                               :foreground (doom-color 'fw-teal-text))
-           (set-face-attribute 'haskell-constructor-face nil
-                               :background (doom-color 'fw-orange-blend)
-                               :foreground (doom-color 'fw-orange-text)))
-          (t t)))
-  (defun cur/load-theme (theme)
-    "Load THEME, disabling all other currently enabled themes. Then
-check for overrides with `cur/theme-override'."
-    (interactive
-     (list
-      (intern (completing-read "Cur Custom Themes: "
-                               (mapcar #'symbol-name
-                                       (custom-available-themes))))))
-    (condition-case nil
-        (progn
-          (mapc #'disable-theme custom-enabled-themes)
-          (load-theme theme t)
-          (cur/theme-override))
-      (error "Problem loading theme %s" theme)))
-  :bind (:map cur/toggle-map
-              ("C-t" . cur/load-theme)))
+  :demand t)
   ;; :config
   ;; (cur/load-theme 'doom-nord))
 
@@ -53,8 +39,7 @@ check for overrides with `cur/theme-override'."
 
 ;; ===Catppuccin Theme===
 (use-package catppuccin-theme
-  :after (autothemer)
-  :config (cur/load-theme 'catppuccin))
+  :after (autothemer))
 
 ;; ===Text Scaling===
 (defhydra hydra-text-scale (:timeout 4)
