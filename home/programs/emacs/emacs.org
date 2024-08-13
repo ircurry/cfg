@@ -401,8 +401,8 @@ NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-s
        '("f" . "C-x C-f") ; find file
        ;'("g" . ) ; C-M- map
        ;'("h" . ) ; C-h map
-       '("j" . "H-j")
-       '("k" . "H-k")
+       ;'("j" . )
+       ;'("k" . )
        ;'("l" . )
        (cons ";" cur/sub-leader-keymap)
        '("RET"   . "M-x")
