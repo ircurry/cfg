@@ -19,6 +19,7 @@
         "nord-aurora"
         "nord-light"
         "oceanic-next"
+        "tomorrow-night"
       ];
       default = "nord-aurora";
       description = "Which theme for the system to use";

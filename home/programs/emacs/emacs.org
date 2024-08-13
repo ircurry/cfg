@@ -923,9 +923,9 @@ Doom themes are a theme pack specifically for the Doom Emacs distribution, but w
 #+begin_src emacs-lisp
   ;; ===Doom Emacs Themes===
   (use-package doom-themes
-    :demand t)
-    ;; :config
-    ;; (cur/load-theme 'doom-nord))
+    :demand t
+    :config
+    (cur-override-theme-load-theme 'doom-tomorrow-night))
 #+end_src
 
 *** Autothemer
@@ -952,9 +952,9 @@ autothemer
 #+begin_src emacs-lisp
   ;; ===Catppuccin Theme===
   (use-package catppuccin-theme
-    :after (autothemer cur-theme)
-    :config
-    (cur-override-theme-load-theme 'catppuccin))
+    :after (autothemer cur-theme))
+    ;; :config
+    ;; (cur-override-theme-load-theme 'catppuccin))
 #+end_src
 
 *** Text Scaling Hydra

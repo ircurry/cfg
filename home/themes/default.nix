@@ -16,5 +16,6 @@
     ./nord-aurora.nix
     ./nord-light.nix
     ./oceanic-next.nix
+    ./tomorrow-night.nix
   ];
 }

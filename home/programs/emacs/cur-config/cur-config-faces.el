@@ -25,18 +25,18 @@
 
 ;; ===Doom Emacs Themes===
 (use-package doom-themes
-  :demand t)
-  ;; :config
-  ;; (cur/load-theme 'doom-nord))
+  :demand t
+  :config
+  (cur-override-theme-load-theme 'doom-tomorrow-night))
 
 ;; ===Autothemer===
 (use-package autothemer)
 
 ;; ===Catppuccin Theme===
 (use-package catppuccin-theme
-  :after (autothemer cur-theme)
-  :config
-  (cur-override-theme-load-theme 'catppuccin))
+  :after (autothemer cur-theme))
+  ;; :config
+  ;; (cur-override-theme-load-theme 'catppuccin))
 
 ;; ===Text Scaling===
 (defhydra hydra-text-scale (:timeout 4)
