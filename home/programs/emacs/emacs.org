@@ -204,6 +204,7 @@ I like having absolute line numbers, especially since the meow number selection 
 
 #+begin_src emacs-lisp
   (use-package isearch
+    :ensure nil
     :demand t
     :custom
     (isearch-wrap-pause 'no-ding)

@@ -33,6 +33,7 @@
   :hook (emacs-startup . recentf-mode))
 
 (use-package isearch
+  :ensure nil
   :demand t
   :custom
   (isearch-wrap-pause 'no-ding)
