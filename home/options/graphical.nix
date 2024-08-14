@@ -152,6 +152,7 @@
     signalDesktop.enable = lib.mkEnableOption "Enable Signal Desktop";
     thunderbird.enable = lib.mkEnableOption "Enable Thunderbird";
     torBrowser.enable = lib.mkEnableOption "Enable the Tor Browser";
+    veracrypt.enable = lib.mkEnableOption "Enable VeraCrypt";
     zathura.enable = lib.mkEnableOption "Enable Zathura";
   };
 }

@@ -19,6 +19,7 @@
     ./signal.nix
     ./thunderbird.nix
     ./tor-browser.nix
+    ./veracrypt.nix
     ./zathura.nix
   ];
 }

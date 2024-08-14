@@ -34,6 +34,7 @@
       signalDesktop.enable = true;
       thunderbird.enable = true;
       torBrowser.enable = true;
+      veracrypt.enable = true;
       zathura.enable = true;
     };
     cli = {
