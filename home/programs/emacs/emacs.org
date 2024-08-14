@@ -853,11 +853,11 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
                                     ("\\.pdf" "zathura" "xdg-open")
                                     (".*" "xdg-open")))
     (dired-auto-revert-buffer #'dired-directory-changed-p)
+    (dired-free-space nil)
+    (dired-make-directory-clickable t)
+    (dired-mouse-drag-files t)
     :config
-    (setq dired-deletion-confirmer 'y-or-n-p)
-    (setq dired-free-space nil)
-    (setq dired-make-directory-clickable t)
-    (setq dired-mouse-drag-files t))
+    (setq dired-deletion-confirmer 'y-or-n-p))
 
   (provide 'cur-config-dired)
 #+end_src
