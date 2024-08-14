@@ -284,6 +284,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
    "Meow fallback commands")
   (meow-keypad-describe-delay 0.0 "No delay in keypad help popup")
   (meow-cheats-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
+  (meow-keypad-leader-dispatch nil)
   :bind ( :map cur/sub-leader-keymap
           ("C-l" . ibuffer)
           ("C-b" . bookmark-set-no-overwrite)
@@ -309,7 +310,6 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
           ("s" . isearch-forward)
           ("r" . isearch-backward))
   :config
-  (setq meow-kteypad-leader-dispatch nil)
   (meow-setup)
   (meow-global-mode 1))
 
