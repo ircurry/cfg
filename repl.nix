@@ -20,7 +20,7 @@ rec {
   inherit (flake.nixosConfigurations.${host}.config) hm; # home manager config
   n = flake.nixosConfigurations.${host}.config.hm.nocturne; # custom hm options
   inherit (flake.nixosConfigurations.${host}.config.hm) nocturne;
-  nsys = flake.nixosConfigurations.${host}.config.nocturne; # custom nixos options
+  nsys = flake.nixosConfigurations.${host}.config.noctsys; # custom nixos system options
   inherit (flake.nixosConfigurations.${host}.config) noctsys;
   inherit (flake.nixosConfigurations.${host}) pkgs; # packages used by nixos and hm
 
