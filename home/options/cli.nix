@@ -22,6 +22,31 @@
       exec = lib.mkOption { type = lib.types.str; };
       exec-start = lib.mkOption { type = lib.types.str; };
     };
+    programs = lib.mkOption {
+      type =
+        with lib.types;
+        attrsOf (oneOf [
+          str
+          attrs
+          package
+        ]);
+      default = { };
+      description = "An attrset of packages, strings (shell script), or attrset usable by writeShellApplication.";
+      example = ''
+                programs = {
+                  pkg1 = "echo hello world";
+        	  pkg2 = {
+                    runtimeInputs = [ pkgs.hello ];
+        	    text = "hello";
+        	  };
+        	  pkg3 = pkgs.writeShellApplication {
+                    name = "pkg3;
+                    runtimeInputs = [ pkgs.hello ];
+        	    text = "hello";
+        	  };
+                };
+      '';
+    };
     shell = {
       name = lib.mkOption {
         type = lib.types.enum [

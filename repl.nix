@@ -9,13 +9,15 @@ in
 rec {
   # ===Basic Values===
   inherit flake host user; # raw access to the flake, user, and host
-  inherit (flake) inputs lib packages; # flake inputs, custom library and custom packages
+  inherit (flake) inputs packages; # flake inputs and custom packages
   inherit (flake.inputs) nixpkgs; # nixpkgs
+  inherit (flake.inputs.nixpkgs) lib; # nixpkgs
+  mylib = flake.lib; # custom lib
 
   # ===Current Host Stuff===
   c = flake.nixosConfigurations.${host}.config; # nixos config
   inherit (flake.nixosConfigurations.${host}) config;
-  inherit (flake.nixosConfigurations.${host}) hm; # home manager config
+  inherit (flake.nixosConfigurations.${host}.config) hm; # home manager config
   n = flake.nixosConfigurations.${host}.config.hm.nocturne; # custom hm options
   inherit (flake.nixosConfigurations.${host}.config.hm) nocturne;
   nsys = flake.nixosConfigurations.${host}.config.nocturne; # custom nixos options
