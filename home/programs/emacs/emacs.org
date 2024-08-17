@@ -116,6 +116,7 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
   (require 'cur-config-nix)
   (require 'cur-config-rust)
   (require 'cur-config-haskell)
+  (require 'cur-config-ocaml)
   (require 'cur-config-c)
   (require 'cur-config-zig)
   (require 'cur-config-go)
@@ -1664,7 +1665,7 @@ company-ghci
 
 #+begin_src text :tangle ./packages.txt :padline no
 tuareg
-utop
+# utop
 merlin
 merlin-company
 #+end_src
@@ -1676,8 +1677,10 @@ merlin-company
     :defer t)
 
   ;; ===Utop===
-  (use-package utop
-    :defer t)
+  ;; (use-package utop
+  ;;   :commands (utop utop-mode)
+  ;;   :config
+  ;;   (advice-add 'utop :around 'inheritenv-apply))
 
   (use-package merlin
     :defer)
@@ -1980,6 +1983,7 @@ elcord
 
 #+begin_src text :tangle ./packages.txt :padline no
   envrc
+  inheritenv
 #+end_src
 
 #+begin_src emacs-lisp

@@ -52,7 +52,7 @@ rustic
 haskell-mode
 company-ghci
 tuareg
-utop
+# utop
 merlin
 merlin-company
 ccls
@@ -66,3 +66,4 @@ ox-gemini
 elpher
 elcord
 envrc
+inheritenv

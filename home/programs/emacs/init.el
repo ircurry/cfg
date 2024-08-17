@@ -63,6 +63,7 @@
 (require 'cur-config-nix)
 (require 'cur-config-rust)
 (require 'cur-config-haskell)
+(require 'cur-config-ocaml)
 (require 'cur-config-c)
 (require 'cur-config-zig)
 (require 'cur-config-go)

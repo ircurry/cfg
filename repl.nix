@@ -23,6 +23,7 @@ rec {
   nsys = flake.nixosConfigurations.${host}.config.noctsys; # custom nixos system options
   inherit (flake.nixosConfigurations.${host}.config) noctsys;
   inherit (flake.nixosConfigurations.${host}) pkgs; # packages used by nixos and hm
+  emacspkg = hm.programs.emacs.package;
 
   # ===Chopin===
   chopin = flake.nixosConfigurations.chopin.config;
