@@ -4,10 +4,10 @@
   :defer t)
 
 ;; ===Utop===
-;; (use-package utop
-;;   :commands (utop utop-mode)
-;;   :config
-;;   (advice-add 'utop :around 'inheritenv-apply))
+(use-package utop
+  :commands (utop utop-mode)
+  :config
+  (advice-add 'utop :around 'inheritenv-apply))
 
 (use-package merlin
   :defer)

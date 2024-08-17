@@ -1665,7 +1665,7 @@ company-ghci
 
 #+begin_src text :tangle ./packages.txt :padline no
 tuareg
-# utop
+utop
 merlin
 merlin-company
 #+end_src
@@ -1677,10 +1677,10 @@ merlin-company
     :defer t)
 
   ;; ===Utop===
-  ;; (use-package utop
-  ;;   :commands (utop utop-mode)
-  ;;   :config
-  ;;   (advice-add 'utop :around 'inheritenv-apply))
+  (use-package utop
+    :commands (utop utop-mode)
+    :config
+    (advice-add 'utop :around 'inheritenv-apply))
 
   (use-package merlin
     :defer)
