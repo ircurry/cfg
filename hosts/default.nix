@@ -12,7 +12,7 @@ let
   pkgsFor = sys: inputs.nixpkgs.legacyPackages.${sys};
 
   # ===NixOS Builder Functions and Values===
-  mkSystemCustomModules =
+  mkSystemWithModules =
     modules: host: sys:
     let
       pkgs = pkgsFor sys;
@@ -70,7 +70,7 @@ let
       ] ++ modules;
     };
 
-  mkSystem = mkSystemCustomModules [ ];
+  mkSystem = mkSystemWithModules [ ];
 in
 {
   # ===NixOS Configurations===
