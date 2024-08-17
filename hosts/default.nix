@@ -31,7 +31,6 @@ let
           mylib
           host
           pkgsUnfree
-          sys
           ;
         isLaptop = host == "chopin";
       };
