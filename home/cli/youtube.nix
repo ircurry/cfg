@@ -22,24 +22,30 @@ in
     (lib.mkIf (cfg.enable && cfg.ytfzf.enable) {
       home.packages =
         let
-          yt = pkgs.writeShellScriptBin "yt" ''
-            ytfzf $@
-          '';
-          yta = pkgs.writeShellScriptBin "yta" ''
-            ytfzf -m --notify-playing $@
-          '';
-          ytl = pkgs.writeShellScriptBin "ytl" ''
-            ytfzf --type=playlist --notify-playing $@
-          '';
-          ytm = pkgs.writeShellScriptBin "ytm" ''
-            ytfzf -m --notify-playing $@
-          '';
+          yt = pkgs.writeShellApplication {
+            name = "yt";
+            runtimeInputs = with pkgs; [
+              chafa
+              ytfzf
+            ];
+            text = ''
+              if [[ "$#" -gt 0 ]]; then
+                case "$1" in
+                        v|vid|video) shift; ytfzf --type=video "$@";;
+                        c|chan|channel) shift; ytfzf --type=channel "$@";;
+                        pl|play|playlist) shift; ytfzf --type=channel "$@";;
+                        all) shift; ytfzf --type=all "$@";;
+                        m|music) shift; ytfzf -m --notify-playing "$@";;
+                        *) ytfzf "$@"
+                esac
+              else
+                ytfzf && exit 0
+              fi
+            '';
+          };
         in
         [
           yt
-          yta
-          ytl
-          ytm
           pkgs.ytfzf
           pkgs.chafa
         ];
