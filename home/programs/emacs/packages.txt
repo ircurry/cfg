@@ -51,6 +51,10 @@ nix-ts-mode
 rustic
 haskell-mode
 company-ghci
+tuareg
+utop
+merlin
+merlin-company
 ccls
 zig-mode
 vterm

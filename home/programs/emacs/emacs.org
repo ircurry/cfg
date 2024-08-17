@@ -1657,6 +1657,37 @@ company-ghci
   (provide 'cur-config-haskell)
 #+end_src
 
+** Configurations for OCaml
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-ocaml.el
+:END:
+
+#+begin_src text :tangle ./packages.txt :padline no
+tuareg
+utop
+merlin
+merlin-company
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; ===Tuareg===
+  (use-package tuareg
+    :hook (tuareg-mode . merlin-mode)
+    :defer t)
+
+  ;; ===Utop===
+  (use-package utop
+    :defer t)
+
+  (use-package merlin
+    :defer)
+
+  (use-package merlin-company
+    :after (merlin))
+
+  (provide 'cur-config-ocaml)
+#+end_src
+
 ** Configurations for C (=cur-config-c.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-c.el
