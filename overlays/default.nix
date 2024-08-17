@@ -1,4 +1,4 @@
-{ inputs, lib, ... }:
+{ inputs, sys, ... }:
 {
   config = {
     nixpkgs.overlays = [
@@ -11,6 +11,11 @@
             inherit (prev) pkgs;
             inherit inputs;
           });
+      })
+      (_: prev: {
+        ytfzf = (
+          prev.ytfzf.override { ueberzugpp = inputs.nixpkgs-ueberzugpp.legacyPackages.${sys}.ueberzugpp; }
+        );
       })
     ];
   };

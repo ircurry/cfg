@@ -10,6 +10,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-ueberzugpp.url = "github:nixos/nixpkgs/954813a9bf746e80ea86c8c582881b4dc49df5ef";
 
     hyprland = {
       #url = "github:hyprwm/Hyprland/";
