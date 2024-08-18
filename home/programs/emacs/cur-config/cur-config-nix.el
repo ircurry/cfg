@@ -1,6 +1,5 @@
 ;; ===nix-mode===
-(use-package nix-mode
-  :hook
-  ((nix-mode) . lsp-deferred))
+(use-package nix-ts-mode
+  :mode ("\\.nix\\'" . nix-ts-mode))
 
 (provide 'cur-config-nix)

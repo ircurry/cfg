@@ -1537,7 +1537,7 @@ This color codes opening and closing delimiters such as parentheses and square b
 
 My configurations for working with the Java language. I have ~java-ts-mode~, the tree sitter version of the normal ~java-mode~, as the mode for editing =.java= files. I have found that either tree sitter provides exactly the same or better syntax highlighting and the possibility of better movement once it gets better integrated into emacs.
 
-I also have lsp-java set up for better integrating ~lsp-mode~ into ~java-ts-mode~. Note because I have =direnv= integration with ~envrc~, the hooks I add to start ~lsp~ must be ~lsp-defered~. ~lsp-defered~ does not start ~lsp-mode~ until after the buffer has visually loaded. We want this because ~envrc~ will change the ~exec-path~ to what =direnv= would change it to. For instance, if I have a devshell that says "here is the lsp-server, the build tool, and external libraries with these exact versions", envrc will make sure that ~exec-path~ contains exactly those versions of those programs in the nix store.
+I also have lsp-java set up for better integrating ~lsp-mode~ into ~java-ts-mode~. Note because I have =direnv= integration with ~envrc~, the hooks I add to start ~lsp~ must be ~lsp-deferred~. ~lsp-deferred~ does not start ~lsp-mode~ until after the buffer has visually loaded. We want this because ~envrc~ will change the ~exec-path~ to what =direnv= would change it to. For instance, if I have a devshell that says "here is the lsp-server, the build tool, and external libraries with these exact versions", envrc will make sure that ~exec-path~ contains exactly those versions of those programs in the nix store.
 
 #+begin_src text :tangle ./packages.txt :padline no
 lsp-java
@@ -1598,15 +1598,14 @@ Literally just ~yaml-mode~.
 My configurations for the Nix language, which boils down to "start the lsp server".
 
 #+begin_src text :tangle ./packages.txt :padline no
-nix-mode
+# nix-mode
 nix-ts-mode
 #+end_src
 
 #+begin_src emacs-lisp
   ;; ===nix-mode===
-  (use-package nix-mode
-    :hook
-    ((nix-mode) . lsp-deferred))
+  (use-package nix-ts-mode
+    :mode ("\\.nix\\'" . nix-ts-mode))
 
   (provide 'cur-config-nix)
 #+end_src

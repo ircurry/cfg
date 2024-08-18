@@ -46,7 +46,7 @@ macrostep
 macrostep-geiser
 lsp-java
 yaml-mode
-nix-mode
+# nix-mode
 nix-ts-mode
 rustic
 haskell-mode
