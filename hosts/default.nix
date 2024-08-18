@@ -12,8 +12,13 @@ let
   pkgsFor = sys: inputs.nixpkgs.legacyPackages.${sys};
 
   # ===NixOS Builder Functions and Values===
-  mkSystemWithModules =
-    modules: host: sys:
+  mkSystem =
+    {
+      host,
+      sys ? "x86_64-linux",
+      modules ? [ ],
+      isLaptop ? false,
+    }@configArgs:
     let
       pkgs = pkgsFor sys;
       pkgsUnfree = (
@@ -31,8 +36,9 @@ let
           mylib
           host
           pkgsUnfree
+          isLaptop
+          configArgs
           ;
-        isLaptop = host == "chopin";
       };
     in
     inputs.nixpkgs.lib.nixosSystem {
@@ -69,10 +75,11 @@ let
         # Extra Modules
       ] ++ modules;
     };
-
-  mkSystem = mkSystemWithModules [ ];
 in
 {
   # ===NixOS Configurations===
-  chopin = mkSystem "chopin" "x86_64-linux";
+  chopin = mkSystem {
+    host = "chopin";
+    isLaptop = true;
+  };
 }
