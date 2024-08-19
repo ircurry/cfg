@@ -9,7 +9,7 @@ let
   c = config.xdg.configHome;
   d = config.xdg.dataHome;
   cache = config.xdg.cacheHome;
-  home = "$HOME";
+  home = config.home.homeDirectory;
   term-cfg = config.nocturne.wayland.terminal;
 in
 {
