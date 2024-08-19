@@ -38,6 +38,7 @@
       zathura.enable = true;
     };
     cli = {
+      age.enable = true;
       amfora.enable = true;
       ani-cli.enable = true;
       conversion.enable = true;

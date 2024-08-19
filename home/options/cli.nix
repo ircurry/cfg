@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, lib, ... }:
 {
   options.nocturne.cli = {
     # ===Abstract Options===
@@ -33,7 +33,7 @@
       default = { };
       description = "An attrset of packages, strings (shell script), or attrset usable by writeShellApplication.";
       example = ''
-                programs = {
+        programs = {
                   pkg1 = "echo hello world";
         	  pkg2 = {
                     runtimeInputs = [ pkgs.hello ];
@@ -60,6 +60,16 @@
     };
 
     # ===Program Options===
+    age = {
+      enable = lib.mkEnableOption "Enable Age encryption tool" // {
+        default = true;
+      };
+      keysDir = lib.mkOption {
+        type = lib.types.path;
+        default = "${config.home.homeDirectory}/.local/share/age";
+        description = "Path of where age keys are stored";
+      };
+    };
     amfora.enable = lib.mkEnableOption "Enable the Amfora Gemini browser";
     ani-cli.enable = lib.mkEnableOption "Enable ani-cli";
     conversion.enable = lib.mkEnableOption "Enable conversion tools";

@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./age.nix
     ./aliases.nix
     ./amfora
     ./ani-cli.nix
