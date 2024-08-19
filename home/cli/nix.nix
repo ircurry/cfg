@@ -1,6 +1,6 @@
 { host, ... }:
 {
-  nocturne.cli.programs = {
+  nocturne.cli.scripts = {
     nrepl = ''
       if [[ -f ./repl.nix ]]; then
         nix repl --arg host '"${host}"' --file ./repl.nix "$@"

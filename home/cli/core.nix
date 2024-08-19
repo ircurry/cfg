@@ -23,5 +23,5 @@
       vim # cli text editor (I don't want to use nano)
       zoxide # a smart cd replacement
     ]
-    ++ lib.attrValues (mylib.mkShellPackages pkgs config.nocturne.cli.programs);
+    ++ lib.attrValues (mylib.mkShellPackages pkgs config.nocturne.cli.scripts);
 }

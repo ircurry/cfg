@@ -22,7 +22,7 @@
       exec = lib.mkOption { type = lib.types.str; };
       exec-start = lib.mkOption { type = lib.types.str; };
     };
-    programs = lib.mkOption {
+    scripts = lib.mkOption {
       type =
         with lib.types;
         attrsOf (oneOf [
