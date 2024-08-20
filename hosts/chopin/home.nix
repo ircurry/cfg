@@ -41,7 +41,6 @@
       age.enable = true;
       amfora.enable = true;
       ani-cli.enable = true;
-      conversion.enable = true;
       direnv.enable = true;
       file-convert.enable = true;
       mpd.enable = true;

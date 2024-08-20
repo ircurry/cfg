@@ -75,7 +75,6 @@
     };
     amfora.enable = lib.mkEnableOption "Enable the Amfora Gemini browser";
     ani-cli.enable = lib.mkEnableOption "Enable ani-cli";
-    conversion.enable = lib.mkEnableOption "Enable conversion tools";
     direnv.enable = lib.mkEnableOption "Enable direnv";
     file-convert.enable = lib.mkEnableOption "Enable file conversion tools";
     git = {
