@@ -20,7 +20,10 @@
         description = "Use graphical or terminal editor";
       };
       exec = lib.mkOption { type = lib.types.str; };
-      exec-start = lib.mkOption { type = lib.types.str; };
+      exec-start = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+      };
     };
     scripts = lib.mkOption {
       type =
