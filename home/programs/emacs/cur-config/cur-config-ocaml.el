@@ -10,7 +10,7 @@
   (advice-add 'utop :around 'inheritenv-apply))
 
 (use-package merlin
-  :defer)
+  :defer t)
 
 (use-package merlin-company
   :after (merlin))
