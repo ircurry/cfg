@@ -60,9 +60,8 @@
           x = 0;
           y = 0;
           scale = 2;
+          state = "undocked";
         }
-      ];
-      docked-monitors = [
         {
           name = "DP-2";
           width = 1920;
@@ -71,6 +70,7 @@
           x = 0;
           y = 0;
           scale = 1;
+          state = "docked";
         }
       ];
     };

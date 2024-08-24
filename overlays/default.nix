@@ -19,6 +19,7 @@
           }
         );
       })
+      (_: prev: { dfh = inputs.dfh.packages.${pkgs.system}.dfh; })
     ];
   };
 }

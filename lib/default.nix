@@ -50,4 +50,19 @@ rec {
       else
         pkgs.writeShellApplication (value // { inherit name; })
     ) shellPkgs;
+
+  monitorAttrToString =
+    monitor: state:
+    if monitor.state == state then
+      let
+        resolution = "${toString monitor.width}x${toString monitor.height}";
+        refresh = "${toString monitor.refreshRate}";
+        position = "${toString monitor.x}x${toString monitor.y}";
+        scale = toString monitor.scale;
+      in
+      "${monitor.name},${resolution}@${refresh},${position},${scale}"
+    else
+      "${monitor.name},disable";
+
+  monitorsToHyprlandConfig = monitors: state: map (m: monitorAttrToString m state) monitors;
 }

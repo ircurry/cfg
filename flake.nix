@@ -51,6 +51,12 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    dfh = {
+      url = "github:ircurry/dfh";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.devenv.follows = "devenv";
+    };
   };
 
   outputs =

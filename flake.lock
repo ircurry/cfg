@@ -108,6 +108,30 @@
         "type": "github"
       }
     },
+    "dfh": {
+      "inputs": {
+        "devenv": [
+          "devenv"
+        ],
+        "flake-parts": "flake-parts",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1724525192,
+        "narHash": "sha256-uzCmW/lC53cvTQ/ug4VploRJIT/E4TXm1YpJJPuTo44=",
+        "owner": "ircurry",
+        "repo": "dfh",
+        "rev": "ad9314087b2a335e344e03e38f4e7a5746b3de0f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ircurry",
+        "repo": "dfh",
+        "type": "github"
+      }
+    },
     "emacs-overlay": {
       "inputs": {
         "flake-utils": "flake-utils_4",
@@ -214,6 +238,24 @@
       "original": {
         "owner": "edolstra",
         "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-parts": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib"
+      },
+      "locked": {
+        "lastModified": 1719994518,
+        "narHash": "sha256-pQMhCCHyQGRzdfAkdJ4cIWiw+JNuWsTX7f0ZYSyz0VY=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "9227223f6d922fee3c7b190b2cc238a99527bbb7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
         "type": "github"
       }
     },
@@ -611,6 +653,18 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib": {
+      "locked": {
+        "lastModified": 1719876945,
+        "narHash": "sha256-Fm2rDDs86sHy0/1jxTOKB1118Q0O3Uc7EC0iXvXKpbI=",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/5daf0514482af3f97abaefc78a6606365c9108e2.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/5daf0514482af3f97abaefc78a6606365c9108e2.tar.gz"
+      }
+    },
     "nixpkgs-regression": {
       "locked": {
         "lastModified": 1643052045,
@@ -849,6 +903,7 @@
       "inputs": {
         "arkenfox": "arkenfox",
         "devenv": "devenv",
+        "dfh": "dfh",
         "emacs-overlay": "emacs-overlay",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
