@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.noctsys.programs.hyprland;
+  cfg = config.hm.nocturne.wayland.compositor;
 in
 {
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.name == "hyprland") {
     services.xserver.desktopManager.gnome.enable = lib.mkForce false;
     services.xserver.displayManager.lightdm.enable = lib.mkForce false;
     programs.hyprland = {

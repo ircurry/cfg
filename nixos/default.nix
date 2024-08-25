@@ -1,10 +1,6 @@
 { ... }:
 {
   imports = [
-    # Options
-    ./options
-
-    # Configuration Modules
     ./boot.nix
     ./hyprland.nix
     ./locales.nix

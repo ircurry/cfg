@@ -12,7 +12,7 @@
     };
     compositor = {
       name = lib.mkOption {
-        type = lib.types.enum [ "hyprland" ];
+        type = lib.types.nullOr (lib.types.enum [ "hyprland" ]);
         default = "hyprland";
         example = "hyprland";
         description = "Name of the compositor";
