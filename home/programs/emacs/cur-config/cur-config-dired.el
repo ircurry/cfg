@@ -127,3 +127,15 @@
   (setq dired-deletion-confirmer 'y-or-n-p))
 
 (provide 'cur-config-dired)
+
+(use-package cur-wallpaper
+  :after (dired)
+  :bind ( :map dired-mode-map
+	  ("W" . cur-wallpaper-set-wallpaper-dired)))
+
+(use-package cur-wallpaper
+  :after (image-dired)
+  :bind ( :map image-dired-thumbnail-mode-map
+	  ("W" . cur-wallpaper-set-wallpaper)))
+
+(provide 'cur-config-dired)
