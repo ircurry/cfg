@@ -149,9 +149,9 @@ in
             "workspace 1, class:^(vesktop)$, title:^(.*)$"
 
             # Pavucontrol
-            "float, class:^(pavucontrol)$, title:^(Volume Control)$"
-            "size 80% 85%, class:^(pavucontrol)$, title:^(Volume Control)$"
-            "center, class:^(pavucontrol)$, title:^(Volume Control)$"
+            # "float, class:^(pavucontrol)$, title:^(Volume Control)$"
+            # "size 80% 85%, class:^(pavucontrol)$, title:^(Volume Control)$"
+            # "center, class:^(pavucontrol)$, title:^(Volume Control)$"
 
             # Network Manager Applet
             "float, class:^(nm-connection-editor)$, title:^(.*)$"
