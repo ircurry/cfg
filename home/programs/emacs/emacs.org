@@ -15,9 +15,9 @@
 I have not tested this config on any emacs version less than 29.1.
 
 #+begin_src emacs-lisp
-  ;; ===Check Emacs Version===
-  (when (version< emacs-version "29.1")
-    (error "This setup is only guarunteed to work on 29.1, disable this line to load anyways."))
+;; ===Check Emacs Version===
+(when (version< emacs-version "29.1")
+  (error "This setup is only guarunteed to work on 29.1, disable this line to load anyways."))
 #+end_src
 
 ** Some Basic Settings
@@ -25,17 +25,17 @@ I have not tested this config on any emacs version less than 29.1.
 These are some basic settings that don't really fit anywhere else in my config.
 
 #+begin_src emacs-lisp
-  ;; ===Basic Settings===
-  (setq frame-title-format "%b")      ;; Set window title to buffer name
-  (setq initial-scratch-message ";; Scratch Buffer\n\n")
-  (setq initial-buffer-choice t)      ;; Scratch as initial buffer
-  (setq make-backup-files nil)        ;; No more file~ everywhere
-  (setq inhibit-startup-message t)    ;; Starts on blank screen
-  (scroll-bar-mode -1)                ;; Disable visible scrollbar
-  (tool-bar-mode -1)                  ;; Disable tool bar
-  (menu-bar-mode -1)                  ;; Disable menu bar
-  (tooltip-mode -1)                   ;; Disable tooltips
-  (set-fringe-mode 10)                ;; No idea what this does
+;; ===Basic Settings===
+(setq frame-title-format "%b")      ;; Set window title to buffer name
+(setq initial-scratch-message ";; Scratch Buffer\n\n")
+(setq initial-buffer-choice t)      ;; Scratch as initial buffer
+(setq make-backup-files nil)        ;; No more file~ everywhere
+(setq inhibit-startup-message t)    ;; Starts on blank screen
+(scroll-bar-mode -1)                ;; Disable visible scrollbar
+(tool-bar-mode -1)                  ;; Disable tool bar
+(menu-bar-mode -1)                  ;; Disable menu bar
+(tooltip-mode -1)                   ;; Disable tooltips
+(set-fringe-mode 10)                ;; No idea what this does
 #+end_src
 
 ** Enabling Disabled Functions
@@ -43,9 +43,9 @@ These are some basic settings that don't really fit anywhere else in my config.
 These functions I want enabled and not asking me if I want to run the command every single time.
 
 #+begin_src emacs-lisp
-  ;; ===Enable Disabled Functions===
-  (dolist (c '(narrow-to-region narrow-to-page upcase-region downcase-region))
-    (put c 'disabled nil))
+;; ===Enable Disabled Functions===
+(dolist (c '(narrow-to-region narrow-to-page upcase-region downcase-region))
+  (put c 'disabled nil))
 #+end_src
 
 ** "Disabling" Custom
@@ -53,8 +53,8 @@ These functions I want enabled and not asking me if I want to run the command ev
 Set it to a temp file so I don't have to deal with custom, lol.
 
 #+begin_src emacs-lisp
-  ;; ===Disable Custom===
-  (setq custom-file (make-temp-file "emacs-custom-"))
+;; ===Disable Custom===
+(setq custom-file (make-temp-file "emacs-custom-"))
 #+end_src
 
 ** Package.el and Package Archives
@@ -62,14 +62,14 @@ Set it to a temp file so I don't have to deal with custom, lol.
 This is only used if I find myself on a non-nixos system, as I have nixos manage my emacs packages instead.
 
 #+begin_src emacs-lisp
-  ;; ===Package Initialization===
-  (require 'package)
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                           ("elpa" . "https://elpa.gnu.org/packages/")
-                           ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; Setting Repos
-  (package-initialize)
-  (unless package-archive-contents
-    (package-refresh-contents))
+;; ===Package Initialization===
+(require 'package)
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")
+                         ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; Setting Repos
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
 #+end_src
 
 ** Use-package
@@ -77,10 +77,10 @@ This is only used if I find myself on a non-nixos system, as I have nixos manage
 Setting up use package. Not sure if all of this is necessary now since ~use-package~ comes with base emacs now.
 
 #+begin_src emacs-lisp
-  ;; ===use-package Initialization===
-  (unless (package-installed-p 'use-package)
-    (package-install 'use-package))
-  (require 'use-package)
+;; ===use-package Initialization===
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(require 'use-package)
 #+end_src
 
 ** Configuration modules.
@@ -88,53 +88,53 @@ Setting up use package. Not sure if all of this is necessary now since ~use-pack
 First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just as simple as ~(require 'module)~.
 
 #+begin_src emacs-lisp
-  ;; ===Load Modules and Packages===
-  (dolist (path '("cur-lisp" "cur-config"))
-    (add-to-list 'load-path (locate-user-emacs-file path)))
+;; ===Load Modules and Packages===
+(dolist (path '("cur-lisp" "cur-config"))
+  (add-to-list 'load-path (locate-user-emacs-file path)))
 
-  ;; =====================
-  ;; == Loading Modules ==
-  ;; =====================
+;; =====================
+;; == Loading Modules ==
+;; =====================
 
-  ;; ===Essentials===
-  (require 'cur-config-essentials)
-  (require 'cur-config-bindings)
-  (require 'cur-config-help)
-  (require 'cur-config-dired)
+;; ===Essentials===
+(require 'cur-config-essentials)
+(require 'cur-config-bindings)
+(require 'cur-config-help)
+(require 'cur-config-dired)
 
-  ;; ===Interfaces===
-  (require 'cur-config-faces)
-  (require 'cur-config-completion)
-  (require 'cur-config-window)
-  ;; (require 'cur-modeline)
+;; ===Interfaces===
+(require 'cur-config-faces)
+(require 'cur-config-completion)
+(require 'cur-config-window)
+;; (require 'cur-modeline)
 
-  ;; ===Languages===
-  (require 'cur-config-ide)
-  (require 'cur-config-lisp)
-  (require 'cur-config-java)
-  (require 'cur-config-markup)
-  (require 'cur-config-nix)
-  (require 'cur-config-rust)
-  (require 'cur-config-haskell)
-  (require 'cur-config-ocaml)
-  (require 'cur-config-c)
-  (require 'cur-config-zig)
-  (require 'cur-config-go)
+;; ===Languages===
+(require 'cur-config-ide)
+(require 'cur-config-lisp)
+(require 'cur-config-java)
+(require 'cur-config-markup)
+(require 'cur-config-nix)
+(require 'cur-config-rust)
+(require 'cur-config-haskell)
+(require 'cur-config-ocaml)
+(require 'cur-config-c)
+(require 'cur-config-zig)
+(require 'cur-config-go)
 
-  ;; ===Terminal Apps===
-  (require 'cur-config-shell)
+;; ===Terminal Apps===
+(require 'cur-config-shell)
 
-  ;; ===Word Processing===
-  (require 'cur-config-org)
+;; ===Word Processing===
+(require 'cur-config-org)
 
-  ;; ===Misc===
-  (require 'cur-config-smol-net)
-  (require 'cur-config-elcord)
+;; ===Misc===
+(require 'cur-config-smol-net)
+(require 'cur-config-elcord)
 
-  ;; ===Direnv is Last===
-  (require 'cur-config-direnv)
+;; ===Direnv is Last===
+(require 'cur-config-direnv)
 
-  (provide 'init)
+(provide 'init)
 #+end_src
 
 * Configuration Modules (=cur-config=)
@@ -151,12 +151,12 @@ These are the basic configurations that I have done in emacs. Its sort of a hodg
 Removing the weird delay for highlighting the opposite parenthesis.
 
 #+begin_src emacs-lisp
-  ;; ===Parens===
-  (use-package paren
-    :ensure nil
-    :demand t
-    :custom
-    (show-paren-delay 0 "No delay for paren highlighting"))
+;; ===Parens===
+(use-package paren
+  :ensure nil
+  :demand t
+  :custom
+  (show-paren-delay 0 "No delay for paren highlighting"))
 #+end_src
 
 *** Line numbers
@@ -164,83 +164,83 @@ Removing the weird delay for highlighting the opposite parenthesis.
 I like having absolute line numbers, especially since the meow number selection makes relative line numbers not as useful. Some modes, especially terminal and shell modes, look weird with line numbers so I disable them. Org-mode also has them disabled because they make the document look kind of weird, especially with images or non-text.
 
 #+begin_src emacs-lisp
-  ;; ===Line Numbers===
-  (column-number-mode)
-  (global-display-line-numbers-mode t)
-  (setq display-line-numbers-type t)
-  ;; Disable line numbers for terminal modes
-  (dolist (mode '(bookmark-bmenu-mode-hook
-                  org-mode-hook
-                  dired-mode-hook
-                  term-mode-hook
-                  vterm-mode-hook
-                  shell-mode-hook
-                  eshell-mode-hook
-                  eat-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0))))
+;; ===Line Numbers===
+(column-number-mode)
+(global-display-line-numbers-mode t)
+(setq display-line-numbers-type t)
+;; Disable line numbers for terminal modes
+(dolist (mode '(bookmark-bmenu-mode-hook
+                org-mode-hook
+                dired-mode-hook
+                term-mode-hook
+                vterm-mode-hook
+                shell-mode-hook
+                eshell-mode-hook
+                eat-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 #+end_src
 
 *** Bookmark Settings
 
 #+begin_src emacs-lisp
-  (use-package bookmark
-    :commands (bookmark-set
-               bookmark-set-no-overwrite
-               bookmark-jump
-               bookmark-bmenu-list)
-    :hook (bookmark-bmenu-mode . hl-line-mode)
-    :config
-    (setq bookmark-save-flag 1))
+(use-package bookmark
+  :commands (bookmark-set
+             bookmark-set-no-overwrite
+             bookmark-jump
+             bookmark-bmenu-list)
+  :hook (bookmark-bmenu-mode . hl-line-mode)
+  :config
+  (setq bookmark-save-flag 1))
 #+end_src
 
 *** Recent Files
 
 #+begin_src emacs-lisp
-  (use-package recentf
-    :hook (emacs-startup . recentf-mode))
+(use-package recentf
+  :hook (emacs-startup . recentf-mode))
 #+end_src
 
 *** Isearch configuration
 
 #+begin_src emacs-lisp
-  (use-package isearch
-    :ensure nil
-    :demand t
-    :custom
-    (isearch-wrap-pause 'no-ding)
-    (isearch-repeat-on-direction-change t)
-    :config
-    (setq isearch-lazy-count t)
-    (setq lazy-count-prefix-format "(%s/%s) ")
-    (setq lazy-count-suffix-format nil))
+(use-package isearch
+  :ensure nil
+  :demand t
+  :custom
+  (isearch-wrap-pause 'no-ding)
+  (isearch-repeat-on-direction-change t)
+  :config
+  (setq isearch-lazy-count t)
+  (setq lazy-count-prefix-format "(%s/%s) ")
+  (setq lazy-count-suffix-format nil))
 #+end_src
 
 *** Proced
 
 #+begin_src emacs-lisp
-  (use-package proced
-    :ensure nil
-    :commands (proced)
-    :custom
-    (proced-auto-update-flag t)
-    (proced-enable-color-flag t)
-    (proced-auto-update-interval 2)
-    (proced-descend t)
-    (proced-filter 'user))
+(use-package proced
+  :ensure nil
+  :commands (proced)
+  :custom
+  (proced-auto-update-flag t)
+  (proced-enable-color-flag t)
+  (proced-auto-update-interval 2)
+  (proced-descend t)
+  (proced-filter 'user))
 #+end_src
 
 *** Emacs Server
 
 #+begin_src emacs-lisp
-  (use-package server
-    :defer 1
-    :config
-    (setq server-client-instructions nil)
-    (unless (server-running-p)
-      (server-start)))
-  
-  (provide 'cur-config-essentials)
+(use-package server
+  :defer 1
+  :config
+  (setq server-client-instructions nil)
+  (unless (server-running-p)
+    (server-start)))
+
+(provide 'cur-config-essentials)
 #+end_src
 
 ** Key bindings configurations (=cur-config-bindings.el=)
@@ -259,9 +259,9 @@ hydra
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Hydra===
-  (use-package hydra
-    :demand t)
+;; ===Hydra===
+(use-package hydra
+  :demand t)
 #+end_src
 
 *** Meow
@@ -271,11 +271,11 @@ This is the meat and potatoes of my keybindings. First I have several keymaps: s
 I try to keep the leader key map as static as possible, with no keybindings being changed with the mode. If I want something to change with the mode I will put it under C-c, which I can access from =RET= via normal mode. The leader key primarily has things for interacting with general emacs constructs, like buffers, universal arg, =M-x=, etc.
 
 The meow states, what vim/nvim call modes, are as follows:
-  - *Normal* - The main state that is used. Used for navigation, selection, and editing. Basically vim's normal and visual mode in one.
-  - *Insert* - Insert text, esc to go back to normal state.
-  - *Motion* - A minimal state used when you don't know what the major-mode does. I have only =j=, =k=, and =SPC= bound to down, up, and leader respectively. Everything else is as the major mode defines it. It's just there so I'm still able to interface with emacs like I normally would, just with a minimal interface.
-  - *Keypad* - Leader key map.
-  - *Beacon* - Multi-cursor in a region. Very convenient but kmacros are GOATed.
+- *Normal* - The main state that is used. Used for navigation, selection, and editing. Basically vim's normal and visual mode in one.
+- *Insert* - Insert text, esc to go back to normal state.
+- *Motion* - A minimal state used when you don't know what the major-mode does. I have only =j=, =k=, and =SPC= bound to down, up, and leader respectively. Everything else is as the major mode defines it. It's just there so I'm still able to interface with emacs like I normally would, just with a minimal interface.
+- *Keypad* - Leader key map.
+- *Beacon* - Multi-cursor in a region. Very convenient but kmacros are GOATed.
 
 Also of note, I find it easier to think about the cursor in normal mode as being a single character selection. This is how helix does it and I really like it so I have a lot of the meow fallback commands to operate on the char after the cursor.
 
@@ -284,7 +284,7 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
 NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-sitter]] to see if its worth using.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  meow
+meow
 #+end_src
 
 #+begin_src emacs-lisp
@@ -373,81 +373,81 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("1" . delete-other-windows)
      '("2" . split-window-right)
      '("3" . split-window-below)
-     ;'("4" . )
-     ;'("5" . )
-     ;'("6" . )
-     ;'("7" . )
-     ;'("8" . )
-     ;'("9" . )
+					;'("4" . )
+					;'("5" . )
+					;'("6" . )
+					;'("7" . )
+					;'("8" . )
+					;'("9" . )
      '("0" . "C-x 0") ; delete window
 
      ;; ===2nd Row===
-     ;'("TAB"  . )
+					;'("TAB"  . )
      '("q" . meow-comment) ; comment dwim
      '("w" . cur/window/body)
-     ;'("e" . )
+					;'("e" . )
      (cons "r" cur/register-map)
      (cons "t" cur/toggle-map)
-     ;'("y" . )
+					;'("y" . )
      '("u" . "C-u")   ; universal argument
-     ;'("i" . )
+					;'("i" . )
      '("o" . "C-x o") ; other window
      (cons "p" project-prefix-map)
-     ;'("-" . )
+					;'("-" . )
 
      ;; ===3rd Row===
-     ;'("<escape>" . )
-     ;'("a" . )
+					;'("<escape>" . )
+					;'("a" . )
      '("s" . "C-x C-s") ; save buffer
      '("d" . kill-current-buffer)
      '("f" . "C-x C-f") ; find file
-     ;'("g" . ) ; C-M- map
-     ;'("h" . ) ; C-h map
-     ;'("j" . )
-     ;'("k" . )
-     ;'("l" . )
+					;'("g" . ) ; C-M- map
+					;'("h" . ) ; C-h map
+					;'("j" . )
+					;'("k" . )
+					;'("l" . )
      (cons ";" cur/sub-leader-keymap)
      '("RET"   . "M-x")
 
      ;; ===4th Row===
      (cons "z" cur/alignment-map)
-     ;'("x" . ) ; C-x map
-     ;'("c" . ) ; C-c map
-     ;'("v" . )
+					;'("x" . ) ; C-x map
+					;'("c" . ) ; C-c map
+					;'("v" . )
      '("b" . "C-x b")
-     ;'("n" . )
-     ;'("m" . ) ; M- map
+					;'("n" . )
+					;'("m" . ) ; M- map
      '("," . meow-beginning-of-thing)
      '("." . meow-end-of-thing)
      '("/" . rg)
-     ;'("'"  . )
+					;'("'"  . )
      )
     (meow-normal-define-key
      ;; ===Top Row===
      '("1" . meow-expand-1)
-     ;'("!" . )
+					;'("!" . )
      '("2" . meow-expand-2)
-     ;'("@" . )
+					;'("@" . )
      '("3" . meow-expand-3)
-     ;'("#" . )
+					;'("#" . )
      '("4" . meow-expand-4)
-     ;'("$" . )
+					;'("$" . )
      '("5" . meow-expand-5)
-     ;'("%" . )
+					;'("%" . )
      '("6" . meow-expand-6)
-     ;'("^" . )
+					;'("^" . )
      '("7" . meow-expand-7)
-     ;'("&" . )
+					;'("&" . )
      '("8" . meow-expand-8)
-     ;'("*" . )
+					;'("*" . )
      '("9" . meow-expand-9)
-     ;'("(" . )
+					;'("(" . )
      '("0" . meow-expand-0)
-     ;'(")" . )
+					;'(")" . )
 
      ;; ===2nd Row===
-     ;'("TAB"  . )
-     ;'("BTAB" . )
+					;'("TAB"  . )
+					;'("BTAB" . )
      '("q" . kmacro-end-and-call-macro)
      '("Q" . cur/kmacro-toggle)
      '("w" . meow-mark-word)
@@ -461,7 +461,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("y" . meow-save)
      '("Y" . meow-clipboard-save)
      '("u" . meow-undo)
-     ;'("U" . )
+					;'("U" . )
      '("i" . meow-insert)
      '("I" . meow-open-below)
      '("o" . meow-block)
@@ -469,14 +469,14 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("p" . meow-yank)
      '("P" . meow-clipboard-yank)
      '("-" . negative-argument)
-     ;'("_" . )
+					;'("_" . )
 
      ;; ===3rd Row===
      '("<escape>" . keyboard-quit)
      '("a" . meow-append)
      '("A" . meow-open-above)
      '("s" . repeat)
-     ;'("S" . )
+					;'("S" . )
      '("d" . meow-kill)
      '("D" . meow-c-k)
      '("f" . meow-find)
@@ -494,23 +494,23 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '(";" . meow-reverse)
      '(":" . meow-page-up)
      '("RET" . "C-c")
-     ;'("S-RET" . )
+					;'("S-RET" . )
 
      ;; ===4th Row===
      '("z" . meow-pop-selection)
-     ;'("Z" . )
+					;'("Z" . )
      '("x" . meow-line)
      '("X" . meow-line-expand)
      '("c" . meow-change)
-     ;'("C" . )
+					;'("C" . )
      (cons "v" goto-map)
-     ;'("V" . )
+					;'("V" . )
      '("b" . meow-back-word)
      '("B" . meow-back-symbol)
      '("n" . meow-search)
      '("N" . meow-visit)
      '("m" . meow-join)
-     ;'("M" . )
+					;'("M" . )
      '("," . meow-bounds-of-thing)
      '("<" . meow-beginning-of-thing)
      '("." . meow-inner-of-thing)
@@ -623,13 +623,13 @@ which-key
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===which-key===
-  (use-package which-key
-    :demand t
-    :init (which-key-mode)
-    :diminish which-key-mode
-    :config
-    (setq which-key-idle-delay 0.0001))
+;; ===which-key===
+(use-package which-key
+  :demand t
+  :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 0.0001))
 #+end_src
 
 *** Helpful
@@ -637,20 +637,20 @@ which-key
 Provides additional info help.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  helpful
+helpful
 #+end_src
 
 #+begin_src emacs-lisp :tangle no
-  ;; ===helpful===
-  (use-package helpful
-    ;; :custom
-    ;; (counsel-describe-function-function #'helpful-callable)
-    ;; (counsel-describe-variable-function #'helpful-variable)
-    :bind
-    ;; ([remap describe-function] . counsel-describe-function)
-    ([remap describe-command] . helpful-command)
-    ;; ([remap describe-variable] . counsel-describe-variable)
-    ([remap describe-key] . helpful-key))
+;; ===helpful===
+(use-package helpful
+  ;; :custom
+  ;; (counsel-describe-function-function #'helpful-callable)
+  ;; (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ;; ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command] . helpful-command)
+  ;; ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-key] . helpful-key))
 #+end_src
 
 *** Info
@@ -658,55 +658,55 @@ Provides additional info help.
 Info is emacs' built in manual system. In essence, its a more feature rich =man= (which emacs also has easy access to with =woman=). Right now I have a custom meow state for keybindings. However, this kind of sucks and I will eventually switch to just changing the default keybindings.
 
 #+begin_src emacs-lisp
-  ;; ===Info===
-  (use-package info
-    :config
-    (setq meow-info-keymap (make-keymap))
-    (meow-define-state info
-      "meow state for interacting with Info"
-      :lighter "INFO"
-      :keymap meow-info-keymap)
-    (meow-define-keys 'info
-      '(":" . meow-page-up)
-      '("?" . meow-page-down)
-      '("," . beginning-of-buffer)
-      '("." . end-of-buffer)
-      ; '("a" . )
-      ; '("b" . )
-      ; '("c" . Info-follow-reference)
-      ; '("d" . )
-      ; '("e" . )
-      '("f" . Info-menu)
-      '("g" . keyboard-quit)
-      '("h" . Info-backward-node)
-      '("H" . meow-left)
-      '("i" . Info-index)
-      '("j" . meow-next)
-      '("k" . meow-prev)
-      '("l" . Info-forward-node)
-      '("L" . meow-right)
-      '("m" . meow-join)
-      '("n" . Info-next)
-      ; '("o" . )
-      '("p" . Info-prev)
-      '("q" . meow-goto-line)
-      '("r" . Info-follow-reference)
-      ; '("s" . )
-      '("t" . Info-toc)
-      '("u" . Info-up)
-      '("v" . meow-visit)
-      ; '("w" . )
-      ; '("x" . )
-      '("y" . Info-copy-current-node-name)
-      '("z" . info-display-manual)
-      '("RET" . Info-follow-nearest-node)
-      '("SPC" . meow-keypad)
-      '("TAB" . Info-next-reference)
-      '("<backtab>" . Info-prev-reference)
-      '("<escape>" . keyboard-quit))
-    (add-hook 'Info-mode-hook #'meow-info-mode))
+;; ===Info===
+(use-package info
+  :config
+  (setq meow-info-keymap (make-keymap))
+  (meow-define-state info
+    "meow state for interacting with Info"
+    :lighter "INFO"
+    :keymap meow-info-keymap)
+  (meow-define-keys 'info
+    '(":" . meow-page-up)
+    '("?" . meow-page-down)
+    '("," . beginning-of-buffer)
+    '("." . end-of-buffer)
+					; '("a" . )
+					; '("b" . )
+					; '("c" . Info-follow-reference)
+					; '("d" . )
+					; '("e" . )
+    '("f" . Info-menu)
+    '("g" . keyboard-quit)
+    '("h" . Info-backward-node)
+    '("H" . meow-left)
+    '("i" . Info-index)
+    '("j" . meow-next)
+    '("k" . meow-prev)
+    '("l" . Info-forward-node)
+    '("L" . meow-right)
+    '("m" . meow-join)
+    '("n" . Info-next)
+					; '("o" . )
+    '("p" . Info-prev)
+    '("q" . meow-goto-line)
+    '("r" . Info-follow-reference)
+					; '("s" . )
+    '("t" . Info-toc)
+    '("u" . Info-up)
+    '("v" . meow-visit)
+					; '("w" . )
+					; '("x" . )
+    '("y" . Info-copy-current-node-name)
+    '("z" . info-display-manual)
+    '("RET" . Info-follow-nearest-node)
+    '("SPC" . meow-keypad)
+    '("TAB" . Info-next-reference)
+    '("<backtab>" . Info-prev-reference)
+    '("<escape>" . keyboard-quit))
+  (add-hook 'Info-mode-hook #'meow-info-mode))
 
-  (provide 'cur-config-help)
+(provide 'cur-config-help)
 #+end_src
 
 ** Dired configuration (=cur-config-dired.el=)
@@ -785,8 +785,8 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
           ;; ("Y" . )
           ("u" . dired-unmark)
           ("U" . dired-unmark-all-marks)
-          ("i" . dired-isearch-filenames-regexp)
-          ("I" . dired-do-isearch-regexp)
+          ;; ("i" . dired-isearch-filenames-regexp)
+          ("I" . image-dired)
           ;; ("o" . )
           ("O" . dired-do-chown)
           ("p" . dired-previous-line)
@@ -798,8 +798,8 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
           ("<escape>" . keyboard-quit)
           ;; ("a" . )
           ;; ("A" . )
-          ;; ("s" . )
-          ;; ("S" . )
+          ("s" . dired-isearch-filenames-regexp)
+          ("S" . dired-do-isearch-regexp)
           ("d" . dired-do-kill-lines)
           ("D" . dired-do-delete)
           ("f" . find-file)
@@ -892,9 +892,9 @@ I think that emacs should have a lot of eye candy, especially since I spend so m
 JetBrains Mono supremacy.
 
 #+begin_src emacs-lisp
-  ;; ===Default Font===
-  (add-to-list 'default-frame-alist
-               '(font . "JetBrains Mono Nerd Font-11"))
+;; ===Default Font===
+(add-to-list 'default-frame-alist
+             '(font . "JetBrains Mono Nerd Font-11"))
 #+end_src
 
 *** Default Opacity
@@ -902,9 +902,9 @@ JetBrains Mono supremacy.
 I have this transparency set to be the same as with my Alacritty config. This adds more consistency to my computing experience. It also just looks really cool.
 
 #+begin_src emacs-lisp
-  ;; ===Default Opacity===
-  (add-to-list 'default-frame-alist
-               '(alpha-background . 85))
+;; ===Default Opacity===
+(add-to-list 'default-frame-alist
+             '(alpha-background . 85))
 #+end_src
 
 *** TODO Custom themes
@@ -912,22 +912,22 @@ I have this transparency set to be the same as with my Alacritty config. This ad
 I have several custom themes in a directory weirdly named themes. These are the =everforest= and =kanagawa= themes. I have changed these from the originals. TODO: add the links to the original themes.
 
 #+begin_src emacs-lisp
-  ;; ===Themes Path===
-  (add-to-list 'custom-theme-load-path (locate-user-emacs-file "themes"))
+;; ===Themes Path===
+(add-to-list 'custom-theme-load-path (locate-user-emacs-file "themes"))
 
-  ;; ===Theme Library===
-  (use-package cur-theme
-    :bind ( :map cur/toggle-map
-            ("C-t" . cur-override-theme-load-theme))
-    :custom
-    (cur-override-theme-overrides
-     '((doom-gruvbox (secondary-selection :background "#504945"))
-       (doom-flatwhite (haskell-operator-face :background (doom-color 'bg)
-                                              :foreground (doom-color 'fg))
-                       (haskell-type-face :background (doom-color 'fw-teal-blend)
-                                          :foreground (doom-color 'fw-teal-text))
-                       (haskell-constructor-face :background (doom-color 'fw-orange-blend)
-                                                 :foreground (doom-color 'fw-orange-text))))))
+;; ===Theme Library===
+(use-package cur-theme
+  :bind ( :map cur/toggle-map
+          ("C-t" . cur-override-theme-load-theme))
+  :custom
+  (cur-override-theme-overrides
+   '((doom-gruvbox (secondary-selection :background "#504945"))
+     (doom-flatwhite (haskell-operator-face :background (doom-color 'bg)
+                                            :foreground (doom-color 'fg))
+                     (haskell-type-face :background (doom-color 'fw-teal-blend)
+                                        :foreground (doom-color 'fw-teal-text))
+                     (haskell-constructor-face :background (doom-color 'fw-orange-blend)
+                                               :foreground (doom-color 'fw-orange-text))))))
 #+end_src
 
 *** Doom themes
@@ -935,15 +935,15 @@ I have several custom themes in a directory weirdly named themes. These are the 
 Doom themes are a theme pack specifically for the Doom Emacs distribution, but work well without doom as well. I have a function that sets some faces based on the theme in ~custom-enabled-themes~. This function is more than just a little jank and I plan on creating my own themes instead of trying to hack around ones made by someone else.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  doom-themes
+doom-themes
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Doom Emacs Themes===
-  (use-package doom-themes
-    :demand t
-    :config
-    (cur-override-theme-load-theme 'doom-tomorrow-night))
+;; ===Doom Emacs Themes===
+(use-package doom-themes
+  :demand t
+  :config
+  (cur-override-theme-load-theme 'doom-tomorrow-night))
 #+end_src
 
 *** Autothemer
@@ -955,8 +955,8 @@ autothemer
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Autothemer===
-  (use-package autothemer)
+;; ===Autothemer===
+(use-package autothemer)
 #+end_src
 
 *** Catppuccin Theme
@@ -964,15 +964,15 @@ autothemer
 [[https:github.com/catppuccin/catppuccin][Link]] to the catppuccin theme.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  catppuccin-theme
+catppuccin-theme
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Catppuccin Theme===
-  (use-package catppuccin-theme
-    :after (autothemer cur-theme))
-    ;; :config
-    ;; (cur-override-theme-load-theme 'catppuccin))
+;; ===Catppuccin Theme===
+(use-package catppuccin-theme
+  :after (autothemer cur-theme))
+;; :config
+;; (cur-override-theme-load-theme 'catppuccin))
 #+end_src
 
 *** Text Scaling Hydra
@@ -980,14 +980,14 @@ autothemer
 A simple hydra that allows me to interactively set the size of the text in a buffer.
 
 #+begin_src emacs-lisp
-  ;; ===Text Scaling===
-  (defhydra hydra-text-scale (:timeout 4)
-    "scale text"
-    ("k" text-scale-increase "in")
-    ("j" text-scale-decrease "out")
-    ("f" nil "finished" :exit t)
-    ("RET" nil "finished" :exit t))
-  (define-key cur/toggle-map (kbd "C-s") 'hydra-text-scale/body)
+;; ===Text Scaling===
+(defhydra hydra-text-scale (:timeout 4)
+  "scale text"
+  ("k" text-scale-increase "in")
+  ("j" text-scale-decrease "out")
+  ("f" nil "finished" :exit t)
+  ("RET" nil "finished" :exit t))
+(define-key cur/toggle-map (kbd "C-s") 'hydra-text-scale/body)
 #+end_src
 
 *** Ef-themes
@@ -999,10 +999,10 @@ ef-themes
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Ef-Themes===
-  (use-package ef-themes)
-    ;; :config
-    ;; (cur/load-theme 'ef-tritanopia-dark))
+;; ===Ef-Themes===
+(use-package ef-themes)
+;; :config
+;; (cur/load-theme 'ef-tritanopia-dark))
 #+end_src
 
 *** Nerd Icons Ibuffer
@@ -1010,13 +1010,13 @@ ef-themes
 Adds Icons to ~ibuffer~. Not really a face thing but I don't have a dedicated ~ibuffer~ module so it goes here instead.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  nerd-icons-ibuffer
+nerd-icons-ibuffer
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Ibuffer Icons===
-  (use-package nerd-icons-ibuffer
-    :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
+;; ===Ibuffer Icons===
+(use-package nerd-icons-ibuffer
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 #+end_src
 
 *** Spacious Padding
@@ -1028,22 +1028,22 @@ spacious-padding
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Spacious Padding===
-  (use-package spacious-padding
-    :disabled t
-    :config
-    (setq spacious-padding-widths
-          '(:internal-border-width 8
-            :header-line-width 0
-            :mode-line-width 0
-            :tab-width 0
-            :right-divider-width 18
-            :scroll-bar-width 0
-            :fringe-width 0))
-    (setq spacious-padding-subtle-mode-line nil)
-    (spacious-padding-mode 1))
+;; ===Spacious Padding===
+(use-package spacious-padding
+  :disabled t
+  :config
+  (setq spacious-padding-widths
+        '(:internal-border-width 8
+				 :header-line-width 0
+				 :mode-line-width 0
+				 :tab-width 0
+				 :right-divider-width 18
+				 :scroll-bar-width 0
+				 :fringe-width 0))
+  (setq spacious-padding-subtle-mode-line nil)
+  (spacious-padding-mode 1))
 
-  (provide 'cur-config-faces)
+(provide 'cur-config-faces)
 #+end_src
 
 *** Doom Modeline
@@ -1055,8 +1055,8 @@ doom-modeline
 #+end_src
 
 #+begin_src emacs-lisp
-  (use-package doom-modeline
-    :hook (emacs-startup . doom-modeline-mode))
+(use-package doom-modeline
+  :hook (emacs-startup . doom-modeline-mode))
 #+end_src
 
 ** Completion system configurations (=cur-config-completion.el=)
@@ -1069,8 +1069,8 @@ This section is not about code completion. Rather, this is my configuration for 
 Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]] suite for doing completions in emacs. I like it but I know that the vertico/marginelia/consult/embark chain is better, faster, and more modern. I plan to make the switch at some point but for now I sticking with ivy.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  embark
-  embark-consult
+embark
+embark-consult
 #+end_src
 
 *** Completions Styles
@@ -1080,32 +1080,32 @@ orderless
 #+end_src
 
 #+begin_src emacs-lisp
-  (use-package minibuffer
-    :config
-    (setq completion-styles '(basic substring orderless))
-    (setq completion-category-overrides
-          '((file      (styles . (basic partial-completion orderless)))
-            (kill-ring (styles . (emacs22 orderless))))))
+(use-package minibuffer
+  :config
+  (setq completion-styles '(basic substring orderless))
+  (setq completion-category-overrides
+        '((file      (styles . (basic partial-completion orderless)))
+          (kill-ring (styles . (emacs22 orderless))))))
 
-  (use-package orderless
-    :bind ( :map minibuffer-local-completion-map
-            ("SPC" . nil)
-            ("?" . nil))
-    :config
-    (setq orderless-matching-styles '(orderless-prefixes orderless-regexp)))
+(use-package orderless
+  :bind ( :map minibuffer-local-completion-map
+          ("SPC" . nil)
+          ("?" . nil))
+  :config
+  (setq orderless-matching-styles '(orderless-prefixes orderless-regexp)))
 #+end_src
 
 *** Vertico
 
 #+begin_src text :tangle ./packages.txt :padline no
-  vertico
+vertico
 #+end_src
 
 #+begin_src emacs-lisp
-  (use-package vertico
-    :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
-    :init
-    (vertico-mode 1))
+(use-package vertico
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
+  :init
+  (vertico-mode 1))
 #+end_src
 
 *** Marginalia
@@ -1115,21 +1115,21 @@ marginalia
 #+end_src
 
 #+begin_src emacs-lisp
-  (use-package marginalia
-    :config
-    (marginalia-mode 1))
+(use-package marginalia
+  :config
+  (marginalia-mode 1))
 #+end_src
 
 *** Vertico Posframe
 
 #+begin_src text :tangle ./packages.txt :padline no
-  vertico-posframe
+vertico-posframe
 #+end_src
 
 #+begin_src emacs-lisp :tangle no
-  (use-package vertico-posframe
-    :config
-    (vertico-posframe-mode 1))
+(use-package vertico-posframe
+  :config
+  (vertico-posframe-mode 1))
 #+end_src
 
 *** Consult
@@ -1188,19 +1188,19 @@ consult
 *** TODO Embark
 
 #+begin_src text :tangle ./packages.txt :padline no
-  embark
-  embark-consult
+embark
+embark-consult
 #+end_src
 
 #+begin_src emacs-lisp
-  (use-package emabark
-    :bind ( :map global-map
-            ("C-." . embark-act)
-            :map minibuffer-local-map
-            ("C-." . embark-act)
-            :map dired-mode-map
-            ("'"  . embark-act)
-            ("\"" . embark-dwim)))
+(use-package emabark
+  :bind ( :map global-map
+          ("C-." . embark-act)
+          :map minibuffer-local-map
+          ("C-." . embark-act)
+          :map dired-mode-map
+          ("'"  . embark-act)
+          ("\"" . embark-dwim)))
 #+end_src
 
 ** Window management configurations (=cur-config-window.el=)
@@ -1213,46 +1213,51 @@ consult
 These are my settings for ~display-buffer-alist~ so windows just Do What I Mean.
 
 #+begin_src emacs-lisp
-  (use-package cur-window
-    :config
-    (setq window-sides-slots
-          '(1 1 1 1))
-    (setq display-buffer-alist
-          '(("\\`\\*Async Shell Command\\*\\'"
-             (display-buffer-no-window))
-            ("\\*Org Src.*"
-             (display-buffer-same-window))
-            ((or (derived-mode . compilation-mode)
-                 (derived-mode . geiser-mode)
-                 (derived-mode . grep-mode)
-                 (derived-mode . help-mode)
-                 (derived-mode . Info-mode)
-                 (derived-mode . rg-mode)
-                 (derived-mode . woman-mode))
-             (cur-window-display-buffer-below-or-pop)
-             (body-function . cur-window-select-fit-to-size))
-            ((or (derived-mode . occur-mode)
-                 (derived-mode . xref--xref-buffer-mode))
-             (display-buffer-reuse-window
-              display-buffer-below-selected)
-             (dedicated . t)
-             (body-function . cur-window-select-fit-to-size))
-            ((or (derived-mode . justl-mode)
-                 "\\*eshell .*"
-                 "\\*.*-eshell*"
-                 "\\*.*-eat\\*"
-                 "justl - .*")
-             (display-buffer-reuse-window
-              display-buffer-at-bottom)
-             (dedicated . t)
-             (window-height . 0.25))
-            ((or (derived-mode . vterm-mode)
-                 "\\*vterm.*\\*"
-                 "\\*.*-vterm\\*")
-             (display-buffer-reuse-mode-window
-              display-buffer-same-window)))))
+(use-package cur-window
+  :config
+  (setq window-sides-slots
+        '(1 1 1 1))
+  (setq display-buffer-alist
+        '(("\\`\\*Async Shell Command\\*\\'"
+           (display-buffer-no-window))
+          ("\\*Org Src.*"
+           (display-buffer-same-window))
+          ((or (derived-mode . compilation-mode)
+               (derived-mode . geiser-mode)
+               (derived-mode . grep-mode)
+               (derived-mode . help-mode)
+               (derived-mode . Info-mode)
+               (derived-mode . rg-mode)
+               (derived-mode . woman-mode))
+           (cur-window-display-buffer-below-or-pop)
+           (body-function . cur-window-select-fit-to-size))
+	  ("\\*Embark Actions\\*"
+           (display-buffer-reuse-mode-window display-buffer-below-selected)
+           (window-height . fit-window-to-buffer)
+           (window-parameters . ((no-other-window . t)
+                                 (mode-line-format . none))))
+          ((or (derived-mode . occur-mode)
+               (derived-mode . xref--xref-buffer-mode))
+           (display-buffer-reuse-window
+            display-buffer-below-selected)
+           (dedicated . t)
+           (body-function . cur-window-select-fit-to-size))
+          ((or (derived-mode . justl-mode)
+               "\\*eshell .*"
+               "\\*.*-eshell*"
+               "\\*.*-eat\\*"
+               "justl - .*")
+           (display-buffer-reuse-window
+            display-buffer-at-bottom)
+           (dedicated . t)
+           (window-height . 0.25))
+          ((or (derived-mode . vterm-mode)
+               "\\*vterm.*\\*"
+               "\\*.*-vterm\\*")
+           (display-buffer-reuse-mode-window
+            display-buffer-same-window)))))
 
-  (provide 'cur-config-window)
+(provide 'cur-config-window)
 #+end_src
 
 ** IDE configurations (=cur-config-ide.el=)
@@ -1267,30 +1272,30 @@ Emacs can be made to have all the features of a modern text editor and then some
 Lsp-mode is my chosen language server protocol support package. I chose this over eglot because of the richer features and (at the time that I started using lsp) more mature state. I will revisit elgot in the future but for now I am perfectly happy with lsp-mode.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  lsp-mode
+lsp-mode
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===LSP Mode===
-  (use-package lsp-mode
-    :demand t
-    :hook
-    (lsp-mode  . lsp-enable-which-key-integration)
-    :custom
-    (lsp-keymap-prefix "C-c C-M-l" "lsp mode keymap")
-    (lsp-file-watch-threshold 1750)
-    :bind (:map lsp-mode-map
-                ("C-c C-a" . lsp-execute-code-action)  ; code actions
-                ("C-c C-e" . lsp-treemacs-errors-list) ; treemacs error list
-                ("C-c f"   . lsp-find-references)      ; find references
-                ("C-c r"   . lsp-find-definition))     ; find definitions
-    :config
-    (lsp-deferred)
-    (setq gc-cons-threshold (* 100 1024 1024))
-    (setq read-process-output-max (* 3 1024 1024))
-    (setq lsp-idle-delay 0.500)
-    (setq lsp-lens-enable nil)
-    (lsp-enable-which-key-integration t))
+;; ===LSP Mode===
+(use-package lsp-mode
+  :demand t
+  :hook
+  (lsp-mode  . lsp-enable-which-key-integration)
+  :custom
+  (lsp-keymap-prefix "C-c C-M-l" "lsp mode keymap")
+  (lsp-file-watch-threshold 1750)
+  :bind (:map lsp-mode-map
+              ("C-c C-a" . lsp-execute-code-action)  ; code actions
+              ("C-c C-e" . lsp-treemacs-errors-list) ; treemacs error list
+              ("C-c f"   . lsp-find-references)      ; find references
+              ("C-c r"   . lsp-find-definition))     ; find definitions
+  :config
+  (lsp-deferred)
+  (setq gc-cons-threshold (* 100 1024 1024))
+  (setq read-process-output-max (* 3 1024 1024))
+  (setq lsp-idle-delay 0.500)
+  (setq lsp-lens-enable nil)
+  (lsp-enable-which-key-integration t))
 #+end_src
 
 *** LSP UI
@@ -1302,26 +1307,26 @@ lsp-ui
 #+end_src
 
 #+begin_src emacs-lisp
-  (use-package lsp-ui
-    :after (lsp-mode)
-    :custom
-    (lsp-ui-doc-enable nil "lsp-ui doc disabled by default")
-    (lsp-ui-doc-show-with-cursor t "lsp-ui doc follows cursor")
-    (lsp-ui-doc-show-with-mouse t "lsp-ui doc follows mouse")
-    (lsp-ui-doc-position 'at-point "lsp-ui doc shows at cursor")
-    :bind (:map lsp-ui-mode-map
-                ("C-c C-f" . lsp-ui-peek-find-references)  ; find references ui
-                ("C-c C-r" . lsp-ui-peek-find-definitions) ; find definitions ui
-                ("C-c C-d" . lsp-ui-doc-mode) ; toggle doc mode
-                :map lsp-ui-peek-mode-map
-                ("ESC" . lsp-ui-peek--abort)             ; toggle doc mode
-                ("g"   . lsp-ui-peek--abort)             ; toggle doc mode
-                ("j"   . lsp-ui-peek--select-next)       ; toggle doc mode
-                ("k"   . lsp-ui-peek--select-prev)       ; toggle doc mode
-                ("C-j" . lsp-ui-peek--select-next-file)  ; toggle doc mode
-                ("C-k" . lsp-ui-peek--select-prev-file)) ; toggle doc mode
-    :hook
-    (lsp-mode . lsp-ui-mode))
+(use-package lsp-ui
+  :after (lsp-mode)
+  :custom
+  (lsp-ui-doc-enable nil "lsp-ui doc disabled by default")
+  (lsp-ui-doc-show-with-cursor t "lsp-ui doc follows cursor")
+  (lsp-ui-doc-show-with-mouse t "lsp-ui doc follows mouse")
+  (lsp-ui-doc-position 'at-point "lsp-ui doc shows at cursor")
+  :bind (:map lsp-ui-mode-map
+              ("C-c C-f" . lsp-ui-peek-find-references)  ; find references ui
+              ("C-c C-r" . lsp-ui-peek-find-definitions) ; find definitions ui
+              ("C-c C-d" . lsp-ui-doc-mode) ; toggle doc mode
+              :map lsp-ui-peek-mode-map
+              ("ESC" . lsp-ui-peek--abort)             ; toggle doc mode
+              ("g"   . lsp-ui-peek--abort)             ; toggle doc mode
+              ("j"   . lsp-ui-peek--select-next)       ; toggle doc mode
+              ("k"   . lsp-ui-peek--select-prev)       ; toggle doc mode
+              ("C-j" . lsp-ui-peek--select-next-file)  ; toggle doc mode
+              ("C-k" . lsp-ui-peek--select-prev-file)) ; toggle doc mode
+  :hook
+  (lsp-mode . lsp-ui-mode))
 #+end_src
 
 *** TODO Eglot
@@ -1331,24 +1336,24 @@ lsp-ui
 The code completion system. This is different from completions systems like ivy or vertico, this is for interactively completing a symbol while programming.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  company
+company
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Company Mode===
-  (use-package company
-    :hook
-    (prog-mode . company-mode)
-    (lsp-mode . company-mode)
-    :bind (:map company-active-map
-                ("<tab>" . company-complete-common-or-cycle)
-                ("<return>" . company-complete-selection))
-    (:map lsp-mode-map
-          ("<tab>" . company-indent-or-complete-common))
-    :custom
-    (company-minimum-prefix-length 1)
-    (company-idle-delay 0.0))
-  ;;(company-tng-configure-default))
+;; ===Company Mode===
+(use-package company
+  :hook
+  (prog-mode . company-mode)
+  (lsp-mode . company-mode)
+  :bind (:map company-active-map
+              ("<tab>" . company-complete-common-or-cycle)
+              ("<return>" . company-complete-selection))
+  (:map lsp-mode-map
+        ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+;;(company-tng-configure-default))
 #+end_src
 
 *** TODO Corfu
@@ -1362,11 +1367,11 @@ flycheck
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Flycheck===
-  (use-package flycheck
-    :hook
-    (prog-mode . flycheck-mode)
-    (lsp-mode  . flycheck-mode))
+;; ===Flycheck===
+(use-package flycheck
+  :hook
+  (prog-mode . flycheck-mode)
+  (lsp-mode  . flycheck-mode))
 #+end_src
 
 *** TODO Flymake
@@ -1376,14 +1381,14 @@ flycheck
 Project tree, I don't use this all that often.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  treemacs
+treemacs
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Treemacs==
-  (use-package treemacs
-    :config
-    (treemacs-follow-mode))
+;; ===Treemacs==
+(use-package treemacs
+  :config
+  (treemacs-follow-mode))
 #+end_src
 
 *** Magit
@@ -1395,32 +1400,32 @@ magit
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Magit===
-  (use-package magit
-    :bind ( :map cur/sub-leader-keymap
-            ("C-v" . magit)
-            :map project-prefix-map
-            ("C-v" . nil)
-            ("v" . magit-project-status)
-            ("V" . project-vc-dir))
-    :custom
-    (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
-    (transient-default-level 5 "Allowing for commit signing"))
+;; ===Magit===
+(use-package magit
+  :bind ( :map cur/sub-leader-keymap
+          ("C-v" . magit)
+          :map project-prefix-map
+          ("C-v" . nil)
+          ("v" . magit-project-status)
+          ("V" . project-vc-dir))
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+  (transient-default-level 5 "Allowing for commit signing"))
 #+end_src
 
 *** Project.el
 
 #+begin_src emacs-lisp
-  (use-package project
-    :bind ( :map project-prefix-map
-            ("d"   . project-dired)
-            ("D"   . project-find-dir)
-            ("C-b" . nil)
-            ("b"   . project-switch-to-buffer)
-            ("l"   . project-list-buffers))
-    :custom
-    (project-buffers-viewer #'project-list-buffers-ibuffer)
-    (project-switch-use-entire-map t))
+(use-package project
+  :bind ( :map project-prefix-map
+          ("d"   . project-dired)
+          ("D"   . project-find-dir)
+          ("C-b" . nil)
+          ("b"   . project-switch-to-buffer)
+          ("l"   . project-list-buffers))
+  :custom
+  (project-buffers-viewer #'project-list-buffers-ibuffer)
+  (project-switch-use-entire-map t))
 #+end_src
 
 *** Ripgrep
@@ -1428,7 +1433,7 @@ magit
 Ripgrep go burrr.
 
 #+begin_src emacs-lisp
-  (use-package rg)
+(use-package rg)
 #+end_src
 
 *** Projectile
@@ -1436,28 +1441,28 @@ Ripgrep go burrr.
 Projectile provides many commands to help manage and do things in a project, such as compile a project from its root, list all files in the project, or run grep or ripgrep on all the files in the project. I also use it's project switching aspect as sort of a bookmark like system.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  # projectile
-  rg
+# projectile
+rg
 #+end_src
 
 #+begin_src emacs-lisp :tangle no
-  ;; ===Projectile===
-  (use-package projectile
-    :after (rg)
-    :bind (:map cur/projectile-map
-                ("C-p"   . projectile-switch-project)
-                ("C-a"   . projectile-add-known-project)
-                ("C-d"   . projectile-dired)
-                ("M-d"   . projectile-find-dir)
-                ("C-f"   . projectile-find-file)
-                ("C-c"   . projectile-compile-project)
-                ("C-l"   . projectile-ibuffer)
-                ("C-k"   . projectile-kill-buffers)
-                ("C-v"   . projectile-vc)
-                ("C-e"   . projectile-run-eshell)
-                ("C-r"   . projectile-ripgrep))
-    :config
-    (projectile-mode 1))
+;; ===Projectile===
+(use-package projectile
+  :after (rg)
+  :bind (:map cur/projectile-map
+              ("C-p"   . projectile-switch-project)
+              ("C-a"   . projectile-add-known-project)
+              ("C-d"   . projectile-dired)
+              ("M-d"   . projectile-find-dir)
+              ("C-f"   . projectile-find-file)
+              ("C-c"   . projectile-compile-project)
+              ("C-l"   . projectile-ibuffer)
+              ("C-k"   . projectile-kill-buffers)
+              ("C-v"   . projectile-vc)
+              ("C-e"   . projectile-run-eshell)
+              ("C-r"   . projectile-ripgrep))
+  :config
+  (projectile-mode 1))
 #+end_src
 
 *** Just
@@ -1465,26 +1470,26 @@ Projectile provides many commands to help manage and do things in a project, suc
 [[https:github.com/casey/just][Just]] is just a command runner. Think of it sort of like make but simplified. This is my configuration for working and interacting with it from emacs.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  just-mode
-  justl
+just-mode
+justl
 #+end_src
 
 #+begin_src emacs-lisp
-  (use-package just-mode)
+(use-package just-mode)
 
-  (use-package justl
-    :bind (:map project-prefix-map
-                ("j" . justl)))
+(use-package justl
+  :bind (:map project-prefix-map
+              ("j" . justl)))
 
-  (provide 'cur-config-ide)
+(provide 'cur-config-ide)
 #+end_src
 
 *** Tmux integration
 
 #+begin_src emacs-lisp
-  (use-package cur-tmux
-    :hook
-    (projectile-after-switch-project . cur-tmux-switch-add-project-window))
+(use-package cur-tmux
+  :hook
+  (projectile-after-switch-project . cur-tmux-switch-add-project-window))
 #+end_src
 
 ** Configurations for Lisp (=cur-config-lisp.el=)
@@ -1499,51 +1504,51 @@ These are my configurations for working with Lisp languages.
 This color codes opening and closing delimiters such as parentheses and square brackets.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  rainbow-delimiters
+rainbow-delimiters
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===rainbow-delimiters===
-  (use-package rainbow-delimiters
-    ;:ensure t
-    :hook (prog-mode . rainbow-delimiters-mode))
+;; ===rainbow-delimiters===
+(use-package rainbow-delimiters
+					;:ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
 *** Paredit
 
 #+begin_src text :tangle ./packages.txt :padline no
-  paredit
+paredit
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Paredit===
-  (use-package paredit
-    :hook ((emacs-lisp-mode lisp-interaction-mode scheme-mode) .
-           (lambda () (paredit-mode 1))))
+;; ===Paredit===
+(use-package paredit
+  :hook ((emacs-lisp-mode lisp-interaction-mode scheme-mode) .
+         (lambda () (paredit-mode 1))))
 #+end_src
 
 *** Geiser
 
 #+begin_src text :tangle ./packages.txt :padline no
-  geiser
-  geiser-chez
-  geiser-chibi
-  geiser-chicken
-  geiser-gambit
-  geiser-gauche
-  geiser-guile
-  geiser-kawa
-  geiser-mit
-  geiser-racket
-  geiser-stklos
-  macrostep
-  macrostep-geiser
+geiser
+geiser-chez
+geiser-chibi
+geiser-chicken
+geiser-gambit
+geiser-gauche
+geiser-guile
+geiser-kawa
+geiser-mit
+geiser-racket
+geiser-stklos
+macrostep
+macrostep-geiser
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Geiser===
+;; ===Geiser===
 
-  (provide 'cur-config-lisp)
+(provide 'cur-config-lisp)
 #+end_src
 
 ** Configurations for Java (=cur-config-java.el=)
@@ -1560,31 +1565,31 @@ lsp-java
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Java Tree-Sitter Mode===
-  (use-package java-ts-mode
-    :mode "\\.java\\'")
+;; ===Java Tree-Sitter Mode===
+(use-package java-ts-mode
+  :mode "\\.java\\'")
 
-  ;; ===lsp-java===
-  (use-package lsp-java
-    :after (lsp-mode cc-mode)
-    :init
-    :hook
-    (envrc-mode . (lambda ()
-                    (when (equal major-mode 'java-ts-mode)
-                      (setq lsp-java-server-install-dir (concat (getenv "JDTLS_PATH") "/share/java/jdtls/")))))
-    (java-ts-mode . lsp-deferred)
-    :config
-    (defun lsp-java--ls-command ()
-      (let ((jdtls-path (getenv "JDTLS_PATH"))
-            (jdtls-exec-options (list
-                                 "-configuration"
-                                 (concat (getenv "HOME") "/.jdtls/config_linux")
-                                 "-data"
-                                 (concat (getenv "HOME") "/.jdtls/java-workspace"))))
-        (message (concat jdtls-path "/share/java/"))
-        (append (list (concat jdtls-path "/bin/jdtls")) jdtls-exec-options))))
+;; ===lsp-java===
+(use-package lsp-java
+  :after (lsp-mode cc-mode)
+  :init
+  :hook
+  (envrc-mode . (lambda ()
+                  (when (equal major-mode 'java-ts-mode)
+                    (setq lsp-java-server-install-dir (concat (getenv "JDTLS_PATH") "/share/java/jdtls/")))))
+  (java-ts-mode . lsp-deferred)
+  :config
+  (defun lsp-java--ls-command ()
+    (let ((jdtls-path (getenv "JDTLS_PATH"))
+          (jdtls-exec-options (list
+                               "-configuration"
+                               (concat (getenv "HOME") "/.jdtls/config_linux")
+                               "-data"
+                               (concat (getenv "HOME") "/.jdtls/java-workspace"))))
+      (message (concat jdtls-path "/share/java/"))
+      (append (list (concat jdtls-path "/bin/jdtls")) jdtls-exec-options))))
 
-  (provide 'cur-config-java)
+(provide 'cur-config-java)
 #+end_src
 
 ** Configurations for Mark-up Languages (=cur-config-markup.el=)
@@ -1595,15 +1600,15 @@ lsp-java
 Literally just ~yaml-mode~.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  yaml-mode
+yaml-mode
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===YAML===
-  (use-package yaml-mode
-    :commands (yaml-mode))
+;; ===YAML===
+(use-package yaml-mode
+  :commands (yaml-mode))
 
-  (provide 'cur-config-markup)
+(provide 'cur-config-markup)
 #+end_src
 
 ** Configurations for Nix (=cur-config-nix.el=)
@@ -1619,12 +1624,12 @@ nix-ts-mode
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===nix-mode===
-  (use-package nix-mode
-    :hook
-    ((nix-mode) . lsp-deferred))
+;; ===nix-mode===
+(use-package nix-mode
+  :hook
+  ((nix-mode) . lsp-deferred))
 
-  (provide 'cur-config-nix)
+(provide 'cur-config-nix)
 #+end_src
 
 ** Configurations for Rust (=cur-config-rust.el=)
@@ -1633,16 +1638,16 @@ nix-ts-mode
 :END:
 
 #+begin_src text :tangle ./packages.txt :padline no
-  rustic
+rustic
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Rust-Mode===
-  (use-package rustic
-    :after (lsp-mode)
-    :hook (rustic . lsp-deferred))
+;; ===Rust-Mode===
+(use-package rustic
+  :after (lsp-mode)
+  :hook (rustic . lsp-deferred))
 
-  (provide 'cur-config-rust)
+(provide 'cur-config-rust)
 #+end_src
 
 ** Configurations for Haskell (=cur-config-haskell.el=)
@@ -1656,22 +1661,22 @@ company-ghci
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Haskell-Mode===
-  (use-package haskell-mode)
+;; ===Haskell-Mode===
+(use-package haskell-mode)
 
-  ;; ===LSP-Haskell===
-  (use-package lsp-haskell
-    :hook
-    ((haskell-mode) . lsp-deferred))
+;; ===LSP-Haskell===
+(use-package lsp-haskell
+  :hook
+  ((haskell-mode) . lsp-deferred))
 
-  ;; ===Company-GHCI===
-  (use-package company-ghci
-    :after (company)
-    :custom (company-ghc-show-info t)
-    :config
-    (push 'company-ghci company-backends))
+;; ===Company-GHCI===
+(use-package company-ghci
+  :after (company)
+  :custom (company-ghc-show-info t)
+  :config
+  (push 'company-ghci company-backends))
 
-  (provide 'cur-config-haskell)
+(provide 'cur-config-haskell)
 #+end_src
 
 ** Configurations for OCaml
@@ -1687,24 +1692,24 @@ merlin-company
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Tuareg===
-  (use-package tuareg
-    :hook (tuareg-mode . merlin-mode)
-    :defer t)
+;; ===Tuareg===
+(use-package tuareg
+  :hook (tuareg-mode . merlin-mode)
+  :defer t)
 
-  ;; ===Utop===
-  (use-package utop
-    :commands (utop utop-mode)
-    :config
-    (advice-add 'utop :around 'inheritenv-apply))
+;; ===Utop===
+(use-package utop
+  :commands (utop utop-mode)
+  :config
+  (advice-add 'utop :around 'inheritenv-apply))
 
-  (use-package merlin
-    :defer t)
+(use-package merlin
+  :defer t)
 
-  (use-package merlin-company
-    :after (merlin))
+(use-package merlin-company
+  :after (merlin))
 
-  (provide 'cur-config-ocaml)
+(provide 'cur-config-ocaml)
 #+end_src
 
 ** Configurations for C (=cur-config-c.el=)
@@ -1715,30 +1720,30 @@ merlin-company
 I use tree-sitter for C, which unfortunately is not currently integrated into the default C major mode for emacs. I have also changed the ~c-default-style~ for C to be "linux", which is 8 spaces for indentation instead of the default of 2.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  ccls
+ccls
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===C Tree-Sitter Mode===
-  (use-package c-ts-mode
-    :after (cc-mode)
-    :mode
-    ("\\.c\\'" . c-ts-mode)
-    ("\\.h\\'" . c-ts-mode)
-    :custom
-    (c-default-style '((c-ts-mode . "linux")
-                       (java-mode . "java")
-                       (awk-mode  . "awk")
-                       (other     . "gnu"))
-     "default style for c programs is linux")
-    :hook
-    (c-ts-mode . (lambda () (require 'ccls) (lsp-deferred))))
+;; ===C Tree-Sitter Mode===
+(use-package c-ts-mode
+  :after (cc-mode)
+  :mode
+  ("\\.c\\'" . c-ts-mode)
+  ("\\.h\\'" . c-ts-mode)
+  :custom
+  (c-default-style '((c-ts-mode . "linux")
+                     (java-mode . "java")
+                     (awk-mode  . "awk")
+                     (other     . "gnu"))
+		   "default style for c programs is linux")
+  :hook
+  (c-ts-mode . (lambda () (require 'ccls) (lsp-deferred))))
 
-  ;; ===CCLS Mode===
-  (use-package ccls
-    :after (cc-mode c-ts-mode))
+;; ===CCLS Mode===
+(use-package ccls
+  :after (cc-mode c-ts-mode))
 
-  (provide 'cur-config-c)
+(provide 'cur-config-c)
 #+end_src
 
 ** Configurations for Zig (=cur-config-zig.el=)
@@ -1751,11 +1756,11 @@ zig-mode
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Zig Mode===
-  (use-package zig-mode
-    :hook (zig-mode . lsp-deferred))
+;; ===Zig Mode===
+(use-package zig-mode
+  :hook (zig-mode . lsp-deferred))
 
-  (provide 'cur-config-zig)
+(provide 'cur-config-zig)
 #+end_src
 
 ** Configurations for Go (=cur-config-go.el=)
@@ -1764,18 +1769,18 @@ zig-mode
 :END:
 
 #+begin_src emacs-lisp
-  ;; ===Go Tree-Sitter Mode===
-  (use-package go-ts-mode
-    :mode
-    ("\\.go\\'" . go-ts-mode)
-    ("go\\.mod\\'" . go-mod-ts-mode)
-    :custom
-    (go-ts-mode-indent-offset 4 "Set the indentation to 4")
-    :hook
-    (go-ts-mode . lsp-deferred)
-    (go-ts-mode . (lambda () (setq tab-width 4))))
+;; ===Go Tree-Sitter Mode===
+(use-package go-ts-mode
+  :mode
+  ("\\.go\\'" . go-ts-mode)
+  ("go\\.mod\\'" . go-mod-ts-mode)
+  :custom
+  (go-ts-mode-indent-offset 4 "Set the indentation to 4")
+  :hook
+  (go-ts-mode . lsp-deferred)
+  (go-ts-mode . (lambda () (setq tab-width 4))))
 
-  (provide 'cur-config-go)
+(provide 'cur-config-go)
 #+end_src
 
 ** Terminal emulation and Eshell configuration (=cur-config-shell.el=)
@@ -1788,26 +1793,26 @@ zig-mode
 Vterm is a terminal emulator for emacs. It is faster than ~term~ and ~ansi-term~ but the downside is that it is not written entirely in elisp so its cross platform. ~cur/meow-vterm~ and ~cur/meow-vterm-other-window~ help make vterm more "intuitive". ~cur/vterm-kill~ kills the vterm buffer cleanly and without prompting.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  vterm
+vterm
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Vterm===
-  (use-package vterm
-    :bind ( :map cur/sub-leader-keymap
-            ("C-t" . vterm))
-    :custom
-    (vterm-shell "fish")
-    :config
-    (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
-    (setq vterm-max-scrollback 10000))
+;; ===Vterm===
+(use-package vterm
+  :bind ( :map cur/sub-leader-keymap
+          ("C-t" . vterm))
+  :custom
+  (vterm-shell "fish")
+  :config
+  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
+  (setq vterm-max-scrollback 10000))
 
-  (use-package cur-vterm
-    :bind ( :map vterm-mode-map
-            ("C-c C-RET"      . cur-vterm-enter-password)
-            ("C-c C-<return>" . cur-vterm-enter-password)
-            :map project-prefix-map
-            ("t" . cur-vterm-project-other-window)))
+(use-package cur-vterm
+  :bind ( :map vterm-mode-map
+          ("C-c C-RET"      . cur-vterm-enter-password)
+          ("C-c C-<return>" . cur-vterm-enter-password)
+          :map project-prefix-map
+          ("t" . cur-vterm-project-other-window)))
 #+end_src
 
 *** Eat
@@ -1819,10 +1824,10 @@ eat
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Eat===
-  (use-package eat
-    :config
-    (eat-eshell-mode 1))
+;; ===Eat===
+(use-package eat
+  :config
+  (eat-eshell-mode 1))
 #+end_src
 
 *** Eshell
@@ -1830,15 +1835,15 @@ eat
 Eshell is an shell for Emacs like bash or sh, but written in elisp and has its own ways of doing things. Note: not POSIX compliant.
 
 #+begin_src emacs-lisp
-  ;; ===Eshell===
-  (use-package eshell
-    :bind ( :map cur/sub-leader-keymap
-            ("C-e" . eshell)))
+;; ===Eshell===
+(use-package eshell
+  :bind ( :map cur/sub-leader-keymap
+          ("C-e" . eshell)))
 
-  (use-package cur-eshell
-    :custom
-    (eshell-prompt-regexp cur-eshell-prompt-regexp "Regex for custom eshell prompt")
-    (eshell-prompt-function 'cur-eshell-prompt "Set custom prompt for eshell"))
+(use-package cur-eshell
+  :custom
+  (eshell-prompt-regexp cur-eshell-prompt-regexp "Regex for custom eshell prompt")
+  (eshell-prompt-function 'cur-eshell-prompt "Set custom prompt for eshell"))
 #+end_src
 
 *** Zoxide
@@ -1846,14 +1851,14 @@ Eshell is an shell for Emacs like bash or sh, but written in elisp and has its o
 Interfacing with Zoxide from emacs.
 
 #+begin_src text :tangle ./packages.txt :padline no
-  zoxide
+zoxide
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Zoxide===
-  (use-package zoxide)
+;; ===Zoxide===
+(use-package zoxide)
 
-  (provide 'cur-config-shell)
+(provide 'cur-config-shell)
 #+end_src
 
 ** Org-mode (=cur-config-org.el=)
@@ -1866,87 +1871,87 @@ org-bullets
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Org-Mode===
-  (use-package org
-    :ensure nil
-    :defer t
-    :hook (org-mode . cur/org-mode-setup)
-    :bind (:map org-mode-map
-            ("C-S-h" . outline-promote)
-            ("C-S-j" . outline-move-subtree-down)
-            ("C-S-k" . outline-move-subtree-up)
-            ("C-S-l" . outline-demote))
-    :init
-    (defun cur/org-mode-setup ()
-      (org-indent-mode 1)
-      (variable-pitch-mode 0)
-      (visual-line-mode 1)
-      (flyspell-mode 1))
-    :custom
-    (org-ellipsis " ▾" "Readable ellipsis")
-    (org-adapt-indentation nil)
-    (org-special-ctrl-a/e nil)
-    (org-M-RET-may-split-line '((default . nil)))
-    (org-hide-emphasis-markers nil)
-    (org-hide-macro-markers nil)
-    (org-hide-leading-stars nil)
-    (org-agenda-start-with-log-mode t)
-    (org-src-window-setup 'plain) ; don't override `display-buffer-alist'
-    (org-log-done 'time)
-    (org-log-into-drawer t)
-    (org-agenda-window-setup 'current-window "Have org-agenda pop up in the current window")
-    (org-imenu-depth 4)
-    (org-edit-src-content-indentation 0)
-    :config
-    (load-library "find-lisp")
-    ;; (setq org-agenda-files (find-lisp-find-files "~/dox/agenda" "\.org$"))
-    (setq org-agenda-time-grid '((daily today require-timed)
-                                 (400 600 800 1000 1200 1400 1600 1800 2000 2200)
-                                 "......" "----------------"))
-    (setq org-format-latex-options '(:foreground "#e5e9e9" :scale 1.0)))
-    ;; (cur/org-font-setup))
+;; ===Org-Mode===
+(use-package org
+  :ensure nil
+  :defer t
+  :hook (org-mode . cur/org-mode-setup)
+  :bind (:map org-mode-map
+              ("C-S-h" . outline-promote)
+              ("C-S-j" . outline-move-subtree-down)
+              ("C-S-k" . outline-move-subtree-up)
+              ("C-S-l" . outline-demote))
+  :init
+  (defun cur/org-mode-setup ()
+    (org-indent-mode 1)
+    (variable-pitch-mode 0)
+    (visual-line-mode 1)
+    (flyspell-mode 1))
+  :custom
+  (org-ellipsis " ▾" "Readable ellipsis")
+  (org-adapt-indentation nil)
+  (org-special-ctrl-a/e nil)
+  (org-M-RET-may-split-line '((default . nil)))
+  (org-hide-emphasis-markers nil)
+  (org-hide-macro-markers nil)
+  (org-hide-leading-stars nil)
+  (org-agenda-start-with-log-mode t)
+  (org-src-window-setup 'plain) ; don't override `display-buffer-alist'
+  (org-log-done 'time)
+  (org-log-into-drawer t)
+  (org-agenda-window-setup 'current-window "Have org-agenda pop up in the current window")
+  (org-imenu-depth 4)
+  (org-edit-src-content-indentation 0)
+  :config
+  (load-library "find-lisp")
+  ;; (setq org-agenda-files (find-lisp-find-files "~/dox/agenda" "\.org$"))
+  (setq org-agenda-time-grid '((daily today require-timed)
+                               (400 600 800 1000 1200 1400 1600 1800 2000 2200)
+                               "......" "----------------"))
+  (setq org-format-latex-options '(:foreground "#e5e9e9" :scale 1.0)))
+;; (cur/org-font-setup))
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Org Tempo and SRC Blocks===
-  (use-package org-tempo
-    :after org
-    :config
-    (push '("conf-unix" . conf-unix) org-src-lang-modes)
+;; ===Org Tempo and SRC Blocks===
+(use-package org-tempo
+  :after org
+  :config
+  (push '("conf-unix" . conf-unix) org-src-lang-modes)
 
-    (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-    (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-    (add-to-list 'org-structure-template-alist '("py" . "src python"))
-    (add-to-list 'org-structure-template-alist '("tex" . "src latex"))
-    (add-to-list 'org-structure-template-alist '("conf" . "src conf-unix"))
-    (add-to-list 'org-structure-template-alist '("yaml" . "src yaml"))
-    (add-to-list 'org-structure-template-alist '("java" . "src java"))
-    (add-to-list 'org-structure-template-alist '("elv" . "src elvish")))
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python"))
+  (add-to-list 'org-structure-template-alist '("tex" . "src latex"))
+  (add-to-list 'org-structure-template-alist '("conf" . "src conf-unix"))
+  (add-to-list 'org-structure-template-alist '("yaml" . "src yaml"))
+  (add-to-list 'org-structure-template-alist '("java" . "src java"))
+  (add-to-list 'org-structure-template-alist '("elv" . "src elvish")))
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Org Babel===
-  (use-package ob
-    :after org)
-  ;; TODO: fix this so I can still auto tangle on saving
-    ;; :init
-    ;; (defun cur/org-babel-tangle-config ()
-    ;;   (when (string-equal (file-name-directory (buffer-file-name))
-    ;;                       (expand-file-name user-emacs-directory))
-    ;;     ;; Dynamic scoping to the rescue
-    ;;     (let ((org-confirm-babel-evaluate nil))
-    ;;       (org-babel-tangle))))
-    ;; 
-    ;; (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'cur/org-babel-tangle-config))))
+;; ===Org Babel===
+(use-package ob
+  :after org)
+;; TODO: fix this so I can still auto tangle on saving
+;; :init
+;; (defun cur/org-babel-tangle-config ()
+;;   (when (string-equal (file-name-directory (buffer-file-name))
+;;                       (expand-file-name user-emacs-directory))
+;;     ;; Dynamic scoping to the rescue
+;;     (let ((org-confirm-babel-evaluate nil))
+;;       (org-babel-tangle))))
+;; 
+;; (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'cur/org-babel-tangle-config))))
 #+end_src
 
 #+begin_src emacs-lisp
-  (use-package flyspell
-    :bind ( :map flyspell-mode-map
-            ("C-." . nil)
-            ("C-," . nil)))
-  
-  (provide 'cur-config-org)
+(use-package flyspell
+  :bind ( :map flyspell-mode-map
+          ("C-." . nil)
+          ("C-," . nil)))
+
+(provide 'cur-config-org)
 #+end_src
 
 ** Configurations for Gemini and the smolnet (=cur-config-smol-net.el=)
@@ -1955,27 +1960,27 @@ org-bullets
 :END:
 
 #+begin_src text :tangle ./packages.txt :padline no
-  gemini-mode
-  ox-gemini
-  elpher
+gemini-mode
+ox-gemini
+elpher
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Gemini-Mode===
-  (use-package gemini-mode
-    :defer t)
+;; ===Gemini-Mode===
+(use-package gemini-mode
+  :defer t)
 
-  ;; ===Org Gemini Exporter==
-  (use-package ox-gemini
-    :defer t)
+;; ===Org Gemini Exporter==
+(use-package ox-gemini
+  :defer t)
 
-  ;; ===Elpher Gemini/Gopher Client===
-  (use-package elpher
-    :defer t
-    :custom
-    (elpher-default-url-type "gemini"))
+;; ===Elpher Gemini/Gopher Client===
+(use-package elpher
+  :defer t
+  :custom
+  (elpher-default-url-type "gemini"))
 
-  (provide 'cur-config-smol-net)
+(provide 'cur-config-smol-net)
 #+end_src
 
 ** Elcord and making myself look productive to my friends (=cur-config-elcord.el=)
@@ -1988,9 +1993,9 @@ elcord
 #+end_src
 
 #+begin_src emacs-lisp
-  (use-package elcord)
+(use-package elcord)
 
-  (provide 'cur-config-elcord)
+(provide 'cur-config-elcord)
 #+end_src
 
 ** Direnv integration (=cur-config-direnv.el=)
@@ -1999,17 +2004,17 @@ elcord
 :END:
 
 #+begin_src text :tangle ./packages.txt :padline no
-  envrc
-  inheritenv
+envrc
+inheritenv
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; ===Envrc===
-  (use-package envrc
-    :config
-    (envrc-global-mode))
+;; ===Envrc===
+(use-package envrc
+  :config
+  (envrc-global-mode))
 
-  (provide 'cur-config-direnv)
+(provide 'cur-config-direnv)
 #+end_src
 
 * Custom Library Modules (=cur-lisp=)
@@ -2020,20 +2025,20 @@ elcord
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-base.el --- The base of my customizations for emacs -*- lexical-binding: t -*-
+;;; cur-base.el --- The base of my customizations for emacs -*- lexical-binding: t -*-
 
-  ;;; Commentary:
-  ;; This is the base of my extensions to Emac's functionality.
-  ;; Do try this at home kids.
+;;; Commentary:
+;; This is the base of my extensions to Emac's functionality.
+;; Do try this at home kids.
 
-  ;;; Code:
+;;; Code:
 
-  (defgroup cur-base ()
-    "Base functions and variables for my Emacs configuration."
-    :group 'editing)
+(defgroup cur-base ()
+  "Base functions and variables for my Emacs configuration."
+  :group 'editing)
 
-  (provide 'cur-base)
-  ;;; cur-base.el ends here
+(provide 'cur-base)
+;;; cur-base.el ends here
 #+end_src
 
 ** Consult-Projectile (=cur-consult-projectile.el=)
@@ -2042,166 +2047,166 @@ elcord
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-consult-projectile.el --- Integrating Consult and Projectile -*- lexical-binding: t -*-
+;;; cur-consult-projectile.el --- Integrating Consult and Projectile -*- lexical-binding: t -*-
 
-  ;;; Commentary:
+;;; Commentary:
 
-  ;;; Code:
+;;; Code:
 
-  (require 'cur-base)
-  (require 'consult)
-  (require 'projectile)
+(require 'cur-base)
+(require 'consult)
+(require 'projectile)
 
-  (defgroup cur-consult-projectile ()
-      "Integrate Consult and Projectile."
-      :group 'consult
-      :group 'projectile
-      :prefix "cur-consult-projectile-")
+(defgroup cur-consult-projectile ()
+  "Integrate Consult and Projectile."
+  :group 'consult
+  :group 'projectile
+  :prefix "cur-consult-projectile-")
 
-  ;; TODO: Make the preview work here without opening a file called dir/dir
-  ;; (defun cur-consult-projectile--dir-preview ()
-  ;;   ""
-  ;;   (let ((open (consult--temporary-files))
-  ;;         ())
-  ;;     (lambda (action cand)
-  ;;       (cond ((equal action 'setup))
-  ;;             ((and (equal action 'preview) cand))
-  ;;             ((and (equal action 'preview) (not cand)))
-  ;;             ((equal action 'exit))
-  ;;             ((equal action 'return))
-  ;;             ))))
+;; TODO: Make the preview work here without opening a file called dir/dir
+;; (defun cur-consult-projectile--dir-preview ()
+;;   ""
+;;   (let ((open (consult--temporary-files))
+;;         ())
+;;     (lambda (action cand)
+;;       (cond ((equal action 'setup))
+;;             ((and (equal action 'preview) cand))
+;;             ((and (equal action 'preview) (not cand)))
+;;             ((equal action 'exit))
+;;             ((equal action 'return))
+;;             ))))
 
-  ;; (defvar cur-consult-projectile--dirs
-  ;;   `( :name "Directories"
-  ;;      :narrow ?d
-  ;;      :default nil
-  ;;      :category file
-  ;;      :state  ,#'consult--file-state
-  ;;      :action ,#'cur-consult-projectile--dir-action
-  ;;      :items  ,#'(lambda ()
-  ;;                   (append '("./")
-  ;;                           (projectile-project-dirs (projectile-project-root))))))
+;; (defvar cur-consult-projectile--dirs
+;;   `( :name "Directories"
+;;      :narrow ?d
+;;      :default nil
+;;      :category file
+;;      :state  ,#'consult--file-state
+;;      :action ,#'cur-consult-projectile--dir-action
+;;      :items  ,#'(lambda ()
+;;                   (append '("./")
+;;                           (projectile-project-dirs (projectile-project-root))))))
 
-  (defvar cur-consult-projectile--files
-    `( :name "Files"
-       :narrow ?f
-       :default nil
-       :category file
-       :state  ,#'consult--file-state
-       :action ,#'consult--file-action
-       :items  ,#'(lambda ()
-                    (projectile-project-files (projectile-project-root)))))
+(defvar cur-consult-projectile--files
+  `( :name "Files"
+     :narrow ?f
+     :default nil
+     :category file
+     :state  ,#'consult--file-state
+     :action ,#'consult--file-action
+     :items  ,#'(lambda ()
+                  (projectile-project-files (projectile-project-root)))))
 
-  (defvar cur-consult-projectile--buffers
-    `( :name     "Buffers"
-       :narrow   ?b
-       :category buffer
-       :face     consult-buffer
-       :history  buffer-name-history
-       :default  t
-       :state    ,#'consult--buffer-state
-       :action   ,#'consult--buffer-action
-       :items    ,#'(lambda ()
-                      (let ((root (projectile-project-root)))
-                        (consult--buffer-query
-                         :sort 'visibility
-                         :directory root
-                         :as #'consult--buffer-pair)
-                        ;; Alternative Implementation
-                        ;; (mapcar (lambda (buffer)
-                        ;;           (cons (buffer-name buffer) buffer))
-                        ;;         (projectile-project-buffers))
-                        ))))
+(defvar cur-consult-projectile--buffers
+  `( :name     "Buffers"
+     :narrow   ?b
+     :category buffer
+     :face     consult-buffer
+     :history  buffer-name-history
+     :default  t
+     :state    ,#'consult--buffer-state
+     :action   ,#'consult--buffer-action
+     :items    ,#'(lambda ()
+                    (let ((root (projectile-project-root)))
+                      (consult--buffer-query
+                       :sort 'visibility
+                       :directory root
+                       :as #'consult--buffer-pair)
+                      ;; Alternative Implementation
+                      ;; (mapcar (lambda (buffer)
+                      ;;           (cons (buffer-name buffer) buffer))
+                      ;;         (projectile-project-buffers))
+                      ))))
 
-  (defcustom cur-consult-projectile-buffer-sources
-    '(cur-consult-projectile--buffers)
-    "Sources used by `cur-consult-projectile-buffer'.
-  See `consult--multi' for a description of the source data structure."
-    :type '(repeat symbol)
-    :group 'cur-consult-projectile)
+(defcustom cur-consult-projectile-buffer-sources
+  '(cur-consult-projectile--buffers)
+  "Sources used by `cur-consult-projectile-buffer'.
+See `consult--multi' for a description of the source data structure."
+  :type '(repeat symbol)
+  :group 'cur-consult-projectile)
 
-  (defun cur-consult-projectile-buffer ()
-    "Switch to buffer in project.
-  The default list of sources is from `cur-consult-projectile--buffers'."
-    (interactive)
-    (consult-buffer cur-consult-projectile-buffer-sources))
+(defun cur-consult-projectile-buffer ()
+  "Switch to buffer in project.
+The default list of sources is from `cur-consult-projectile--buffers'."
+  (interactive)
+  (consult-buffer cur-consult-projectile-buffer-sources))
 
-  (defcustom cur-consult-projectile-find-file-sources
-    '(cur-consult-projectile--files
-      ;; TODO: get the preview working
-      ;; cur-consult-projectile--dirs
-      )
-    "Sources used by `consult-buffer'.
-  See also `consult-project-buffer-sources'.
-  See `consult--multi' for a description of the source data structure."
-    :type '(repeat symbol)
-    :group 'cur-consult-projectile)
+(defcustom cur-consult-projectile-find-file-sources
+  '(cur-consult-projectile--files
+    ;; TODO: get the preview working
+    ;; cur-consult-projectile--dirs
+    )
+  "Sources used by `consult-buffer'.
+See also `consult-project-buffer-sources'.
+See `consult--multi' for a description of the source data structure."
+  :type '(repeat symbol)
+  :group 'cur-consult-projectile)
 
-  (defun cur-consult-projectile-find-file ()
-    "Open file in project.
-  The default list of sources is from `cur-consult-projectile-find-file-sources'."
-    (interactive)
-    ;; Make this work if not in a project
-    (let* ((default-directory (projectile-project-root)))
-      (consult--multi cur-consult-projectile-find-file-sources
-                      :prompt "Find File: ")))
+(defun cur-consult-projectile-find-file ()
+  "Open file in project.
+The default list of sources is from `cur-consult-projectile-find-file-sources'."
+  (interactive)
+  ;; Make this work if not in a project
+  (let* ((default-directory (projectile-project-root)))
+    (consult--multi cur-consult-projectile-find-file-sources
+                    :prompt "Find File: ")))
 
-  ;; TODO: Make alternative to `projectile-switch-project'
-  ;; (defun cur-consult-projectile--select-multi ()
-  ;;   (consult--multi `(( :name     "Buffers"
-  ;;                       :narrow   ?b
-  ;;                       :category buffer
-  ;;                       :face     consult-buffer
-  ;;                       :history  buffer-name-history
-  ;;                       :default  t
-  ;;                       :state    ,#'consult--buffer-state
-  ;;                       :items    ,(lambda ()
-  ;;                                    (let ((root (projectile-project-root)))
-  ;;                                      (consult--buffer-query
-  ;;                                       :sort 'visibility
-  ;;                                       :directory root
-  ;;                                       :as #'consult--buffer-pair)
-  ;;                                      ;; Alternative Implementation
-  ;;                                      ;; (mapcar (lambda (buffer)
-  ;;                                      ;;           (cons (buffer-name buffer) buffer))
-  ;;                                      ;;         (projectile-project-buffers))
-  ;;                                      )))
-  ;;                     ( :name "Directories"
-  ;;                       :narrow ?d
-  ;;                       :default nil
-  ;;                       :category file
-  ;;                       :state ,#'consult--file-state
-  ;;                       :items ,(append '("./")
-  ;;                                       (projectile-project-dirs (projectile-project-root))))
+;; TODO: Make alternative to `projectile-switch-project'
+;; (defun cur-consult-projectile--select-multi ()
+;;   (consult--multi `(( :name     "Buffers"
+;;                       :narrow   ?b
+;;                       :category buffer
+;;                       :face     consult-buffer
+;;                       :history  buffer-name-history
+;;                       :default  t
+;;                       :state    ,#'consult--buffer-state
+;;                       :items    ,(lambda ()
+;;                                    (let ((root (projectile-project-root)))
+;;                                      (consult--buffer-query
+;;                                       :sort 'visibility
+;;                                       :directory root
+;;                                       :as #'consult--buffer-pair)
+;;                                      ;; Alternative Implementation
+;;                                      ;; (mapcar (lambda (buffer)
+;;                                      ;;           (cons (buffer-name buffer) buffer))
+;;                                      ;;         (projectile-project-buffers))
+;;                                      )))
+;;                     ( :name "Directories"
+;;                       :narrow ?d
+;;                       :default nil
+;;                       :category file
+;;                       :state ,#'consult--file-state
+;;                       :items ,(append '("./")
+;;                                       (projectile-project-dirs (projectile-project-root))))
 
-  ;;                     ( :name "Files"
-  ;;                       :narrow ?f
-  ;;                       :default nil
-  ;;                       :category file
-  ;;                       :state ,#'consult--file-state
-  ;;                       :items ,(projectile-project-files (projectile-project-root))))
-  ;;                   :sort t))
+;;                     ( :name "Files"
+;;                       :narrow ?f
+;;                       :default nil
+;;                       :category file
+;;                       :state ,#'consult--file-state
+;;                       :items ,(projectile-project-files (projectile-project-root))))
+;;                   :sort t))
 
-  ;; (defun cur-consult-projectile-switch ()
-  ;;   "Call `projectile-switch-project' and select from candidates.
+;; (defun cur-consult-projectile-switch ()
+;;   "Call `projectile-switch-project' and select from candidates.
 
-  ;; The candidates are as follows:
-  ;;   - Buffers
-  ;;   - Files
-  ;;   - Directories
-  ;;   - Actions"
-  ;;   (interactive)
-  ;;   ;; (let* ((selection (consult--multi
-  ;;   ;; 			     `(( :name "Projects"
-  ;;   ;; 				 :narrow ?p
-  ;;   ;; 				 :category file
-  ;;   ;; 				 :items ,(projectile-relevant-known-projects)))))
-  ;;   ;; 	 (root )))
-  ;;   (let ((projectile-switch-project-action 'cur-consult-projectile-find-file))
-  ;;     (projectile-switch-project)))
+;; The candidates are as follows:
+;;   - Buffers
+;;   - Files
+;;   - Directories
+;;   - Actions"
+;;   (interactive)
+;;   ;; (let* ((selection (consult--multi
+;;   ;; 			     `(( :name "Projects"
+;;   ;; 				 :narrow ?p
+;;   ;; 				 :category file
+;;   ;; 				 :items ,(projectile-relevant-known-projects)))))
+;;   ;; 	 (root )))
+;;   (let ((projectile-switch-project-action 'cur-consult-projectile-find-file))
+;;     (projectile-switch-project)))
 
-  (provide 'cur-consult-projectile)
-  ;;; cur-consult-projectile.el ends here
+(provide 'cur-consult-projectile)
+;;; cur-consult-projectile.el ends here
 #+end_src
 
 ** Consult Extensions (=cur-consult.el=)
@@ -2210,77 +2215,77 @@ elcord
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-consult-el --- Extending and Customizing Consult -*- lexical-binding: t -*-
+;;; cur-consult-el --- Extending and Customizing Consult -*- lexical-binding: t -*-
 
-  ;;; Commentary:
+;;; Commentary:
 
-  ;;; Code:
+;;; Code:
 
-  (require 'consult)
+(require 'consult)
 
-  (defgroup cur-consult ()
-    "Integrate Consult and Projectile."
-    :group 'consult
-    :prefix "cur-consult-")
+(defgroup cur-consult ()
+  "Integrate Consult and Projectile."
+  :group 'consult
+  :prefix "cur-consult-")
 
-  (defun cur-consult-theme (theme)
-    "Disable current themes and enable THEME from `consult-themes'.
+(defun cur-consult-theme (theme)
+  "Disable current themes and enable THEME from `consult-themes'.
 
-  If THEME is a list of symbols, go through and enable each theme in reverse
-  order.  The command supports previewing the currently selected theme."
-    (interactive
-     (list
-      (let* ((regexp (consult--regexp-filter
-                      (mapcar (lambda (x) (if (stringp x) x (format "\\`%s\\'" x)))
-                              consult-themes)))
-             (avail-themes (seq-filter
-                            (lambda (x) (string-match-p regexp (symbol-name x)))
-                            (cons 'default (custom-available-themes))))
-             (saved-theme (if (< (length custom-enabled-themes) 2)
-                              (car custom-enabled-themes)
-                            custom-enabled-themes)))
-        (consult--read
-         (mapcar #'symbol-name avail-themes)
-         :prompt "Theme: "
-         :require-match t
-         :category 'theme
-         :history 'consult--theme-history
-         :lookup (lambda (selected &rest _)
-                   (setq selected (and selected (intern-soft selected)))
-                   (or (and selected (car (memq selected avail-themes)))
-                       saved-theme))
-         :state (lambda (action theme)
-                  (pcase action
-                    ('return (cur-consult-theme (or theme saved-theme)))
-                    ((and 'preview (guard theme)) (cur-consult-theme theme))))
-         :default (symbol-name (or (if (and saved-theme (listp saved-theme))
-                                       (car (last saved-theme))
-                                     saved-theme)
-                                   'default))))))
-    (when (or (eq theme 'default)
-              (when (listp theme)
-                (member 'default theme)))
-      (setq theme nil))
-    (cond ((symbolp theme)
-           (unless (eq theme (car custom-enabled-themes))
+If THEME is a list of symbols, go through and enable each theme in reverse
+order.  The command supports previewing the currently selected theme."
+  (interactive
+   (list
+    (let* ((regexp (consult--regexp-filter
+                    (mapcar (lambda (x) (if (stringp x) x (format "\\`%s\\'" x)))
+                            consult-themes)))
+           (avail-themes (seq-filter
+                          (lambda (x) (string-match-p regexp (symbol-name x)))
+                          (cons 'default (custom-available-themes))))
+           (saved-theme (if (< (length custom-enabled-themes) 2)
+                            (car custom-enabled-themes)
+                          custom-enabled-themes)))
+      (consult--read
+       (mapcar #'symbol-name avail-themes)
+       :prompt "Theme: "
+       :require-match t
+       :category 'theme
+       :history 'consult--theme-history
+       :lookup (lambda (selected &rest _)
+                 (setq selected (and selected (intern-soft selected)))
+                 (or (and selected (car (memq selected avail-themes)))
+                     saved-theme))
+       :state (lambda (action theme)
+                (pcase action
+                  ('return (cur-consult-theme (or theme saved-theme)))
+                  ((and 'preview (guard theme)) (cur-consult-theme theme))))
+       :default (symbol-name (or (if (and saved-theme (listp saved-theme))
+                                     (car (last saved-theme))
+                                   saved-theme)
+                                 'default))))))
+  (when (or (eq theme 'default)
+            (when (listp theme)
+              (member 'default theme)))
+    (setq theme nil))
+  (cond ((symbolp theme)
+         (unless (eq theme (car custom-enabled-themes))
+           (mapc #'disable-theme custom-enabled-themes)
+           (when theme
+             (if (custom-theme-p theme)
+                 (enable-theme theme)
+               (load-theme theme :no-confirm)))))
+        ((listp theme)
+         (unless (equal theme custom-enabled-themes)
+           (let ((themes (reverse theme)))
              (mapc #'disable-theme custom-enabled-themes)
-             (when theme
-               (if (custom-theme-p theme)
-                   (enable-theme theme)
-                 (load-theme theme :no-confirm)))))
-          ((listp theme)
-           (unless (equal theme custom-enabled-themes)
-             (let ((themes (reverse theme)))
-               (mapc #'disable-theme custom-enabled-themes)
-               (when themes
-                 (mapc (lambda (theme)
-                         (if (custom-theme-p theme)
-                             (enable-theme theme)
-                           (load-theme theme :no-confirm)))
-                       themes)))))))
+             (when themes
+               (mapc (lambda (theme)
+                       (if (custom-theme-p theme)
+                           (enable-theme theme)
+                         (load-theme theme :no-confirm)))
+                     themes)))))))
 
-  (provide 'cur-consult)
-  ;;; cur-consult.el ends here
+(provide 'cur-consult)
+;;; cur-consult.el ends here
 #+end_src
 
 ** Custom modeline (=cur-modline.el=)
@@ -2289,63 +2294,63 @@ elcord
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur/modeline.el --- My custom modeline -*- lexical-binding: t -*-
+;;; cur/modeline.el --- My custom modeline -*- lexical-binding: t -*-
 
-  ;;; Commentary:
-  ;;
-  ;; This is my custom modeline.  This is here bascially because I don't want to
-  ;; use doom modeline.
+;;; Commentary:
+;;
+;; This is my custom modeline.  This is here bascially because I don't want to
+;; use doom modeline.
 
-  ;;; Code:
-  (defgroup cur-modeline nil
-    "My custom modeline that tries to be minimal."
-    :group 'mode-line)
-  
-  (defgroup cur-modeline-faces nil
-    "The faces for my custom modeline."
-    :group 'cur-modeline)
+;;; Code:
+(defgroup cur-modeline nil
+  "My custom modeline that tries to be minimal."
+  :group 'mode-line)
 
-  (defun cur-mode-line/padding ()
-    "Function to return padding so `mode-line-end-spaces' will be right aligned."
-    (let ((r-length (length (format-mode-line mode-line-end-spaces))))
-      (propertize " "
-                  'display `(space :align-to (- right ,r-length)))))
+(defgroup cur-modeline-faces nil
+  "The faces for my custom modeline."
+  :group 'cur-modeline)
 
-  (setq-default mode-line-format
-                '("%e"
-                  (:eval
-                   (when (and (mode-line-window-selected-p) defining-kbd-macro)
-                     (propertize "  KMACRO  " 'face 'font-lock-string-face)))
-                  (:eval
-                   (when (and (mode-line-window-selected-p)
-                              (buffer-narrowed-p)
-                              (not (derived-mode-p 'Info-mode 'help-mode 'special-mode 'message-mode)))
-                     (propertize "  NARROWED  " 'face 'font-lock-constant-face)))
-                  (:eval
-                   (when (and (member 'meow features) (mode-line-window-selected-p))
-                     (propertize (format "  %s  " (upcase (symbol-name meow--current-state)))
-                                 'face 'highlight)))
-                  "  "
-                  (:eval
-                   (when (mode-line-window-selected-p)
-                     (cond (buffer-read-only
-                            (propertize "RO" 'face 'shadow))
-                           ((buffer-modified-p)
-                            (propertize "**" 'face 'shadow))
-                           (t
-                            (propertize "RW" 'face 'shadow)))))
-                  "  "
-                  (:eval
-                   (propertize (format "%s" (buffer-name)) 'face 'bold))
-                  "  "
-                  (:eval
-                   (if (mode-line-window-selected-p)
+(defun cur-mode-line/padding ()
+  "Function to return padding so `mode-line-end-spaces' will be right aligned."
+  (let ((r-length (length (format-mode-line mode-line-end-spaces))))
+    (propertize " "
+                'display `(space :align-to (- right ,r-length)))))
+
+(setq-default mode-line-format
+              '("%e"
+                (:eval
+                 (when (and (mode-line-window-selected-p) defining-kbd-macro)
+                   (propertize "  KMACRO  " 'face 'font-lock-string-face)))
+                (:eval
+                 (when (and (mode-line-window-selected-p)
+                            (buffer-narrowed-p)
+                            (not (derived-mode-p 'Info-mode 'help-mode 'special-mode 'message-mode)))
+                   (propertize "  NARROWED  " 'face 'font-lock-constant-face)))
+                (:eval
+                 (when (and (member 'meow features) (mode-line-window-selected-p))
+                   (propertize (format "  %s  " (upcase (symbol-name meow--current-state)))
+                               'face 'highlight)))
+                "  "
+                (:eval
+                 (when (mode-line-window-selected-p)
+                   (cond (buffer-read-only
+                          (propertize "RO" 'face 'shadow))
+                         ((buffer-modified-p)
+                          (propertize "**" 'face 'shadow))
+                         (t
+                          (propertize "RW" 'face 'shadow)))))
+                "  "
+                (:eval
+                 (propertize (format "%s" (buffer-name)) 'face 'bold))
+                "  "
+                (:eval
+                 (if (mode-line-window-selected-p)
                      (propertize (capitalize (symbol-name major-mode)) 'face 'warning)
-                     (propertize (capitalize (symbol-name major-mode)) 'face 'shadow)))
-                  (:eval (cur-mode-line/padding))))
+                   (propertize (capitalize (symbol-name major-mode)) 'face 'shadow)))
+                (:eval (cur-mode-line/padding))))
 
-  (provide 'cur-modeline)
-  ;;; cur-modeline.el ends here
+(provide 'cur-modeline)
+;;; cur-modeline.el ends here
 #+end_src
 
 ** Eshell aliases and extensions (=cur-eshell.el=)
@@ -2354,58 +2359,58 @@ elcord
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-eshell.el --- My exensions of the Emacs Shell -*- lexical-binding: t -*-
+;;; cur-eshell.el --- My exensions of the Emacs Shell -*- lexical-binding: t -*-
 
-  ;;; Commentary:
+;;; Commentary:
 
-  ;;; Code:
+;;; Code:
 
-  (require 'eshell)
-  (require 'files)
-  (require 'dired)
+(require 'eshell)
+(require 'files)
+(require 'dired)
 
-  (defun cur-eshell-prompt ()
-    "A minimal and colourful prompt for `eshell'.
-  Set `eshell-prompt-function' to this function to enable."
-    (let* ((red     (face-foreground 'ansi-color-red))
-           (green   (face-foreground 'ansi-color-green))
-           (yellow  (face-foreground 'ansi-color-yellow))
-           (blue    (face-foreground 'ansi-color-blue))
-           (magenta (face-foreground 'ansi-color-magenta))
-           (cyan    (face-foreground 'ansi-color-cyan))
-           (white   (face-foreground 'ansi-color-white)))
-      (concat
-       (propertize "["                   'face `(:weight bold :foreground ,red))
-       (propertize (eshell/whoami)       'face `(:weight bold :foreground ,yellow))
-       (propertize "@"                   'face `(:weight bold :foreground ,green))
-       (propertize (system-name)         'face `(:weight bold :foreground ,blue))
-       " "
-       (propertize (concat (eshell/pwd)) 'face `(:weight bold :foreground ,magenta))
-       (propertize "]"                   'face `(:weight bold :foreground ,red))
-       (propertize "$ "                  'face `(:weight bold :foreground ,white)))))
+(defun cur-eshell-prompt ()
+  "A minimal and colourful prompt for `eshell'.
+Set `eshell-prompt-function' to this function to enable."
+  (let* ((red     (face-foreground 'ansi-color-red))
+         (green   (face-foreground 'ansi-color-green))
+         (yellow  (face-foreground 'ansi-color-yellow))
+         (blue    (face-foreground 'ansi-color-blue))
+         (magenta (face-foreground 'ansi-color-magenta))
+         (cyan    (face-foreground 'ansi-color-cyan))
+         (white   (face-foreground 'ansi-color-white)))
+    (concat
+     (propertize "["                   'face `(:weight bold :foreground ,red))
+     (propertize (eshell/whoami)       'face `(:weight bold :foreground ,yellow))
+     (propertize "@"                   'face `(:weight bold :foreground ,green))
+     (propertize (system-name)         'face `(:weight bold :foreground ,blue))
+     " "
+     (propertize (concat (eshell/pwd)) 'face `(:weight bold :foreground ,magenta))
+     (propertize "]"                   'face `(:weight bold :foreground ,red))
+     (propertize "$ "                  'face `(:weight bold :foreground ,white)))))
 
-  (defun eshell/ff (&optional file)
-    "Eshell alias to open FILE.
-  Will call `find-file' interactively if no file is specified."
-    (cond (file
-           (find-file file))
-          (t
-           (call-interactively 'find-file))))
+(defun eshell/ff (&optional file)
+  "Eshell alias to open FILE.
+Will call `find-file' interactively if no file is specified."
+  (cond (file
+         (find-file file))
+        (t
+         (call-interactively 'find-file))))
 
-  (defun eshell/dir (&optional dir)
-    "Eshell alias to open `dired' at DIR.
-  Will call `dired' on current directory if no directory is specified."
-    (cond (dir
-           (dired dir))
-          (t
-           (dired "."))))
+(defun eshell/dir (&optional dir)
+  "Eshell alias to open `dired' at DIR.
+Will call `dired' on current directory if no directory is specified."
+  (cond (dir
+         (dired dir))
+        (t
+         (dired "."))))
 
-  (defvar cur-eshell-prompt-regexp
-    "^\\[[^]]*\\]\\[?[[:digit:]]*\\]?[#$λ] "
-    "Regex for the `cur-eshell-prompt' prompt.")
+(defvar cur-eshell-prompt-regexp
+  "^\\[[^]]*\\]\\[?[[:digit:]]*\\]?[#$λ] "
+  "Regex for the `cur-eshell-prompt' prompt.")
 
-  (provide 'cur-eshell)
-  ;;; cur-base.el ends here
+(provide 'cur-eshell)
+;;; cur-base.el ends here
 #+end_src
 
 ** Meow Extension (=cur-meow.el=)
@@ -2414,24 +2419,24 @@ elcord
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-meow.el --- Extending Meow's Capabilities -*- lexical-binding: t -*-
+;;; cur-meow.el --- Extending Meow's Capabilities -*- lexical-binding: t -*-
 
-  ;;; Commentary:
-  ;;
+;;; Commentary:
+;;
 
-  ;;; Code:
-  (require 'meow)
+;;; Code:
+(require 'meow)
 
-  (defun cur-meow-toggle-temp-normal-motion ()
-    "Toggle normal and motion mode.
-  If in neither of the two states, return nil."
-    (interactive)
-    (cond ((meow-normal-mode-p) (call-interactively 'meow-motion-mode))
-          ((meow-motion-mode-p) (call-interactively 'meow-normal-mode))
-          (t nil)))
+(defun cur-meow-toggle-temp-normal-motion ()
+  "Toggle normal and motion mode.
+If in neither of the two states, return nil."
+  (interactive)
+  (cond ((meow-normal-mode-p) (call-interactively 'meow-motion-mode))
+        ((meow-motion-mode-p) (call-interactively 'meow-normal-mode))
+        (t nil)))
 
-  (provide 'cur-meow)
-  ;;; cur-meow.el ends here
+(provide 'cur-meow)
+;;; cur-meow.el ends here
 #+end_src
 
 ** Tmux Integration (=cur-tmux.el=)
@@ -2440,177 +2445,177 @@ elcord
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-tmux.el --- Integrating Emacs with a tmux -*- lexical-binding: t -*-
+;;; cur-tmux.el --- Integrating Emacs with a tmux -*- lexical-binding: t -*-
 
-  ;;; Commentary:
+;;; Commentary:
 
-  ;;; Code:
+;;; Code:
 
-  (require 'projectile)
+(require 'projectile)
 
-  (defvar cur-tmux-session-name
-    "emacs"
-    "The name of the session Emacs will try to connect to and manipulate.")
+(defvar cur-tmux-session-name
+  "emacs"
+  "The name of the session Emacs will try to connect to and manipulate.")
 
-  (defvar cur-tmux-default-command
-    "fish"
-    "The default command to run when creating a new window.")
+(defvar cur-tmux-default-command
+  "fish"
+  "The default command to run when creating a new window.")
 
-  (defun cur-tmux--remove-ansi-escape-colors (str)
-    "Remove ansi escape color codes from STR."
-    (replace-regexp-in-string "\\[.*?m" "" str))
+(defun cur-tmux--remove-ansi-escape-colors (str)
+  "Remove ansi escape color codes from STR."
+  (replace-regexp-in-string "\\[.*?m" "" str))
 
-  (defun cur-tmux--list-session-names ()
-    "List the names of all active tmux sessions."
-    (let* ((session-names (string-split
-                          (with-temp-buffer
-                            (cur-tmux--exec-command '("ls" "-F" "#{session_name}") t)
-                            (buffer-string)) "\n" t)))
-      (remove nil session-names)))
+(defun cur-tmux--list-session-names ()
+  "List the names of all active tmux sessions."
+  (let* ((session-names (string-split
+                         (with-temp-buffer
+                           (cur-tmux--exec-command '("ls" "-F" "#{session_name}") t)
+                           (buffer-string)) "\n" t)))
+    (remove nil session-names)))
 
-  (defun cur-tmux-emacs-session-p ()
-    "Return t of `cur-tmux-session-name' is an active session."
-    (if (member cur-tmux-session-name (cur-tmux--list-session-names))
-        t
-      nil))
+(defun cur-tmux-emacs-session-p ()
+  "Return t of `cur-tmux-session-name' is an active session."
+  (if (member cur-tmux-session-name (cur-tmux--list-session-names))
+      t
+    nil))
 
-  (defun cur-tmux-create-session (&optional command)
-    "Create session named after `cur-tmux-session-name' if one does not exist.
-  Will return nil if session exists and will return t if session is
-  created successfully.  Will error if tmux is not found or if tmux
-  returns an error value.
-  If COMMAND is not nil, it will be passed as the initial shell command to tmux.
-  If COMMAND is nil, `cur-tmux-default-command' will be used."
-    (if (cur-tmux-emacs-session-p)
-        nil
-      (let* ((exit-code (cond
-                         (command (call-process "tmux" nil nil nil
-                                                "new" "-d" "-s" cur-tmux-session-name command))
-                         (t (call-process "tmux" nil nil nil
-                                          "new" "-d" "-s" cur-tmux-session-name cur-tmux-default-command)))))
-        (if (= exit-code 0)
-            t
-          (error "Tmux was unable to create a new session with that name")))))
-
-  (defun cur-tmux--exec-command-with-code (args &optional buffer dir)
-    "Call tmux with ARGS, output to BUFFER and return exit code.
-  ARGS must be a list strings that corespond to tmux flags and arguments.
-
-  If DIR is not nil, set the directory to of the tmux window to DIR."
-    (let ((default-directory (if dir
-                                 (expand-file-name dir)
-                               default-directory)))
-      (apply 'call-process "tmux" nil buffer nil args)))
-
-  (defun cur-tmux--exec-command (args &optional buffer dir)
-    "Call `cur-tmux--exec-command' with ARGS, BUFFER, and DIR, return t or nil.
-  Nil is returned if there is an error and t is returned if there is no error.
-  ARGS must be a list strings that corespond to tmux flags and arguments."
-    (let ((exit-code (cur-tmux--exec-command-with-code args buffer dir)))
-      (if (> exit-code 0)
-          nil
-        t)))
-
-  (defun cur-tmux--exec-command-err-on-err (args &optional buffer dir)
-    "Call `cur-tmux--exec-command' with ARGS, BUFFER and DIR, `error' on error."
-    (let* ((exit-code (cur-tmux--exec-command-with-code args buffer dir)))
+(defun cur-tmux-create-session (&optional command)
+  "Create session named after `cur-tmux-session-name' if one does not exist.
+Will return nil if session exists and will return t if session is
+created successfully.  Will error if tmux is not found or if tmux
+returns an error value.
+If COMMAND is not nil, it will be passed as the initial shell command to tmux.
+If COMMAND is nil, `cur-tmux-default-command' will be used."
+  (if (cur-tmux-emacs-session-p)
+      nil
+    (let* ((exit-code (cond
+                       (command (call-process "tmux" nil nil nil
+                                              "new" "-d" "-s" cur-tmux-session-name command))
+                       (t (call-process "tmux" nil nil nil
+                                        "new" "-d" "-s" cur-tmux-session-name cur-tmux-default-command)))))
       (if (= exit-code 0)
           t
-        (error "Tmux terminated with exit code %d" exit-code))))
+        (error "Tmux was unable to create a new session with that name")))))
 
-  (defun cur-tmux--new-window (window-name &optional command dir)
-    "New window named WINDOW-NAME, executing COMMAND if it is non nil.
-  If DIR is not nil, command is executed in DIR."
-    (let* ((args (list "new-window" "-n" window-name "-t" cur-tmux-session-name))
-           (args* (if command
-                      (append args (list command))
-                    args)))
-      (cur-tmux--exec-command-err-on-err args* nil dir)))
+(defun cur-tmux--exec-command-with-code (args &optional buffer dir)
+  "Call tmux with ARGS, output to BUFFER and return exit code.
+ARGS must be a list strings that corespond to tmux flags and arguments.
 
-  (defun cur-tmux--list-windows (&optional index)
-    "List windows in `cur-tmux-session-name'.
-  If INDEX is not nil, output the with format \"#{window_index}: #{window_name}\"."
-    (let* ((args (list "list-windows" "-t" cur-tmux-session-name "-F" ))
-           (args* (if index
-                      (append args '("#{window_index}: #{window_name}"))
-                    (append args '("#{window_name}")))))
-      (split-string
-       (with-temp-buffer
-         (cur-tmux--exec-command-err-on-err args* t)
-         (buffer-string))
-       "\n" t)))
+If DIR is not nil, set the directory to of the tmux window to DIR."
+  (let ((default-directory (if dir
+                               (expand-file-name dir)
+                             default-directory)))
+    (apply 'call-process "tmux" nil buffer nil args)))
 
-  (defun cur-tmux--get-window-number (window)
-    "Get the number associated with WINDOW from `cur-tmux-session-name' session."
-    (car
-     (rassoc
-      (list window)
-      (let* ((window-list (cur-tmux--list-windows t))
-             (window-alist (mapcar (lambda (line)
-                                     (string-split line "[ :]+" t))
-                                   window-list)))
-        ;; (rassoc window window-alist)
-        window-alist))))
+(defun cur-tmux--exec-command (args &optional buffer dir)
+  "Call `cur-tmux--exec-command' with ARGS, BUFFER, and DIR, return t or nil.
+Nil is returned if there is an error and t is returned if there is no error.
+ARGS must be a list strings that corespond to tmux flags and arguments."
+  (let ((exit-code (cur-tmux--exec-command-with-code args buffer dir)))
+    (if (> exit-code 0)
+        nil
+      t)))
 
-  (defun cur-tmux-window-exists-p (window &optional index)
-    "Check if WINDOW is a window in `cur-tmux-session-name'.
-  If INDEX is not nil, check if there is a window named WINDOW with number INDEX.
-  The behavior is similar to that of `member'."
-    (cond
-     (index (if (member (format "%d: %s" index window) (cur-tmux--list-windows index))
-                t
-              nil))
-     (t (if (member window (cur-tmux--list-windows))
-            t
-          nil))))
+(defun cur-tmux--exec-command-err-on-err (args &optional buffer dir)
+  "Call `cur-tmux--exec-command' with ARGS, BUFFER and DIR, `error' on error."
+  (let* ((exit-code (cur-tmux--exec-command-with-code args buffer dir)))
+    (if (= exit-code 0)
+        t
+      (error "Tmux terminated with exit code %d" exit-code))))
 
-  (defun cur-tmux--switch-to-window (window)
-    "Switch to WINDOW in `cur-tmux-session-name' session.
-  If WINDOW is a string, look up and select the first window number
-  named WINDOW
-  If WINDOW is a number, access the window with that number."
-    (cond ((numberp window)
-           (cur-tmux--exec-command-err-on-err
-            (list "selectw" "-t"
-                  (concat cur-tmux-session-name (format "%d" window)))))
-          ((stringp window)
-           (cur-tmux--exec-command-err-on-err
-                (list "selectw" "-t"
-                      (concat cur-tmux-session-name
-                              ":" (cur-tmux--get-window-number project-name)))))
-          (t
-           (error "WINDOW is not a valid type"))))
+(defun cur-tmux--new-window (window-name &optional command dir)
+  "New window named WINDOW-NAME, executing COMMAND if it is non nil.
+If DIR is not nil, command is executed in DIR."
+  (let* ((args (list "new-window" "-n" window-name "-t" cur-tmux-session-name))
+         (args* (if command
+                    (append args (list command))
+                  args)))
+    (cur-tmux--exec-command-err-on-err args* nil dir)))
 
-  (defun cur-tmux-switch-add-project-window ()
-    "Switch or add window coresponding to current project.
-  The name of the window is the value of `projectile-project-name'.
-  When switching, the first window with that name is chosen."
-    (interactive)
-    (when (not (cur-tmux-emacs-session-p))
-      (cur-tmux-create-session))
-    (when (projectile-project-p)
-      (let ((project-name (projectile-project-name))
-            (project-dir (projectile-project-root)))
-        (cond ((cur-tmux-window-exists-p project-name)
-               (cur-tmux--switch-to-window project-name))
-              (t
-               (cur-tmux--new-window project-name cur-tmux-default-command project-dir))))))
+(defun cur-tmux--list-windows (&optional index)
+  "List windows in `cur-tmux-session-name'.
+If INDEX is not nil, output the with format \"#{window_index}: #{window_name}\"."
+  (let* ((args (list "list-windows" "-t" cur-tmux-session-name "-F" ))
+         (args* (if index
+                    (append args '("#{window_index}: #{window_name}"))
+                  (append args '("#{window_name}")))))
+    (split-string
+     (with-temp-buffer
+       (cur-tmux--exec-command-err-on-err args* t)
+       (buffer-string))
+     "\n" t)))
 
-  (defun cur-tmux-new-window (window command &optional directory)
-    "Create a new window called WINDOW and run COMMAND.
-  If DIRECTORY is not nil, run COMMAND in DIRECTORY."
-    (interactive
-     (let ((win (read-string "Window Name: " nil nil "scratch"))
-           (cmd (read-shell-command "Command: "))
-           (dir (read-directory-name "Directory: " nil default-directory)))
-       (list win cmd dir)))
-    (cur-tmux-create-session)
-    (if (not (equal command ""))
-        (cur-tmux--new-window window command directory)
-      (cur-tmux--new-window window cur-tmux-default-command directory)))
+(defun cur-tmux--get-window-number (window)
+  "Get the number associated with WINDOW from `cur-tmux-session-name' session."
+  (car
+   (rassoc
+    (list window)
+    (let* ((window-list (cur-tmux--list-windows t))
+           (window-alist (mapcar (lambda (line)
+                                   (string-split line "[ :]+" t))
+                                 window-list)))
+      ;; (rassoc window window-alist)
+      window-alist))))
 
-  (provide 'cur-tmux)
-  ;;; cur-tmux.el ends here
+(defun cur-tmux-window-exists-p (window &optional index)
+  "Check if WINDOW is a window in `cur-tmux-session-name'.
+If INDEX is not nil, check if there is a window named WINDOW with number INDEX.
+The behavior is similar to that of `member'."
+  (cond
+   (index (if (member (format "%d: %s" index window) (cur-tmux--list-windows index))
+              t
+            nil))
+   (t (if (member window (cur-tmux--list-windows))
+          t
+        nil))))
+
+(defun cur-tmux--switch-to-window (window)
+  "Switch to WINDOW in `cur-tmux-session-name' session.
+If WINDOW is a string, look up and select the first window number
+named WINDOW
+If WINDOW is a number, access the window with that number."
+  (cond ((numberp window)
+         (cur-tmux--exec-command-err-on-err
+          (list "selectw" "-t"
+                (concat cur-tmux-session-name (format "%d" window)))))
+        ((stringp window)
+         (cur-tmux--exec-command-err-on-err
+          (list "selectw" "-t"
+                (concat cur-tmux-session-name
+                        ":" (cur-tmux--get-window-number project-name)))))
+        (t
+         (error "WINDOW is not a valid type"))))
+
+(defun cur-tmux-switch-add-project-window ()
+  "Switch or add window coresponding to current project.
+The name of the window is the value of `projectile-project-name'.
+When switching, the first window with that name is chosen."
+  (interactive)
+  (when (not (cur-tmux-emacs-session-p))
+    (cur-tmux-create-session))
+  (when (projectile-project-p)
+    (let ((project-name (projectile-project-name))
+          (project-dir (projectile-project-root)))
+      (cond ((cur-tmux-window-exists-p project-name)
+             (cur-tmux--switch-to-window project-name))
+            (t
+             (cur-tmux--new-window project-name cur-tmux-default-command project-dir))))))
+
+(defun cur-tmux-new-window (window command &optional directory)
+  "Create a new window called WINDOW and run COMMAND.
+If DIRECTORY is not nil, run COMMAND in DIRECTORY."
+  (interactive
+   (let ((win (read-string "Window Name: " nil nil "scratch"))
+         (cmd (read-shell-command "Command: "))
+         (dir (read-directory-name "Directory: " nil default-directory)))
+     (list win cmd dir)))
+  (cur-tmux-create-session)
+  (if (not (equal command ""))
+      (cur-tmux--new-window window command directory)
+    (cur-tmux--new-window window cur-tmux-default-command directory)))
+
+(provide 'cur-tmux)
+;;; cur-tmux.el ends here
 #+end_src
 
 ** Theme Helpers (=cur-theme.el=)
@@ -2619,243 +2624,243 @@ elcord
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-theme.el --- Helper functions for theming -*- lexical-binding: t -*-
+;;; cur-theme.el --- Helper functions for theming -*- lexical-binding: t -*-
 
-  ;;; Commentary:
-  ;;
+;;; Commentary:
+;;
 
-  ;;; Code:
+;;; Code:
 
-  (require 'cl-lib)
+(require 'cl-lib)
 
-  (defgroup cur-theme nil
-    "A themeing library for creating simple and extensible themes."
-    :group 'faces)
+(defgroup cur-theme nil
+  "A themeing library for creating simple and extensible themes."
+  :group 'faces)
 
-  (defgroup cur-override-theme nil
-    "A theme that will conditionally override aspects of your current theme."
-    :group 'cur-theme)
+(defgroup cur-override-theme nil
+  "A theme that will conditionally override aspects of your current theme."
+  :group 'cur-theme)
 
-  (defvar cur-theme--default-face-defs
-    '(())
-    "The default definitions for theme faces.")
+(defvar cur-theme--default-face-defs
+  '(())
+  "The default definitions for theme faces.")
 
-  (defun cur-theme-name-to-rgb (color)
-    "Retrieves the hexidecimal string repesented the named COLOR (e.g. \"red\")
-  for FRAME (defaults to the current frame)."
-    (cl-loop with div = (float (car (tty-color-standard-values "#ffffff")))
-             for x in (tty-color-standard-values (downcase color))
-             collect (/ x div)))
+(defun cur-theme-name-to-rgb (color)
+  "Retrieves the hexidecimal string repesented the named COLOR (e.g. \"red\")
+for FRAME (defaults to the current frame)."
+  (cl-loop with div = (float (car (tty-color-standard-values "#ffffff")))
+           for x in (tty-color-standard-values (downcase color))
+           collect (/ x div)))
 
-  (defun cur-theme-blend (color1 color2 alpha)
-    "Blend COLOR1 with COLOR2 with ALPHA.
-  Both COLOR1 and COLOR2 must be strings in hexidecimal form, prepended
-  with a \"#\"."
-    (if (and (string-prefix-p "#" color2) (string-prefix-p "#" color2))
-        (apply (lambda (r g b) (format "#%02x%02x%02x" (* r 255) (* g 255) (* b 255)))
-               (cl-loop for it    in (cur-theme-name-to-rgb color1)
-                        for other in (cur-theme-name-to-rgb color2)
-                        collect (+ (* alpha it) (* other (- 1 alpha)))))
-      (error "No \"#\" prefix for \"%s\" and \"%s\"" color2 color2)))
+(defun cur-theme-blend (color1 color2 alpha)
+  "Blend COLOR1 with COLOR2 with ALPHA.
+Both COLOR1 and COLOR2 must be strings in hexidecimal form, prepended
+with a \"#\"."
+  (if (and (string-prefix-p "#" color2) (string-prefix-p "#" color2))
+      (apply (lambda (r g b) (format "#%02x%02x%02x" (* r 255) (* g 255) (* b 255)))
+             (cl-loop for it    in (cur-theme-name-to-rgb color1)
+                      for other in (cur-theme-name-to-rgb color2)
+                      collect (+ (* alpha it) (* other (- 1 alpha)))))
+    (error "No \"#\" prefix for \"%s\" and \"%s\"" color2 color2)))
 
-  (defun cur-theme-lighten (color alpha)
-    "Blend COLOR with \"#FFFFFF\" and ALPHA."
-    (cur-theme-blend color "#FFFFFF" (- 1 alpha)))
+(defun cur-theme-lighten (color alpha)
+  "Blend COLOR with \"#FFFFFF\" and ALPHA."
+  (cur-theme-blend color "#FFFFFF" (- 1 alpha)))
 
-  (defun cur-theme-darken (color alpha)
-    "Blend COLOR with \"#000000\" and ALPHA."
-    (cur-theme-blend color "#000000" (- 1 alpha)))
+(defun cur-theme-darken (color alpha)
+  "Blend COLOR with \"#000000\" and ALPHA."
+  (cur-theme-blend color "#000000" (- 1 alpha)))
 
-  (defvar cur-theme--schema-names
-    '(base00
-      base01
-      base02))
+(defvar cur-theme--schema-names
+  '(base00
+    base01
+    base02))
 
-  (defun cur-theme--check-default-schema (colors)
-    "Take COLORS and check if it has all of the default schema values defined.
-  The names of the default schema are in `cur-theme--schema-names'.
-  Note, this will not check recursively defined colors.  For example, something
-  like ((thing1 thing2) (thing2 thing1)) will be considered valid."
-    (let ((color-names (mapcar (lambda (x) (car x)) colors)))
-      (dolist (color-name cur-theme--schema-names)
-        (unless (member color-name color-names)
-          (error "Color %s is not defined in theme" color-name)))
-      (dolist (color colors)
-        (unless (equal (length color) 2)
-          (error "Color %s has several definitions" (car color)))
-        (let ((name (car color))
-              (value (car (last color))))
-          (cond ((stringp value)
-                 (unless (equal (length value) 7)
-                   (error "Color %s's value is too long: %s" name value))
-                 (unless (string-match-p (rx "#" (repeat 6 (any "A-F" "a-f" "0-9"))) value)
-                   (error "Color %s does not have a proper hex value: %s" name value)))
-                ((symbolp value)
-                 (unless (member value color-names)
-                   (error "Color %s references a nondefined color %s" name value)))
-                (t
-                 (error "Color %s has nonsensical definition %s" name value)))))))
+(defun cur-theme--check-default-schema (colors)
+  "Take COLORS and check if it has all of the default schema values defined.
+The names of the default schema are in `cur-theme--schema-names'.
+Note, this will not check recursively defined colors.  For example, something
+like ((thing1 thing2) (thing2 thing1)) will be considered valid."
+  (let ((color-names (mapcar (lambda (x) (car x)) colors)))
+    (dolist (color-name cur-theme--schema-names)
+      (unless (member color-name color-names)
+        (error "Color %s is not defined in theme" color-name)))
+    (dolist (color colors)
+      (unless (equal (length color) 2)
+        (error "Color %s has several definitions" (car color)))
+      (let ((name (car color))
+            (value (car (last color))))
+        (cond ((stringp value)
+               (unless (equal (length value) 7)
+                 (error "Color %s's value is too long: %s" name value))
+               (unless (string-match-p (rx "#" (repeat 6 (any "A-F" "a-f" "0-9"))) value)
+                 (error "Color %s does not have a proper hex value: %s" name value)))
+              ((symbolp value)
+               (unless (member value color-names)
+                 (error "Color %s references a nondefined color %s" name value)))
+              (t
+               (error "Color %s has nonsensical definition %s" name value)))))))
 
-  (defun cur-theme--expand-faces (face-defs)
-    "Take FACE-DEFS and return faces that can be used by `custom-theme-set-faces'."
-    (mapcar
-     (lambda (face-def)
-       (let* ((face (car face-def))
-              (def  (cdr face-def)))
-         `(list ',face ,`(list (list t (list ,@def))))))
-     face-defs))
+(defun cur-theme--expand-faces (face-defs)
+  "Take FACE-DEFS and return faces that can be used by `custom-theme-set-faces'."
+  (mapcar
+   (lambda (face-def)
+     (let* ((face (car face-def))
+            (def  (cdr face-def)))
+       `(list ',face ,`(list (list t (list ,@def))))))
+   face-defs))
 
-  (defun cur-theme--get-face (face-name face-defs)
-    "Return face-def with FACE-NAME in FACE-DEFS.
-  FACE-NAME should be a symbol."
-    (cl-loop for face-def in face-defs
-             when (equal face-name (car face-def))
-             return face-def))
+(defun cur-theme--get-face (face-name face-defs)
+  "Return face-def with FACE-NAME in FACE-DEFS.
+FACE-NAME should be a symbol."
+  (cl-loop for face-def in face-defs
+           when (equal face-name (car face-def))
+           return face-def))
 
-  (defun cur-theme--merge-faces (prev-list new-list)
-    "Take PREV-LIST of face defs and overlay NEW-LIST on top."
-    (let (overridden)
-      (setq overridden prev-list)
-      (dolist (face-override new-list)
-        (let ((face (car face-override))
-              (definition (cdr face-override)))
-          (if (assoc face overridden)
-              (setcdr (cur-theme--get-face face overridden) definition)
-            (push face-override overridden))))
-      overridden))
+(defun cur-theme--merge-faces (prev-list new-list)
+  "Take PREV-LIST of face defs and overlay NEW-LIST on top."
+  (let (overridden)
+    (setq overridden prev-list)
+    (dolist (face-override new-list)
+      (let ((face (car face-override))
+            (definition (cdr face-override)))
+        (if (assoc face overridden)
+            (setcdr (cur-theme--get-face face overridden) definition)
+          (push face-override overridden))))
+    overridden))
 
-  (defun cur-theme--option-plist-get (plist prop default)
-    "Get PROP from PLIST if PLIST has PROP, otherwise returning DEFAUlT."
-    (if (plist-member plist prop)
-        (plist-get plist prop)
-      default))
+(defun cur-theme--option-plist-get (plist prop default)
+  "Get PROP from PLIST if PLIST has PROP, otherwise returning DEFAUlT."
+  (if (plist-member plist prop)
+      (plist-get plist prop)
+    default))
 
-  (defmacro cur-theme-def (theme-name doc options-plist colors &rest faces)
-    "Generate custom theme named THEME-NAME.
-  DOC is the documentation string.
-  OPTIONS-PLIST is an plist of optionional parameters that change the behavior of
-  different parts of the macro.  They are as follows:
-  ,* :merge - When t, merge FACES with `cur-theme--default-face-defs'.  When nil,
-    do not perform any merging.  Defaults to t.
-  ,* :color-check - When set to t, check COLORS for conforming to schema.  When
-    nil preform no checks.  Defaults to t.
+(defmacro cur-theme-def (theme-name doc options-plist colors &rest faces)
+  "Generate custom theme named THEME-NAME.
+DOC is the documentation string.
+OPTIONS-PLIST is an plist of optionional parameters that change the behavior of
+different parts of the macro.  They are as follows:
+,* :merge - When t, merge FACES with `cur-theme--default-face-defs'.  When nil,
+  do not perform any merging.  Defaults to t.
+,* :color-check - When set to t, check COLORS for conforming to schema.  When
+  nil preform no checks.  Defaults to t.
 
-  COLORS is a list of lists, where the first element is a symbol and the second is
-  a string that is the hex value of the color or the name of another color in the
-  list.  COLORS must define all names in `cur-theme--schema-names' are defined.
-  OPTIONS-PLIST will affect this behavior.
+COLORS is a list of lists, where the first element is a symbol and the second is
+a string that is the hex value of the color or the name of another color in the
+list.  COLORS must define all names in `cur-theme--schema-names' are defined.
+OPTIONS-PLIST will affect this behavior.
 
-  FACES is a list of faces in the form (FACE PROPERTIES).  For example, (bold
-  :background bg :foreground fg :weight \\='bold).  OPTIONS-PLIST will affect
-  this behavior."
-    (declare (indent 1))
-    (let* ((merge (cur-theme--option-plist-get options-plist :merge t))
-           (color-check (cur-theme--option-plist-get options-plist :color-check t)))
-      (cond (color-check
-             (cur-theme--check-default-schema colors))
-            (t (when (eq merge t)
-                 (warn "Theme defined with no default schema but still merges with default faces defs which require the default schema"))))
+FACES is a list of faces in the form (FACE PROPERTIES).  For example, (bold
+:background bg :foreground fg :weight \\='bold).  OPTIONS-PLIST will affect
+this behavior."
+  (declare (indent 1))
+  (let* ((merge (cur-theme--option-plist-get options-plist :merge t))
+         (color-check (cur-theme--option-plist-get options-plist :color-check t)))
+    (cond (color-check
+           (cur-theme--check-default-schema colors))
+          (t (when (eq merge t)
+               (warn "Theme defined with no default schema but still merges with default faces defs which require the default schema"))))
 
-      `(let* (,@colors)
-         (deftheme ,theme-name
-           ,doc)
-         ,(unless (and (equal (length faces) 1)
-                       (equal (car faces) nil))
-            `(custom-theme-set-faces
-              ',theme-name
-              ,@(if merge
-                   (cur-theme--expand-faces
-                    (cur-theme--merge-faces cur-theme--default-face-defs faces))
-                 (cur-theme--expand-faces faces)))))))
+    `(let* (,@colors)
+       (deftheme ,theme-name
+         ,doc)
+       ,(unless (and (equal (length faces) 1)
+                     (equal (car faces) nil))
+          `(custom-theme-set-faces
+            ',theme-name
+            ,@(if merge
+                  (cur-theme--expand-faces
+                   (cur-theme--merge-faces cur-theme--default-face-defs faces))
+		(cur-theme--expand-faces faces)))))))
 
-  (defcustom cur-override-theme-overrides
-    '((doom-gruvbox (secondary-selection :background "#504945")))
-    "The overrides for cur-override-theme."
-    :group 'cur-override-theme
-    :type '(alist :key-type symbol :value-type sexp))
+(defcustom cur-override-theme-overrides
+  '((doom-gruvbox (secondary-selection :background "#504945")))
+  "The overrides for cur-override-theme."
+  :group 'cur-override-theme
+  :type '(alist :key-type symbol :value-type sexp))
 
-  (defcustom cur-override-theme-theme-priority
-    'single
-    "The priority for which theme has its overrides applied.
-  `first' means apply the override of the first theme if it has one.  `last' means
-  apply the override of the last theme if it has one.  `single' means expect only
-  a single theme to be enabled and signal a user error if multiple are enabled."
-    :group 'cur-override-theme
-    :type '(choice (const :tag "Use First Enabled Theme" first)
-                   (const :tag "Use Last Enabled Theme" last)
-                   (const :tag "Expect a Single Enabled Theme" single)))
+(defcustom cur-override-theme-theme-priority
+  'single
+  "The priority for which theme has its overrides applied.
+`first' means apply the override of the first theme if it has one.  `last' means
+apply the override of the last theme if it has one.  `single' means expect only
+a single theme to be enabled and signal a user error if multiple are enabled."
+  :group 'cur-override-theme
+  :type '(choice (const :tag "Use First Enabled Theme" first)
+                 (const :tag "Use Last Enabled Theme" last)
+                 (const :tag "Expect a Single Enabled Theme" single)))
 
-  (defun cur-theme--get-overrides (theme)
-    "Return the overrides for THEME from `cur-override-theme-overrides'."
-    (cdr (assoc theme cur-override-theme-overrides)))
+(defun cur-theme--get-overrides (theme)
+  "Return the overrides for THEME from `cur-override-theme-overrides'."
+  (cdr (assoc theme cur-override-theme-overrides)))
 
-  (defmacro cur-override-theme-def ()
-    ""
-    (let ((overrides
-           (cond ((eq cur-override-theme-theme-priority 'first)
-                  (cur-theme--get-overrides (car (last custom-enabled-themes))))
-                 ((eq cur-override-theme-theme-priority 'last)
-                  (cur-theme--get-overrides (car custom-enabled-themes)))
-                 ((eq cur-override-theme-theme-priority 'single)
-                  (when (> (length custom-enabled-themes) 1)
-                    (user-error "More than one theme enabled.
-  Please disable all but one theme or change the value of `cur-override-theme-theme-priority'"))
-                  (cur-theme--get-overrides (car custom-enabled-themes))))))
-      `(cur-theme-def cur-override
-         "A theme to override defintions another theme."
-         ( :merge nil
-           :color-check nil)
-         nil
-         ,@ (if overrides
-                overrides
-              '(nil)))))
+(defmacro cur-override-theme-def ()
+  ""
+  (let ((overrides
+         (cond ((eq cur-override-theme-theme-priority 'first)
+                (cur-theme--get-overrides (car (last custom-enabled-themes))))
+               ((eq cur-override-theme-theme-priority 'last)
+                (cur-theme--get-overrides (car custom-enabled-themes)))
+               ((eq cur-override-theme-theme-priority 'single)
+                (when (> (length custom-enabled-themes) 1)
+                  (user-error "More than one theme enabled.
+Please disable all but one theme or change the value of `cur-override-theme-theme-priority'"))
+                (cur-theme--get-overrides (car custom-enabled-themes))))))
+    `(cur-theme-def cur-override
+       "A theme to override defintions another theme."
+       ( :merge nil
+         :color-check nil)
+       nil
+       ,@ (if overrides
+              overrides
+            '(nil)))))
 
-  (defun cur-theme-load-theme (theme)
-    "Load THEME, disabling all other currently enabled themes."
-    (interactive
-     (list
-      (intern (completing-read "Custom Themes: "
-                               (mapcar #'symbol-name
-                                       (custom-available-themes))))))
-    (condition-case nil
-        (progn
-          (mapc #'disable-theme custom-enabled-themes)
-          (load-theme theme t))
-      (error "Problem loading theme %s" theme)))
+(defun cur-theme-load-theme (theme)
+  "Load THEME, disabling all other currently enabled themes."
+  (interactive
+   (list
+    (intern (completing-read "Custom Themes: "
+                             (mapcar #'symbol-name
+                                     (custom-available-themes))))))
+  (condition-case nil
+      (progn
+        (mapc #'disable-theme custom-enabled-themes)
+        (load-theme theme t))
+    (error "Problem loading theme %s" theme)))
 
-  (defcustom cur-override-theme-load-function
-    #'cur-theme-load-theme
-    "The function to set a theme or themes."
-    :group 'cur-override-theme
-    :type '(function))
+(defcustom cur-override-theme-load-function
+  #'cur-theme-load-theme
+  "The function to set a theme or themes."
+  :group 'cur-override-theme
+  :type '(function))
 
-  (defun cur-override-theme-load-theme (theme)
-    "Load a THEME and then load the `cur-override' theme.
-  If THEME is nil then call interactively the function
-  `cur-override-theme-load-function'."
-    (interactive (list nil))
-    (if theme
-        (cur-theme-load-theme theme)
-      (call-interactively cur-override-theme-load-function))
-    (load-theme 'cur-override t))
+(defun cur-override-theme-load-theme (theme)
+  "Load a THEME and then load the `cur-override' theme.
+If THEME is nil then call interactively the function
+`cur-override-theme-load-function'."
+  (interactive (list nil))
+  (if theme
+      (cur-theme-load-theme theme)
+    (call-interactively cur-override-theme-load-function))
+  (load-theme 'cur-override t))
 
-  (provide 'cur-theme)
-  ;;; cur-theme.el ends here
+(provide 'cur-theme)
+;;; cur-theme.el ends here
 #+end_src
 
 #+begin_src emacs-lisp :tangle ./themes/cur-override-theme.el
-  ;;; cur-override-theme.el --- Theme that will override other themes -*- lexical-binding: t -*-
+;;; cur-override-theme.el --- Theme that will override other themes -*- lexical-binding: t -*-
 
-  ;;; Commentary:
-  ;;
+;;; Commentary:
+;;
 
-  ;;; Code:
-  (require 'cur-theme)
-  
-  (cur-override-theme-def)
+;;; Code:
+(require 'cur-theme)
 
-  (provide 'cur-override)
-  ;; cur-override-theme.el ends here
+(cur-override-theme-def)
+
+(provide 'cur-override)
+;; cur-override-theme.el ends here
 #+end_src
 
 ** Wallpaper Functions (=cur-wallpaper.el=)
@@ -2895,115 +2900,115 @@ elcord
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-window.el --- Customization and helper functions for window management -*- lexical-binding: t -*-
+;;; cur-window.el --- Customization and helper functions for window management -*- lexical-binding: t -*-
 
-  ;;; Commentary:
-  ;; Custom functions and variables for managing windows.  In particular, setting `display-buffer-alist'
-  ;; so that windows are just placed how I want.
-  ;;
-  ;; Much of this was shamelessly stolen from Protesilaos Stavrou, who greatly inspired much of my config.
-  ;; Please see https://protesilaos.com/emacs/dotemacs#h:35b8a0a5-c447-4301-a404-bc274596238d for his window
-  ;; management section of his Emacs config.
+;;; Commentary:
+;; Custom functions and variables for managing windows.  In particular, setting `display-buffer-alist'
+;; so that windows are just placed how I want.
+;;
+;; Much of this was shamelessly stolen from Protesilaos Stavrou, who greatly inspired much of my config.
+;; Please see https://protesilaos.com/emacs/dotemacs#h:35b8a0a5-c447-4301-a404-bc274596238d for his window
+;; management section of his Emacs config.
 
-  ;;; Code:
+;;; Code:
 
-  (defun cur-window--window-small-p ()
-    "Return non-nil if window is small.
-  Check if the `window-width' or `window-height' is less than
-  `split-width-threshold' and `split-height-threshold',
-  respectively."
-    (or (and (numberp split-width-threshold)
-             (< (window-total-width) split-width-threshold))
-        (and (numberp split-height-threshold)
-             (> (window-total-height) split-height-threshold))))
+(defun cur-window--window-small-p ()
+  "Return non-nil if window is small.
+Check if the `window-width' or `window-height' is less than
+`split-width-threshold' and `split-height-threshold',
+respectively."
+  (or (and (numberp split-width-threshold)
+           (< (window-total-width) split-width-threshold))
+      (and (numberp split-height-threshold)
+           (> (window-total-height) split-height-threshold))))
 
-  (defun cur-window--three-or-more-windows-p (&optional frame)
-    "Return non-nil if three or more windows occupy FRAME.
-  If FRAME is non-nil, inspect the current frame."
-    (>= (length (window-list frame :no-minibuffer)) 3))
+(defun cur-window--three-or-more-windows-p (&optional frame)
+  "Return non-nil if three or more windows occupy FRAME.
+If FRAME is non-nil, inspect the current frame."
+  (>= (length (window-list frame :no-minibuffer)) 3))
 
-  (defun cur-window--get-display-buffer-below-or-pop ()
-    "Return list of functions for `cur-window-display-buffer-below-or-pop'."
-    (list
-     #'display-buffer-reuse-mode-window
-     (if (or (cur-window--window-small-p)
-             (cur-window--three-or-more-windows-p))
-         #'display-buffer-below-selected
-       #'display-buffer-pop-up-window)))
+(defun cur-window--get-display-buffer-below-or-pop ()
+  "Return list of functions for `cur-window-display-buffer-below-or-pop'."
+  (list
+   #'display-buffer-reuse-mode-window
+   (if (or (cur-window--window-small-p)
+           (cur-window--three-or-more-windows-p))
+       #'display-buffer-below-selected
+     #'display-buffer-pop-up-window)))
 
-  (defun cur-window-display-buffer-below-or-pop (&rest args)
-    "Display buffer below current window or pop a new window.
-  The criterion for choosing to display the buffer below the
-  current one is a non-nil return value for
-  `prot-common-window-small-p'.
+(defun cur-window-display-buffer-below-or-pop (&rest args)
+  "Display buffer below current window or pop a new window.
+The criterion for choosing to display the buffer below the
+current one is a non-nil return value for
+`prot-common-window-small-p'.
 
-  Apply ARGS expected by the underlying `display-buffer' functions.
+Apply ARGS expected by the underlying `display-buffer' functions.
 
-  This as the action function in a `display-buffer-alist' entry."
-    (let ((functions (cur-window--get-display-buffer-below-or-pop)))
-      (catch 'success
-        (dolist (fn functions)
-          (when (apply fn args)
-            (throw 'success fn))))))
+This as the action function in a `display-buffer-alist' entry."
+  (let ((functions (cur-window--get-display-buffer-below-or-pop)))
+    (catch 'success
+      (dolist (fn functions)
+        (when (apply fn args)
+          (throw 'success fn))))))
 
-  (defvar cur-window-window-sizes
-    '( :max-height (lambda () (floor (frame-height) 3))
-       :min-height 10
-       :max-width (lambda () (floor (frame-width) 3))
-       :min-width 20)
-    "This is a property list of max and min values for window sizes.
-  This value is used by `cur-window-select-fit-to-size' to set the
-  size of the window.")
+(defvar cur-window-window-sizes
+  '( :max-height (lambda () (floor (frame-height) 3))
+     :min-height 10
+     :max-width (lambda () (floor (frame-width) 3))
+     :min-width 20)
+  "This is a property list of max and min values for window sizes.
+This value is used by `cur-window-select-fit-to-size' to set the
+size of the window.")
 
-  (defun cur-window--get-window-size (key)
-    "Use KEY to extract the value from `cur-window-window-sizes'.
-  If the value is a number return it, if it is a function, call
-  it and return it's value."
-    (when-let ((value (plist-get cur-window-window-sizes key)))
-      (cond
-       ((functionp value)
-        (funcall value))
-       ((numberp value)
-        value)
-       (t
-        (error "The value of %s is not a number or function" key)))))
+(defun cur-window--get-window-size (key)
+  "Use KEY to extract the value from `cur-window-window-sizes'.
+If the value is a number return it, if it is a function, call
+it and return it's value."
+  (when-let ((value (plist-get cur-window-window-sizes key)))
+    (cond
+     ((functionp value)
+      (funcall value))
+     ((numberp value)
+      value)
+     (t
+      (error "The value of %s is not a number or function" key)))))
 
-  (defun cur-window-select-fit-to-size (window)
-    "Select WINDOW and fit it to the buffer.
-  The minimum and maximum height and width is determined by
-  `cur-window-window-sizes'."
-    (select-window window)
-    (fit-window-to-buffer
-     window
-     (cur-window--get-window-size :max-height)
-     (cur-window--get-window-size :min-height)
-     (cur-window--get-window-size :max-width)
-     (cur-window--get-window-size :min-width)))
+(defun cur-window-select-fit-to-size (window)
+  "Select WINDOW and fit it to the buffer.
+The minimum and maximum height and width is determined by
+`cur-window-window-sizes'."
+  (select-window window)
+  (fit-window-to-buffer
+   window
+   (cur-window--get-window-size :max-height)
+   (cur-window--get-window-size :min-height)
+   (cur-window--get-window-size :max-width)
+   (cur-window--get-window-size :min-width)))
 
-  (defvar cur-window-same-window-modes-list
-    '(justl-mode)
-    "List of major modes that should have their window reused.
-  The function `cur-window-display-buffer-below-or-pop' uses this variable to
-  determine if it will create a new window or reuse the current one.")
+(defvar cur-window-same-window-modes-list
+  '(justl-mode)
+  "List of major modes that should have their window reused.
+The function `cur-window-display-buffer-below-or-pop' uses this variable to
+determine if it will create a new window or reuse the current one.")
 
-  (defun cur-window--get-display-buffer-same-window-or-below ()
-    "Return a list of functions for `cur-window-display-buffer-same-window-or-below'."
-    (list
-     #'display-buffer-reuse-window
-     (if (memq major-mode cur-window-same-window-modes-list)
-         #'display-buffer-same-window
-       #'display-buffer-below-selected)))
+(defun cur-window--get-display-buffer-same-window-or-below ()
+  "Return a list of functions for `cur-window-display-buffer-same-window-or-below'."
+  (list
+   #'display-buffer-reuse-window
+   (if (memq major-mode cur-window-same-window-modes-list)
+       #'display-buffer-same-window
+     #'display-buffer-below-selected)))
 
-  (defun cur-window-display-buffer-same-window-or-below (&rest args)
-    "Display buffer either reusing the current window or bellow."
-    (let ((functions (cur-window--get-display-buffer-same-window-or-below)))
-      (catch 'success
-        (dolist (fn functions)
-          (when (apply fn args)
-            (throw 'success fn))))))
+(defun cur-window-display-buffer-same-window-or-below (&rest args)
+  "Display buffer either reusing the current window or bellow."
+  (let ((functions (cur-window--get-display-buffer-same-window-or-below)))
+    (catch 'success
+      (dolist (fn functions)
+        (when (apply fn args)
+          (throw 'success fn))))))
 
-  (provide 'cur-window)
-  ;;; cur-window.el ends here
+(provide 'cur-window)
+;;; cur-window.el ends here
 #+end_src
 
 ** Vterm extension (=cur-vterm.el=)
@@ -3012,42 +3017,42 @@ elcord
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-vterm.el --- Customization and helper functions for vterm
+;;; cur-vterm.el --- Customization and helper functions for vterm
 
-  ;;; Commentary:
+;;; Commentary:
 
-  ;;; Code:
+;;; Code:
 
-  (require 'vterm)
+(require 'vterm)
 
-  (defun cur-vterm-enter-password ()
-    (declare (interactive-only t))
-    (interactive)
-    (unless (equal major-mode 'vterm-mode)
-      (user-error "Not in a VTerm Terminal"))
-    (vterm-insert (read-passwd "Password: "))
-    (vterm-send-return))
+(defun cur-vterm-enter-password ()
+  (declare (interactive-only t))
+  (interactive)
+  (unless (equal major-mode 'vterm-mode)
+    (user-error "Not in a VTerm Terminal"))
+  (vterm-insert (read-passwd "Password: "))
+  (vterm-send-return))
 
-  (defun cur-vterm-project (&optional other-window)
-    (interactive)
-    (if-let* ((current-project (project-current))
-              (default-directory (project-root current-project))
-              (buffer-name (format "*%s-%s*" (project-name current-project) "vterm")))
-        (if (buffer-live-p (get-buffer buffer-name))
-            (if other-window
-                (switch-to-buffer-other-window buffer-name)
-              (switch-to-buffer buffer-name))
+(defun cur-vterm-project (&optional other-window)
+  (interactive)
+  (if-let* ((current-project (project-current))
+            (default-directory (project-root current-project))
+            (buffer-name (format "*%s-%s*" (project-name current-project) "vterm")))
+      (if (buffer-live-p (get-buffer buffer-name))
           (if other-window
-              (vterm-other-window buffer-name)
-            (vterm buffer-name)))
-      (user-error "Cannot create vterm buffer in %s" (cdr current-project))))
+              (switch-to-buffer-other-window buffer-name)
+            (switch-to-buffer buffer-name))
+        (if other-window
+            (vterm-other-window buffer-name)
+          (vterm buffer-name)))
+    (user-error "Cannot create vterm buffer in %s" (cdr current-project))))
 
-  (defun cur-vterm-project-other-window ()
-    (interactive)
-    (cur-vterm-project t))
+(defun cur-vterm-project-other-window ()
+  (interactive)
+  (cur-vterm-project t))
 
-  (provide 'cur-vterm)
-  ;;; cur-vterm.el ends here
+(provide 'cur-vterm)
+;;; cur-vterm.el ends here
 #+end_src
 
 * Themes
@@ -3057,361 +3062,361 @@ elcord
 :END:
 
 #+begin_src emacs-lisp
-  ;;; cur-gruvbox-theme.el --- My custom gruvbox theme
+;;; cur-gruvbox-theme.el --- My custom gruvbox theme
 
-  ;;; Commentary:
+;;; Commentary:
 
-  ;;; Code:
+;;; Code:
 
-  (require 'cur-theme)
+(require 'cur-theme)
 
-  ;; (add-to-list 'custom-theme-load-path (locate-user-emacs-file "/home/recur/cfg/home/programs/emacs/themes"))
+;; (add-to-list 'custom-theme-load-path (locate-user-emacs-file "/home/recur/cfg/home/programs/emacs/themes"))
 
-  (defun cur-theme-name-to-rgb (color)
-    "Retrieves the hexidecimal string repesented the named COLOR (e.g. \"red\")
-  for FRAME (defaults to the current frame)."
-    (cl-loop with div = (float (car (tty-color-standard-values "#ffffff")))
-             for x in (tty-color-standard-values (downcase color))
-             collect (/ x div)))
+(defun cur-theme-name-to-rgb (color)
+  "Retrieves the hexidecimal string repesented the named COLOR (e.g. \"red\")
+for FRAME (defaults to the current frame)."
+  (cl-loop with div = (float (car (tty-color-standard-values "#ffffff")))
+           for x in (tty-color-standard-values (downcase color))
+           collect (/ x div)))
 
-  (defun cur-theme-blend (color1 color2 alpha)
-    ""
-    (if (and (string-prefix-p "#" color2) (string-prefix-p "#" color2))
-        (apply (lambda (r g b) (format "#%02x%02x%02x" (* r 255) (* g 255) (* b 255)))
-               (cl-loop for it    in (cur-theme-name-to-rgb color1)
-                        for other in (cur-theme-name-to-rgb color2)
-                        collect (+ (* alpha it) (* other (- 1 alpha)))))
-      (error "No \"#\" prefix for \"%s\" and \"%s\"" color2 color2)))
+(defun cur-theme-blend (color1 color2 alpha)
+  ""
+  (if (and (string-prefix-p "#" color2) (string-prefix-p "#" color2))
+      (apply (lambda (r g b) (format "#%02x%02x%02x" (* r 255) (* g 255) (* b 255)))
+             (cl-loop for it    in (cur-theme-name-to-rgb color1)
+                      for other in (cur-theme-name-to-rgb color2)
+                      collect (+ (* alpha it) (* other (- 1 alpha)))))
+    (error "No \"#\" prefix for \"%s\" and \"%s\"" color2 color2)))
 
-  (defun cur-theme-lighten (color alpha)
-    ""
-    (cur-theme-blend color "#FFFFFF" (- 1 alpha)))
+(defun cur-theme-lighten (color alpha)
+  ""
+  (cur-theme-blend color "#FFFFFF" (- 1 alpha)))
 
-  (defun cur-theme-darken (color alpha)
-    ""
-    (cur-theme-blend color "#000000" (- 1 alpha)))
+(defun cur-theme-darken (color alpha)
+  ""
+  (cur-theme-blend color "#000000" (- 1 alpha)))
 
-  (deftheme cur-gruvbox
-    "Asdf.")
+(deftheme cur-gruvbox
+  "Asdf.")
 
-  (let* (
-        ;; Normal colours
-        (red        "#cc241d")
-        (green      "#98971a")
-        (yellow     "#d79921")
-        (blue       "#458588")
-        (purple     "#b16286")
-        (aqua       "#689d6a")
-        (orange     "#d65d0e")
+(let* (
+       ;; Normal colours
+       (red        "#cc241d")
+       (green      "#98971a")
+       (yellow     "#d79921")
+       (blue       "#458588")
+       (purple     "#b16286")
+       (aqua       "#689d6a")
+       (orange     "#d65d0e")
 
-        ;; Bright colours
-        (light-red        "#fb4934")
-        (light-green      "#b8bb26")
-        (light-yellow     "#fabd2f")
-        (light-blue       "#83a598")
-        (light-purple     "#d3869b")
-        (light-aqua       "#8ec07c")
-        (light-orange     "#fe8019")
+       ;; Bright colours
+       (light-red        "#fb4934")
+       (light-green      "#b8bb26")
+       (light-yellow     "#fabd2f")
+       (light-blue       "#83a598")
+       (light-purple     "#d3869b")
+       (light-aqua       "#8ec07c")
+       (light-orange     "#fe8019")
 
-        ;; Colored Background
-        (bg-red    (cur-theme-blend "#cc241d" "#282828" 0.1)) ; red
-        (bg-green  (cur-theme-blend "#b8bb26" "#282828" 0.1)) ; light-green
-        (bg-yellow (cur-theme-blend "#fabd2f" "#282828" 0.1)) ; light-yellow
-        (bg-blue   (cur-theme-blend "#83a598" "#282828" 0.1)) ; light-blue
-        (bg-purple (cur-theme-blend "#d3869b" "#282828" 0.1)) ; light-purple
-        (bg-aqua   (cur-theme-blend "#8ec07c" "#282828" 0.1)) ; light-aqua
-        (bg-orange (cur-theme-blend "#fe8019" "#282828" 0.1)) ; light-orange
+       ;; Colored Background
+       (bg-red    (cur-theme-blend "#cc241d" "#282828" 0.1)) ; red
+       (bg-green  (cur-theme-blend "#b8bb26" "#282828" 0.1)) ; light-green
+       (bg-yellow (cur-theme-blend "#fabd2f" "#282828" 0.1)) ; light-yellow
+       (bg-blue   (cur-theme-blend "#83a598" "#282828" 0.1)) ; light-blue
+       (bg-purple (cur-theme-blend "#d3869b" "#282828" 0.1)) ; light-purple
+       (bg-aqua   (cur-theme-blend "#8ec07c" "#282828" 0.1)) ; light-aqua
+       (bg-orange (cur-theme-blend "#fe8019" "#282828" 0.1)) ; light-orange
 
-        ;; Pale Colors
-        (pale-red    (cur-theme-blend "#cc241d" "#ebdbb2" 0.6))
-        (pale-green  (cur-theme-blend "#b8bb26" "#ebdbb2" 0.6))
-        (pale-yellow (cur-theme-blend "#fabd2f" "#ebdbb2" 0.6))
-        (pale-blue   (cur-theme-blend "#83a598" "#ebdbb2" 0.6))
-        (pale-purple (cur-theme-blend "#d3869b" "#ebdbb2" 0.6))
-        (pale-aqua   (cur-theme-blend "#8ec07c" "#ebdbb2" 0.6))
-        (pale-orange (cur-theme-blend "#fe8019" "#ebdbb2" 0.6))
+       ;; Pale Colors
+       (pale-red    (cur-theme-blend "#cc241d" "#ebdbb2" 0.6))
+       (pale-green  (cur-theme-blend "#b8bb26" "#ebdbb2" 0.6))
+       (pale-yellow (cur-theme-blend "#fabd2f" "#ebdbb2" 0.6))
+       (pale-blue   (cur-theme-blend "#83a598" "#ebdbb2" 0.6))
+       (pale-purple (cur-theme-blend "#d3869b" "#ebdbb2" 0.6))
+       (pale-aqua   (cur-theme-blend "#8ec07c" "#ebdbb2" 0.6))
+       (pale-orange (cur-theme-blend "#fe8019" "#ebdbb2" 0.6))
 
-        ;; Background colours
-        (bg-sp1   "#0d1011")
-        (bg0h     "#1d2021") ;; Darkest
-        (bg0      "#282828") ;; Default bg
-        (bg0s     "#32302f")
-        (bg1      "#3c3836")
-        (bg2      "#504945")
-        (bg3      "#665c54")
-        (bg4      "#7c6f64")
-        (grey     "#928374") ;; Lightest
+       ;; Background colours
+       (bg-sp1   "#0d1011")
+       (bg0h     "#1d2021") ;; Darkest
+       (bg0      "#282828") ;; Default bg
+       (bg0s     "#32302f")
+       (bg1      "#3c3836")
+       (bg2      "#504945")
+       (bg3      "#665c54")
+       (bg4      "#7c6f64")
+       (grey     "#928374") ;; Lightest
 
-        ;; Foreground colours
-        (fg4     "#a89984") ;; Darkest
-        (fg3     "#bdae93")
-        (fg2     "#d5c4a1")
-        (fg1     "#ebdbb2") ;; Default fg
-        (fg0     "#fbf1c7") ;; Lightest
-        )
-    (custom-theme-set-faces
-     'cur-gruvbox
-     `(default             ((t (:foreground ,fg1 :background ,bg0))))
-     `(success             ((t (:foreground ,light-green))))
-     `(warning             ((t (:foreground ,light-yellow))))
-     `(error               ((t (:foreground ,light-red))))
-     `(link                ((t (:foreground ,light-aqua :underline t :weight bold))))
-     `(link-visited        ((t (:foreground ,aqua :underline t :weight bold))))
-     `(cursor              ((t (:background ,fg0))))
-     `(fringe              ((t (:distant-foreground ,fg1 :background ,bg3))))
-     `(region              ((t (:background ,bg3))))
-     `(highlight           ((t (:foreground ,bg-sp1 :distant-foreground ,fg0 :background ,light-yellow))))
-     `(hl-line             ((t (:background ,bg1))))
-     `(header-line         ((t (:inherit (mode-line)))))
-     `(vertical-border     ((t (:foreground ,bg0 :background ,bg0))))
-     `(secondary-selection ((t (:background ,bg2))))
-     `(query-replace       ((t (:inherit isearch))))
-     `(minibuffer-prompt   ((t (:foreground ,aqua))))
-     `(tooltip             ((t (:foreground ,fg1 :background ,bg0h))))
-     `(shadow              ((t (:foreground ,bg4))))
+       ;; Foreground colours
+       (fg4     "#a89984") ;; Darkest
+       (fg3     "#bdae93")
+       (fg2     "#d5c4a1")
+       (fg1     "#ebdbb2") ;; Default fg
+       (fg0     "#fbf1c7") ;; Lightest
+       )
+  (custom-theme-set-faces
+   'cur-gruvbox
+   `(default             ((t (:foreground ,fg1 :background ,bg0))))
+   `(success             ((t (:foreground ,light-green))))
+   `(warning             ((t (:foreground ,light-yellow))))
+   `(error               ((t (:foreground ,light-red))))
+   `(link                ((t (:foreground ,light-aqua :underline t :weight bold))))
+   `(link-visited        ((t (:foreground ,aqua :underline t :weight bold))))
+   `(cursor              ((t (:background ,fg0))))
+   `(fringe              ((t (:distant-foreground ,fg1 :background ,bg3))))
+   `(region              ((t (:background ,bg3))))
+   `(highlight           ((t (:foreground ,bg-sp1 :distant-foreground ,fg0 :background ,light-yellow))))
+   `(hl-line             ((t (:background ,bg1))))
+   `(header-line         ((t (:inherit (mode-line)))))
+   `(vertical-border     ((t (:foreground ,bg0 :background ,bg0))))
+   `(secondary-selection ((t (:background ,bg2))))
+   `(query-replace       ((t (:inherit isearch))))
+   `(minibuffer-prompt   ((t (:foreground ,aqua))))
+   `(tooltip             ((t (:foreground ,fg1 :background ,bg0h))))
+   `(shadow              ((t (:foreground ,bg4))))
 
-     ;; Font Lock Faces
+   ;; Font Lock Faces
 
-     `(font-lock-builtin-face           ((t (:foreground ,light-orange))))
-     `(font-lock-comment-face           ((t (:foreground ,grey :slant italic))))
-     `(font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face))))
-     `(font-lock-doc-face               ((t (:foreground ,fg2))))
-     `(font-lock-function-name-face     ((t (:foreground ,light-green))))
-     `(font-lock-function-call-face     ((t (:inherit font-lock-function-name-face))))
-     `(font-lock-keyword-face           ((t (:foreground ,light-red))))
-     `(font-lock-preprocessor-face      ((t (:foreground ,fg1 :weight bold))))
-     `(font-lock-string-face            ((t (:foreground ,light-green))))
-     `(font-lock-type-face              ((t (:foreground ,light-yellow))))
-     `(font-lock-constant-face          ((t (:foreground ,light-purple))))
-     `(font-lock-variable-name-face     ((t (:foreground ,light-blue))))
-     `(font-lock-warning-face           ((t (:inherit warning))))
-     `(font-lock-negation-char-face     ((t (:foreground ,fg1 :weight bold))))
-     `(font-lock-number-face            ((t (:foreground ,light-purple))))
+   `(font-lock-builtin-face           ((t (:foreground ,light-orange))))
+   `(font-lock-comment-face           ((t (:foreground ,grey :slant italic))))
+   `(font-lock-comment-delimiter-face ((t (:inherit font-lock-comment-face))))
+   `(font-lock-doc-face               ((t (:foreground ,fg2))))
+   `(font-lock-function-name-face     ((t (:foreground ,light-green))))
+   `(font-lock-function-call-face     ((t (:inherit font-lock-function-name-face))))
+   `(font-lock-keyword-face           ((t (:foreground ,light-red))))
+   `(font-lock-preprocessor-face      ((t (:foreground ,fg1 :weight bold))))
+   `(font-lock-string-face            ((t (:foreground ,light-green))))
+   `(font-lock-type-face              ((t (:foreground ,light-yellow))))
+   `(font-lock-constant-face          ((t (:foreground ,light-purple))))
+   `(font-lock-variable-name-face     ((t (:foreground ,light-blue))))
+   `(font-lock-warning-face           ((t (:inherit warning))))
+   `(font-lock-negation-char-face     ((t (:foreground ,fg1 :weight bold))))
+   `(font-lock-number-face            ((t (:foreground ,light-purple))))
 
-     ;; Mode Line
+   ;; Mode Line
 
-     `(mode-line           ((t (:background ,bg1))))
-     `(mode-line-active    ((t (:inherit mode-line))))
-     `(mode-line-emphasis  ((t (:foreground ,light-yellow :distant-foreground ,bg0))))
-     `(mode-line-inactive  ((t (:foreground ,bg3 :background ,bg0s))))
-     `(mode-line-buffer-id ((t (:weight bold))))
+   `(mode-line           ((t (:background ,bg1))))
+   `(mode-line-active    ((t (:inherit mode-line))))
+   `(mode-line-emphasis  ((t (:foreground ,light-yellow :distant-foreground ,bg0))))
+   `(mode-line-inactive  ((t (:foreground ,bg3 :background ,bg0s))))
+   `(mode-line-buffer-id ((t (:weight bold))))
 
-     ;; Line Number
+   ;; Line Number
 
-     `(line-number              ((t (:foreground ,bg4 :background ,bg0 :inherit default :slant italic :weight normal))))
-     `(line-number-current-line ((t (:foreground ,light-yellow :background ,bg1 :inherit (hl-line default) :slant italic :weight normal))))
+   `(line-number              ((t (:foreground ,bg4 :background ,bg0 :inherit default :slant italic :weight normal))))
+   `(line-number-current-line ((t (:foreground ,light-yellow :background ,bg1 :inherit (hl-line default) :slant italic :weight normal))))
 
-     ;; Isearch
+   ;; Isearch
 
-     `(isearch         ((t (:foreground ,bg0h :background ,light-orange))))
-     `(isearch-fail    ((t (:foreground ,fg0 :background ,light-red))))
-     `(isearch-group-1 ((t (:foreground ,bg0h :background ,light-orange))))
-     `(isearch-group-2 ((t (:foreground ,bg0h :background ,orange))))
-     `(lazy-highlight  ((t (:foreground ,bg0h :background ,light-yellow))))
+   `(isearch         ((t (:foreground ,bg0h :background ,light-orange))))
+   `(isearch-fail    ((t (:foreground ,fg0 :background ,light-red))))
+   `(isearch-group-1 ((t (:foreground ,bg0h :background ,light-orange))))
+   `(isearch-group-2 ((t (:foreground ,bg0h :background ,orange))))
+   `(lazy-highlight  ((t (:foreground ,bg0h :background ,light-yellow))))
 
-  ;;; Minibuffer and Completions
+;;; Minibuffer and Completions
 
-     ;; Match and Completions
+   ;; Match and Completions
 
-     `(match                   ((t (:foreground ,pale-orange :background ,bg-orange))))
-     `(completions-common-part ((t (:foreground ,pale-aqua :background ,bg-aqua))))
+   `(match                   ((t (:foreground ,pale-orange :background ,bg-orange))))
+   `(completions-common-part ((t (:foreground ,pale-aqua :background ,bg-aqua))))
 
-     ;; Orderless
+   ;; Orderless
 
-     `(orderless-match-face-0 ((t (:foreground ,pale-blue :background ,bg-blue))))
-     `(orderless-match-face-1 ((t (:foreground ,pale-red :background ,bg-red))))
-     `(orderless-match-face-2 ((t (:foreground ,pale-green :background ,bg-green))))
-     `(orderless-match-face-3 ((t (:foreground ,pale-yellow :background ,bg-yellow))))
+   `(orderless-match-face-0 ((t (:foreground ,pale-blue :background ,bg-blue))))
+   `(orderless-match-face-1 ((t (:foreground ,pale-red :background ,bg-red))))
+   `(orderless-match-face-2 ((t (:foreground ,pale-green :background ,bg-green))))
+   `(orderless-match-face-3 ((t (:foreground ,pale-yellow :background ,bg-yellow))))
 
-     ;; Vertico
+   ;; Vertico
 
-     `(vertico-current         ((t (:background ,bg2))))
-     `(vertico-group-separator ((t (:strike-through t :inherit (shadow)))))
-     `(vertico-group-title     ((t (:slant italic :inherit (shadow)))))
-     `(vertico-multiline       ((t (:inherit (shadow)))))
+   `(vertico-current         ((t (:background ,bg2))))
+   `(vertico-group-separator ((t (:strike-through t :inherit (shadow)))))
+   `(vertico-group-title     ((t (:slant italic :inherit (shadow)))))
+   `(vertico-multiline       ((t (:inherit (shadow)))))
 
-     ;; Vertico Posframe
+   ;; Vertico Posframe
 
-     `(vertico-posframe                 ((t (:inherit (default)))))
-     `(vertico-posframe-border          ((t (:background ,grey))))
-     `(vertico-posframe-border-2        ((t (:background ,light-red))))
-     `(vertico-posframe-border-3        ((t (:background ,light-green))))
-     `(vertico-posframe-border-4        ((t (:background ,light-blue))))
-     `(vertico-posframe-border-fallback ((t (:background ,light-yellow))))
-
-
-  ;;; Terminal and Shell Colors
-
-     ;; Ansi Colors
-
-     `(ansi-color-black          ((t (:foreground ,bg0h :background ,bg0h))))
-     `(ansi-color-red            ((t (:foreground ,light-red :background ,light-red))))
-     `(ansi-color-green          ((t (:foreground ,light-green :background ,light-green))))
-     `(ansi-color-yellow         ((t (:foreground ,light-yellow :background ,light-yellow))))
-     `(ansi-color-blue           ((t (:foreground ,light-blue :background ,light-blue))))
-     `(ansi-color-magenta        ((t (:foreground ,light-purple :background ,light-purple))))
-     `(ansi-color-cyan           ((t (:foreground ,light-aqua :background ,light-aqua))))
-     `(ansi-color-white          ((t (:foreground ,fg4 :background ,fg4))))
-     `(ansi-color-bright-black   ((t (:foreground ,grey :background ,grey))))
-     `(ansi-color-bright-red     ((t (:foreground ,light-red :background ,light-red))))
-     `(ansi-color-bright-green   ((t (:foreground ,light-green :background ,light-green))))
-     `(ansi-color-bright-yellow  ((t (:foreground ,light-yellow :background ,light-yellow))))
-     `(ansi-color-bright-blue    ((t (:foreground ,light-blue :background ,light-blue))))
-     `(ansi-color-bright-magenta ((t (:foreground ,light-purple :background ,light-purple))))
-     `(ansi-color-bright-cyan    ((t (:foreground ,light-aqua :background ,light-aqua))))
-     `(ansi-color-bright-white   ((t (:foreground ,fg1 :background ,fg1))))
-
-  ;;; Programming Auxiliary
-
-     ;; Paren Mode
-
-     `(show-paren-match            ((t (:background ,bg4))))
-     `(show-paren-match-expression ((t (:inherit show-paren-match))))
-     `(show-paren-mismatch         ((t (:foreground ,fg0 :background ,light-red :weight bold))))
-
-     ;; Rainbow Delimiters
-
-     `(rainbow-delimiters-base-face       ((t (:inherit default))))
-     `(rainbow-delimiters-base-error-face ((t (:foreground ,light-red :background ,bg0h))))
-     `(rainbow-delimiters-unmatched-face  ((t (:foreground ,bg0h :background ,light-red :weight bold))))
-     `(rainbow-delimiters-mismatched-face ((t (:inherit rainbow-delimiters-base-unmatched-face))))
-     `(rainbow-delimiters-depth-1-face    ((t (:foreground ,light-orange))))
-     `(rainbow-delimiters-depth-2-face    ((t (:foreground ,light-red))))
-     `(rainbow-delimiters-depth-3-face    ((t (:foreground ,light-green))))
-     `(rainbow-delimiters-depth-4-face    ((t (:foreground ,light-blue))))
-     `(rainbow-delimiters-depth-5-face    ((t (:foreground ,light-aqua))))
-     `(rainbow-delimiters-depth-6-face    ((t (:foreground ,light-purple))))
-     `(rainbow-delimiters-depth-7-face    ((t (:foreground ,orange))))
-     `(rainbow-delimiters-depth-8-face    ((t (:foreground ,red))))
-     `(rainbow-delimiters-depth-9-face    ((t (:foreground ,green))))
-
-  ;;; Languages and IDE Packages
-
-     ;; Flycheck
-     `(flycheck-error          ((t (:background ,bg1 :underline (:style wave :color ,light-red)))))
-     `(flycheck-info           ((t (:background ,bg1 :underline (:style wave :color ,light-blue)))))
-     `(flycheck-warning        ((t (:background ,bg1 :underline (:style wave :color ,light-yellow)))))
-     `(flycheck-fringe-error   ((t (:inherit fringe :foreground ,light-red))))
-     `(flycheck-fringe-info    ((t (:inherit fringe :foreground ,light-yellow))))
-     `(flycheck-fringe-warning ((t (:inherit fringe :foreground ,light-green))))
-
-     ;; Flyspell
-     `(flyspell-duplicate ((t (:underline (:style wave :color ,light-yellow)))))
-     `(flyspell-incorrect ((t (:underline (:style wave :color ,light-red)))))
+   `(vertico-posframe                 ((t (:inherit (default)))))
+   `(vertico-posframe-border          ((t (:background ,grey))))
+   `(vertico-posframe-border-2        ((t (:background ,light-red))))
+   `(vertico-posframe-border-3        ((t (:background ,light-green))))
+   `(vertico-posframe-border-4        ((t (:background ,light-blue))))
+   `(vertico-posframe-border-fallback ((t (:background ,light-yellow))))
 
 
-  ;;; Internet Modes
+;;; Terminal and Shell Colors
 
-     ;; Elpher
+   ;; Ansi Colors
 
-     `(elpher-binary                     ((t (:inherit (elpher-unknown)))))
-     `(elpher-gemini                     ((t (:foreground ,light-aqua :weight normal :inherit (link)))))
-     `(elpher-gemini-heading1            ((t (:foreground ,light-red :height 1.8 :inherit (default)))))
-     `(elpher-gemini-heading2            ((t (:foreground ,light-yellow :height 1.4 :inherit (default)))))
-     `(elpher-gemini-heading3            ((t (:foreground ,light-orange :height 1.2 :inherit (default)))))
-     `(elpher-gemini-preformatted        ((t (:foreground ,grey :inherit (fixed-pitch)))))
-     `(elpher-gemini-preformatted-toggle ((t (:inherit (button)))))
-     `(elpher-gemini-quoted              ((t (:inherit (italic)))))
-     `(elpher-html                       ((t (:inherit (elpher-other-url)))))
-     `(elpher-image                      ((t (:inherit (elpher-other-url)))))
-     `(elpher-index                      ((t (:foreground ,light-red))))
-     `(elpher-info                       ((t (:inherit (elpher-text)))))
-     `(elpher-margin-brackets            ((t (:inherit (bold)))))
-     `(elpher-margin-key                 ((t (:inherit (shadow)))))
-     `(elpher-other-url                  ((t (:foreground ,bg4 :slant italic))))
-     `(elpher-search                     ((t (:foreground ,light-yellow))))
-     `(elpher-telnet                     ((t (:inherit (elpher-unknown)))))
-     `(elpher-text                       ((t (:inherit (bold)))))
-     `(elpher-unknown                    ((t (:foreground ,bg4))))
+   `(ansi-color-black          ((t (:foreground ,bg0h :background ,bg0h))))
+   `(ansi-color-red            ((t (:foreground ,light-red :background ,light-red))))
+   `(ansi-color-green          ((t (:foreground ,light-green :background ,light-green))))
+   `(ansi-color-yellow         ((t (:foreground ,light-yellow :background ,light-yellow))))
+   `(ansi-color-blue           ((t (:foreground ,light-blue :background ,light-blue))))
+   `(ansi-color-magenta        ((t (:foreground ,light-purple :background ,light-purple))))
+   `(ansi-color-cyan           ((t (:foreground ,light-aqua :background ,light-aqua))))
+   `(ansi-color-white          ((t (:foreground ,fg4 :background ,fg4))))
+   `(ansi-color-bright-black   ((t (:foreground ,grey :background ,grey))))
+   `(ansi-color-bright-red     ((t (:foreground ,light-red :background ,light-red))))
+   `(ansi-color-bright-green   ((t (:foreground ,light-green :background ,light-green))))
+   `(ansi-color-bright-yellow  ((t (:foreground ,light-yellow :background ,light-yellow))))
+   `(ansi-color-bright-blue    ((t (:foreground ,light-blue :background ,light-blue))))
+   `(ansi-color-bright-magenta ((t (:foreground ,light-purple :background ,light-purple))))
+   `(ansi-color-bright-cyan    ((t (:foreground ,light-aqua :background ,light-aqua))))
+   `(ansi-color-bright-white   ((t (:foreground ,fg1 :background ,fg1))))
 
-     ;; Gemini
+;;; Programming Auxiliary
 
-     `(gemini-heading-face-1    ((t (:foreground ,light-red :height 1.8 :inherit (default)))))
-     `(gemini-heading-face-2    ((t (:foreground ,light-yellow :height 1.4 :inherit (default)))))
-     `(gemini-heading-face-3    ((t (:foreground ,light-orange :height 1.2 :inherit (default)))))
-     `(gemini-heading-face-rest ((t (:inherit (bold)))))
-     `(gemini-preformatted-face ((t (:foreground ,grey :inherit (fixed-pitch)))))
-     `(gemini-quote-face        ((t (:inherit (italic)))))
-     `(gemini-ulist-face        ((t (:inherit (default)))))
+   ;; Paren Mode
 
-  ;;; Org
+   `(show-paren-match            ((t (:background ,bg4))))
+   `(show-paren-match-expression ((t (:inherit show-paren-match))))
+   `(show-paren-mismatch         ((t (:foreground ,fg0 :background ,light-red :weight bold))))
 
-     ;; Org General
-     `(org-archived                 ((t (:foreground ,bg4))))
-     `(org-block                    ((t (:background ,bg1 :extend t))))
-     `(org-block-begin-line         ((t (:foreground ,grey :inherit (org-block)))))
-     `(org-block-end-line           ((t (:inherit (org-block-begin-line)))))
-     `(org-code                     ((t (:foreground ,light-orange :inherit org-block))))
-     `(org-checkbox-statistics-done ((t (:inherit org-done))))
-     `(org-checkbox-statistics-todo ((t (:inherit org-todo))))
-     `(org-checkbox                 ((t (:inherit org-todo))))
-     `(org-date                     ((t (:foreground ,light-green))))
-     `(org-drawer                   ((t (:foreground ,(cur-theme-lighten light-aqua 0.4)))))
-     `(org-done                     ((t (:inherit org-headline-done :weight bold))))
-     `(org-ellipsis                 ((t (:foreground ,light-orange))))
-     `(org-footnote                 ((t (:foreground ,light-orange))))
-     `(org-formula                  ((t (:foreground ,light-green))))
-     `(org-headline-done            ((t (:foreground ,bg4))))
-     `(org-headline-todo            ((t (:foreground ,light-green))))
-     `(org-link                     ((t (:foreground ,light-yellow :inherit link))))
-     `(org-list-dt                  ((t (:foreground ,light-aqua))))
-     `(org-meta-line                ((t (:foreground ,grey))))
-     `(org-priority                 ((t (:foreground ,light-red))))
-     `(org-property-value           ((t (:inherit default))))
-     `(org-quote                    ((t (:foreground ,fg2  :inherit (italic org-block)))))
-     `(org-special-keyword          ((t (:foreground ,(cur-theme-lighten light-aqua 0.15)))))
-     `(org-table                    ((t (:foreground ,light-aqua))))
-     `(org-tag                      ((t (:foreground ,bg4 :weight normal))))
-     `(org-todo                     ((t (:inherit org-headline-todo :weight bold))))
-     `(org-verbatim                 ((t (:foreground ,light-yellow))))
+   ;; Rainbow Delimiters
 
-     ;; Outline N and Org Heading Levels
-     `(outline-1 ((t (:foreground ,light-purple :weight bold :extend t))))
-     `(outline-2 ((t (:foreground ,light-aqua :weight bold :extend t))))
-     `(outline-3 ((t (:foreground ,light-green :weight bold :extend t))))
-     `(outline-4 ((t (:foreground ,(cur-theme-lighten light-purple 0.2) :weight bold :extend t))))
-     `(outline-5 ((t (:foreground ,(cur-theme-lighten aqua 0.25) :weight bold :extend t))))
-     `(outline-6 ((t (:foreground ,(cur-theme-lighten light-purple 0.4) :weight bold :extend t))))
-     `(outline-7 ((t (:foreground ,(cur-theme-lighten aqua 0.5) :weight bold :extend t))))
-     `(outline-8 ((t (:foreground ,(cur-theme-lighten light-aqua 0.6) :weight bold :extend t))))
+   `(rainbow-delimiters-base-face       ((t (:inherit default))))
+   `(rainbow-delimiters-base-error-face ((t (:foreground ,light-red :background ,bg0h))))
+   `(rainbow-delimiters-unmatched-face  ((t (:foreground ,bg0h :background ,light-red :weight bold))))
+   `(rainbow-delimiters-mismatched-face ((t (:inherit rainbow-delimiters-base-unmatched-face))))
+   `(rainbow-delimiters-depth-1-face    ((t (:foreground ,light-orange))))
+   `(rainbow-delimiters-depth-2-face    ((t (:foreground ,light-red))))
+   `(rainbow-delimiters-depth-3-face    ((t (:foreground ,light-green))))
+   `(rainbow-delimiters-depth-4-face    ((t (:foreground ,light-blue))))
+   `(rainbow-delimiters-depth-5-face    ((t (:foreground ,light-aqua))))
+   `(rainbow-delimiters-depth-6-face    ((t (:foreground ,light-purple))))
+   `(rainbow-delimiters-depth-7-face    ((t (:foreground ,orange))))
+   `(rainbow-delimiters-depth-8-face    ((t (:foreground ,red))))
+   `(rainbow-delimiters-depth-9-face    ((t (:foreground ,green))))
 
-     `(nerd-icons-blue       ((t (:foreground ,light-blue))))
-     `(nerd-icons-blue-alt   ((t (:foreground ,light-aqua))))
-     `(nerd-icons-cyan       ((t (:foreground ,light-aqua))))
-     `(nerd-icons-cyan-alt   ((t (:foreground ,light-aqua))))
-     `(nerd-icons-dblue      ((t (:foreground ,blue))))
-     `(nerd-icons-dcyan      ((t (:foreground ,aqua))))
-     `(nerd-icons-dgreen     ((t (:foreground ,(cur-theme-darken light-green 0.3)))))
-     `(nerd-icons-dmaroon    ((t (:foreground ,(cur-theme-darken red 0.3)))))
-     `(nerd-icons-dorange    ((t (:foreground ,(cur-theme-darken light-orange 0.3)))))
-     `(nerd-icons-dpink      ((t (:foreground ,(cur-theme-lighten light-red 0.15)))))
-     `(nerd-icons-dpurple    ((t (:foreground ,(cur-theme-darken light-purple 0.3)))))
-     `(nerd-icons-dred       ((t (:foreground ,(cur-theme-darken light-red 0.3)))))
-     `(nerd-icons-dsilver    ((t (:foreground ,(cur-theme-lighten grey 0.1)))))
-     `(nerd-icons-dyellow    ((t (:foreground ,(cur-theme-darken yellow 0.3)))))
-     `(nerd-icons-green      ((t (:foreground ,light-green))))
-     `(nerd-icons-lblue      ((t (:foreground ,(cur-theme-lighten light-blue 0.3)))))
-     `(nerd-icons-lcyan      ((t (:foreground ,(cur-theme-lighten light-aqua 0.3)))))
-     `(nerd-icons-lgreen     ((t (:foreground ,(cur-theme-lighten light-green 0.3)))))
-     `(nerd-icons-lmaroon    ((t (:foreground ,(cur-theme-lighten red 0.3)))))
-     `(nerd-icons-lorange    ((t (:foreground ,(cur-theme-lighten light-orange 0.3)))))
-     `(nerd-icons-lpink      ((t (:foreground ,(cur-theme-lighten light-red 0.55)))))
-     `(nerd-icons-lpurple    ((t (:foreground ,(cur-theme-lighten light-purple 0.3)))))
-     `(nerd-icons-lred       ((t (:foreground ,(cur-theme-lighten light-red 0.3)))))
-     `(nerd-icons-lsilver    ((t (:foreground ,(cur-theme-lighten grey 0.7)))))
-     `(nerd-icons-lyellow    ((t (:foreground ,(cur-theme-lighten yellow 0.3)))))
-     `(nerd-icons-maroon     ((t (:foreground ,red))))
-     `(nerd-icons-orange     ((t (:foreground ,light-orange))))
-     `(nerd-icons-pink       ((t (:foreground ,(cur-theme-lighten light-red 0.35)))))
-     `(nerd-icons-purple     ((t (:foreground ,light-purple))))
-     `(nerd-icons-purple-alt ((t (:foreground ,(cur-theme-blend light-purple grey 0.15)))))
-     `(nerd-icons-red        ((t (:foreground ,light-red))))
-     `(nerd-icons-red-alt    ((t (:foreground ,(cur-theme-blend light-red grey 0.15)))))
-     `(nerd-icons-silver     ((t (:foreground ,(cur-theme-lighten grey 0.45)))))
-     `(nerd-icons-yellow     ((t (:foreground ,yellow))))
-     )
-    )
+;;; Languages and IDE Packages
 
-  (provide-theme 'cur-gruvbox)
-  ;;; cur-gruvbox-theme.el ends here
+   ;; Flycheck
+   `(flycheck-error          ((t (:background ,bg1 :underline (:style wave :color ,light-red)))))
+   `(flycheck-info           ((t (:background ,bg1 :underline (:style wave :color ,light-blue)))))
+   `(flycheck-warning        ((t (:background ,bg1 :underline (:style wave :color ,light-yellow)))))
+   `(flycheck-fringe-error   ((t (:inherit fringe :foreground ,light-red))))
+   `(flycheck-fringe-info    ((t (:inherit fringe :foreground ,light-yellow))))
+   `(flycheck-fringe-warning ((t (:inherit fringe :foreground ,light-green))))
+
+   ;; Flyspell
+   `(flyspell-duplicate ((t (:underline (:style wave :color ,light-yellow)))))
+   `(flyspell-incorrect ((t (:underline (:style wave :color ,light-red)))))
+
+
+;;; Internet Modes
+
+   ;; Elpher
+
+   `(elpher-binary                     ((t (:inherit (elpher-unknown)))))
+   `(elpher-gemini                     ((t (:foreground ,light-aqua :weight normal :inherit (link)))))
+   `(elpher-gemini-heading1            ((t (:foreground ,light-red :height 1.8 :inherit (default)))))
+   `(elpher-gemini-heading2            ((t (:foreground ,light-yellow :height 1.4 :inherit (default)))))
+   `(elpher-gemini-heading3            ((t (:foreground ,light-orange :height 1.2 :inherit (default)))))
+   `(elpher-gemini-preformatted        ((t (:foreground ,grey :inherit (fixed-pitch)))))
+   `(elpher-gemini-preformatted-toggle ((t (:inherit (button)))))
+   `(elpher-gemini-quoted              ((t (:inherit (italic)))))
+   `(elpher-html                       ((t (:inherit (elpher-other-url)))))
+   `(elpher-image                      ((t (:inherit (elpher-other-url)))))
+   `(elpher-index                      ((t (:foreground ,light-red))))
+   `(elpher-info                       ((t (:inherit (elpher-text)))))
+   `(elpher-margin-brackets            ((t (:inherit (bold)))))
+   `(elpher-margin-key                 ((t (:inherit (shadow)))))
+   `(elpher-other-url                  ((t (:foreground ,bg4 :slant italic))))
+   `(elpher-search                     ((t (:foreground ,light-yellow))))
+   `(elpher-telnet                     ((t (:inherit (elpher-unknown)))))
+   `(elpher-text                       ((t (:inherit (bold)))))
+   `(elpher-unknown                    ((t (:foreground ,bg4))))
+
+   ;; Gemini
+
+   `(gemini-heading-face-1    ((t (:foreground ,light-red :height 1.8 :inherit (default)))))
+   `(gemini-heading-face-2    ((t (:foreground ,light-yellow :height 1.4 :inherit (default)))))
+   `(gemini-heading-face-3    ((t (:foreground ,light-orange :height 1.2 :inherit (default)))))
+   `(gemini-heading-face-rest ((t (:inherit (bold)))))
+   `(gemini-preformatted-face ((t (:foreground ,grey :inherit (fixed-pitch)))))
+   `(gemini-quote-face        ((t (:inherit (italic)))))
+   `(gemini-ulist-face        ((t (:inherit (default)))))
+
+;;; Org
+
+   ;; Org General
+   `(org-archived                 ((t (:foreground ,bg4))))
+   `(org-block                    ((t (:background ,bg1 :extend t))))
+   `(org-block-begin-line         ((t (:foreground ,grey :inherit (org-block)))))
+   `(org-block-end-line           ((t (:inherit (org-block-begin-line)))))
+   `(org-code                     ((t (:foreground ,light-orange :inherit org-block))))
+   `(org-checkbox-statistics-done ((t (:inherit org-done))))
+   `(org-checkbox-statistics-todo ((t (:inherit org-todo))))
+   `(org-checkbox                 ((t (:inherit org-todo))))
+   `(org-date                     ((t (:foreground ,light-green))))
+   `(org-drawer                   ((t (:foreground ,(cur-theme-lighten light-aqua 0.4)))))
+   `(org-done                     ((t (:inherit org-headline-done :weight bold))))
+   `(org-ellipsis                 ((t (:foreground ,light-orange))))
+   `(org-footnote                 ((t (:foreground ,light-orange))))
+   `(org-formula                  ((t (:foreground ,light-green))))
+   `(org-headline-done            ((t (:foreground ,bg4))))
+   `(org-headline-todo            ((t (:foreground ,light-green))))
+   `(org-link                     ((t (:foreground ,light-yellow :inherit link))))
+   `(org-list-dt                  ((t (:foreground ,light-aqua))))
+   `(org-meta-line                ((t (:foreground ,grey))))
+   `(org-priority                 ((t (:foreground ,light-red))))
+   `(org-property-value           ((t (:inherit default))))
+   `(org-quote                    ((t (:foreground ,fg2  :inherit (italic org-block)))))
+   `(org-special-keyword          ((t (:foreground ,(cur-theme-lighten light-aqua 0.15)))))
+   `(org-table                    ((t (:foreground ,light-aqua))))
+   `(org-tag                      ((t (:foreground ,bg4 :weight normal))))
+   `(org-todo                     ((t (:inherit org-headline-todo :weight bold))))
+   `(org-verbatim                 ((t (:foreground ,light-yellow))))
+
+   ;; Outline N and Org Heading Levels
+   `(outline-1 ((t (:foreground ,light-purple :weight bold :extend t))))
+   `(outline-2 ((t (:foreground ,light-aqua :weight bold :extend t))))
+   `(outline-3 ((t (:foreground ,light-green :weight bold :extend t))))
+   `(outline-4 ((t (:foreground ,(cur-theme-lighten light-purple 0.2) :weight bold :extend t))))
+   `(outline-5 ((t (:foreground ,(cur-theme-lighten aqua 0.25) :weight bold :extend t))))
+   `(outline-6 ((t (:foreground ,(cur-theme-lighten light-purple 0.4) :weight bold :extend t))))
+   `(outline-7 ((t (:foreground ,(cur-theme-lighten aqua 0.5) :weight bold :extend t))))
+   `(outline-8 ((t (:foreground ,(cur-theme-lighten light-aqua 0.6) :weight bold :extend t))))
+
+   `(nerd-icons-blue       ((t (:foreground ,light-blue))))
+   `(nerd-icons-blue-alt   ((t (:foreground ,light-aqua))))
+   `(nerd-icons-cyan       ((t (:foreground ,light-aqua))))
+   `(nerd-icons-cyan-alt   ((t (:foreground ,light-aqua))))
+   `(nerd-icons-dblue      ((t (:foreground ,blue))))
+   `(nerd-icons-dcyan      ((t (:foreground ,aqua))))
+   `(nerd-icons-dgreen     ((t (:foreground ,(cur-theme-darken light-green 0.3)))))
+   `(nerd-icons-dmaroon    ((t (:foreground ,(cur-theme-darken red 0.3)))))
+   `(nerd-icons-dorange    ((t (:foreground ,(cur-theme-darken light-orange 0.3)))))
+   `(nerd-icons-dpink      ((t (:foreground ,(cur-theme-lighten light-red 0.15)))))
+   `(nerd-icons-dpurple    ((t (:foreground ,(cur-theme-darken light-purple 0.3)))))
+   `(nerd-icons-dred       ((t (:foreground ,(cur-theme-darken light-red 0.3)))))
+   `(nerd-icons-dsilver    ((t (:foreground ,(cur-theme-lighten grey 0.1)))))
+   `(nerd-icons-dyellow    ((t (:foreground ,(cur-theme-darken yellow 0.3)))))
+   `(nerd-icons-green      ((t (:foreground ,light-green))))
+   `(nerd-icons-lblue      ((t (:foreground ,(cur-theme-lighten light-blue 0.3)))))
+   `(nerd-icons-lcyan      ((t (:foreground ,(cur-theme-lighten light-aqua 0.3)))))
+   `(nerd-icons-lgreen     ((t (:foreground ,(cur-theme-lighten light-green 0.3)))))
+   `(nerd-icons-lmaroon    ((t (:foreground ,(cur-theme-lighten red 0.3)))))
+   `(nerd-icons-lorange    ((t (:foreground ,(cur-theme-lighten light-orange 0.3)))))
+   `(nerd-icons-lpink      ((t (:foreground ,(cur-theme-lighten light-red 0.55)))))
+   `(nerd-icons-lpurple    ((t (:foreground ,(cur-theme-lighten light-purple 0.3)))))
+   `(nerd-icons-lred       ((t (:foreground ,(cur-theme-lighten light-red 0.3)))))
+   `(nerd-icons-lsilver    ((t (:foreground ,(cur-theme-lighten grey 0.7)))))
+   `(nerd-icons-lyellow    ((t (:foreground ,(cur-theme-lighten yellow 0.3)))))
+   `(nerd-icons-maroon     ((t (:foreground ,red))))
+   `(nerd-icons-orange     ((t (:foreground ,light-orange))))
+   `(nerd-icons-pink       ((t (:foreground ,(cur-theme-lighten light-red 0.35)))))
+   `(nerd-icons-purple     ((t (:foreground ,light-purple))))
+   `(nerd-icons-purple-alt ((t (:foreground ,(cur-theme-blend light-purple grey 0.15)))))
+   `(nerd-icons-red        ((t (:foreground ,light-red))))
+   `(nerd-icons-red-alt    ((t (:foreground ,(cur-theme-blend light-red grey 0.15)))))
+   `(nerd-icons-silver     ((t (:foreground ,(cur-theme-lighten grey 0.45)))))
+   `(nerd-icons-yellow     ((t (:foreground ,yellow))))
+   )
+  )
+
+(provide-theme 'cur-gruvbox)
+;;; cur-gruvbox-theme.el ends here
 #+end_src
