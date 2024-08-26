@@ -131,8 +131,8 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("b" . "C-x b")
      ;'("n" . )
      ;'("m" . ) ; M- map
-     '("," . meow-bounds-of-thing)
-     '("." . meow-inner-of-thing)
+     '("," . meow-beginning-of-thing)
+     '("." . meow-end-of-thing)
      '("/" . rg)
      ;'("'"  . )
      )
