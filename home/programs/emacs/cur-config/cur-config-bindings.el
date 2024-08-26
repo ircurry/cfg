@@ -87,81 +87,81 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("1" . delete-other-windows)
      '("2" . split-window-right)
      '("3" . split-window-below)
-     ;'("4" . )
-     ;'("5" . )
-     ;'("6" . )
-     ;'("7" . )
-     ;'("8" . )
-     ;'("9" . )
+     ;; '("4" . )
+     ;; '("5" . )
+     ;; '("6" . )
+     ;; '("7" . )
+     ;; '("8" . )
+     ;; '("9" . )
      '("0" . "C-x 0") ; delete window
 
      ;; ===2nd Row===
-     ;'("TAB"  . )
+     ;; '("TAB"  . )
      '("q" . meow-comment) ; comment dwim
      '("w" . cur/window/body)
-     ;'("e" . )
+     ;; '("e" . )
      (cons "r" cur/register-map)
      (cons "t" cur/toggle-map)
-     ;'("y" . )
+     ;; '("y" . )
      '("u" . "C-u")   ; universal argument
-     ;'("i" . )
+     ;; '("i" . )
      '("o" . "C-x o") ; other window
      (cons "p" project-prefix-map)
-     ;'("-" . )
+     ;; '("-" . )
 
      ;; ===3rd Row===
-     ;'("<escape>" . )
-     ;'("a" . )
+     ;; '("<escape>" . )
+     ;; '("a" . )
      '("s" . "C-x C-s") ; save buffer
      '("d" . kill-current-buffer)
      '("f" . "C-x C-f") ; find file
-     ;'("g" . ) ; C-M- map
-     ;'("h" . ) ; C-h map
-     ;'("j" . )
-     ;'("k" . )
-     ;'("l" . )
+     ;; '("g" . ) ; C-M- map
+     ;; '("h" . ) ; C-h map
+     ;; '("j" . )
+     ;; '("k" . )
+     ;; '("l" . )
      (cons ";" cur/sub-leader-keymap)
      '("RET"   . "M-x")
 
      ;; ===4th Row===
      (cons "z" cur/alignment-map)
-     ;'("x" . ) ; C-x map
-     ;'("c" . ) ; C-c map
-     ;'("v" . )
+     ;; '("x" . ) ; C-x map
+     ;; '("c" . ) ; C-c map
+     ;; '("v" . )
      '("b" . "C-x b")
-     ;'("n" . )
-     ;'("m" . ) ; M- map
+     ;; '("n" . )
+     ;; '("m" . ) ; M- map
      '("," . meow-beginning-of-thing)
      '("." . meow-end-of-thing)
      '("/" . rg)
-     ;'("'"  . )
+     ;; '("'"  . )
      )
     (meow-normal-define-key
      ;; ===Top Row===
      '("1" . meow-expand-1)
-     ;'("!" . )
+     ;; '("!" . )
      '("2" . meow-expand-2)
-     ;'("@" . )
+     ;; '("@" . )
      '("3" . meow-expand-3)
-     ;'("#" . )
+     ;; '("#" . )
      '("4" . meow-expand-4)
-     ;'("$" . )
+     ;; '("$" . )
      '("5" . meow-expand-5)
-     ;'("%" . )
+     ;; '("%" . )
      '("6" . meow-expand-6)
-     ;'("^" . )
+     ;; '("^" . )
      '("7" . meow-expand-7)
-     ;'("&" . )
+     ;; '("&" . )
      '("8" . meow-expand-8)
-     ;'("*" . )
+     ;; '("*" . )
      '("9" . meow-expand-9)
-     ;'("(" . )
+     ;; '("(" . )
      '("0" . meow-expand-0)
-     ;'(")" . )
+     ;; '(")" . )
 
      ;; ===2nd Row===
-     ;'("TAB"  . )
-     ;'("BTAB" . )
+     ;; '("TAB"  . )
+     ;; '("BTAB" . )
      '("q" . kmacro-end-and-call-macro)
      '("Q" . cur/kmacro-toggle)
      '("w" . meow-mark-word)
@@ -175,7 +175,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("y" . meow-save)
      '("Y" . meow-clipboard-save)
      '("u" . meow-undo)
-     ;'("U" . )
+     ;; '("U" . )
      '("i" . meow-insert)
      '("I" . meow-open-below)
      '("o" . meow-block)
@@ -183,14 +183,14 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("p" . meow-yank)
      '("P" . meow-clipboard-yank)
      '("-" . negative-argument)
-     ;'("_" . )
+     ;; '("_" . )
 
      ;; ===3rd Row===
      '("<escape>" . keyboard-quit)
      '("a" . meow-append)
      '("A" . meow-open-above)
      '("s" . repeat)
-     ;'("S" . )
+     ;; '("S" . )
      '("d" . meow-kill)
      '("D" . meow-c-k)
      '("f" . meow-find)
@@ -208,23 +208,23 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '(";" . meow-reverse)
      '(":" . meow-page-up)
      '("RET" . "C-c")
-     ;'("S-RET" . )
+     ;; '("S-RET" . )
 
      ;; ===4th Row===
      '("z" . meow-pop-selection)
-     ;'("Z" . )
+     ;; '("Z" . )
      '("x" . meow-line)
      '("X" . meow-line-expand)
      '("c" . meow-change)
-     ;'("C" . )
+     ;; '("C" . )
      (cons "v" goto-map)
-     ;'("V" . )
+     ;; '("V" . )
      '("b" . meow-back-word)
      '("B" . meow-back-symbol)
      '("n" . meow-search)
      '("N" . meow-visit)
      '("m" . meow-join)
-     ;'("M" . )
+     ;; '("M" . )
      '("," . meow-bounds-of-thing)
      '("<" . meow-beginning-of-thing)
      '("." . meow-inner-of-thing)

@@ -143,9 +143,9 @@ this behavior."
           `(custom-theme-set-faces
             ',theme-name
             ,@(if merge
-                 (cur-theme--expand-faces
-                  (cur-theme--merge-faces cur-theme--default-face-defs faces))
-               (cur-theme--expand-faces faces)))))))
+                  (cur-theme--expand-faces
+                   (cur-theme--merge-faces cur-theme--default-face-defs faces))
+		(cur-theme--expand-faces faces)))))))
 
 (defcustom cur-override-theme-overrides
   '((doom-gruvbox (secondary-selection :background "#504945")))

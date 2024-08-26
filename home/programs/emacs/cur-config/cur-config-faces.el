@@ -35,8 +35,8 @@
 ;; ===Catppuccin Theme===
 (use-package catppuccin-theme
   :after (autothemer cur-theme))
-  ;; :config
-  ;; (cur-override-theme-load-theme 'catppuccin))
+;; :config
+;; (cur-override-theme-load-theme 'catppuccin))
 
 ;; ===Text Scaling===
 (defhydra hydra-text-scale (:timeout 4)
@@ -49,8 +49,8 @@
 
 ;; ===Ef-Themes===
 (use-package ef-themes)
-  ;; :config
-  ;; (cur/load-theme 'ef-tritanopia-dark))
+;; :config
+;; (cur/load-theme 'ef-tritanopia-dark))
 
 ;; ===Ibuffer Icons===
 (use-package nerd-icons-ibuffer
@@ -61,13 +61,13 @@
   :disabled t
   :config
   (setq spacious-padding-widths
-        '(:internal-border-width 8
-          :header-line-width 0
-          :mode-line-width 0
-          :tab-width 0
-          :right-divider-width 18
-          :scroll-bar-width 0
-          :fringe-width 0))
+        '( :internal-border-width 8
+	   :header-line-width 0
+	   :mode-line-width 0
+	   :tab-width 0
+	   :right-divider-width 18
+	   :scroll-bar-width 0
+	   :fringe-width 0))
   (setq spacious-padding-subtle-mode-line nil)
   (spacious-padding-mode 1))
 

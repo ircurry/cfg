@@ -9,7 +9,7 @@
                      (java-mode . "java")
                      (awk-mode  . "awk")
                      (other     . "gnu"))
-   "default style for c programs is linux")
+		   "default style for c programs is linux")
   :hook
   (c-ts-mode . (lambda () (require 'ccls) (lsp-deferred))))
 

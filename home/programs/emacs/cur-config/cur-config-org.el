@@ -3,7 +3,7 @@
   :ensure nil
   :defer t
   :hook (org-mode . cur/org-mode-setup)
-  :bind (:map org-mode-map
+  :bind ( :map org-mode-map
           ("C-S-h" . outline-promote)
           ("C-S-j" . outline-move-subtree-down)
           ("C-S-k" . outline-move-subtree-up)
@@ -36,7 +36,7 @@
                                (400 600 800 1000 1200 1400 1600 1800 2000 2200)
                                "......" "----------------"))
   (setq org-format-latex-options '(:foreground "#e5e9e9" :scale 1.0)))
-  ;; (cur/org-font-setup))
+;; (cur/org-font-setup))
 
 ;; ===Org Tempo and SRC Blocks===
 (use-package org-tempo
@@ -57,15 +57,15 @@
 (use-package ob
   :after org)
 ;; TODO: fix this so I can still auto tangle on saving
-  ;; :init
-  ;; (defun cur/org-babel-tangle-config ()
-  ;;   (when (string-equal (file-name-directory (buffer-file-name))
-  ;;                       (expand-file-name user-emacs-directory))
-  ;;     ;; Dynamic scoping to the rescue
-  ;;     (let ((org-confirm-babel-evaluate nil))
-  ;;       (org-babel-tangle))))
-  ;; 
-  ;; (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'cur/org-babel-tangle-config))))
+;; :init
+;; (defun cur/org-babel-tangle-config ()
+;;   (when (string-equal (file-name-directory (buffer-file-name))
+;;                       (expand-file-name user-emacs-directory))
+;;     ;; Dynamic scoping to the rescue
+;;     (let ((org-confirm-babel-evaluate nil))
+;;       (org-babel-tangle))))
+;; 
+;; (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'cur/org-babel-tangle-config))))
 
 (use-package flyspell
   :bind ( :map flyspell-mode-map

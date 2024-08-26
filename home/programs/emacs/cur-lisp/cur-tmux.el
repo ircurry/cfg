@@ -21,9 +21,9 @@
 (defun cur-tmux--list-session-names ()
   "List the names of all active tmux sessions."
   (let* ((session-names (string-split
-                        (with-temp-buffer
-                          (cur-tmux--exec-command '("ls" "-F" "#{session_name}") t)
-                          (buffer-string)) "\n" t)))
+                         (with-temp-buffer
+                           (cur-tmux--exec-command '("ls" "-F" "#{session_name}") t)
+                           (buffer-string)) "\n" t)))
     (remove nil session-names)))
 
 (defun cur-tmux-emacs-session-p ()
@@ -133,9 +133,9 @@ If WINDOW is a number, access the window with that number."
                 (concat cur-tmux-session-name (format "%d" window)))))
         ((stringp window)
          (cur-tmux--exec-command-err-on-err
-              (list "selectw" "-t"
-                    (concat cur-tmux-session-name
-                            ":" (cur-tmux--get-window-number project-name)))))
+          (list "selectw" "-t"
+                (concat cur-tmux-session-name
+                        ":" (cur-tmux--get-window-number project-name)))))
         (t
          (error "WINDOW is not a valid type"))))
 

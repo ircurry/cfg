@@ -49,7 +49,7 @@
                 "  "
                 (:eval
                  (if (mode-line-window-selected-p)
-                   (propertize (capitalize (symbol-name major-mode)) 'face 'warning)
+                     (propertize (capitalize (symbol-name major-mode)) 'face 'warning)
                    (propertize (capitalize (symbol-name major-mode)) 'face 'shadow)))
                 (:eval (cur-mode-line/padding))))
 

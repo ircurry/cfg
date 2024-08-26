@@ -9,10 +9,10 @@
 (require 'projectile)
 
 (defgroup cur-consult-projectile ()
-    "Integrate Consult and Projectile."
-    :group 'consult
-    :group 'projectile
-    :prefix "cur-consult-projectile-")
+  "Integrate Consult and Projectile."
+  :group 'consult
+  :group 'projectile
+  :prefix "cur-consult-projectile-")
 
 ;; TODO: Make the preview work here without opening a file called dir/dir
 ;; (defun cur-consult-projectile--dir-preview ()

@@ -386,81 +386,81 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("1" . delete-other-windows)
      '("2" . split-window-right)
      '("3" . split-window-below)
-					;'("4" . )
-					;'("5" . )
-					;'("6" . )
-					;'("7" . )
-					;'("8" . )
-					;'("9" . )
+     ;; '("4" . )
+     ;; '("5" . )
+     ;; '("6" . )
+     ;; '("7" . )
+     ;; '("8" . )
+     ;; '("9" . )
      '("0" . "C-x 0") ; delete window
 
      ;; ===2nd Row===
-					;'("TAB"  . )
+     ;; '("TAB"  . )
      '("q" . meow-comment) ; comment dwim
      '("w" . cur/window/body)
-					;'("e" . )
+     ;; '("e" . )
      (cons "r" cur/register-map)
      (cons "t" cur/toggle-map)
-					;'("y" . )
+     ;; '("y" . )
      '("u" . "C-u")   ; universal argument
-					;'("i" . )
+     ;; '("i" . )
      '("o" . "C-x o") ; other window
      (cons "p" project-prefix-map)
-					;'("-" . )
+     ;; '("-" . )
 
      ;; ===3rd Row===
-					;'("<escape>" . )
-					;'("a" . )
+     ;; '("<escape>" . )
+     ;; '("a" . )
      '("s" . "C-x C-s") ; save buffer
      '("d" . kill-current-buffer)
      '("f" . "C-x C-f") ; find file
-					;'("g" . ) ; C-M- map
-					;'("h" . ) ; C-h map
-					;'("j" . )
-					;'("k" . )
-					;'("l" . )
+     ;; '("g" . ) ; C-M- map
+     ;; '("h" . ) ; C-h map
+     ;; '("j" . )
+     ;; '("k" . )
+     ;; '("l" . )
      (cons ";" cur/sub-leader-keymap)
      '("RET"   . "M-x")
 
      ;; ===4th Row===
      (cons "z" cur/alignment-map)
-					;'("x" . ) ; C-x map
-					;'("c" . ) ; C-c map
-					;'("v" . )
+     ;; '("x" . ) ; C-x map
+     ;; '("c" . ) ; C-c map
+     ;; '("v" . )
      '("b" . "C-x b")
-					;'("n" . )
-					;'("m" . ) ; M- map
+     ;; '("n" . )
+     ;; '("m" . ) ; M- map
      '("," . meow-beginning-of-thing)
      '("." . meow-end-of-thing)
      '("/" . rg)
-					;'("'"  . )
+     ;; '("'"  . )
      )
     (meow-normal-define-key
      ;; ===Top Row===
      '("1" . meow-expand-1)
-					;'("!" . )
+     ;; '("!" . )
      '("2" . meow-expand-2)
-					;'("@" . )
+     ;; '("@" . )
      '("3" . meow-expand-3)
-					;'("#" . )
+     ;; '("#" . )
      '("4" . meow-expand-4)
-					;'("$" . )
+     ;; '("$" . )
      '("5" . meow-expand-5)
-					;'("%" . )
+     ;; '("%" . )
      '("6" . meow-expand-6)
-					;'("^" . )
+     ;; '("^" . )
      '("7" . meow-expand-7)
-					;'("&" . )
+     ;; '("&" . )
      '("8" . meow-expand-8)
-					;'("*" . )
+     ;; '("*" . )
      '("9" . meow-expand-9)
-					;'("(" . )
+     ;; '("(" . )
      '("0" . meow-expand-0)
-					;'(")" . )
+     ;; '(")" . )
 
      ;; ===2nd Row===
-					;'("TAB"  . )
-					;'("BTAB" . )
+     ;; '("TAB"  . )
+     ;; '("BTAB" . )
      '("q" . kmacro-end-and-call-macro)
      '("Q" . cur/kmacro-toggle)
      '("w" . meow-mark-word)
@@ -474,7 +474,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("y" . meow-save)
      '("Y" . meow-clipboard-save)
      '("u" . meow-undo)
-					;'("U" . )
+     ;; '("U" . )
      '("i" . meow-insert)
      '("I" . meow-open-below)
      '("o" . meow-block)
@@ -482,14 +482,14 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '("p" . meow-yank)
      '("P" . meow-clipboard-yank)
      '("-" . negative-argument)
-					;'("_" . )
+     ;; '("_" . )
 
      ;; ===3rd Row===
      '("<escape>" . keyboard-quit)
      '("a" . meow-append)
      '("A" . meow-open-above)
      '("s" . repeat)
-					;'("S" . )
+     ;; '("S" . )
      '("d" . meow-kill)
      '("D" . meow-c-k)
      '("f" . meow-find)
@@ -507,23 +507,23 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      '(";" . meow-reverse)
      '(":" . meow-page-up)
      '("RET" . "C-c")
-					;'("S-RET" . )
+     ;; '("S-RET" . )
 
      ;; ===4th Row===
      '("z" . meow-pop-selection)
-					;'("Z" . )
+     ;; '("Z" . )
      '("x" . meow-line)
      '("X" . meow-line-expand)
      '("c" . meow-change)
-					;'("C" . )
+     ;; '("C" . )
      (cons "v" goto-map)
-					;'("V" . )
+     ;; '("V" . )
      '("b" . meow-back-word)
      '("B" . meow-back-symbol)
      '("n" . meow-search)
      '("N" . meow-visit)
      '("m" . meow-join)
-					;'("M" . )
+     ;; '("M" . )
      '("," . meow-bounds-of-thing)
      '("<" . meow-beginning-of-thing)
      '("." . meow-inner-of-thing)
@@ -684,11 +684,11 @@ Info is emacs' built in manual system. In essence, its a more feature rich =man=
     '("?" . meow-page-down)
     '("," . beginning-of-buffer)
     '("." . end-of-buffer)
-					; '("a" . )
-					; '("b" . )
-					; '("c" . Info-follow-reference)
-					; '("d" . )
-					; '("e" . )
+    ;;  '("a" . )
+    ;;  '("b" . )
+    ;;  '("c" . Info-follow-reference)
+    ;;  '("d" . )
+    ;;  '("e" . )
     '("f" . Info-menu)
     '("g" . keyboard-quit)
     '("h" . Info-backward-node)
@@ -700,16 +700,16 @@ Info is emacs' built in manual system. In essence, its a more feature rich =man=
     '("L" . meow-right)
     '("m" . meow-join)
     '("n" . Info-next)
-					; '("o" . )
+    ;;  '("o" . )
     '("p" . Info-prev)
     '("q" . meow-goto-line)
     '("r" . Info-follow-reference)
-					; '("s" . )
+    ;;  '("s" . )
     '("t" . Info-toc)
     '("u" . Info-up)
     '("v" . meow-visit)
-					; '("w" . )
-					; '("x" . )
+    ;;  '("w" . )
+    ;;  '("x" . )
     '("y" . Info-copy-current-node-name)
     '("z" . info-display-manual)
     '("RET" . Info-follow-nearest-node)
@@ -1046,13 +1046,13 @@ spacious-padding
   :disabled t
   :config
   (setq spacious-padding-widths
-        '(:internal-border-width 8
-				 :header-line-width 0
-				 :mode-line-width 0
-				 :tab-width 0
-				 :right-divider-width 18
-				 :scroll-bar-width 0
-				 :fringe-width 0))
+        '( :internal-border-width 8
+	   :header-line-width 0
+	   :mode-line-width 0
+	   :tab-width 0
+	   :right-divider-width 18
+	   :scroll-bar-width 0
+	   :fringe-width 0))
   (setq spacious-padding-subtle-mode-line nil)
   (spacious-padding-mode 1))
 
@@ -1523,7 +1523,7 @@ rainbow-delimiters
 #+begin_src emacs-lisp
 ;; ===rainbow-delimiters===
 (use-package rainbow-delimiters
-					;:ensure t
+  ;; :ensure t
   :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
@@ -1889,11 +1889,11 @@ org-bullets
   :ensure nil
   :defer t
   :hook (org-mode . cur/org-mode-setup)
-  :bind (:map org-mode-map
-              ("C-S-h" . outline-promote)
-              ("C-S-j" . outline-move-subtree-down)
-              ("C-S-k" . outline-move-subtree-up)
-              ("C-S-l" . outline-demote))
+  :bind ( :map org-mode-map
+          ("C-S-h" . outline-promote)
+          ("C-S-j" . outline-move-subtree-down)
+          ("C-S-k" . outline-move-subtree-up)
+          ("C-S-l" . outline-demote))
   :init
   (defun cur/org-mode-setup ()
     (org-indent-mode 1)
