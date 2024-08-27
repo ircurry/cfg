@@ -8,6 +8,7 @@
 (setq initial-buffer-choice t)      ;; Scratch as initial buffer
 (setq make-backup-files nil)        ;; No more file~ everywhere
 (setq inhibit-startup-message t)    ;; Starts on blank screen
+(setq scroll-conservatively 101)    ;; Enable Line by line scrolling
 (scroll-bar-mode -1)                ;; Disable visible scrollbar
 (tool-bar-mode -1)                  ;; Disable tool bar
 (menu-bar-mode -1)                  ;; Disable menu bar
