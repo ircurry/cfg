@@ -865,7 +865,7 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
   (dired-listing-switches "-A -G -F -h -l -v --group-directories-first --time-style=long-iso")
   (dired-guess-shell-alist-user '(("\\.\\(png\\|jpe?g\\|tiff\\|gif\\)" "xdg-open" "imv" "feh")
                                   ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\|mov\\)" "xdg-open" "mpv" "vlc")
-                                  ("\\.pdf" "zathura" "xdg-open")
+                                  ("\\.pdf" "xdg-open" "zathura")
                                   (".*" "xdg-open")))
   (dired-auto-revert-buffer #'dired-directory-changed-p)
   (dired-free-space nil)
@@ -1231,7 +1231,7 @@ These are my settings for ~display-buffer-alist~ so windows just Do What I Mean.
   (setq window-sides-slots
         '(1 1 1 1))
   (setq display-buffer-alist
-        '(("\\`\\*Async Shell Command\\*\\'"
+        '(("\\`\\*Async Shell Command.*\\'"
            (display-buffer-no-window))
           ("\\*Org Src.*"
            (display-buffer-same-window))

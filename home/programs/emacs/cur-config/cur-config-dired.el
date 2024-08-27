@@ -117,7 +117,7 @@
   (dired-listing-switches "-A -G -F -h -l -v --group-directories-first --time-style=long-iso")
   (dired-guess-shell-alist-user '(("\\.\\(png\\|jpe?g\\|tiff\\|gif\\)" "xdg-open" "imv" "feh")
                                   ("\\.\\(mp[34]\\|m4a\\|ogg\\|flac\\|webm\\|mkv\\|mov\\)" "xdg-open" "mpv" "vlc")
-                                  ("\\.pdf" "zathura" "xdg-open")
+                                  ("\\.pdf" "xdg-open" "zathura")
                                   (".*" "xdg-open")))
   (dired-auto-revert-buffer #'dired-directory-changed-p)
   (dired-free-space nil)

@@ -3,7 +3,7 @@
   (setq window-sides-slots
         '(1 1 1 1))
   (setq display-buffer-alist
-        '(("\\`\\*Async Shell Command\\*\\'"
+        '(("\\`\\*Async Shell Command.*\\'"
            (display-buffer-no-window))
           ("\\*Org Src.*"
            (display-buffer-same-window))

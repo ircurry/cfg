@@ -76,7 +76,8 @@ in
         set recolor                     "true"
       '';
     };
-    xdg.mimeApps.defaultApplications = lib.mkOverride 900 {
+
+    xdg.mimeApps.defaultApplications = {
       "application/pdf" = "org.pwmt.zathura.desktop";
     };
   };
