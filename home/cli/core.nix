@@ -12,6 +12,7 @@
     [
       bottom # system resource monitor
       eza # a smart ls replacement
+      fd # a fast find replacement
       file # file info
       fzf # cli fuzzy finder
       neofetch # system info fetcher
