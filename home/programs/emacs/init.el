@@ -4,20 +4,7 @@
 
 ;; ===Basic Settings===
 (setq frame-title-format "%b")      ;; Set window title to buffer name
-(setq initial-scratch-message ";;                Frieren
-;; ⠀ ⠀⠀⠀⠀⠀⢀⡴⢾⣶⣴⠚⣫⠏⠉⠉⠛⠛⢭⡓⢶⣶⠶⣦⡀⠀⠀⠀⠀⠀
-;; ⠀⠀⠀⠀⠀⣰⠋⡀⣠⠟⢁⣾⠇⠀⣀⣷⠀⠀⠓⣝⠂⠙⣆⢄⢻⡞⢢⠀⠀⠀
-;; ⠀⠀⠀⠀⢠⡇⢸⢡⠃⢠⡞⠁⠀⣰⡟⠉⢦⣄⠀⠈⢆⠀⢻⣾⡄⢧⢸⠀⠀⠀
-;; ⠀⠀⠀⠀⢸⠀⡇⡌⠀⡞⠀⢀⣴⡋⠀⠀⠀⣙⣷⡀⠘⡄⠘⣿⣧⢸⣼⣥⠀⠀
-;; ⣀⣀⣀⣀⣞⣰⠁⡇⠀⣧⠴⠛⠛⠁⠀⠀⠀⠉⠉⠙⠦⡇⠀⣿⣸⣼⣿⣇⣀⣀
-;; ⠳⢽⣷⠺⡟⡿⣯⡇⠰⣧⠠⣿⡷⠂⠀⠀⠀⠐⣾⠷⠀⡀⠀⣿⡟⣴⠶⢁⡨⠊
-;; ⠀⠀⠉⢳⢦⣅⠘⣿⣄⢿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡇⢀⣏⣳⣿⣴⡞⠈⠀
-;; ⠀⠀⠀⣼⢸⡅⢹⣿⣿⣾⣟⠀⠀⢠⣀⣄⣠⠀⠀⢠⣾⣿⡿⣿⢻⠁⢹⣷⡀⠀
-;; ⠀⠀⠸⡏⠸⡇⢼⣿⡿⠟⠛⠓⣦⣄⣀⣀⣀⣀⡤⠴⠿⢿⡟⠛⠺⣦⣬⣗⠀⠀
-;; ⠀⠀⢰⡇⠀⡇⠸⡏⠀⠀⢰⠋⠙⠛⠛⠉⠉⢹⠀⠀⠀⠀⡇⠀⠀⣿⣿⣿⣿⡇
-;;  ⡐⣾⠀⡀⢹⠀⣿⣄⠀⢸⠀⠀⠀⠀⠀⠀⢸⡇⠀⠀⢠⣇⠀⠀⣿⣿⣿⣿⣿
-;; ⣰⣿⣿⠀⡇⠘⡄⢸⣿⠆⠈⡇⠀⠀⠀⠀⠈⢉⠃⠀⣰⡾⠻⠃⢰⣿⣿⣿⣿⡇
-;; ⣿⣿⣿⡆⢷⠀⢧⠈⣿⠤⠤⣇⠀⠀⠀⠀⢀⣸⣠⢾⠟⠓⡶⢤⣾⣿⣿⣿⣿⣷\n\n")
+(setq initial-scratch-message ";; Scratch Buffer\n\n")
 (setq initial-buffer-choice t)      ;; Scratch as initial buffer
 (setq make-backup-files nil)        ;; No more file~ everywhere
 (setq inhibit-startup-message t)    ;; Starts on blank screen
