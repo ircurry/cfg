@@ -97,6 +97,9 @@
   :bind (:map project-prefix-map
               ("j" . justl)))
 
+(use-package tmr
+  :defer t)
+
 (provide 'cur-config-ide)
 
 (use-package cur-tmux

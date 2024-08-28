@@ -1498,6 +1498,17 @@ justl
 (use-package justl
   :bind (:map project-prefix-map
               ("j" . justl)))
+#+end_src
+
+*** TMR
+
+#+begin_src text :tangle ./packages.txt :padline no
+tmr
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package tmr
+  :defer t)
 
 (provide 'cur-config-ide)
 #+end_src

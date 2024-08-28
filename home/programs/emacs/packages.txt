@@ -29,6 +29,7 @@ magit
 rg
 just-mode
 justl
+tmr
 rainbow-delimiters
 paredit
 geiser
