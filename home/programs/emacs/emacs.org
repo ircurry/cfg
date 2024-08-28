@@ -2415,7 +2415,7 @@ Will call `find-file' interactively if no file is specified."
         (t
          (call-interactively 'find-file))))
 
-(defun eshell/dir (&optional dir)
+(defun eshell/lf (&optional dir)
   "Eshell alias to open `dired' at DIR.
 Will call `dired' on current directory if no directory is specified."
   (cond (dir
