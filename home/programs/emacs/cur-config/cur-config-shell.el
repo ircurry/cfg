@@ -20,6 +20,15 @@
   :bind ( :map eat-mode-map
 	  ("C-c C-RET" . eat-send-password)
 	  ("C-c C-<return>" . eat-send-password))
+  :custom
+  (eat-kill-buffer-on-exit t)
+  (eat-enable-directory-tracking t))
+
+(use-package eat
+  :after eshell
+  :custom
+  (eshell-visual-commands nil "nil because using `eat-eshell-mode'")
+  (eshell-visual-subcommands nil "nil because using `eat-eshell-mode'")
   :config
   (eat-eshell-mode 1))
 
