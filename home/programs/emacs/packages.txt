@@ -60,6 +60,7 @@ ccls
 zig-mode
 vterm
 eat
+eshell-syntax-highlighting
 zoxide
 org-bullets
 gemini-mode

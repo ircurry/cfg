@@ -24,9 +24,9 @@ Set `eshell-prompt-function' to this function to enable."
      (propertize "@"                   'face `(:weight bold :foreground ,green))
      (propertize (system-name)         'face `(:weight bold :foreground ,blue))
      " "
-     (propertize (concat (eshell/pwd)) 'face `(:weight bold :foreground ,magenta))
+     (propertize (concat (abbreviate-file-name (eshell/pwd))) 'face `(:weight bold :foreground ,magenta))
      (propertize "]"                   'face `(:weight bold :foreground ,red))
-     (propertize "$ "                  'face `(:weight bold :foreground ,white)))))
+     (propertize "λ "                  'face `(:weight bold :foreground ,white)))))
 
 (defun eshell/ff (&optional file)
   "Eshell alias to open FILE.

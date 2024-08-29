@@ -17,6 +17,9 @@
 
 ;; ===Eat===
 (use-package eat
+  :bind ( :map eat-mode-map
+	  ("C-c C-RET" . eat-send-password)
+	  ("C-c C-<return>" . eat-send-password))
   :config
   (eat-eshell-mode 1))
 
@@ -25,7 +28,13 @@
   :bind ( :map cur/sub-leader-keymap
           ("C-e" . eshell)))
 
+(use-package eshell-syntax-highlighting
+  :after eshell
+  :config
+  (eshell-syntax-highlighting-global-mode +1))
+
 (use-package cur-eshell
+  :after eshell
   :custom
   (eshell-prompt-regexp cur-eshell-prompt-regexp "Regex for custom eshell prompt")
   (eshell-prompt-function 'cur-eshell-prompt "Set custom prompt for eshell"))
