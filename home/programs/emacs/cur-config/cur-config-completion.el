@@ -62,8 +62,6 @@
   :custom
   (cur-override-theme-load-function #'cur-consult-theme))
 
-(provide 'cur-config-completion)
-
 (use-package emabark
   :bind ( :map global-map
           ("C-." . embark-act)
@@ -72,3 +70,25 @@
           :map dired-mode-map
           ("'"  . embark-act)
           ("\"" . embark-dwim)))
+
+(use-package corfu
+  :bind
+  (:map corfu-map
+	("TAB"       . corfu-next)
+	("<tab>"     . corfu-next)
+	("S-TAB"     . corfu-previous)
+	("<backtab>" . corfu-previous)
+	("<escape>"  . corfu-quit) ; note: cannot bind "ESC" because it causes errors
+	("M-SPC"     . corfu-insert-separator))
+  :custom
+  (corfu-auto t)
+  (corfu-preview-current 'insert)
+  (corfu-auto-delay 0.1)
+  (corfu-auto-prefix 3)
+  (corfu-max-width 40)
+  (corfu-popupinfo-delay '(2.0 . 1.0))
+  (tab-always-indent 'complete)
+  :hook
+  (corfu-mode . corfu-popupinfo-mode))
+
+(provide 'cur-config-completion)
