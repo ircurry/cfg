@@ -17,8 +17,11 @@ vertico
 marginalia
 vertico-posframe
 consult
+consult-dir
 embark
 embark-consult
+corfu
+cape
 lsp-mode
 lsp-ui
 company

@@ -1202,6 +1202,9 @@ consult
 #+end_src
 
 *** TODO Consult Directory
+#+begin_src text :tangle ./packages.txt :padline no
+consult-dir
+#+end_src
 
 *** TODO Embark
 
@@ -1219,6 +1222,18 @@ embark-consult
           :map dired-mode-map
           ("'"  . embark-act)
           ("\"" . embark-dwim)))
+#+end_src
+
+*** TODO Corfu
+
+#+begin_src text :tangle ./packages.txt :padline no
+corfu
+#+end_src
+
+*** TODO Cape
+
+#+begin_src text :tangle ./packages.txt :padline no
+cape
 #+end_src
 
 ** Window management configurations (=cur-config-window.el=)
