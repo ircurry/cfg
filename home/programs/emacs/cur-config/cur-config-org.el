@@ -41,17 +41,16 @@
 ;; ===Org Tempo and SRC Blocks===
 (use-package org-tempo
   :after org
-  :config
-  (push '("conf-unix" . conf-unix) org-src-lang-modes)
-
-  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
-  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-  (add-to-list 'org-structure-template-alist '("py" . "src python"))
-  (add-to-list 'org-structure-template-alist '("tex" . "src latex"))
-  (add-to-list 'org-structure-template-alist '("conf" . "src conf-unix"))
-  (add-to-list 'org-structure-template-alist '("yaml" . "src yaml"))
-  (add-to-list 'org-structure-template-alist '("java" . "src java"))
-  (add-to-list 'org-structure-template-alist '("elv" . "src elvish")))
+  :custom
+  (org-structure-template-alist
+   '(("s" . "src")
+     ("e" . "src emacs-lisp")
+     ("t" . "src emacs-lisp :tangle FILENAME")
+     ("T" . "src text :tangle FILENAME")
+     ("x" . "export")
+     ("X" . "example")
+     ("q" . "quote")
+     ("v" . "verse"))))
 
 ;; ===Org Babel===
 (use-package ob
