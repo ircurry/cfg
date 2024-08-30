@@ -23,6 +23,9 @@ in
         set fish_greeting
         ${pkgs.zoxide}/bin/zoxide init fish | source
         direnv hook fish | source
+        if test "$INSIDE_EMACS" = "vterm"; and test -n "$EMACS_VTERM_PATH"; and test -f "$EMACS_VTERM_PATH/etc/emacs-vterm.fish"
+            source "$EMACS_VTERM_PATH/etc/emacs-vterm.fish"
+        end
         my-fetch
       '';
     };
