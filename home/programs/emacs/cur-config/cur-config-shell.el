@@ -1,7 +1,7 @@
 ;; ===Vterm===
 (use-package vterm
   :bind ( :map cur/sub-leader-keymap
-          ("C-t" . vterm))
+          ("C-S-t" . vterm))
   :custom
   (vterm-shell "fish")
   :config
@@ -13,13 +13,17 @@
           ("C-c C-RET"      . cur-vterm-enter-password)
           ("C-c C-<return>" . cur-vterm-enter-password)
           :map project-prefix-map
-          ("t" . cur-vterm-project-other-window)))
+          ("T" . cur-vterm-project-other-window)))
 
 ;; ===Eat===
 (use-package eat
   :bind ( :map eat-mode-map
 	  ("C-c C-RET" . eat-send-password)
-	  ("C-c C-<return>" . eat-send-password))
+	  ("C-c C-<return>" . eat-send-password)
+	  :map project-prefix-map
+	  ("t" . eat-project)
+	  :map cur/sub-leader-keymap
+	  ("C-t" . eat))
   :custom
   (eat-kill-buffer-on-exit t)
   (eat-enable-directory-tracking t))
