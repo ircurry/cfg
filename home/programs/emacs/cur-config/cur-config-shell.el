@@ -37,10 +37,25 @@
   :config
   (eat-eshell-mode 1))
 
+(use-package eat
+  :if (locate-library "corfu.el")
+  :hook (eat-mode . (lambda (&rest _)
+		      (setq-local corfu-auto nil)
+		      (setq-local corfu-quit-at-boundary nil)
+		      (corfu-mode +1))))
+
 ;; ===Eshell===
 (use-package eshell
   :bind ( :map cur/sub-leader-keymap
           ("C-e" . eshell)))
+
+(use-package eshell
+  :if (locate-library "corfu.el")
+  :hook
+  (eshell-mode . (lambda (&rest _)
+		   (setq-local corfu-auto nil)
+		   (setq-local corfu-quit-at-boundary nil)
+		   (corfu-mode +1))))
 
 (use-package eshell-syntax-highlighting
   :after eshell
