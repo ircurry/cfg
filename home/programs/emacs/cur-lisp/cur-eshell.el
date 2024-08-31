@@ -45,7 +45,7 @@ Will call `dired' on current directory if no directory is specified."
          (dired "."))))
 
 (defvar cur-eshell-prompt-regexp
-  "^\\[[^]]*\\]\\[?[[:digit:]]*\\]?[#$λ] "
+  "^\\[.*?@.*? [/~].*\\]?[#$λ] "
   "Regex for the `cur-eshell-prompt' prompt.")
 
 (provide 'cur-eshell)
