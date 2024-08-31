@@ -19,6 +19,7 @@ in
         enable = true;
         arkenfox = {
           enable = true;
+          # TODO: update this
           version = "119.0";
         };
 
