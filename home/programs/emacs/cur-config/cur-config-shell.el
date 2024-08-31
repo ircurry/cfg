@@ -17,6 +17,7 @@
 
 ;; ===Eat===
 (use-package eat
+  :hook (eat-exec . (lambda (&rest _) (eat-line-mode)))
   :bind ( :map eat-mode-map
 	  ("C-c C-RET" . eat-send-password)
 	  ("C-c C-<return>" . eat-send-password)
