@@ -92,12 +92,10 @@ This is only used if I find myself on a non-nixos system, as I have nixos manage
 
 ** Use-package
 
-Setting up use package. Not sure if all of this is necessary now since ~use-package~ comes with base emacs now.
+Requiring =use-package= as that is what I use for almost all of my configuration.
 
 #+begin_src emacs-lisp
 ;; ===use-package Initialization===
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
 (require 'use-package)
 #+end_src
 
