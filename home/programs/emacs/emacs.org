@@ -431,6 +431,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      (cons "z" cur/alignment-map)
      ;; '("x" . ) ; C-x map
      ;; '("c" . ) ; C-c map
+     '("C" . capitalize-dwim)
      ;; '("v" . )
      '("b" . "C-x b")
      ;; '("n" . )
