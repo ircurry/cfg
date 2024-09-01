@@ -70,7 +70,7 @@ These functions I want enabled and not asking me if I want to run the command ev
 
 ** "Disabling" Custom
 
-Set it to a temp file so I don't have to deal with custom, lol.
+Set ~custom-file~ to a temp file so I don't have to deal with custom, lol. This is a tip I learned from [[https://protesilaos.com/emacs/dotemacs#h:f2ffe0e9-a58d-4bba-9831-cc35940ea83f][Protesilaos' config]].
 
 #+begin_src emacs-lisp
 ;; ===Disable Custom===
