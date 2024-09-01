@@ -29,12 +29,12 @@
 
 ** Emacs Version Check
 
-I have not tested this config on any emacs version less than 29.1.
+I do not test this config on any emacs version less than 29.4.
 
 #+begin_src emacs-lisp
 ;; ===Check Emacs Version===
-(when (version< emacs-version "29.1")
-  (error "This setup is only guarunteed to work on 29.1, disable this line to load anyways."))
+(when (version< emacs-version "29.4")
+  (error "This setup is only guarunteed to work on 29.4, disable this line to load anyways."))
 #+end_src
 
 ** Some Basic Settings

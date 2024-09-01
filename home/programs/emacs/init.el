@@ -1,6 +1,6 @@
 ;; ===Check Emacs Version===
-(when (version< emacs-version "29.1")
-  (error "This setup is only guarunteed to work on 29.1, disable this line to load anyways."))
+(when (version< emacs-version "29.4")
+  (error "This setup is only guarunteed to work on 29.4, disable this line to load anyways."))
 
 ;; ===Basic Settings===
 (setq frame-title-format "%b")      ;; Set window title to buffer name
