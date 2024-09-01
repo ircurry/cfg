@@ -94,7 +94,7 @@ This is only used if I find myself on a non-nixos system, as I have nixos manage
 
 ** Use-package
 
-Requiring =use-package= as that is what I use for almost all of my configuration.
+Requiring ~use-package~ as that is what I use for almost all of my configuration.
 
 #+begin_src emacs-lisp
 ;; ===use-package Initialization===
