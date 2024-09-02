@@ -370,20 +370,13 @@ _o_: other window
     ("J" windmove-swap-states-down)
     ("K" windmove-swap-states-up)
     ("L" windmove-swap-states-right))
-  (defhydra cur/goto (:hint nil)
-    "
-_g_:  goto line         _a_:  beginning of line     _,_: buffer start     _n_: next buffer hydra
-_s_: to indentation     _e_:  end of line           _._: buffer end       _p_: prev buffer hydra
-"
-    ("g" meow-goto-line :exit t)
-    ("a" move-beginning-of-line :exit t)
-    ("e" move-end-of-line :exit t)
-    ("m" back-to-indentation :exit t)
-    ("s" back-to-indentation :exit t)
-    ("," beginning-of-buffer :exit t)
-    ("." end-of-buffer :exit t)
-    ("n" cur/hydra-buffer-cycle/next-buffer :exit t)
-    ("p" cur/hydra-buffer-cycle/previous-buffer :exit t))
+  (defun cur/reverse-other-window ()
+    (interactive)
+    (other-window -1))
+  (defhydra cur/other-window-hydra (:hint nil)
+    "o: other window | O: reverse other window"
+    ("o" other-window)
+    ("O" cur/reverse-other-window))
   (defun meow-setup ()
     (meow-motion-overwrite-define-key
      '("j" . meow-next)
@@ -412,7 +405,7 @@ _s_: to indentation     _e_:  end of line           _._: buffer end       _p_: p
      ;; '("y" . )
      '("u" . "C-u")   ; universal argument
      ;; '("i" . )
-     '("o" . "C-x o") ; other window
+     '("o" . cur/other-window-hydra/other-window) ; other window
      (cons "p" project-prefix-map)
      ;; '("-" . )
 
