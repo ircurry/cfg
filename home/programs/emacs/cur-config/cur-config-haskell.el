@@ -11,6 +11,6 @@
   :after (company)
   :custom (company-ghc-show-info t)
   :config
-  (add-to-list company-backends 'company-ghci))
+  (push 'company-ghci company-backends))
 
 (provide 'cur-config-haskell)
