@@ -6,19 +6,22 @@
   (show-paren-delay 0 "No delay for paren highlighting"))
 
 ;; ===Line Numbers===
-(column-number-mode)
-(global-display-line-numbers-mode t)
-(setq display-line-numbers-type t)
-;; Disable line numbers for terminal modes
-(dolist (mode '(bookmark-bmenu-mode-hook
-                org-mode-hook
-                dired-mode-hook
-                term-mode-hook
-                vterm-mode-hook
-                shell-mode-hook
-                eshell-mode-hook
-                eat-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+(use-package emacs
+  :custom
+  (display-line-numbers-type t)
+  :config
+  (column-number-mode 1)
+  (global-display-line-numbers-mode 1)
+  ;; Disable line numbers for terminal modes
+  (dolist (mode '(bookmark-bmenu-mode-hook
+                  org-mode-hook
+                  dired-mode-hook
+                  term-mode-hook
+                  vterm-mode-hook
+                  shell-mode-hook
+                  eshell-mode-hook
+                  eat-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode -1)))))
 
 (use-package bookmark
   :commands (bookmark-set
