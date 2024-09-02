@@ -62,6 +62,24 @@
   :custom
   (cur-override-theme-load-function #'cur-consult-theme))
 
+(use-package consult-dir
+  :bind ( :map global-map
+	  ("C-x C-d" . consult-dir)
+	  :map minibuffer-local-completion-map
+	  ("C-x C-d" . consult-dir)
+	  ("C-x C-j" . consult-dir-jump-file)))
+
+(use-package consult-dir
+  :after vertico
+  :bind ( :map vertico-map
+	  ("C-x C-d" . consult-dir)
+	  ("C-x C-j" . consult-dir-jump-file)))
+
+(use-package consult-dir
+  :after meow
+  :bind ( :map cur/sub-leader-keymap
+	  ("C-d" . consult-dir)))
+
 (use-package emabark
   :bind ( :map global-map
           ("C-." . embark-act)
