@@ -71,7 +71,35 @@
   (setq spacious-padding-subtle-mode-line nil)
   (spacious-padding-mode 1))
 
-(provide 'cur-config-faces)
+(use-package doom-modeline)
+  ;; :hook (emacs-startup . doom-modeline-mode))
 
-(use-package doom-modeline
-  :hook (emacs-startup . doom-modeline-mode))
+(use-package cur-mode-line
+  :custom
+  (mode-line-right-align-edge 'right-fringe)
+  :config
+  (setq-default mode-line-end-spaces
+		'(""
+		  cur-mode-line-flycheck-indicator
+		  (:eval (when (cur-mode-line-flycheck-display-p) "  "))
+		  cur-mode-line-eat-indicator
+		  (:eval (when (cur-mode-line-eat-display-p) "  "))
+		  cur-mode-line-major-mode-indicator
+		  (:eval (cur-mode-line--end-space-dwim 0))))
+  (setq-default mode-line-format
+		'("%e"
+		  mode-line-client
+                  cur-mode-line-kmacro-indicator
+                  cur-mode-line-narrowed-indicator
+                  "  "
+                  cur-mode-line-buffer-status-indicator
+		  (:eval (when (cur-mode-line-meow-display-p) "  "))
+                  cur-mode-line-meow-state-indicator
+                  "  "
+		  cur-mode-line-buffer-name-indicator
+		  (:eval (when (mode-line-window-selected-p) "  "))
+		  cur-mode-line-postion-indicator
+		  cur-mode-line-right-align
+		  mode-line-end-spaces)))
+
+(provide 'cur-config-faces)
