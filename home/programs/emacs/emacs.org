@@ -2432,7 +2432,9 @@ To create add more padding you can use the `cur-mode-line-end-space-dwim'
 (defun cur-mode-line--meow ()
   "Return a propertized string of the current meow state."
   (when (cur-mode-line-meow-display-p)
-    (propertize (format "  %s  " (upcase (symbol-name meow--current-state)))
+    (propertize (format "  %s  " (substring-no-properties
+				  (upcase (symbol-name meow--current-state))
+				  0 3))
 		'face 'cur-mode-line-meow-state)))
 
 (defvar cur-mode-line-meow-state-indicator
