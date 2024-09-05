@@ -3,17 +3,19 @@
   (error "This setup is only guarunteed to work on 29.4, disable this line to load anyways."))
 
 ;; ===Basic Settings===
-(setq frame-title-format "%b")      ;; Set window title to buffer name
+(setq frame-title-format "%b")      ; Set window title to buffer name
 (setq initial-scratch-message ";; Scratch Buffer\n\n")
-(setq initial-buffer-choice t)      ;; Scratch as initial buffer
-(setq make-backup-files nil)        ;; No more file~ everywhere
-(setq inhibit-startup-message t)    ;; Starts on blank screen
-(setq scroll-conservatively 101)    ;; Enable Line by line scrolling
-(scroll-bar-mode -1)                ;; Disable visible scrollbar
-(tool-bar-mode -1)                  ;; Disable tool bar
-(menu-bar-mode -1)                  ;; Disable menu bar
-(tooltip-mode -1)                   ;; Disable tooltips
-(set-fringe-mode 10)                ;; No idea what this does
+(setq initial-buffer-choice t)      ; Scratch as initial buffer
+(setq make-backup-files nil)        ; No more file~ everywhere
+(setq inhibit-startup-message t)    ; Starts on blank screen
+(setq scroll-conservatively 101)    ; Enable Line by line scrolling
+(setq use-dialog-box nil)           ; No yes-no-p for mouse clicks
+(setq use-short-answers t)          ; Use y-or-n-p for yes-no dialogue.
+(scroll-bar-mode -1)                ; Disable visible scrollbar
+(tool-bar-mode -1)                  ; Disable tool bar
+(menu-bar-mode -1)                  ; Disable menu bar
+(tooltip-mode -1)                   ; Disable tooltips
+(set-fringe-mode 10)                ; No idea what this does
 
 ;; ===Enable Disabled Functions===
 (dolist (c '(narrow-to-region narrow-to-page upcase-region downcase-region))
