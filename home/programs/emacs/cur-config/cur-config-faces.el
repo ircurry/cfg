@@ -28,7 +28,8 @@
 		     (org-dispatcher-highlight :background "#f7e0c3"
 					       :foreground "#957f5f")
 		     (help-key-binding :background "#f7f3ee"
-				       :foreground "#7382a0")))))
+				       :foreground "#7382a0")
+		     (fill-column-indicator :foreground "#b9a992")))))
 
 ;; ===Doom Emacs Themes===
 (use-package doom-themes

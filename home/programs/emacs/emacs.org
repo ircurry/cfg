@@ -952,7 +952,8 @@ I have several custom themes in a directory weirdly named themes. These are the 
 		     (org-dispatcher-highlight :background "#f7e0c3"
 					       :foreground "#957f5f")
 		     (help-key-binding :background "#f7f3ee"
-				       :foreground "#7382a0")))))
+				       :foreground "#7382a0")
+		     (fill-column-indicator :foreground "#b9a992")))))
 #+end_src
 
 *** Doom themes
@@ -1382,14 +1383,16 @@ Emacs can be made to have all the features of a modern text editor and then some
 
 *** Display Fill Column Indicator
 
-This is just a minor mode that shows a small bar at a certain column position. Very useful for a quick eyeball test if the line is too big.
+This is just a minor mode that shows a small bar at a certain column position. It's useful for a quick eyeball test if the line is too big but sometimes hurts readability.
 
 #+begin_src emacs-lisp
 (use-package emacs
   :custom
-  (display-fill-column-indicator-column 80)
-  :hook (prog-mode . (lambda (&rest _)
-		       (display-fill-column-indicator-mode +1))))
+  (display-fill-column-indicator-column 81)
+  ;; Enable this hook for it to show up in prog-mode
+  ;; :hook (prog-mode . (lambda (&rest _)
+  ;; 		       (display-fill-column-indicator-mode +1)))
+  )
 #+end_src
 
 *** LSP-mode

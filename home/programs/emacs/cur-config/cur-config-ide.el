@@ -1,8 +1,10 @@
 (use-package emacs
   :custom
-  (display-fill-column-indicator-column 80)
-  :hook (prog-mode . (lambda (&rest _)
-		       (display-fill-column-indicator-mode +1))))
+  (display-fill-column-indicator-column 81)
+  ;; Enable this hook for it to show up in prog-mode
+  ;; :hook (prog-mode . (lambda (&rest _)
+  ;; 		       (display-fill-column-indicator-mode +1)))
+  )
 
 ;; ===LSP Mode===
 (use-package lsp-mode
