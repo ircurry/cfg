@@ -29,7 +29,9 @@
 					       :foreground "#957f5f")
 		     (help-key-binding :background "#f7f3ee"
 				       :foreground "#7382a0")
-		     (fill-column-indicator :foreground "#b9a992")))))
+		     (fill-column-indicator :foreground "#b9a992")
+		     (org-block :foreground "#93836c"
+				:background "#f1ece4")))))
 
 ;; ===Doom Emacs Themes===
 (use-package doom-themes
