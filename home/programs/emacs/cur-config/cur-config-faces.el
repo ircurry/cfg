@@ -96,7 +96,6 @@
 		  (:eval (cur-mode-line--end-space-dwim 0))))
   (setq-default mode-line-format
 		'("%e"
-		  mode-line-client
                   cur-mode-line-kmacro-indicator
                   cur-mode-line-narrowed-indicator
                   "  "
