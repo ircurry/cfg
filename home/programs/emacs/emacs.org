@@ -341,21 +341,15 @@ meow
       (call-interactively #'meow-start-kmacro))))
   (defhydra cur/window (:hint nil)
     "
-^Movement^            ^Splitting^               ^Manipulation
-^--------^------------^---------^---------------^--------------
-_h_: left             _1_: only window          _H_: swap left
-_j_: down             _2_: split vertical       _J_: swap down
-_k_: up               _3_: split horizontal     _K_: swap up
-_l_: right            _0_: close window         _L_: swap right
-_o_: other window
+^Movement^            ^Splitting and Balancing^   ^Manipulation^       ^Resizing^
+^--------^------------^-----------------------^---^------------^-------^--------^---------------------
+_h_: left             _._: only window            _H_: swap left       _i_: enlarge window
+_j_: down             _v_: split vertical         _J_: swap down       _d_: shrink window
+_k_: up               _;_: split horizontal       _K_: swap up         _f_: enlarge window horizonally
+_l_: right            _=_: balance windows        _L_: swap right      _b_: shrink window horizonally
+_o_: other window     _F_: fit to buffer          _c_: close window
 "
     ("RET" ignore "finished" :exit t)
-    ("w" other-window "other window" :exit t)
-    ("." delete-other-windows "only window" :exit t)
-    ("f" find-file-other-window "file in new window" :exit t)
-    ("v" split-window-right "split vertical" :exit t)
-    (";" split-window-below "split horizontal" :exit t)
-    ("c" delete-window "delete window" :exit t)
 
     ("o" other-window)
     ("h" windmove-left)
@@ -363,15 +357,22 @@ _o_: other window
     ("k" windmove-up)
     ("l" windmove-right)
 
-    ("1" delete-other-windows)
-    ("2" split-window-right)
-    ("3" split-window-below)
-    ("0" delete-window)
+    ("." delete-other-windows)
+    ("v" split-window-right)
+    (";" split-window-below)
+    ("=" balance-windows)
+    ("F" fit-window-to-buffer)
 
     ("H" windmove-swap-states-left)
     ("J" windmove-swap-states-down)
     ("K" windmove-swap-states-up)
-    ("L" windmove-swap-states-right))
+    ("L" windmove-swap-states-right)
+    ("c" delete-window)
+
+    ("i" enlarge-window)
+    ("d" shrink-window)
+    ("f" enlarge-window-horizontally)
+    ("b" shrink-window-horizontally))
   (defun cur/reverse-other-window ()
     (interactive)
     (other-window -1))
