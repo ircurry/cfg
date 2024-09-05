@@ -1,3 +1,9 @@
+(use-package emacs
+  :custom
+  (display-fill-column-indicator-column 80)
+  :hook (prog-mode . (lambda (&rest _)
+		       (display-fill-column-indicator-mode +1))))
+
 ;; ===LSP Mode===
 (use-package lsp-mode
   :demand t

@@ -1380,6 +1380,18 @@ These are my settings for ~display-buffer-alist~ so windows just Do What I Mean.
 
 Emacs can be made to have all the features of a modern text editor and then some.
 
+*** Display Fill Column Indicator
+
+This is just a minor mode that shows a small bar at a certain column position. Very useful for a quick eyeball test if the line is too big.
+
+#+begin_src emacs-lisp
+(use-package emacs
+  :custom
+  (display-fill-column-indicator-column 80)
+  :hook (prog-mode . (lambda (&rest _)
+		       (display-fill-column-indicator-mode +1))))
+#+end_src
+
 *** LSP-mode
 
 Lsp-mode is my chosen language server protocol support package. I chose this over eglot because of the richer features and (at the time that I started using lsp) more mature state. I will revisit elgot in the future but for now I am perfectly happy with lsp-mode.
