@@ -169,7 +169,8 @@ To create add more padding you can use the `cur-mode-line-end-space-dwim'
   "Return a propertized string for file indicator."
   ;; TODO: make these clickable
   (propertize
-   (concat "%z" (mode-line-eol-desc) "%1*" "%1+" "%@") 'face 'cur-mode-line-buffer-status))
+   (concat "%z" (mode-line-eol-desc) "%1*" "%1+" "%@")
+   'face 'cur-mode-line-buffer-status))
 
 (defvar cur-mode-line-buffer-status-indicator
   '(:eval (cur-mode-line--buffer-status-indicator))
@@ -237,7 +238,8 @@ To create add more padding you can use the `cur-mode-line-end-space-dwim'
    (propertize
     (cond (eat--line-mode "(Line Mode)")
 	  ((or eat--char-mode eat--eshell-char-mode) "(Char Mode)")
-	  ((or eat--semi-char-mode eat--eshell-semi-char-mode) "(Semi-Char Mode)")
+	  ((or eat--semi-char-mode eat--eshell-semi-char-mode)
+	   "(Semi-Char Mode)")
 	  (t "(Emacs Mode)"))
     'face 'cur-mode-line-eat)))
 
