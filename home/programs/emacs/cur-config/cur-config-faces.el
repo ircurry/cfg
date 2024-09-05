@@ -16,12 +16,19 @@
   :custom
   (cur-override-theme-overrides
    '((doom-gruvbox (secondary-selection :background "#504945"))
-     (doom-flatwhite (haskell-operator-face :background (doom-color 'bg)
-                                            :foreground (doom-color 'fg))
-                     (haskell-type-face :background (doom-color 'fw-teal-blend)
-                                        :foreground (doom-color 'fw-teal-text))
-                     (haskell-constructor-face :background (doom-color 'fw-orange-blend)
-                                               :foreground (doom-color 'fw-orange-text))))))
+     (doom-flatwhite (haskell-operator-face :background "#f7f3ee"
+                                            :foreground "#605a52")
+                     (haskell-type-face :background "#d2ebe3"
+                                        :foreground "#465953")
+                     (haskell-constructor-face :background "#f7e0c3"
+                                               :foreground "#5b5143")
+		     (completions-common-part :background "#dde4f2"
+					      :foreground "#7382a0"
+					      :weight 'bold)
+		     (org-dispatcher-highlight :background "#f7e0c3"
+					       :foreground "#957f5f")
+		     (help-key-binding :background "#f7f3ee"
+				       :foreground "#7382a0")))))
 
 ;; ===Doom Emacs Themes===
 (use-package doom-themes
