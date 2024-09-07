@@ -46,7 +46,7 @@ in
 {
   config = lib.mkIf (theme == "flatwhite") {
     nocturne = {
-      themes.variant = "dark";
+      themes.variant = "light";
       themes.colors = {
         base00 = "f7f3ee"; # ----
         base01 = "f1ece4"; # ---
