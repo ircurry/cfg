@@ -403,14 +403,21 @@ in
               workspace-hover-bg
               workspace-fg
               workspace-empty
+              workspace-empty-bg
               workspace-urgent
+              workspace-urgent-bg
+              workspace-active
+              workspace-active-bg
               workspace-visible
+              workspace-visible-bg
               launcher-fg
               launcher-bg
               battery-fg
               battery-bg
               battery-warning
+              battery-warning-bg
               battery-critical
+              battery-critical-bg
               clock-fg
               clock-bg
               tray-bg
@@ -481,15 +488,19 @@ in
             }
             #workspaces button.empty {
               color: #${workspace-empty};
+              background-color: #${workspace-empty-bg};
             }
             #workspaces button.active {
-              color: #${workspace-fg};
+              color: #${workspace-active};
+              background-color: #${workspace-active-bg};
             }
             #workspaces button.urgent {
               color: #${workspace-urgent};
+              background-color: #${workspace-urgent-bg};
             }
             #workspaces button.visible {
               color: #${workspace-visible};
+              background-color: #${workspace-visible-bg};
             }
             /* ===Launcher=== */
             #custom-launcher {
@@ -511,9 +522,11 @@ in
             }
             #battery.warning:not(.charging) {
               color: #${battery-warning};
+              background-color: #${battery-warning-bg};
             }
             #battery.critical:not(.charging) {
               color: #${battery-critical};
+              background-color: #${battery-critical-bg};
             }
             /* ===Tray=== */
             #tray {

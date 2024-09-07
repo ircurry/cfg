@@ -37,7 +37,7 @@
 (use-package doom-themes
   :demand t
   :config
-  (cur-override-theme-load-theme 'doom-tomorrow-night))
+  (cur-override-theme-load-theme 'doom-flatwhite))
 
 ;; ===Autothemer===
 (use-package autothemer)

@@ -7,7 +7,7 @@
 let
   cfg = config.nocturne.wayland.notification;
   frameColor = config.nocturne.wayland.dunst.frameColor + "ff";
-  bg = config.nocturne.wayland.dunst.bg + "aa";
+  bg = config.nocturne.wayland.dunst.bg + config.nocturne.wayland.dunst.bg-opacity;
   fg = config.nocturne.wayland.dunst.fg + "ff";
   critical = config.nocturne.wayland.dunst.critical + "ff";
   increaseColor = config.nocturne.wayland.dunst.increaseColor;

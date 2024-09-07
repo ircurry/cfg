@@ -149,6 +149,10 @@
         type = lib.types.str;
         default = config.nocturne.themes.colors.base02;
       };
+      bg-opacity = lib.mkOption {
+        type = lib.types.str;
+        default = "aa";
+      };
       fg = lib.mkOption {
         type = lib.types.str;
         default = config.nocturne.themes.colors.base05;
@@ -465,21 +469,41 @@
         type = lib.types.str;
         default = config.nocturne.wayland.waybar.default-bg;
       };
+      workspace-fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base05;
+      };
       workspace-hover-bg = lib.mkOption {
         type = lib.types.str;
         default = config.nocturne.themes.colors.base00;
       };
-      workspace-fg = lib.mkOption {
+      workspace-empty-bg = lib.mkOption {
         type = lib.types.str;
-        default = config.nocturne.themes.colors.base05;
+        default = config.nocturne.wayland.waybar.workspace-bg;
       };
       workspace-empty = lib.mkOption {
         type = lib.types.str;
         default = config.nocturne.themes.colors.base03;
       };
+      workspace-urgent-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.wayland.waybar.workspace-bg;
+      };
       workspace-urgent = lib.mkOption {
         type = lib.types.str;
         default = config.nocturne.themes.colors.base09;
+      };
+      workspace-active-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.wayland.waybar.workspace-bg;
+      };
+      workspace-active = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.wayland.waybar.workspace-fg;
+      };
+      workspace-visible-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.wayland.waybar.workspace-bg;
       };
       workspace-visible = lib.mkOption {
         type = lib.types.str;
@@ -505,9 +529,17 @@
         type = lib.types.str;
         default = config.nocturne.themes.colors.base0B;
       };
+      battery-warning-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.wayland.waybar.default-bg;
+      };
       battery-warning = lib.mkOption {
         type = lib.types.str;
         default = config.nocturne.themes.colors.base09;
+      };
+      battery-critical-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.wayland.waybar.default-bg;
       };
       battery-critical = lib.mkOption {
         type = lib.types.str;
