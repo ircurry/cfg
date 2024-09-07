@@ -173,6 +173,7 @@ in
           };
 
           extensions = with inputs.firefox-addons.packages."x86_64-linux"; [
+            darkreader
             ublock-origin
             libredirect
             multi-account-containers
