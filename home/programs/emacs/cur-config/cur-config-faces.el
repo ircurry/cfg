@@ -80,9 +80,9 @@
 
 ;; ===Catppuccin Theme===
 (use-package catppuccin-theme
-  :after (autothemer cur-theme)
-  :config
-  (cur-override-theme-load-theme 'catppuccin))
+  :after (autothemer cur-theme))
+
+(cur-override-theme-load-theme 'catppuccin)
 
 ;; ===Text Scaling===
 (defhydra hydra-text-scale (:timeout 4)

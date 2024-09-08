@@ -1038,9 +1038,13 @@ catppuccin-theme
 #+begin_src emacs-lisp
 ;; ===Catppuccin Theme===
 (use-package catppuccin-theme
-  :after (autothemer cur-theme)
-  :config
-  (cur-override-theme-load-theme 'catppuccin))
+  :after (autothemer cur-theme))
+#+end_src
+
+*** Default Theme
+
+#+begin_src emacs-lisp
+(cur-override-theme-load-theme 'catppuccin)
 #+end_src
 
 *** Text Scaling Hydra
