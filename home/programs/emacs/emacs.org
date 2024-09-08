@@ -918,7 +918,7 @@ fontaine
 (use-package fontaine
   :demand t
   :bind ( :map cur/toggle-map
-	  ("C-f" . fontaine-set-preset))
+	  ("C-s" . fontaine-set-preset))
   :custom
   (fontaine-presets '((regular)
 		      (small
@@ -1056,21 +1056,6 @@ catppuccin-theme
 
 #+begin_src emacs-lisp
 (cur-override-theme-load-theme 'catppuccin)
-#+end_src
-
-*** Text Scaling Hydra
-
-A simple hydra that allows me to interactively set the size of the text in a buffer.
-
-#+begin_src emacs-lisp
-;; ===Text Scaling===
-(defhydra hydra-text-scale (:timeout 4)
-  "scale text"
-  ("k" text-scale-increase "in")
-  ("j" text-scale-decrease "out")
-  ("f" nil "finished" :exit t)
-  ("RET" nil "finished" :exit t))
-(define-key cur/toggle-map (kbd "C-s") 'hydra-text-scale/body)
 #+end_src
 
 *** Ef-themes

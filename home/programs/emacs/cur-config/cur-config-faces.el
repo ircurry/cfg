@@ -3,7 +3,7 @@
 (use-package fontaine
   :demand t
   :bind ( :map cur/toggle-map
-	  ("C-f" . fontaine-set-preset))
+	  ("C-s" . fontaine-set-preset))
   :custom
   (fontaine-presets '((regular)
 		      (small
@@ -95,15 +95,6 @@
   :after (autothemer cur-theme))
 
 (cur-override-theme-load-theme 'catppuccin)
-
-;; ===Text Scaling===
-(defhydra hydra-text-scale (:timeout 4)
-  "scale text"
-  ("k" text-scale-increase "in")
-  ("j" text-scale-decrease "out")
-  ("f" nil "finished" :exit t)
-  ("RET" nil "finished" :exit t))
-(define-key cur/toggle-map (kbd "C-s") 'hydra-text-scale/body)
 
 ;; ===Ef-Themes===
 (use-package ef-themes)
