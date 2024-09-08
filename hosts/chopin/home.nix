@@ -50,6 +50,7 @@
       youtube.enable = true;
     };
     wayland = {
+      menu.name = "rofi";
       idleManager.name = null;
       uiStyle = "fancy";
       monitors = [
