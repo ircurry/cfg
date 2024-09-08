@@ -33,6 +33,18 @@
 (add-to-list 'default-frame-alist
              '(alpha-background . 85))
 
+(use-package emacs
+  :preface
+  (defun cur/toggle-frame-opacity ()
+    (interactive)
+    (let ((current-alpha (frame-parameter nil 'alpha-background)))
+      (cond ((eq current-alpha 100)
+	     (set-frame-parameter nil 'alpha-background 85))
+	    (t
+	     (set-frame-parameter nil 'alpha-background 100)))))
+  :bind ( :map cur/toggle-map
+	  ("C-o" . cur/toggle-frame-opacity)))
+
 ;; ===Themes Path===
 (add-to-list 'custom-theme-load-path (locate-user-emacs-file "themes"))
 
