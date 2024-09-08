@@ -3,6 +3,7 @@ meow
 which-key
 helpful
 nerd-icons-dired
+fontaine
 doom-themes
 autothemer
 catppuccin-theme

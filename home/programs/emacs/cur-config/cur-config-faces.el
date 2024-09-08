@@ -1,6 +1,33 @@
 ;; ===Default Font===
-(add-to-list 'default-frame-alist
-             '(font . "JetBrains Mono Nerd Font-11"))
+
+(use-package fontaine
+  :demand t
+  :bind ( :map cur/toggle-map
+	  ("C-f" . fontaine-set-preset))
+  :custom
+  (fontaine-presets '((regular)
+		      (small
+		       :default-height 100)
+		      (large
+		       :default-height 140)
+		      (t
+		       :default-family "JetBrainsMono Nerd Font"
+		       :default-weight regular
+		       :default-height 110
+
+		       :fixed-pitch-family nil
+		       :fixed-pitch-weight nil
+		       :fixed-pitch-height 1.0
+
+		       :fixed-pitch-serif-family nil
+		       :fixed-pitch-serif-weight nil
+		       :fixed-pitch-serif-height 1.0
+
+		       :mode-line-active-height 1.0
+		       :mode-line-inactive-height 1.0)))
+  :config
+  (fontaine-set-preset (or (fontaine-restore-latest-preset) 'regular))
+  (fontaine-mode 1))
 
 ;; ===Default Opacity===
 (add-to-list 'default-frame-alist
