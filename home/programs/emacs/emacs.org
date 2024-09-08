@@ -126,7 +126,6 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
 (require 'cur-config-faces)
 (require 'cur-config-completion)
 (require 'cur-config-window)
-;; (require 'cur-modeline)
 
 ;; ===Languages===
 (require 'cur-config-ide)

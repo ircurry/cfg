@@ -54,7 +54,6 @@
 (require 'cur-config-faces)
 (require 'cur-config-completion)
 (require 'cur-config-window)
-;; (require 'cur-modeline)
 
 ;; ===Languages===
 (require 'cur-config-ide)
