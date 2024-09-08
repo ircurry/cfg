@@ -15,7 +15,16 @@
           ("C-t" . cur-override-theme-load-theme))
   :custom
   (cur-override-theme-overrides
-   '((doom-gruvbox (secondary-selection :background "#504945"))
+   '((catppuccin (company-preview :foreground (catppuccin-color 'overlay0)
+				  :background (if (eq catppuccin-flavor 'latte)
+						  (catppuccin-darken (catppuccin-color 'base) 12)
+						(catppuccin-lighten (catppuccin-color 'base) 17)))
+		 (cur-mode-line-meow-state :background (catppuccin-color 'surface0))
+		 (cur-mode-line-major-mode-active :foreground (catppuccin-color 'blue) :weight 'bold)
+		 (flycheck-info :underline (list :style 'wave :color (catppuccin-color 'green)))
+		 (flycheck-warning :underline (list :style 'wave :color (catppuccin-color 'yellow)))
+		 (flycheck-error :underline (list :style 'wave :color (catppuccin-color 'red))))
+     (doom-gruvbox (secondary-selection :background "#504945"))
      (doom-flatwhite (haskell-operator-face :background "#f7f3ee"
                                             :foreground "#605a52")
                      (haskell-type-face :background "#d2ebe3"
@@ -35,18 +44,18 @@
 
 ;; ===Doom Emacs Themes===
 (use-package doom-themes
-  :demand t
-  :config
-  (cur-override-theme-load-theme 'doom-flatwhite))
+  :demand t)
+  ;; :config
+  ;; (cur-override-theme-load-theme 'doom-flatwhite))
 
 ;; ===Autothemer===
 (use-package autothemer)
 
 ;; ===Catppuccin Theme===
 (use-package catppuccin-theme
-  :after (autothemer cur-theme))
-;; :config
-;; (cur-override-theme-load-theme 'catppuccin))
+  :after (autothemer cur-theme)
+  :config
+  (cur-override-theme-load-theme 'catppuccin))
 
 ;; ===Text Scaling===
 (defhydra hydra-text-scale (:timeout 4)
