@@ -7,8 +7,8 @@
   # ===Nocturne Home Configuration===
   nocturne = {
     # themes.theme = "basic-dark";
-    # themes.theme = "catppuccin-mocha";
-    themes.theme = "flatwhite";
+    themes.theme = "catppuccin-mocha";
+    # themes.theme = "flatwhite";
     # themes.theme = "grimshaw";
     # themes.theme = "gruvbox-dark";
     # themes.theme = "gruvbox-dark-bright";
