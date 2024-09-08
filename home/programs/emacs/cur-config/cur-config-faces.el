@@ -58,12 +58,17 @@
 				  :background (if (eq catppuccin-flavor 'latte)
 						  (catppuccin-darken (catppuccin-color 'base) 12)
 						(catppuccin-lighten (catppuccin-color 'base) 17)))
-		 (cur-mode-line-meow-state :background (catppuccin-color 'surface0))
+		 (cur-mode-line-meow-state :background (catppuccin-color 'lavender)
+					   :foreground (catppuccin-color 'base))
 		 (cur-mode-line-major-mode-active :foreground (catppuccin-color 'blue) :weight 'bold)
 		 (flycheck-info :underline (list :style 'wave :color (catppuccin-color 'green)))
 		 (flycheck-warning :underline (list :style 'wave :color (catppuccin-color 'yellow)))
 		 (flycheck-error :underline (list :style 'wave :color (catppuccin-color 'red))))
-     (doom-gruvbox (secondary-selection :background "#504945"))
+     (doom-gruvbox (secondary-selection :background "#504945")
+		   (cur-mode-line-major-mode-active :foreground "#83a598"
+						    :weight 'bold))
+     (doom-oceanic-next (cur-mode-line-major-mode-active :foreground "#6699CC"
+							 :weight 'bold))
      (doom-flatwhite (haskell-operator-face :background "#f7f3ee"
                                             :foreground "#605a52")
                      (haskell-type-face :background "#d2ebe3"
