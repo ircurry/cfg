@@ -64,5 +64,21 @@ rec {
     else
       "${monitor.name},disable";
 
+  monitorAttrToStringNonDisable =
+    monitor: state:
+    if monitor.state == state then
+      let
+        resolution = "${toString monitor.width}x${toString monitor.height}";
+        refresh = "${toString monitor.refreshRate}";
+        position = "${toString monitor.x}x${toString monitor.y}";
+        scale = toString monitor.scale;
+      in
+      "${monitor.name},${resolution}@${refresh},${position},${scale}"
+    else
+      "";
+
   monitorsToHyprlandConfig = monitors: state: map (m: monitorAttrToString m state) monitors;
+
+  monitorsToHyprlandConfigNonDisable =
+    monitors: state: map (m: monitorAttrToStringNonDisable m state) monitors;
 }

@@ -33,7 +33,11 @@ let
 
   # ===Monitor Configurations===
   monitors = config.nocturne.wayland.monitors;
-  initialMonitorConfig = mylib.monitorsToHyprlandConfig monitors "undocked";
+  initialMonitorConfig = mylib.removeEmpty (
+    [ ]
+    ++ mylib.monitorsToHyprlandConfigNonDisable monitors "undocked"
+    ++ mylib.monitorsToHyprlandConfigNonDisable monitors "docked"
+  );
 in
 {
   config = lib.mkMerge [
