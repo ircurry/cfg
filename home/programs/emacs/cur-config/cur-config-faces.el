@@ -131,6 +131,7 @@
 (use-package cur-mode-line
   :custom
   (mode-line-right-align-edge 'right-fringe)
+  (cur-mode-line-exclude-narrow-inidcator '(Info-mode))
   :config
   (setq-default mode-line-end-spaces
 		'(""
