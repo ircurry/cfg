@@ -15,6 +15,7 @@ in
 {
   config = {
     home.sessionVariables = {
+      NIXOS_OZONE_WL = "1";
       NOCTURNE_CONF_DIR = home + "/cfg";
       TMUX_TMPDIR = "$XDG_RUNTIME_DIR";
       GNUPGHOME = d + "/gnupg";
