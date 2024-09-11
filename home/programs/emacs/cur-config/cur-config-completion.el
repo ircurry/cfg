@@ -39,7 +39,11 @@
          ("o" . consult-outline)
          :map search-map
          ("/" . consult-line)
-         ("?" . consult-line-multi))
+         ("?" . consult-line-multi)
+	 :map cur/register-map
+	 ("C-s" . consult-register-store)
+	 ("C-l" . consult-register-load)
+	 ("C-v" . consult-register))
   :custom
   (consult-preview-allowed-hooks '(global-font-lock-mode
                                    save-place-find-file-hook

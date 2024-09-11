@@ -285,7 +285,6 @@ _o_: other window     _F_: fit to buffer          _c_: close window
           ("C-b" . bookmark-set-no-overwrite)
           :map cur/register-map
           ("C-j" . jump-to-register)
-          ("C-s" . point-to-register)
           ("C-." . point-to-register)
           ("C-y" . copy-to-register)
           ("C-p" . insert-register)
