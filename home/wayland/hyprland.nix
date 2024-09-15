@@ -147,6 +147,8 @@ in
           };
           windowrulev2 = [
             "suppressevent maximize, class:.*"
+            "maxsize 1000 700, class:.*" # have windows be a reasonable size
+            "center 1, class:.*" # have windows centered by default
 
             # Center
             "float, class:^(center)$"
