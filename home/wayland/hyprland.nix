@@ -31,6 +31,9 @@ let
   col_background = config.nocturne.wayland.hyprland.col-background;
   col_inactive_border = config.nocturne.wayland.hyprland.col-inactive-border;
 
+  # ===Plugins===
+  inherit (config.nocturne.wayland.hyprland) plugins;
+
   # ===Monitor Configurations===
   monitors = config.nocturne.wayland.monitors;
   initialMonitorConfig = mylib.removeEmpty (
@@ -60,7 +63,8 @@ in
       # ===Actual Hyprland Config===
       wayland.windowManager.hyprland = {
         enable = true;
-        #package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+        # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+        plugins = with pkgs.hyprlandPlugins; [ ] ++ lib.optionals plugins.hyprbars [ hyprbars ];
         settings = {
           "$terminal" = "${term-cfg.exec}";
           "$editor" = "${ed-cfg.exec}";
@@ -236,6 +240,32 @@ in
               ",switch:on:Lid Switch,exec,${pkgs.dfh}/bin/hyprdock docked"
               ",switch:off:Lid Switch,exec,${pkgs.dfh}/bin/hyprdock -exclude-disable undocked"
             ];
+          plugin = lib.mkMerge [
+            (lib.mkIf plugins.hyprbars {
+              hyprbars =
+                let
+                  coltext = config.nocturne.graphical.alacritty.fg + "ff";
+                  # bar_color = config.nocturne.graphical.alacritty.bg + "d9";
+                  bar_color = config.nocturne.themes.colors.base01 + "ff";
+                  close_color = config.nocturne.themes.colors.base08;
+                  fullscreen_color = config.nocturne.themes.colors.base0A;
+                  floating_color = config.nocturne.themes.colors.base0B;
+                in
+                {
+                  bar_height = 25;
+                  bar_color = "rgba(${bar_color})";
+                  bar_text_font = "JetBrainsMono Nerd Font Bold";
+                  bar_text_size = 11;
+                  bar_precedence_over_border = true;
+                  "col.text" = "rgba(${coltext})";
+                  hyprbars-button = [
+                    "rgb(${close_color}), 20, 󰅖, hyprctl dispatch killactive"
+                    "rgb(${fullscreen_color}), 20, 󰊓, hyprctl dispatch fullscreen 2"
+                    "rgb(${floating_color}), 20, 󰍴, hyprctl dispatch togglefloating"
+                  ];
+                };
+            })
+          ];
         };
         # Devices
         extraConfig = ''
