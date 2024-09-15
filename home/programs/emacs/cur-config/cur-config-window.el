@@ -28,13 +28,16 @@
            (dedicated . t)
            (body-function . cur-window-select-fit-to-size))
           ((or (derived-mode . justl-mode)
-               "\\*eshell .*"
-               "\\*.*-eshell*"
-               "\\*.*-eat\\*"
                "justl - .*")
            (display-buffer-reuse-window
             display-buffer-at-bottom)
            (dedicated . t)
+           (window-height . 0.25))
+	  ((or "\\*eshell .*"
+               "\\*.*-eshell*"
+               "\\*.*-eat\\*")
+           (display-buffer-reuse-window
+            display-buffer-at-bottom)
            (window-height . 0.25))
           ((or (derived-mode . vterm-mode)
                "\\*vterm.*\\*"
