@@ -257,11 +257,7 @@ To create add more padding you can use the `cur-mode-line-end-space-dwim'
 (defun cur-mode-line--position ()
   "Return a propertized string with the position of point in current buffer."
   (when (mode-line-window-selected-p)
-    (propertize
-     (concat "(%p"
-	     (when column-number-mode ", %c")
-	     ")")
-     'face 'cur-mode-line-postion-active)))
+    (concat "(%p" (when column-number-mode ", %c") ")")))
 
 (defvar cur-mode-line-postion-indicator
   '(:eval (cur-mode-line--position))

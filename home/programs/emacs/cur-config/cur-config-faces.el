@@ -140,7 +140,7 @@
 		  cur-mode-line-eat-indicator
 		  (:eval (when (cur-mode-line-eat-display-p) "  "))
 		  cur-mode-line-major-mode-indicator
-		  (:eval (cur-mode-line--end-space-dwim 0))))
+		  cur-mode-line-end-padding))
   (setq-default mode-line-format
 		'("%e"
                   cur-mode-line-kmacro-indicator
