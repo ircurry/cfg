@@ -2,6 +2,7 @@
 {
   imports = [
     ./boot.nix
+    ./community-cache.nix
     ./hyprland.nix
     ./locales.nix
     ./networking.nix
