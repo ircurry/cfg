@@ -152,6 +152,7 @@ in
 
             # Title Bar
             "plugin:hyprbars:nobar, floating:0" # no bar on tiled windows
+            "plugin:hyprbars:nobar, initialTitle:^(vesktop)$" # no bar vesktop loading window
 
             # Center
             "float, class:^(center)$"
