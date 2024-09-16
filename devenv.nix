@@ -19,11 +19,11 @@ inputs.devenv.lib.mkShell {
           pkgs.sops
           pkgs.ssh-to-age
           pkgs.nil
-          pkgs.nixfmt-rfc-style
+          pkgs.nixfmt
         ];
 
         pre-commit = {
-          hooks.nixfmt = {
+          hooks.nixfmt-rfc-style = {
             enable = true;
           };
         };
