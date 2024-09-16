@@ -50,6 +50,7 @@
       youtube.enable = true;
     };
     wayland = {
+      hyprland.plugins.hyprbars = true;
       menu.name = "rofi";
       idleManager.name = null;
       uiStyle = "fancy";

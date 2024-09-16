@@ -147,8 +147,11 @@ in
           };
           windowrulev2 = [
             "suppressevent maximize, class:.*"
-            "maxsize 1000 700, class:.*" # have windows be a reasonable size
+            "maxsize 1000 650, class:.*" # have windows be a reasonable size
             "center 1, class:.*" # have windows centered by default
+
+            # Title Bar
+            "plugin:hyprbars:nobar, floating:0" # no bar on tiled windows
 
             # Center
             "float, class:^(center)$"
@@ -254,16 +257,16 @@ in
                   floating_color = config.nocturne.themes.colors.base0B;
                 in
                 {
-                  bar_height = 25;
+                  bar_height = 20;
                   bar_color = "rgba(${bar_color})";
                   bar_text_font = "JetBrainsMono Nerd Font Bold";
                   bar_text_size = 11;
                   bar_precedence_over_border = true;
                   "col.text" = "rgba(${coltext})";
                   hyprbars-button = [
-                    "rgb(${close_color}), 20, 󰅖, hyprctl dispatch killactive"
-                    "rgb(${fullscreen_color}), 20, 󰊓, hyprctl dispatch fullscreen 2"
-                    "rgb(${floating_color}), 20, 󰍴, hyprctl dispatch togglefloating"
+                    "rgb(${close_color}), 15, , hyprctl dispatch killactive"
+                    "rgb(${fullscreen_color}), 15, , hyprctl dispatch fullscreen 1"
+                    "rgb(${floating_color}), 15, , hyprctl dispatch togglefloating"
                   ];
                 };
             })
@@ -278,6 +281,8 @@ in
         '';
       };
     }
-    (lib.mkIf config.xdg.enable { xdg.configFile."dfh/monitors.json".text = builtins.toJSON monitors; })
+    (lib.mkIf config.xdg.enable {
+      xdg.configFile."dfh/monitors.json".text = builtins.toJSON monitors;
+    })
   ];
 }
