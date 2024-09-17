@@ -41,12 +41,138 @@ let
     ++ mylib.monitorsToHyprlandConfigNonDisable monitors "undocked"
     ++ mylib.monitorsToHyprlandConfigNonDisable monitors "docked"
   );
+
+  # ===Floating Script===
+  floatToggle = pkgs.writeShellApplication {
+    name = "toggle-float";
+    runtimeInputs = with pkgs; [
+      hyprland
+      jq
+    ];
+    text = ''
+      if [ -z "$1" ]; then
+        echo "No Arguments Given" 1>&2
+        exit 1
+      fi
+      CURRENT_ACTIVE_WORKSPACE="$(hyprctl -j activeworkspace | jq ".id")"
+      WINDOWS_IN_WORKSPACE="$(hyprctl clients -j | jq ".[] | select(.workspace.id==$CURRENT_ACTIVE_WORKSPACE) | .address" | sed 's/"//g')"
+      if [ "$1" = "float" ]; then
+        for i in $WINDOWS_IN_WORKSPACE; do
+          hyprctl dispatch setfloating address:"$i"
+        done
+      elif [ "$1" = "tile" ]; then
+        for i in $WINDOWS_IN_WORKSPACE; do
+          hyprctl dispatch settiled address:"$i"
+        done
+      else
+        echo "Expected one of 'tile' or 'float', got $1" 1>&2
+        exit 1
+      fi
+    '';
+  };
+
+  # ===Motion Key DWIM===
+  hjklDwim = pkgs.writeShellApplication {
+    name = "hjkl-dwim";
+    runtimeInputs = with pkgs; [
+      hyprland
+      jq
+    ];
+    text = ''
+      FLOATING="$(hyprctl activewindow -j | jq ".floating" | sed 's/"//g')"
+      if [ -z "$1" ]; then
+        echo "No Arguments Given" 1>&2
+        exit 1
+      fi
+      case "$1" in
+        h) if [ "$FLOATING" =  "true" ]; then
+             hyprctl dispatch "moveactive -25 0"
+           else
+             hyprctl dispatch "layoutmsg swapprev"
+           fi;;
+        j) if [ "$FLOATING" = "true" ]; then
+             hyprctl dispatch "moveactive 0 25"
+           else
+             hyprctl dispatch "layoutmsg rollnext"
+           fi;;
+        k) if [ "$FLOATING" = "true" ]; then
+             hyprctl dispatch "moveactive 0 -25"
+           else
+             hyprctl dispatch "layoutmsg rollprev"
+           fi;;
+        l) if [ "$FLOATING" = "true" ]; then
+             hyprctl dispatch "moveactive 25 0"
+           else
+             hyprctl dispatch "layoutmsg swapprev"
+           fi;;
+        H) if [ "$FLOATING" =  "true" ]; then
+             hyprctl dispatch "resizeactive -25 0"
+           else
+             hyprctl dispatch "layoutmsg mfact -0.1"
+           fi;;
+        J) if [ "$FLOATING" = "true" ]; then
+             hyprctl dispatch "resizeactive 0 25"
+           else
+             hyprctl dispatch "layoutmsg cyclenext"
+           fi;;
+        K) if [ "$FLOATING" = "true" ]; then
+             hyprctl dispatch "resizeactive 0 -25"
+           else
+             hyprctl dispatch "layoutmsg cyclenext"
+           fi;;
+        L) if [ "$FLOATING" = "true" ]; then
+             hyprctl dispatch "resizeactive 25 0"
+           else
+             hyprctl dispatch "layoutmsg mfact 0.1"
+           fi;;
+        *) echo "Expected one of 'h', 'j', 'k', or 'l', got $1" 1>&2 && exit 1;;
+      esac
+    '';
+  };
+
+  # ===Toggle Animations===
+  toggleAnimations = pkgs.writeShellApplication {
+    name = "toggle-animations";
+    runtimeInputs = with pkgs; [
+      hyprland
+      jq
+    ];
+    text = ''
+      ANIMATIONS="$(hyprctl -j getoption animations:enabled | jq ".int" | sed 's/"//g')"
+      if [ "$ANIMATIONS" = "1" ]; then
+        hyprctl keyword animations:enabled false
+      else
+        hyprctl keyword animations:enabled true
+      fi
+    '';
+  };
+  # ===Floating Script===
+  centerAllFloating = pkgs.writeShellApplication {
+    name = "center-all-float";
+    runtimeInputs = with pkgs; [
+      hyprland
+      jq
+    ];
+    text = ''
+      CURRENT_ACTIVE_WORKSPACE="$(hyprctl -j activeworkspace | jq ".id")"
+      WINDOWS_IN_WORKSPACE="$(hyprctl clients -j | jq ".[] | select(.workspace.id==$CURRENT_ACTIVE_WORKSPACE) | select(.floating==true) | .address" | sed 's/"//g')"
+      ORIGINAL_WINDOW="$(hyprctl activewindow -j | jq ".address" | sed 's/"//g')"
+      for i in $WINDOWS_IN_WORKSPACE; do
+        hyprctl dispatch focuswindow address:"$i"
+        hyprctl dispatch centerwindow 1
+      done
+      hyprctl dispatch focuswindow address:"$ORIGINAL_WINDOW"
+    '';
+  };
 in
 {
   config = lib.mkMerge [
     {
       # ===Packages Needed===
       home.packages = [
+        hjklDwim
+        floatToggle
+        centerAllFloating
         pkgs.dfh
         pkgs.killall
         # Audio Control
@@ -147,7 +273,7 @@ in
           };
           windowrulev2 = [
             "suppressevent maximize, class:.*"
-            "maxsize 1000 650, class:.*" # have windows be a reasonable size
+            "size 80% 80%, class:.*" # have windows be a reasonable size
             "center 1, class:.*" # have windows centered by default
 
             # Title Bar
@@ -183,27 +309,29 @@ in
               "$MOD, E, exec, $editor"
               "$MOD, R, exec, $menu-run"
               "$MOD, P, exec, $menu-drun"
+              "$MOD_SHIFT, A, exec, ${lib.getExe toggleAnimations}"
               # "$MOD, code:61, exec, $menu-window"
               "$MOD, B, exec, killall '.waybar-wrapped' || waybar"
-              "$MOD_SHIFT, C, killactive, "
-              "$MOD, C, killactive, "
-              "$MOD_SHIFT, Q, exit,"
+              "$MOD, D, killactive, "
+              "$MOD_CTRL, Q, exit,"
               ## Logout (semi-colon)
               "$MOD_CTRL, code:47, exec, ${config.nocturne.wayland.menu.exec-logout}"
               "$MOD, code:47, exec, ${config.nocturne.wayland.menu.exec-logout}"
 
               # Window Manipulation
-              "$MOD, H, layoutmsg, swapprev"
-              "$MOD, L, layoutmsg, swapnext"
-              "$MOD, K, layoutmsg, cycleprev"
-              "$MOD, J, layoutmsg, cyclenext"
               "$MOD, Return, layoutmsg, swapwithmaster"
-              "$MOD, O, layoutmsg, orientationcycle top left center"
+              "$MOD, TAB, cyclenext"
+              "$MOD, TAB, bringactivetotop"
+              "$MOD, O, cyclenext"
+              "$MOD, O, bringactivetotop"
+              "$MOD, N, layoutmsg, orientationcycle top left center"
               "$MOD, F, fullscreen"
               "$MOD, M, fullscreen, 1"
               "$MOD, W, togglefloating"
-              "$MOD, TAB, cyclenext"
-              "$MOD, TAB, bringactivetotop"
+              "$MOD, Q, exec, ${lib.getExe floatToggle} float"
+              "$MOD_SHIFT, Q, exec, ${lib.getExe floatToggle} tile"
+              "$MOD, C, exec, hyprctl dispatch centerwindow 1"
+              "$MOD_SHIFT, C, exec, ${lib.getExe centerAllFloating}"
 
               # Workspace Manipulation
               "$MOD, 1, workspace, 1"
@@ -227,6 +355,16 @@ in
             ];
 
           binde = [
+            # Window Management
+            "$MOD, H, exec, ${lib.getExe hjklDwim} h"
+            "$MOD, J, exec, ${lib.getExe hjklDwim} j"
+            "$MOD, K, exec, ${lib.getExe hjklDwim} k"
+            "$MOD, L, exec, ${lib.getExe hjklDwim} l"
+            "$MOD_SHIFT, H, exec, ${lib.getExe hjklDwim} H"
+            "$MOD_SHIFT, J, exec, ${lib.getExe hjklDwim} J"
+            "$MOD_SHIFT, K, exec, ${lib.getExe hjklDwim} K"
+            "$MOD_SHIFT, L, exec, ${lib.getExe hjklDwim} L"
+
             # Volume and Brightness
             ", XF86AudioLowerVolume, exec, ${voldown}"
             ", XF86AudioRaiseVolume, exec, ${volup}"
