@@ -53,7 +53,6 @@
       hyprland.plugins.hyprbars = true;
       menu.name = "rofi";
       idleManager.name = null;
-      uiStyle = "fancy";
       monitors = [
         {
           name = "eDP-1";

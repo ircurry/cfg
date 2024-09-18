@@ -131,13 +131,6 @@
       exec-start = lib.mkOption { type = lib.types.nullOr lib.types.str; };
       exec-center = lib.mkOption { type = lib.types.str; };
     };
-    uiStyle = lib.mkOption {
-      type = lib.types.enum [
-        "simple"
-        "fancy"
-      ];
-      default = "simple";
-    };
 
     # ===Program Options===
     dunst = {
