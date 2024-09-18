@@ -30,6 +30,13 @@
       (call-interactively #'meow-end-kmacro))
      (t
       (call-interactively #'meow-start-kmacro))))
+  (defun cur/shell-filter-active-region ()
+    (interactive)
+    (if (region-active-p)
+	(shell-command-on-region (region-beginning) (region-end)
+				 (read-shell-command "Filter Region with: ")
+				 1 1)
+      (user-error "The region is not currently active")))
   (defhydra cur/window (:hint nil)
     "
 ^Movement^            ^Splitting and Balancing^   ^Manipulation^       ^Resizing^
@@ -134,7 +141,7 @@ _o_: other window     _F_: fit to buffer          _c_: close window
     (meow-normal-define-key
      ;; ===Top Row===
      '("1" . meow-expand-1)
-     ;; '("!" . )
+     '("!" . cur/shell-filter-active-region)
      '("2" . meow-expand-2)
      ;; '("@" . )
      '("3" . meow-expand-3)
