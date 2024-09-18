@@ -484,7 +484,7 @@ _o_: other window     _F_: fit to buffer          _c_: close window
      '("o" . meow-block)
      '("O" . meow-to-block)
      '("p" . meow-yank)
-     '("P" . meow-clipboard-yank)
+     '("P" . meow-yank-pop)
      '("-" . negative-argument)
      ;; '("_" . )
 
