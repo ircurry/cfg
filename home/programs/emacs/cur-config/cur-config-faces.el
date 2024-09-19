@@ -6,8 +6,10 @@
 	  ("C-s" . fontaine-set-preset))
   :custom
   (fontaine-presets '((regular)
-		      (small
+		      (extra-small
 		       :default-height 100)
+		      (small
+		       :default-height 107)
 		      (large
 		       :default-height 140)
 		      (t
