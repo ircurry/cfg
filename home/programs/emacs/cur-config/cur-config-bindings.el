@@ -231,7 +231,7 @@ _o_: other window     _F_: fit to buffer          _c_: close window
      '("<" . meow-beginning-of-thing)
      '("." . meow-inner-of-thing)
      '(">" . meow-end-of-thing)
-     (cons "/" search-map)
+     ;; '("/" . ) ; I bind this later to `consult-line'
      '("?" . meow-page-down)
      '("'"  . embark-act)
      '("\"" . embark-dwim)))

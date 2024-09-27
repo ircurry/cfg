@@ -57,6 +57,12 @@
         xref-show-definitions-function #'consult-xref))
 
 (use-package consult
+  :after (meow)
+  :config
+  (meow-normal-define-key
+   '("/" . consult-line)))
+
+(use-package consult
   :after (org)
   :bind ( :map org-mode-map
           ([remap consult-imenu] . consult-org-heading)))

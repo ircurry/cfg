@@ -539,7 +539,7 @@ _o_: other window     _F_: fit to buffer          _c_: close window
      '("<" . meow-beginning-of-thing)
      '("." . meow-inner-of-thing)
      '(">" . meow-end-of-thing)
-     (cons "/" search-map)
+     ;; '("/" . ) ; I bind this later to `consult-line'
      '("?" . meow-page-down)
      '("'"  . embark-act)
      '("\"" . embark-dwim)))
@@ -1285,6 +1285,12 @@ consult
   :config
   (setq xref-show-xrefs-function       #'consult-xref
         xref-show-definitions-function #'consult-xref))
+
+(use-package consult
+  :after (meow)
+  :config
+  (meow-normal-define-key
+   '("/" . consult-line)))
 
 (use-package consult
   :after (org)
