@@ -2,6 +2,10 @@
 (use-package hydra
   :demand t)
 
+(use-package avy
+  :bind ( :map goto-map
+	  ("a" . avy-goto-char-2)))
+
 ;; ===Meow Setup===
 (use-package meow
   :after (hydra)

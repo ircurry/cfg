@@ -286,6 +286,18 @@ hydra
   :demand t)
 #+end_src
 
+*** Avy
+
+#+begin_src text :tangle ./packages.txt :padline no
+avy
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package avy
+  :bind ( :map goto-map
+	  ("a" . avy-goto-char-2)))
+#+end_src
+
 *** Meow
 
 This is the meat and potatoes of my keybindings. First I have several keymaps: sub-leader, projectile, toggle, and alignment. Sub leader is for more miscellaneous one-off commands, such as ~ibuffer~. Projectile is for, you guessed it, projectile related commands. Toggle is for quick, on the fly, changing of settings, such as the font size. The alignment is currently unused as of now but will have commands to change how text is currently being viewed without actually modifying the text of the buffer, think ~recenter-top-bottom~ like commands and more.

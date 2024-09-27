@@ -1,4 +1,5 @@
 hydra
+avy
 meow
 which-key
 helpful
