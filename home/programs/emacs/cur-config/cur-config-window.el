@@ -43,6 +43,8 @@
                "\\*vterm.*\\*"
                "\\*.*-vterm\\*")
            (display-buffer-reuse-mode-window
-            display-buffer-same-window)))))
+            display-buffer-same-window))
+	  (".*"
+	   (display-buffer-same-window)))))
 
 (provide 'cur-config-window)

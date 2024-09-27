@@ -1449,7 +1449,9 @@ These are my settings for ~display-buffer-alist~ so windows just Do What I Mean.
                "\\*vterm.*\\*"
                "\\*.*-vterm\\*")
            (display-buffer-reuse-mode-window
-            display-buffer-same-window)))))
+            display-buffer-same-window))
+	  (".*"
+	   (display-buffer-same-window)))))
 
 (provide 'cur-config-window)
 #+end_src
