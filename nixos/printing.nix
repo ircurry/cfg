@@ -3,7 +3,7 @@
   config = {
     # Enable CUPS to print documents.
     services.printing = {
-      enable = true;
+      enable = false;
       drivers = with pkgs; [
         gutenprint
         hplip
@@ -11,7 +11,7 @@
       ];
     };
     services.avahi = {
-      enable = true;
+      enable = false;
       nssmdns4 = true;
       publish = {
         enable = true;
