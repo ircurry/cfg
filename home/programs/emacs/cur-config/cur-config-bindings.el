@@ -1,3 +1,9 @@
+;; ===Repeat Mode===
+(use-package emacs
+  :demand t
+  :config
+  (repeat-mode 1))
+
 ;; ===Hydra===
 (use-package hydra
   :demand t)

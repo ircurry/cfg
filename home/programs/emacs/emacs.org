@@ -272,6 +272,18 @@ I like having absolute line numbers, especially since the meow number selection 
 
 I use [[https:github.com/meow-edit/meow][meow]], a modal editing layer designed to be integrate well into emacs. It's very easy to hack on and extend and just feels more emacsy. I have had almost no issues with this, compared to evil which just felt sluggish and was hard to customize. The object-verb syntax is also really great and I prefer it to the verb-object of vim/nvim.
 
+*** Repeat mode
+
+One of the most basic ways to make using Emacs keybindings a breeze.
+
+#+begin_src emacs-lisp
+;; ===Repeat Mode===
+(use-package emacs
+  :demand t
+  :config
+  (repeat-mode 1))
+#+end_src
+
 *** Hydra 
 
 I use hydras for repeat keybindings. I plan to switch to use the built in repeat keymap more in the future but they are very helpful for creating something almost like a mini meow state, just for one particular task.
