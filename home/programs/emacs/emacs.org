@@ -406,10 +406,6 @@ _o_: other window     _F_: fit to buffer          _c_: close window
   (defun cur/reverse-other-window ()
     (interactive)
     (other-window -1))
-  (defhydra cur/other-window-hydra (:hint nil)
-    "o: other window | O: reverse other window"
-    ("o" other-window)
-    ("O" cur/reverse-other-window))
   (defun meow-setup ()
     (meow-motion-overwrite-define-key
      '("j" . meow-next)
@@ -438,7 +434,7 @@ _o_: other window     _F_: fit to buffer          _c_: close window
      ;; '("y" . )
      '("u" . "C-u")   ; universal argument
      ;; '("i" . )
-     '("o" . cur/other-window-hydra/other-window) ; other window
+     '("o" . other-window) ; other window
      (cons "p" project-prefix-map)
      ;; '("-" . )
 
