@@ -57,6 +57,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.devenv.follows = "devenv";
     };
+
+    nocturne-tools = {
+      url = "github:ircurry/nocturne-tools";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.devenv.follows = "devenv";
+    };
   };
 
   outputs =

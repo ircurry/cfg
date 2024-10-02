@@ -355,6 +355,24 @@
         "type": "github"
       }
     },
+    "flake-parts_3": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib_2"
+      },
+      "locked": {
+        "lastModified": 1726153070,
+        "narHash": "sha256-HO4zgY0ekfwO5bX0QH/3kJ/h4KvUDFZg8YpkNwIbg1U=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "bcef6817a8b2aa20a5a6dbb19b43e63c5bf8619a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -826,6 +844,18 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/5daf0514482af3f97abaefc78a6606365c9108e2.tar.gz"
       }
     },
+    "nixpkgs-lib_2": {
+      "locked": {
+        "lastModified": 1725233747,
+        "narHash": "sha256-Ss8QWLXdr2JCBPcYChJhz4xJm+h/xjl4G0c0XlP6a74=",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/356624c12086a18f2ea2825fed34523d60ccc4e3.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/356624c12086a18f2ea2825fed34523d60ccc4e3.tar.gz"
+      }
+    },
     "nixpkgs-regression": {
       "locked": {
         "lastModified": 1643052045,
@@ -1018,6 +1048,30 @@
         "type": "github"
       }
     },
+    "nocturne-tools": {
+      "inputs": {
+        "devenv": [
+          "devenv"
+        ],
+        "flake-parts": "flake-parts_3",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1727897207,
+        "narHash": "sha256-TM2QUOwO0JtM1iKt/4Tcg+uWgS9Ny6jiLRlyL2mGCPs=",
+        "owner": "ircurry",
+        "repo": "nocturne-tools",
+        "rev": "6079df05ff1699c449b02985bc010dc99a279fe7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ircurry",
+        "repo": "nocturne-tools",
+        "type": "github"
+      }
+    },
     "poetry2nix": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -1141,6 +1195,7 @@
         "nh": "nh",
         "nixpkgs": "nixpkgs_5",
         "nixpkgs-ueberzugpp": "nixpkgs-ueberzugpp",
+        "nocturne-tools": "nocturne-tools",
         "sops-nix": "sops-nix"
       }
     },

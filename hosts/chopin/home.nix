@@ -53,26 +53,68 @@
       hyprland.plugins.hyprbars = true;
       menu.name = "rofi";
       idleManager.name = null;
-      monitors = [
+      monitor-profiles = [
         {
-          name = "eDP-1";
-          width = 2256;
-          height = 1504;
-          refreshRate = 60;
-          x = 0;
-          y = 0;
-          scale = 2;
-          state = "undocked";
+          name = "undocked";
+          monitors = [
+            {
+              name = "eDP-1";
+              resolution = {
+                width = 2256;
+                height = 1504;
+                refresh_rate = 60;
+              };
+              position = {
+                x = 0;
+                y = 0;
+              };
+              scale = 2;
+              enabled = true;
+            }
+            {
+              name = "DP-2";
+              resolution = {
+                width = 1920;
+                height = 1080;
+                refresh_rate = 60;
+              };
+              position = {
+                x = 0;
+                y = 1504;
+              };
+              scale = 1;
+              enabled = true;
+            }
+            {
+              enabled = true;
+            }
+          ];
         }
         {
-          name = "DP-2";
-          width = 1920;
-          height = 1080;
-          refreshRate = 60;
-          x = 0;
-          y = 0;
-          scale = 1;
-          state = "docked";
+          name = "docked";
+          monitors = [
+            {
+              name = "eDP-1";
+              enabled = false;
+            }
+            {
+              name = "DP-2";
+              resolution = {
+                width = 1920;
+                height = 1080;
+                refresh_rate = 60;
+              };
+              position = {
+                x = 2255;
+                y = 0;
+              };
+              scale = 1;
+              enabled = true;
+            }
+            {
+              enabled = true;
+            }
+          ];
         }
       ];
     };

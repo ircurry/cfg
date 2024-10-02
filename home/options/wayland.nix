@@ -77,22 +77,67 @@
       exec-dmenu = lib.mkOption { type = lib.types.str; };
       exec-logout = lib.mkOption { type = lib.types.str; };
     };
-    monitors = lib.mkOption {
-      type = lib.types.listOf (
-        lib.types.submodule {
+    monitor-profiles =
+      with lib.types;
+      let
+        inherit (lib) mkOption;
+        resolution = mkOption {
+          default = null;
+          type = nullOr (submodule {
+            options = {
+              width = mkOption { type = ints.u32; };
+              height = mkOption { type = ints.u32; };
+              refresh_rate = mkOption { type = ints.positive; };
+            };
+          });
+        };
+        position = mkOption {
+          default = null;
+          type = nullOr (submodule {
+            options = {
+              x = mkOption { type = int; };
+              y = mkOption { type = int; };
+            };
+          });
+        };
+        monitors = mkOption {
+          type = listOf (submodule {
+            options = {
+              name = mkOption {
+                type = nullOr str;
+                default = null;
+              };
+              inherit resolution position;
+              scale = mkOption {
+                type = nullOr (numbers.between 1 256);
+                default = null;
+              };
+              enabled = mkOption {
+                type = bool;
+                default = true;
+              };
+            };
+          });
+        };
+      in
+      mkOption {
+        type = listOf (submodule {
           options = {
-            name = lib.mkOption { type = lib.types.str; };
-            width = lib.mkOption { type = lib.types.int; };
-            height = lib.mkOption { type = lib.types.int; };
-            refreshRate = lib.mkOption { type = lib.types.int; };
-            x = lib.mkOption { type = lib.types.int; };
-            y = lib.mkOption { type = lib.types.int; };
-            scale = lib.mkOption { type = lib.types.int; };
-            state = lib.mkOption { type = lib.types.str; };
+            name = mkOption { type = str; };
+            inherit monitors;
           };
-        }
-      );
-    };
+        });
+        default = [
+          {
+            name = "default";
+            monitors = [
+              {
+                enabled = true;
+              }
+            ];
+          }
+        ];
+      };
     notification = {
       daemon = lib.mkOption {
         type = lib.types.enum [

@@ -51,34 +51,36 @@ rec {
         pkgs.writeShellApplication (value // { inherit name; })
     ) shellPkgs;
 
-  monitorAttrToString =
-    monitor: state:
-    if monitor.state == state then
-      let
-        resolution = "${toString monitor.width}x${toString monitor.height}";
-        refresh = "${toString monitor.refreshRate}";
-        position = "${toString monitor.x}x${toString monitor.y}";
-        scale = toString monitor.scale;
-      in
-      "${monitor.name},${resolution}@${refresh},${position},${scale}"
-    else
-      "${monitor.name},disable";
+  hyprlandMonitorsToString =
+    monitors:
+    let
+      nameToString = name: if name == null then "" else "${name}";
+      resolutionToString =
+        res:
+        if res == null then
+          "prefered"
+        else
+          "${toString res.width}x${toString res.height}@${toString res.refresh_rate}";
+      positionToString = pos: if pos == null then "auto" else "${toString pos.x}x${toString pos.y}";
+      scaleToString = scale: if scale == null then "auto" else "${toString scale}";
+      mapFn =
+        monitor:
+        if monitor.enabled then
+          "${nameToString monitor.name},${resolutionToString monitor.resolution},${positionToString monitor.position},${scaleToString monitor.scale}"
+        else
+          "${nameToString monitor.name},disabled";
+    in
+    map mapFn monitors;
 
-  monitorAttrToStringNonDisable =
-    monitor: state:
-    if monitor.state == state then
-      let
-        resolution = "${toString monitor.width}x${toString monitor.height}";
-        refresh = "${toString monitor.refreshRate}";
-        position = "${toString monitor.x}x${toString monitor.y}";
-        scale = toString monitor.scale;
-      in
-      "${monitor.name},${resolution}@${refresh},${position},${scale}"
-    else
-      "";
-
-  monitorsToHyprlandConfig = monitors: state: map (m: monitorAttrToString m state) monitors;
-
-  monitorsToHyprlandConfigNonDisable =
-    monitors: state: map (m: monitorAttrToStringNonDisable m state) monitors;
+  hyprlandDefaultProfile =
+    defaultProfile: monitorProfiles:
+    let
+      profilesWithDefaultName = builtins.filter (x: x != { }) (
+        lib.map (x: if defaultProfile == x.name then x else { }) monitorProfiles
+      );
+      profile =
+        assert (builtins.length profilesWithDefaultName) == 1;
+        builtins.head profilesWithDefaultName;
+    in
+    hyprlandMonitorsToString profile.monitors;
 }

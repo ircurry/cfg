@@ -35,12 +35,7 @@ let
   inherit (config.nocturne.wayland.hyprland) plugins;
 
   # ===Monitor Configurations===
-  monitors = config.nocturne.wayland.monitors;
-  initialMonitorConfig = mylib.removeEmpty (
-    [ ]
-    ++ mylib.monitorsToHyprlandConfigNonDisable monitors "undocked"
-    ++ mylib.monitorsToHyprlandConfigNonDisable monitors "docked"
-  );
+  monitorConfig = mylib.hyprlandDefaultProfile "undocked" config.nocturne.wayland.monitor-profiles;
 
   # ===Floating Script===
   floatToggle = pkgs.writeShellApplication {
@@ -173,7 +168,7 @@ in
         hjklDwim
         floatToggle
         centerAllFloating
-        pkgs.dfh
+        pkgs.nocturne-tools
         pkgs.killall
         # Audio Control
         pkgs.pavucontrol
@@ -201,7 +196,7 @@ in
           "$MOD" = "SUPER";
 
           env = [ "XCURSOR_SIZE,24" ];
-          monitor = initialMonitorConfig ++ [ ",preferred,auto,auto" ];
+          monitor = monitorConfig;
           exec-once =
             [
               "waybar"
@@ -381,8 +376,8 @@ in
             [ ]
             # Dock when closing Laptop lid
             ++ lib.optionals (isLaptop == true) [
-              ",switch:on:Lid Switch,exec,${pkgs.dfh}/bin/hyprdock docked"
-              ",switch:off:Lid Switch,exec,${pkgs.dfh}/bin/hyprdock -exclude-disable undocked"
+              ",switch:on:Lid Switch,exec,${pkgs.nocturne-tools}/bin/hyprdock docked"
+              ",switch:off:Lid Switch,exec,${pkgs.nocturne-tools}/bin/hyprdock undocked"
             ];
           plugin = lib.mkMerge [
             (lib.mkIf plugins.hyprbars {
@@ -420,8 +415,5 @@ in
         '';
       };
     }
-    (lib.mkIf config.xdg.enable {
-      xdg.configFile."dfh/monitors.json".text = builtins.toJSON monitors;
-    })
   ];
 }

@@ -6,6 +6,7 @@
     ./grim-slurp.nix
     ./hyprland.nix
     ./mako.nix
+    ./monitors.nix
     ./rofi-logout.nix
     ./rofi.nix
     ./swayidle.nix
