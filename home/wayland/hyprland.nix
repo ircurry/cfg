@@ -103,7 +103,7 @@ let
         H) if [ "$FLOATING" =  "true" ]; then
              hyprctl dispatch "resizeactive -25 0"
            else
-             hyprctl dispatch "layoutmsg mfact -0.1"
+             hyprctl dispatch "layoutmsg mfact -0.01"
            fi;;
         J) if [ "$FLOATING" = "true" ]; then
              hyprctl dispatch "resizeactive 0 25"
@@ -118,7 +118,7 @@ let
         L) if [ "$FLOATING" = "true" ]; then
              hyprctl dispatch "resizeactive 25 0"
            else
-             hyprctl dispatch "layoutmsg mfact 0.1"
+             hyprctl dispatch "layoutmsg mfact 0.01"
            fi;;
         *) echo "Expected one of 'h', 'j', 'k', or 'l', got $1" 1>&2 && exit 1;;
       esac
