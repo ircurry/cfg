@@ -185,7 +185,7 @@ in
         floatToggle
         centerAllFloating
         monitorCheck
-        pkgs.nocturne-tools
+        pkgs.dfh
         pkgs.killall
         # Audio Control
         pkgs.pavucontrol
@@ -393,8 +393,8 @@ in
             [ ]
             # Dock when closing Laptop lid
             ++ lib.optionals (isLaptop == true) [
-              ",switch:on:Lid Switch,exec,${lib.getExe monitorCheck} DP-2 && ${pkgs.nocturne-tools}/bin/hyprdock docked"
-              ",switch:off:Lid Switch,exec,${pkgs.nocturne-tools}/bin/hyprdock undocked"
+              ",switch:on:Lid Switch,exec,${lib.getExe monitorCheck} DP-2 && ${pkgs.dfh}/bin/hyprdock docked"
+              ",switch:off:Lid Switch,exec,${pkgs.dfh}/bin/hyprdock undocked"
             ];
           plugin = lib.mkMerge [
             (lib.mkIf plugins.hyprbars {

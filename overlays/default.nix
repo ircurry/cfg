@@ -19,8 +19,8 @@
           }
         );
       })
-      # (_: prev: { dfh = inputs.dfh.packages.${pkgs.system}.dfh; })
-      (_: prev: { nocturne-tools = inputs.nocturne-tools.packages.${pkgs.system}.default; })
+      (_: prev: { dfh = inputs.dfh.packages.${pkgs.system}.dfh; })
+      # (_: prev: { nocturne-tools = inputs.nocturne-tools.packages.${pkgs.system}.default; })
     ];
   };
 }
