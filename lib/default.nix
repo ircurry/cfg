@@ -83,4 +83,25 @@ rec {
         builtins.head profilesWithDefaultName;
     in
     hyprlandMonitorsToString profile.monitors;
+
+  monitorsFilteredNames =
+    profileName: monitorProfiles: filterFunction:
+    let
+      profilesWithDefaultName = builtins.filter (x: x != { }) (
+        lib.map (x: if profileName == x.name then x else { }) monitorProfiles
+      );
+      profile =
+        assert (builtins.length profilesWithDefaultName) == 1;
+        builtins.head profilesWithDefaultName;
+    in
+    builtins.filter (x: filterFunction x && builtins.isString x.name) profile.monitors;
+
+  monitorEnabledNames =
+    profileName: monitorProfiles: monitorsFilteredNames profileName monitorProfiles (x: x.enabled);
+
+  monitorDisabledNames =
+    profileName: monitorProfiles: monitorsFilteredNames profileName monitorProfiles (x: !x.enabled);
+
+  monitorNames =
+    profileName: monitorProfiles: monitorsFilteredNames profileName monitorProfiles (_: true);
 }
