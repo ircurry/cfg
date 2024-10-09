@@ -193,11 +193,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1728501070,
-        "narHash": "sha256-iK1a4eLzNNKvfOlolD8PAm6IReXLQSg+kgazFRta4Ok=",
+        "lastModified": 1728503823,
+        "narHash": "sha256-1ueXxH+ClSoQeovwMOYy8+2Eru6djCh2L5h04Qlb/jg=",
         "owner": "ircurry",
         "repo": "dfh",
-        "rev": "4de02d3034c4d47bf6a5fb7815025b8b78fd8d7f",
+        "rev": "cd5cca29c6b3d9294c7bda384d1bc106b84fc6c6",
         "type": "github"
       },
       "original": {

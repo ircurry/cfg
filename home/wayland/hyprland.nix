@@ -37,19 +37,17 @@ let
   # ===Monitor Configurations===
   monitorConfig = mylib.hyprlandDefaultProfile "undocked" config.nocturne.wayland.monitor-profiles;
 
-  # ===Monitor Checking Script===
-  monitorCheck = pkgs.writeShellApplication {
-    name = "monitor-check";
+  # ===Checked Hyprdock===
+  checkedHyprdock = pkgs.writeShellApplication {
+    name = "checked-hyprdock";
     runtimeInputs = with pkgs; [
       hyprland
-      jq
+      dfh
     ];
     text = ''
-      CONNECTED_MONITOR="$(hyprctl monitors -j | jq '[(.[]."name")]' | jq "any(. == \"$1\")")"
-      if [[ "$CONNECTED_MONITOR" != "true" ]]; then
-        exit 1
+      if hyprdock -a "$1" | monchk --; then
+          hyprdock "$1"
       fi
-      exit 0
     '';
   };
 
@@ -184,7 +182,7 @@ in
         hjklDwim
         floatToggle
         centerAllFloating
-        monitorCheck
+        checkedHyprdock
         pkgs.dfh
         pkgs.killall
         # Audio Control
@@ -393,7 +391,7 @@ in
             [ ]
             # Dock when closing Laptop lid
             ++ lib.optionals (isLaptop == true) [
-              ",switch:on:Lid Switch,exec,${lib.getExe monitorCheck} DP-2 && ${pkgs.dfh}/bin/hyprdock docked"
+              ",switch:on:Lid Switch,exec,${lib.getExe checkedHyprdock} docked"
               ",switch:off:Lid Switch,exec,${pkgs.dfh}/bin/hyprdock undocked"
             ];
           plugin = lib.mkMerge [
