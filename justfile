@@ -1,6 +1,5 @@
 nixos-config := 'chopin'
 rb-action := 'switch'
-input := 'nixpkgs'
 # Eat, compile, (ansi)term, and comint programs do not work with nom unfortunately
 nom := if env_var_or_default('INSIDE_EMACS', "") =~ ".*,(eat|comint|compile|term)(:.*)?" { "--no-nom" } else { "" }
 
@@ -13,7 +12,7 @@ rb:
 update:
 	nix flake update
 
-input:
+input input:
 	nix flake lock --update-input {{ input }}
 
 gc:
