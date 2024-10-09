@@ -105,7 +105,7 @@
                 refresh_rate = 60;
               };
               position = {
-                x = 2255;
+                x = 0;
                 y = 0;
               };
               scale = 1;
