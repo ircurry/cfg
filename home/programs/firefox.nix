@@ -177,6 +177,7 @@ in
             ublock-origin
             libredirect
             multi-account-containers
+            tree-style-tab
           ];
         };
 
@@ -243,6 +244,7 @@ in
             libredirect
             multi-account-containers
             user-agent-string-switcher
+            tree-style-tab
           ];
         };
         profiles.games = {
