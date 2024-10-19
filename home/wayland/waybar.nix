@@ -287,6 +287,7 @@
             format = "󱄅";
             tooltip = false;
             on-click = "sleep 0.1 && ${config.nocturne.wayland.menu.exec}";
+            on-click-right = "sleep 0.1 && ${config.nocturne.wayland.menu.exec-run}";
           };
           margin-top = 5;
           "hyprland/workspaces" = {
