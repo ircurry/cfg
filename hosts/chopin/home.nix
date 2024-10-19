@@ -82,7 +82,7 @@
                 x = 0;
                 y = 1504;
               };
-              scale = 1;
+              scale = 1.00001;
               enabled = true;
             }
             {
