@@ -50,7 +50,7 @@
       youtube.enable = true;
     };
     wayland = {
-      hyprland.plugins.hyprbars = true;
+      hyprland.plugins.hyprbars = false;
       menu.name = "rofi";
       idleManager.name = null;
       monitor-profiles = [
