@@ -2781,6 +2781,17 @@ Set `eshell-prompt-function' to this function to enable."
      (propertize "]"                   'face `(:weight bold :foreground ,red))
      (propertize "λ "                  'face `(:weight bold :foreground ,white)))))
 
+(defun eshell/i (fn)
+  "Call FN interactively.
+FN should be a string."
+  (let ((user-fn (intern-soft fn)))
+    (cond ((and user-fn (commandp user-fn))
+	   (call-interactively user-fn))
+	  (user-fn
+	   (user-error "Function is not an interactive function"))
+	  (t
+	   (user-error "There was no function with that name")))))
+
 (defun eshell/ff (&optional file)
   "Eshell alias to open FILE.
 Will call `find-file' interactively if no file is specified."
