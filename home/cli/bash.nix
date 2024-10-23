@@ -17,6 +17,7 @@
                   && [[ -f ''${EMACS_VTERM_PATH}/etc/emacs-vterm-bash.sh ]]; then
         	        source ''${EMACS_VTERM_PATH}/etc/emacs-vterm-bash.sh
                 fi
+                eval "$(${pkgs.zoxide}/bin/zoxide init bash)"
       '';
       profileExtra = config.nocturne.wayland.compositor.profileExtra;
     };
