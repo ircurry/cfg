@@ -18,7 +18,6 @@ inputs.devenv.lib.mkShell {
           pkgs.just
           pkgs.sops
           pkgs.ssh-to-age
-          pkgs.nil
           pkgs.nixfmt
         ];
 
@@ -29,6 +28,7 @@ inputs.devenv.lib.mkShell {
         };
 
         languages.nix.enable = true;
+        languages.nix.lsp.package = pkgs.nixd;
         scripts = {
           fl.exec = ''
             nix-diff() {

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   config = {
     documentation = {
@@ -14,5 +14,6 @@
         "flakes"
       ];
     };
+    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
   };
 }
