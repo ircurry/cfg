@@ -30,6 +30,15 @@
   (eat-enable-directory-tracking t))
 
 (use-package eat
+  :after meow
+  :hook
+  (eat--char-mode . (lambda (&rest _)
+			    (if eat--char-mode
+				(meow-mode -1)
+			      (unless meow-mode
+				(meow-mode +1))))))
+
+(use-package eat
   :after eshell
   :custom
   (eshell-visual-commands nil "nil because using `eat-eshell-mode'")
