@@ -40,6 +40,7 @@
 
 (use-package eat
   :after eshell
+  :hook (eat-eshell-exec . (lambda (&rest _) (eat-eshell-emacs-mode)))
   :custom
   (eshell-visual-commands nil "nil because using `eat-eshell-mode'")
   (eshell-visual-subcommands nil "nil because using `eat-eshell-mode'")
