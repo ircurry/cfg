@@ -141,6 +141,8 @@
 		  (:eval (when (cur-mode-line-flycheck-display-p) "  "))
 		  cur-mode-line-eat-indicator
 		  (:eval (when (cur-mode-line-eat-display-p) "  "))
+		  cur-mode-line-eat-eshell-indicator
+		  (:eval (when (cur-mode-line-eat-eshell-display-p) "  "))
 		  cur-mode-line-major-mode-indicator
 		  cur-mode-line-end-padding))
   (setq-default mode-line-format

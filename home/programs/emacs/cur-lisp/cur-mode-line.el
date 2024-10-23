@@ -247,6 +247,35 @@ To create add more padding you can use the `cur-mode-line-end-space-dwim'
   '(:eval (cur-mode-line--eat))
   "Indicator for Eat's current mode.")
 
+;;;;; Eat Eshell
+
+(defface cur-mode-line-eat-eshell
+  '((t :inherit (bold eat-shell-prompt-annotation-success)))
+  "Face for displaying current `eat-eshell-mode' minor mode."
+  :group 'cur-mode-line-faces)
+
+(defun cur-mode-line-eat-eshell-display-p ()
+  "Return whether or not it is appropriate to display eat indicator in eshell."
+  (and (member 'eat features)
+       (member 'eshell features)
+       (mode-line-window-selected-p)
+       (eq major-mode 'eshell-mode)
+       eat-terminal))
+
+(defun cur-mode-line--eat-eshell ()
+  "Return propertized string of current eat mode."
+  (when (cur-mode-line-eat-eshell-display-p)
+    (propertize
+     (cond ((or eat--char-mode eat--eshell-char-mode) "(Char Mode)")
+	   ((or eat--semi-char-mode eat--eshell-semi-char-mode)
+	    "(Semi-Char Mode)")
+	   (t "(Emacs Mode)"))
+     'face 'cur-mode-line-eat)))
+
+(defvar cur-mode-line-eat-eshell-indicator
+  '(:eval (cur-mode-line--eat-eshell))
+  "Indicator for eat-eshell's current mode.")
+
 ;;;;; Position
 
 (defface cur-mode-line-postion
@@ -324,7 +353,8 @@ To create add more padding you can use the `cur-mode-line-end-space-dwim'
 	       cur-mode-line-major-mode-indicator
 	       cur-mode-line-postion-indicator
 	       cur-mode-line-flycheck-indicator
-	       cur-mode-line-eat-indicator))
+	       cur-mode-line-eat-indicator
+	       cur-mode-line-eat-eshell-indicator))
   (put var 'risky-local-variable t))
 
 (provide 'cur-mode-line)
