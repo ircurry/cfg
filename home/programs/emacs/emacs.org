@@ -3058,7 +3058,7 @@ a single theme to be enabled and signal a user error if multiple are enabled."
   (cdr (assoc theme cur-override-theme-overrides)))
 
 (defmacro cur-override-theme-def ()
-  ""
+  "Define the override theme."
   (let ((overrides
          (cond ((eq cur-override-theme-theme-priority 'single)
                 (when (> (length custom-enabled-themes) 1)
