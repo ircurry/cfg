@@ -3088,7 +3088,8 @@ Please disable all but one theme or change the value of `cur-override-theme-them
   (condition-case nil
       (progn
         (mapc #'disable-theme custom-enabled-themes)
-        (load-theme theme t))
+        (load-theme theme t)
+	(load-theme 'cur-override t))
     (error "Problem loading theme %s" theme)))
 
 (defcustom cur-override-theme-load-function
