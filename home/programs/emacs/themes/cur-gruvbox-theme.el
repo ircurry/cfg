@@ -7,6 +7,7 @@
 (require 'cur-theme)
 
 ;; (add-to-list 'custom-theme-load-path (locate-user-emacs-file "/home/recur/cfg/home/programs/emacs/themes"))
+;; (load-theme 'cur-gruvbox t)
 
 (defun cur-theme-name-to-rgb (color)
   "Retrieves the hexidecimal string repesented the named COLOR (e.g. \"red\")
