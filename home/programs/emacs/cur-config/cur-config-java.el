@@ -1,6 +1,7 @@
 ;; ===Java Tree-Sitter Mode===
 (use-package java-ts-mode
-  :mode "\\.java\\'")
+  :mode "\\.java\\'"
+  :custom (java-ts-mode-indent-offset 8))
 
 ;; ===lsp-java===
 (use-package lsp-java
