@@ -3322,7 +3322,7 @@ determine if it will create a new window or reuse the current one.")
 * Themes
 ** Gruvbox
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle no
+:header-args:emacs-lisp: :tangle ./themes/cur-gruvbox-theme.el
 :END:
 
 #+begin_src emacs-lisp
@@ -3427,7 +3427,7 @@ for FRAME (defaults to the current frame)."
    `(link                ((t (:foreground ,light-aqua :underline t :weight bold))))
    `(link-visited        ((t (:foreground ,aqua :underline t :weight bold))))
    `(cursor              ((t (:background ,fg0))))
-   `(fringe              ((t (:distant-foreground ,fg1 :background ,bg3))))
+   `(fringe              ((t (:distant-foreground ,fg1 :background ,bg0))))
    `(region              ((t (:background ,bg3))))
    `(highlight           ((t (:foreground ,bg-sp1 :distant-foreground ,fg0 :background ,light-yellow))))
    `(hl-line             ((t (:background ,bg1))))
