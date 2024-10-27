@@ -3323,7 +3323,7 @@ determine if it will create a new window or reuse the current one.")
 * Themes
 ** Gruvbox
 :PROPERTIES:
-:header-args:emacs-lisp: :tangle ./themes/cur-gruvbox-theme.el
+:header-args:emacs-lisp: :tangle no
 :END:
 
 #+begin_src emacs-lisp
