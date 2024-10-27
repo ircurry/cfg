@@ -154,7 +154,7 @@ for FRAME (defaults to the current frame)."
    `(mode-line           ((t (:background ,bg1))))
    `(mode-line-active    ((t (:inherit mode-line))))
    `(mode-line-emphasis  ((t (:foreground ,light-blue :distant-foreground ,bg4))))
-   `(mode-line-inactive  ((t (:foreground ,bg4 :background ,bg0s))))
+   `(mode-line-inactive  ((t (:foreground ,bg4 :background ,bg1))))
    `(mode-line-buffer-id ((t (:weight bold))))
 
    ;; Line Number
