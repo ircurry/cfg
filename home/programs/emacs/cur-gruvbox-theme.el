@@ -126,7 +126,7 @@ for FRAME (defaults to the current frame)."
    `(vertical-border     ((t (:foreground ,bg0 :background ,bg0))))
    `(secondary-selection ((t (:background ,bg2))))
    `(query-replace       ((t (:inherit isearch))))
-   `(minibuffer-prompt   ((t (:foreground ,aqua))))
+   `(minibuffer-prompt   ((t (:foreground ,light-aqua))))
    `(tooltip             ((t (:foreground ,fg1 :background ,bg0h))))
    `(shadow              ((t (:foreground ,bg4))))
    `(trailing-whitespace ((t (:background ,light-red))))
