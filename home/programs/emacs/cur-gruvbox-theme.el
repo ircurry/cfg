@@ -260,9 +260,9 @@ for FRAME (defaults to the current frame)."
    `(rainbow-delimiters-depth-4-face    ((t (:foreground ,light-blue))))
    `(rainbow-delimiters-depth-5-face    ((t (:foreground ,light-aqua))))
    `(rainbow-delimiters-depth-6-face    ((t (:foreground ,light-purple))))
-   `(rainbow-delimiters-depth-7-face    ((t (:foreground ,orange))))
-   `(rainbow-delimiters-depth-8-face    ((t (:foreground ,red))))
-   `(rainbow-delimiters-depth-9-face    ((t (:foreground ,green))))
+   `(rainbow-delimiters-depth-7-face    ((t (:foreground ,light-orange))))
+   `(rainbow-delimiters-depth-8-face    ((t (:foreground ,light-red))))
+   `(rainbow-delimiters-depth-9-face    ((t (:foreground ,light-green))))
 
    ;; Magit
 
