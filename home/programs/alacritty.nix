@@ -34,7 +34,7 @@ in
       programs.alacritty = {
         enable = true;
         settings = {
-          shell = {
+          terminal.shell = {
             program = shell-cfg.exec;
           };
           window = {
