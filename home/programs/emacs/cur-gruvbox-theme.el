@@ -73,6 +73,24 @@ for FRAME (defaults to the current frame)."
        (pale-aqua   (cur-theme-blend "#8ec07c" "#ebdbb2" 0.6))
        (pale-orange (cur-theme-blend "#fe8019" "#ebdbb2" 0.6))
 
+       ;; Hightlight Fg
+       (highlight-fg-red    (cur-theme-darken "#fb4934" 0.15))
+       (highlight-fg-green  (cur-theme-darken "#b8bb26" 0.15))
+       (highlight-fg-yellow (cur-theme-darken "#fabd2f" 0.15))
+       (highlight-fg-blue   (cur-theme-darken "#83a598" 0.15))
+       (highlight-fg-purple (cur-theme-darken "#d3869b" 0.15))
+       (highlight-fg-aqua   (cur-theme-darken "#8ec07c" 0.15))
+       (highlight-fg-orange (cur-theme-darken "#fe8019" 0.15))
+
+       ;; Highlight Bg
+       (highlight-bg-red    (cur-theme-blend highlight-fg-red    "#282828" 0.2))
+       (highlight-bg-green  (cur-theme-blend highlight-fg-green  "#282828" 0.2))
+       (highlight-bg-yellow (cur-theme-blend highlight-fg-yellow "#282828" 0.2))
+       (highlight-bg-blue   (cur-theme-blend highlight-fg-blue   "#282828" 0.2))
+       (highlight-bg-purple (cur-theme-blend highlight-fg-purple "#282828" 0.2))
+       (highlight-bg-aqua   (cur-theme-blend highlight-fg-aqua   "#282828" 0.2))
+       (highlight-bg-orange (cur-theme-blend highlight-fg-orange "#282828" 0.2))
+
        ;; Background colours
        (bg-sp1   "#0d1011")
        (bg0h     "#1d2021") ;; Darkest
@@ -111,6 +129,7 @@ for FRAME (defaults to the current frame)."
    `(minibuffer-prompt   ((t (:foreground ,aqua))))
    `(tooltip             ((t (:foreground ,fg1 :background ,bg0h))))
    `(shadow              ((t (:foreground ,bg4))))
+   `(trailing-whitespace ((t (:background ,light-red))))
 
    ;; Font Lock Faces
 
@@ -205,6 +224,20 @@ for FRAME (defaults to the current frame)."
 
 ;;; Programming Auxiliary
 
+   ;; Git Commit
+   ;; `(git-commit-comment-action        ((t ())))
+   `(git-commit-comment-branch-local  ((t (:foreground ,light-purple))))
+   `(git-commit-comment-branch-remote ((t (:foreground ,light-green))))
+   `(git-commit-comment-detached      ((t (:foreground ,light-orange))))
+   `(git-commit-comment-file          ((t (:foreground ,light-purple))))
+   `(git-commit-comment-heading       ((t (:foreground ,light-red))))
+   `(git-commit-keyword               ((t (:foreground ,light-aqua :slant italic))))
+   `(git-commit-nonempty-second-line  ((t (:inherit git-commit-overlong-summary))))
+   `(git-commit-overlong-summary      ((t (:background ,bg-sp1 :slant italic :weight bold :inherit error))))
+   `(git-commit-summary               ((t (:foreground ,light-green))))
+   ;; `(git-commit-trailer-token         ((t ())))
+   ;; `(git-commit-trailer-value         ((t ())))
+
    ;; Paren Mode
 
    `(show-paren-match            ((t (:background ,bg4))))
@@ -228,8 +261,106 @@ for FRAME (defaults to the current frame)."
    `(rainbow-delimiters-depth-9-face    ((t (:foreground ,green))))
 
    ;; Magit
-   `(magit-branch-local ((t (:foreground ,light-aqua))))
-   `(magit-section-heading ((t (:foreground ,light-aqua :bold t))))
+
+   `(magit-bisect-bad                      ((t (:foreground ,light-red))))
+   `(magit-bisect-good                     ((t (:foreground ,light-green))))
+   `(magit-bisect-skip                     ((t (:foreground ,light-orange))))
+   `(magit-blame-date                      ((t (:foreground ,red))))
+   ;; `(magit-blame-dimmed                    ((t ())))
+   `(magit-blame-hash                      ((t (:foreground ,light-aqua))))
+   `(magit-blame-heading                   ((t (:foreground ,light-orange :background ,bg1))))
+   `(magit-blame-highlight                 ((t (:inherit hightlight))))
+   ;; `(magit-blame-margin                    ((t ())))
+   ;; `(magit-blame-name                      ((t ())))
+   ;; `(magit-blame-summary                   ((t ())))
+   `(magit-branch-current                  ((t (:foreground ,light-aqua :underline ,light-green))))
+   `(magit-branch-local                    ((t (:foreground ,light-aqua))))
+   `(magit-branch-remote                   ((t (:foreground ,light-green))))
+   ;; `(magit-branch-remote-head              ((t ())))
+   ;; `(magit-branch-upstream                 ((t ())))
+   ;; `(magit-branch-warning                  ((t ())))
+   `(magit-cherry-equivalent               ((t (:foreground ,light-purple))))
+   `(magit-cherry-unmatched                ((t (:foreground ,light-aqua))))
+   `(magit-diff-added                      ((t (:foreground ,(cur-theme-darken highlight-fg-green 0.2) :background ,(cur-theme-blend highlight-fg-green bg0 0.1) :extend t))))
+   `(magit-diff-added-highlight            ((t (:foreground ,highlight-fg-green :background ,highlight-bg-green :weight bold :extend t))))
+   `(magit-diff-base                       ((t (:foreground ,(cur-theme-darken highlight-fg-orange 0.2) :background ,(cur-theme-blend highlight-fg-orange bg0 0.1) :extend t))))
+   `(magit-diff-base-highlight             ((t (:foreground ,highlight-fg-orange :background ,highlight-bg-orange :weight bold :extend t))))
+   ;; `(magit-diff-conflict-heading           ((t ())))
+   `(magit-diff-context                    ((t (:foreground ,(cur-theme-darken fg1 0.4) :background ,bg0))))
+   `(magit-diff-context-highlight          ((t (:foreground ,fg1 :background ,bg0h))))
+   `(magit-diff-file-heading               ((t (:foreground ,fg0 :weight bold :extend t))))
+   ;; `(magit-diff-file-heading-highlight     ((t ())))
+   ;; `(magit-diff-file-heading-selection     ((t ())))
+   `(magit-diff-hunk-heading               ((t (:foreground ,fg1 :background ,bg1))))
+   `(magit-diff-hunk-heading-highlight     ((t (:foreground ,fg0 :background ,bg2))))
+   ;; `(magit-diff-hunk-heading-selection     ((t ())))
+   ;; `(magit-diff-hunk-region                ((t ())))
+   ;; `(magit-diff-lines-boundary             ((t ())))
+   ;; `(magit-diff-lines-heading              ((t ())))
+   ;; `(magit-diff-our                        ((t ())))
+   ;; `(magit-diff-our-highlight              ((t ())))
+   `(magit-diff-removed                    ((t (:foreground ,(cur-theme-darken highlight-fg-red 0.2) :background ,(cur-theme-blend highlight-fg-red bg0 0.1) :extend t))))
+   `(magit-diff-removed-highlight          ((t (:foreground ,highlight-fg-red :background ,highlight-bg-red :weight bold :extend t))))
+   ;; `(magit-diff-revision-summary           ((t ())))
+   ;; `(magit-diff-revision-summary-highlight ((t ())))
+   ;; `(magit-diff-their                      ((t ())))
+   ;; `(magit-diff-their-highlight            ((t ())))
+   ;; `(magit-diff-whitespace-warning         ((t ())))
+   `(magit-diffstat-added                  ((t (:foreground ,highlight-fg-green))))
+   `(magit-diffstat-removed                ((t (:foreground ,highlight-fg-red))))
+   `(magit-dimmed                          ((t (:foreground ,fg2))))
+   `(magit-filename                        ((t (:foreground ,light-purple))))
+   `(magit-hash                            ((t (:slant normal :inherit font-lock-comment-face))))
+   ;; `(magit-head                            ((t ())))
+   `(magit-header-line                     ((t (:background ,blue :foreground ,fg0 :weight bold :box (:line-width 3 :color ,blue)))))
+   ;; `(magit-header-line-key                 ((t ())))
+   ;; `(magit-header-line-log-select          ((t ())))
+   ;; `(magit-keyword                         ((t ())))
+   ;; `(magit-keyword-squash                  ((t ())))
+   `(magit-log-author                      ((t (:foreground ,light-orange :slant normal))))
+   `(magit-log-date                        ((t (:foreground ,light-blue :slant normal))))
+   ;; `(magit-log-graph                       ((t ())))
+   ;; `(magit-mode-line-process               ((t ())))
+   ;; `(magit-mode-line-process-error         ((t ())))
+   `(magit-process-ng                      ((t (:inherit error))))
+   `(magit-process-ok                      ((t (:inherit success))))
+   ;; `(magit-reflog-amend                    ((t ())))
+   ;; `(magit-reflog-checkout                 ((t ())))
+   ;; `(magit-reflog-cherry-pick              ((t ())))
+   ;; `(magit-reflog-commit                   ((t ())))
+   ;; `(magit-reflog-merge                    ((t ())))
+   ;; `(magit-reflog-other                    ((t ())))
+   ;; `(magit-reflog-rebase                   ((t ())))
+   ;; `(magit-reflog-remote                   ((t ())))
+   ;; `(magit-reflog-reset                    ((t ())))
+   ;; `(magit-refname                         ((t ())))
+   ;; `(magit-refname-pullreq                 ((t ())))
+   ;; `(magit-refname-stash                   ((t ())))
+   ;; `(magit-refname-wip                     ((t ())))
+   ;; `(magit-section-child-count             ((t ())))
+   `(magit-section-heading                 ((t (:foreground ,light-aqua :weight bold :extend t))))
+   `(magit-section-heading-selection       ((t (:foreground ,light-orange :weight bold :extend t))))
+   `(magit-section-highlight               ((t (:inherit hl-line))))
+   `(magit-section-secondary-heading       ((t (:foreground ,light-purple :weight bold :extend t))))
+   ;; `(magit-sequence-done                   ((t ())))
+   ;; `(magit-sequence-drop                   ((t ())))
+   ;; `(magit-sequence-exec                   ((t ())))
+   ;; `(magit-sequence-head                   ((t ())))
+   ;; `(magit-sequence-onto                   ((t ())))
+   ;; `(magit-sequence-part                   ((t ())))
+   ;; `(magit-sequence-pick                   ((t ())))
+   ;; `(magit-sequence-stop                   ((t ())))
+   ;; `(magit-signature-bad                   ((t ())))
+   ;; `(magit-signature-error                 ((t ())))
+   ;; `(magit-signature-expired               ((t ())))
+   ;; `(magit-signature-expired-key           ((t ())))
+   ;; `(magit-signature-good                  ((t ())))
+   ;; `(magit-signature-revoked               ((t ())))
+   ;; `(magit-signature-untrusted             ((t ())))
+   ;; `(magit-tag                             ((t ())))
+
+   ;; `(magit-branch-local ((t (:foreground ,light-aqua))))
+   ;; `(magit-section-heading ((t (:foreground ,light-aqua :bold t))))
 
 ;;; Languages and IDE Packages
 
@@ -244,7 +375,6 @@ for FRAME (defaults to the current frame)."
    ;; Flyspell
    `(flyspell-duplicate ((t (:underline (:style wave :color ,light-yellow)))))
    `(flyspell-incorrect ((t (:underline (:style wave :color ,light-red)))))
-
 
 ;;; Internet Modes
 
