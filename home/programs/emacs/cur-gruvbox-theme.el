@@ -380,6 +380,10 @@ for FRAME (defaults to the current frame)."
    `(flyspell-duplicate ((t (:underline (:style wave :color ,light-yellow)))))
    `(flyspell-incorrect ((t (:underline (:style wave :color ,light-red)))))
 
+   ;; Lsp-mode
+   `(lsp-face-highlight-read ((t (:inherit lsp-face-highlight-textual))))
+   `(lsp-face-highlight-textual ((t (:foreground ,fg1 :background ,bg1 :underline t))))
+
 ;;; Internet Modes
 
    ;; Elpher
