@@ -227,6 +227,10 @@ for FRAME (defaults to the current frame)."
    `(rainbow-delimiters-depth-8-face    ((t (:foreground ,red))))
    `(rainbow-delimiters-depth-9-face    ((t (:foreground ,green))))
 
+   ;; Magit
+   `(magit-branch-local ((t (:foreground ,light-aqua))))
+   `(magit-section-heading ((t (:foreground ,light-aqua :bold t))))
+
 ;;; Languages and IDE Packages
 
    ;; Flycheck
