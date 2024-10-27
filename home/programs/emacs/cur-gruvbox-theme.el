@@ -368,6 +368,13 @@ for FRAME (defaults to the current frame)."
 
 ;;; Languages and IDE Packages
 
+   ;; Company
+   `(company-tooltip ((t (:inherit 'tooltip))))
+   `(company-tooltip-common ((t (:foreground ,light-aqua))))
+   `(company-tooltip-common-selection ((t (:foreground ,light-aqua))))
+   `(company-preview ((t (:foreground ,grey))))
+   `(company-preview-common ((t (:foreground ,light-aqua :background ,bg1))))
+
    ;; Flycheck
    `(flycheck-error          ((t (:background ,bg1 :underline (:style wave :color ,light-red)))))
    `(flycheck-info           ((t (:background ,bg1 :underline (:style wave :color ,light-blue)))))
