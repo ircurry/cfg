@@ -200,6 +200,10 @@ for FRAME (defaults to the current frame)."
    `(vertico-posframe-border-4        ((t (:background ,light-blue))))
    `(vertico-posframe-border-fallback ((t (:background ,light-yellow))))
 
+   ;; Which Key
+   `(which-key-key-face ((t (:foreground ,light-green))))
+   `(which-key-separator-face ((t (:slant normal :inherit (font-lock-comment-face)))))
+   `(which-key-command-description-face ((t (:foreground ,light-blue))))
 
 ;;; Terminal and Shell Colors
 
