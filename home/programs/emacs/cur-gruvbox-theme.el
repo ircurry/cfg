@@ -123,7 +123,7 @@ for FRAME (defaults to the current frame)."
    `(highlight           ((t (:foreground ,bg-sp1 :distant-foreground ,fg0 :background ,light-yellow))))
    `(hl-line             ((t (:background ,bg1))))
    `(header-line         ((t (:inherit (mode-line)))))
-   `(vertical-border     ((t (:foreground ,bg0 :background ,bg0))))
+   `(vertical-border     ((t (:foreground ,bg2 :background ,bg2))))
    `(secondary-selection ((t (:background ,bg2))))
    `(query-replace       ((t (:inherit isearch))))
    `(minibuffer-prompt   ((t (:foreground ,light-aqua))))
