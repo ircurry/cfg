@@ -69,6 +69,7 @@ in
           search_again=0
           enable_hist=1
           enable_search_hist=1
+          next_page_action_shortcut="$selection_meta_key-p"
 
           ##############
           ### Videos ###
