@@ -47,7 +47,7 @@ in
         macro v set browser "setsid -f mpv '%u' >/dev/null 2>&1" ; open-in-browser-and-mark-read ; set browser "xdg-open '%u'"
         macro d set browser "echo '%u' >> ${config.xdg.userDirs.download}/vids_to_download-$(date +%Y_%U).txt" ; open-in-browser-and-mark-read ; set browser "xdg-open '%u'"
         macro p set browser "echo '%u' >> ${config.xdg.userDirs.download}/pods_to_download-$(date +%Y_%U).txt" ; open-in-browser-and-mark-read ; set browser "xdg-open '%u'"
-        macro c set browser "echo '%u' | ${pkgs.wl-clipboard}/bin/wl-copy" ; open-in-browser ; set browser "xdg-open '%u'"
+        macro c set browser "printf '%u' | ${pkgs.wl-clipboard}/bin/wl-copy" ; open-in-browser ; set browser "xdg-open '%u'"
 
         #############
         ## PODBOAT ##
