@@ -1039,7 +1039,9 @@ I have several custom themes in a directory weirdly named themes. These are the 
 				       :foreground "#7382a0")
 		     (fill-column-indicator :foreground "#b9a992")
 		     (org-block :foreground "#93836c"
-				:background "#f1ece4")))))
+				:background "#f1ece4"))
+     (doom-nord (dired-broken-symlink :foreground "#ebcb8b"
+				      :background "#bf616a")))))
 #+end_src
 
 *** Doom themes

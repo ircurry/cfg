@@ -86,7 +86,9 @@
 				       :foreground "#7382a0")
 		     (fill-column-indicator :foreground "#b9a992")
 		     (org-block :foreground "#93836c"
-				:background "#f1ece4")))))
+				:background "#f1ece4"))
+     (doom-nord (dired-broken-symlink :foreground "#ebcb8b"
+				      :background "#bf616a")))))
 
 ;; ===Doom Emacs Themes===
 (use-package doom-themes
