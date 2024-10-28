@@ -16,6 +16,7 @@
     ./lf
     ./mpd.nix
     ./my-fetch
+    ./newsboat.nix
     ./nix.nix
     ./phetch.nix
     ./sops.nix

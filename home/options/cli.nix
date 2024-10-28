@@ -95,6 +95,7 @@
       description = "Enable lf File Manager";
     };
     mpd.enable = lib.mkEnableOption "Enable Music Player Daemon and NCMPCPP";
+    newsboat.enable = lib.mkEnableOption "Enable Newsboat RSS Client";
     phetch.enable = lib.mkEnableOption "Enable Phetch";
     youtube = {
       enable = lib.mkEnableOption "Enable youtube scripts and programs";

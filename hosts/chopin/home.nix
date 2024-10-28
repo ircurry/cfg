@@ -45,6 +45,7 @@
       direnv.enable = true;
       file-convert.enable = true;
       mpd.enable = true;
+      newsboat.enable = true;
       phetch.enable = true;
       shell.name = "fish";
       youtube.enable = true;
