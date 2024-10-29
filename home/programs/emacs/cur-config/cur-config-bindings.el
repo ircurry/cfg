@@ -10,7 +10,7 @@
 
 (use-package avy
   :bind ( :map goto-map
-	  ("a" . avy-goto-char-2)))
+	  ("c" . avy-goto-char-2)))
 
 ;; ===Meow Setup===
 (use-package meow
@@ -177,7 +177,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("e" . meow-next-word)
      '("E" . meow-next-symbol)
      '("r" . meow-replace)
-     '("R" . meow-replace-save)
+     '("R" . meow-swap-grab)
      '("t" . meow-till)
      '("T" . meow-till-expand)
      '("y" . meow-save)
@@ -224,7 +224,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("x" . meow-line)
      '("X" . meow-line-expand)
      '("c" . meow-change)
-     ;; '("C" . )
+     '("C" . meow-sync-grab)
      (cons "v" goto-map)
      ;; '("V" . )
      '("b" . meow-back-word)
@@ -293,6 +293,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   (meow-keypad-describe-delay 0.0 "No delay in keypad help popup")
   (meow-cheats-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
   (meow-keypad-leader-dispatch nil)
+  (meow-visit-sanitize-completion nil)
   :bind ( :map cur/sub-leader-keymap
           ("C-l" . ibuffer)
           ("C-b" . bookmark-set-no-overwrite)
