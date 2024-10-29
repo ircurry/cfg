@@ -96,13 +96,14 @@
 				      :background "#3b4252"
 				      :inherit 'org-block
 				      :extend t)
-		(org-block :background "#2e3440"
-			   :inherit 'fixed-pitch)
+		(org-block :background "#2e3440")
 		(dired-broken-symlink :foreground "#ebcb8b"
 				      :background "#bf616a")
 		(meow-beacon-fake-selection :foreground "#d8dee9"
 					    :weight 'bold)
 		(secondary-selection :background "#3b4252")
+		(vertical-border :foreground "#3b4252"
+				 :background "#3b4252")
 		(help-key-binding :foreground "#88c0d0"
 				  :background "#2e3440"
 				  :box '(:line-width 1 :color "#4c566a")
