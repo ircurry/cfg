@@ -88,7 +88,14 @@
 		     (org-block :foreground "#93836c"
 				:background "#f1ece4"))
      (doom-nord (dired-broken-symlink :foreground "#ebcb8b"
-				      :background "#bf616a")))))
+				      :background "#bf616a")
+		(meow-beacon-fake-selection :foreground "#d8dee9"
+					    :weight 'bold)
+		(secondary-selection :background "#3b4252")
+		(help-key-binding :foreground "#88c0d0"
+				  :background "#2e3440"
+				  :box '(:line-width 1 :color "#4c566a")
+				  :inherit 'fixed-pitch)))))
 
 ;; ===Doom Emacs Themes===
 (use-package doom-themes
