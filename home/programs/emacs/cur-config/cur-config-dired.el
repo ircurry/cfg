@@ -124,7 +124,8 @@
   (dired-make-directory-clickable t)
   (dired-mouse-drag-files t)
   :config
-  (setq dired-deletion-confirmer 'y-or-n-p))
+  (setq dired-deletion-confirmer 'y-or-n-p)
+  (setopt dired-do-revert-buffer (lambda (dir) (not (file-remote-p dir)))))
 
 (provide 'cur-config-dired)
 
