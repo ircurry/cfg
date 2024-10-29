@@ -374,10 +374,10 @@ meow
 ^Movement^            ^Splitting and Balancing^   ^Manipulation^       ^Resizing^
 ^--------^------------^-----------------------^---^------------^-------^--------^---------------------
 _h_: left             _._: only window            _H_: swap left       _i_: enlarge window
-_j_: down             _v_: split vertical         _J_: swap down       _d_: shrink window
-_k_: up               _;_: split horizontal       _K_: swap up         _f_: enlarge window horizonally
+_j_: down             _v_: split vertical         _J_: swap down       _r_: shrink window
+_k_: up               _s_: split horizontal       _K_: swap up         _f_: enlarge window horizonally
 _l_: right            _=_: balance windows        _L_: swap right      _b_: shrink window horizonally
-_o_: other window     _F_: fit to buffer          _c_: close window
+_o_: other window     _F_: fit to buffer          _d_: close window
 "
     ("RET" ignore "finished" :exit t)
 
@@ -389,7 +389,7 @@ _o_: other window     _F_: fit to buffer          _c_: close window
 
     ("." delete-other-windows)
     ("v" split-window-right)
-    (";" split-window-below)
+    ("s" split-window-below)
     ("=" balance-windows)
     ("F" fit-window-to-buffer)
 
@@ -397,10 +397,10 @@ _o_: other window     _F_: fit to buffer          _c_: close window
     ("J" windmove-swap-states-down)
     ("K" windmove-swap-states-up)
     ("L" windmove-swap-states-right)
-    ("c" delete-window)
+    ("d" delete-window)
 
     ("i" enlarge-window)
-    ("d" shrink-window)
+    ("r" shrink-window)
     ("f" enlarge-window-horizontally)
     ("b" shrink-window-horizontally))
   (defun cur/reverse-other-window ()
