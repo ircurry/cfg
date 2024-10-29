@@ -87,7 +87,18 @@
 		     (fill-column-indicator :foreground "#b9a992")
 		     (org-block :foreground "#93836c"
 				:background "#f1ece4"))
-     (doom-nord (dired-broken-symlink :foreground "#ebcb8b"
+     (doom-nord (mode-line :background "#3b4252")
+		(mode-line-inactive :foreground "#88c0d0"
+				    :background "#3b4252")
+		(hl-line :background "#3b4252")
+		(font-lock-comment-face :foreground "#4c566a")
+		(org-block-begin-line :foreground "#d8dee9"
+				      :background "#3b4252"
+				      :inherit 'org-block
+				      :extend t)
+		(org-block :background "#2e3440"
+			   :inherit 'fixed-pitch)
+		(dired-broken-symlink :foreground "#ebcb8b"
 				      :background "#bf616a")
 		(meow-beacon-fake-selection :foreground "#d8dee9"
 					    :weight 'bold)
