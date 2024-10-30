@@ -59,6 +59,12 @@
   (eat-eshell-exec . (lambda (&rest _)
 		       (when (and meow-mode meow-insert-mode)
 			 (meow-normal-mode +1))))
+  (eat--eshell-semi-char-mode . (lambda (&rest _)
+				  (progn
+				    (when (and meow-global-mode (not meow-mode))
+				      (meow-mode +1))
+				    (when (and meow-global-mode meow-mode meow-insert-mode eat--eshell-semi-char-mode)
+				      (meow-normal-mode +1)))))
   (eat--eshell-char-mode . (lambda (&rest _)
 			     (if eat--eshell-char-mode
 				 (meow-mode -1)
