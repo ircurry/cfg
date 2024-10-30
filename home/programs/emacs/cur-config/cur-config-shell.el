@@ -41,6 +41,12 @@
 (use-package eat
   :after eshell
   :hook (eat-eshell-exec . (lambda (&rest _) (eat-eshell-emacs-mode)))
+  :bind ( :map eat-eshell-emacs-mode-map
+	  ("C-c C-RET" . eat-send-password)
+	  ("C-c C-<return>" . eat-send-password)
+	  :map eat-eshell-semi-char-mode-map
+	  ("C-c C-RET" . eat-send-password)
+	  ("C-c C-<return>" . eat-send-password))
   :custom
   (eshell-visual-commands nil "nil because using `eat-eshell-mode'")
   (eshell-visual-subcommands nil "nil because using `eat-eshell-mode'")
