@@ -2118,6 +2118,21 @@ eat
   (eat-eshell-mode 1))
 
 (use-package eat
+  :after (eshell meow)
+  :hook
+  (eat-eshell-exec . (lambda (&rest _)
+		       (when (and meow-mode meow-insert-mode)
+			 (meow-normal-mode +1))))
+  (eat--eshell-char-mode . (lambda (&rest _)
+			     (if eat--eshell-char-mode
+				 (meow-mode -1)
+			       (unless meow-mode
+				 (meow-mode +1)))))
+  (eat-eshell-exit . (lambda (&rest _)
+		       (when (and meow-global-mode (not meow-mode))
+			 (meow-mode +1)))))
+
+(use-package eat
   :if (locate-library "corfu.el")
   :hook (eat-mode . (lambda (&rest _)
 		      (setq-local corfu-auto nil)
