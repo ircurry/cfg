@@ -12,13 +12,6 @@
             inherit inputs;
           });
       })
-      (_: prev: {
-        ytfzf = (
-          prev.ytfzf.override {
-            ueberzugpp = inputs.nixpkgs-ueberzugpp.legacyPackages.${pkgs.system}.ueberzugpp;
-          }
-        );
-      })
       (_: prev: { dfh = inputs.dfh.packages.${pkgs.system}.dfh; })
       # (_: prev: { nocturne-tools = inputs.nocturne-tools.packages.${pkgs.system}.default; })
     ];
