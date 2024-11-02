@@ -1,0 +1,24 @@
+* Features
+** Directories
+*** Open Directory in new buffer
+*** Open Directory in subdir
+*** Goto Directory in subdir if present, Open in new buffer if not
+*** Open Parent Directory in new buffer
+*** Goto parent directory if subdir, Open if not
+*** Delete subdir
+*** Next subdir
+*** Previous subdir
+*** First file of subdir
+*** Last file of subdir
+** File
+*** Open File
+*** Open File with external program
+*** Open File in other window
+*** Open Files
+*** Open Files Regex
+*** Mark File
+*** Mark File Regex
+*** Flag File
+*** Flag Files Regex
+*** Flag Files Marked
+*** Preview File in other window
