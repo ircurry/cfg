@@ -270,7 +270,7 @@ in
           };
           master = {
             new_status = "master";
-            orientation = "center";
+            orientation = "left";
           };
           gestures.workspace_swipe = "off";
           misc = {
@@ -334,7 +334,7 @@ in
               "$MOD, TAB, bringactivetotop"
               "$MOD, O, cyclenext"
               "$MOD, O, bringactivetotop"
-              "$MOD, N, layoutmsg, orientationcycle top left center"
+              "$MOD, N, layoutmsg, orientationcycle left top center"
               "$MOD, F, fullscreen"
               "$MOD, M, fullscreen, 1"
               "$MOD, W, togglefloating"
