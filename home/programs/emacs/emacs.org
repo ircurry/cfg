@@ -1615,14 +1615,6 @@ tmr
 (provide 'cur-config-ide)
 #+end_src
 
-*** Tmux integration
-
-#+begin_src emacs-lisp
-(use-package cur-tmux
-  :hook
-  (projectile-after-switch-project . cur-tmux-switch-add-project-window))
-#+end_src
-
 ** Configurations for Lisp (=cur-config-lisp.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-lisp.el
