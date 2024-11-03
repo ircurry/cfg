@@ -885,7 +885,8 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
   (setq dired-deletion-confirmer 'y-or-n-p)
   (setopt dired-do-revert-buffer (lambda (dir) (not (file-remote-p dir)))))
 
-(use-package dired
+(use-package cur-dired
+  :after (dired)
   :bind ( :map dired-mode-map
 	  ("l" . cur-dired-maybe-insert-subdir-or-find-file)))
 
@@ -2716,6 +2717,7 @@ To create add more padding you can use the `cur-mode-line-end-space-dwim'
 
 ;;; Code:
 
+;;;###autoload
 (defun cur-dired-maybe-insert-subdir-or-find-file (&optional other-window)
   (interactive "P")
   (let ((file (dired-get-file-for-visit)))
@@ -2727,6 +2729,7 @@ To create add more padding you can use the `cur-mode-line-end-space-dwim'
 	  (find-file-other-window file)
 	(dired--find-possibly-alternative-file file)))))
 
+;;;###autoload
 (defun cur-dired-find-file-dwim (&optional other-window)
   (interactive "P")
   (let* ((file (dired-get-file-for-visit)))

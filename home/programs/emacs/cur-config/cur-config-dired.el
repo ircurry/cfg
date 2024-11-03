@@ -127,7 +127,8 @@
   (setq dired-deletion-confirmer 'y-or-n-p)
   (setopt dired-do-revert-buffer (lambda (dir) (not (file-remote-p dir)))))
 
-(use-package dired
+(use-package cur-dired
+  :after (dired)
   :bind ( :map dired-mode-map
 	  ("l" . cur-dired-maybe-insert-subdir-or-find-file)))
 

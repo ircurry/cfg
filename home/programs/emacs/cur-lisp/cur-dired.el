@@ -4,6 +4,7 @@
 
 ;;; Code:
 
+;;;###autoload
 (defun cur-dired-maybe-insert-subdir-or-find-file (&optional other-window)
   (interactive "P")
   (let ((file (dired-get-file-for-visit)))
@@ -15,6 +16,7 @@
 	  (find-file-other-window file)
 	(dired--find-possibly-alternative-file file)))))
 
+;;;###autoload
 (defun cur-dired-find-file-dwim (&optional other-window)
   (interactive "P")
   (let* ((file (dired-get-file-for-visit)))
