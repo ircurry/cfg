@@ -1567,8 +1567,6 @@ company
 ;;(company-tng-configure-default))
 #+end_src
 
-*** TODO Corfu
-
 *** Flycheck
 
 Code error checking with a nice UI.
