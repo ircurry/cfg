@@ -29,19 +29,19 @@ rg
 tmr
 rainbow-delimiters
 paredit
-# geiser
-# geiser-chez
-# geiser-chibi
-# geiser-chicken
-# geiser-gambit
-# geiser-gauche
-# geiser-guile
-# geiser-kawa
-# geiser-mit
-# geiser-racket
-# geiser-stklos
+geiser
+geiser-chez
+geiser-chibi
+geiser-chicken
+geiser-gambit
+geiser-gauche
+geiser-guile
+geiser-kawa
+geiser-mit
+geiser-racket
+geiser-stklos
 macrostep
-# macrostep-geiser
+macrostep-geiser
 lsp-java
 yaml-mode
 nix-mode

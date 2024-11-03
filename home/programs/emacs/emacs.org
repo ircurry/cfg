@@ -1653,19 +1653,19 @@ paredit
 *** Geiser
 
 #+begin_src text :tangle ./packages.txt :padline no
-# geiser
-# geiser-chez
-# geiser-chibi
-# geiser-chicken
-# geiser-gambit
-# geiser-gauche
-# geiser-guile
-# geiser-kawa
-# geiser-mit
-# geiser-racket
-# geiser-stklos
+geiser
+geiser-chez
+geiser-chibi
+geiser-chicken
+geiser-gambit
+geiser-gauche
+geiser-guile
+geiser-kawa
+geiser-mit
+geiser-racket
+geiser-stklos
 macrostep
-# macrostep-geiser
+macrostep-geiser
 #+end_src
 
 #+begin_src emacs-lisp
