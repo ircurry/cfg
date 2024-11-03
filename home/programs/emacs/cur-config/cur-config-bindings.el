@@ -105,7 +105,8 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      ;; ===2nd Row===
      ;; '("TAB"  . )
      '("q" . meow-comment) ; comment dwim
-     '("w" . cur/window/body)
+     ;; '("w" . ) ; bound in ace-window section
+     '("W" . cur/window/body)
      ;; '("e" . )
      (cons "r" cur/register-map)
      (cons "t" cur/toggle-map)
@@ -320,6 +321,12 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   :config
   (meow-setup)
   (meow-global-mode 1))
+
+(use-package meow
+  :if (locate-library "ace-window.el")
+  :config
+  (meow-leader-define-key
+   '("w" . ace-window)))
 
 (use-package cur-meow
   :after (meow)

@@ -20,6 +20,7 @@ embark
 embark-consult
 corfu
 cape
+ace-window
 lsp-mode
 lsp-ui
 company

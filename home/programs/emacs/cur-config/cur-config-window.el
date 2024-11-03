@@ -47,4 +47,18 @@
 	  (".*"
 	   (display-buffer-same-window)))))
 
+(use-package ace-window
+  :custom
+  (aw-keys '(?n ?h ?j ?k ?l ?i ?u ?y ?r ?e))
+  (aw-dispatch-always t)
+  :config
+  (setq aw-dispatch-alist '((?d aw-delete-window "Delete Window")
+			    (?m aw-swap-window "Swap Window")
+			    (?w aw-flip-window "Previous Window")
+			    (?b aw-switch-buffer-in-window "Select Buffer")
+			    (?s aw-split-window-horz "Split Horizonally")
+			    (?v aw-split-window-vert "Split Vertically")
+			    (?o delete-other-windows "Delete Other Windows")
+			    (?? aw-show-dispatch-help))))
+
 (provide 'cur-config-window)
