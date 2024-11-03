@@ -69,11 +69,6 @@
   (prog-mode . flycheck-mode)
   (lsp-mode  . flycheck-mode))
 
-;; ===Treemacs==
-(use-package treemacs
-  :config
-  (treemacs-follow-mode))
-
 ;; ===Magit===
 (use-package magit
   :bind ( :map cur/sub-leader-keymap
@@ -98,12 +93,6 @@
   (project-switch-use-entire-map t))
 
 (use-package rg)
-
-(use-package just-mode)
-
-(use-package justl
-  :bind (:map project-prefix-map
-              ("j" . justl)))
 
 (use-package tmr
   :defer t)

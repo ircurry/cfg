@@ -676,27 +676,6 @@ which-key
   (setq which-key-idle-delay 0.0001))
 #+end_src
 
-*** Helpful
-
-Provides additional info help.
-
-#+begin_src text :tangle ./packages.txt :padline no
-helpful
-#+end_src
-
-#+begin_src emacs-lisp :tangle no
-;; ===helpful===
-(use-package helpful
-  ;; :custom
-  ;; (counsel-describe-function-function #'helpful-callable)
-  ;; (counsel-describe-variable-function #'helpful-variable)
-  :bind
-  ;; ([remap describe-function] . counsel-describe-function)
-  ([remap describe-command] . helpful-command)
-  ;; ([remap describe-variable] . counsel-describe-variable)
-  ([remap describe-key] . helpful-key))
-#+end_src
-
 *** Info
 
 Info is emacs' built in manual system. In essence, its a more feature rich =man= (which emacs also has easy access to with =woman=). Right now I have a custom meow state for keybindings. However, this kind of sucks and I will eventually switch to just changing the default keybindings.
@@ -1147,44 +1126,6 @@ nerd-icons-ibuffer
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 #+end_src
 
-*** Spacious Padding
-
-It adds padding and makes emacs look better.
-
-#+begin_src text :tangle ./packages.txt :padline no
-spacious-padding
-#+end_src
-
-#+begin_src emacs-lisp
-;; ===Spacious Padding===
-(use-package spacious-padding
-  :disabled t
-  :config
-  (setq spacious-padding-widths
-        '( :internal-border-width 8
-	   :header-line-width 0
-	   :mode-line-width 0
-	   :tab-width 0
-	   :right-divider-width 18
-	   :scroll-bar-width 0
-	   :fringe-width 0))
-  (setq spacious-padding-subtle-mode-line nil)
-  (spacious-padding-mode 1))
-#+end_src
-
-*** Doom Modeline
-
-I will one day make my own modeline that is featureful and awesome. Today is not that day.
-
-#+begin_src text :tangle ./packages.txt :padline no
-doom-modeline
-#+end_src
-
-#+begin_src emacs-lisp
-(use-package doom-modeline)
-  ;; :hook (emacs-startup . doom-modeline-mode))
-#+end_src
-
 *** Custom Mode Line
 
 #+begin_src emacs-lisp
@@ -1220,6 +1161,7 @@ doom-modeline
 
 (provide 'cur-config-faces)
 #+end_src
+
 ** Completion system configurations (=cur-config-completion.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-completion.el
@@ -1279,18 +1221,6 @@ marginalia
 (use-package marginalia
   :config
   (marginalia-mode 1))
-#+end_src
-
-*** Vertico Posframe
-
-#+begin_src text :tangle ./packages.txt :padline no
-vertico-posframe
-#+end_src
-
-#+begin_src emacs-lisp :tangle no
-(use-package vertico-posframe
-  :config
-  (vertico-posframe-mode 1))
 #+end_src
 
 *** Consult
@@ -1623,21 +1553,6 @@ flycheck
 
 *** TODO Flymake
 
-*** Treemacs
-
-Project tree, I don't use this all that often.
-
-#+begin_src text :tangle ./packages.txt :padline no
-treemacs
-#+end_src
-
-#+begin_src emacs-lisp
-;; ===Treemacs==
-(use-package treemacs
-  :config
-  (treemacs-follow-mode))
-#+end_src
-
 *** Magit
 
 Magit is a git interface, probably the best one I have ever seen or had the pleasure of using. I consider magit to be one of emacs' "killer features", right up there with org-mode.
@@ -1679,54 +1594,12 @@ magit
 
 Ripgrep go burrr.
 
-#+begin_src emacs-lisp
-(use-package rg)
-#+end_src
-
-*** Projectile
-
-Projectile provides many commands to help manage and do things in a project, such as compile a project from its root, list all files in the project, or run grep or ripgrep on all the files in the project. I also use it's project switching aspect as sort of a bookmark like system.
-
 #+begin_src text :tangle ./packages.txt :padline no
-# projectile
 rg
 #+end_src
 
-#+begin_src emacs-lisp :tangle no
-;; ===Projectile===
-(use-package projectile
-  :after (rg)
-  :bind (:map cur/projectile-map
-              ("C-p"   . projectile-switch-project)
-              ("C-a"   . projectile-add-known-project)
-              ("C-d"   . projectile-dired)
-              ("M-d"   . projectile-find-dir)
-              ("C-f"   . projectile-find-file)
-              ("C-c"   . projectile-compile-project)
-              ("C-l"   . projectile-ibuffer)
-              ("C-k"   . projectile-kill-buffers)
-              ("C-v"   . projectile-vc)
-              ("C-e"   . projectile-run-eshell)
-              ("C-r"   . projectile-ripgrep))
-  :config
-  (projectile-mode 1))
-#+end_src
-
-*** Just
-
-[[https:github.com/casey/just][Just]] is just a command runner. Think of it sort of like make but simplified. This is my configuration for working and interacting with it from emacs.
-
-#+begin_src text :tangle ./packages.txt :padline no
-just-mode
-justl
-#+end_src
-
 #+begin_src emacs-lisp
-(use-package just-mode)
-
-(use-package justl
-  :bind (:map project-prefix-map
-              ("j" . justl)))
+(use-package rg)
 #+end_src
 
 *** TMR

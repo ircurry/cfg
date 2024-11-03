@@ -2,7 +2,6 @@ hydra
 avy
 meow
 which-key
-helpful
 nerd-icons-dired
 fontaine
 doom-themes
@@ -10,14 +9,11 @@ autothemer
 catppuccin-theme
 ef-themes
 nerd-icons-ibuffer
-spacious-padding
-doom-modeline
 embark
 embark-consult
 orderless
 vertico
 marginalia
-vertico-posframe
 consult
 consult-dir
 embark
@@ -28,12 +24,8 @@ lsp-mode
 lsp-ui
 company
 flycheck
-treemacs
 magit
-# projectile
 rg
-just-mode
-justl
 tmr
 rainbow-delimiters
 paredit
