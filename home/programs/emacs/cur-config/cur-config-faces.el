@@ -107,7 +107,11 @@
 		(help-key-binding :foreground "#88c0d0"
 				  :background "#2e3440"
 				  :box '(:line-width 1 :color "#4c566a")
-				  :inherit 'fixed-pitch)))))
+				  :inherit 'fixed-pitch)
+		(corfu-default :foreground "#eceff4"
+			       :background "#3b4252")
+		(corfu-current :foreground "#eceff4"
+			       :background "#434c5e")))))
 
 ;; ===Doom Emacs Themes===
 (use-package doom-themes
