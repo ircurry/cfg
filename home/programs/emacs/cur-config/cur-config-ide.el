@@ -53,11 +53,11 @@
   :hook
   (prog-mode . company-mode)
   (lsp-mode . company-mode)
-  :bind (:map company-active-map
-              ("<tab>" . company-complete-common-or-cycle)
-              ("<return>" . company-complete-selection))
-  (:map lsp-mode-map
-        ("<tab>" . company-indent-or-complete-common))
+  :bind ( :map company-active-map
+          ("<tab>" . company-complete-common-or-cycle)
+          ("<return>" . company-complete-selection)
+	  :map company-mode-map
+	  ("<tab>" . company-indent-or-complete-common))
   :custom
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0))
