@@ -6,6 +6,13 @@ if [ -z $1 ]; then
 fi
 
 base="$(echo $1 | grep -Eo 'playlist\?list=.{34}')"
+if [ -z "$base" ]; then
+    base="$(echo $1 | grep -Eo 'playlist\?list=.{18}')"
+fi
+if [ -z "$base" ]; then
+    printf "Failed to get base of playlist from '%s'" "$1" 1>&2
+    exit 1
+fi
 url=$(echo "https://youtube.com/$base")
 mkdir -p "$HOME/dl/intake-playlists"
 yt-dlp --embed-metadata \
