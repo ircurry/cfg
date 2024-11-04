@@ -111,7 +111,9 @@
 		(corfu-default :foreground "#eceff4"
 			       :background "#3b4252")
 		(corfu-current :foreground "#eceff4"
-			       :background "#434c5e")))))
+			       :background "#434c5e")
+		(aw-leading-char-face :foreground "#bf616a")
+		(aw-background-face :foreground "#4c566a")))))
 
 ;; ===Doom Emacs Themes===
 (use-package doom-themes
