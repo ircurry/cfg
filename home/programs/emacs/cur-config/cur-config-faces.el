@@ -169,4 +169,50 @@
 		  cur-mode-line-right-align
 		  mode-line-end-spaces)))
 
+(use-package page-break-lines
+  :defer t)
+
+(use-package dashboard
+  :custom
+  (dashboard-items '((projects . 5)
+		     (recents . 5)
+		     (bookmarks . 5)))
+  (dashboard-startupify-list '(dashboard-insert-banner
+			       dashboard-insert-newline
+			       dashboard-insert-init-info
+			       dashboard-insert-items
+			       dashboard-insert-newline
+			       dashboard-insert-footer))
+  (dashboard-center-content t)
+  :config
+  ;; These make it really easy to accidentally delete projects and bookmarks
+  (dolist (c '(dashboard-remove-item-under
+	       dashboard-remove-item-agenda
+	       dashboard-remove-item-recentf
+	       dashboard-remove-item-projects
+	       dashboard-remove-item-bookmarks))
+    (put c 'disabled t))
+  (setopt dashboard-heading-icons '((recents . "nf-oct-history")
+				    (bookmarks . "nf-oct-bookmark")
+				    (agenda . "nf-oct-calendar")
+				    (projects . "nf-oct-rocket")
+				    (registers . "nf-oct-database")))
+  (setopt dashboard-startup-banner (concat (expand-file-name user-emacs-directory) "dashboard-banners/nocturne-fraktur.txt"))
+  (dashboard-setup-startup-hook))
+
+(use-package dashboard
+  :if (locate-library "nerd-icons.el")
+  :custom
+  (dashboard-display-icons-p t)
+  (dashboard-icon-type 'nerd-icons)
+  (dashboard-set-file-icons t)
+  (dashboard-set-heading-icons t))
+
+(use-package dashboard
+  :if (locate-library "page-break-lines.el")
+  :hook (dashboard-before-initialize . (lambda (&rest _)
+					(page-break-lines-mode +1)))
+  :custom
+  (dashboard-page-separator "\n"))
+
 (provide 'cur-config-faces)

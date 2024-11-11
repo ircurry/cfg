@@ -9,6 +9,9 @@ autothemer
 catppuccin-theme
 ef-themes
 nerd-icons-ibuffer
+page-break-lines
+dashboard
+nerd-icons
 embark
 embark-consult
 orderless
