@@ -33,7 +33,7 @@ in
                 case "$1" in
                         v|vid|video) shift; ytfzf --type=video "$@";;
                         c|chan|channel) shift; ytfzf --type=channel "$@";;
-                        pl|play|playlist) shift; ytfzf --type=channel "$@";;
+                        pl|play|playlist) shift; ytfzf --type=playlist "$@";;
                         all) shift; ytfzf --type=all "$@";;
                         m|music) shift; ytfzf -m --notify-playing "$@";;
                         *) ytfzf "$@"
