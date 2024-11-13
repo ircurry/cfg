@@ -112,7 +112,7 @@
 			       :background "#3b4252")
 		(corfu-current :foreground "#eceff4"
 			       :background "#434c5e")
-		(aw-leading-char-face :foreground "#bf616a")
+		(aw-leading-char-face :foreground "#bf616a" :height 1.3)
 		(aw-background-face :foreground "#4c566a")))))
 
 ;; ===Doom Emacs Themes===
