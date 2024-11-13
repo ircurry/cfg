@@ -18,9 +18,7 @@
            (body-function . cur-window-select-fit-to-size))
 	  ("\\*Embark Actions\\*"
            (display-buffer-reuse-mode-window display-buffer-below-selected)
-           (window-height . fit-window-to-buffer)
-           (window-parameters . ((no-other-window . t)
-                                 (mode-line-format . none))))
+           (window-height . fit-window-to-buffer))
           ((or (derived-mode . occur-mode)
                (derived-mode . xref--xref-buffer-mode))
            (display-buffer-reuse-window
