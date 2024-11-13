@@ -68,8 +68,8 @@ in
         rofi.border-color = bg4;
       };
       wayland.hyprland = {
-        col-active-border1 = bg4 + "ee";
-        col-active-border2 = bg3 + "ee";
+        col-active-border1 = light-blue + "ee";
+        col-active-border2 = light-blue + "ee";
         col-inactive-border = bg1 + "ee";
       };
       wayland.waybar = {
