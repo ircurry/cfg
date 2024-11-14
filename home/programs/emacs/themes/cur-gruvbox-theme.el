@@ -434,6 +434,8 @@
    `(org-checkbox                 ((t (:inherit org-todo))))
    `(org-date                     ((t (:foreground ,light-green))))
    `(org-drawer                   ((t (:foreground ,(cur-theme-lighten light-aqua 0.4)))))
+   `(org-document-info            ((t (:foreground ,light-red :bold t))))
+   `(org-document-title           ((t (:foreground ,light-red))))
    `(org-done                     ((t (:inherit org-headline-done :weight bold))))
    `(org-ellipsis                 ((t (:foreground ,light-orange))))
    `(org-footnote                 ((t (:foreground ,light-orange))))
