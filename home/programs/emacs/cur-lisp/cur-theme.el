@@ -169,16 +169,16 @@ a single theme to be enabled and signal a user error if multiple are enabled."
   (cdr (assoc theme cur-override-theme-overrides)))
 
 (defmacro cur-override-theme-def ()
-  ""
+  "Define the override theme."
   (let ((overrides
-         (cond ((eq cur-override-theme-theme-priority 'first)
-                (cur-theme--get-overrides (car (last custom-enabled-themes))))
-               ((eq cur-override-theme-theme-priority 'last)
-                (cur-theme--get-overrides (car custom-enabled-themes)))
-               ((eq cur-override-theme-theme-priority 'single)
+         (cond ((eq cur-override-theme-theme-priority 'single)
                 (when (> (length custom-enabled-themes) 1)
                   (user-error "More than one theme enabled.
 Please disable all but one theme or change the value of `cur-override-theme-theme-priority'"))
+                (cur-theme--get-overrides (car custom-enabled-themes)))
+	       ((eq cur-override-theme-theme-priority 'first)
+		(cur-theme--get-overrides (car (last custom-enabled-themes))))
+               ((eq cur-override-theme-theme-priority 'last)
                 (cur-theme--get-overrides (car custom-enabled-themes))))))
     `(cur-theme-def cur-override
        "A theme to override defintions another theme."
@@ -199,7 +199,8 @@ Please disable all but one theme or change the value of `cur-override-theme-them
   (condition-case nil
       (progn
         (mapc #'disable-theme custom-enabled-themes)
-        (load-theme theme t))
+        (load-theme theme t)
+	(load-theme 'cur-override t))
     (error "Problem loading theme %s" theme)))
 
 (defcustom cur-override-theme-load-function

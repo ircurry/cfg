@@ -44,13 +44,13 @@ in
         base05 = fg1; # +++
         base06 = fg2; # ++
         base07 = fg0; # ++++
-        base08 = red; # red
-        base09 = orange; # orange
-        base0A = yellow; # yellow
-        base0B = green; # green
-        base0C = aqua; # aqua/cyan
-        base0D = blue; # blue
-        base0E = purple; # purple
+        base08 = light-red; # red
+        base09 = light-orange; # orange
+        base0A = light-yellow; # yellow
+        base0B = light-green; # green
+        base0C = light-aqua; # aqua/cyan
+        base0D = light-blue; # blue
+        base0E = light-purple; # purple
         base0F = grey; # brown
       };
       graphical = {
@@ -68,8 +68,8 @@ in
         rofi.border-color = bg4;
       };
       wayland.hyprland = {
-        col-active-border1 = bg4 + "ee";
-        col-active-border2 = bg3 + "ee";
+        col-active-border1 = light-blue + "ee";
+        col-active-border2 = light-blue + "ee";
         col-inactive-border = bg1 + "ee";
       };
       wayland.waybar = {

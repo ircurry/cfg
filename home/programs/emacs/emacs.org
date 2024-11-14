@@ -3122,16 +3122,16 @@ a single theme to be enabled and signal a user error if multiple are enabled."
   (cdr (assoc theme cur-override-theme-overrides)))
 
 (defmacro cur-override-theme-def ()
-  ""
+  "Define the override theme."
   (let ((overrides
-         (cond ((eq cur-override-theme-theme-priority 'first)
-                (cur-theme--get-overrides (car (last custom-enabled-themes))))
-               ((eq cur-override-theme-theme-priority 'last)
-                (cur-theme--get-overrides (car custom-enabled-themes)))
-               ((eq cur-override-theme-theme-priority 'single)
+         (cond ((eq cur-override-theme-theme-priority 'single)
                 (when (> (length custom-enabled-themes) 1)
                   (user-error "More than one theme enabled.
 Please disable all but one theme or change the value of `cur-override-theme-theme-priority'"))
+                (cur-theme--get-overrides (car custom-enabled-themes)))
+	       ((eq cur-override-theme-theme-priority 'first)
+		(cur-theme--get-overrides (car (last custom-enabled-themes))))
+               ((eq cur-override-theme-theme-priority 'last)
                 (cur-theme--get-overrides (car custom-enabled-themes))))))
     `(cur-theme-def cur-override
        "A theme to override defintions another theme."
@@ -3152,7 +3152,8 @@ Please disable all but one theme or change the value of `cur-override-theme-them
   (condition-case nil
       (progn
         (mapc #'disable-theme custom-enabled-themes)
-        (load-theme theme t))
+        (load-theme theme t)
+	(load-theme 'cur-override t))
     (error "Problem loading theme %s" theme)))
 
 (defcustom cur-override-theme-load-function
@@ -3398,6 +3399,7 @@ determine if it will create a new window or reuse the current one.")
 (require 'cur-theme)
 
 ;; (add-to-list 'custom-theme-load-path (locate-user-emacs-file "/home/recur/cfg/home/programs/emacs/themes"))
+;; (load-theme 'cur-gruvbox t)
 
 (defun cur-theme-name-to-rgb (color)
   "Retrieves the hexidecimal string repesented the named COLOR (e.g. \"red\")
@@ -3490,7 +3492,7 @@ for FRAME (defaults to the current frame)."
    `(link                ((t (:foreground ,light-aqua :underline t :weight bold))))
    `(link-visited        ((t (:foreground ,aqua :underline t :weight bold))))
    `(cursor              ((t (:background ,fg0))))
-   `(fringe              ((t (:distant-foreground ,fg1 :background ,bg3))))
+   `(fringe              ((t (:distant-foreground ,fg1 :background ,bg0))))
    `(region              ((t (:background ,bg3))))
    `(highlight           ((t (:foreground ,bg-sp1 :distant-foreground ,fg0 :background ,light-yellow))))
    `(hl-line             ((t (:background ,bg1))))
@@ -3524,8 +3526,8 @@ for FRAME (defaults to the current frame)."
 
    `(mode-line           ((t (:background ,bg1))))
    `(mode-line-active    ((t (:inherit mode-line))))
-   `(mode-line-emphasis  ((t (:foreground ,light-yellow :distant-foreground ,bg0))))
-   `(mode-line-inactive  ((t (:foreground ,bg3 :background ,bg0s))))
+   `(mode-line-emphasis  ((t (:foreground ,light-blue :distant-foreground ,bg4))))
+   `(mode-line-inactive  ((t (:foreground ,bg4 :background ,bg0s))))
    `(mode-line-buffer-id ((t (:weight bold))))
 
    ;; Line Number
@@ -3616,6 +3618,10 @@ for FRAME (defaults to the current frame)."
    `(rainbow-delimiters-depth-7-face    ((t (:foreground ,orange))))
    `(rainbow-delimiters-depth-8-face    ((t (:foreground ,red))))
    `(rainbow-delimiters-depth-9-face    ((t (:foreground ,green))))
+
+   ;; Magit
+   `(magit-branch-local ((t (:foreground ,light-aqua))))
+   `(magit-section-heading ((t (:foreground ,light-aqua :bold t))))
 
 ;;; Languages and IDE Packages
 
