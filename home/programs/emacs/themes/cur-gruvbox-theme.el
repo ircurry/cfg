@@ -6,32 +6,8 @@
 
 (require 'cur-theme)
 
-;; (add-to-list 'custom-theme-load-path (locate-user-emacs-file "/home/recur/cfg/home/programs/emacs/"))
-;; (load-theme 'cur-gruvbox t)
-
-(defun cur-theme-name-to-rgb (color)
-  "Retrieves the hexidecimal string repesented the named COLOR (e.g. \"red\")
-for FRAME (defaults to the current frame)."
-  (cl-loop with div = (float (car (tty-color-standard-values "#ffffff")))
-           for x in (tty-color-standard-values (downcase color))
-           collect (/ x div)))
-
-(defun cur-theme-blend (color1 color2 alpha)
-  ""
-  (if (and (string-prefix-p "#" color2) (string-prefix-p "#" color2))
-      (apply (lambda (r g b) (format "#%02x%02x%02x" (* r 255) (* g 255) (* b 255)))
-             (cl-loop for it    in (cur-theme-name-to-rgb color1)
-                      for other in (cur-theme-name-to-rgb color2)
-                      collect (+ (* alpha it) (* other (- 1 alpha)))))
-    (error "No \"#\" prefix for \"%s\" and \"%s\"" color2 color2)))
-
-(defun cur-theme-lighten (color alpha)
-  ""
-  (cur-theme-blend color "#FFFFFF" (- 1 alpha)))
-
-(defun cur-theme-darken (color alpha)
-  ""
-  (cur-theme-blend color "#000000" (- 1 alpha)))
+;; (add-to-list 'custom-theme-load-path (locate-user-emacs-file "/home/recur/cfg/home/programs/emacs/themes"))
+;; (progn (mapc #'disable-theme custom-enabled-themes) (load-theme 'cur-gruvbox t))
 
 (deftheme cur-gruvbox
   "Asdf.")
