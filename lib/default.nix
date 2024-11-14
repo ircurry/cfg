@@ -51,6 +51,8 @@ rec {
         pkgs.writeShellApplication (value // { inherit name; })
     ) shellPkgs;
 
+  # Map over a list of monitors and return a list of strings in the form that
+  # hyprland uses for monitor configuration.
   hyprlandMonitorsToString =
     monitors:
     let
@@ -72,6 +74,9 @@ rec {
     in
     map mapFn monitors;
 
+  # take a profile name (string) and a list of monitor profiles and return a
+  # list of strings that are in the form that hyprland uses for monitor
+  # configuration.
   hyprlandDefaultProfile =
     defaultProfile: monitorProfiles:
     let
