@@ -425,8 +425,8 @@
 
    ;; Org General
    `(org-archived                 ((t (:foreground ,bg4))))
-   `(org-block                    ((t (:background ,bg1 :extend t))))
-   `(org-block-begin-line         ((t (:foreground ,grey :inherit (org-block)))))
+   `(org-block                    ((t (:inherit default))))
+   `(org-block-begin-line         ((t (:foreground ,grey :background ,bg1 :extend t))))
    `(org-block-end-line           ((t (:inherit (org-block-begin-line)))))
    `(org-code                     ((t (:foreground ,light-orange :inherit org-block))))
    `(org-checkbox-statistics-done ((t (:inherit org-done))))
