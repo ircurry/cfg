@@ -106,6 +106,7 @@
    `(tooltip             ((t (:foreground ,fg1 :background ,bg0h))))
    `(shadow              ((t (:foreground ,bg4))))
    `(trailing-whitespace ((t (:background ,light-red))))
+   `(help-key-binding    ((t (:background ,bg0 :foreground ,light-blue :box (:line-width 1 :color ,bg2) :inherit fixed-pitch))))
 
    ;; Font Lock Faces
 
