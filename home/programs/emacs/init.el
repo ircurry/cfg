@@ -59,6 +59,7 @@
 (require 'cur-config-ide)
 (require 'cur-config-lisp)
 (require 'cur-config-java)
+(require 'cur-config-just)
 (require 'cur-config-markup)
 (require 'cur-config-nix)
 (require 'cur-config-rust)

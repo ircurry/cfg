@@ -131,6 +131,7 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
 (require 'cur-config-ide)
 (require 'cur-config-lisp)
 (require 'cur-config-java)
+(require 'cur-config-just)
 (require 'cur-config-markup)
 (require 'cur-config-nix)
 (require 'cur-config-rust)
@@ -1811,6 +1812,20 @@ lsp-java
       (append (list (concat jdtls-path "/bin/jdtls")) jdtls-exec-options))))
 
 (provide 'cur-config-java)
+#+end_src
+
+** Configurations for Justfiles (=cur-config-just.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-config/cur-config-just.el
+:END:
+
+#+begin_src text :tangle ./packages.txt :padline no
+just-mode
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package just-mode
+  :defer t)
 #+end_src
 
 ** Configurations for Mark-up Languages (=cur-config-markup.el=)

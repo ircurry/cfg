@@ -47,6 +47,7 @@ geiser-stklos
 macrostep
 macrostep-geiser
 lsp-java
+just-mode
 yaml-mode
 nix-mode
 nix-ts-mode
