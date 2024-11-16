@@ -1826,6 +1826,8 @@ just-mode
 #+begin_src emacs-lisp
 (use-package just-mode
   :defer t)
+
+(provide 'cur-config-just)
 #+end_src
 
 ** Configurations for Mark-up Languages (=cur-config-markup.el=)
