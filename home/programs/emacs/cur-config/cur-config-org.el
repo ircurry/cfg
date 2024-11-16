@@ -47,6 +47,7 @@
      ("e" . "src emacs-lisp")
      ("t" . "src emacs-lisp :tangle FILENAME")
      ("T" . "src text :tangle FILENAME")
+     ("P" . "src text :tangle ./packages.txt :padline no")
      ("x" . "export")
      ("X" . "example")
      ("q" . "quote")
