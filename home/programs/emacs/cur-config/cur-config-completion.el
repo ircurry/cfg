@@ -14,6 +14,9 @@
 
 (use-package vertico
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
+  :bind ( :map vertico-map
+	  ("M-e" . vertico-next-group)
+	  ("M-a" . vertico-previous-group))
   :init
   (vertico-mode 1))
 
