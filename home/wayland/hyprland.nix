@@ -250,7 +250,9 @@ in
               size = 5;
               passes = 2;
             };
-            drop_shadow = "no";
+            shadow = {
+              enabled = false;
+            };
           };
           animations = {
             enabled = "yes";
