@@ -13,6 +13,7 @@
         experimental-features = [
           "nix-command"
           "flakes"
+          "pipe-operators"
         ];
       };
       nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
