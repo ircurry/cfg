@@ -54,27 +54,6 @@
   (eat-eshell-mode 1))
 
 (use-package eat
-  :after (eshell meow)
-  :hook
-  (eat--eshell-semi-char-mode . (lambda (&rest _)
-				  (progn
-				    (when (and meow-global-mode (not meow-mode))
-				      (meow-mode +1)))))
-  ;; TODO: in the future I would like for there to be a hook that operates when
-  ;; switching between the eat modes. This would make integrating meow and eat
-  ;; soooooo much easier and cleaner. It would also generally make eat more
-  ;; felixible. I would also like for `eat-emacs-mode' and the like to have
-  ;; hooks that I can use.
-  (eat--eshell-char-mode . (lambda (&rest _)
-			     (if eat--eshell-char-mode
-				 (meow-mode -1)
-			       (unless meow-mode
-				 (meow-mode +1)))))
-  (eat-eshell-exit . (lambda (&rest _)
-		       (when (and meow-global-mode (not meow-mode))
-			 (meow-mode +1)))))
-
-(use-package eat
   :if (locate-library "corfu.el")
   :hook (eat-mode . (lambda (&rest _)
 		      (setq-local corfu-auto nil)
