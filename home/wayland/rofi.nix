@@ -21,7 +21,7 @@ in
         ];
 
       home.packages = [
-        pkgs.nerdfonts
+        pkgs.nerd-fonts.jetbrains-mono
         pkgs.rofi-wayland
       ];
       nocturne.wayland.menu = {

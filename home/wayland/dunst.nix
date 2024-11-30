@@ -107,7 +107,7 @@ in
       volmute
       brightup
       brightdown
-      pkgs.nerdfonts
+      pkgs.nerd-fonts.jetbrains-mono
       pkgs.libnotify
     ];
     services.dunst = {

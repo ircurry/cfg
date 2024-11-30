@@ -10,7 +10,8 @@ in
 {
   config = lib.mkIf (cfg.name == "swaylock") {
     home.packages = [
-      pkgs.nerdfonts
+      pkgs.nerd-fonts.fira-code
+      pkgs.nerd-fonts.fira-mono
       pkgs.swaylock-effects
     ];
     nocturne.wayland.lock.exec = "${lib.getExe pkgs.swaylock-effects}";

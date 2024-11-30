@@ -10,7 +10,7 @@ in
 {
   config = lib.mkIf (cfg == "mako") {
     home.packages = [
-      pkgs.nerdfonts
+      pkgs.nerd-fonts.jetbrains-mono
       pkgs.libnotify
     ];
     nocturne.wayland.notification.exec-start = "${lib.getExe pkgs.mako}";

@@ -38,7 +38,7 @@ in
         # ===General===
         ispell
         libvterm
-        nerdfonts
+        nerd-fonts.jetbrains-mono
         texliveFull
       ];
 

@@ -7,7 +7,10 @@
   config = {
     home.packages = with pkgs; [
       material-design-icons
-      nerdfonts
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.iosevka
+      nerd-fonts.iosevka-term
+      nerd-fonts.iosevka-term-slab
     ];
     programs.waybar = {
       enable = true;
@@ -296,12 +299,18 @@
             active-only = false;
             all-outputs = true;
             format-icons = {
-              "1" = "一";
-              "2" = "二";
-              "3" = "三";
-              "4" = "四";
-              "5" = "五";
-              "6" = "六";
+              # "1" = "一";
+              # "2" = "二";
+              # "3" = "三";
+              # "4" = "四";
+              # "5" = "五";
+              # "6" = "六";
+              "1" = "";
+              "2" = "";
+              "3" = "";
+              "4" = "";
+              "5" = "";
+              "6" = "";
             };
             persistent-workspaces = {
               "*" = [

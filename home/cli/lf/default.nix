@@ -11,7 +11,7 @@ in
 {
   config = lib.mkIf cfg.enable {
     home.packages = [
-      pkgs.nerdfonts
+      pkgs.nerd-fonts.jetbrains-mono
       pkgs.bzip2
       pkgs.gzip
       pkgs.xz
