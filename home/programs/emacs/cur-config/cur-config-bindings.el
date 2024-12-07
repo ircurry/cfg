@@ -146,9 +146,12 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      ;; '("'"  . )
      )
     (meow-normal-define-key
+     ;; ===Special===
+     '("|" . cur/shell-filter-active-region)
+
      ;; ===Top Row===
      '("1" . meow-expand-1)
-     '("!" . cur/shell-filter-active-region)
+     ;; '("!" . )
      '("2" . meow-expand-2)
      ;; '("@" . )
      '("3" . meow-expand-3)
