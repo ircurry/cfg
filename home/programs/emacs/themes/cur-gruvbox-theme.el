@@ -154,6 +154,7 @@
    `(dired-flagged ((t (:foreground ,light-red :bold t))))
    `(dired-header ((t (:foreground ,light-green :bold t))))
    `(dired-special ((t (:foreground ,light-orange))))
+   `(dired-symlink ((t (:foreground ,light-aqua))))
    `(dired-mark ((t (:foreground ,light-orange :background ,bg0 :inverse t :bold t))))
    `(dired-marked ((t (:foreground ,light-yellow :inherit dired-mark))))
 
@@ -163,7 +164,7 @@
 
    `(marginalia-file-priv-dir ((t (:foreground ,light-blue))))
    `(marginalia-file-priv-exec ((t (:foreground ,light-green))))
-   `(marginalia-file-priv-link ((t (:foreground ,light-purple))))
+   `(marginalia-file-priv-link ((t (:foreground ,light-aqua))))
    `(marginalia-file-priv-other ((t (:foreground ,light-orange))))
    `(marginalia-file-priv-rare ((t (:foreground ,light-orange))))
    `(marginalia-file-priv-read ((t (:foreground ,light-yellow))))
