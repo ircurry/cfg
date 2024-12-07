@@ -330,8 +330,10 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
 
 NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-sitter]] to see if its worth using.
 
+Currently Meow is broken in the emacsoverlay so I am including the package from mepla stable instead.
+
 #+begin_src text :tangle ./packages.txt :padline no
-meow
+# meow
 #+end_src
 
 #+begin_src emacs-lisp

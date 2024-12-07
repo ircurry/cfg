@@ -1,6 +1,6 @@
 hydra
 avy
-meow
+# meow
 which-key
 nerd-icons-dired
 fontaine

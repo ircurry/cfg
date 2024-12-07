@@ -20,7 +20,10 @@ let
         );
       in
       (lib.foldl (acc: x: acc ++ [ epkgs."${x}" ]) [ ] packageNames)
-      ++ [ epkgs.treesit-grammars.with-all-grammars ]
+      ++ [
+        epkgs.treesit-grammars.with-all-grammars
+        epkgs.nongnuPackages.meow
+      ]
     ));
 in
 {
