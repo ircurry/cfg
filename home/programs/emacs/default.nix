@@ -22,7 +22,11 @@ let
       (lib.foldl (acc: x: acc ++ [ epkgs."${x}" ]) [ ] packageNames)
       ++ [
         epkgs.treesit-grammars.with-all-grammars
-        epkgs.nongnuPackages.meow
+        (pkgs.callPackage ./meow.nix {
+          inherit (pkgs) fetchFromGitHub;
+          inherit (lib) fakeHash;
+          inherit (epkgs) trivialBuild;
+        })
       ]
     ));
 in
