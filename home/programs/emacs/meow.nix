@@ -9,7 +9,7 @@ trivialBuild rec {
   src = fetchFromGitHub {
     owner = "meow-edit";
     repo = "meow";
-    rev = "73f2dd2fce8069c4ac4f6ae2a8afdda40450a7e4";
-    hash = "sha256-Ief014W0XHQlYfTrvqykBJCXp/6bYJeT+ikYjkHFbLE=";
+    rev = "cde5f4c57bc8657bd361f60725338cf218b66e7d";
+    hash = "sha256-w9JBdFFb/H3kLfzfpN4ZmBNV509E5+PRddfikvieyco=";
   };
 }

@@ -298,7 +298,6 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   (meow-cheats-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
   (meow-keypad-leader-dispatch nil)
   (meow-visit-sanitize-completion nil)
-  (meow-keypad-leader-dispatch "C-c")
   :bind ( :map cur/sub-leader-keymap
           ("C-l" . ibuffer)
           ("C-b" . bookmark-set-no-overwrite)

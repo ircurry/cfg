@@ -330,7 +330,7 @@ A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
 
 NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-sitter]] to see if its worth using.
 
-I have packaged meow on my own so it is commented out here. I left it here because to show that it is an external dependency for my emacs configuration.
+Currently Meow is broken in the emacsoverlay so I am including the package from mepla stable instead.
 
 #+begin_src text :tangle ./packages.txt :padline no
 # meow
@@ -623,7 +623,6 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   (meow-cheats-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
   (meow-keypad-leader-dispatch nil)
   (meow-visit-sanitize-completion nil)
-  (meow-keypad-leader-dispatch "C-c")
   :bind ( :map cur/sub-leader-keymap
           ("C-l" . ibuffer)
           ("C-b" . bookmark-set-no-overwrite)
