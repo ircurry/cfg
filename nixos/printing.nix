@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
-  config = {
+  config = lib.mkIf false {
     # Enable CUPS to print documents.
     services.printing = {
-      enable = false;
+      enable = true;
       drivers = with pkgs; [
         gutenprint
         hplip
@@ -11,7 +11,7 @@
       ];
     };
     services.avahi = {
-      enable = false;
+      enable = true;
       nssmdns4 = true;
       publish = {
         enable = true;
