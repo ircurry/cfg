@@ -189,7 +189,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("u" . meow-undo)
      ;; '("U" . )
      '("i" . meow-insert)
-     '("I" . meow-open-below)
+     '("I" . meow-open-above)
      '("o" . meow-block)
      '("O" . meow-to-block)
      '("p" . meow-yank)
@@ -200,7 +200,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      ;; ===3rd Row===
      '("<escape>" . keyboard-quit)
      '("a" . meow-append)
-     '("A" . meow-open-above)
+     '("A" . meow-open-below)
      '("s" . repeat)
      ;; '("S" . )
      '("d" . meow-kill)
