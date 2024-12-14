@@ -53,10 +53,13 @@
   (setq aw-dispatch-alist '((?d aw-delete-window "Delete Window")
 			    (?m aw-swap-window "Swap Window")
 			    (?w aw-flip-window)
-			    (?b aw-switch-buffer-in-window "Select Buffer")
+			    (?b cur-aw-switch-buffer-in-window "Select Buffer")
 			    (?s aw-split-window-horz "Split Horizonally")
 			    (?v aw-split-window-vert "Split Vertically")
 			    (?o delete-other-windows "Delete Other Windows")
 			    (?? aw-show-dispatch-help))))
+
+(use-package cur-aw
+  :after ace-window)
 
 (provide 'cur-config-window)
