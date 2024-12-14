@@ -208,7 +208,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("f" . meow-find)
      '("F" . meow-find-expand)
      '("g" . meow-cancel-selection)
-     '("G" . meow-grab)
+     ;; '("G" . )
      '("h" . meow-left)
      '("H" . meow-left-expand)
      '("j" . meow-next)
@@ -238,13 +238,13 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("m" . meow-join)
      ;; '("M" . )
      '("," . meow-bounds-of-thing)
-     '("<" . meow-beginning-of-thing)
+     '("<" . beginning-of-buffer)
      '("." . meow-inner-of-thing)
-     '(">" . meow-end-of-thing)
+     '(">" . end-of-buffer)
      ;; '("/" . ) ; I bind this later to `consult-line'
      '("?" . meow-page-down)
-     '("'"  . embark-act)
-     '("\"" . embark-dwim)))
+     '("'" . meow-grab)
+     '("\"" . meow-pop-grab)))
   :init
   (defhydra cur/hydra-buffer-cycle (:timeout 4)
     "tab through buffers"
