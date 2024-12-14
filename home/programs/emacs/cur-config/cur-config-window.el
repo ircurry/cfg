@@ -19,6 +19,10 @@
 	  ("\\*Embark Actions\\*"
            (display-buffer-reuse-mode-window display-buffer-below-selected)
            (window-height . fit-window-to-buffer))
+	  ("\\*Register Preview\\*"
+           (display-buffer-reuse-mode-window display-buffer-at-bottom)
+           (window-height . fit-window-to-buffer)
+	   (window-parameters . ((mode-line-format . none))))
           ((or (derived-mode . occur-mode)
                (derived-mode . xref--xref-buffer-mode))
            (display-buffer-reuse-window
