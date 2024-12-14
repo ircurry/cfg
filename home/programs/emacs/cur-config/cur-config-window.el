@@ -54,13 +54,15 @@
   (aw-keys '(?n ?h ?j ?k ?l ?i ?u ?y ?r ?e))
   (aw-dispatch-always t)
   :config
-  (setq aw-dispatch-alist '((?d aw-delete-window "Delete Window")
+  (setq aw-dispatch-alist '((?d delete-window)
+			    (?D aw-delete-window "Delete Window")
 			    (?m aw-swap-window "Swap Window")
 			    (?w aw-flip-window)
 			    (?b cur-aw-switch-buffer-in-window "Select Buffer")
 			    (?s aw-split-window-horz "Split Horizonally")
 			    (?v aw-split-window-vert "Split Vertically")
-			    (?o delete-other-windows "Delete Other Windows")
+			    (?o delete-other-windows)
+			    (?O delete-other-windows "Delete Other Windows")
 			    (?? aw-show-dispatch-help))))
 
 (use-package cur-aw
