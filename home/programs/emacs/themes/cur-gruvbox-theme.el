@@ -158,6 +158,8 @@
    `(dired-mark ((t (:foreground ,light-orange :background ,bg0 :inverse t :bold t))))
    `(dired-marked ((t (:foreground ,light-yellow :inherit dired-mark))))
 
+   `(aw-leading-char-face ((t (:foreground ,light-red :height 1.3))))
+   `(aw-background-face  ((t (:foreground ,grey))))
 ;;; Minibuffer and Completions
 
    ;; Marginalia
