@@ -91,16 +91,16 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("<escape>" . ignore))
     (meow-leader-define-key
      ;; ===Top Row===
-     '("1" . delete-other-windows)
-     '("2" . split-window-right)
-     '("3" . split-window-below)
+     ;; '("1" . )
+     ;; '("2" . )
+     ;; '("3" . )
      ;; '("4" . )
      ;; '("5" . )
      ;; '("6" . )
      ;; '("7" . )
      ;; '("8" . )
      ;; '("9" . )
-     '("0" . "C-x 0") ; delete window
+     ;; '("0" . )
 
      ;; ===2nd Row===
      ;; '("TAB"  . )
