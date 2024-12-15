@@ -103,7 +103,7 @@
           ("<" . beginning-of-buffer)
           ("." . dired-next-dirline)
           (">" . end-of-buffer)
-          ;; ("/" . )
+          ("/" . dired-sort-toggle-or-edit)
           ("?" . scroll-up-command)
           ;; ("'"  . ) ; Leave these blank, usually embark-act
           ;; ("\"" . ) ; Leave these blank, usually embark-dwim
