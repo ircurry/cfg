@@ -33,13 +33,6 @@
     (let ((map (make-sparse-keymap)))
       map)
     "Keymap for commands that use registers.")
-  (defun cur/kmacro-toggle ()
-    (interactive)
-    (cond
-     (defining-kbd-macro
-      (call-interactively #'meow-end-kmacro))
-     (t
-      (call-interactively #'meow-start-kmacro))))
   (defun cur/shell-filter-active-region ()
     (interactive)
     (if (region-active-p)
