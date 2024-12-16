@@ -1190,7 +1190,7 @@ dashboard
 nerd-icons
 #+end_src
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (use-package dashboard
   :custom
   (dashboard-items '((projects . 5)
@@ -1233,7 +1233,9 @@ nerd-icons
 					(page-break-lines-mode +1)))
   :custom
   (dashboard-page-separator "\n"))
+#+end_src
 
+#+begin_src emacs-lisp
 (provide 'cur-config-faces)
 #+end_src
 
