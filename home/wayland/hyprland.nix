@@ -89,53 +89,58 @@ let
     ];
     text = ''
       FLOATING="$(hyprctl activewindow -j | jq ".floating" | sed 's/"//g')"
+      LAYOUT="$(hyprctl getoption "general:layout" -j | jq ".str" | sed 's/"//g')"
       if [ -z "$1" ]; then
         echo "No Arguments Given" 1>&2
         exit 1
       fi
-      case "$1" in
-        h) if [ "$FLOATING" =  "true" ]; then
-             hyprctl dispatch "moveactive -25 0"
-           else
-             hyprctl dispatch "layoutmsg swapprev"
-           fi;;
-        j) if [ "$FLOATING" = "true" ]; then
-             hyprctl dispatch "moveactive 0 25"
-           else
-             hyprctl dispatch "layoutmsg rollnext"
-           fi;;
-        k) if [ "$FLOATING" = "true" ]; then
-             hyprctl dispatch "moveactive 0 -25"
-           else
-             hyprctl dispatch "layoutmsg rollprev"
-           fi;;
-        l) if [ "$FLOATING" = "true" ]; then
-             hyprctl dispatch "moveactive 25 0"
-           else
-             hyprctl dispatch "layoutmsg swapprev"
-           fi;;
-        H) if [ "$FLOATING" =  "true" ]; then
-             hyprctl dispatch "resizeactive -25 0"
-           else
-             hyprctl dispatch "layoutmsg mfact -0.01"
-           fi;;
-        J) if [ "$FLOATING" = "true" ]; then
-             hyprctl dispatch "resizeactive 0 25"
-           else
-             hyprctl dispatch "layoutmsg cyclenext"
-           fi;;
-        K) if [ "$FLOATING" = "true" ]; then
-             hyprctl dispatch "resizeactive 0 -25"
-           else
-             hyprctl dispatch "layoutmsg cyclenext"
-           fi;;
-        L) if [ "$FLOATING" = "true" ]; then
-             hyprctl dispatch "resizeactive 25 0"
-           else
-             hyprctl dispatch "layoutmsg mfact 0.01"
-           fi;;
-        *) echo "Expected one of 'h', 'j', 'k', or 'l', got $1" 1>&2 && exit 1;;
-      esac
+      function floating() {
+        case "$1" in
+          h) hyprctl dispatch "moveactive -25 0" ;;
+          j) hyprctl dispatch "moveactive 0 25" ;;
+          k) hyprctl dispatch "moveactive 0 -25" ;;
+          l) hyprctl dispatch "moveactive 25 0" ;;
+          H) hyprctl dispatch "resizeactive -25 0" ;;
+          J) hyprctl dispatch "resizeactive 0 25" ;;
+          K) hyprctl dispatch "resizeactive 0 -25" ;;
+          L) hyprctl dispatch "resizeactive 25 0" ;;
+          *) echo "Expected one of 'h', 'j', 'k', or 'l', got $1" 1>&2 && exit 1;;
+        esac
+      }
+      function master() {
+        case "$1" in
+          h) hyprctl dispatch "layoutmsg swapprev" ;;
+          j) hyprctl dispatch "layoutmsg rollnext" ;;
+          k) hyprctl dispatch "layoutmsg rollprev" ;;
+          l) hyprctl dispatch "layoutmsg swapnext" ;;
+          H) hyprctl dispatch "layoutmsg mfact -0.01" ;;
+          J) hyprctl dispatch "layoutmsg cyclenext" ;;
+          K) hyprctl dispatch "layoutmsg cycleprev" ;;
+          L) hyprctl dispatch "layoutmsg mfact 0.01" ;;
+          *) echo "Expected one of 'h', 'j', 'k', or 'l', got $1" 1>&2 && exit 1;;
+        esac
+      }
+      function dwindle() {
+        case "$1" in
+          h) hyprctl dispatch "movefocus l";;
+          j) hyprctl dispatch "movefocus d";;
+          k) hyprctl dispatch "movefocus u";;
+          l) hyprctl dispatch "movefocus r";;
+          H) hyprctl dispatch "swapwindow l";;
+          J) hyprctl dispatch "swapwindow d";;
+          K) hyprctl dispatch "swapwindow u";;
+          L) hyprctl dispatch "swapwindow r";;
+          t) hyprctl dispatch "layoutmsg swapsplit" ;;
+          *) echo "Expected one of 'h', 'j', 'k', or 'l', got $1" 1>&2 && exit 1;;
+        esac
+      }
+      if [ "$FLOATING" = "true" ]; then
+        floating "$1"
+      elif [ "$LAYOUT" = "dwindle" ]; then
+        dwindle "$1"
+      else
+        master "$1"
+      fi
     '';
   };
 
@@ -376,6 +381,7 @@ in
             "$MOD_SHIFT, J, exec, ${lib.getExe hjklDwim} J"
             "$MOD_SHIFT, K, exec, ${lib.getExe hjklDwim} K"
             "$MOD_SHIFT, L, exec, ${lib.getExe hjklDwim} L"
+            "$MOD, T, exec, ${lib.getExe hjklDwim} t"
 
             # Volume and Brightness
             ", XF86AudioLowerVolume, exec, ${voldown}"
