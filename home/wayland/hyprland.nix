@@ -51,35 +51,6 @@ let
     '';
   };
 
-  # ===Floating Script===
-  floatToggle = pkgs.writeShellApplication {
-    name = "toggle-float";
-    runtimeInputs = with pkgs; [
-      hyprland
-      jq
-    ];
-    text = ''
-      if [ -z "$1" ]; then
-        echo "No Arguments Given" 1>&2
-        exit 1
-      fi
-      CURRENT_ACTIVE_WORKSPACE="$(hyprctl -j activeworkspace | jq ".id")"
-      WINDOWS_IN_WORKSPACE="$(hyprctl clients -j | jq ".[] | select(.workspace.id==$CURRENT_ACTIVE_WORKSPACE) | .address" | sed 's/"//g')"
-      if [ "$1" = "float" ]; then
-        for i in $WINDOWS_IN_WORKSPACE; do
-          hyprctl dispatch setfloating address:"$i"
-        done
-      elif [ "$1" = "tile" ]; then
-        for i in $WINDOWS_IN_WORKSPACE; do
-          hyprctl dispatch settiled address:"$i"
-        done
-      else
-        echo "Expected one of 'tile' or 'float', got $1" 1>&2
-        exit 1
-      fi
-    '';
-  };
-
   # ===Motion Key DWIM===
   hjklDwim = pkgs.writeShellApplication {
     name = "hjkl-dwim";
@@ -185,7 +156,6 @@ in
       # ===Packages Needed===
       home.packages = [
         hjklDwim
-        floatToggle
         centerAllFloating
         checkedHyprdock
         pkgs.dfh
@@ -345,8 +315,6 @@ in
               "$MOD, F, fullscreen"
               "$MOD, M, fullscreen, 1"
               "$MOD, W, togglefloating"
-              "$MOD, Q, exec, ${lib.getExe floatToggle} float"
-              "$MOD_SHIFT, Q, exec, ${lib.getExe floatToggle} tile"
               "$MOD, C, exec, hyprctl dispatch centerwindow 1"
               "$MOD_SHIFT, C, exec, ${lib.getExe centerAllFloating}"
 
