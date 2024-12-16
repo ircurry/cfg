@@ -200,7 +200,7 @@ in
       wayland.windowManager.hyprland = {
         enable = true;
         # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-        plugins = with pkgs.hyprlandPlugins; [ ] ++ lib.optionals plugins.hyprbars [ hyprbars ];
+        plugins = with pkgs.hyprlandPlugins; [ ] ++ lib.optionals plugins.hyprbars.enable [ hyprbars ];
         settings = {
           "$terminal" = "${term-cfg.exec}";
           "$editor" = "${ed-cfg.exec}";
@@ -397,7 +397,7 @@ in
               ",switch:off:Lid Switch,exec,${pkgs.dfh}/bin/hyprdock undocked"
             ];
           plugin = lib.mkMerge [
-            (lib.mkIf plugins.hyprbars {
+            (lib.mkIf plugins.hyprbars.enable {
               hyprbars =
                 let
                   coltext = config.nocturne.graphical.alacritty.fg + "ff";

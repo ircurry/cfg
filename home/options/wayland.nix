@@ -243,7 +243,7 @@
       };
     };
     hyprland = {
-      plugins.hyprbars = lib.mkEnableOption "Whether to enable window title bars in Hyprland";
+      plugins.hyprbars.enable = lib.mkEnableOption "Whether to enable window title bars in Hyprland";
       col-active-border1 = lib.mkOption {
         type = lib.types.str;
         default = config.nocturne.themes.colors.base0D + "ee";
