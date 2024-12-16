@@ -248,6 +248,7 @@ in
           master = {
             new_status = "master";
             orientation = "left";
+            mfact = "0.5";
           };
           gestures.workspace_swipe = "off";
           misc = {
