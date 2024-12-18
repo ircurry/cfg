@@ -31,6 +31,13 @@ let
   col_background = config.nocturne.wayland.hyprland.col-background;
   col_inactive_border = config.nocturne.wayland.hyprland.col-inactive-border;
 
+  # ===Rounding===
+  rounding = 10;
+
+  # ===Gaps===
+  gaps_in = 3;
+  gaps_out = 5;
+
   # ===Plugins===
   inherit (config.nocturne.wayland.hyprland) plugins;
 
@@ -149,6 +156,30 @@ let
       hyprctl dispatch focuswindow address:"$ORIGINAL_WINDOW"
     '';
   };
+
+  focusMode = pkgs.writeShellApplication {
+    name = "focus-mode";
+    runtimeInputs = [
+      pkgs.hyprland
+      pkgs.killall
+    ];
+    text =
+      let
+        menu = config.nocturne.wayland.menu;
+      in
+      ''
+        MODE=$(echo -e "󰿄 Enter\n󰿅 Exit" | ${menu.exec-dmenu} ${menu.promptSwitch} "Focus Mode" | awk '{print tolower($2)}')
+        case "$MODE" in
+          enter)
+            hyprctl --batch 'keyword general:gaps_in 0 ; keyword general:gaps_out 0 ; keyword decoration:rounding 0'
+            killall '.waybar-wrapped' ;;
+          exit)
+            hyprctl --batch 'keyword general:gaps_in ${builtins.toString gaps_in} ; keyword general:gaps_out ${builtins.toString gaps_out} ; keyword decoration:rounding ${builtins.toString rounding}'
+            killall '.waybar-wrapped' || true
+            setsid -f 'waybar' > /dev/null 2>&1;;
+        esac
+      '';
+  };
 in
 {
   config = lib.mkMerge [
@@ -158,6 +189,7 @@ in
         hjklDwim
         centerAllFloating
         checkedHyprdock
+        focusMode
         pkgs.dfh
         pkgs.killall
         # Audio Control
@@ -202,11 +234,10 @@ in
             ++ lib.optionals (config.nocturne.graphical.firefox.enable) [ "[workspace 4 silent] firefox" ]
             ++ lib.optionals (term-cfg.exec-start != null) [ "${term-cfg.exec-start}" ];
           general = {
-            gaps_in = 3;
-            gaps_out = 5;
-            border_size = 2;
+            inherit gaps_in gaps_out;
             "col.active_border" = "rgba(${col_active_border1}) rgba(${col_active_border2}) 45deg";
             "col.inactive_border" = "rgba(${col_inactive_border})";
+            border_size = 2;
             layout = "master";
             allow_tearing = false;
           };
@@ -219,7 +250,7 @@ in
             sensitivity = 0;
           };
           decoration = {
-            rounding = 10;
+            inherit rounding;
             blur = {
               enabled = true;
               size = 5;
@@ -305,6 +336,8 @@ in
               ## Logout (semi-colon)
               "$MOD_CTRL, code:47, exec, ${config.nocturne.wayland.menu.exec-logout}"
               "$MOD, code:47, exec, ${config.nocturne.wayland.menu.exec-logout}"
+              ## Focus Mode
+              "$MOD_SHIFT, F, exec, ${lib.getExe focusMode}"
 
               # Window Manipulation
               "$MOD, Return, layoutmsg, swapwithmaster"
