@@ -123,7 +123,7 @@ in
           follow = "keyboard";
           enable_posix_regex = true;
           width = 300;
-          height = 100;
+          height = "(0, 100)";
           origin = "top-right";
           offset = "10x10";
           progress_bar = true;
