@@ -337,4 +337,9 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   :bind ( :map cur/sub-leader-keymap
           ("C-n" . cur-meow-toggle-temp-normal-motion)))
 
+(use-package meow-tree-sitter
+  :after meow
+  :config
+  (meow-tree-sitter-register-defaults))
+
 (provide 'cur-config-bindings)

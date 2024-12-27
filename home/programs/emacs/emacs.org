@@ -328,12 +328,10 @@ Also of note, I find it easier to think about the cursor in normal mode as being
 
 A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
 
-NOTE TO SELF: check out [[https:github.com/skissue/meow-tree-sitter][meow-tree-sitter]] to see if its worth using.
-
 Currently Meow is broken in the emacsoverlay so I am including the package from mepla stable instead.
 
 #+begin_src text :tangle ./packages.txt :padline no
-# meow
+meow
 #+end_src
 
 #+begin_src emacs-lisp
@@ -661,6 +659,19 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   :after (meow)
   :bind ( :map cur/sub-leader-keymap
           ("C-n" . cur-meow-toggle-temp-normal-motion)))
+#+end_src
+
+*** Meow Tree Sitter
+
+#+begin_src text :tangle ./packages.txt :padline no
+meow-tree-sitter
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package meow-tree-sitter
+  :after meow
+  :config
+  (meow-tree-sitter-register-defaults))
 
 (provide 'cur-config-bindings)
 #+end_src

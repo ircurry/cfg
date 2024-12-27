@@ -1,6 +1,7 @@
 hydra
 avy
-# meow
+meow
+meow-tree-sitter
 which-key
 nerd-icons-dired
 fontaine

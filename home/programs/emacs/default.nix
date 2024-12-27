@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  inputs,
   mylib,
   ...
 }:
@@ -10,9 +9,18 @@
 let
   cfg = config.nocturne.graphical.emacs;
   way-cfg = config.nocturne.wayland.editor;
+  emacs-overrides = self: super: {
+    meow = (
+      pkgs.callPackage ./meow.nix {
+        inherit (pkgs) fetchFromGitHub;
+        inherit (lib) fakeHash;
+        inherit (self) trivialBuild;
+      }
+    );
+  };
   emacs-package =
     with pkgs;
-    ((emacsPackagesFor emacs29-pgtk).emacsWithPackages (
+    ((emacsPackagesFor emacs29-pgtk).overrideScope emacs-overrides).emacsWithPackages (
       epkgs:
       let
         packageNames = mylib.filterStrList (str: !mylib.startsWithHash str) (
@@ -20,15 +28,8 @@ let
         );
       in
       (lib.foldl (acc: x: acc ++ [ epkgs."${x}" ]) [ ] packageNames)
-      ++ [
-        epkgs.treesit-grammars.with-all-grammars
-        (pkgs.callPackage ./meow.nix {
-          inherit (pkgs) fetchFromGitHub;
-          inherit (lib) fakeHash;
-          inherit (epkgs) trivialBuild;
-        })
-      ]
-    ));
+      ++ [ epkgs.treesit-grammars.with-all-grammars ]
+    );
 in
 {
   config = lib.mkMerge [
