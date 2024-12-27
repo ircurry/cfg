@@ -4,7 +4,7 @@
   :init (which-key-mode)
   :diminish which-key-mode
   :config
-  (setq which-key-idle-delay 0.0001))
+  (setq which-key-idle-delay 1.0))
 
 ;; ===Info===
 (use-package info
