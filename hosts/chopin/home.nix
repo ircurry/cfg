@@ -7,7 +7,7 @@
   # ===Nocturne Home Configuration===
   nocturne = {
     # themes.theme = "basic-dark";
-    themes.theme = "catppuccin-mocha";
+    # themes.theme = "catppuccin-mocha";
     # themes.theme = "flatwhite";
     # themes.theme = "grimshaw";
     # themes.theme = "gruvbox-dark";
@@ -17,7 +17,7 @@
     # themes.theme = "nord-aurora";
     # themes.theme = "nord-light";
     # themes.theme = "oceanic-next";
-    # themes.theme = "tomorrow-night";
+    themes.theme = "tomorrow-night";
     graphical = {
       alacritty.enable = true;
       anki.enable = true;
