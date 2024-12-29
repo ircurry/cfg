@@ -1590,6 +1590,7 @@ lsp-mode
   :custom
   (lsp-keymap-prefix "C-c C-M-l" "lsp mode keymap")
   (lsp-file-watch-threshold 1750)
+  (lsp-headerline-breadcrumb-enable nil)
   :bind (:map lsp-mode-map
               ("C-c C-a" . lsp-execute-code-action)  ; code actions
               ("C-c C-e" . lsp-treemacs-errors-list) ; treemacs error list
