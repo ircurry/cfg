@@ -11,13 +11,13 @@
     # themes.theme = "flatwhite";
     # themes.theme = "grimshaw";
     # themes.theme = "gruvbox-dark";
-    # themes.theme = "gruvbox-dark-bright";
+    themes.theme = "gruvbox-dark-bright";
     # themes.theme = "gruvbox-light";
     # themes.theme = "kanagawa-wave";
     # themes.theme = "nord-aurora";
     # themes.theme = "nord-light";
     # themes.theme = "oceanic-next";
-    themes.theme = "tomorrow-night";
+    # themes.theme = "tomorrow-night";
     graphical = {
       alacritty.enable = true;
       anki.enable = true;

@@ -1127,7 +1127,7 @@ catppuccin-theme
 *** Default Theme
 
 #+begin_src emacs-lisp
-(cur-override-theme-load-theme 'doom-tomorrow-night)
+(cur-override-theme-load-theme 'cur-gruvbox)
 #+end_src
 
 *** Ef-themes
