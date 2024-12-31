@@ -133,7 +133,7 @@
 (use-package catppuccin-theme
   :after (autothemer cur-theme))
 
-(cur-override-theme-load-theme 'cur-gruvbox)
+(cur-override-theme-load-theme 'doom-oceanic-next)
 
 ;; ===Ef-Themes===
 (use-package ef-themes)
