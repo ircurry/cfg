@@ -321,7 +321,9 @@ _o_: other window     _F_: fit to buffer          _d_: close window
           :map search-map
           ("n" . meow-visit)
           ("s" . isearch-forward)
-          ("r" . isearch-backward))
+          ("r" . isearch-backward)
+	  :map next-error-repeat-map
+	  ("a" . first-error))
   :config
   (meow-setup)
   (meow-global-mode 1))
