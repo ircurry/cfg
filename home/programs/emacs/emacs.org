@@ -1133,7 +1133,7 @@ catppuccin-theme
 *** Default Theme
 
 #+begin_src emacs-lisp
-(cur-override-theme-load-theme 'doom-oceanic-next)
+(cur-override-theme-load-theme 'doom-nord)
 #+end_src
 
 *** Ef-themes
