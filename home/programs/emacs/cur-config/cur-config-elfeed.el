@@ -22,6 +22,7 @@
 
 (use-package elfeed-tube
   :after elfeed
+  :demand t
   :bind ( :map elfeed-show-mode-map
 	  ("F" . elfeed-tube-fetch)
 	  ([remap save-buffer] . elfeed-tube-save)
@@ -35,8 +36,11 @@
 
 (use-package elfeed-tube-mpv
   :after (elfeed-tube elfeed)
+  :demand t
   :bind ( :map elfeed-show-mode-map
-	  ("v" . elfeed-tube-mpv)
+	  ("v"       . elfeed-tube-mpv)
+	  ("C-c C-f" . elfeed-tube-mpv-follow-mode)
+	  ("C-c C-w" . elfeed-tube-mpv-where)
 	  :map elfeed-search-mode-map
 	  ("v" . elfeed-tube-mpv)))
 
