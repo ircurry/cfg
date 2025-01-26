@@ -78,6 +78,7 @@
 ;; ===Misc===
 (require 'cur-config-smol-net)
 (require 'cur-config-elcord)
+(require 'cur-config-elfeed)
 
 ;; ===Direnv is Last===
 (require 'cur-config-direnv)

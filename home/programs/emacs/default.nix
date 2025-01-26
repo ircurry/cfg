@@ -57,8 +57,11 @@ in
         ".emacs.d/themes".source = ./themes;
         ".emacs.d/dashboard-banners".source = ./dashboard-banners;
       };
-    })
 
+      sops.secrets."elfeed_links" = {
+        path = "${config.home.homeDirectory}/.emacs.d/cur-elfeed-links";
+      };
+    })
     (lib.mkIf (way-cfg.name == "emacs") {
       assertions = [
         {
