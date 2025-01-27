@@ -105,7 +105,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      (cons "t" cur/toggle-map)
      ;; '("y" . )
      '("u" . "C-u")   ; universal argument
-     ;; '("i" . )
+     ;; '("i" . ) ; bound in popper section
      '("o" . other-window) ; other window
      (cons "p" project-prefix-map)
      ;; '("-" . )
@@ -338,7 +338,8 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   :if (locate-library "popper.el")
   :config
   (meow-leader-define-key
-   '("e" . popper-toggle)))
+   '("e" . popper-toggle)
+   '("i" . popper-cycle)))
 
 (use-package cur-meow
   :after (meow)

@@ -71,8 +71,7 @@
 (use-package popper
   :demand t
   :bind ( :map cur/toggle-map
-	  ("w" . popper-toggle)
-	  ("c" . popper-cycle))
+	  ("w" . popper-toggle-type))
   :config
   (setopt popper-reference-buffers '("\\*Messages\\*"
 				     "\\*eat\\*" "\\*.*-eat\\*$" eat-mode
@@ -97,8 +96,9 @@
   (progn
     (popper-mode -1)
     (popper-mode +1)
-    (popper-echo-mode -1)
-    (popper-echo-mode +1)))
+    ;; (popper-echo-mode -1)
+    ;; (popper-echo-mode +1)
+    ))
 
 (use-package cur-popper
   :after (popper)
@@ -112,7 +112,8 @@
   (progn
     (popper-mode -1)
     (popper-mode +1)
-    (popper-echo-mode -1)
-    (popper-echo-mode +1)))
+    ;; (popper-echo-mode -1)
+    ;; (popper-echo-mode +1)
+    ))
 
 (provide 'cur-config-window)

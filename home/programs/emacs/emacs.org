@@ -429,7 +429,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      (cons "t" cur/toggle-map)
      ;; '("y" . )
      '("u" . "C-u")   ; universal argument
-     ;; '("i" . )
+     ;; '("i" . ) ; bound in popper section
      '("o" . other-window) ; other window
      (cons "p" project-prefix-map)
      ;; '("-" . )
@@ -662,7 +662,8 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   :if (locate-library "popper.el")
   :config
   (meow-leader-define-key
-   '("e" . popper-toggle)))
+   '("e" . popper-toggle)
+   '("i" . popper-cycle)))
 
 (use-package cur-meow
   :after (meow)
@@ -1573,8 +1574,7 @@ popper
 (use-package popper
   :demand t
   :bind ( :map cur/toggle-map
-	  ("w" . popper-toggle)
-	  ("c" . popper-cycle))
+	  ("w" . popper-toggle-type))
   :config
   (setopt popper-reference-buffers '("\\*Messages\\*"
 				     "\\*eat\\*" "\\*.*-eat\\*$" eat-mode
@@ -1599,8 +1599,9 @@ popper
   (progn
     (popper-mode -1)
     (popper-mode +1)
-    (popper-echo-mode -1)
-    (popper-echo-mode +1)))
+    ;; (popper-echo-mode -1)
+    ;; (popper-echo-mode +1)
+    ))
 
 (use-package cur-popper
   :after (popper)
@@ -1614,8 +1615,9 @@ popper
   (progn
     (popper-mode -1)
     (popper-mode +1)
-    (popper-echo-mode -1)
-    (popper-echo-mode +1)))
+    ;; (popper-echo-mode -1)
+    ;; (popper-echo-mode +1)
+    ))
 
 (provide 'cur-config-window)
 #+end_src
