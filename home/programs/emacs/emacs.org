@@ -424,7 +424,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("q" . meow-comment) ; comment dwim
      ;; '("w" . ) ; bound in ace-window section
      '("W" . cur/window/body)
-     ;; '("e" . )
+     ;; '("e" . ) ; bound in popper section
      (cons "r" cur/register-map)
      (cons "t" cur/toggle-map)
      ;; '("y" . )
@@ -657,6 +657,12 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   :config
   (meow-leader-define-key
    '("w" . ace-window)))
+
+(use-package meow
+  :if (locate-library "popper.el")
+  :config
+  (meow-leader-define-key
+   '("e" . popper-toggle)))
 
 (use-package cur-meow
   :after (meow)
@@ -1555,6 +1561,61 @@ ace-window
 
 (use-package cur-aw
   :after ace-window)
+#+end_src
+
+*** Popper and Pop Windows
+
+#+begin_src text :tangle ./packages.txt :padline no
+popper
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package popper
+  :demand t
+  :bind ( :map cur/toggle-map
+	  ("w" . popper-toggle)
+	  ("c" . popper-cycle))
+  :config
+  (setopt popper-reference-buffers '("\\*Messages\\*"
+				     "\\*eat\\*" "\\*.*-eat\\*$" eat-mode
+				     "\\*eshell\\*" "\\*.*-eshell\\*$" eshell-mode
+				     compilation-mode
+				     help-mode
+				     occur-mode
+				     geiser-mode
+				     grep-mode
+				     rg-mode)))
+
+(use-package popper
+  :after project
+  :demand t
+  :config
+  (setopt popper-group-function #'popper-group-by-project))
+
+(use-package popper
+  :if (not (locate-library "cur-popper.el"))
+  :config
+  (setopt popper-display-function #'display-buffer-below-selected)
+  (progn
+    (popper-mode -1)
+    (popper-mode +1)
+    (popper-echo-mode -1)
+    (popper-echo-mode +1)))
+
+(use-package cur-popper
+  :after (popper)
+  :config
+  (setopt popper-display-function #'cur-popper-display-buffer-dwim)
+  (setopt cur-popper-select-conditions '("\\*eat\\*" "\\*.*-eat\\*" (major-mode . eat-mode)
+					 "\\*eshell\\*" "\\*.*-eshell\\*" (major-mode . eshell-mode)
+					 "\\*Occur\\*" (major-mode . occur)
+					 (major-mode . compilation-mode)
+					 (major-mode . grep-mode)))
+  (progn
+    (popper-mode -1)
+    (popper-mode +1)
+    (popper-echo-mode -1)
+    (popper-echo-mode +1)))
 
 (provide 'cur-config-window)
 #+end_src
@@ -3084,6 +3145,53 @@ If in neither of the two states, return nil."
 
 (provide 'cur-meow)
 ;;; cur-meow.el ends here
+#+end_src
+
+** Popper Extensions (=cur-popper.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-lisp/cur-popper.el
+:END:
+
+#+begin_src emacs-lisp
+;;; cur-popper.el --- Extending Popper's capabilities -*- lexical-binding: t -*-
+
+;;; Commentary:
+;;
+
+;;; Code:
+(require 'popper)
+
+(defgroup cur-popper ()
+  "Base functions and variables for my Emacs configuration."
+  :group 'popper)
+
+(defcustom cur-popper-select-conditions '("\\*eat\\*" (derived-mode . eat-mode))
+  "A list of `buffer-match-p' conditions that determine if a popped buffer is focused."
+  :type '(repeat (choice (cons (choice (const derived-mode) (const major-mode)) symbol)
+			 string))
+  :group 'cur-popper)
+
+(defcustom cur-popper-select-window 'dwim
+  "Whether to select a popped buffer with `cur-popper-dispaly-buffer-dwim'."
+  :type '(choice (const :tag "Always" t)
+		 (const :tag "Sometimes" dwim)
+		 (const :tag "Never" nil))
+  :group 'cur-popper)
+
+(defun cur-popper-display-buffer-dwim (buffer &optional alist)
+  "Display BUFFER at the bottom of the frame and conditonally select the window.
+ALIST is passed to `dispaly-buffer-at-bottom'."
+  (let* ((nalist (append alist `((window-height . ,popper-window-height))))
+	 (window (display-buffer-at-bottom buffer nalist)))
+    (pcase cur-popper-select-window
+      (`nil window)
+      (`dwim (if (buffer-match-p `(or . ,cur-popper-select-conditions) (window-buffer window))
+		 (select-window window)
+	       window))
+      (_ (select-window window)))))
+
+(provide 'cur-popper)
+;;; cur-popper.el ends here
 #+end_src
 
 ** Theme Helpers (=cur-theme.el=)

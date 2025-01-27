@@ -100,7 +100,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("q" . meow-comment) ; comment dwim
      ;; '("w" . ) ; bound in ace-window section
      '("W" . cur/window/body)
-     ;; '("e" . )
+     ;; '("e" . ) ; bound in popper section
      (cons "r" cur/register-map)
      (cons "t" cur/toggle-map)
      ;; '("y" . )
@@ -333,6 +333,12 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   :config
   (meow-leader-define-key
    '("w" . ace-window)))
+
+(use-package meow
+  :if (locate-library "popper.el")
+  :config
+  (meow-leader-define-key
+   '("e" . popper-toggle)))
 
 (use-package cur-meow
   :after (meow)

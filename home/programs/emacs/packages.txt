@@ -25,6 +25,7 @@ embark-consult
 corfu
 cape
 ace-window
+popper
 lsp-mode
 lsp-ui
 company

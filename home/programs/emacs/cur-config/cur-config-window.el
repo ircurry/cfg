@@ -68,4 +68,51 @@
 (use-package cur-aw
   :after ace-window)
 
+(use-package popper
+  :demand t
+  :bind ( :map cur/toggle-map
+	  ("w" . popper-toggle)
+	  ("c" . popper-cycle))
+  :config
+  (setopt popper-reference-buffers '("\\*Messages\\*"
+				     "\\*eat\\*" "\\*.*-eat\\*$" eat-mode
+				     "\\*eshell\\*" "\\*.*-eshell\\*$" eshell-mode
+				     compilation-mode
+				     help-mode
+				     occur-mode
+				     geiser-mode
+				     grep-mode
+				     rg-mode)))
+
+(use-package popper
+  :after project
+  :demand t
+  :config
+  (setopt popper-group-function #'popper-group-by-project))
+
+(use-package popper
+  :if (not (locate-library "cur-popper.el"))
+  :config
+  (setopt popper-display-function #'display-buffer-below-selected)
+  (progn
+    (popper-mode -1)
+    (popper-mode +1)
+    (popper-echo-mode -1)
+    (popper-echo-mode +1)))
+
+(use-package cur-popper
+  :after (popper)
+  :config
+  (setopt popper-display-function #'cur-popper-display-buffer-dwim)
+  (setopt cur-popper-select-conditions '("\\*eat\\*" "\\*.*-eat\\*" (major-mode . eat-mode)
+					 "\\*eshell\\*" "\\*.*-eshell\\*" (major-mode . eshell-mode)
+					 "\\*Occur\\*" (major-mode . occur)
+					 (major-mode . compilation-mode)
+					 (major-mode . grep-mode)))
+  (progn
+    (popper-mode -1)
+    (popper-mode +1)
+    (popper-echo-mode -1)
+    (popper-echo-mode +1)))
+
 (provide 'cur-config-window)
