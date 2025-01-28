@@ -73,11 +73,9 @@
   :bind ( :map cur/toggle-map
 	  ("w" . popper-toggle-type))
   :config
-  (setopt popper-reference-buffers '("\\*Messages\\*"
-				     "\\*eat\\*" "\\*.*-eat\\*$" eat-mode
+  (setopt popper-reference-buffers '("\\*eat\\*" "\\*.*-eat\\*$" eat-mode
 				     "\\*eshell\\*" "\\*.*-eshell\\*$" eshell-mode
 				     compilation-mode
-				     help-mode
 				     occur-mode
 				     geiser-mode
 				     grep-mode
