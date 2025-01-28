@@ -618,6 +618,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   :bind ( :map cur/sub-leader-keymap
           ("C-l" . ibuffer)
           ("C-b" . bookmark-set-no-overwrite)
+          ("C-c" . compile)
           :map cur/register-map
           ("C-j" . jump-to-register)
           ("C-." . point-to-register)
@@ -646,8 +647,8 @@ _o_: other window     _F_: fit to buffer          _d_: close window
           ("n" . meow-visit)
           ("s" . isearch-forward)
           ("r" . isearch-backward)
-	  :map next-error-repeat-map
-	  ("a" . first-error))
+          :map next-error-repeat-map
+          ("a" . first-error))
   :config
   (meow-setup)
   (meow-global-mode 1))
