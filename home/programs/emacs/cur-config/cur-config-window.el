@@ -102,6 +102,7 @@
   :after (popper)
   :config
   (setopt popper-display-function #'cur-popper-display-buffer-dwim)
+  (setopt popper-window-height #'cur-popper-fit-window-height)
   (setopt cur-popper-select-conditions '("\\*eat\\*" "\\*.*-eat\\*" (major-mode . eat-mode)
 					 "\\*eshell\\*" "\\*.*-eshell\\*" (major-mode . eshell-mode)
 					 "\\*Occur\\*" (major-mode . occur)

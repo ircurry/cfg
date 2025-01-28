@@ -35,5 +35,11 @@ ALIST is passed to `dispaly-buffer-at-bottom'."
 	       window))
       (_ (select-window window)))))
 
+(defun cur-popper-fit-window-height (win)
+  (fit-window-to-buffer
+   win
+   (floor (frame-height) 3)
+   (floor (frame-height) 5)))
+
 (provide 'cur-popper)
 ;;; cur-popper.el ends here
