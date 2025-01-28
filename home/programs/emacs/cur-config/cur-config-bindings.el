@@ -84,16 +84,16 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("<escape>" . ignore))
     (meow-leader-define-key
      ;; ===Top Row===
-     ;; '("1" . )
-     ;; '("2" . )
-     ;; '("3" . )
-     ;; '("4" . )
-     ;; '("5" . )
-     ;; '("6" . )
-     ;; '("7" . )
-     ;; '("8" . )
-     ;; '("9" . )
-     ;; '("0" . )
+     '("1" . digit-argument)
+     '("2" . digit-argument)
+     '("3" . digit-argument)
+     '("4" . digit-argument)
+     '("5" . digit-argument)
+     '("6" . digit-argument)
+     '("7" . digit-argument)
+     '("8" . digit-argument)
+     '("9" . digit-argument)
+     '("0" . digit-argument)
 
      ;; ===2nd Row===
      ;; '("TAB"  . )
