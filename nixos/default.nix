@@ -5,6 +5,7 @@
     ./community-cache.nix
     ./hyprland.nix
     ./locales.nix
+    ./mullvad-vpn.nix
     ./networking.nix
     ./nix.nix
     ./pipewire.nix

@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.hm.nocturne.wayland.compositor;
+  cfg = config.nocturne.hm.wayland.compositor;
 in
 {
   config = lib.mkIf (cfg.name == "hyprland") {

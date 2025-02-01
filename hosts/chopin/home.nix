@@ -31,6 +31,7 @@
       kid3.enable = true;
       libreoffice.enable = true;
       mullvadBrowser.enable = true;
+      mullvad-vpn.enable = true;
       obs.enable = true;
       signalDesktop.enable = true;
       thunderbird.enable = true;

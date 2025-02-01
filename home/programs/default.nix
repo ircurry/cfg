@@ -15,6 +15,7 @@
     ./libreoffice.nix
     ./mpv.nix
     ./mullvad-browser.nix
+    ./mullvad-vpn.nix
     ./obs.nix
     ./signal.nix
     ./thunderbird.nix

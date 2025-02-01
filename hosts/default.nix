@@ -61,17 +61,23 @@ let
         }
         # Alias for home-manager, stolen from iynaix
         # (https://github.com/iynaix/dotfiles)
-        (lib.mkAliasOptionModule [ "hm" ] [
-          "home-manager"
-          "users"
-          user
-        ])
-        (lib.mkAliasOptionModule [ "nocturne" ] [
-          "home-manager"
-          "users"
-          user
-          "nocturne"
-        ])
+        (lib.mkAliasOptionModule
+          [ "hm" ]
+          [
+            "home-manager"
+            "users"
+            user
+          ]
+        )
+        (lib.mkAliasOptionModule
+          [ "nocturne" "hm" ]
+          [
+            "home-manager"
+            "users"
+            user
+            "nocturne"
+          ]
+        )
         # Extra Modules
       ] ++ modules;
     };
