@@ -17,6 +17,7 @@
     ./mullvad-browser.nix
     ./mullvad-vpn.nix
     ./obs.nix
+    ./qbittorrent.nix
     ./signal.nix
     ./thunderbird.nix
     ./tor-browser.nix

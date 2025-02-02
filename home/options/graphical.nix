@@ -114,6 +114,7 @@
     mullvadBrowser.enable = lib.mkEnableOption "Enable Mullvad Browser";
     mullvad-vpn.enable = lib.mkEnableOption "Enable Mullvad VPN";
     obs.enable = lib.mkEnableOption "Enable OBS";
+    qbittorrent.enable = lib.mkEnableOption "Enable qBittorrent";
     # TODO: DEPRICATED: will be moved to wayland option attr set
     rofi = {
       enable = lib.mkEnableOption "Enable Rofi";
