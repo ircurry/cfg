@@ -2411,7 +2411,7 @@ elfeed
   (setopt elfeed-search-filter "@2-weeks-ago")
   (setopt elfeed-db-directory (concat (abbreviate-file-name (expand-file-name user-emacs-directory)) "elfeed-db")))
 
-(let ((cur-links-path (concat (abbreviate-file-name (expand-file-name user-emacs-directory)) "cur-elfeed-links")))
+(let ((cur-links-path (locate-user-emacs-file "cur-elfeed-links")))
   (use-package elfeed
     :if (file-readable-p cur-links-path)
     :config
