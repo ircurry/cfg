@@ -246,6 +246,7 @@ I like having absolute line numbers, especially since the meow number selection 
 #+begin_src emacs-lisp
 (use-package proced
   :ensure nil
+  :if (eq system-type 'gnu/linux)
   :commands (proced)
   :custom
   (proced-auto-update-flag t)

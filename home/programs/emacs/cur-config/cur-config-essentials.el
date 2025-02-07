@@ -48,6 +48,7 @@
 
 (use-package proced
   :ensure nil
+  :if (eq system-type 'gnu/linux)
   :commands (proced)
   :custom
   (proced-auto-update-flag t)
