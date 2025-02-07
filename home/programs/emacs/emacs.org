@@ -31,7 +31,7 @@ Obligatory Frieren Ascii art.
 
 ** Emacs Version Check
 
-I do not test this config on any emacs version less than 29.4.
+This is to check what version of Emacs is being used. I do not test this configuration on any Emacs version less than 29.4. Using this configuration on any version less than 29.4 could lead to unforeseen consequences.
 
 #+begin_src emacs-lisp
 ;; ===Check Emacs Version===
@@ -41,7 +41,7 @@ I do not test this config on any emacs version less than 29.4.
 
 ** Some Basic Settings
 
-These are some basic settings that don't really fit anywhere else in my config.
+These are some basic settings that I want Emacs to load up front. Most of them are built in or core to the function of Emacs. If the rest of my configuration fails to load, I would like to at minimum have these settings enabled. There are comments next to each of them explaining what each of them does. The only exception is the one setting the scratch buffer.
 
 #+begin_src emacs-lisp
 ;; ===Basic Settings===
@@ -63,7 +63,7 @@ These are some basic settings that don't really fit anywhere else in my config.
 
 ** Enabling Disabled Functions
 
-These functions I want enabled and not asking me if I want to run the command every single time.
+These functions are disabled by default, meaning Emacs will ask me to confirm if I really want to run them. This makes sense for beginners but I use these functions often enough that I want them enabled.
 
 #+begin_src emacs-lisp
 ;; ===Enable Disabled Functions===
@@ -73,7 +73,7 @@ These functions I want enabled and not asking me if I want to run the command ev
 
 ** "Disabling" Custom
 
-Set ~custom-file~ to a temp file so I don't have to deal with custom, lol. This is a tip I learned from [[https://protesilaos.com/emacs/dotemacs#h:f2ffe0e9-a58d-4bba-9831-cc35940ea83f][Protesilaos' config]].
+Set ~custom-file~ to a temp file so I don't have to deal with custom. This is a tip I learned from [[https://protesilaos.com/emacs/dotemacs#h:f2ffe0e9-a58d-4bba-9831-cc35940ea83f][Protesilaos' config]]. If you are just starting with Emacs you may want to consider using =M-x customize= and friends in the interim. However, in the long run it will limit you and I recommend learning the basics of elisp as quickly as you can. If you have little to no prior experience to programming, consider reading [[https://www.gnu.org/software/emacs/manual/html_node/eintr/index.html][An Introduction to Programming in Emacs Lisp]]. It is a book written for non-technical people and should provide a solid base for you to work on your configuration and extend Emacs' capabilities.
 
 #+begin_src emacs-lisp
 ;; ===Disable Custom===
@@ -82,7 +82,7 @@ Set ~custom-file~ to a temp file so I don't have to deal with custom, lol. This 
 
 ** Package.el and Package Archives
 
-This is only used if I find myself on a non-nixos system, as I have nixos manage my emacs packages instead.
+This is only used if I find myself on a non-nixos system, as I have nixos manage my Emacs packages instead.
 
 #+begin_src emacs-lisp
 ;; ===Package Initialization===
@@ -97,7 +97,7 @@ This is only used if I find myself on a non-nixos system, as I have nixos manage
 
 ** Use-package
 
-Requiring ~use-package~ as that is what I use for almost all of my configuration.
+Requiring ~use-package~ as that is what I use for almost all of my configuration. It is a macro that allows for easily declaring configuration for a specific [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Named-Features.html][feature]] (think a program or plug-in within Emacs). Please read the [[info:use-package][info manual]] for how to use it and use [[https://jwiegley.github.io/use-package/keywords/][this keyword overview]] for a quick a reference if you need a refresher while using the macro.
 
 #+begin_src emacs-lisp
 ;; ===use-package Initialization===
