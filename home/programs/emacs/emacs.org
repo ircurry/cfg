@@ -166,7 +166,7 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-essentials.el
 :END:
 
-These are the basic configurations that I have done in emacs. Its sort of a hodge-podge of fixing/changing things that are built emacs. They aren't strictly essential so the name is kind of a misnomer.
+These are the basic configurations that I have done in Emacs. Its sort of a hodge-podge of fixing/changing things that are built Emacs. They aren't strictly essential so the name is kind of a misnomer.
 
 *** Parentheses highlighting
 
@@ -274,7 +274,7 @@ I like having absolute line numbers, especially since the meow number selection 
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-bindings.el
 :END:
 
-I use [[https:github.com/meow-edit/meow][meow]], a modal editing layer designed to be integrate well into emacs. It's very easy to hack on and extend and just feels more emacsy. I have had almost no issues with this, compared to evil which just felt sluggish and was hard to customize. The object-verb syntax is also really great and I prefer it to the verb-object of vim/nvim.
+I use [[https:github.com/meow-edit/meow][meow]], a modal editing layer designed to be integrate well into Emacs. It's very easy to hack on and extend and just feels more Emacsy. I have had almost no issues with this, compared to evil which just felt sluggish and was hard to customize. The object-verb syntax is also really great and I prefer it to the verb-object of vim/nvim.
 
 *** Repeat mode
 
@@ -318,12 +318,12 @@ avy
 
 This is the meat and potatoes of my keybindings. First I have several keymaps: sub-leader, projectile, toggle, and alignment. Sub leader is for more miscellaneous one-off commands, such as ~ibuffer~. Projectile is for, you guessed it, projectile related commands. Toggle is for quick, on the fly, changing of settings, such as the font size. The alignment is currently unused as of now but will have commands to change how text is currently being viewed without actually modifying the text of the buffer, think ~recenter-top-bottom~ like commands and more.
 
-I try to keep the leader key map as static as possible, with no keybindings being changed with the mode. If I want something to change with the mode I will put it under C-c, which I can access from =RET= via normal mode. The leader key primarily has things for interacting with general emacs constructs, like buffers, universal arg, =M-x=, etc.
+I try to keep the leader key map as static as possible, with no keybindings being changed with the mode. If I want something to change with the mode I will put it under C-c, which I can access from =RET= via normal mode. The leader key primarily has things for interacting with general Emacs constructs, like buffers, universal arg, =M-x=, etc.
 
 The meow states, what vim/nvim call modes, are as follows:
 - *Normal* - The main state that is used. Used for navigation, selection, and editing. Basically vim's normal and visual mode in one.
 - *Insert* - Insert text, esc to go back to normal state.
-- *Motion* - A minimal state used when you don't know what the major-mode does. I have only =j=, =k=, and =SPC= bound to down, up, and leader respectively. Everything else is as the major mode defines it. It's just there so I'm still able to interface with emacs like I normally would, just with a minimal interface.
+- *Motion* - A minimal state used when you don't know what the major-mode does. I have only =j=, =k=, and =SPC= bound to down, up, and leader respectively. Everything else is as the major mode defines it. It's just there so I'm still able to interface with Emacs like I normally would, just with a minimal interface.
 - *Keypad* - Leader key map.
 - *Beacon* - Multi-cursor in a region. Very convenient but kmacros are GOATed.
 
@@ -331,7 +331,7 @@ Also of note, I find it easier to think about the cursor in normal mode as being
 
 A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
 
-Currently Meow is broken in the emacsoverlay so I am including the package from mepla stable instead.
+Currently Meow is broken in the Emacs overlay so I am including the package from mepla stable instead.
 
 #+begin_src text :tangle ./packages.txt :padline no
 meow
@@ -694,11 +694,11 @@ meow-tree-sitter
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-help.el
 :END:
 
-Enhancing the help mechanisms in emacs.
+Enhancing the help mechanisms in Emacs.
 
 *** Which-key
 
-Which-key shows you what keybindings are available in a keychord. Super helpful and a must have in emacs.
+Which-key shows you what keybindings are available in a keychord. Super helpful and a must have in Emacs.
 
 #+begin_src text :tangle ./packages.txt :padline no
 which-key
@@ -716,7 +716,7 @@ which-key
 
 *** Info
 
-Info is emacs' built in manual system. In essence, its a more feature rich =man= (which emacs also has easy access to with =woman=). Right now I have a custom meow state for keybindings. However, this kind of sucks and I will eventually switch to just changing the default keybindings.
+Info is Emacs' built in manual system. In essence, its a more feature rich =man= (which Emacs also has easy access to with =woman=). Right now I have a custom meow state for keybindings. However, this kind of sucks and I will eventually switch to just changing the default keybindings.
 
 #+begin_src emacs-lisp
 ;; ===Info===
@@ -775,7 +775,7 @@ Info is emacs' built in manual system. In essence, its a more feature rich =man=
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-dired.el
 :END:
 
-Dired is the built in file manager in emacs. Its very capable and very hackable although it lacks good file previewing solutions
+Dired is the built in file manager in Emacs. Its very capable and very hackable although it lacks good file previewing solutions
 
 *** Nerd Icons Dired
 
@@ -794,7 +794,7 @@ nerd-icons-dired
 
 *** Main Dired Configuration
 
-By default, I want dired to look very minimal. This lack of clutter makes it easier to focus on what I am doing in the file manager. This is also the approach I try to take with other parts of emacs as well. By default, I have file details (owner, permissions, last modified, etc.) hidden. I have other changes as well, use the system trash can instead of deleting, that are under the ~:config~ part of the ~use-package~ declaration.
+By default, I want dired to look very minimal. This lack of clutter makes it easier to focus on what I am doing in the file manager. This is also the approach I try to take with other parts of Emacs as well. By default, I have file details (owner, permissions, last modified, etc.) hidden. I have other changes as well, use the system trash can instead of deleting, that are under the ~:config~ part of the ~use-package~ declaration.
 
 The keybindings are a hybrid of my normal state and the default dired keybindings.
 
@@ -952,7 +952,7 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-faces.el
 :END:
 
-I think that emacs should have a lot of eye candy, especially since I spend so much time in it. These are my configurations for emacs' faces, theming and ui settings essentially.
+I think that Emacs should have a lot of eye candy, especially since I spend so much time in it. These are my configurations for Emacs' faces, theming and ui settings essentially.
 
 *** Default Font and Fontaine
 
@@ -1283,7 +1283,7 @@ nerd-icons
 
 This section is not about code completion. Rather, this is my configuration for Emacs' completion system and the main interfaces that use them. For code completion please go see =cur-config-ide.el= and ~company-mode~.
 
-Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]] suite for doing completions in emacs. I like it but I know that the vertico/marginelia/consult/embark chain is better, faster, and more modern. I plan to make the switch at some point but for now I sticking with ivy.
+Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]] suite for doing completions in Emacs. I like it but I know that the vertico/marginelia/consult/embark chain is better, faster, and more modern. I plan to make the switch at some point but for now I sticking with ivy.
 
 #+begin_src text :tangle ./packages.txt :padline no
 embark
@@ -1755,7 +1755,7 @@ flycheck
 
 *** Magit
 
-Magit is a git interface, probably the best one I have ever seen or had the pleasure of using. I consider magit to be one of emacs' "killer features", right up there with org-mode.
+Magit is a git interface, probably the best one I have ever seen or had the pleasure of using. I consider magit to be one of Emacs' "killer features", right up there with org-mode.
 
 #+begin_src text :tangle ./packages.txt :padline no
 magit
@@ -2063,7 +2063,7 @@ merlin-company
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-c.el
 :END:
 
-I use tree-sitter for C, which unfortunately is not currently integrated into the default C major mode for emacs. I have also changed the ~c-default-style~ for C to be "linux", which is 8 spaces for indentation instead of the default of 2.
+I use tree-sitter for C, which unfortunately is not currently integrated into the default C major mode for Emacs. I have also changed the ~c-default-style~ for C to be "linux", which is 8 spaces for indentation instead of the default of 2.
 
 #+begin_src text :tangle ./packages.txt :padline no
 ccls
@@ -2136,7 +2136,7 @@ zig-mode
 
 *** Vterm
 
-Vterm is a terminal emulator for emacs. It is faster than ~term~ and ~ansi-term~ but the downside is that it is not written entirely in elisp so its cross platform. ~cur/meow-vterm~ and ~cur/meow-vterm-other-window~ help make vterm more "intuitive". ~cur/vterm-kill~ kills the vterm buffer cleanly and without prompting.
+Vterm is a terminal emulator for Emacs. It is faster than ~term~ and ~ansi-term~ but the downside is that it is not written entirely in elisp so its cross platform. ~cur/meow-vterm~ and ~cur/meow-vterm-other-window~ help make vterm more "intuitive". ~cur/vterm-kill~ kills the vterm buffer cleanly and without prompting.
 
 #+begin_src text :tangle ./packages.txt :padline no
 vterm
@@ -2253,7 +2253,7 @@ eshell-syntax-highlighting
 
 *** Zoxide
 
-Interfacing with Zoxide from emacs.
+Interfacing with Zoxide from Emacs.
 
 #+begin_src text :tangle ./packages.txt :padline no
 zoxide
