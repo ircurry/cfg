@@ -11,6 +11,7 @@
 (setq scroll-conservatively 101)    ; Enable Line by line scrolling
 (setq use-dialog-box nil)           ; No yes-no-p for mouse clicks
 (setq use-short-answers t)          ; Use y-or-n-p for yes-no dialogue.
+(setq async-shell-command-buffer 'new-buffer) ; Create new buffer or each async-shell-command
 (scroll-bar-mode -1)                ; Disable visible scrollbar
 (tool-bar-mode -1)                  ; Disable tool bar
 (menu-bar-mode -1)                  ; Disable menu bar
