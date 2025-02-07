@@ -1053,7 +1053,8 @@ I have several custom themes in a directory weirdly named themes. These are the 
                         (elpher-gemini-heading1 :foreground "#ec5f67" :height 1.8 :inherit 'bold)
                         (elpher-gemini-heading2 :foreground "#6699cc" :height 1.4 :inherit 'bold)
                         (elpher-gemini-heading3 :foreground "#c594c5" :height 1.2 :inherit 'bold)
-			(elpher-gemini-preformatted :foreground "#65737e" :inhert 'fixed-pitch))
+			(elpher-gemini-preformatted :foreground "#65737e" :inhert 'fixed-pitch)
+			(hl-line :background "#343D46"))
      (doom-flatwhite (haskell-operator-face :background "#f7f3ee"
                                             :foreground "#605a52")
                      (haskell-type-face :background "#d2ebe3"
