@@ -9,6 +9,8 @@
   :hook
   (dired-mode . dired-hide-details-mode) ; don't show file details by default
   (dired-mode . hl-line-mode) ; Highlight the line the cursor is on
+  (dired-mode . (lambda (&rest _)
+		  (setq-local truncate-lines t)))
   ;; TODO: create a dired-find-file-dwim for external programs
   :bind ( :map dired-mode-map
           ;; ===Top Row===
