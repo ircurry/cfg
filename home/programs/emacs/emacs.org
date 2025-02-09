@@ -265,7 +265,22 @@ I like having absolute line numbers, especially since the meow number selection 
   (setq server-client-instructions nil)
   (unless (server-running-p)
     (server-start)))
+#+end_src
 
+*** =cur-config-essentials.el= section on tmr
+
+#+begin_src text :tangle ./packages.txt :padline no
+tmr
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package tmr
+  :defer t)
+#+end_src
+
+*** =cur-config-essentials.el= call to provide
+
+#+begin_src emacs-lisp
 (provide 'cur-config-essentials)
 #+end_src
 
@@ -1808,16 +1823,9 @@ rg
 (use-package rg)
 #+end_src
 
-*** TMR
-
-#+begin_src text :tangle ./packages.txt :padline no
-tmr
-#+end_src
+*** =cur-config-ide.el= call to provide
 
 #+begin_src emacs-lisp
-(use-package tmr
-  :defer t)
-
 (provide 'cur-config-ide)
 #+end_src
 

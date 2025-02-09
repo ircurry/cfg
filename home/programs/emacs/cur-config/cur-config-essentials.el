@@ -64,4 +64,7 @@
   (unless (server-running-p)
     (server-start)))
 
+(use-package tmr
+  :defer t)
+
 (provide 'cur-config-essentials)

@@ -95,7 +95,4 @@
 
 (use-package rg)
 
-(use-package tmr
-  :defer t)
-
 (provide 'cur-config-ide)

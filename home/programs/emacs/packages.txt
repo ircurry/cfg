@@ -1,3 +1,4 @@
+tmr
 hydra
 avy
 meow
@@ -32,7 +33,6 @@ company
 flycheck
 magit
 rg
-tmr
 rainbow-delimiters
 paredit
 geiser
