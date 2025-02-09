@@ -120,7 +120,6 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
 ;; ===Essentials===
 (require 'cur-config-essentials)
 (require 'cur-config-bindings)
-(require 'cur-config-help)
 (require 'cur-config-dired)
 (require 'cur-config-faces)
 (require 'cur-config-completion)
@@ -2339,7 +2338,7 @@ elcord
 *** =cur-config-net.el= call to ~provide~
 
 #+begin_src emacs-lisp
-(provide 'cur-config-smol-net)
+(provide 'cur-config-net)
 #+end_src
 
 ** Direnv integration (=cur-config-direnv.el=)

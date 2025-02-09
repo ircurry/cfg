@@ -68,4 +68,4 @@
 				       "\\\\*Occur\\\\*"
 				       "\\\\*Embark Collect .*\\\\*")))
 
-(provide 'cur-config-smol-net)
+(provide 'cur-config-net)
