@@ -9,6 +9,7 @@
 (setq make-backup-files nil)        ; No more file~ everywhere
 (setq inhibit-startup-message t)    ; Starts on blank screen
 (setq scroll-conservatively 101)    ; Enable Line by line scrolling
+(setq scroll-margin 4)              ; Start scrolling when 4 lines from top/bottom
 (setq recenter-positions '(top bottom middle)) ; recenter line on top, then bottom, then middle
 (setq use-dialog-box nil)           ; No yes-no-p for mouse clicks
 (setq use-short-answers t)          ; Use y-or-n-p for yes-no dialogue.
