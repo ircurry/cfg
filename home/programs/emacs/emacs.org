@@ -180,6 +180,7 @@ I like having absolute line numbers, especially since the meow number selection 
 *** =cur-config-essentials.el= section on bookmark settings
 
 #+begin_src emacs-lisp
+;; ===Bookmarks===
 (use-package bookmark
   :commands (bookmark-set
              bookmark-set-no-overwrite

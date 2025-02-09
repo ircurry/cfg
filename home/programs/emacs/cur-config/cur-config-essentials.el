@@ -23,6 +23,7 @@
                   eat-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode -1)))))
 
+;; ===Bookmarks===
 (use-package bookmark
   :commands (bookmark-set
              bookmark-set-no-overwrite
