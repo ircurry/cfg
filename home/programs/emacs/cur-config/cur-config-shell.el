@@ -85,7 +85,4 @@
   :config
   (setopt eshell-prompt-regexp cur-eshell-prompt-regexp))
 
-;; ===Zoxide===
-(use-package zoxide)
-
 (provide 'cur-config-shell)

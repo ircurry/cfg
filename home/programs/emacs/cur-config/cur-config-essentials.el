@@ -67,4 +67,12 @@
 (use-package tmr
   :defer t)
 
+;; ===which-key===
+(use-package which-key
+  :demand t
+  :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 1.0))
+
 (provide 'cur-config-essentials)

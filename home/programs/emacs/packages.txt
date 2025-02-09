@@ -1,9 +1,9 @@
 tmr
+which-key
 hydra
 avy
 meow
 meow-tree-sitter
-which-key
 nerd-icons-dired
 fontaine
 doom-themes
@@ -65,7 +65,6 @@ zig-mode
 vterm
 eat
 eshell-syntax-highlighting
-zoxide
 org-bullets
 gemini-mode
 ox-gemini

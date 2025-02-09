@@ -50,38 +50,13 @@
 (require 'cur-config-bindings)
 (require 'cur-config-help)
 (require 'cur-config-dired)
-
-;; ===Interfaces===
 (require 'cur-config-faces)
 (require 'cur-config-completion)
 (require 'cur-config-window)
-
-;; ===Languages===
 (require 'cur-config-ide)
-(require 'cur-config-lisp)
-(require 'cur-config-java)
-(require 'cur-config-just)
-(require 'cur-config-markup)
-(require 'cur-config-nix)
-(require 'cur-config-rust)
-(require 'cur-config-haskell)
-(require 'cur-config-ocaml)
-(require 'cur-config-c)
-(require 'cur-config-zig)
-(require 'cur-config-go)
-
-;; ===Terminal Apps===
 (require 'cur-config-shell)
-
-;; ===Word Processing===
 (require 'cur-config-org)
-
-;; ===Misc===
-(require 'cur-config-smol-net)
-(require 'cur-config-elcord)
-(require 'cur-config-elfeed)
-
-;; ===Direnv is Last===
-(require 'cur-config-direnv)
+(require 'cur-config-net)
+(require 'cur-config-direnv) ; Direnv is the last to be loaded
 
 (provide 'init)
