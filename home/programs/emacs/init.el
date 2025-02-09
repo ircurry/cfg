@@ -43,11 +43,6 @@
 (dolist (path '("cur-lisp" "cur-config"))
   (add-to-list 'load-path (locate-user-emacs-file path)))
 
-;; =====================
-;; == Loading Modules ==
-;; =====================
-
-;; ===Essentials===
 (require 'cur-config-essentials)
 (require 'cur-config-bindings)
 (require 'cur-config-dired)
