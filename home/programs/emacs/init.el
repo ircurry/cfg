@@ -9,6 +9,7 @@
 (setq make-backup-files nil)        ; No more file~ everywhere
 (setq inhibit-startup-message t)    ; Starts on blank screen
 (setq scroll-conservatively 101)    ; Enable Line by line scrolling
+(setq recenter-positions '(top bottom middle)) ; recenter line on top, then bottom, then middle
 (setq use-dialog-box nil)           ; No yes-no-p for mouse clicks
 (setq use-short-answers t)          ; Use y-or-n-p for yes-no dialogue.
 (setq async-shell-command-buffer 'new-buffer) ; Create new buffer or each async-shell-command
@@ -48,7 +49,6 @@
 ;; ===Essentials===
 (require 'cur-config-essentials)
 (require 'cur-config-bindings)
-(require 'cur-config-help)
 (require 'cur-config-dired)
 (require 'cur-config-faces)
 (require 'cur-config-completion)
