@@ -232,6 +232,9 @@ in
               "${config.nocturne.wayland.idleManager.exec}"
             ]
             ++ lib.optionals (config.nocturne.graphical.firefox.enable) [ "[workspace 4 silent] firefox" ]
+            ++ lib.optionals (config.nocturne.graphical.mullvadBrowser.enable) [
+              "[workspace 4 silent] mullvad-browser"
+            ]
             ++ lib.optionals (config.nocturne.graphical.mullvad-vpn.enable) [
               "[workspace 4 silent] mullvad-vpn"
             ]
