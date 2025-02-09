@@ -79,7 +79,8 @@
 				     occur-mode
 				     geiser-mode
 				     grep-mode
-				     rg-mode)))
+				     rg-mode
+				     xref--xref-buffer-mode)))
 
 (use-package popper
   :after project
@@ -107,7 +108,9 @@
 					 "\\*eshell\\*" "\\*.*-eshell\\*" (major-mode . eshell-mode)
 					 "\\*Occur\\*" (major-mode . occur)
 					 (major-mode . compilation-mode)
-					 (major-mode . grep-mode)))
+					 (major-mode . grep-mode)
+					 (major-mode . rg-mode)
+					 (major-mode . xref--xref-buffer-mode)))
   (progn
     (popper-mode -1)
     (popper-mode +1)
