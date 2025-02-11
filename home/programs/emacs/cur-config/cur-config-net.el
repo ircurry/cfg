@@ -4,7 +4,8 @@
 
 ;; ===Org Gemini Exporter==
 (use-package ox-gemini
-  :defer t)
+  :after org
+  :commands (org-gemini-export-to-file org-gemini-export-to-buffer))
 
 ;; ===Elpher Gemini/Gopher Client===
 (use-package elpher
