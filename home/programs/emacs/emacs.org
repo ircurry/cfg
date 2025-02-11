@@ -3,8 +3,6 @@
 #+language: en
 #+options: toc:2 num:t author:t
 
-* Introduction and Overview
-
 Obligatory Frieren Ascii art.
 
 #+begin_example text
@@ -24,14 +22,28 @@ Obligatory Frieren Ascii art.
 ⣿⣿⣿⡆⢷⠀⢧⠈⣿⠤⠤⣇⠀⠀⠀⠀⢀⣸⣠⢾⠟⠓⡶⢤⣾⣿⣿⣿⣿⣷
 #+end_example
 
+This is my configuration for GNU Emacs. It is a [[https://protesilaos.com/codelog/2025-01-26-emacs-organise-init/][literate configuration]], meaning that the documentation (prose) and configuration (code) are part of one file, right next to each other. This makes it easier for future me and others to be able to know what each part of my configuration does. That said, it is still possible for the prose and the code to become out of sync so please be aware of that when reading (i.e. if there is a discrepancy between the code and the prose, go with the code). I have primarily based my configuration specifically, and my approach to Emacs generally, off of [[https://protesilaos.com/emacs/dotemacs][Proesilaos Stavrou's]]. I highly recommend reading through some of his configuration as it is one of the most well documented and well structured configurations for Emacs out there.
+
+The way my configuration works is that the code parts of this file get copied out (tangled) to their respective files, meaning that Emacs does not read from this file at all. The main benefit of doing this is speed, Emacs only has to worry about the code parts, not finding the code among the prose (its more complicated than this but thats the gist). My configuration is structured as follows:
+- =init.el= :: This is the file Emacs reads from after starting. Here I take care of the some the fundamental stuff like setting up package management, checking if the feature configuration macro (~use-package~) is installed, and loading my configuration modules.
+- =cur-config= :: This is the directory I keep all my configuration modules in. Each "module" is really just an Emacs Lisp file that configures a part of Emacs. Although these are Emacs Lisp files and I /could/ write anything in here (it is a complete programming language), I try to keep extending the functionalities of Emacs out of these files. These files tend to only set variables (settings in Emacs) and change key bindings.
+- =cur-lisp= :: This directory contains modules that extend the functionality of Emacs or Emacs packages. A good example is my custom [[info:emacs#Mode Line][mode line]], which I find cleaner that the default.
+- =themes= :: This is the directory where I store themes to change the color scheme of Emacs. It needs a major overhaul and can effectively ignored.
+
 * Initialization of Emacs (=init.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./init.el
+:ID:       38c3c91c-fcd9-48e1-8fe8-bef0085a12fc
 :END:
 
-** =init.el= section on Emacs version check
+This is the beginning of my configuration. All code in here gets tangled out into =init.el= and is loaded by Emacs on startup.
 
-This is to check what version of Emacs is being used. I do not test this configuration on any Emacs version less than 29.4. Using this configuration on any version less than 29.4 could lead to unforeseen consequences.
+** =init.el= section on Emacs version check
+:PROPERTIES:
+:ID:       16193924-963c-4e0c-b2c8-34b65c7ce743
+:END:
+
+This is to check what version of Emacs is being used. I do not test this configuration on any Emacs version less than 29.4. Using this configuration on any version less than 29.4 could lead to [[https://youtube.com/watch?v=xtrqYdvZ29E][unforeseen consequences]].
 
 #+begin_src emacs-lisp
 ;; ===Check Emacs Version===
@@ -40,6 +52,9 @@ This is to check what version of Emacs is being used. I do not test this configu
 #+end_src
 
 ** =init.el= section on some basic settings
+:PROPERTIES:
+:ID:       5ba13056-a274-4213-af86-dadd25293fb4
+:END:
 
 These are some basic settings that I want Emacs to load up front. Most of them are built in or core to the function of Emacs. If the rest of my configuration fails to load, I would like to at minimum have these settings enabled. There are comments next to each of them explaining what each of them does. The only exception is the one setting the scratch buffer.
 
@@ -64,6 +79,9 @@ These are some basic settings that I want Emacs to load up front. Most of them a
 #+end_src
 
 ** =init.el= section on enabling disabled functions
+:PROPERTIES:
+:ID:       3b95a744-fb39-4582-8652-78c4bad57520
+:END:
 
 These functions are disabled by default, meaning Emacs will ask me to confirm if I really want to run them. This makes sense for beginners but I use these functions often enough that I want them enabled.
 
@@ -74,6 +92,9 @@ These functions are disabled by default, meaning Emacs will ask me to confirm if
 #+end_src
 
 ** =init.el= section on "disabling" custom
+:PROPERTIES:
+:ID:       e3f462eb-1464-45e6-84e5-a17cfee2797b
+:END:
 
 Set ~custom-file~ to a temp file so I don't have to deal with custom. This is a tip I learned from [[https://protesilaos.com/emacs/dotemacs#h:f2ffe0e9-a58d-4bba-9831-cc35940ea83f][Protesilaos' config]]. If you are just starting with Emacs you may want to consider using =M-x customize= and friends in the interim. However, in the long run it will limit you and I recommend learning the basics of elisp as quickly as you can. If you have little to no prior experience to programming, consider reading [[https://www.gnu.org/software/emacs/manual/html_node/eintr/index.html][An Introduction to Programming in Emacs Lisp]]. It is a book written for non-technical people and should provide a solid base for you to work on your configuration and extend Emacs' capabilities.
 
@@ -83,6 +104,9 @@ Set ~custom-file~ to a temp file so I don't have to deal with custom. This is a 
 #+end_src
 
 ** =init.el= section on package.el and package archives
+:PROPERTIES:
+:ID:       e6684d48-0111-450f-9809-a587079ee9ec
+:END:
 
 This is only used if I find myself on a non-nixos system, as I have nixos manage my Emacs packages instead.
 
@@ -98,8 +122,11 @@ This is only used if I find myself on a non-nixos system, as I have nixos manage
 #+end_src
 
 ** =init.el= section on use-package
+:PROPERTIES:
+:ID:       095c9460-65d2-4884-ab8f-e3ea428863e7
+:END:
 
-Requiring ~use-package~ as that is what I use for almost all of my configuration. It is a macro that allows for easily declaring configuration for a specific [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Named-Features.html][feature]] (think a program or plug-in within Emacs). Please read the [[info:use-package][info manual]] for how to use it and use [[https://jwiegley.github.io/use-package/keywords/][this keyword overview]] for a quick a reference if you need a refresher while using the macro.
+Requiring ~use-package~ as that is what I use for almost all of my configuration. It is a macro that allows for easily declaring configuration for a specific [[info:elisp#Named Features][feature]] (think a program or plug-in within Emacs). Please read the [[info:use-package][info manual]] for how to use it and use [[https://jwiegley.github.io/use-package/keywords/][this keyword overview]] for a quick a reference if you need a refresher while using the macro.
 
 #+begin_src emacs-lisp
 ;; ===use-package Initialization===
@@ -107,6 +134,9 @@ Requiring ~use-package~ as that is what I use for almost all of my configuration
 #+end_src
 
 ** =init.el= section on configuration modules.
+:PROPERTIES:
+:ID:       5f5ac6fb-9a3e-4c61-b585-f5a19c10f9f9
+:END:
 
 First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just as simple as ~(require 'module)~.
 
@@ -131,17 +161,26 @@ First, I add the =cur-lisp= and =cur-config= to the ~load-path~. Then its just a
 #+end_src
 
 * Configuration Modules (=cur-config=)
+:PROPERTIES:
+:ID:       9eb5052a-d247-44f4-95bf-0747de210827
+:END:
+
+The following are the modules that the =init.el= loads.
 
 ** Essential configuration (=cur-config-essentials.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-essentials.el
+:ID:       56443852-8eb0-4c6d-9d51-fe8d48d6ab66
 :END:
 
 These are the basic configurations that I have done in Emacs. Its sort of a hodge-podge of fixing/changing things that are built Emacs. They aren't strictly essential so the name is kind of a misnomer.
 
 *** =cur-config-essentials.el= section on parentheses highlighting
+:PROPERTIES:
+:ID:       861dafb4-2509-481d-8ca4-21be9174cdb1
+:END:
 
-Removing the weird delay for highlighting the opposite parenthesis.
+=paren= is what highlights the matching parenthesis, bracket, brace, etc. of the one next to point. For some reason the default is to have delay in the highlight that is just long enough that it makes Emacs seem slow when it actually isn't.
 
 #+begin_src emacs-lisp
 ;; ===Parens===
@@ -153,8 +192,11 @@ Removing the weird delay for highlighting the opposite parenthesis.
 #+end_src
 
 *** =cur-config-essentials.el= section on line numbers
+:PROPERTIES:
+:ID:       8869ca67-28b7-43bc-93e4-ea28dbf87807
+:END:
 
-I like having absolute line numbers, especially since the meow number selection makes relative line numbers not as useful. Some modes, especially terminal and shell modes, look weird with line numbers so I disable them. Org-mode also has them disabled because they make the document look kind of weird, especially with images or non-text.
+I like having absolute line numbers, especially since the meow number selection makes relative line numbers not as useful. Some modes, especially terminal and shell modes, look weird with line numbers so I disable them. I also have them disabled in modes like =org-mode= which have non-textual elements (e.g. images) because they make the buffer look janky.
 
 #+begin_src emacs-lisp
 ;; ===Line Numbers===
@@ -178,6 +220,11 @@ I like having absolute line numbers, especially since the meow number selection 
 #+end_src
 
 *** =cur-config-essentials.el= section on bookmark settings
+:PROPERTIES:
+:ID:       e62f628a-9d35-4526-8a1e-4e30d17bece8
+:END:
+
+The built in bookmark feature of Emacs is great and one of the pillars of making Emacs a one-stop-shop for all* your computing needs. Really the only changes that I need to make is to set bookmarks to autosave and for  =hl-line-mode= to be enabled in =bookmark-bmenu-mode=.
 
 #+begin_src emacs-lisp
 ;; ===Bookmarks===
@@ -192,6 +239,11 @@ I like having absolute line numbers, especially since the meow number selection 
 #+end_src
 
 *** =cur-config-essentials.el= section on recent files
+:PROPERTIES:
+:ID:       afd9b978-9ce9-4a22-a6d5-05115ac660dc
+:END:
+
+This sets emacs to save the most recently visited files. I enable this primarily for quick file access.
 
 #+begin_src emacs-lisp
 (use-package recentf
@@ -199,6 +251,11 @@ I like having absolute line numbers, especially since the meow number selection 
 #+end_src
 
 *** =cur-config-essentials.el= section on ~isearch~ and incremental searching
+:PROPERTIES:
+:ID:       9f9b16a7-d53f-4ae5-84c7-d3eff7f604e4
+:END:
+
+=isearch=, or incremental search, is Emacs' primary incremental search (shocker). I mainly use it where my usual searching methods (see the section on =meow= and =consult=) aren't available or convenient like in =info= buffers. It is also very good for working with [[info:emacs#Keyboard Macros][keyboard macros]].
 
 #+begin_src emacs-lisp
 (use-package isearch
@@ -214,6 +271,11 @@ I like having absolute line numbers, especially since the meow number selection 
 #+end_src
 
 *** =cur-config-essentials.el= section on ~proced~ and viewing process (htop like)
+:PROPERTIES:
+:ID:       43057235-3fa9-4f74-a68f-805448523905
+:END:
+
+=proced= provides an htop like overview of what processes are running. Though I mainly use [[https://github.com/ClementTsang/bottom][bottom]] because of its pretty visuals, I do find it occasionally useful.
 
 #+begin_src emacs-lisp
 (use-package proced
@@ -229,6 +291,13 @@ I like having absolute line numbers, especially since the meow number selection 
 #+end_src
 
 *** =cur-config-essentials.el= section on starting the Emacs server
+:PROPERTIES:
+:ID:       f526082c-4ebe-42b6-95b0-155e98dc7786
+:END:
+
+Its no secret that Emacs has a slow startup time when compared to other text editors like ([[https://neovim.io/][neo]])[[https://www.vim.org/][vim]]. This is an often cited reason to use X editor instead of Emacs. However, I practically never have to deal with slow startup times by using [[info:emacs#Emacs Server][Emacs' server functionality]]. This allows me to have to the best of both worlds: I can have a long lived Emacs session, only dealing with startup once and I can spawn and kill ad hoc Emacs Client frames for any need. I often spawn these ad hoc frames when working on school work or browsing media I have downloaded.
+
+The typical way to start Emacs as a server is to run ~emacs --daemon~ or start it as a systemd service. However, I prefer to launch it as a part of my configuration 1 second after Emacs launches, but only if a sever is not already running. I do this so that Emacs sort of just "does what I mean" with out having to set up a service or make sure I use the appropriate flag.
 
 #+begin_src emacs-lisp
 (use-package server
@@ -240,6 +309,11 @@ I like having absolute line numbers, especially since the meow number selection 
 #+end_src
 
 *** =cur-config-essentials.el= section on ~tmr~ (tomato timer in emacs)
+:PROPERTIES:
+:ID:       57ae1e8f-83da-4f1a-96ad-770d88ffcdce
+:END:
+
+[[https://protesilaos.com/emacs/tmr][TMR]] is a simple tomato timer in Emacs with a convenient notation.
 
 #+begin_src text :tangle ./packages.txt :padline no
 tmr
@@ -251,8 +325,11 @@ tmr
 #+end_src
 
 *** =cur-config-essentials.el= section on ~which-key~ and showing key bindings
+:PROPERTIES:
+:ID:       f98928ad-7a8d-47f1-be1f-c6fb33c35294
+:END:
 
-Which-key shows you what keybindings are available in a keychord. Super helpful and a must have in Emacs.
+[[https://github.com/justbur/emacs-which-key][~which-key~]] shows you what keybindings are available in a keychord. Super helpful and +a must have in Emacs+ will be a part of Emacs 30 🎉.
 
 #+begin_src text :tangle ./packages.txt :padline no
 which-key
@@ -269,6 +346,11 @@ which-key
 #+end_src
 
 *** =cur-config-essentials.el= call to ~provide~
+:PROPERTIES:
+:ID:       2d610426-19cb-42e2-9a50-fee49ffca0ba
+:END:
+
+At the bottom of all Emacs Lisp libraries a all to ~provide~ with the name of the library is required. For example, if the file is named =foobar.el= the call to provide will be ~(provide 'foobar)~. At the end of each my configuration modules there will be a call to provide but I will not really document it as it is documented here.
 
 #+begin_src emacs-lisp
 (provide 'cur-config-essentials)
@@ -277,11 +359,15 @@ which-key
 ** Key bindings configurations (=cur-config-bindings.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-bindings.el
+:ID:       c6c1b5c2-a355-42d3-9e0b-ec3521726fae
 :END:
 
 I use [[https:github.com/meow-edit/meow][meow]], a modal editing layer designed to be integrate well into Emacs. It's very easy to hack on and extend and just feels more Emacsy. I have had almost no issues with this, compared to evil which just felt sluggish and was hard to customize. The object-verb syntax is also really great and I prefer it to the verb-object of vim/nvim.
 
 *** =cur-config-bindings.el= section on ~repeat-mode~ and repeating key bindings
+:PROPERTIES:
+:ID:       a78dad5e-2675-4530-a3ea-8066f102905c
+:END:
 
 One of the most basic ways to make using Emacs keybindings a breeze.
 
@@ -294,6 +380,9 @@ One of the most basic ways to make using Emacs keybindings a breeze.
 #+end_src
 
 *** =cur-config-bindings.el= section on ~hydra~ and quick transient key maps
+:PROPERTIES:
+:ID:       5ec45ba2-771f-461f-835c-b6e5a6bd350d
+:END:
 
 I use hydras for repeat keybindings. I plan to switch to use the built in repeat keymap more in the future but they are very helpful for creating something almost like a mini meow state, just for one particular task.
 
@@ -308,6 +397,9 @@ hydra
 #+end_src
 
 *** =cur-config-bindings.el= section on ~avy~ and jumping to characters
+:PROPERTIES:
+:ID:       fc0629a4-40b3-45fd-880f-67c14d1aee36
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 avy
@@ -320,6 +412,9 @@ avy
 #+end_src
 
 *** =cur-config-bindings.el= section on ~meow~ and modal key bindings
+:PROPERTIES:
+:ID:       d0be41a7-a02d-4c61-a980-3a2bef444971
+:END:
 
 This is the meat and potatoes of my keybindings. First I have several keymaps: sub-leader, projectile, toggle, and alignment. Sub leader is for more miscellaneous one-off commands, such as ~ibuffer~. Projectile is for, you guessed it, projectile related commands. Toggle is for quick, on the fly, changing of settings, such as the font size. The alignment is currently unused as of now but will have commands to change how text is currently being viewed without actually modifying the text of the buffer, think ~recenter-top-bottom~ like commands and more.
 
@@ -680,6 +775,9 @@ _o_: other window     _F_: fit to buffer          _d_: close window
 #+end_src
 
 *** =cur-config-bindings.el= section on ~meow-tree-sitter~
+:PROPERTIES:
+:ID:       9082076e-8399-470a-8778-83c9c800065d
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 meow-tree-sitter
@@ -694,6 +792,9 @@ meow-tree-sitter
 #+end_src
 
 *** =cur-config-bindings.el= call to ~provide~
+:PROPERTIES:
+:ID:       e866972a-7579-4005-938d-b068c9a6c660
+:END:
 
 #+begin_src emacs-lisp
 (provide 'cur-config-bindings)
@@ -702,11 +803,15 @@ meow-tree-sitter
 ** Dired configuration (=cur-config-dired.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-dired.el
+:ID:       fe71ad88-6ff2-4974-a849-f0e5ff9bc906
 :END:
 
 Dired is the built in file manager in Emacs. Its very capable and very hackable although it lacks good file previewing solutions
 
 *** =cur-config-dired.el= section on ~nerd-icons-dired~ and file icons
+:PROPERTIES:
+:ID:       d413c669-dc46-41e6-a7b3-e3415d847e28
+:END:
 
 Adds icons to make dired a bit more pretty and gives a visual sense of what files are what. 
 
@@ -722,6 +827,9 @@ nerd-icons-dired
 #+end_src
 
 *** =cur-config-dired.el= section on the main ~dired~ configuration
+:PROPERTIES:
+:ID:       18cf0d85-e484-4b03-98c1-cc016c928b17
+:END:
 
 By default, I want dired to look very minimal. This lack of clutter makes it easier to focus on what I am doing in the file manager. This is also the approach I try to take with other parts of Emacs as well. By default, I have file details (owner, permissions, last modified, etc.) hidden. I have other changes as well, use the system trash can instead of deleting, that are under the ~:config~ part of the ~use-package~ declaration.
 
@@ -863,6 +971,9 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
 #+end_src
 
 *** =cur-config-dired.el= section on setting my wallpaper
+:PROPERTIES:
+:ID:       a9bbcca2-9303-4252-8926-b0520fb68b7a
+:END:
 
 #+begin_src emacs-lisp
 (use-package cur-wallpaper
@@ -877,6 +988,9 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
 #+end_src
 
 *** =cur-config-dired.el= call to ~provide~
+:PROPERTIES:
+:ID:       11189827-2b84-4388-b819-4cf71456230c
+:END:
 
 #+begin_src emacs-lisp
 (provide 'cur-config-dired)
@@ -885,11 +999,15 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
 ** Faces, themes, and eye candy configurations (=cur-config-faces.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-faces.el
+:ID:       c81f0f60-e024-4cf2-944d-259a037dfa7e
 :END:
 
 I think that Emacs should have a lot of eye candy, especially since I spend so much time in it. These are my configurations for Emacs' faces, theming and ui settings essentially.
 
 *** =cur-config-faces.el= section on setting the default font and ~fontaine~
+:PROPERTIES:
+:ID:       e47e4025-4113-407a-a0a7-f37c4f2b94c7
+:END:
 
 JetBrains Mono supremacy.
 
@@ -933,6 +1051,9 @@ fontaine
 #+end_src
 
 *** =cur-config-faces.el= section on setting the default opacity
+:PROPERTIES:
+:ID:       7ef99fe8-31fa-4dfe-bfa5-068a69938a2f
+:END:
 
 I have this transparency set to be the same as with my Alacritty config. This adds more consistency to my computing experience. It also just looks really cool.
 
@@ -955,6 +1076,9 @@ I have this transparency set to be the same as with my Alacritty config. This ad
 #+end_src
 
 *** TODO =cur-config-faces.el= section on custom themes
+:PROPERTIES:
+:ID:       0cfecd63-934e-47cb-bf5e-e82c478ee0c2
+:END:
 
 I have several custom themes in a directory weirdly named themes. These are the =everforest= and =kanagawa= themes. I have changed these from the originals. TODO: add the links to the original themes.
 
@@ -1035,6 +1159,9 @@ I have several custom themes in a directory weirdly named themes. These are the 
 #+end_src
 
 *** =cur-config-faces.el= section on ~doom-themes~
+:PROPERTIES:
+:ID:       124c6009-9efd-4ca6-9a0a-14ffc0659d00
+:END:
 
 Doom themes are a theme pack specifically for the Doom Emacs distribution, but work well without doom as well. I have a function that sets some faces based on the theme in ~custom-enabled-themes~. This function is more than just a little jank and I plan on creating my own themes instead of trying to hack around ones made by someone else.
 
@@ -1051,6 +1178,9 @@ doom-themes
 #+end_src
 
 *** =cur-config-faces.el= section on ~autothemer~
+:PROPERTIES:
+:ID:       27ab6486-0928-425f-b089-1c42129fff25
+:END:
 
 A library used by =catppuccin= and =kanagawa=.
 
@@ -1064,6 +1194,9 @@ autothemer
 #+end_src
 
 *** =cur-config-faces.el= section on catppuccin theme
+:PROPERTIES:
+:ID:       805fb865-4448-4d17-a5f2-831af0ad02b5
+:END:
 
 [[https:github.com/catppuccin/catppuccin][Link]] to the catppuccin theme.
 
@@ -1078,12 +1211,18 @@ catppuccin-theme
 #+end_src
 
 *** =cur-config-faces.el= section on setting the default theme
+:PROPERTIES:
+:ID:       ceb49ec5-0266-4bca-9bfb-cbcba2d2dcce
+:END:
 
 #+begin_src emacs-lisp
 (cur-override-theme-load-theme 'catppuccin)
 #+end_src
 
 *** =cur-config-faces.el= section on ~ef-themes~
+:PROPERTIES:
+:ID:       950fc8af-3791-4cd9-8bb0-35a9915cf659
+:END:
 
 Themes made by Protesilaos, also known as Prot.
 
@@ -1099,6 +1238,9 @@ ef-themes
 #+end_src
 
 *** =cur-config-faces.el= section on ~nerd-icons-ibuffer~
+:PROPERTIES:
+:ID:       dd3258a6-a2e7-4fcf-beb8-a6d213380dc7
+:END:
 
 Adds Icons to ~ibuffer~. Not really a face thing but I don't have a dedicated ~ibuffer~ module so it goes here instead.
 
@@ -1113,6 +1255,9 @@ nerd-icons-ibuffer
 #+end_src
 
 *** =cur-config-faces.el= section on custom mode-line
+:PROPERTIES:
+:ID:       9eae8c72-8268-41ee-9f37-ccd18fa50f26
+:END:
 
 #+begin_src emacs-lisp
 (use-package cur-mode-line
@@ -1147,6 +1292,10 @@ nerd-icons-ibuffer
 #+end_src
 
 *** =cur-config-faces.el= section on ~page-break-lines~ and making page breaks pretty
+:PROPERTIES:
+:ID:       3ce920f3-5990-4aa3-bb9e-6deb0de1c2c3
+:END:
+
 #+begin_src text :tangle ./packages.txt :padline no
 page-break-lines
 #+end_src
@@ -1157,6 +1306,9 @@ page-break-lines
 #+end_src
 
 *** =cur-config-faces.el= section on ~dashboard~ and startup overview
+:PROPERTIES:
+:ID:       bbc53d0c-2f80-4cf3-8685-ae56f65ad9aa
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 dashboard
@@ -1209,6 +1361,9 @@ nerd-icons
 #+end_src
 
 *** =cur-config-faces.el= call to ~provide~
+:PROPERTIES:
+:ID:       e6cb8999-24b0-4b75-b6fa-5d7168ee0a8a
+:END:
 
 #+begin_src emacs-lisp
 (provide 'cur-config-faces)
@@ -1217,6 +1372,7 @@ nerd-icons
 ** Completion system configurations (=cur-config-completion.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-completion.el
+:ID:       54d4323e-5f7a-49bf-85d0-a14d3f6e291f
 :END:
 
 This section is not about code completion. Rather, this is my configuration for Emacs' completion system and the main interfaces that use them. For code completion please go see =cur-config-ide.el= and ~company-mode~.
@@ -1229,6 +1385,9 @@ embark-consult
 #+end_src
 
 *** =cur-config-completion.el= section on completions styles
+:PROPERTIES:
+:ID:       9b8572d1-ff66-4710-8752-9625b34f1485
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 orderless
@@ -1251,6 +1410,9 @@ orderless
 #+end_src
 
 *** =cur-config-completion.el= section on ~vertico~ and better completion UI
+:PROPERTIES:
+:ID:       ddcb7c19-0dd0-422c-9890-06d1b9d70b5e
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 vertico
@@ -1267,6 +1429,9 @@ vertico
 #+end_src
 
 *** =cur-config-completion.el= section on ~marginalia~ and providing additional completion info
+:PROPERTIES:
+:ID:       3a1b87c1-c40d-4453-b404-7448840c2a79
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 marginalia
@@ -1279,6 +1444,9 @@ marginalia
 #+end_src
 
 *** =cur-config-completion.el= section on ~consult~ and richer interactive commands
+:PROPERTIES:
+:ID:       519e9743-b1eb-4987-90d0-37be93b6219a
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 consult
@@ -1338,6 +1506,9 @@ consult
 #+end_src
 
 *** =cur-config-completion.el= section on quick directory jumping with ~consult-dir~
+:PROPERTIES:
+:ID:       bf673606-06f4-48f5-ba60-32dbe1dfb18b
+:END:
 #+begin_src text :tangle ./packages.txt :padline no
 consult-dir
 #+end_src
@@ -1363,6 +1534,9 @@ consult-dir
 #+end_src
 
 *** TODO =cur-config-completion.el= section on ~embark~ and mini-buffer actions
+:PROPERTIES:
+:ID:       89487c3d-ae1e-443c-9fbf-99e7042e33f5
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 embark
@@ -1381,6 +1555,9 @@ embark-consult
 #+end_src
 
 *** TODO =cur-config-completion.el= section on ~corfu~ and in-buffer completions
+:PROPERTIES:
+:ID:       9b2c6589-f87c-411a-b302-7424f24f24a8
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 corfu
@@ -1409,12 +1586,18 @@ corfu
 #+end_src
 
 *** TODO =cur-config-completion.el= section on ~cape~ and making completion at point functions (capfs)
+:PROPERTIES:
+:ID:       64087654-2ad5-4dba-8de8-91b572720ca2
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 cape
 #+end_src
 
 *** =cur-config-completion.el= call to ~provide~
+:PROPERTIES:
+:ID:       ee9fb108-8f60-46d1-8b23-b3799f30716f
+:END:
 
 #+begin_src emacs-lisp
 (provide 'cur-config-completion)
@@ -1423,9 +1606,13 @@ cape
 ** Window management configurations (=cur-config-window.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-window.el
+:ID:       a4ff1a2a-9b63-4fca-98d7-2a7d5433fa12
 :END:
 
 *** =cur-config-window.el= section on ~display-buffer-alist~ and default window behavior
+:PROPERTIES:
+:ID:       b363dfea-a062-4803-a381-66c9eb9674ff
+:END:
 
 These are my settings for ~display-buffer-alist~ so windows just Do What I Mean.
 
@@ -1483,6 +1670,9 @@ These are my settings for ~display-buffer-alist~ so windows just Do What I Mean.
 #+end_src
 
 *** =cur-config-window.el= section on ~ace-window~ and O(1) window switching/actions
+:PROPERTIES:
+:ID:       bbb30d94-91c8-49b8-ae87-22bb1f228e26
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 ace-window
@@ -1510,6 +1700,9 @@ ace-window
 #+end_src
 
 *** =cur-config-window.el= section on ~popper~ and pop windows
+:PROPERTIES:
+:ID:       79bfcbf0-8a10-4ef9-9d39-04e21e7fd1a9
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 popper
@@ -1568,6 +1761,9 @@ popper
 #+end_src
 
 *** =cur-config-window.el= call to ~provide~
+:PROPERTIES:
+:ID:       445fb6c0-bb89-463f-a8dc-b5185b1e3e97
+:END:
 
 #+begin_src emacs-lisp
 (provide 'cur-config-window)
@@ -1576,11 +1772,15 @@ popper
 ** IDE configurations (=cur-config-ide.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-ide.el
+:ID:       20083d39-e9a2-4e1c-8fd0-c84993b8730c
 :END:
 
 Emacs can be made to have all the features of a modern text editor and then some.
 
 *** =cur-config-ide.el= section on ~display-fill-column-indicator~
+:PROPERTIES:
+:ID:       4d229324-b82e-45e1-8886-3e9b1d702650
+:END:
 
 This is just a minor mode that shows a small bar at a certain column position. It's useful for a quick eyeball test if the line is too big but sometimes hurts readability.
 
@@ -1595,6 +1795,9 @@ This is just a minor mode that shows a small bar at a certain column position. I
 #+end_src
 
 *** =cur-config-ide.el= section on ~lsp-mode~ and lsp
+:PROPERTIES:
+:ID:       b0b77539-5afd-4043-987e-557363d778bc
+:END:
 
 Lsp-mode is my chosen language server protocol support package. I chose this over eglot because of the richer features and (at the time that I started using lsp) more mature state. I will revisit elgot in the future but for now I am perfectly happy with lsp-mode.
 
@@ -1627,6 +1830,9 @@ lsp-mode
 #+end_src
 
 *** =cur-config-ide.el= section on ~lsp-ui~
+:PROPERTIES:
+:ID:       9b8b7653-7f3f-47f8-a5a1-e41c0fd07407
+:END:
 
 Lsp-ui provides some ui enhancements and extra features to lsp. Probably the best one is the doc feature to view documentation in the editor.
 
@@ -1658,8 +1864,14 @@ lsp-ui
 #+end_src
 
 *** TODO =cur-config-ide.el= section on ~eglot~ and lsp
+:PROPERTIES:
+:ID:       73015191-0919-4808-8b8b-377c9e3682f8
+:END:
 
 *** =cur-config-ide.el= section on ~company~ and auto-complete
+:PROPERTIES:
+:ID:       4ce88735-e016-41ec-890c-26fac1907c9a
+:END:
 
 The code completion system. This is different from completions systems like ivy or vertico, this is for interactively completing a symbol while programming.
 
@@ -1685,6 +1897,9 @@ company
 #+end_src
 
 *** =cur-config-ide.el= section on ~flycheck~ and in-buffer error messages
+:PROPERTIES:
+:ID:       5aa2456b-f94d-4151-83e2-f56995516dce
+:END:
 
 Code error checking with a nice UI.
 
@@ -1701,8 +1916,14 @@ flycheck
 #+end_src
 
 *** TODO =cur-config-ide.el= section on ~flymake~ and in-buffer error messages
+:PROPERTIES:
+:ID:       cfbd2b8f-7860-4c1f-b54c-c81664bd499a
+:END:
 
 *** =cur-config-ide.el= section on ~magit~ and quick git interface
+:PROPERTIES:
+:ID:       c4b9aa02-bb0d-429c-88c1-780057bdac94
+:END:
 
 Magit is a git interface, probably the best one I have ever seen or had the pleasure of using. I consider magit to be one of Emacs' "killer features", right up there with org-mode.
 
@@ -1725,6 +1946,9 @@ magit
 #+end_src
 
 *** =cur-config-ide.el= section on ~project~ and project related functions
+:PROPERTIES:
+:ID:       ee41e6f2-1b63-4438-b3b0-bd8c6082a4ef
+:END:
 
 #+begin_src emacs-lisp
 (use-package project
@@ -1740,6 +1964,9 @@ magit
 #+end_src
 
 *** =cur-config-ide.el= section on using ~ripgrep~ in Emacs
+:PROPERTIES:
+:ID:       a8175c44-4cf2-4b2d-b7be-9eec48a2f1a5
+:END:
 
 Ripgrep go burrr.
 
@@ -1752,6 +1979,9 @@ rg
 #+end_src
 
 *** =cur-config-ide.el= section on ~rainbow-delimiters~
+:PROPERTIES:
+:ID:       9586f275-5609-4e85-bfc8-4f3e621fb7d0
+:END:
 
 This color codes opening and closing delimiters such as parentheses and square brackets.
 
@@ -1767,6 +1997,9 @@ rainbow-delimiters
 #+end_src
 
 *** =cur-config-ide.el= section on ~paredit~
+:PROPERTIES:
+:ID:       a0bb932b-650d-45d1-b0d2-e8d673408d41
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 paredit
@@ -1780,6 +2013,9 @@ paredit
 #+end_src
 
 *** =cur-config-ide.el= section on ~geiser~ and working with schemes
+:PROPERTIES:
+:ID:       b44c76ac-9660-4cc5-80d6-81112a734185
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 geiser
@@ -1798,6 +2034,9 @@ macrostep-geiser
 #+end_src
 
 *** =cur-config-ide.el= section on java programming
+:PROPERTIES:
+:ID:       9f889f1e-d963-46ae-af5f-77fd0ba59779
+:END:
 
 My configurations for working with the Java language. I have ~java-ts-mode~, the tree sitter version of the normal ~java-mode~, as the mode for editing =.java= files. I have found that either tree sitter provides exactly the same or better syntax highlighting and the possibility of better movement once it gets better integrated into emacs.
 
@@ -1835,6 +2074,9 @@ lsp-java
 #+end_src
 
 *** =cur-config-ide.el= section on working with justfiles
+:PROPERTIES:
+:ID:       8e3e0c17-47b3-4a83-a4f2-381ab03727ef
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 just-mode
@@ -1846,6 +2088,9 @@ just-mode
 #+end_src
 
 *** =cur-config-ide.el= section on yaml files
+:PROPERTIES:
+:ID:       40209140-b2b5-4a24-94b3-fa14ffa2c7d7
+:END:
 #+begin_src text :tangle ./packages.txt :padline no
 yaml-mode
 #+end_src
@@ -1857,6 +2102,9 @@ yaml-mode
 #+end_src
 
 *** =cur-config-ide.el= configurations for nix
+:PROPERTIES:
+:ID:       2736a16d-403e-4b3e-bc6a-6be6e3cdd679
+:END:
 
 My configurations for the Nix language, which boils down to "start the lsp server".
 
@@ -1879,6 +2127,9 @@ nix-ts-mode
 #+end_src
 
 *** =cur-config-ide.el= configurations for rust
+:PROPERTIES:
+:ID:       5faeccc8-de89-47ac-bd25-43fe3df10b9a
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 rustic
@@ -1892,6 +2143,9 @@ rustic
 #+end_src
 
 *** =cur-config-ide.el= configurations for haskell
+:PROPERTIES:
+:ID:       36eb4cf2-82a0-4de6-a27c-d56413744789
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 haskell-mode
@@ -1916,6 +2170,9 @@ company-ghci
 #+end_src
 
 *** =cur-config-ide.el= configurations for ocaml
+:PROPERTIES:
+:ID:       b17c9828-12cb-4ccf-b7a8-6dd60f1bfe29
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 tuareg
@@ -1944,6 +2201,9 @@ merlin-company
 #+end_src
 
 *** =cur-config-ide.el= configurations for C lang
+:PROPERTIES:
+:ID:       45a60406-d36b-4649-a0b3-0bd4a2135470
+:END:
 
 I use tree-sitter for C, which unfortunately is not currently integrated into the default C major mode for Emacs. I have also changed the ~c-default-style~ for C to be "linux", which is 8 spaces for indentation instead of the default of 2.
 
@@ -1973,6 +2233,9 @@ ccls
 #+end_src
 
 *** =cur-config-ide.el= configurations for zig
+:PROPERTIES:
+:ID:       cd00a97f-9707-4b53-9700-fe0342382691
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 zig-mode
@@ -1985,6 +2248,9 @@ zig-mode
 #+end_src
 
 *** =cur-config-ide.el= configurations for go
+:PROPERTIES:
+:ID:       378f48d2-ab20-4851-8837-69e6793830f0
+:END:
 
 #+begin_src emacs-lisp
 ;; ===Go Tree-Sitter Mode===
@@ -2000,6 +2266,9 @@ zig-mode
 #+end_src
 
 *** =cur-config-ide.el= call to ~provide~
+:PROPERTIES:
+:ID:       94476685-e2fc-4e23-999d-66c68818fecd
+:END:
 
 #+begin_src emacs-lisp
 (provide 'cur-config-ide)
@@ -2008,9 +2277,13 @@ zig-mode
 ** Terminal emulation and Eshell configuration (=cur-config-shell.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-shell.el
+:ID:       c6096b33-de53-4f61-b021-add1e4449984
 :END:
 
 *** =cur-config-shell.el= section on ~vterm~ and fast, accurate terminal emulation
+:PROPERTIES:
+:ID:       de664b6d-e7b6-4ef2-b418-b1e91baef0a9
+:END:
 
 Vterm is a terminal emulator for Emacs. It is faster than ~term~ and ~ansi-term~ but the downside is that it is not written entirely in elisp so its cross platform. ~cur/meow-vterm~ and ~cur/meow-vterm-other-window~ help make vterm more "intuitive". ~cur/vterm-kill~ kills the vterm buffer cleanly and without prompting.
 
@@ -2038,6 +2311,9 @@ vterm
 #+end_src
 
 *** =cur-config-shell.el= section on ~eat~ and terminal emulation
+:PROPERTIES:
+:ID:       522c5038-171d-4163-9bce-7b36e5cbded8
+:END:
 
 Eat is just a better elisp terminal emulator. I mostly use this so that eshell can run TUI programs.
 
@@ -2093,6 +2369,9 @@ eat
 #+end_src
 
 *** =cur-config-shell.el= section on ~eshell~, the Emacs Shell
+:PROPERTIES:
+:ID:       6f582490-9acf-4e04-8253-ec2a3bc2ed24
+:END:
 
 Eshell is an shell for Emacs like bash or sh, but written in elisp and has its own ways of doing things. Note: not POSIX compliant.
 
@@ -2128,6 +2407,9 @@ eshell-syntax-highlighting
 #+end_src
 
 *** =cur-config-shell.el= call to ~provide~
+:PROPERTIES:
+:ID:       8ddb6cc7-67d2-414d-a5cc-ffdcb3ea2d9c
+:END:
 
 #+begin_src emacs-lisp
 (provide 'cur-config-shell)
@@ -2136,6 +2418,7 @@ eshell-syntax-highlighting
 ** Org-mode (=cur-config-org.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-org.el
+:ID:       280d85c5-9e50-4048-9e1a-269c8b711ff5
 :END:
 
 #+begin_src text :tangle ./packages.txt :padline no
@@ -2229,9 +2512,13 @@ org-bullets
 ** Configurations for working with the Internet (=cur-config-net.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-net.el
+:ID:       0dfed815-701f-4f77-8ec3-ab921c88a7ca
 :END:
 
 *** =cur-config-net.el= section on gemini and the smolnet
+:PROPERTIES:
+:ID:       03175fe0-f192-4307-b2c2-24669236c508
+:END:
 
 #+begin_src text :tangle ./packages.txt :padline no
 gemini-mode
@@ -2257,6 +2544,10 @@ elpher
 #+end_src
 
 *** =cur-config-net.el= section on ~elfeed~, and rss/atom feed reader
+:PROPERTIES:
+:ID:       08dfceb3-1c1c-482e-a3fb-c94151a7d1b9
+:END:
+
 #+begin_src text :tangle ./packages.txt :padline no
 elfeed
 #+end_src
@@ -2286,6 +2577,10 @@ elfeed
 #+end_src
 
 *** =cur-config-net.el= section on ~elfeed~ integration with youtube and ~yt-dlp~
+:PROPERTIES:
+:ID:       6f6b6415-898e-4e38-9a0f-c314470e382a
+:END:
+
 #+begin_src text :tangle ./packages.txt :padline no
 elfeed-tube
 elfeed-tube-mpv
@@ -2320,6 +2615,10 @@ elfeed-tube-mpv
 #+end_src
 
 *** =cur-config-net.el= section on ~elcord~ and making myself look productive to my friends
+:PROPERTIES:
+:ID:       7184df32-7e9e-4a3a-8621-8a89077c34d6
+:END:
+
 #+begin_src text :tangle ./packages.txt :padline no
 elcord
 #+end_src
@@ -2335,6 +2634,9 @@ elcord
 #+end_src
 
 *** =cur-config-net.el= call to ~provide~
+:PROPERTIES:
+:ID:       6a681b64-ee9c-4c07-85be-b8c60a83164b
+:END:
 
 #+begin_src emacs-lisp
 (provide 'cur-config-net)
@@ -2343,6 +2645,7 @@ elcord
 ** Direnv integration (=cur-config-direnv.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-direnv.el
+:ID:       95bc6815-90f6-4630-83b0-fd87e98204b4
 :END:
 
 #+begin_src text :tangle ./packages.txt :padline no
@@ -2360,10 +2663,14 @@ inheritenv
 #+end_src
 
 * Custom Library Modules (=cur-lisp=)
+:PROPERTIES:
+:ID:       154b7ee9-1ad9-4e58-93e5-07dff545776f
+:END:
 
 ** Ace Window Extensions (=cur-aw.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-aw.el
+:ID:       03e2b639-de95-4cd4-bc24-89745ad8908a
 :END:
 
 #+begin_src emacs-lisp
@@ -2400,6 +2707,7 @@ Prefer the use of `consult-buffer'."
 ** Base Values and Functions (=cur-base.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-base.el
+:ID:       39558113-15a3-49d8-a8b8-6821a24685fe
 :END:
 
 #+begin_src emacs-lisp
@@ -2422,6 +2730,7 @@ Prefer the use of `consult-buffer'."
 ** Consult Extensions (=cur-consult.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-consult.el
+:ID:       474fa162-b8f9-4441-92cc-b949de18f0b0
 :END:
 
 #+begin_src emacs-lisp
@@ -2501,6 +2810,7 @@ order.  The command supports previewing the currently selected theme."
 ** Custom Mode Line (=cur-modline.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-mode-line.el
+:ID:       f36c824e-ce05-40b8-88b0-599ad5bf3418
 :END:
 
 #+begin_src emacs-lisp
@@ -2870,6 +3180,7 @@ To create add more padding you can use the `cur-mode-line-end-space-dwim'
 ** Dired Extensions (=cur-dired.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-dired.el
+:ID:       4bb3fd54-986d-43e7-b408-2ed2fb272ac5
 :END:
 
 #+begin_src emacs-lisp
@@ -2920,6 +3231,7 @@ To create add more padding you can use the `cur-mode-line-end-space-dwim'
 ** Eshell aliases and extensions (=cur-eshell.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-eshell.el
+:ID:       f776fb00-2e8b-4936-9e75-62ca15f268cb
 :END:
 
 #+begin_src emacs-lisp
@@ -2991,6 +3303,7 @@ Will call `dired' on current directory if no directory is specified."
 ** Meow Extension (=cur-meow.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-meow.el
+:ID:       4aa1f51c-204e-4479-8295-d0522d178789
 :END:
 
 #+begin_src emacs-lisp
@@ -3017,6 +3330,7 @@ If in neither of the two states, return nil."
 ** Popper Extensions (=cur-popper.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-popper.el
+:ID:       3ad0cb08-93dd-43db-9522-fa21cf32b4c6
 :END:
 
 #+begin_src emacs-lisp
@@ -3070,6 +3384,7 @@ ALIST is passed to `dispaly-buffer-at-bottom'."
 ** Theme Helpers (=cur-theme.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-theme.el
+:ID:       41ff5a19-e301-487f-9bf8-493c0f2f681f
 :END:
 
 #+begin_src emacs-lisp
@@ -3316,6 +3631,7 @@ If THEME is nil then call interactively the function
 ** Wallpaper Functions (=cur-wallpaper.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-wallpaper.el
+:ID:       9b1350bf-332a-4f8a-a4cb-821486adf8e4
 :END:
 
 #+begin_src emacs-lisp
@@ -3347,6 +3663,7 @@ If THEME is nil then call interactively the function
 ** Window Management (=cur-window.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-window.el
+:ID:       f7a52192-5fe8-45e6-a541-1139216007bd
 :END:
 
 #+begin_src emacs-lisp
@@ -3464,6 +3781,7 @@ determine if it will create a new window or reuse the current one.")
 ** Vterm extension (=cur-vterm.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./cur-lisp/cur-vterm.el
+:ID:       7c12cb33-ff1d-4aff-a0af-aa6d0023efe0
 :END:
 
 #+begin_src emacs-lisp
@@ -3506,9 +3824,14 @@ determine if it will create a new window or reuse the current one.")
 #+end_src
 
 * Themes
+:PROPERTIES:
+:ID:       8a389991-b8c2-478c-b691-a5edace0a55c
+:END:
+
 ** Gruvbox
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle no
+:ID:       0f2eba32-600b-486d-a387-382e5c1f00d6
 :END:
 
 #+begin_src emacs-lisp
