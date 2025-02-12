@@ -61,6 +61,16 @@
 
 (provide 'cur-config-elfeed)
 
+(use-package cur-yt
+  :commands (cur-yt-play-video))
+
+(use-package cur-yt
+  :after (elfeed elfeed-tube)
+  :bind ( :map elfeed-show-mode-map
+	  ("V" . cur-yt-play-video)
+	  :map elfeed-search-mode-map
+	  ("V" . cur-yt-play-video)))
+
 (use-package elcord
   :custom
   (elcord-boring-buffers-regexp-list '("^ " "\\\\*Messages\\\\*"
