@@ -1384,6 +1384,18 @@ embark
 embark-consult
 #+end_src
 
+*** =cur-config-completion.el= section on minibuffer settings
+:PROPERTIES:
+:ID:       a93b748d-4a45-48d4-a12a-8d319f367fae
+:END:
+
+#+begin_src emacs-lisp
+(use-package emacs
+  :ensure nil
+  :custom
+  (minibuffer-follows-selected-frame nil "Display the minibuffer on a per-frame basis"))
+#+end_src
+
 *** =cur-config-completion.el= section on completions styles
 :PROPERTIES:
 :ID:       9b8572d1-ff66-4710-8752-9625b34f1485

@@ -1,3 +1,8 @@
+(use-package emacs
+  :ensure nil
+  :custom
+  (minibuffer-follows-selected-frame nil "Display the minibuffer on a per-frame basis"))
+
 (use-package minibuffer
   :config
   (setq completion-styles '(basic substring orderless))
