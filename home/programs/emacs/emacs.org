@@ -362,14 +362,14 @@ At the bottom of all Emacs Lisp libraries a all to ~provide~ with the name of th
 :ID:       c6c1b5c2-a355-42d3-9e0b-ec3521726fae
 :END:
 
-I use [[https:github.com/meow-edit/meow][meow]], a modal editing layer designed to be integrate well into Emacs. It's very easy to hack on and extend and just feels more Emacsy. I have had almost no issues with this, compared to evil which just felt sluggish and was hard to customize. The object-verb syntax is also really great and I prefer it to the verb-object of vim/nvim.
+This module is the base of my key bindings. I use [[https:github.com/meow-edit/meow][meow]], a modal editing layer designed to be well integrated into the rest of the Emacs ecosystem. It's very easy to hack on and extend and just feels more Emacsy (e.g. using regular keymaps instead of =general.el=). I have had almost no issues with this, compared to evil which just felt sluggish and was hard to customize. The object-verb syntax is also really great and I prefer it to the verb-object of vim/nvim. There are also some other things I use in this section, such as ~repeat-mode~ and ~hydra~.
 
 *** =cur-config-bindings.el= section on ~repeat-mode~ and repeating key bindings
 :PROPERTIES:
 :ID:       a78dad5e-2675-4530-a3ea-8066f102905c
 :END:
 
-One of the most basic ways to make using Emacs keybindings a breeze.
+~repeat-mode~ is one of the most basic ways to make working with standard Emacs key bindings a breeze. In its simplest form, it allows you to be able to simply repeat a key with out a prefix or modifiers. For example, instead of having to type =C-x o C-x o C-x o C-x o= to cycle through 4 windows, you would just keep hitting the =o= key, typing =C-x o o o o=. In more advanced cases you have several (often related) commands that are just a key-press away. This is one of those features that, in my opinion, should just be enabled by default in Emacs. This is [[info:emacs#Repeating][section in the manual]] talks about it some and this [[https://karthinks.com/software/it-bears-repeating/][blog post]] by [[https://karthinks.com/][karthinks]] goes very in depth into what ~repeat-mode~ can do.
 
 #+begin_src emacs-lisp
 ;; ===Repeat Mode===
@@ -384,7 +384,7 @@ One of the most basic ways to make using Emacs keybindings a breeze.
 :ID:       5ec45ba2-771f-461f-835c-b6e5a6bd350d
 :END:
 
-I use hydras for repeat keybindings. I plan to switch to use the built in repeat keymap more in the future but they are very helpful for creating something almost like a mini meow state, just for one particular task.
+~hydra~ is a package that makes creating ad hoc [[info:transient#Top][transient]] key maps very easy. Transient key maps are temporary keyboard driven menus, somewhere between full on modal editing and keyboard short cuts. [[info:magit#Top][magit]] is a good example of what transient key maps are capable of.
 
 #+begin_src text :tangle ./packages.txt :padline no
 hydra
@@ -401,6 +401,8 @@ hydra
 :ID:       fc0629a4-40b3-45fd-880f-67c14d1aee36
 :END:
 
+~avy~ is a package that allows you to quickly jump to a point on screen. I almost exclusively use ~avy-goto-char-2~ as opposed to ~avy-goto-char-timer~ since I like consistent behavior in my editing commands. ~avy~ also has commands for being able to quickly edit or select text at a point as well but I honestly never use it as I prefer using ~meow~ editing commands. If that does interest you please read [[https://karthinks.com/software/avy-can-do-anything/][this article]] by [[https://karthinks.com/][karthinks]].
+
 #+begin_src text :tangle ./packages.txt :padline no
 avy
 #+end_src
@@ -416,22 +418,27 @@ avy
 :ID:       d0be41a7-a02d-4c61-a980-3a2bef444971
 :END:
 
-This is the meat and potatoes of my keybindings. First I have several keymaps: sub-leader, projectile, toggle, and alignment. Sub leader is for more miscellaneous one-off commands, such as ~ibuffer~. Projectile is for, you guessed it, projectile related commands. Toggle is for quick, on the fly, changing of settings, such as the font size. The alignment is currently unused as of now but will have commands to change how text is currently being viewed without actually modifying the text of the buffer, think ~recenter-top-bottom~ like commands and more.
+[[https://github.com/meow-edit/meow][meow]] is a package that implements modal editing in Emacs in a very unobtrusive way. By default ~meow~ provides a well thought out set of editing commands (which are just wrappers around the default Emacs editing commands) and states (~meow~'s analog to ([[https://neovim.io/][neo]])[[https://www.vim.org/][vim's]] modes). Much of the beauty of ~meow~ is how its all just normal Emacs concepts under the hood ([[info:emacs#Keymaps][keymaps]], [[info:elisp#Defining Commands][interactive functions]], [[info:emacs#Keyboard Macros][keyboard macros]], etc.) making it trivial to mold and shape ~meow~ to what you need it to be. Contrast this to [[https://github.com/emacs-evil/evil][evil]] (vim emulation in Emacs) which I found to be more confusing, less extensible, and very slow. One of the primary things I like about ~meow~ is its inversion of (neo)vim's (and Emacs') typical model of action -> selection. ~meow~ follows [[https://kakoune.org/][kakoune's]] and [[https://helix-editor.com/][helix's]] approach which is selection -> action. This to me feels very logical and, in my option, should be the default way things should operate. Please read these parts of [[https://karthinks.com/software/fifteen-ways-to-use-embark/][these]] [[https://karthinks.com/software/emacs-window-management-almanac/#window-magic-with-ace-window-dispatch][blog]] [[https://karthinks.com/software/avy-can-do-anything/#adc2ee][posts]] by [[https://karthinks.com/][karthinks]] on some of the theory behind this if you are interested (I cover ~embark~ and ~ace-window~ later in my configuration and I covered avy previously in my configuration).
 
-I try to keep the leader key map as static as possible, with no keybindings being changed with the mode. If I want something to change with the mode I will put it under C-c, which I can access from =RET= via normal mode. The leader key primarily has things for interacting with general Emacs constructs, like buffers, universal arg, =M-x=, etc.
+There is a lot that ~meow~ is capable of so instead of trying to say what has been said better by others I will leave you with how I learned ~meow~. First I followed along with each of the [[https://github.com/meow-edit/meow?tab=readme-ov-file#documents][documents listed in the README]]. This will take you through installation, the tutorial (available with =M-x meow-tutor RET=), list of commands and customization options, and the explanation of the concepts behind ~meow~. Read all of it (except for maybe the changelog) and do what the documentation says. It is a very well documented and you will thank yourself in the future for having read it. On a side note, if you are coming from (neo)vim, please read the [[https://github.com/meow-edit/meow/blob/master/VIM_COMPARISON.org][comparison sheet]]. Next you are going to want to make the key bindings what you find comfortable to type and behave the way you want them too. To do this I suggest you write something long and relatively unimportant while using these ~meow~ key bindings *and only ~meow~ keybindings*. It doesn't really matter what it is, an essay, a program, a collection notes, some sort of hybrid documentation-Emacs-lisp code base (hey, wait a second!). Something that will force you to find what is comfortable, find what is not, and get familiar with the way ~meow~ does editing. Personally I found something close to the defaults to be what is most comfortable for me but I have seen others who have completely unique layouts and states.
 
-The meow states, what vim/nvim call modes, are as follows:
+The ~meow~ default states, what (neo)vim call modes, are as follows:
 - *Normal* - The main state that is used. Used for navigation, selection, and editing. Basically vim's normal and visual mode in one.
-- *Insert* - Insert text, esc to go back to normal state.
-- *Motion* - A minimal state used when you don't know what the major-mode does. I have only =j=, =k=, and =SPC= bound to down, up, and leader respectively. Everything else is as the major mode defines it. It's just there so I'm still able to interface with Emacs like I normally would, just with a minimal interface.
-- *Keypad* - Leader key map.
-- *Beacon* - Multi-cursor in a region. Very convenient but kmacros are GOATed.
+- *Insert* - Insert text like normal Emacs, =ESC= to go back to *Normal* state.
+- *Motion* - A minimal state used when you don't know what the ~major-mode~ does. I have only =j=, =k=, and =SPC= bound to down, up, and *Keypad* respectively. Everything else is as the major mode defines it. It's just there so I'm still able to interface with Emacs like I normally would, just with a minimal interface.
+- *Keypad* - This is effectively my leader key (if you are coming from (neo)vim). I use this for quick access to important commands and keymaps that I want available globally. I also use this as a translation layer so I don't have to use modifier keys for Emacs commands under =C-x= and =C-c= (=x= and =c= in *Keypad* respectively). Please consult [[https://github.com/meow-edit/meow/blob/master/TUTORIAL.org][meow's web tutorial]] for a better explanation on how to use it. This is very convenient for dealing with Emacs' infamous long key chords but can sometimes become tedious if most of the keys are lower case. 
+- *Beacon* - Beacon creates multiple cursors over a region. Basically you create a [[info:emacs#Secondary Selection][secondary selection]] and your actions automatically get converted into a keyboard macro that gets played where all of your cursors are. Please read [[https://github.com/meow-edit/meow/blob/master/TUTORIAL.org#beacon][here]] for a better explanation or go through the tutorial (type =M-x meow-tutor RET=).
+I use the default states but there is no stopping you from making your own.
 
-Also of note, I find it easier to think about the cursor in normal mode as being a single character selection. This is how helix does it and I really like it so I have a lot of the meow fallback commands to operate on the char after the cursor.
+I have several key maps I define for use under the *Keypad* state: ~cur/sub-leader-keymap~, ~cur/toggle-map~, and ~cur/register-map~. ~cur/sub-leader-map~ is for more miscellaneous one-off commands that I want quick access to, such as ~ibuffer~. ~cur/toggle-map~ is for quick, on the fly, changing of settings, such as the font size and theme. ~cur/register-map~ is for register related commands such as ~jump-to-register~ or ~copy-to-register~. In addition to the key maps I define, I also use the built in ~project-prefix-map~ for project / version control related commands. I try to keep the leader key map as static as possible, with no keybindings being changed with the mode. If I want something to change with the mode I will put it under =C-c=, which I can access under =c= in *Keypad* and under =RET= in *Normal*. The leader key primarily has things for interacting with general Emacs constructs, like buffers, universal arg, =M-x=, etc.
+
+Under *Normal* state I try to reuse Emacs functionality and key maps, such as binding the ~goto-map~ under =v=. This maximizes my ability to draw from standard Emacs functionality and makes Emacs feel far more consistent. The only thing I am missing is bringing ~search-map~ into the mix but I will address that in due time.
+
+Also of note, I find it easier to think about the cursor in normal mode as being a single character selection. This is how helix does it and I really like it so I have a lot of the meow fallback commands to operate on the char after the cursor. There are sometimes I have to think about it in the normal Emacs way of being between two characters but after using it for a while you get used to it.
 
 A cheatsheet for the normal state can be accessed via =M-x meow-cheatsheet RET=.
 
-Currently Meow is broken in the Emacs overlay so I am including the package from mepla stable instead.
+Currently ~meow~ is broken in the Emacs overlay so I am including the package from mepla stable instead.
 
 #+begin_src text :tangle ./packages.txt :padline no
 meow
