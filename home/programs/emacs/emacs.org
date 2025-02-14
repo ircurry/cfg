@@ -786,6 +786,8 @@ _o_: other window     _F_: fit to buffer          _d_: close window
 :ID:       9082076e-8399-470a-8778-83c9c800065d
 :END:
 
+This integrates ~meow~'s thing system with tree-sitter, allowing me to quickly select classes, functions, arguments, etc. This is not a complete system for structural editing but it is a good component.
+
 #+begin_src text :tangle ./packages.txt :padline no
 meow-tree-sitter
 #+end_src
