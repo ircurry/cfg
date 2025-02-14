@@ -46,8 +46,8 @@
          ("M" . consult-global-mark)
          ("o" . consult-outline)
          :map search-map
-         ("/" . consult-line)
-         ("?" . consult-line-multi)
+         ("l" . consult-line)
+         ("L" . consult-line-multi)
 	 :map cur/register-map
 	 ("C-s" . consult-register-store)
 	 ("C-l" . consult-register-load)
@@ -63,12 +63,6 @@
   :config
   (setq xref-show-xrefs-function       #'consult-xref
         xref-show-definitions-function #'consult-xref))
-
-(use-package consult
-  :after (meow)
-  :config
-  (meow-normal-define-key
-   '("/" . consult-line)))
 
 (use-package consult
   :after (org)

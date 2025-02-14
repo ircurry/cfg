@@ -25,10 +25,6 @@
     (let ((map (make-sparse-keymap)))
       map)
     "Keymap for commands that change settings from the leader key.")
-  (defvar cur/alignment-map
-    (let ((map (make-sparse-keymap)))
-      map)
-    "Keymap for commands that change alignment and cursor display.")
   (defvar cur/register-map
     (let ((map (make-sparse-keymap)))
       map)
@@ -125,11 +121,11 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("RET"   . "M-x")
 
      ;; ===4th Row===
-     (cons "z" cur/alignment-map)
+     ;; '("z" . )
      ;; '("x" . ) ; C-x map
      ;; '("c" . ) ; C-c map
      '("C" . capitalize-dwim)
-     ;; '("v" . )
+     (cons "v" search-map)
      '("b" . "C-x b")
      ;; '("n" . )
      ;; '("m" . ) ; M- map
@@ -234,7 +230,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("<" . beginning-of-buffer)
      '("." . meow-inner-of-thing)
      '(">" . end-of-buffer)
-     ;; '("/" . ) ; I bind this later to `consult-line'
+     '("/" . meow-visit)
      '("?" . meow-page-down)
      '("'" . meow-grab)
      '("\"" . meow-pop-grab)))
@@ -319,10 +315,6 @@ _o_: other window     _F_: fit to buffer          _d_: close window
           ("J"   . next-logical-line)
           ("K"   . previous-logical-line)
           ("s"   . back-to-indentation)
-          :map search-map
-          ("n" . meow-visit)
-          ("s" . isearch-forward)
-          ("r" . isearch-backward)
           :map next-error-repeat-map
           ("a" . first-error))
   :config
