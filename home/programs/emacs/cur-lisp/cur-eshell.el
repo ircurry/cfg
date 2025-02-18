@@ -5,6 +5,8 @@
 ;;; Code:
 
 (require 'eshell)
+(require 'em-dirs)
+(require 'em-unix)
 (require 'files)
 (require 'dired)
 
@@ -16,7 +18,7 @@ Set `eshell-prompt-function' to this function to enable."
          (yellow  (face-foreground 'ansi-color-yellow))
          (blue    (face-foreground 'ansi-color-blue))
          (magenta (face-foreground 'ansi-color-magenta))
-         (cyan    (face-foreground 'ansi-color-cyan))
+         ;; (cyan    (face-foreground 'ansi-color-cyan))
          (white   (face-foreground 'ansi-color-white)))
     (concat
      (propertize "["                   'face `(:weight bold :foreground ,red))
@@ -54,6 +56,13 @@ Will call `dired' on current directory if no directory is specified."
          (dired dir))
         (t
          (dired "."))))
+
+(defun eshell/icd (&optional _)
+  "Interactively change directories with `read-file-name'.
+This function ignores its argument."
+  (let* ((default-dir (read-file-name "Switch To: " nil nil t nil #'file-directory-p)))
+    (unless (string-empty-p default-dir)
+      (eshell/cd default-dir))))
 
 (defvar cur-eshell-prompt-regexp
   "^\\[.*?@.*? [/~].*\\]?[#$λ] "
