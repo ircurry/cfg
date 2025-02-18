@@ -3143,7 +3143,8 @@ To create add more padding you can use the `cur-mode-line-end-space-dwim'
 (defun cur-mode-line--flycheck-num-errors (level face)
   "Return a string of number of errors in LEVEL with FACE applied conditionally."
   (when (cur-mode-line-flycheck-display-p)
-    (let* ((error-nums (or (cdr (assoc level (flycheck-count-errors flycheck-current-errors))) 0))
+    (let* ((error-nums (or (cdr (assoc level (flycheck-count-errors
+					      flycheck-current-errors))) 0))
 	   (icon (pcase level
 		   ('info "󰋽")
 		   ('warning "")
@@ -3173,11 +3174,14 @@ To create add more padding you can use the `cur-mode-line-end-space-dwim'
   :group 'cur-mode-line-faces)
 
 (defvar cur-mode-line-flycheck-indicator
-  '((:eval (cur-mode-line--flycheck-num-errors 'error 'cur-mode-line-flycheck-error))
+  '((:eval (cur-mode-line--flycheck-num-errors 'error
+					       'cur-mode-line-flycheck-error))
     " "
-    (:eval (cur-mode-line--flycheck-num-errors 'warning 'cur-mode-line-flycheck-warning))
+    (:eval (cur-mode-line--flycheck-num-errors 'warning
+					       'cur-mode-line-flycheck-warning))
     " "
-    (:eval (cur-mode-line--flycheck-num-errors 'info 'cur-mode-line-flycheck-info)))
+    (:eval (cur-mode-line--flycheck-num-errors 'info
+					       'cur-mode-line-flycheck-info)))
   "Indicator for flycheck errors.")
 
 (format-mode-line cur-mode-line-flycheck-indicator)
