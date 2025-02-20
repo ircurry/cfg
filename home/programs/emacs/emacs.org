@@ -374,9 +374,7 @@ This module is the base of my key bindings. I use [[https:github.com/meow-edit/m
 #+begin_src emacs-lisp
 ;; ===Repeat Mode===
 (use-package emacs
-  :demand t
-  :config
-  (repeat-mode 1))
+  :hook (after-init . repeat-mode))
 #+end_src
 
 *** =cur-config-bindings.el= section on ~hydra~ and quick transient key maps
