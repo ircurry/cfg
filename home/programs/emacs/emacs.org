@@ -638,8 +638,8 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("l" . meow-right)
      '("L" . meow-right-expand)
      '(";" . meow-reverse)
-     '(":" . meow-page-up)
-     '("RET" . "C-c")
+     ;; '(":" . )
+     ;; '("RET" . )
      ;; '("S-RET" . )
 
      ;; ===4th Row===
@@ -662,7 +662,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("." . meow-inner-of-thing)
      '(">" . end-of-buffer)
      '("/" . meow-visit)
-     '("?" . meow-page-down)
+     ;; '("?" . )
      '("'" . meow-grab)
      '("\"" . meow-pop-grab)))
   :init
@@ -1763,6 +1763,29 @@ popper
     ;; (popper-echo-mode -1)
     ;; (popper-echo-mode +1)
     ))
+#+end_src
+
+*** =cur-config-window.el= section on paging up and down
+:PROPERTIES:
+:ID:       19429233-7dd7-4404-a925-90cd2267fa37
+:END:
+
+#+begin_src emacs-lisp
+(use-package emacs
+  :after repeat
+  :preface
+  (defvar cur/scroll-up-repeat-map
+    (let ((map (make-sparse-keymap)))
+      map)
+    "The keymap to repeat scrolling up.")
+  (defvar cur/scroll-down-repeat-map
+    (let ((map (make-sparse-keymap)))
+      map)
+    "The keymap to repeat scrolling down.")
+  :bind ( :repeat-map cur/scroll-down-repeat-map
+	  ("v" . scroll-down-command)
+	  :repeat-map cur/scroll-up-repeat-map
+	  ("v" . scroll-up-command)))
 #+end_src
 
 *** =cur-config-window.el= call to ~provide~

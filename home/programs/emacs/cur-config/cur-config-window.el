@@ -118,4 +118,20 @@
     ;; (popper-echo-mode +1)
     ))
 
+(use-package emacs
+  :after repeat
+  :preface
+  (defvar cur/scroll-up-repeat-map
+    (let ((map (make-sparse-keymap)))
+      map)
+    "The keymap to repeat scrolling up.")
+  (defvar cur/scroll-down-repeat-map
+    (let ((map (make-sparse-keymap)))
+      map)
+    "The keymap to repeat scrolling down.")
+  :bind ( :repeat-map cur/scroll-down-repeat-map
+	  ("v" . scroll-down-command)
+	  :repeat-map cur/scroll-up-repeat-map
+	  ("v" . scroll-up-command)))
+
 (provide 'cur-config-window)

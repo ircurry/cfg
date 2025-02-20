@@ -205,8 +205,8 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("l" . meow-right)
      '("L" . meow-right-expand)
      '(";" . meow-reverse)
-     '(":" . meow-page-up)
-     '("RET" . "C-c")
+     ;; '(":" . )
+     ;; '("RET" . )
      ;; '("S-RET" . )
 
      ;; ===4th Row===
@@ -229,7 +229,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("." . meow-inner-of-thing)
      '(">" . end-of-buffer)
      '("/" . meow-visit)
-     '("?" . meow-page-down)
+     ;; '("?" . )
      '("'" . meow-grab)
      '("\"" . meow-pop-grab)))
   :init
