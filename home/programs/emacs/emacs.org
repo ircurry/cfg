@@ -286,8 +286,8 @@ This sets emacs to save the most recently visited files. I enable this primarily
 	  ("d" . lgrep)
 	  ("r" . rgrep)
 	  :map grep-mode-map
-	  ("M-e" . compilation-next-error)
-	  ("M-a" . compilation-previous-error)))
+	  ("M-e" . compilation-next-file)
+	  ("M-a" . compilation-previous-file)))
 #+end_src
 
 *** =cur-config-essentials.el= section on ~proced~ and viewing process (htop like)

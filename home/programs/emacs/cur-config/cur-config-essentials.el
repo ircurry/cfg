@@ -57,8 +57,8 @@
 	  ("d" . lgrep)
 	  ("r" . rgrep)
 	  :map grep-mode-map
-	  ("M-e" . compilation-next-error)
-	  ("M-a" . compilation-previous-error)))
+	  ("M-e" . compilation-next-file)
+	  ("M-a" . compilation-previous-file)))
 
 (use-package proced
   :ensure nil
