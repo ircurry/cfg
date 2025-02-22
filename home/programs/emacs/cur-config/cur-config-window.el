@@ -90,6 +90,10 @@
 				     reb-mode
 				     reb-lisp-mode)))
 
+(use-package popper-echo
+  :after popper
+  :hook (after-init . popper-echo-mode))
+
 (use-package popper
   :after project
   :demand t

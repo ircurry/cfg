@@ -17,6 +17,13 @@ let
         inherit (self) trivialBuild;
       }
     );
+    popper = (
+      pkgs.callPackage ./popper.nix {
+        inherit (pkgs) fetchFromGitHub;
+        inherit (lib) fakeHash;
+        inherit (self) trivialBuild;
+      }
+    );
   };
   emacs-package =
     with pkgs;
