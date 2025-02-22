@@ -270,10 +270,28 @@ This sets emacs to save the most recently visited files. I enable this primarily
   (setq lazy-count-suffix-format nil))
 #+end_src
 
+*** =cur-config-essentials.el= section on ~occur~ and finding regexp occurrences
+:PROPERTIES:
+:ID:       be1322cb-70d6-4c7f-9a9d-ae2b4a552cc2
+:END:
+
+~occur~ is a command to find occurrences in a buffer that match a regexp and display those matches in a ~compile~ like buffer. This allows you to quickly see and edit patterns of text. It's useful but has the draw back of not being search-as-you-type.
+
+#+begin_src emacs-lisp
+(use-package emacs
+  :custom (list-matching-lines-jump-to-current-line nil)
+  :bind ( :map occur-mode-map
+	  ("RET" . occur-mode-goto-occurrence-other-window)
+	  :map search-map
+	  ("o" . occur)))
+#+end_src
+
 *** =cur-config-essentials.el= section on ~grep~ and searching with grep in emacs
 :PROPERTIES:
 :ID:       f8a5f08e-cb9f-4e81-b124-09258d3d54f0
 :END:
+
+Emacs provides nice wrappers around standard cli commands such as grep. You can run grep with the aptly named ~grep~ command which will put all of the results in a ~compile~ like buffer. However, using grep this way isn't much more useful than using Emacs' built in ~occur~. What's more useful is grepping over multiple files which is what ~lgrep~ and ~rgrep~ are for.
 
 #+begin_src emacs-lisp
 (use-package grep

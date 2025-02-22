@@ -47,6 +47,13 @@
   (setq lazy-count-prefix-format "(%s/%s) ")
   (setq lazy-count-suffix-format nil))
 
+(use-package emacs
+  :custom (list-matching-lines-jump-to-current-line nil)
+  :bind ( :map occur-mode-map
+	  ("RET" . occur-mode-goto-occurrence-other-window)
+	  :map search-map
+	  ("o" . occur)))
+
 (use-package grep
   :ensure nil
   :commands (grep lgrep rgrep)
