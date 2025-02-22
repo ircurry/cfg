@@ -291,7 +291,7 @@ This sets emacs to save the most recently visited files. I enable this primarily
 :ID:       f8a5f08e-cb9f-4e81-b124-09258d3d54f0
 :END:
 
-Emacs provides nice wrappers around standard cli commands such as grep. You can run grep with the aptly named ~grep~ command which will put all of the results in a ~compile~ like buffer. However, using grep this way isn't much more useful than using Emacs' built in ~occur~. What's more useful is grepping over multiple files which is what ~lgrep~ and ~rgrep~ are for.
+Emacs provides nice wrappers around standard cli commands such as grep. You can run grep with the aptly named ~grep~ command which will put all of the results in a ~compile~ like buffer. However, using grep this way isn't much more useful than using Emacs' built in ~occur~. What's more useful is grepping over multiple files which is what ~lgrep~ and ~rgrep~ are for. I also have emacs set to use ripgrep instead of grep if it is available.
 
 #+begin_src emacs-lisp
 (use-package grep
