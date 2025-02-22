@@ -65,6 +65,16 @@
         xref-show-definitions-function #'consult-xref))
 
 (use-package consult
+  :if (executable-find "rg")
+  :bind ( :map search-map
+	  ("i" . consult-ripgrep)))
+
+(use-package consult
+  :unless (executable-find "rg")
+  :bind ( :map search-map
+	  ("i" . consult-grep)))
+
+(use-package consult
   :after (org)
   :bind ( :map org-mode-map
           ([remap consult-imenu] . consult-org-heading)))
