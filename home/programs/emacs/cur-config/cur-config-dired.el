@@ -134,8 +134,6 @@
   :bind ( :map dired-mode-map
 	  ("l" . cur-dired-maybe-insert-subdir-or-find-file)))
 
-(provide 'cur-config-dired)
-
 (use-package cur-wallpaper
   :after (dired)
   :bind ( :map dired-mode-map

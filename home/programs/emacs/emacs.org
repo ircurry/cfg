@@ -985,8 +985,6 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
   :after (dired)
   :bind ( :map dired-mode-map
 	  ("l" . cur-dired-maybe-insert-subdir-or-find-file)))
-
-(provide 'cur-config-dired)
 #+end_src
 
 *** =cur-config-dired.el= section on setting my wallpaper
