@@ -39,13 +39,18 @@
 (use-package isearch
   :ensure nil
   :demand t
+  :bind ( :map isearch-mode-map
+	  ("M-s l" . isearch-toggle-lax-whitespace))
   :custom
   (isearch-wrap-pause 'no-ding)
   (isearch-repeat-on-direction-change t)
+  (isearch-lazy-count t)
+  (isearch-lax-whitespace t)
+  (search-whitespace-regexp ".*?")
+  (lazy-count-prefix-format "(%s/%s) ")
+  (lazy-count-suffix-format nil)
   :config
-  (setq isearch-lazy-count t)
-  (setq lazy-count-prefix-format "(%s/%s) ")
-  (setq lazy-count-suffix-format nil))
+  (setq isearch-regexp-lax-whitespace nil)) ; not a custom variable for some reason
 
 (use-package emacs
   :custom (list-matching-lines-jump-to-current-line nil)

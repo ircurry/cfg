@@ -129,7 +129,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      ;; '("m" . ) ; M- map
      '("," . meow-beginning-of-thing)
      '("." . meow-end-of-thing)
-     '("/" . rg)
+     '("/" . isearch-forward-regexp)
      ;; '("'"  . )
      )
     (meow-normal-define-key
@@ -284,7 +284,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   (meow-keypad-describe-delay 0.0 "No delay in keypad help popup")
   (meow-cheats-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
   (meow-keypad-leader-dispatch nil)
-  (meow-visit-sanitize-completion nil)
+  (meow-visit-sanitize-completion t)
   :bind ( :map cur/sub-leader-keymap
           ("C-l" . ibuffer)
           ("C-b" . bookmark-set-no-overwrite)

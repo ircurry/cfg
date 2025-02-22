@@ -261,13 +261,18 @@ This sets emacs to save the most recently visited files. I enable this primarily
 (use-package isearch
   :ensure nil
   :demand t
+  :bind ( :map isearch-mode-map
+	  ("M-s l" . isearch-toggle-lax-whitespace))
   :custom
   (isearch-wrap-pause 'no-ding)
   (isearch-repeat-on-direction-change t)
+  (isearch-lazy-count t)
+  (isearch-lax-whitespace t)
+  (search-whitespace-regexp ".*?")
+  (lazy-count-prefix-format "(%s/%s) ")
+  (lazy-count-suffix-format nil)
   :config
-  (setq isearch-lazy-count t)
-  (setq lazy-count-prefix-format "(%s/%s) ")
-  (setq lazy-count-suffix-format nil))
+  (setq isearch-regexp-lax-whitespace nil)) ; not a custom variable for some reason
 #+end_src
 
 *** =cur-config-essentials.el= section on ~occur~ and finding regexp occurrences
@@ -605,7 +610,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      ;; '("m" . ) ; M- map
      '("," . meow-beginning-of-thing)
      '("." . meow-end-of-thing)
-     '("/" . rg)
+     '("/" . isearch-forward-regexp)
      ;; '("'"  . )
      )
     (meow-normal-define-key
@@ -760,7 +765,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   (meow-keypad-describe-delay 0.0 "No delay in keypad help popup")
   (meow-cheats-layout meow-cheatsheet-layout-qwerty "Meow qwerty layout for the cheatsheet")
   (meow-keypad-leader-dispatch nil)
-  (meow-visit-sanitize-completion nil)
+  (meow-visit-sanitize-completion t)
   :bind ( :map cur/sub-leader-keymap
           ("C-l" . ibuffer)
           ("C-b" . bookmark-set-no-overwrite)
