@@ -46,6 +46,12 @@
                "\\*.*-vterm\\*")
            (display-buffer-reuse-mode-window
             display-buffer-same-window))
+	  ((or (derived-mode . reb-mode)
+	       (derived-mode . reb-lisp-mode)
+	       "\\*RE-Builder\\*")
+	   (display-buffer-reuse-mode-window
+	    display-buffer-at-bottom)
+	   (window-height . 0.25))
 	  (".*"
 	   (display-buffer-same-window)))))
 
@@ -80,7 +86,9 @@
 				     geiser-mode
 				     grep-mode
 				     rg-mode
-				     xref--xref-buffer-mode)))
+				     xref--xref-buffer-mode
+				     reb-mode
+				     reb-lisp-mode)))
 
 (use-package popper
   :after project
@@ -94,10 +102,7 @@
   (setopt popper-display-function #'display-buffer-below-selected)
   (progn
     (popper-mode -1)
-    (popper-mode +1)
-    ;; (popper-echo-mode -1)
-    ;; (popper-echo-mode +1)
-    ))
+    (popper-mode +1)))
 
 (use-package cur-popper
   :after (popper)
@@ -110,13 +115,12 @@
 					 (major-mode . compilation-mode)
 					 (major-mode . grep-mode)
 					 (major-mode . rg-mode)
-					 (major-mode . xref--xref-buffer-mode)))
+					 (major-mode . xref--xref-buffer-mode)
+					 (major-mode . reb-mode)
+					 (major-mode . reb-lisp-mode)))
   (progn
     (popper-mode -1)
-    (popper-mode +1)
-    ;; (popper-echo-mode -1)
-    ;; (popper-echo-mode +1)
-    ))
+    (popper-mode +1)))
 
 (use-package emacs
   :after repeat
