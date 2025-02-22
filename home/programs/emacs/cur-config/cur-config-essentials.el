@@ -59,13 +59,18 @@
   :commands (grep lgrep rgrep)
   :custom
   (grep-save-buffers 'ask)
-  (grep-template "grep <X> <C> -nH --null -e <R> <F>")
   :bind ( :map search-map
 	  ("d" . lgrep)
 	  ("r" . rgrep)
 	  :map grep-mode-map
 	  ("M-e" . compilation-next-file)
-	  ("M-a" . compilation-previous-file)))
+	  ("M-a" . compilation-previous-file))
+  :config
+  (let ((rg-found (executable-find "rg")))
+    (setopt grep-template (if rg-found
+			      "rg --no-heading -nH --null -e <R> <F>"
+			      "grep <X> <C> -nH --null -e <R> <F>"))
+    (setopt xref-search-program (if rg-found 'ripgrep 'grep))))
 
 (use-package proced
   :ensure nil
