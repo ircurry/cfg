@@ -47,6 +47,16 @@
   (setq lazy-count-prefix-format "(%s/%s) ")
   (setq lazy-count-suffix-format nil))
 
+(use-package grep
+  :ensure nil
+  :commands (grep lgrep rgrep)
+  :custom
+  (grep-save-buffers 'ask)
+  (grep-template "grep <X> <C> -nH --null -e <R> <F>")
+  :bind ( :map search-map
+	  ("d" . lgrep)
+	  ("r" . rgrep)))
+
 (use-package proced
   :ensure nil
   :if (eq system-type 'gnu/linux)
