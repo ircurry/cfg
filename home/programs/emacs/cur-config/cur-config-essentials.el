@@ -55,7 +55,10 @@
   (grep-template "grep <X> <C> -nH --null -e <R> <F>")
   :bind ( :map search-map
 	  ("d" . lgrep)
-	  ("r" . rgrep)))
+	  ("r" . rgrep)
+	  :map grep-mode-map
+	  ("M-e" . compilation-next-error)
+	  ("M-a" . compilation-previous-error)))
 
 (use-package proced
   :ensure nil

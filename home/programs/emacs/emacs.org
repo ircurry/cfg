@@ -284,7 +284,10 @@ This sets emacs to save the most recently visited files. I enable this primarily
   (grep-template "grep <X> <C> -nH --null -e <R> <F>")
   :bind ( :map search-map
 	  ("d" . lgrep)
-	  ("r" . rgrep)))
+	  ("r" . rgrep)
+	  :map grep-mode-map
+	  ("M-e" . compilation-next-error)
+	  ("M-a" . compilation-previous-error)))
 #+end_src
 
 *** =cur-config-essentials.el= section on ~proced~ and viewing process (htop like)
