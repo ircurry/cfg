@@ -1773,15 +1773,7 @@ popper
   :config
   (setopt popper-display-function #'cur-popper-display-buffer-dwim)
   (setopt popper-window-height #'cur-popper-fit-window-height)
-  (setopt cur-popper-select-conditions '("\\*eat\\*" "\\*.*-eat\\*" (major-mode . eat-mode)
-					 "\\*eshell\\*" "\\*.*-eshell\\*" (major-mode . eshell-mode)
-					 "\\*Occur\\*" (major-mode . occur)
-					 (major-mode . compilation-mode)
-					 (major-mode . grep-mode)
-					 (major-mode . rg-mode)
-					 (major-mode . xref--xref-buffer-mode)
-					 (major-mode . reb-mode)
-					 (major-mode . reb-lisp-mode)))
+  (setopt cur-popper-stay-conditions '())
   (progn
     (popper-mode -1)
     (popper-mode +1)))
@@ -3426,7 +3418,7 @@ If in neither of the two states, return nil."
   "Base functions and variables for my Emacs configuration."
   :group 'popper)
 
-(defcustom cur-popper-select-conditions '("\\*eat\\*" (derived-mode . eat-mode))
+(defcustom cur-popper-stay-conditions '()
   "A list of `buffer-match-p' conditions that determine if a popped buffer is focused."
   :type '(repeat (choice (cons (choice (const derived-mode) (const major-mode)) symbol)
 			 string))
@@ -3446,7 +3438,7 @@ ALIST is passed to `dispaly-buffer-at-bottom'."
 	 (window (display-buffer-at-bottom buffer nalist)))
     (pcase cur-popper-select-window
       (`nil window)
-      (`dwim (if (buffer-match-p `(or . ,cur-popper-select-conditions) (window-buffer window))
+      (`dwim (if (not (buffer-match-p `(or . ,cur-popper-stay-conditions) (window-buffer window)))
 		 (select-window window)
 	       window))
       (_ (select-window window)))))

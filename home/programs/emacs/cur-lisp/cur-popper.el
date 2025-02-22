@@ -10,7 +10,7 @@
   "Base functions and variables for my Emacs configuration."
   :group 'popper)
 
-(defcustom cur-popper-select-conditions '("\\*eat\\*" (derived-mode . eat-mode))
+(defcustom cur-popper-stay-conditions '()
   "A list of `buffer-match-p' conditions that determine if a popped buffer is focused."
   :type '(repeat (choice (cons (choice (const derived-mode) (const major-mode)) symbol)
 			 string))
@@ -30,7 +30,7 @@ ALIST is passed to `dispaly-buffer-at-bottom'."
 	 (window (display-buffer-at-bottom buffer nalist)))
     (pcase cur-popper-select-window
       (`nil window)
-      (`dwim (if (buffer-match-p `(or . ,cur-popper-select-conditions) (window-buffer window))
+      (`dwim (if (not (buffer-match-p `(or . ,cur-popper-stay-conditions) (window-buffer window)))
 		 (select-window window)
 	       window))
       (_ (select-window window)))))
