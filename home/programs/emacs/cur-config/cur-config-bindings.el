@@ -7,6 +7,8 @@
   :demand t)
 
 (use-package avy
+  :custom
+  (avy-timeout-seconds 1.0)
   :bind ( :map goto-map
 	  ("c" . avy-goto-char-2)
 	  ("a" . avy-goto-char-timer)))
