@@ -8,7 +8,8 @@
 
 (use-package avy
   :bind ( :map goto-map
-	  ("c" . avy-goto-char-2)))
+	  ("c" . avy-goto-char-2)
+	  ("a" . avy-goto-char-timer)))
 
 ;; ===Meow Setup===
 (use-package meow

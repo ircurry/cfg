@@ -457,7 +457,8 @@ avy
 #+begin_src emacs-lisp
 (use-package avy
   :bind ( :map goto-map
-	  ("c" . avy-goto-char-2)))
+	  ("c" . avy-goto-char-2)
+	  ("a" . avy-goto-char-timer)))
 #+end_src
 
 *** =cur-config-bindings.el= section on ~meow~ and modal key bindings
