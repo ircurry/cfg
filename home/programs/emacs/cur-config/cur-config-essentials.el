@@ -50,7 +50,8 @@
   (lazy-count-prefix-format "(%s/%s) ")
   (lazy-count-suffix-format nil)
   :config
-  (setq isearch-regexp-lax-whitespace nil)) ; not a custom variable for some reason
+  (setq isearch-regexp-lax-whitespace nil) ; not a custom variable for some reason
+  (setq isearch-case-fold-search nil))
 
 (use-package emacs
   :custom (list-matching-lines-jump-to-current-line nil)

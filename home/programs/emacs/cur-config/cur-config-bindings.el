@@ -129,7 +129,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      ;; '("m" . ) ; M- map
      '("," . meow-beginning-of-thing)
      '("." . meow-end-of-thing)
-     '("/" . isearch-forward-regexp)
+     '("/" . meow-visit)
      ;; '("'"  . )
      )
     (meow-normal-define-key
@@ -228,7 +228,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("<" . beginning-of-buffer)
      '("." . meow-inner-of-thing)
      '(">" . end-of-buffer)
-     '("/" . meow-visit)
+     '("/" . isearch-forward-regexp)
      ;; '("?" . )
      '("'" . meow-grab)
      '("\"" . meow-pop-grab)))

@@ -272,7 +272,8 @@ This sets emacs to save the most recently visited files. I enable this primarily
   (lazy-count-prefix-format "(%s/%s) ")
   (lazy-count-suffix-format nil)
   :config
-  (setq isearch-regexp-lax-whitespace nil)) ; not a custom variable for some reason
+  (setq isearch-regexp-lax-whitespace nil) ; not a custom variable for some reason
+  (setq isearch-case-fold-search nil))
 #+end_src
 
 *** =cur-config-essentials.el= section on ~occur~ and finding regexp occurrences
@@ -610,7 +611,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      ;; '("m" . ) ; M- map
      '("," . meow-beginning-of-thing)
      '("." . meow-end-of-thing)
-     '("/" . isearch-forward-regexp)
+     '("/" . meow-visit)
      ;; '("'"  . )
      )
     (meow-normal-define-key
@@ -709,7 +710,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("<" . beginning-of-buffer)
      '("." . meow-inner-of-thing)
      '(">" . end-of-buffer)
-     '("/" . meow-visit)
+     '("/" . isearch-forward-regexp)
      ;; '("?" . )
      '("'" . meow-grab)
      '("\"" . meow-pop-grab)))
