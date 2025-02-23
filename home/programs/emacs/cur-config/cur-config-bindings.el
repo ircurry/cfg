@@ -229,8 +229,8 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("<" . beginning-of-buffer)
      '("." . meow-inner-of-thing)
      '(">" . end-of-buffer)
-     '("/" . isearch-forward-regexp)
-     '("?" . isearch-backward-regexp)
+     ;; '("/" . isearch-forward-regexp)
+     ;; '("?" . isearch-backward-regexp)
      '("'" . meow-grab)
      '("\"" . meow-pop-grab)))
   :init
@@ -332,6 +332,15 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   (meow-leader-define-key
    '("e" . popper-toggle)
    '("i" . popper-cycle)))
+
+(use-package cur-search
+  :after meow
+  :demand t
+  :commands (cur-search-ifr cur-search-ibr)
+  :config
+  (meow-normal-define-key
+   '("/" . cur-search-ifr)
+   '("?" . cur-search-ibr)))
 
 (use-package cur-meow
   :after (meow)

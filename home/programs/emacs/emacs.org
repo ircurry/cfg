@@ -711,8 +711,8 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("<" . beginning-of-buffer)
      '("." . meow-inner-of-thing)
      '(">" . end-of-buffer)
-     '("/" . isearch-forward-regexp)
-     '("?" . isearch-backward-regexp)
+     ;; '("/" . isearch-forward-regexp)
+     ;; '("?" . isearch-backward-regexp)
      '("'" . meow-grab)
      '("\"" . meow-pop-grab)))
   :init
@@ -814,6 +814,15 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   (meow-leader-define-key
    '("e" . popper-toggle)
    '("i" . popper-cycle)))
+
+(use-package cur-search
+  :after meow
+  :demand t
+  :commands (cur-search-ifr cur-search-ibr)
+  :config
+  (meow-normal-define-key
+   '("/" . cur-search-ifr)
+   '("?" . cur-search-ibr)))
 
 (use-package cur-meow
   :after (meow)
@@ -1443,7 +1452,7 @@ embark-consult
   (minibuffer-follows-selected-frame nil "Display the minibuffer on a per-frame basis"))
 #+end_src
 
-*** =cur-config-completion.el= section on completions styles
+*** =cur-config-completion.el= section on completions styles and ~orderless~
 :PROPERTIES:
 :ID:       9b8572d1-ff66-4710-8752-9625b34f1485
 :END:
@@ -3414,6 +3423,40 @@ This function ignores its argument."
 
 (provide 'cur-eshell)
 ;;; cur-base.el ends here
+#+end_src
+
+** Isearch wrappers (=cur-search.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./cur-lisp/cur-search.el
+:ID:       b8638707-e1f8-41e9-9d42-2966836bd850
+:END:
+
+#+begin_src emacs-lisp
+;;; cur-search.el --- My wrappers around isearch -*- lexical-binding: t -*-
+
+;;; Commentary:
+
+;;; Code:
+
+(defun cur-search-ifr (direction)
+  "Begin `isearch-forward-regexp' or `isearch-backward-regexp' based on DIRECTION.
+DIRECTION should be a number.  If DIRECTION is negative,
+`isearch-backward-regexp' is called.  Otherwise, `isearch-forward-regexp' is
+called."
+  (interactive "p")
+  (let ((case-fold-search nil))
+    (if (< 0 direction)
+	(call-interactively #'isearch-forward-regexp)
+      (call-interactively #'isearch-backward-regexp))))
+
+(defun cur-search-ibr (direction)
+  "The opposite of `cur-search-ifr'.
+If DIRECTION is negative, call `isearch-forward-regexp' and vice versa."
+  (interactive "p")
+  (cur-search-ifr (- direction)))
+
+(provide 'cur-search)
+;;; cur-search.el ends here
 #+end_src
 
 ** Meow Extension (=cur-meow.el=)
