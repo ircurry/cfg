@@ -230,7 +230,7 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      '("." . meow-inner-of-thing)
      '(">" . end-of-buffer)
      '("/" . isearch-forward-regexp)
-     ;; '("?" . )
+     '("?" . isearch-backward-regexp)
      '("'" . meow-grab)
      '("\"" . meow-pop-grab)))
   :init
