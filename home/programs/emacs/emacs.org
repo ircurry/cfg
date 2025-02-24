@@ -3446,9 +3446,10 @@ DIRECTION should be a number.  If DIRECTION is negative,
 `isearch-backward-regexp' is called.  Otherwise, `isearch-forward-regexp' is
 called."
   (interactive "p")
-  (let ((case-fold-search nil))
+  (let ((case-fold-search nil)
+	(current-prefix-arg nil))
     (if (< 0 direction)
-	(call-interactively #'isearch-forward-regexp)
+      (call-interactively #'isearch-forward-regexp)
       (call-interactively #'isearch-backward-regexp))))
 
 (defun cur-search-ibr (direction)
