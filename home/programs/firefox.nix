@@ -172,7 +172,7 @@ in
             };
           };
 
-          extensions = with inputs.firefox-addons.packages."${pkgs.system}"; [
+          extensions.packages = with inputs.firefox-addons.packages."${pkgs.system}"; [
             darkreader
             ublock-origin
             libredirect
@@ -239,7 +239,7 @@ in
             };
           };
 
-          extensions = with inputs.firefox-addons.packages."${pkgs.system}"; [
+          extensions.packages = with inputs.firefox-addons.packages."${pkgs.system}"; [
             ublock-origin
             libredirect
             multi-account-containers
@@ -256,7 +256,7 @@ in
             force = true;
           };
 
-          extensions = with inputs.firefox-addons.packages."${pkgs.system}"; [
+          extensions.packages = with inputs.firefox-addons.packages."${pkgs.system}"; [
             multi-account-containers
             ublock-origin
           ];
@@ -270,7 +270,7 @@ in
             force = true;
           };
 
-          extensions = with inputs.firefox-addons.packages."${pkgs.system}"; [
+          extensions.packages = with inputs.firefox-addons.packages."${pkgs.system}"; [
             multi-account-containers
             ublock-origin
           ];
@@ -284,7 +284,7 @@ in
             force = true;
           };
 
-          extensions = with inputs.firefox-addons.packages."${pkgs.system}"; [
+          extensions.packages = with inputs.firefox-addons.packages."${pkgs.system}"; [
             multi-account-containers
             ublock-origin
           ];
@@ -298,7 +298,7 @@ in
             force = true;
           };
 
-          extensions = with inputs.firefox-addons.packages."${pkgs.system}"; [
+          extensions.packages = with inputs.firefox-addons.packages."${pkgs.system}"; [
             multi-account-containers
             ublock-origin
           ];
@@ -312,7 +312,7 @@ in
             force = true;
           };
 
-          extensions = with inputs.firefox-addons.packages."${pkgs.system}"; [
+          extensions.packages = with inputs.firefox-addons.packages."${pkgs.system}"; [
             multi-account-containers
             ublock-origin
           ];
