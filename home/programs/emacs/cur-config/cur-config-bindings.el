@@ -10,8 +10,9 @@
   :custom
   (avy-timeout-seconds 1.0)
   :bind ( :map goto-map
+	  ("a" . avy-isearch)
 	  ("c" . avy-goto-char-2)
-	  ("a" . avy-goto-char-timer)))
+	  (";" . avy-goto-char-timer)))
 
 ;; ===Meow Setup===
 (use-package meow
