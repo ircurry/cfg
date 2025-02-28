@@ -23,9 +23,10 @@
 
 (defun cur-yt--get-view-key (url)
   "Get view key from URL."
-  (save-match-data
-    (string-match cur-yt--youtube-view-key-regexp url)
-    (match-string-no-properties 1 url)))
+  (when (not (string-empty-p url))
+    (save-match-data
+      (string-match cur-yt--youtube-view-key-regexp url)
+      (match-string-no-properties 1 url))))
 
 (defun cur-yt--convert-to-yt-link (url)
   "Convert URL to a YouTube link."
@@ -83,14 +84,17 @@ This function with error if it finds a missing program."
 (defun cur-yt-play-video (url &optional resolution)
   "Play video URL at RESOLUTION."
   (interactive
-   (list (read-string "YouTube URL: " nil
-		      cur-yt-play-url-history
-		      (when kill-ring
-			(cur-yt--convert-to-yt-link (substring-no-properties (car kill-ring)))))
-	 (when (or cur-yt-play-always-prompt-resolution current-prefix-arg)
-	   (completing-read "Resolution: "
-			    '("worst" "144" "240" "360" "480" "720" "1080" "1440" "2160" "best")
-			    nil 'confirm nil t))))
+   (let* ((default-key (cur-yt--get-view-key (substring-no-properties (or (car kill-ring) ""))))
+	  (prompt (if default-key
+		      (format "YouTube URL (%s): " default-key)
+		    "YouTube URL: ")))
+     (list (read-string prompt nil
+			cur-yt-play-url-history
+			(cur-yt--convert-to-yt-link (substring-no-properties (or (car kill-ring) ""))))
+	   (when (or cur-yt-play-always-prompt-resolution current-prefix-arg)
+	     (completing-read "Resolution: "
+			      '("worst" "144" "240" "360" "480" "720" "1080" "1440" "2160" "best")
+			      nil 'confirm nil t)))))
   (cur-yt--play-check-exetutables)
   (let ((res (or resolution cur-yt-play-default-resolution))
 	(yt-url (cur-yt--convert-to-yt-link url)))
