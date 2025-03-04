@@ -13,7 +13,6 @@
           });
       })
       (_: prev: { dfh = inputs.dfh.packages.${pkgs.system}.dfh; })
-      (_: prev: { mullvad = inputs.nixpkgs-mullvad.legacyPackages.${pkgs.system}.mullvad; })
       # (_: prev: { nocturne-tools = inputs.nocturne-tools.packages.${pkgs.system}.default; })
     ];
   };

@@ -461,22 +461,6 @@
         "url": "https://github.com/NixOS/nixpkgs/archive/356624c12086a18f2ea2825fed34523d60ccc4e3.tar.gz"
       }
     },
-    "nixpkgs-mullvad": {
-      "locked": {
-        "lastModified": 1738230524,
-        "narHash": "sha256-HstkzlU90d0v2RviWmNxtc9xqsNLILYFDiCCrbSQRJ0=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "e5ff76fa4937d8d67bdfc12aaac0a98e1884c0cc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "e5ff76fa4937d8d67bdfc12aaac0a98e1884c0cc",
-        "type": "github"
-      }
-    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1740865531,
@@ -595,7 +579,6 @@
         "home-manager": "home-manager",
         "nh": "nh",
         "nixpkgs": "nixpkgs_4",
-        "nixpkgs-mullvad": "nixpkgs-mullvad",
         "nocturne-tools": "nocturne-tools",
         "sops-nix": "sops-nix"
       }

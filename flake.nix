@@ -10,7 +10,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
-    nixpkgs-mullvad.url = "github:nixos/nixpkgs/e5ff76fa4937d8d67bdfc12aaac0a98e1884c0cc";
 
     nh = {
       url = "github:viperML/nh";
