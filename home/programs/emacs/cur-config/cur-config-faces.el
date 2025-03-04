@@ -134,7 +134,7 @@
 (use-package catppuccin-theme
   :after (autothemer cur-theme))
 
-(cur-override-theme-load-theme 'catppuccin)
+(cur-override-theme-load-theme 'doom-nord)
 
 ;; ===Ef-Themes===
 (use-package ef-themes)

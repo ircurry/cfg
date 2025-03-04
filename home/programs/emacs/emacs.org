@@ -1275,7 +1275,7 @@ catppuccin-theme
 :END:
 
 #+begin_src emacs-lisp
-(cur-override-theme-load-theme 'catppuccin)
+(cur-override-theme-load-theme 'doom-nord)
 #+end_src
 
 *** =cur-config-faces.el= section on ~ef-themes~
