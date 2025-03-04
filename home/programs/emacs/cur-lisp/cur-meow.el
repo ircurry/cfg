@@ -7,6 +7,11 @@
 (require 'meow)
 (eval-when-compile (require 'cl-lib))
 
+;;; Customization
+(defgroup cur-meow ()
+  "Options related to extensions for the meow package."
+  :group 'meow)
+
 ;;; Normal-Motion Toggle
 (defun cur-meow-toggle-temp-normal-motion ()
   "Toggle normal and motion mode.
@@ -138,6 +143,9 @@ the current point."
 	(with-current-buffer buffer
 	  (when sel (meow--cancel-selection)))))))
 
+(defvar cur-meow-mini-search-history nil
+  "History of regexp searches by `cur-meow-mini-search'.")
+
 (defun cur-meow-mini-search (arg)
   "Search for rexexp incrementally and select it like `meow-search'.
 Giving ARG with reverse the direction of the search."
@@ -148,7 +156,9 @@ Giving ARG with reverse the direction of the search."
 	 (search (minibuffer-with-setup-hook
 		     (cur-meow--minibuffer-search-setup :reverse reverse
 							:start-point start-point)
-		   (read-from-minibuffer "Search: " nil nil nil nil "")))
+		   (read-from-minibuffer "Search: " nil nil
+					 nil cur-meow-mini-search-history
+					 "")))
 	 (matching (cur-meow--search-from-point :search search
 						:start-point start-point
 						:reverse reverse))
