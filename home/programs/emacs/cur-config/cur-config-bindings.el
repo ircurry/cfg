@@ -336,19 +336,16 @@ _o_: other window     _F_: fit to buffer          _d_: close window
    '("e" . popper-toggle)
    '("i" . popper-cycle)))
 
-(use-package cur-search
-  :after meow
-  :demand t
-  :commands (cur-search-ifr cur-search-ibr)
-  :config
-  (meow-normal-define-key
-   '("/" . cur-search-ifr)
-   '("?" . cur-search-ibr)))
-
 (use-package cur-meow
   :after (meow)
+  :demand t
+  :commands (cur-meow-mini-search
+	     cur-meow-toggle-temp-normal-motion)
   :bind ( :map cur/sub-leader-keymap
-          ("C-n" . cur-meow-toggle-temp-normal-motion)))
+          ("C-n" . cur-meow-toggle-temp-normal-motion))
+  :config
+  (meow-normal-define-key
+   '("/" . cur-meow-mini-search)))
 
 (use-package meow-tree-sitter
   :after meow
