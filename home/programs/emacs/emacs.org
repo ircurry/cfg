@@ -3581,7 +3581,7 @@ the current point."
   "History of regexp searches by `cur-meow-mini-search'.")
 
 (defun cur-meow-mini-search (arg)
-  "Search for rexexp incrementally and select it like `meow-search'.
+  "Search for regexp incrementally and select it like `meow-search'.
 Giving ARG with reverse the direction of the search."
   (interactive "P")
   (let* ((case-fold-search nil)
