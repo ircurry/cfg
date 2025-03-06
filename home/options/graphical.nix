@@ -152,6 +152,24 @@
       };
     };
     signalDesktop.enable = lib.mkEnableOption "Enable Signal Desktop";
+    swayimg = {
+      bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base00;
+      };
+      tile-bg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base02;
+      };
+      tile-border = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base00;
+      };
+      fg = lib.mkOption {
+        type = lib.types.str;
+        default = config.nocturne.themes.colors.base04;
+      };
+    };
     thunderbird.enable = lib.mkEnableOption "Enable Thunderbird";
     torBrowser.enable = lib.mkEnableOption "Enable the Tor Browser";
     veracrypt.enable = lib.mkEnableOption "Enable VeraCrypt";

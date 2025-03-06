@@ -44,8 +44,11 @@
     };
     image = {
       name = lib.mkOption {
-        type = lib.types.enum [ "imv" ];
-        default = "imv";
+        type = lib.types.enum [
+          "swayimg"
+          "imv"
+        ];
+        default = "swayimg";
         example = "imv";
         description = "Name of the main system image viewer";
       };

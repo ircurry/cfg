@@ -19,6 +19,7 @@
     ./obs.nix
     ./qbittorrent.nix
     ./signal.nix
+    ./swayimg.nix
     ./thunderbird.nix
     ./tor-browser.nix
     ./veracrypt.nix
