@@ -26,7 +26,6 @@
       emacs.enable = true;
       firefox.enable = true;
       flatpak.enable = false;
-      imv.enable = false;
       keepassxc.enable = true;
       kid3.enable = true;
       libreoffice.enable = true;

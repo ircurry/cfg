@@ -7,6 +7,7 @@
 
 let
   cfg = config.nocturne.cli.lf;
+  way-cfg = config.nocturne.wayland;
 in
 {
   config = lib.mkIf cfg.enable {
@@ -43,8 +44,7 @@ in
             case $(file --mime-type "$f" -bL) in
               application/pdf|application/vnd.djvu|application/epub*) ${pkgs.zathura}/bin/zathura "$fx" ;;
               text/*|application/json|inode/x-empty|application/x-subrip) $EDITOR "$f" ;;
-              # image/*) setsid -f ${pkgs.imv}/bin/imv-dir "$f" >/dev/null 2>&1 ;;
-              image/*) ${pkgs.imv}/bin/imv-dir "$f" ;;
+              image/*) ${way-cfg.image.exec-dir} "$f" ;;
               audio/*|video/x-ms-asf) ${pkgs.mpv}/bin/mpv --audio-display=no "$f" ;;
               video/*) ${pkgs.mpv}/bin/mpv -quiet "$f" ;;
               *) xdg-open "$f" ;;
@@ -71,7 +71,7 @@ in
 
             lf -remote 'send reload'
           }}'';
-        opendirimages = ''$setsid -f ${pkgs.imv}/bin/imv "$f" >/dev/null 2>&1'';
+        opendirimages = ''$setsid -f ${way-cfg.image.exec-dir} "$f" >/dev/null 2>&1'';
         zoxidecd = ''
           ''${{
             dirtocd="$(${pkgs.zoxide}/bin/zoxide query --interactive "$1")"
