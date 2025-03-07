@@ -2,7 +2,7 @@
 let
   wcfg = config.nocturne.wayland.image;
   scfg = config.nocturne.graphical.swayimg;
-  simg = config.programs.swayimage;
+  simg = config.programs.swayimg;
   inherit (scfg)
     bg
     tile-bg
