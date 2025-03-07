@@ -32,7 +32,7 @@
     };
 
     emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
+      url = "github:nix-community/emacs-overlay/a3bf20522b1fa7295ca05ea4a8d37546915e598e";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -48,6 +48,11 @@
 
     nocturne-tools = {
       url = "github:ircurry/nocturne-tools";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
