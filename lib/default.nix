@@ -51,6 +51,75 @@ rec {
         pkgs.writeShellApplication (value // { inherit name; })
     ) shellPkgs;
 
+  writeJanetScriptBinPrototype =
+    {
+      lib,
+      runtimeShell,
+      janet,
+      writeTextFile,
+    }:
+    {
+      name,
+      text,
+      meta ? { },
+      runtimeInputs ? [ ],
+      runtimeEnv ? null,
+      checkPhase ? "",
+      passthru ? { },
+      derivationArgs ? { },
+      janetProgram ? janet,
+      janetPath ? "${janet}/lib/janet",
+      janetAdditionalArgs ? "",
+      inheritPath ? true,
+    }:
+    let
+      janetfile = writeTextFile {
+        name = "${name}-raw";
+        inherit meta passthru derivationArgs;
+        text = ''
+          ${text}
+        '';
+        checkPhase = ''
+          runHook preCheck
+
+          ${checkPhase}
+
+          runHook postCheck
+        '';
+      };
+    in
+    writeTextFile {
+      inherit
+        name
+        meta
+        passthru
+        derivationArgs
+        ;
+      executable = true;
+      destination = "/bin/${name}";
+      allowSubstitutes = true; # What does this do???
+      preferLocalBuild = false; # Same with ts???
+      text =
+        ''
+          #!${runtimeShell}
+
+        ''
+        + lib.optionalString (runtimeEnv != null) (
+          lib.concatStrings (
+            lib.mapAttrsToList (name: value: ''
+              ${lib.toShellVar name value}
+              export ${name}
+            '') runtimeEnv
+          )
+        )
+        + lib.optionalString (runtimeInputs != [ ]) ''
+          export PATH="${lib.makeBinPath runtimeInputs}${lib.optionalString inheritPath ":$PATH"}"
+        ''
+        + ''
+          ${lib.getExe janetProgram} -m ${janetPath} ${janetAdditionalArgs} -- ${janetfile} $@
+        '';
+    };
+
   # Map over a list of monitors and return a list of strings in the form that
   # hyprland uses for monitor configuration.
   hyprlandMonitorsToString =
