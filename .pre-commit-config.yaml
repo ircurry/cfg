@@ -1,0 +1,34 @@
+{
+  "default_stages": [
+    "pre-commit"
+  ],
+  "repos": [
+    {
+      "hooks": [
+        {
+          "always_run": false,
+          "args": [],
+          "entry": "nixfmt ",
+          "exclude": "^$",
+          "exclude_types": [],
+          "fail_fast": false,
+          "files": "\\.nix$",
+          "id": "nixfmt-rfc-style",
+          "language": "system",
+          "name": "nixfmt-rfc-style",
+          "pass_filenames": true,
+          "require_serial": false,
+          "stages": [
+            "pre-commit"
+          ],
+          "types": [
+            "file"
+          ],
+          "types_or": [],
+          "verbose": false
+        }
+      ],
+      "repo": "local"
+    }
+  ]
+}

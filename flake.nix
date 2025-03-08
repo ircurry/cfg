@@ -36,11 +36,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    devenv = {
-      url = "github:cachix/devenv";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -49,13 +44,11 @@
     dfh = {
       url = "github:ircurry/dfh";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.devenv.follows = "devenv";
     };
 
     nocturne-tools = {
       url = "github:ircurry/nocturne-tools";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.devenv.follows = "devenv";
     };
   };
 
@@ -100,10 +93,7 @@
 
       # ===Development Enviornment===
       devShells = forAllSystems (pkgs: {
-        default = import ./devenv.nix {
-          inherit inputs;
-          inherit (pkgs) system;
-        };
+        default = import ./shell.nix { inherit pkgs; };
       });
 
       # ===Templates===
