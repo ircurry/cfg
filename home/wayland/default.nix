@@ -7,6 +7,7 @@
     ./hyprland.nix
     ./mako.nix
     ./monitors.nix
+    ./niri.nix
     ./rofi-logout.nix
     ./rofi.nix
     ./swayidle.nix
