@@ -60,26 +60,32 @@
   };
 
   outputs =
-    inputs:
+    { nixpkgs, self, ... }@inputs:
     let
+      # ===Nixpkgs Lib===
+      inherit (nixpkgs) lib;
+
       # ===Dealing with System===
-      forSystem = function: system: function inputs.nixpkgs.legacyPackages.${system};
+      forSystem = function: system: function nixpkgs.legacyPackages.${system};
 
       systems = [ "x86_64-linux" ];
 
-      forAllSystems = function: inputs.nixpkgs.lib.genAttrs systems (forSystem function);
+      forAllSystems = function: lib.genAttrs systems (forSystem function);
 
       # ===My Library===
       mylib = import ./lib {
-        inherit (inputs.nixpkgs) lib;
-        inherit (inputs) nixpkgs;
+        inherit nixpkgs lib;
       };
 
       # ===Common Attributes===
       commonAttrs = {
-        inherit (inputs.nixpkgs) lib;
-        inherit (inputs) nixpkgs self;
-        inherit inputs mylib;
+        inherit
+          inputs
+          mylib
+          nixpkgs
+          lib
+          self
+          ;
       };
     in
     {
