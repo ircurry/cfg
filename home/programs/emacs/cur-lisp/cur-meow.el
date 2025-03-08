@@ -113,8 +113,8 @@ It will be restored when exiting the minibuffer.
 
 START-POINT is the point at which the search should start.  By default this is
 the current point."
-  (let* ((unwind (make-symbol "cur/search-unwind-function"))
-	 (after-change (make-symbol "cur/after-change-hook-function")))
+  (let* ((unwind (make-symbol "cur-meow-search-unwind-function"))
+	 (after-change (make-symbol "cur-meow-after-change-hook-function")))
     (fset after-change
 	  (lambda (_beg _end _len)
 	    (let ((string (minibuffer-contents))
