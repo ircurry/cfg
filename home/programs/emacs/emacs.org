@@ -3564,12 +3564,10 @@ the current point."
 	    (remove-hook 'minibuffer-exit-hook unwind t)
 	    ;; Restore point and mark
 	    (with-minibuffer-selected-window
-	      (with-current-buffer buffer (goto-char start-point)))
-	    (cur-meow--highlight-cleanup)
-	    (with-minibuffer-selected-window
-	      (with-current-buffer buffer
-		(setq meow--selection-history hist)
-		(when sel (meow--select-without-history sel))))))
+	      (with-current-buffer buffer (goto-char start-point))
+	      (cur-meow--highlight-cleanup)
+	      (setq meow--selection-history hist)
+	      (when sel (meow--select-without-history sel)))))
     (lambda ()
       (add-hook 'minibuffer-exit-hook unwind nil t)
       (add-hook 'after-change-functions after-change nil t)
