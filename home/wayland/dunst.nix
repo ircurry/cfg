@@ -10,10 +10,14 @@ let
   bg = config.nocturne.wayland.dunst.bg + config.nocturne.wayland.dunst.bg-opacity;
   fg = config.nocturne.wayland.dunst.fg + "ff";
   critical = config.nocturne.wayland.dunst.critical + "ff";
-  increaseColor = config.nocturne.wayland.dunst.increaseColor;
-  decreaseColor = config.nocturne.wayland.dunst.decreaseColor;
-  mutedColor = config.nocturne.wayland.dunst.mutedColor;
-  inherit (config.nocturne.wayland.decoration) stdgaps;
+  inherit (config.nocturne.wayland.dunst)
+    padding
+    borderthick
+    increaseColor
+    decreaseColor
+    mutedColor
+    offset
+    ;
 
   volup = pkgs.writeShellApplication {
     name = "volup";
@@ -126,13 +130,13 @@ in
           width = 300;
           height = "(0, 100)";
           origin = "top-right";
-          offset = "10x10";
+          inherit offset;
           progress_bar = true;
           progress_bar_horizontal_alignment = "center";
           progress_bar_height = 10;
           progress_bar_corner_radius = 8;
-          padding = stdgaps;
-          horizontal_padding = stdgaps;
+          inherit padding;
+          horizontal_padding = padding;
           gap_size = 10;
           font = "JetBrainsMono Nerd Font 10";
           stack_duplicates = true;
@@ -140,7 +144,7 @@ in
           mouse_left_click = "close_current";
           mouse_middle_click = "close_all";
           mouse_right_click = "do_action, close_current";
-          frame_width = 2;
+          frame_width = borderthick;
           frame_color = "#${frameColor}";
         };
         urgency_low = {
