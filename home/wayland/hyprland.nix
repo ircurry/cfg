@@ -37,6 +37,9 @@ let
   col_background = config.nocturne.wayland.hyprland.col-background;
   col_inactive_border = config.nocturne.wayland.hyprland.col-inactive-border;
 
+  # ===Border Thickness===
+  border_size = config.nocturne.wayland.decoration.stdborderthick;
+
   # ===Rounding===
   rounding = 10;
 
@@ -247,10 +250,9 @@ in
             ++ lib.optionals (config.nocturne.graphical.keepassxc.enable) [ "[workspace 5 silent] keepassxc" ]
             ++ lib.optionals (term-cfg.exec-start != null) [ "${term-cfg.exec-start}" ];
           general = {
-            inherit gaps_in gaps_out;
+            inherit gaps_in gaps_out border_size;
             "col.active_border" = "rgba(${col_active_border1}) rgba(${col_active_border2}) 45deg";
             "col.inactive_border" = "rgba(${col_inactive_border})";
-            border_size = 3;
             layout = "master";
             allow_tearing = false;
           };
