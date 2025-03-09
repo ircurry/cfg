@@ -7,6 +7,7 @@
 let
   wcfg = config.nocturne.wayland;
   inherit (wcfg) bar waybar;
+  inherit (wcfg.decoration) stdgaps;
 in
 {
   config = lib.mkIf (bar.name == "waybar") {
@@ -22,7 +23,6 @@ in
       package = pkgs.waybar;
       style =
         let
-          stdMargin = builtins.toString waybar.stdMargin;
           stdPadding = builtins.toString waybar.stdPadding;
           stdFontSize = builtins.toString waybar.stdFontSize;
           launcher-font-size = builtins.toString waybar.launcher-font-size;
@@ -71,6 +71,9 @@ in
         in
         ''
           * {
+            all: unset;
+          }
+          * {
             border: none;
             border-radius: 8px;
           }
@@ -99,7 +102,7 @@ in
           /* ===Workspaces=== */
           #workspaces {
             background-color: #${workspace-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           #workspaces button {
@@ -107,7 +110,7 @@ in
             font-family: Material Design Icons, Iosevka Nerd Font Mono, DejaVu Sans;
             font-size: ${stdFontSize}px;
             margin: 0px;
-            padding: 0px ${stdPadding}px;
+            padding: 0px ${builtins.toString (waybar.stdPadding * 2)}px;
           }
           #workspaces button:hover {
             box-shadow: none;
@@ -161,14 +164,14 @@ in
             font-size: ${launcher-font-size}px;
             color: #${launcher-fg};
             background-color: #${launcher-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===Battery=== */
           #battery {
             font-family: Material Design Icons, Iosevka Nerd Font Mono;
             font-size: ${stdFontSize}px;
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
             color: #${battery-fg};
             background-color: #${battery-bg};
@@ -186,7 +189,7 @@ in
             font-family: Material Design Icons, Iosevka Nerd Font Mono;
             font-size: ${stdFontSize}px;
             background-color: #${tray-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===Clock=== */
@@ -195,7 +198,7 @@ in
             font-size: ${stdFontSize}px;
             color: #${clock-fg};
             background-color: #${clock-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===Backlight=== */
@@ -204,7 +207,7 @@ in
             font-size: ${stdFontSize}px;
             color: #${backlight-fg};
             background-color: #${backlight-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===Audio=== */
@@ -213,7 +216,7 @@ in
             font-size: ${stdFontSize}px;
             color: #${audio-fg};
             background-color: #${audio-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===Network=== */
@@ -222,7 +225,7 @@ in
             font-size: ${stdFontSize}px;
             color: #${network-fg};
             background-color: #${network-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           #network.disconnected,
@@ -235,7 +238,7 @@ in
             font-size: ${power-font-size}px;
             color: #${power-fg};
             background-color: #${power-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===CPU=== */
@@ -244,7 +247,7 @@ in
             font-size: ${stdFontSize}px;
             color: #${cpu-fg};
             background-color: #${cpu-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===Memory=== */
@@ -253,7 +256,7 @@ in
             font-size: ${stdFontSize}px;
             color: #${memory-fg};
             background-color: #${memory-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===MPD=== */
@@ -262,7 +265,7 @@ in
             font-size: ${stdFontSize}px;
             color: #${mpd-fg};
             background-color: #${mpd-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
         '';
@@ -271,6 +274,11 @@ in
         {
           layer = "top";
           position = "top";
+          spacing = waybar.stdSpacing;
+          margin-top = stdgaps;
+          margin-right = stdgaps;
+          margin-left = stdgaps;
+          margin-bottom = 0;
           output = [
             "eDP-1"
             "DP-2"
@@ -297,7 +305,6 @@ in
             on-click = "sleep 0.1 && ${wcfg.menu.exec}";
             on-click-right = "sleep 0.1 && ${wcfg.menu.exec-run}";
           };
-          margin-top = 5;
           "hyprland/workspaces" = {
             on-click = "activate";
             format = "{icon}";

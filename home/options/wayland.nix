@@ -369,14 +369,66 @@
       };
     };
     waybar = {
-      stdMargin = lib.mkOption {
-        type = lib.types.int;
+      stdSpacingMax = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = 8;
+      };
+      stdSpacingMin = lib.mkOption {
+        type = lib.types.ints.positive;
         default = 4;
       };
-      stdPadding = lib.mkOption {
-        type = lib.types.int;
-        default = config.nocturne.wayland.decoration.stdgaps;
+      stdSpacing =
+        let
+          cfg = config.nocturne.wayland.waybar;
+          max = cfg.stdSpacingMax;
+          min = cfg.stdSpacingMin;
+          inherit (config.nocturne.wayland.decoration) stdgaps;
+          default = (if stdgaps > max then max else (if stdgaps < min then min else stdgaps));
+        in
+        lib.mkOption {
+          type = lib.types.addCheck lib.types.int (x: x <= max && x >= min);
+          inherit default;
+        };
+      stdPaddingMax = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = 8;
       };
+      stdPaddingMin = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = 4;
+      };
+      stdPadding =
+        let
+          cfg = config.nocturne.wayland.waybar;
+          max = cfg.stdPaddingMax;
+          min = cfg.stdPaddingMin;
+          inherit (config.nocturne.wayland.decoration) stdgaps;
+          default = (if stdgaps > max then max else (if stdgaps < min then min else stdgaps));
+        in
+        lib.mkOption {
+          type = lib.types.addCheck lib.types.int (x: x <= max && x >= min);
+          inherit default;
+        };
+      workSpacePaddingMax = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = 10;
+      };
+      workSpacePaddingMin = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = 4;
+      };
+      workSpacePadding =
+        let
+          cfg = config.nocturne.wayland.waybar;
+          max = cfg.workSpacePaddingMax;
+          min = cfg.workSpacePaddingMin;
+          val = cfg.stdPadding * 2;
+          default = (if val > max then max else (if val < min then min else val));
+        in
+        lib.mkOption {
+          type = lib.types.addCheck lib.types.int (x: x <= max && x >= min);
+          inherit default;
+        };
       stdFontSize = lib.mkOption {
         type = lib.types.int;
         default = 16;
