@@ -2,6 +2,22 @@
 {
   options.nocturne.wayland = {
     # ===Abstract Options===
+    bar = {
+      name = lib.mkOption {
+        type = lib.types.enum [
+          "waybar"
+          "ags"
+          "ags-side"
+        ];
+        default = "waybar";
+        example = "ags-top";
+        description = "Name of bar use by the Wayland Compositor";
+      };
+      exec-on = lib.mkOption { type = lib.types.str; };
+      exec-off = lib.mkOption { type = lib.types.str; };
+      exec-start = lib.mkOption { type = lib.types.str; };
+      exec-toggle = lib.mkOption { type = lib.types.str; };
+    };
     browser = {
       name = lib.mkOption {
         type = lib.types.enum [ "firefox" ];

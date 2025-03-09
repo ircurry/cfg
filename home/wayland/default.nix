@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./ags
     ./dunst.nix
     ./fuzzel.nix
     ./grim-slurp.nix

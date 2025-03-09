@@ -55,6 +55,11 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ags = {
+      url = "github:aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -98,7 +103,10 @@
 
       # ===Development Enviornment===
       devShells = forAllSystems (pkgs: {
-        default = import ./shell.nix { inherit pkgs; };
+        default = import ./shell.nix {
+          inherit pkgs;
+          ags = inputs.ags.packages.${pkgs.system}.agsFull;
+        };
       });
 
       # ===Templates===
