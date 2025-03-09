@@ -19,6 +19,12 @@ let
   brightup = config.nocturne.wayland.notification.exec-brightup;
   brightdown = config.nocturne.wayland.notification.exec-brightdown;
 
+  # ===Bar===
+  bar-on = config.nocturne.wayland.bar.exec-on;
+  bar-off = config.nocturne.wayland.bar.exec-off;
+  bar-start = config.nocturne.wayland.bar.exec-start;
+  bar-toggle = config.nocturne.wayland.bar.exec-toggle;
+
   # ===Editor===
   ed-cfg = config.nocturne.wayland.editor;
 
@@ -172,11 +178,11 @@ let
         case "$MODE" in
           enter)
             hyprctl --batch 'keyword general:gaps_in 0 ; keyword general:gaps_out 0 ; keyword decoration:rounding 0'
-            killall '.waybar-wrapped' ;;
+            ${bar-off} ;;
           exit)
             hyprctl --batch 'keyword general:gaps_in ${builtins.toString gaps_in} ; keyword general:gaps_out ${builtins.toString gaps_out} ; keyword decoration:rounding ${builtins.toString rounding}'
-            killall '.waybar-wrapped' || true
-            setsid -f 'waybar' > /dev/null 2>&1;;
+            ${bar-off} || true
+            ${bar-on} ;;
         esac
       '';
   };
@@ -221,7 +227,7 @@ in
           monitor = monitorConfig;
           exec-once =
             [
-              "waybar"
+              "${bar-start}"
               "${pkgs.swww}/bin/swww init"
               "${config.nocturne.wayland.notification.exec-start}"
               "${pkgs.networkmanagerapplet}/bin/nm-applet"
@@ -337,7 +343,7 @@ in
               "$MOD, P, exec, $menu-drun"
               "$MOD_SHIFT, A, exec, ${lib.getExe toggleAnimations}"
               # "$MOD, code:61, exec, $menu-window"
-              "$MOD, B, exec, killall '.waybar-wrapped' || waybar"
+              "$MOD, B, exec, ${bar-toggle}"
               "$MOD, D, killactive, "
               "$MOD_CTRL, Q, exit,"
               ## Logout (semi-colon)

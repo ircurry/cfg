@@ -434,5 +434,45 @@ in
         }
       ];
     };
+    nocturne.wayland.bar =
+      let
+        waybar-pkg = config.programs.waybar.package;
+        on = pkgs.writeShellApplication {
+          name = "waybar-on";
+          runtimeInputs = with pkgs; [
+            util-linux
+            waybar-pkg
+          ];
+          text = ''
+            setsid -f waybar >/dev/null 2>&1
+          '';
+        };
+        off = pkgs.writeShellApplication {
+          name = "waybar-off";
+          runtimeInputs = with pkgs; [
+            killall
+            waybar-pkg
+          ];
+          text = ''
+            killall '.waybar-wrapped'
+          '';
+        };
+        toggle = pkgs.writeShellApplication {
+          name = "waybar-toggle";
+          runtimeInputs = [
+            on
+            off
+          ];
+          text = ''
+            waybar-off || waybar-on
+          '';
+        };
+      in
+      {
+        exec-on = "${lib.getExe on}";
+        exec-off = "${lib.getExe off}";
+        exec-start = "${lib.getExe on}";
+        exec-toggle = "${lib.getExe toggle}";
+      };
   };
 }
