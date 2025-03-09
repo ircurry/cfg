@@ -1,10 +1,15 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }:
+let
+  wcfg = config.nocturne.wayland;
+  inherit (wcfg) bar waybar;
+in
 {
-  config = {
+  config = lib.mkIf (bar.name == "waybar") {
     home.packages = with pkgs; [
       material-design-icons
       nerd-fonts.jetbrains-mono
@@ -17,12 +22,12 @@
       package = pkgs.waybar;
       style =
         let
-          stdMargin = builtins.toString config.nocturne.wayland.waybar.stdMargin;
-          stdPadding = builtins.toString config.nocturne.wayland.waybar.stdPadding;
-          stdFontSize = builtins.toString config.nocturne.wayland.waybar.stdFontSize;
-          launcher-font-size = builtins.toString config.nocturne.wayland.waybar.launcher-font-size;
-          power-font-size = builtins.toString config.nocturne.wayland.waybar.power-font-size;
-          inherit (config.nocturne.wayland.waybar)
+          stdMargin = builtins.toString waybar.stdMargin;
+          stdPadding = builtins.toString waybar.stdPadding;
+          stdFontSize = builtins.toString waybar.stdFontSize;
+          launcher-font-size = builtins.toString waybar.launcher-font-size;
+          power-font-size = builtins.toString waybar.power-font-size;
+          inherit (waybar)
             workspace-bg
             workspace-hover-bg
             workspace-fg
@@ -289,8 +294,8 @@
           "custom/launcher" = {
             format = "󱄅";
             tooltip = false;
-            on-click = "sleep 0.1 && ${config.nocturne.wayland.menu.exec}";
-            on-click-right = "sleep 0.1 && ${config.nocturne.wayland.menu.exec-run}";
+            on-click = "sleep 0.1 && ${wcfg.menu.exec}";
+            on-click-right = "sleep 0.1 && ${wcfg.menu.exec-run}";
           };
           margin-top = 5;
           "hyprland/workspaces" = {
@@ -348,8 +353,8 @@
             ];
           };
           tray = {
-            icon-size = config.nocturne.wayland.waybar.stdIconSize;
-            spacing = config.nocturne.wayland.waybar.stdPadding;
+            icon-size = waybar.stdIconSize;
+            spacing = waybar.stdPadding;
           };
           # Center
           clock = {
@@ -403,7 +408,7 @@
           "custom/power" = {
             format = "󰐥";
             tooltip = false;
-            on-click = "sleep 0.1 && ${config.nocturne.wayland.menu.exec-logout}";
+            on-click = "sleep 0.1 && ${wcfg.menu.exec-logout}";
           };
           cpu = {
             format = "󰻠 {usage}%";
@@ -418,7 +423,7 @@
             max-length = 15;
             on-click = "${pkgs.mpc-cli}/bin/mpc toggle";
             on-click-middle = "${pkgs.mpc-cli}/bin/mpc stop";
-            on-click-right = "${config.nocturne.wayland.terminal.exec-center} ${pkgs.ncmpcpp}/bin/ncmpcpp";
+            on-click-right = "${wcfg.terminal.exec-center} ${pkgs.ncmpcpp}/bin/ncmpcpp";
             state-icons = {
               paused = "󰂼";
               playing = "󱉺";
