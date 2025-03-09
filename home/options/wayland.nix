@@ -35,6 +35,14 @@
       };
       profileExtra = lib.mkOption { type = lib.types.str; };
     };
+    decoration = {
+      stdgaps = lib.mkOption {
+        type = lib.types.addCheck lib.types.int (x: x >= 0 && (0 == (lib.mod x 2)));
+        default = 6;
+        example = 12;
+        description = "The standard gapping between objects such as windows";
+      };
+    };
     editor = {
       name = lib.mkOption {
         type = lib.types.enum [ "emacs" ];
@@ -367,7 +375,7 @@
       };
       stdPadding = lib.mkOption {
         type = lib.types.int;
-        default = 6;
+        default = config.nocturne.wayland.decoration.stdgaps;
       };
       stdFontSize = lib.mkOption {
         type = lib.types.int;

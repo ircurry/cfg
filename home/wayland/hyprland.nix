@@ -41,8 +41,8 @@ let
   rounding = 10;
 
   # ===Gaps===
-  gaps_in = 3;
-  gaps_out = 5;
+  gaps_out = config.nocturne.wayland.decoration.stdgaps;
+  gaps_in = gaps_out / 2;
 
   # ===Plugins===
   inherit (config.nocturne.wayland.hyprland) plugins;
