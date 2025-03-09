@@ -13,6 +13,7 @@ let
   increaseColor = config.nocturne.wayland.dunst.increaseColor;
   decreaseColor = config.nocturne.wayland.dunst.decreaseColor;
   mutedColor = config.nocturne.wayland.dunst.mutedColor;
+  inherit (config.nocturne.wayland.decoration) stdgaps;
 
   volup = pkgs.writeShellApplication {
     name = "volup";
@@ -130,8 +131,8 @@ in
           progress_bar_horizontal_alignment = "center";
           progress_bar_height = 10;
           progress_bar_corner_radius = 8;
-          padding = 5;
-          horizontal_padding = 5;
+          padding = stdgaps;
+          horizontal_padding = stdgaps;
           gap_size = 10;
           font = "JetBrainsMono Nerd Font 10";
           stack_duplicates = true;
