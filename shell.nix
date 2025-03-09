@@ -1,5 +1,7 @@
 {
   pkgs ? import <nixpkgs> { },
+  ags ? pkgs.ags,
+  ...
 }:
 pkgs.mkShell {
   packages = with pkgs; [
@@ -10,5 +12,6 @@ pkgs.mkShell {
     ssh-to-age
     nixfmt-rfc-style
     nixd
+    ags
   ];
 }

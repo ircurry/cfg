@@ -98,7 +98,10 @@
 
       # ===Development Enviornment===
       devShells = forAllSystems (pkgs: {
-        default = import ./shell.nix { inherit pkgs; };
+        default = import ./shell.nix {
+          inherit pkgs;
+          ags = inputs.ags.packages.${pkgs.system}.agsFull;
+        };
       });
 
       # ===Templates===
