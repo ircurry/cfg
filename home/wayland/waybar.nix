@@ -441,7 +441,7 @@ in
         }
       ];
     };
-    nocturne.wayland.bar =
+    nocturne.wayland =
       let
         waybar-pkg = config.programs.waybar.package;
         on = pkgs.writeShellApplication {
@@ -476,10 +476,15 @@ in
         };
       in
       {
-        exec-on = "${lib.getExe on}";
-        exec-off = "${lib.getExe off}";
-        exec-start = "${lib.getExe on}";
-        exec-toggle = "${lib.getExe toggle}";
+        startup = [
+          {
+            exec = "waybar-on";
+            packages = [ on ];
+          }
+        ];
+        bar.exec-on = "${lib.getExe on}";
+        bar.exec-off = "${lib.getExe off}";
+        bar.exec-toggle = "${lib.getExe toggle}";
       };
   };
 }

@@ -168,7 +168,12 @@ in
         };
       };
     };
-    nocturne.wayland.notification.exec-start = "${config.services.dunst.package}/bin/dunst";
+    nocturne.wayland.startup = [
+      {
+        exec = "dunst";
+        packages = [ config.services.dunst.package ];
+      }
+    ];
     nocturne.wayland.notification.exec-volup = "${lib.getExe volup}";
     nocturne.wayland.notification.exec-voldown = "${lib.getExe voldown}";
     nocturne.wayland.notification.exec-volmute = "${lib.getExe volmute}";

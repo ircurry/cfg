@@ -22,7 +22,6 @@ let
   # ===Bar===
   bar-on = config.nocturne.wayland.bar.exec-on;
   bar-off = config.nocturne.wayland.bar.exec-off;
-  bar-start = config.nocturne.wayland.bar.exec-start;
   bar-toggle = config.nocturne.wayland.bar.exec-toggle;
 
   # ===Editor===
@@ -52,6 +51,36 @@ let
 
   # ===Monitor Configurations===
   monitorConfig = mylib.hyprlandDefaultProfile "undocked" config.nocturne.wayland.monitor-profiles;
+
+  # ===Startup===
+  startup =
+    let
+      exec-concat =
+        text: exec: workspace:
+        if (workspace == null) then
+          text
+          + ''
+            hyprctl keyword exec '${exec}'
+          ''
+        else
+          text
+          + ''
+            hyprctl keyword exec '[workspace ${builtins.toString workspace} silent] ${exec}'
+          '';
+      fldfn = acc: x: {
+        runtimeInputs = lib.lists.unique (acc.runtimeInputs ++ x.packages);
+        text = exec-concat acc.text x.exec x.workspace;
+      };
+      fldstart = {
+        text = "";
+        runtimeInputs = [ config.wayland.windowManager.hyprland.package ];
+      };
+      folding = lib.foldl fldfn fldstart config.nocturne.wayland.startup;
+    in
+    pkgs.writeShellApplication {
+      name = "startup";
+      inherit (folding) runtimeInputs text;
+    };
 
   # ===Checked Hyprdock===
   checkedHyprdock = pkgs.writeShellApplication {
@@ -199,6 +228,7 @@ in
         centerAllFloating
         checkedHyprdock
         focusMode
+        startup
         pkgs.dfh
         pkgs.killall
         # Audio Control
@@ -228,27 +258,11 @@ in
 
           env = [ "XCURSOR_SIZE,24" ];
           monitor = monitorConfig;
-          exec-once =
-            [
-              "${bar-start}"
-              "${pkgs.swww}/bin/swww init"
-              "${config.nocturne.wayland.notification.exec-start}"
-              "${pkgs.networkmanagerapplet}/bin/nm-applet"
-              "[workspace 2 silent] $terminal"
-              "[workspace 3 silent] $editor"
-            ]
-            ++ lib.optionals (config.nocturne.wayland.idleManager.name != null) [
-              "${config.nocturne.wayland.idleManager.exec}"
-            ]
-            ++ lib.optionals (config.nocturne.graphical.firefox.enable) [ "[workspace 4 silent] firefox" ]
-            ++ lib.optionals (config.nocturne.graphical.mullvadBrowser.enable) [
-              "[workspace 4 silent] mullvad-browser"
-            ]
-            ++ lib.optionals (config.nocturne.graphical.mullvad-vpn.enable) [
-              "[workspace 4 silent] mullvad-vpn"
-            ]
-            ++ lib.optionals (config.nocturne.graphical.keepassxc.enable) [ "[workspace 5 silent] keepassxc" ]
-            ++ lib.optionals (term-cfg.exec-start != null) [ "${term-cfg.exec-start}" ];
+          exec-once = [
+            "${lib.getExe startup}"
+            "${pkgs.swww}/bin/swww init"
+            "${pkgs.networkmanagerapplet}/bin/nm-applet"
+          ];
           general = {
             inherit gaps_in gaps_out border_size;
             "col.active_border" = "rgba(${col_active_border1}) rgba(${col_active_border2}) 45deg";
