@@ -246,7 +246,7 @@
           val = deco.stdgaps + deco.stdborderthick + (deco.stdgaps / 2);
         in
         lib.mkOption {
-          type = lib.types.string;
+          type = lib.types.str;
           default = "${builtins.toString val}x${builtins.toString val}";
         };
       borderthick = lib.mkOption {
