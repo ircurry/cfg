@@ -120,8 +120,14 @@ in
         }
       ];
       nocturne.wayland.terminal.exec = "${lib.getExe pkgs.alacritty}";
-      nocturne.wayland.terminal.exec-start = null;
       nocturne.wayland.terminal.exec-center = "${lib.getExe pkgs.alacritty} --class=center -e";
+      nocturne.wayland.startup = [
+        {
+          exec = "alacritty";
+          packages = [ pkgs.alacritty ];
+          workspace = 2;
+        }
+      ];
     })
   ];
 }

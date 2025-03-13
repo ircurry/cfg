@@ -15,7 +15,6 @@
       };
       exec-on = lib.mkOption { type = lib.types.str; };
       exec-off = lib.mkOption { type = lib.types.str; };
-      exec-start = lib.mkOption { type = lib.types.str; };
       exec-toggle = lib.mkOption { type = lib.types.str; };
     };
     browser = {
@@ -49,7 +48,6 @@
       };
       exec = lib.mkOption { type = lib.types.str; };
       exec-reuse = lib.mkOption { type = lib.types.nullOr lib.types.str; };
-      exec-start = lib.mkOption { type = lib.types.nullOr lib.types.str; };
     };
     idleManager = {
       name = lib.mkOption {
@@ -172,7 +170,6 @@
         example = "mako";
         description = "Which notification daemon to use";
       };
-      exec-start = lib.mkOption { type = lib.types.str; };
       exec-volup = lib.mkOption { type = lib.types.str; };
       exec-voldown = lib.mkOption { type = lib.types.str; };
       exec-volmute = lib.mkOption { type = lib.types.str; };
@@ -197,9 +194,36 @@
         description = "Which terminal emulator to use";
       };
       exec = lib.mkOption { type = lib.types.str; };
-      exec-start = lib.mkOption { type = lib.types.nullOr lib.types.str; };
       exec-center = lib.mkOption { type = lib.types.str; };
     };
+    startup =
+      let
+        inherit (lib) mkOption;
+        inherit (lib.types)
+          listOf
+          submodule
+          str
+          nullOr
+          package
+          ;
+        inherit (lib.types.ints) positive;
+      in
+      mkOption {
+        type = listOf (submodule {
+          options = {
+            exec = mkOption { type = str; };
+            workspace = mkOption {
+              type = nullOr positive;
+              default = null;
+            };
+            packages = mkOption {
+              type = listOf package;
+              default = [ ];
+            };
+          };
+        });
+        default = [ ];
+      };
 
     # ===Program Options===
     dunst = {
