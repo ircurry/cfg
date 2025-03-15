@@ -30,6 +30,14 @@
       exec-reuse = lib.mkOption { type = lib.types.nullOr lib.types.str; };
       exec-start = lib.mkOption { type = lib.types.nullOr lib.types.str; };
     };
+    fileManager = {
+      name = lib.mkOption {
+        type = lib.types.enum [ "thunar" ];
+        default = "thunar";
+        example = "thunar";
+        description = "Name of the main GUI file manager";
+      };
+    };
     idleManager = {
       name = lib.mkOption {
         type = lib.types.nullOr (lib.types.enum [ "swayidle" ]);
