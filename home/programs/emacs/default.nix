@@ -27,7 +27,7 @@ let
   };
   emacs-package =
     with pkgs;
-    ((emacsPackagesFor emacs29-pgtk).overrideScope emacs-overrides).emacsWithPackages (
+    ((emacsPackagesFor emacs30-pgtk).overrideScope emacs-overrides).emacsWithPackages (
       epkgs:
       let
         packageNames = mylib.filterStrList (str: !mylib.startsWithHash str) (
