@@ -45,41 +45,44 @@ in
             "2700".enable = true;
           };
 
-          bookmarks = [
-            {
-              name = "wikipedia";
-              tags = [ "wiki" ];
-              keyword = "wiki";
-              url = "https://en.wikipedia.org/";
-            }
-            {
-              name = "archwiki";
-              tags = [ "wiki" ];
-              keyword = "arch";
-              url = "https://wiki.archlinux.org/";
-            }
-            {
-              name = "nixos wiki";
-              tags = [
-                "wiki"
-                "nix"
-                "nixos"
-              ];
-              url = "https://nixos.wiki/";
-            }
-            {
-              name = "nixdev";
-              tags = [
-                "wiki"
-                "nix"
-                "nixos"
-              ];
-              url = "https://nix.dev/";
-            }
-          ];
+          bookmarks = {
+            force = true;
+            settings = [
+              {
+                name = "wikipedia";
+                tags = [ "wiki" ];
+                keyword = "wiki";
+                url = "https://en.wikipedia.org/";
+              }
+              {
+                name = "archwiki";
+                tags = [ "wiki" ];
+                keyword = "arch";
+                url = "https://wiki.archlinux.org/";
+              }
+              {
+                name = "nixos wiki";
+                tags = [
+                  "wiki"
+                  "nix"
+                  "nixos"
+                ];
+                url = "https://nixos.wiki/";
+              }
+              {
+                name = "nixdev";
+                tags = [
+                  "wiki"
+                  "nix"
+                  "nixos"
+                ];
+                url = "https://nix.dev/";
+              }
+            ];
+          };
 
           search = {
-            default = "DuckDuckGo";
+            default = "ddg";
             force = true;
             engines = {
               "Nix Packages" = {
@@ -203,17 +206,20 @@ in
             "2700".enable = true;
           };
 
-          bookmarks = [
-            {
-              name = "wikipedia";
-              tags = [ "wiki" ];
-              keyword = "wiki";
-              url = "https://en.wikipedia.org/";
-            }
-          ];
+          bookmarks = {
+            force = true;
+            settings = [
+              {
+                name = "wikipedia";
+                tags = [ "wiki" ];
+                keyword = "wiki";
+                url = "https://en.wikipedia.org/";
+              }
+            ];
+          };
 
           search = {
-            default = "DuckDuckGo";
+            default = "ddg";
             force = true;
             engines = {
               "Nix Packages" = {
@@ -252,7 +258,7 @@ in
           id = 2;
 
           search = {
-            default = "DuckDuckGo";
+            default = "ddg";
             force = true;
           };
 
@@ -266,7 +272,7 @@ in
           id = 3;
 
           search = {
-            default = "DuckDuckGo";
+            default = "ddg";
             force = true;
           };
 
@@ -280,7 +286,7 @@ in
           id = 4;
 
           search = {
-            default = "DuckDuckGo";
+            default = "ddg";
             force = true;
           };
 
@@ -294,7 +300,7 @@ in
           id = 5;
 
           search = {
-            default = "DuckDuckGo";
+            default = "ddg";
             force = true;
           };
 
@@ -308,7 +314,7 @@ in
           id = 6;
 
           search = {
-            default = "DuckDuckGo";
+            default = "ddg";
             force = true;
           };
 

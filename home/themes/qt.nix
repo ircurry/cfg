@@ -11,7 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     qt = {
       enable = true;
-      platformTheme = "gtk";
+      platformTheme.name = "gtk";
       style.package = pkgs.adwaita-qt;
       style.name = "adwaita";
     };
