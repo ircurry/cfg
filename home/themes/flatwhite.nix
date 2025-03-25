@@ -104,8 +104,8 @@ in
         power-bg = fw-red-text-sec;
       };
       wayland.hyprland = {
-        col-active-border1 = colors.base04 + "ee";
-        col-active-border2 = colors.base04 + "ee";
+        col-active-border1 = fw-blue-text-sec + "ee";
+        col-active-border2 = fw-blue-text-sec + "ee";
         col-inactive-border = colors.base03 + "ee";
       };
     };
