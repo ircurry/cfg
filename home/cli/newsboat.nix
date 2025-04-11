@@ -57,6 +57,8 @@ in
     };
     sops.secrets.links = {
       path = "${config.xdg.configHome}/newsboat/urls";
+      format = "binary";
+      sopsFile = ../../secrets/newsboat-links.txt;
     };
     assertions = [
       {

@@ -67,6 +67,8 @@ in
 
       sops.secrets."elfeed_links" = {
         path = "${config.home.homeDirectory}/.emacs.d/cur-elfeed-links";
+        format = "binary";
+        sopsFile = ../../../secrets/cur-elfeed-links.el;
       };
     })
     (lib.mkIf (way-cfg.name == "emacs") {
