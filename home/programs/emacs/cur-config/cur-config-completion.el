@@ -65,6 +65,12 @@
         xref-show-definitions-function #'consult-xref))
 
 (use-package consult
+  :after project
+  :demand t
+  :bind ( :map project-prefix-map
+	  ("b" . consult-project-buffer)))
+
+(use-package consult
   :if (executable-find "rg")
   :bind ( :map search-map
 	  ("i" . consult-ripgrep)))
