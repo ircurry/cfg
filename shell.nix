@@ -3,6 +3,7 @@
 }:
 pkgs.mkShell {
   packages = with pkgs; [
+    pre-commit
     age
     nh
     just
