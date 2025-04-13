@@ -23,6 +23,11 @@
           user = "git";
           identityFile = "~/.ssh/id_gitlab";
         };
+        "codeburg.org" = {
+          host = "codeburg.org";
+          user = "git";
+          identityFile = "~/.ssh/id_codeburg";
+        };
       };
     };
   };
