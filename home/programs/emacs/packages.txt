@@ -65,6 +65,7 @@ zig-mode
 vterm
 eat
 eshell-syntax-highlighting
+mistty
 org-bullets
 gemini-mode
 ox-gemini

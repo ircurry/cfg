@@ -20,7 +20,8 @@
                   vterm-mode-hook
                   shell-mode-hook
                   eshell-mode-hook
-                  eat-mode-hook))
+                  eat-mode-hook
+		  mistty-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode -1)))))
 
 ;; ===Bookmarks===

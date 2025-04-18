@@ -214,7 +214,8 @@ I like having absolute line numbers, especially since the meow number selection 
                   vterm-mode-hook
                   shell-mode-hook
                   eshell-mode-hook
-                  eat-mode-hook))
+                  eat-mode-hook
+		  mistty-mode-hook))
     (add-hook mode (lambda () (display-line-numbers-mode -1)))))
 
 #+end_src
@@ -1800,6 +1801,7 @@ popper
   :config
   (setopt popper-reference-buffers '("\\*eat\\*" "\\*.*-eat\\*$" eat-mode
 				     "\\*eshell\\*" "\\*.*-eshell\\*$" eshell-mode
+				     "\\*mistty\\*" "\\*.*-mistty\\*$" mistty-mode
 				     compilation-mode
 				     occur-mode
 				     geiser-mode
@@ -2429,10 +2431,11 @@ eat
   :bind ( :map eat-mode-map
 	  ("C-c C-RET" . eat-send-password)
 	  ("C-c C-<return>" . eat-send-password)
-	  :map project-prefix-map
-	  ("t" . eat-project)
-	  :map cur/sub-leader-keymap
-	  ("C-t" . eat))
+	  ;; :map project-prefix-map
+	  ;; ("t" . eat-project)
+	  ;; :map cur/sub-leader-keymap
+	  ;; ("C-t" . eat)
+	  )
   :custom
   (eat-kill-buffer-on-exit t)
   (eat-enable-directory-tracking t))
@@ -2505,6 +2508,28 @@ eshell-syntax-highlighting
   (eshell-prompt-function 'cur-eshell-prompt "Set custom prompt for eshell")
   :config
   (setopt eshell-prompt-regexp cur-eshell-prompt-regexp))
+#+end_src
+
+*** =cur-config-shell.el= section on ~mistty~, an ~commint~ and ~eat~ alternative
+
+#+begin_src text :tangle ./packages.txt :padline no
+mistty
+#+end_src
+
+#+begin_src emacs-lisp
+;; ===MisTTY===
+(use-package mistty
+  :bind ( :map project-prefix-map
+	  ("t" . mistty-in-project)
+	  :map cur/sub-leader-keymap
+	  ("C-t" . mistty))
+  :custom (mistty-shell-command "fish"))
+
+(use-package cur-mistty
+  :after (mistty)
+  :bind ( :map mistty-mode-map
+	  ("C-c C-RET" . cur-mistty-send-password)
+	  ("C-c C-<return>" . cur-mistty-send-password)))
 #+end_src
 
 *** =cur-config-shell.el= call to ~provide~
@@ -3620,6 +3645,34 @@ Giving ARG with reverse the direction of the search."
 
 (provide 'cur-meow)
 ;;; cur-meow.el ends here
+#+end_src
+
+** Mistty Extensions (=cur-mistty.el=)
+:PROPERTIES:
+:ID:       8265217f-ef63-4554-afff-9315265febc4
+:END:
+
+#+begin_src emacs-lisp :tangle ./cur-lisp/cur-mistty.el
+;;; cur-mistty.el --- Extending Mistty's capabilities -*- lexical-binding: t -*-
+
+;;; Commentary:
+;;
+
+;;; Code:
+
+(require 'mistty)
+(require 'auth-source)
+
+(defun cur-mistty-send-password ()
+  "Read a password and send it to the current mistty buffer."
+  (interactive)
+  (unless (process-live-p mistty-proc) (user-error "No running process"))
+  (mistty-send-string (read-passwd "Password: "))
+  (mistty-send-string "\n")
+  (message "Password sent."))
+
+(provide 'cur-mistty)
+;;; cur-mistty.el ends here
 #+end_src
 
 ** Popper Extensions (=cur-popper.el=)

@@ -81,6 +81,7 @@
   :config
   (setopt popper-reference-buffers '("\\*eat\\*" "\\*.*-eat\\*$" eat-mode
 				     "\\*eshell\\*" "\\*.*-eshell\\*$" eshell-mode
+				     "\\*mistty\\*" "\\*.*-mistty\\*$" mistty-mode
 				     compilation-mode
 				     occur-mode
 				     geiser-mode

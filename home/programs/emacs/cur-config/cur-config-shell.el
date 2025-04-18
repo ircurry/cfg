@@ -21,10 +21,11 @@
   :bind ( :map eat-mode-map
 	  ("C-c C-RET" . eat-send-password)
 	  ("C-c C-<return>" . eat-send-password)
-	  :map project-prefix-map
-	  ("t" . eat-project)
-	  :map cur/sub-leader-keymap
-	  ("C-t" . eat))
+	  ;; :map project-prefix-map
+	  ;; ("t" . eat-project)
+	  ;; :map cur/sub-leader-keymap
+	  ;; ("C-t" . eat)
+	  )
   :custom
   (eat-kill-buffer-on-exit t)
   (eat-enable-directory-tracking t))
@@ -84,5 +85,19 @@
   (eshell-prompt-function 'cur-eshell-prompt "Set custom prompt for eshell")
   :config
   (setopt eshell-prompt-regexp cur-eshell-prompt-regexp))
+
+;; ===MisTTY===
+(use-package mistty
+  :bind ( :map project-prefix-map
+	  ("t" . mistty-in-project)
+	  :map cur/sub-leader-keymap
+	  ("C-t" . mistty))
+  :custom (mistty-shell-command "fish"))
+
+(use-package cur-mistty
+  :after (mistty)
+  :bind ( :map mistty-mode-map
+	  ("C-c C-RET" . cur-mistty-send-password)
+	  ("C-c C-<return>" . cur-mistty-send-password)))
 
 (provide 'cur-config-shell)
