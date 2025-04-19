@@ -2510,7 +2510,7 @@ eshell-syntax-highlighting
   (setopt eshell-prompt-regexp cur-eshell-prompt-regexp))
 #+end_src
 
-*** =cur-config-shell.el= section on ~mistty~, an ~commint~ and ~eat~ alternative
+*** =cur-config-shell.el= section on ~mistty~, a ~commint~ and ~eat~ alternative
 
 #+begin_src text :tangle ./packages.txt :padline no
 mistty
