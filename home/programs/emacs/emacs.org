@@ -4140,6 +4140,7 @@ determine if it will create a new window or reuse the current one.")
 ;;; Code:
 
 (require 'vterm)
+(require 'auth-source)
 
 (defun cur-vterm-enter-password ()
   (declare (interactive-only t))

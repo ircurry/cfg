@@ -5,6 +5,7 @@
 ;;; Code:
 
 (require 'vterm)
+(require 'auth-source)
 
 (defun cur-vterm-enter-password ()
   (declare (interactive-only t))
