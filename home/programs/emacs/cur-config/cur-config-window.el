@@ -82,6 +82,7 @@
   (setopt popper-reference-buffers '("\\*eat\\*" "\\*.*-eat\\*$" eat-mode
 				     "\\*eshell\\*" "\\*.*-eshell\\*$" eshell-mode
 				     "\\*mistty\\*" "\\*.*-mistty\\*$" mistty-mode
+				     "\\*vterm\\*" "\\*.*-vterm\\*" vterm-mode
 				     compilation-mode
 				     occur-mode
 				     geiser-mode
