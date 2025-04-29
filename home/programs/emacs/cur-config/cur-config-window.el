@@ -79,10 +79,10 @@
   :bind ( :map cur/toggle-map
 	  ("w" . popper-toggle-type))
   :config
-  (setopt popper-reference-buffers '("\\*eat\\*" "\\*.*-eat\\*$" eat-mode
-				     "\\*eshell\\*" "\\*.*-eshell\\*$" eshell-mode
-				     "\\*mistty\\*" "\\*.*-mistty\\*$" mistty-mode
-				     "\\*vterm\\*" "\\*.*-vterm\\*" vterm-mode
+  (setopt popper-reference-buffers '("^\\*eat\\*$"    "^\\*.*-eat\\*$" eat-mode
+				     "^\\*eshell\\*$" "^\\*.*-eshell\\*$" eshell-mode
+				     "^\\*mistty\\*$" "^\\*.*-mistty\\*$" mistty-mode
+				     "^\\*vterm\\*$"  "^\\*.*-vterm\\*$" vterm-mode
 				     compilation-mode
 				     occur-mode
 				     geiser-mode
