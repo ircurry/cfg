@@ -6,6 +6,9 @@ nom := if env_var_or_default('INSIDE_EMACS', "") =~ ".*,(eat|comint|compile|term
 test:
 	nh os test . {{ nom }}
 
+build:
+	nh os build . {{ nom }}
+
 boot:
 	nh os boot . {{ nom }}
 
