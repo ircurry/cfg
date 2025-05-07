@@ -153,13 +153,13 @@ in
                 icon = "${pkgs.libsForQt5.breeze-icons}/share/icons/breeze-dark/actions/16/media-playback-start.svg";
                 definedAliases = [ "@od" ];
               };
-              "Invidious" = {
+              "YouTube" = {
                 urls = [
                   {
-                    template = "https://invidious.nerdvpn.de/search";
+                    template = "https://www.youtube.com/results";
                     params = [
                       {
-                        name = "q";
+                        name = "search_query";
                         value = "{searchTerms}";
                       }
                     ];
@@ -168,8 +168,7 @@ in
 
                 icon = "${pkgs.libsForQt5.breeze-icons}/share/icons/breeze-dark/actions/16/media-playback-start.svg";
                 definedAliases = [
-                  "@in"
-                  "@inv"
+                  "@yt"
                 ];
               };
             };
