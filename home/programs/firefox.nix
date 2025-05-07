@@ -78,6 +78,12 @@ in
                 ];
                 url = "https://nix.dev/";
               }
+              {
+                name = "consumer rights wiki";
+                tags = [ "wiki" ];
+                keyword = "consumer";
+                url = "https://consumerrights.wiki/";
+              }
             ];
           };
 
