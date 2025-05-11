@@ -38,6 +38,7 @@
 
 ;; ===use-package Initialization===
 (require 'use-package)
+(setq use-package-compute-statistics t)
 
 ;; ===Load Modules and Packages===
 (dolist (path '("cur-lisp" "cur-config"))

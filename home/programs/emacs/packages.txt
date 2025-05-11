@@ -1,6 +1,5 @@
 tmr
 which-key
-hydra
 avy
 meow
 meow-tree-sitter

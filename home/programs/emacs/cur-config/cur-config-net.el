@@ -34,14 +34,13 @@
   :bind ( :map elfeed-show-mode-map
 	  ([remap imenu] . consult-imenu)))
 
-(let ((cur-links-path (locate-user-emacs-file "cur-elfeed-links")))
-  (use-package elfeed
-    :if (file-readable-p cur-links-path)
-    :defer t
-    :config
-    (setopt elfeed-feeds (car (read-from-string (with-temp-buffer
-						  (insert-file-contents cur-links-path)
-						  (buffer-substring-no-properties (point-min) (point-max))))))))
+(use-package elfeed
+  :if (file-readable-p (locate-user-emacs-file "cur-elfeed-links"))
+  :defer t
+  :config
+  (setopt elfeed-feeds (car (read-from-string (with-temp-buffer
+						(insert-file-contents (locate-user-emacs-file "cur-elfeed-links"))
+						(buffer-substring-no-properties (point-min) (point-max)))))))
 
 (use-package elfeed-tube
   :after elfeed

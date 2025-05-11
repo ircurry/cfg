@@ -30,7 +30,7 @@
   (marginalia-mode 1))
 
 (use-package consult
-  :demand t
+  :defer t
   :bind (("C-x b"               . consult-buffer)
          ("M-g i"               . consult-imenu)
          ("M-y"                 . consult-yank-pop)
@@ -38,7 +38,6 @@
          ([remap bookmark-jump] . consult-bookmark)
          ([remap rg-project]    . consult-ripgrep)
          ([remap rg]            . consult-ripgrep)
-         ([remap project-switch-to-buffer] . consult-project-buffer)
          :map consult-narrow-map
          ("?" . consult-narrow-help)
          :map goto-map
@@ -66,27 +65,31 @@
 
 (use-package consult
   :after project
-  :demand t
+  :defer t
   :bind ( :map project-prefix-map
 	  ("b" . consult-project-buffer)))
 
 (use-package consult
   :if (executable-find "rg")
+  :defer t
   :bind ( :map search-map
 	  ("i" . consult-ripgrep)))
 
 (use-package consult
   :unless (executable-find "rg")
+  :defer t
   :bind ( :map search-map
 	  ("i" . consult-grep)))
 
 (use-package consult
   :after (org)
+  :defer t
   :bind ( :map org-mode-map
           ([remap consult-imenu] . consult-org-heading)))
 
 (use-package cur-consult
   :after (consult)
+  :demand t
   :custom
   (cur-override-theme-load-function #'cur-consult-theme))
 

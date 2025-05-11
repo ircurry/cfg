@@ -131,6 +131,7 @@ Requiring ~use-package~ as that is what I use for almost all of my configuration
 #+begin_src emacs-lisp
 ;; ===use-package Initialization===
 (require 'use-package)
+(setq use-package-compute-statistics t)
 #+end_src
 
 ** =init.el= section on configuration modules.
@@ -201,6 +202,7 @@ I like having absolute line numbers, especially since the meow number selection 
 #+begin_src emacs-lisp
 ;; ===Line Numbers===
 (use-package emacs
+  :demand t
   :custom
   (display-line-numbers-type t)
   :config
@@ -230,13 +232,18 @@ The built in bookmark feature of Emacs is great and one of the pillars of making
 #+begin_src emacs-lisp
 ;; ===Bookmarks===
 (use-package bookmark
+  :defer t
   :commands (bookmark-set
              bookmark-set-no-overwrite
              bookmark-jump
              bookmark-bmenu-list)
-  :hook (bookmark-bmenu-mode . hl-line-mode)
   :config
   (setq bookmark-save-flag 1))
+
+(use-package hl-line
+  :after (bookmark)
+  :defer t
+  :hook (bookmark-bmenu-mode . hl-line-mode))
 #+end_src
 
 *** =cur-config-essentials.el= section on recent files
@@ -248,6 +255,7 @@ This sets emacs to save the most recently visited files. I enable this primarily
 
 #+begin_src emacs-lisp
 (use-package recentf
+  :defer t
   :hook (emacs-startup . recentf-mode))
 #+end_src
 
@@ -285,7 +293,8 @@ This sets emacs to save the most recently visited files. I enable this primarily
 ~occur~ is a command to find occurrences in a buffer that match a regexp and display those matches in a ~compile~ like buffer. This allows you to quickly see and edit patterns of text. It's useful but has the draw back of not being search-as-you-type.
 
 #+begin_src emacs-lisp
-(use-package emacs
+(use-package replace
+  :defer t
   :custom (list-matching-lines-jump-to-current-line nil)
   :bind ( :map occur-mode-map
 	  ("RET" . occur-mode-goto-occurrence-other-window)
@@ -301,23 +310,29 @@ This sets emacs to save the most recently visited files. I enable this primarily
 Emacs provides nice wrappers around standard cli commands such as grep. You can run grep with the aptly named ~grep~ command which will put all of the results in a ~compile~ like buffer. However, using grep this way isn't much more useful than using Emacs' built in ~occur~. What's more useful is grepping over multiple files which is what ~lgrep~ and ~rgrep~ are for. I also have emacs set to use ripgrep instead of grep if it is available.
 
 #+begin_src emacs-lisp
+;;; Code:
 (use-package grep
   :ensure nil
+  :defer t
   :commands (grep lgrep rgrep)
   :custom
   (grep-save-buffers 'ask)
   :bind ( :map search-map
 	  ("d" . lgrep)
-	  ("r" . rgrep)
-	  :map grep-mode-map
-	  ("M-e" . compilation-next-file)
-	  ("M-a" . compilation-previous-file))
+	  ("r" . rgrep))
   :config
   (let ((rg-found (executable-find "rg")))
     (setopt grep-template (if rg-found
 			      "rg --no-heading -nH --null -e <R> <F>"
-			      "grep <X> <C> -nH --null -e <R> <F>"))
+			    "grep <X> <C> -nH --null -e <R> <F>"))
     (setopt xref-search-program (if rg-found 'ripgrep 'grep))))
+
+(use-package compile
+  :after (grep)
+  :defer t
+  :bind ( :map grep-mode-map
+	  ("M-e" . compilation-next-file)
+	  ("M-a" . compilation-previous-file)))
 #+end_src
 
 *** =cur-config-essentials.el= section on ~proced~ and viewing process (htop like)
@@ -391,8 +406,8 @@ which-key
   :demand t
   :init (which-key-mode)
   :diminish which-key-mode
-  :config
-  (setq which-key-idle-delay 1.0))
+  :custom
+  (which-key-idle-delay 1.0))
 #+end_src
 
 *** =cur-config-essentials.el= call to ~provide~
@@ -423,25 +438,9 @@ This module is the base of my key bindings. I use [[https:github.com/meow-edit/m
 
 #+begin_src emacs-lisp
 ;; ===Repeat Mode===
-(use-package emacs
+(use-package repeat
+  :defer t
   :hook (after-init . repeat-mode))
-#+end_src
-
-*** =cur-config-bindings.el= section on ~hydra~ and quick transient key maps
-:PROPERTIES:
-:ID:       5ec45ba2-771f-461f-835c-b6e5a6bd350d
-:END:
-
-~hydra~ is a package that makes creating ad hoc [[info:transient#Top][transient]] key maps very easy. Transient key maps are temporary keyboard driven menus, somewhere between full on modal editing and keyboard short cuts. [[info:magit#Top][magit]] is a good example of what transient key maps are capable of.
-
-#+begin_src text :tangle ./packages.txt :padline no
-hydra
-#+end_src
-
-#+begin_src emacs-lisp
-;; ===Hydra===
-(use-package hydra
-  :demand t)
 #+end_src
 
 *** =cur-config-bindings.el= section on ~avy~ and jumping to characters
@@ -457,6 +456,7 @@ avy
 
 #+begin_src emacs-lisp
 (use-package avy
+  :defer t
   :custom
   (avy-timeout-seconds 1.0)
   :bind ( :map goto-map
@@ -524,167 +524,7 @@ meow
   (defun cur/reverse-other-window ()
     (interactive)
     (other-window -1))
-  (defun meow-setup ()
-    (meow-motion-overwrite-define-key
-     '("j" . meow-next)
-     '("k" . meow-prev)
-     '("<escape>" . ignore))
-    (meow-leader-define-key
-     ;; ===Top Row===
-     '("1" . digit-argument)
-     '("2" . digit-argument)
-     '("3" . digit-argument)
-     '("4" . digit-argument)
-     '("5" . digit-argument)
-     '("6" . digit-argument)
-     '("7" . digit-argument)
-     '("8" . digit-argument)
-     '("9" . digit-argument)
-     '("0" . digit-argument)
-
-     ;; ===2nd Row===
-     ;; '("TAB"  . )
-     '("q" . meow-comment)  ; comment dwim
-     ;; '("w" . ) ; bound in ace-window section
-     ;; '("W" . )
-     ;; '("e" . ) ; bound in popper section
-     (cons "r" cur/register-map)
-     (cons "t" cur/toggle-map)
-     ;; '("y" . )
-     '("u" . "C-u")		; universal argument
-     ;; '("i" . ) ; bound in popper section
-     '("o" . other-window)		; other window
-     (cons "p" project-prefix-map)
-     ;; '("-" . )
-
-     ;; ===3rd Row===
-     ;; '("<escape>" . )
-     ;; '("a" . )
-     '("s" . "C-x C-s")			; save buffer
-     '("d" . kill-current-buffer)
-     '("f" . "C-x C-f")			; find file
-     ;; '("g" . ) ; C-M- map
-     ;; '("h" . ) ; C-h map
-     ;; '("j" . )
-     ;; '("k" . )
-     ;; '("l" . )
-     (cons ";" cur/sub-leader-keymap)
-     '("RET"   . "M-x")
-
-     ;; ===4th Row===
-     ;; '("z" . )
-     ;; '("x" . ) ; C-x map
-     ;; '("c" . ) ; C-c map
-     '("C" . capitalize-dwim)
-     (cons "v" search-map)
-     '("b" . "C-x b")
-     ;; '("n" . )
-     ;; '("m" . ) ; M- map
-     '("," . meow-beginning-of-thing)
-     '("." . meow-end-of-thing)
-     '("/" . meow-visit)
-     ;; '("'"  . )
-     )
-    (meow-normal-define-key
-     ;; ===Special===
-     '("|" . cur/shell-filter-active-region)
-
-     ;; ===Top Row===
-     '("1" . meow-expand-1)
-     ;; '("!" . )
-     '("2" . meow-expand-2)
-     ;; '("@" . )
-     '("3" . meow-expand-3)
-     ;; '("#" . )
-     '("4" . meow-expand-4)
-     ;; '("$" . )
-     '("5" . meow-expand-5)
-     '("%" . meow-query-replace)
-     '("6" . meow-expand-6)
-     ;; '("^" . )
-     '("7" . meow-expand-7)
-     ;; '("&" . )
-     '("8" . meow-expand-8)
-     ;; '("*" . )
-     '("9" . meow-expand-9)
-     '("(" . meow-start-kmacro)
-     '("0" . meow-expand-0)
-     '(")" . meow-end-kmacro)
-
-     ;; ===2nd Row===
-     ;; '("TAB"  . )
-     ;; '("BTAB" . )
-     ;; '("q" . )
-     '("Q" . kmacro-end-and-call-macro)
-     '("w" . meow-mark-word)
-     '("W" . meow-mark-symbol)
-     '("e" . meow-next-word)
-     '("E" . meow-next-symbol)
-     '("r" . meow-replace)
-     '("R" . meow-swap-grab)
-     '("t" . meow-till)
-     '("T" . meow-till-expand)
-     '("y" . meow-save)
-     '("Y" . meow-clipboard-save)
-     '("u" . meow-undo)
-     ;; '("U" . )
-     '("i" . meow-insert)
-     '("I" . meow-open-above)
-     '("o" . meow-block)
-     '("O" . meow-to-block)
-     '("p" . meow-yank)
-     '("P" . meow-yank-pop)
-     '("-" . negative-argument)
-     ;; '("_" . )
-
-     ;; ===3rd Row===
-     '("<escape>" . keyboard-quit)
-     '("a" . meow-append)
-     '("A" . meow-open-below)
-     '("s" . repeat)
-     ;; '("S" . )
-     '("d" . meow-kill)
-     '("D" . meow-c-k)
-     '("f" . meow-find)
-     '("F" . meow-find-expand)
-     '("g" . meow-cancel-selection)
-     ;; '("G" . )
-     '("h" . meow-left)
-     '("H" . meow-left-expand)
-     '("j" . meow-next)
-     '("J" . meow-next-expand)
-     '("k" . meow-prev)
-     '("K" . meow-prev-expand)
-     '("l" . meow-right)
-     '("L" . meow-right-expand)
-     '(";" . meow-reverse)
-     ;; '(":" . )
-     ;; '("RET" . )
-     ;; '("S-RET" . )
-
-     ;; ===4th Row===
-     '("z" . meow-pop-selection)
-     ;; '("Z" . )
-     '("x" . meow-line)
-     '("X" . meow-line-expand)
-     '("c" . meow-change)
-     '("C" . meow-sync-grab)
-     (cons "v" goto-map)
-     ;; '("V" . )
-     '("b" . meow-back-word)
-     '("B" . meow-back-symbol)
-     '("n" . meow-search)
-     '("N" . meow-visit)
-     '("m" . meow-join)
-     ;; '("M" . )
-     '("," . meow-bounds-of-thing)
-     '("<" . beginning-of-buffer)
-     '("." . meow-inner-of-thing)
-     '(">" . end-of-buffer)
-     ;; '("/" . isearch-forward-regexp)
-     ;; '("?" . isearch-backward-regexp)
-     '("'" . meow-grab)
-     '("\"" . meow-pop-grab)))
+  
   :custom
   (meow-mode-state-list
    '((authinfo-mode . normal)
@@ -762,8 +602,167 @@ meow
           :map next-error-repeat-map
           ("a" . first-error))
   :config
-  (meow-setup)
-  (meow-global-mode 1))
+  (meow-motion-overwrite-define-key
+   '("j" . meow-next)
+   '("k" . meow-prev)
+   '("<escape>" . ignore))
+  (meow-leader-define-key
+   ;; ===Top Row===
+   '("1" . digit-argument)
+   '("2" . digit-argument)
+   '("3" . digit-argument)
+   '("4" . digit-argument)
+   '("5" . digit-argument)
+   '("6" . digit-argument)
+   '("7" . digit-argument)
+   '("8" . digit-argument)
+   '("9" . digit-argument)
+   '("0" . digit-argument)
+
+   ;; ===2nd Row===
+   ;; '("TAB"  . )
+   '("q" . meow-comment)  ; comment dwim
+   ;; '("w" . ) ; bound in ace-window section
+   ;; '("W" . )
+   ;; '("e" . ) ; bound in popper section
+   (cons "r" cur/register-map)
+   (cons "t" cur/toggle-map)
+   ;; '("y" . )
+   '("u" . "C-u")		; universal argument
+   ;; '("i" . ) ; bound in popper section
+   '("o" . other-window)		; other window
+   (cons "p" project-prefix-map)
+   ;; '("-" . )
+
+   ;; ===3rd Row===
+   ;; '("<escape>" . )
+   ;; '("a" . )
+   '("s" . "C-x C-s")			; save buffer
+   '("d" . kill-current-buffer)
+   '("f" . "C-x C-f")			; find file
+   ;; '("g" . ) ; C-M- map
+   ;; '("h" . ) ; C-h map
+   ;; '("j" . )
+   ;; '("k" . )
+   ;; '("l" . )
+   (cons ";" cur/sub-leader-keymap)
+   '("RET"   . "M-x")
+
+   ;; ===4th Row===
+   ;; '("z" . )
+   ;; '("x" . ) ; C-x map
+   ;; '("c" . ) ; C-c map
+   '("C" . capitalize-dwim)
+   (cons "v" search-map)
+   '("b" . "C-x b")
+   ;; '("n" . )
+   ;; '("m" . ) ; M- map
+   '("," . meow-beginning-of-thing)
+   '("." . meow-end-of-thing)
+   '("/" . meow-visit)
+   ;; '("'"  . )
+   )
+  (meow-normal-define-key
+   ;; ===Special===
+   '("|" . cur/shell-filter-active-region)
+
+   ;; ===Top Row===
+   '("1" . meow-expand-1)
+   ;; '("!" . )
+   '("2" . meow-expand-2)
+   ;; '("@" . )
+   '("3" . meow-expand-3)
+   ;; '("#" . )
+   '("4" . meow-expand-4)
+   ;; '("$" . )
+   '("5" . meow-expand-5)
+   '("%" . meow-query-replace)
+   '("6" . meow-expand-6)
+   ;; '("^" . )
+   '("7" . meow-expand-7)
+   ;; '("&" . )
+   '("8" . meow-expand-8)
+   ;; '("*" . )
+   '("9" . meow-expand-9)
+   '("(" . meow-start-kmacro)
+   '("0" . meow-expand-0)
+   '(")" . meow-end-kmacro)
+
+   ;; ===2nd Row===
+   ;; '("TAB"  . )
+   ;; '("BTAB" . )
+   ;; '("q" . )
+   '("Q" . kmacro-end-and-call-macro)
+   '("w" . meow-mark-word)
+   '("W" . meow-mark-symbol)
+   '("e" . meow-next-word)
+   '("E" . meow-next-symbol)
+   '("r" . meow-replace)
+   '("R" . meow-swap-grab)
+   '("t" . meow-till)
+   '("T" . meow-till-expand)
+   '("y" . meow-save)
+   '("Y" . meow-clipboard-save)
+   '("u" . meow-undo)
+   ;; '("U" . )
+   '("i" . meow-insert)
+   '("I" . meow-open-above)
+   '("o" . meow-block)
+   '("O" . meow-to-block)
+   '("p" . meow-yank)
+   '("P" . meow-yank-pop)
+   '("-" . negative-argument)
+   ;; '("_" . )
+
+   ;; ===3rd Row===
+   '("<escape>" . keyboard-quit)
+   '("a" . meow-append)
+   '("A" . meow-open-below)
+   '("s" . repeat)
+   ;; '("S" . )
+   '("d" . meow-kill)
+   '("D" . meow-c-k)
+   '("f" . meow-find)
+   '("F" . meow-find-expand)
+   '("g" . meow-cancel-selection)
+   ;; '("G" . )
+   '("h" . meow-left)
+   '("H" . meow-left-expand)
+   '("j" . meow-next)
+   '("J" . meow-next-expand)
+   '("k" . meow-prev)
+   '("K" . meow-prev-expand)
+   '("l" . meow-right)
+   '("L" . meow-right-expand)
+   '(";" . meow-reverse)
+   ;; '(":" . )
+   ;; '("RET" . )
+   ;; '("S-RET" . )
+
+   ;; ===4th Row===
+   '("z" . meow-pop-selection)
+   ;; '("Z" . )
+   '("x" . meow-line)
+   '("X" . meow-line-expand)
+   '("c" . meow-change)
+   '("C" . meow-sync-grab)
+   (cons "v" goto-map)
+   ;; '("V" . )
+   '("b" . meow-back-word)
+   '("B" . meow-back-symbol)
+   '("n" . meow-search)
+   '("N" . meow-visit)
+   '("m" . meow-join)
+   ;; '("M" . )
+   '("," . meow-bounds-of-thing)
+   '("<" . beginning-of-buffer)
+   '("." . meow-inner-of-thing)
+   '(">" . end-of-buffer)
+   ;; '("/" . isearch-forward-regexp)
+   ;; '("?" . isearch-backward-regexp)
+   '("'" . meow-grab)
+   '("\"" . meow-pop-grab))
+  (meow-global-mode +1))
 
 ;; ===Meow Extensions===
 (use-package cur-meow
@@ -791,6 +790,7 @@ meow-tree-sitter
 #+begin_src emacs-lisp
 (use-package meow-tree-sitter
   :after meow
+  :demand t
   :config
   (meow-tree-sitter-register-defaults))
 
@@ -828,6 +828,7 @@ nerd-icons-dired
 ;; ===Dired Icons===
 (use-package nerd-icons-dired
   :after (dired)
+  :defer t
   :hook (dired-mode . nerd-icons-dired-mode))
 #+end_src
 
@@ -844,6 +845,7 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
 ;; ===Dired===
 (use-package dired
   :ensure nil
+  :defer t
   :hook
   (dired-mode . dired-hide-details-mode) ; don't show file details by default
   (dired-mode . hl-line-mode) ; Highlight the line the cursor is on
@@ -1193,7 +1195,8 @@ autothemer
 
 #+begin_src emacs-lisp
 ;; ===Autothemer===
-(use-package autothemer)
+(use-package autothemer
+  :defer t)
 #+end_src
 
 *** =cur-config-faces.el= section on catppuccin theme
@@ -1210,7 +1213,8 @@ catppuccin-theme
 #+begin_src emacs-lisp
 ;; ===Catppuccin Theme===
 (use-package catppuccin-theme
-  :after (autothemer cur-theme))
+  :after (autothemer cur-theme)
+  :defer t)
 #+end_src
 
 *** =cur-config-faces.el= section on setting the default theme
@@ -1469,7 +1473,7 @@ consult
 
 #+begin_src emacs-lisp
 (use-package consult
-  :demand t
+  :defer t
   :bind (("C-x b"               . consult-buffer)
          ("M-g i"               . consult-imenu)
          ("M-y"                 . consult-yank-pop)
@@ -1477,7 +1481,6 @@ consult
          ([remap bookmark-jump] . consult-bookmark)
          ([remap rg-project]    . consult-ripgrep)
          ([remap rg]            . consult-ripgrep)
-         ([remap project-switch-to-buffer] . consult-project-buffer)
          :map consult-narrow-map
          ("?" . consult-narrow-help)
          :map goto-map
@@ -1505,27 +1508,31 @@ consult
 
 (use-package consult
   :after project
-  :demand t
+  :defer t
   :bind ( :map project-prefix-map
 	  ("b" . consult-project-buffer)))
 
 (use-package consult
   :if (executable-find "rg")
+  :defer t
   :bind ( :map search-map
 	  ("i" . consult-ripgrep)))
 
 (use-package consult
   :unless (executable-find "rg")
+  :defer t
   :bind ( :map search-map
 	  ("i" . consult-grep)))
 
 (use-package consult
   :after (org)
+  :defer t
   :bind ( :map org-mode-map
           ([remap consult-imenu] . consult-org-heading)))
 
 (use-package cur-consult
   :after (consult)
+  :demand t
   :custom
   (cur-override-theme-load-function #'cur-consult-theme))
 #+end_src
@@ -1785,7 +1792,7 @@ popper
 ;; ===Popper Fallback===
 (use-package popper
   :if (not (locate-library "cur-popper.el"))
-  :demand t
+  :defer t
   :config
   (setopt popper-display-function #'display-buffer-below-selected)
   (progn
@@ -1795,10 +1802,12 @@ popper
 ;; ===Popper Exensions===
 (use-package cur-popper
   :after (popper)
-  :demand t
-  :config
+  :defer t
+  :autoload (cur-popper-display-buffer-dwim cur-popper-fit-window-height)
+  :init
   (setopt popper-display-function #'cur-popper-display-buffer-dwim)
   (setopt popper-window-height #'cur-popper-fit-window-height)
+  :config
   (setopt cur-popper-stay-conditions '())
   (progn
     (popper-mode -1)
@@ -2034,7 +2043,6 @@ magit
           ("d"   . project-dired)
           ("D"   . project-find-dir)
           ("C-b" . nil)
-          ("b"   . project-switch-to-buffer)
           ("l"   . project-list-buffers))
   :custom
   (project-buffers-viewer #'project-list-buffers-ibuffer)
@@ -2053,7 +2061,8 @@ rg
 #+end_src
 
 #+begin_src emacs-lisp
-(use-package rg)
+(use-package rg
+  :defer t)
 #+end_src
 
 *** =cur-config-ide.el= section on ~rainbow-delimiters~
@@ -2232,7 +2241,8 @@ company-ghci
 
 #+begin_src emacs-lisp
 ;; ===Haskell-Mode===
-(use-package haskell-mode)
+(use-package haskell-mode
+  :defer t)
 
 ;; ===LSP-Haskell===
 (use-package lsp-haskell
@@ -2241,7 +2251,7 @@ company-ghci
 
 ;; ===Company-GHCI===
 (use-package company-ghci
-  :after (company)
+  :after (company haskell-mode)
   :custom (company-ghc-show-info t)
   :config
   (push 'company-ghci company-backends))
@@ -2461,11 +2471,13 @@ eshell-syntax-highlighting
 #+begin_src emacs-lisp
 ;; ===Eshell===
 (use-package eshell
+  :defer t
   :bind ( :map cur/sub-leader-keymap
           ("C-e" . eshell)))
 
 (use-package eshell
   :if (locate-library "corfu.el")
+  :defer t
   :hook
   (eshell-mode . (lambda (&rest _)
 		   (setq-local corfu-auto nil)
@@ -2479,6 +2491,7 @@ eshell-syntax-highlighting
 
 (use-package cur-eshell
   :after (eshell)
+  :demand t
   :custom
   (eshell-prompt-function 'cur-eshell-prompt "Set custom prompt for eshell")
   :config
@@ -2675,14 +2688,13 @@ elfeed
   :bind ( :map elfeed-show-mode-map
 	  ([remap imenu] . consult-imenu)))
 
-(let ((cur-links-path (locate-user-emacs-file "cur-elfeed-links")))
-  (use-package elfeed
-    :if (file-readable-p cur-links-path)
-    :defer t
-    :config
-    (setopt elfeed-feeds (car (read-from-string (with-temp-buffer
-						  (insert-file-contents cur-links-path)
-						  (buffer-substring-no-properties (point-min) (point-max))))))))
+(use-package elfeed
+  :if (file-readable-p (locate-user-emacs-file "cur-elfeed-links"))
+  :defer t
+  :config
+  (setopt elfeed-feeds (car (read-from-string (with-temp-buffer
+						(insert-file-contents (locate-user-emacs-file "cur-elfeed-links"))
+						(buffer-substring-no-properties (point-min) (point-max)))))))
 #+end_src
 
 *** =cur-config-net.el= section on ~elfeed~ integration with youtube and ~yt-dlp~

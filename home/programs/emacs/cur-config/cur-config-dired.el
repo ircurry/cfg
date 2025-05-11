@@ -1,11 +1,13 @@
 ;; ===Dired Icons===
 (use-package nerd-icons-dired
   :after (dired)
+  :defer t
   :hook (dired-mode . nerd-icons-dired-mode))
 
 ;; ===Dired===
 (use-package dired
   :ensure nil
+  :defer t
   :hook
   (dired-mode . dired-hide-details-mode) ; don't show file details by default
   (dired-mode . hl-line-mode) ; Highlight the line the cursor is on

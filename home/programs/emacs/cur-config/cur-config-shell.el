@@ -63,11 +63,13 @@
 
 ;; ===Eshell===
 (use-package eshell
+  :defer t
   :bind ( :map cur/sub-leader-keymap
           ("C-e" . eshell)))
 
 (use-package eshell
   :if (locate-library "corfu.el")
+  :defer t
   :hook
   (eshell-mode . (lambda (&rest _)
 		   (setq-local corfu-auto nil)
@@ -81,6 +83,7 @@
 
 (use-package cur-eshell
   :after (eshell)
+  :demand t
   :custom
   (eshell-prompt-function 'cur-eshell-prompt "Set custom prompt for eshell")
   :config

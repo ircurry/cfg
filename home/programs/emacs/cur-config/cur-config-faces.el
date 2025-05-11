@@ -128,11 +128,13 @@
   ;; (cur-override-theme-load-theme 'doom-flatwhite))
 
 ;; ===Autothemer===
-(use-package autothemer)
+(use-package autothemer
+  :defer t)
 
 ;; ===Catppuccin Theme===
 (use-package catppuccin-theme
-  :after (autothemer cur-theme))
+  :after (autothemer cur-theme)
+  :defer t)
 
 (cur-override-theme-load-theme 'doom-nord)
 

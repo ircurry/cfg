@@ -87,13 +87,13 @@
           ("d"   . project-dired)
           ("D"   . project-find-dir)
           ("C-b" . nil)
-          ("b"   . project-switch-to-buffer)
           ("l"   . project-list-buffers))
   :custom
   (project-buffers-viewer #'project-list-buffers-ibuffer)
   (project-switch-use-entire-map t))
 
-(use-package rg)
+(use-package rg
+  :defer t)
 
 ;; ===rainbow-delimiters===
 (use-package rainbow-delimiters
@@ -154,7 +154,8 @@
   :hook (rustic . lsp-deferred))
 
 ;; ===Haskell-Mode===
-(use-package haskell-mode)
+(use-package haskell-mode
+  :defer t)
 
 ;; ===LSP-Haskell===
 (use-package lsp-haskell
@@ -163,7 +164,7 @@
 
 ;; ===Company-GHCI===
 (use-package company-ghci
-  :after (company)
+  :after (company haskell-mode)
   :custom (company-ghc-show-info t)
   :config
   (push 'company-ghci company-backends))

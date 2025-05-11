@@ -7,6 +7,7 @@
 
 ;; ===Line Numbers===
 (use-package emacs
+  :demand t
   :custom
   (display-line-numbers-type t)
   :config
@@ -26,15 +27,21 @@
 
 ;; ===Bookmarks===
 (use-package bookmark
+  :defer t
   :commands (bookmark-set
              bookmark-set-no-overwrite
              bookmark-jump
              bookmark-bmenu-list)
-  :hook (bookmark-bmenu-mode . hl-line-mode)
   :config
   (setq bookmark-save-flag 1))
 
+(use-package hl-line
+  :after (bookmark)
+  :defer t
+  :hook (bookmark-bmenu-mode . hl-line-mode))
+
 (use-package recentf
+  :defer t
   :hook (emacs-startup . recentf-mode))
 
 (use-package isearch
@@ -54,30 +61,37 @@
   (setq isearch-regexp-lax-whitespace nil) ; not a custom variable for some reason
   (setq isearch-case-fold-search nil))
 
-(use-package emacs
+(use-package replace
+  :defer t
   :custom (list-matching-lines-jump-to-current-line nil)
   :bind ( :map occur-mode-map
 	  ("RET" . occur-mode-goto-occurrence-other-window)
 	  :map search-map
 	  ("o" . occur)))
 
+;;; Code:
 (use-package grep
   :ensure nil
+  :defer t
   :commands (grep lgrep rgrep)
   :custom
   (grep-save-buffers 'ask)
   :bind ( :map search-map
 	  ("d" . lgrep)
-	  ("r" . rgrep)
-	  :map grep-mode-map
-	  ("M-e" . compilation-next-file)
-	  ("M-a" . compilation-previous-file))
+	  ("r" . rgrep))
   :config
   (let ((rg-found (executable-find "rg")))
     (setopt grep-template (if rg-found
 			      "rg --no-heading -nH --null -e <R> <F>"
-			      "grep <X> <C> -nH --null -e <R> <F>"))
+			    "grep <X> <C> -nH --null -e <R> <F>"))
     (setopt xref-search-program (if rg-found 'ripgrep 'grep))))
+
+(use-package compile
+  :after (grep)
+  :defer t
+  :bind ( :map grep-mode-map
+	  ("M-e" . compilation-next-file)
+	  ("M-a" . compilation-previous-file)))
 
 (use-package proced
   :ensure nil
@@ -105,7 +119,7 @@
   :demand t
   :init (which-key-mode)
   :diminish which-key-mode
-  :config
-  (setq which-key-idle-delay 1.0))
+  :custom
+  (which-key-idle-delay 1.0))
 
 (provide 'cur-config-essentials)

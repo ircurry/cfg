@@ -119,7 +119,7 @@
 ;; ===Popper Fallback===
 (use-package popper
   :if (not (locate-library "cur-popper.el"))
-  :demand t
+  :defer t
   :config
   (setopt popper-display-function #'display-buffer-below-selected)
   (progn
@@ -129,10 +129,12 @@
 ;; ===Popper Exensions===
 (use-package cur-popper
   :after (popper)
-  :demand t
-  :config
+  :defer t
+  :autoload (cur-popper-display-buffer-dwim cur-popper-fit-window-height)
+  :init
   (setopt popper-display-function #'cur-popper-display-buffer-dwim)
   (setopt popper-window-height #'cur-popper-fit-window-height)
+  :config
   (setopt cur-popper-stay-conditions '())
   (progn
     (popper-mode -1)
