@@ -16,7 +16,6 @@
 
 ;; ===Meow Setup===
 (use-package meow
-  :after (hydra)
   :demand t
   :preface
   (defvar cur/sub-leader-keymap
@@ -31,6 +30,7 @@
     (let ((map (make-sparse-keymap)))
       map)
     "Keymap for commands that use registers.")
+  :init
   (defun cur/shell-filter-active-region ()
     (interactive)
     (if (region-active-p)
@@ -38,40 +38,6 @@
                                  (read-shell-command "Filter Region with: ")
                                  1 1)
       (user-error "The region is not currently active")))
-  (defhydra cur/window (:hint nil)
-    "
-^Movement^            ^Splitting and Balancing^   ^Manipulation^       ^Resizing^
-^--------^------------^-----------------------^---^------------^-------^--------^---------------------
-_h_: left             _._: only window            _H_: swap left       _i_: enlarge window
-_j_: down             _v_: split vertical         _J_: swap down       _r_: shrink window
-_k_: up               _s_: split horizontal       _K_: swap up         _f_: enlarge window horizonally
-_l_: right            _=_: balance windows        _L_: swap right      _b_: shrink window horizonally
-_o_: other window     _F_: fit to buffer          _d_: close window
-"
-    ("RET" ignore "finished" :exit t)
-
-    ("o" other-window)
-    ("h" windmove-left)
-    ("j" windmove-down)
-    ("k" windmove-up)
-    ("l" windmove-right)
-
-    ("." delete-other-windows)
-    ("v" split-window-right)
-    ("s" split-window-below)
-    ("=" balance-windows)
-    ("F" fit-window-to-buffer)
-
-    ("H" windmove-swap-states-left)
-    ("J" windmove-swap-states-down)
-    ("K" windmove-swap-states-up)
-    ("L" windmove-swap-states-right)
-    ("d" delete-window)
-
-    ("i" enlarge-window)
-    ("r" shrink-window)
-    ("f" enlarge-window-horizontally)
-    ("b" shrink-window-horizontally))
   (defun cur/reverse-other-window ()
     (interactive)
     (other-window -1))
@@ -95,25 +61,25 @@ _o_: other window     _F_: fit to buffer          _d_: close window
 
      ;; ===2nd Row===
      ;; '("TAB"  . )
-     '("q" . meow-comment) ; comment dwim
+     '("q" . meow-comment)  ; comment dwim
      ;; '("w" . ) ; bound in ace-window section
-     '("W" . cur/window/body)
+     ;; '("W" . )
      ;; '("e" . ) ; bound in popper section
      (cons "r" cur/register-map)
      (cons "t" cur/toggle-map)
      ;; '("y" . )
-     '("u" . "C-u")   ; universal argument
+     '("u" . "C-u")		; universal argument
      ;; '("i" . ) ; bound in popper section
-     '("o" . other-window) ; other window
+     '("o" . other-window)		; other window
      (cons "p" project-prefix-map)
      ;; '("-" . )
 
      ;; ===3rd Row===
      ;; '("<escape>" . )
      ;; '("a" . )
-     '("s" . "C-x C-s") ; save buffer
+     '("s" . "C-x C-s")			; save buffer
      '("d" . kill-current-buffer)
-     '("f" . "C-x C-f") ; find file
+     '("f" . "C-x C-f")			; find file
      ;; '("g" . ) ; C-M- map
      ;; '("h" . ) ; C-h map
      ;; '("j" . )
@@ -236,13 +202,6 @@ _o_: other window     _F_: fit to buffer          _d_: close window
      ;; '("?" . isearch-backward-regexp)
      '("'" . meow-grab)
      '("\"" . meow-pop-grab)))
-  :init
-  (defhydra cur/hydra-buffer-cycle (:timeout 4)
-    "tab through buffers"
-    ("n" next-buffer "next buffer")
-    ("p" previous-buffer "previous buffer")
-    ("f" nil "finished" :exit t)
-    ("RET" nil "finished" :exit t))
   :custom
   (meow-mode-state-list
    '((authinfo-mode . normal)
@@ -323,27 +282,14 @@ _o_: other window     _F_: fit to buffer          _d_: close window
   (meow-setup)
   (meow-global-mode 1))
 
-(use-package meow
-  :if (locate-library "ace-window.el")
-  :config
-  (meow-leader-define-key
-   '("w" . ace-window)))
-
-(use-package meow
-  :if (locate-library "popper.el")
-  :config
-  (meow-leader-define-key
-   '("e" . popper-toggle)
-   '("i" . popper-cycle)))
-
+;; ===Meow Extensions===
 (use-package cur-meow
   :after (meow)
-  :demand t
-  :commands (cur-meow-mini-search
-	     cur-meow-toggle-temp-normal-motion)
+  :defer t
+  :commands (cur-meow-mini-search)
   :bind ( :map cur/sub-leader-keymap
           ("C-n" . cur-meow-toggle-temp-normal-motion))
-  :config
+  :init
   (meow-normal-define-key
    '("/" . cur-meow-mini-search)))
 

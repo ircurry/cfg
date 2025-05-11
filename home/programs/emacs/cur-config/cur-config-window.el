@@ -55,6 +55,7 @@
 	  (".*"
 	   (display-buffer-same-window)))))
 
+;; ===Ace-Window Configuration===
 (use-package ace-window
   :custom
   (aw-keys '(?n ?h ?j ?k ?l ?i ?u ?y ?r ?e))
@@ -71,9 +72,21 @@
 			    (?O delete-other-windows "Delete Other Windows")
 			    (?? aw-show-dispatch-help))))
 
+;; ===Ace-Window Extensions===
 (use-package cur-aw
-  :after ace-window)
+  :after ace-window
+  :demand t)
 
+;; ===Ace-Window Meow Bindings===
+(use-package ace-window
+  :after (meow)
+  :defer t
+  :commands (ace-window)
+  :init
+  (meow-leader-define-key
+   '("w" . ace-window)))
+
+;; ===Popper Configurations===
 (use-package popper
   :demand t
   :bind ( :map cur/toggle-map
@@ -94,6 +107,7 @@
 
 (use-package popper-echo
   :after popper
+  :demand t
   :hook (after-init . popper-echo-mode))
 
 (use-package popper
@@ -102,16 +116,20 @@
   :config
   (setopt popper-group-function #'popper-group-by-project))
 
+;; ===Popper Fallback===
 (use-package popper
   :if (not (locate-library "cur-popper.el"))
+  :demand t
   :config
   (setopt popper-display-function #'display-buffer-below-selected)
   (progn
     (popper-mode -1)
     (popper-mode +1)))
 
+;; ===Popper Exensions===
 (use-package cur-popper
   :after (popper)
+  :demand t
   :config
   (setopt popper-display-function #'cur-popper-display-buffer-dwim)
   (setopt popper-window-height #'cur-popper-fit-window-height)
@@ -119,6 +137,16 @@
   (progn
     (popper-mode -1)
     (popper-mode +1)))
+
+;; ===Popper Meow Bindings===
+(use-package popper
+  :after (meow)
+  :defer t
+  :commands (popper-toggle popper-cycle)
+  :init
+  (meow-leader-define-key
+   '("e" . popper-toggle)
+   '("i" . popper-cycle)))
 
 (use-package emacs
   :after repeat
