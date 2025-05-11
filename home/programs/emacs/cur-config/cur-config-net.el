@@ -17,9 +17,11 @@
 
 (use-package elfeed
   :defer t
+  :commands (elfeed)
   :bind ( :map elfeed-show-mode-map
 	  ("w" . elfeed-show-visit)
 	  ("e" . eww)
+	  ("i" . imenu)
 	  :map elfeed-search-mode-map
 	  ("w" . elfeed-search-browse-url)
 	  ("e" . eww))
@@ -27,9 +29,15 @@
   (setopt elfeed-search-filter "@2-weeks-ago")
   (setopt elfeed-db-directory (concat (abbreviate-file-name (expand-file-name user-emacs-directory)) "elfeed-db")))
 
+(use-package elfeed
+  :after consult
+  :bind ( :map elfeed-show-mode-map
+	  ([remap imenu] . consult-imenu)))
+
 (let ((cur-links-path (locate-user-emacs-file "cur-elfeed-links")))
   (use-package elfeed
     :if (file-readable-p cur-links-path)
+    :defer t
     :config
     (setopt elfeed-feeds (car (read-from-string (with-temp-buffer
 						  (insert-file-contents cur-links-path)
