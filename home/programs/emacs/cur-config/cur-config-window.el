@@ -1,4 +1,5 @@
 (use-package cur-window
+  :demand t
   :config
   (setq window-sides-slots
         '(1 1 1 1))
@@ -57,6 +58,7 @@
 
 ;; ===Ace-Window Configuration===
 (use-package ace-window
+  :defer t
   :custom
   (aw-keys '(?n ?h ?j ?k ?l ?i ?u ?y ?r ?e))
   (aw-dispatch-always t)
@@ -150,8 +152,9 @@
    '("e" . popper-toggle)
    '("i" . popper-cycle)))
 
-(use-package emacs
+(use-package window
   :after repeat
+  :defer t
   :preface
   (defvar cur/scroll-up-repeat-map
     (let ((map (make-sparse-keymap)))

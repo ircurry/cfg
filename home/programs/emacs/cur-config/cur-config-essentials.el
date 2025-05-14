@@ -96,6 +96,7 @@
 (use-package proced
   :ensure nil
   :if (eq system-type 'gnu/linux)
+  :defer t
   :commands (proced)
   :custom
   (proced-auto-update-flag t)

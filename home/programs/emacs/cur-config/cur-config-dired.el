@@ -133,16 +133,19 @@
 
 (use-package cur-dired
   :after (dired)
+  :defer t
   :bind ( :map dired-mode-map
 	  ("l" . cur-dired-maybe-insert-subdir-or-find-file)))
 
 (use-package cur-wallpaper
   :after (dired)
+  :defer t
   :bind ( :map dired-mode-map
 	  ("W" . cur-wallpaper-set-wallpaper-dired)))
 
 (use-package cur-wallpaper
   :after (image-dired)
+  :defer t
   :bind ( :map image-dired-thumbnail-mode-map
 	  ("W" . cur-wallpaper-set-wallpaper)))
 

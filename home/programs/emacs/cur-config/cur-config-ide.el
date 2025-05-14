@@ -1,10 +1,12 @@
 (use-package emacs
+  :demand t
   :custom
-  (display-fill-column-indicator-column 81)
-  ;; Enable this hook for it to show up in prog-mode
-  ;; :hook (prog-mode . (lambda (&rest _)
-  ;; 		       (display-fill-column-indicator-mode +1)))
-  )
+  (display-fill-column-indicator-column 81))
+
+(use-package emacs
+  :disabled t
+  :demand t
+  :hook (prog-mode . display-fill-column-indicator-mode))
 
 ;; ===LSP Mode===
 (use-package lsp-mode
@@ -30,6 +32,7 @@
 
 (use-package lsp-ui
   :after (lsp-mode)
+  :defer t
   :custom
   (lsp-ui-doc-enable nil "lsp-ui doc disabled by default")
   (lsp-ui-doc-show-with-cursor t "lsp-ui doc follows cursor")
@@ -51,6 +54,7 @@
 
 ;; ===Company Mode===
 (use-package company
+  :defer t
   :hook
   (prog-mode . company-mode)
   (lsp-mode . company-mode)
@@ -62,16 +66,17 @@
   :custom
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0))
-;;(company-tng-configure-default))
 
 ;; ===Flycheck===
 (use-package flycheck
+  :defer t
   :hook
   (prog-mode . flycheck-mode)
   (lsp-mode  . flycheck-mode))
 
 ;; ===Magit===
 (use-package magit
+  :defer t
   :bind ( :map cur/sub-leader-keymap
           ("C-v" . magit)
           :map project-prefix-map
@@ -83,6 +88,7 @@
   (transient-default-level 5 "Allowing for commit signing"))
 
 (use-package project
+  :defer t
   :bind ( :map project-prefix-map
           ("d"   . project-dired)
           ("D"   . project-find-dir)
@@ -97,23 +103,25 @@
 
 ;; ===rainbow-delimiters===
 (use-package rainbow-delimiters
-  ;; :ensure t
+  :defer t
+  :commands (rainbow-delimiters-mode)
   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; ===Paredit===
 (use-package paredit
-  :hook ((emacs-lisp-mode lisp-interaction-mode scheme-mode) .
-         (lambda () (paredit-mode 1))))
+  :defer t
+  :hook ((emacs-lisp-mode lisp-interaction-mode scheme-mode) . paredit-mode))
 
 ;; ===Java Tree-Sitter Mode===
 (use-package java-ts-mode
+  :defer t
   :mode "\\.java\\'"
   :custom (java-ts-mode-indent-offset 8))
 
 ;; ===lsp-java===
 (use-package lsp-java
   :after (lsp-mode cc-mode)
-  :init
+  :defer t
   :hook
   (envrc-mode . (lambda ()
                   (when (equal major-mode 'java-ts-mode)
@@ -135,49 +143,61 @@
 
 ;; ===YAML===
 (use-package yaml-mode
+  :defer t
   :commands (yaml-mode))
 
 ;; ===nix-mode===
+(use-package nix-mode
+  :defer t)
+
 (use-package lsp-mode
   :defer t
+  :after (nix-mode)
   :hook
-  (nix-mode . lsp-deferred)) ;; So that envrc mode will work
-
-(use-package nix-mode
-  :after lsp-mode
-  :defer t
+  (nix-mode . lsp-deferred) ;; So that envrc mode will work
   :custom
   (lsp-disabled-clients '((nix-mode . nix-nil)) "disable nil so that nixd will be used as lsp-server")
   (lsp-nix-nixd-server-path "nixd" "set nixd binary path to be use from current $PATH"))
 
 ;; ===Rust-Mode===
 (use-package rustic
-  :after (lsp-mode)
-  :hook (rustic . lsp-deferred))
+  :defer t)
+
+(use-package lsp-mode
+  :defer t
+  :after (rustic)
+  :hook (rustic-mode . lsp-deferred))
 
 ;; ===Haskell-Mode===
 (use-package haskell-mode
   :defer t)
 
+(use-package lsp-mode
+  :after (haskell-mode)
+  :defer t
+  :hook (haskell-mode . lsp-deferred))
+
 ;; ===LSP-Haskell===
 (use-package lsp-haskell
-  :hook
-  ((haskell-mode) . lsp-deferred))
+  :after (haskell-mode lsp-mode)
+  :demand t)
 
 ;; ===Company-GHCI===
 (use-package company-ghci
   :after (company haskell-mode)
+  :demand t
   :custom (company-ghc-show-info t)
   :config
   (push 'company-ghci company-backends))
 
 ;; ===Tuareg===
 (use-package tuareg
-  :hook (tuareg-mode . merlin-mode)
-  :defer t)
+  :defer t
+  :hook (tuareg-mode . merlin-mode))
 
 ;; ===Utop===
 (use-package utop
+  :defer t
   :commands (utop utop-mode)
   :config
   (advice-add 'utop :around 'inheritenv-apply))
@@ -186,11 +206,13 @@
   :defer t)
 
 (use-package merlin-company
-  :after (merlin))
+  :after (company merlin)
+  :demand t)
 
 ;; ===C Tree-Sitter Mode===
 (use-package c-ts-mode
   :after (cc-mode)
+  :defer t
   :mode
   ("\\.c\\'" . c-ts-mode)
   ("\\.h\\'" . c-ts-mode)
@@ -199,27 +221,41 @@
                      (java-mode . "java")
                      (awk-mode  . "awk")
                      (other     . "gnu"))
-		   "default style for c programs is linux")
-  :hook
-  (c-ts-mode . (lambda () (require 'ccls) (lsp-deferred))))
+		   "default style for c programs is linux"))
+
+(use-package lsp-mode
+  :after (c-ts-mode)
+  :defer t
+  :hook (c-ts-mode . lsp-deferred))
 
 ;; ===CCLS Mode===
 (use-package ccls
-  :after (cc-mode c-ts-mode))
+  :after (cc-mode c-ts-mode lsp-mode)
+  :demand t)
 
 ;; ===Zig Mode===
 (use-package zig-mode
+  :defer t)
+
+(use-package lsp-mode
+  :after (zig-mode)
+  :defer t
   :hook (zig-mode . lsp-deferred))
 
 ;; ===Go Tree-Sitter Mode===
 (use-package go-ts-mode
+  :defer t
   :mode
   ("\\.go\\'" . go-ts-mode)
   ("go\\.mod\\'" . go-mod-ts-mode)
   :custom
   (go-ts-mode-indent-offset 4 "Set the indentation to 4")
   :hook
-  (go-ts-mode . lsp-deferred)
   (go-ts-mode . (lambda () (setq tab-width 4))))
+
+(use-package lsp-mode
+  :after (go-ts-mode)
+  :defer t
+  :hook (go-ts-mode . lsp-deferred))
 
 (provide 'cur-config-ide)

@@ -5,6 +5,7 @@
 ;; ===Org Gemini Exporter==
 (use-package ox-gemini
   :after org
+  :defer t
   :commands (org-gemini-export-to-file org-gemini-export-to-buffer))
 
 ;; ===Elpher Gemini/Gopher Client===
@@ -14,7 +15,6 @@
   (elpher-default-url-type "gemini"))
 
 ;;; cur-config-elfeed.el --- Links for elfeed -*- lexical-binding: t -*-
-
 (use-package elfeed
   :defer t
   :commands (elfeed)
@@ -29,8 +29,9 @@
   (setopt elfeed-search-filter "@2-weeks-ago")
   (setopt elfeed-db-directory (concat (abbreviate-file-name (expand-file-name user-emacs-directory)) "elfeed-db")))
 
-(use-package elfeed
-  :after consult
+(use-package consult
+  :after elfeed
+  :defer t
   :bind ( :map elfeed-show-mode-map
 	  ([remap imenu] . consult-imenu)))
 
@@ -69,16 +70,19 @@
 (provide 'cur-config-elfeed)
 
 (use-package cur-yt
+  :defer t
   :commands (cur-yt-play-video))
 
 (use-package cur-yt
   :after (elfeed elfeed-tube)
+  :defer t
   :bind ( :map elfeed-show-mode-map
 	  ("V" . cur-yt-play-video)
 	  :map elfeed-search-mode-map
 	  ("V" . cur-yt-play-video)))
 
 (use-package elcord
+  :defer t
   :custom
   (elcord-boring-buffers-regexp-list '("^ " "\\\\*Messages\\\\*"
 				       "\\\\*Help\\\\*" "\\\\*elpher\\\\*"

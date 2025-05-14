@@ -41,6 +41,7 @@
 ;; ===Org Tempo and SRC Blocks===
 (use-package org-tempo
   :after org
+  :demand t
   :custom
   (org-structure-template-alist
    '(("s" . "src")
@@ -55,7 +56,8 @@
 
 ;; ===Org Babel===
 (use-package ob
-  :after org)
+  :after org
+  :defer t)
 ;; TODO: fix this so I can still auto tangle on saving
 ;; :init
 ;; (defun cur/org-babel-tangle-config ()
@@ -68,6 +70,7 @@
 ;; (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'cur/org-babel-tangle-config))))
 
 (use-package flyspell
+  :demand t
   :bind ( :map flyspell-mode-map
           ("C-." . nil)
           ("C-," . nil)))

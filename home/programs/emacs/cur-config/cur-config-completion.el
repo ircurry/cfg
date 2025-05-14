@@ -1,9 +1,11 @@
 (use-package emacs
+  :demand t
   :ensure nil
   :custom
   (minibuffer-follows-selected-frame nil "Display the minibuffer on a per-frame basis"))
 
 (use-package minibuffer
+  :demand t
   :config
   (setq completion-styles '(basic substring orderless))
   (setq completion-category-overrides
@@ -11,13 +13,15 @@
           (kill-ring (styles . (emacs22 orderless))))))
 
 (use-package orderless
+  :demand t
   :bind ( :map minibuffer-local-completion-map
           ("SPC" . nil)
           ("?" . nil))
-  :config
-  (setq orderless-matching-styles '(orderless-prefixes orderless-regexp)))
+  :custom
+  (orderless-matching-styles '(orderless-prefixes orderless-regexp)))
 
 (use-package vertico
+  :defer t
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
   :bind ( :map vertico-map
 	  ("M-e" . vertico-next-group)
@@ -26,8 +30,9 @@
   (vertico-mode 1))
 
 (use-package marginalia
+  :demand t
   :config
-  (marginalia-mode 1))
+  (marginalia-mode +1))
 
 (use-package consult
   :defer t
@@ -94,6 +99,7 @@
   (cur-override-theme-load-function #'cur-consult-theme))
 
 (use-package consult-dir
+  :defer t
   :bind ( :map global-map
 	  ("C-x C-d" . consult-dir)
 	  :map minibuffer-local-completion-map
@@ -102,16 +108,19 @@
 
 (use-package consult-dir
   :after vertico
+  :defer t
   :bind ( :map vertico-map
 	  ("C-x C-d" . consult-dir)
 	  ("C-x C-j" . consult-dir-jump-file)))
 
 (use-package consult-dir
   :after meow
+  :defer t
   :bind ( :map cur/sub-leader-keymap
 	  ("C-d" . consult-dir)))
 
 (use-package emabark
+  :defer t
   :bind ( :map global-map
           ("C-." . embark-act)
           :map minibuffer-local-map
@@ -121,6 +130,7 @@
           ("\"" . embark-dwim)))
 
 (use-package corfu
+  :defer t
   :bind
   (:map corfu-map
 	("TAB"       . corfu-next)

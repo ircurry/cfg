@@ -346,6 +346,7 @@ Emacs provides nice wrappers around standard cli commands such as grep. You can 
 (use-package proced
   :ensure nil
   :if (eq system-type 'gnu/linux)
+  :defer t
   :commands (proced)
   :custom
   (proced-auto-update-flag t)
@@ -971,6 +972,7 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
 
 (use-package cur-dired
   :after (dired)
+  :defer t
   :bind ( :map dired-mode-map
 	  ("l" . cur-dired-maybe-insert-subdir-or-find-file)))
 #+end_src
@@ -983,11 +985,13 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
 #+begin_src emacs-lisp
 (use-package cur-wallpaper
   :after (dired)
+  :defer t
   :bind ( :map dired-mode-map
 	  ("W" . cur-wallpaper-set-wallpaper-dired)))
 
 (use-package cur-wallpaper
   :after (image-dired)
+  :defer t
   :bind ( :map image-dired-thumbnail-mode-map
 	  ("W" . cur-wallpaper-set-wallpaper)))
 #+end_src
@@ -1068,6 +1072,7 @@ I have this transparency set to be the same as with my Alacritty config. This ad
              '(alpha-background . 85))
 
 (use-package emacs
+  :demand t
   :preface
   (defun cur/toggle-frame-opacity ()
     (interactive)
@@ -1095,6 +1100,7 @@ I have several custom themes in a directory weirdly named themes. These are the 
 (use-package cur-theme
   :bind ( :map cur/toggle-map
           ("C-t" . cur-override-theme-load-theme))
+  :defer t
   :custom
   (cur-override-theme-overrides
    '((catppuccin (company-preview :foreground (catppuccin-color 'overlay0)
@@ -1177,9 +1183,7 @@ doom-themes
 #+begin_src emacs-lisp
 ;; ===Doom Emacs Themes===
 (use-package doom-themes
-  :demand t)
-  ;; :config
-  ;; (cur-override-theme-load-theme 'doom-flatwhite))
+  :defer t)
 #+end_src
 
 *** =cur-config-faces.el= section on ~autothemer~
@@ -1239,9 +1243,8 @@ ef-themes
 
 #+begin_src emacs-lisp
 ;; ===Ef-Themes===
-(use-package ef-themes)
-;; :config
-;; (cur/load-theme 'ef-tritanopia-dark))
+(use-package ef-themes
+  :defer t)
 #+end_src
 
 *** =cur-config-faces.el= section on ~nerd-icons-ibuffer~
@@ -1258,6 +1261,7 @@ nerd-icons-ibuffer
 #+begin_src emacs-lisp
 ;; ===Ibuffer Icons===
 (use-package nerd-icons-ibuffer
+  :defer t
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 #+end_src
 
@@ -1267,7 +1271,10 @@ nerd-icons-ibuffer
 :END:
 
 #+begin_src emacs-lisp
+;;; Code:
+
 (use-package cur-mode-line
+  :demand t
   :custom
   (mode-line-right-align-edge 'right-fringe)
   (cur-mode-line-exclude-narrow-inidcator '(Info-mode))
@@ -1324,6 +1331,7 @@ nerd-icons
 
 #+begin_src emacs-lisp :tangle no
 (use-package dashboard
+  :demand t
   :custom
   (dashboard-items '((projects . 5)
 		     (recents . 5)
@@ -1353,16 +1361,17 @@ nerd-icons
 
 (use-package dashboard
   :if (locate-library "nerd-icons.el")
+  :demand t
   :custom
   (dashboard-display-icons-p t)
   (dashboard-icon-type 'nerd-icons)
   (dashboard-set-file-icons t)
   (dashboard-set-heading-icons t))
 
-(use-package dashboard
-  :if (locate-library "page-break-lines.el")
-  :hook (dashboard-before-initialize . (lambda (&rest _)
-					(page-break-lines-mode +1)))
+(use-package page-break-lines
+  :after (dashboard)
+  :demand t
+  :hook (dashboard-before-initialize . page-break-lines-mode)
   :custom
   (dashboard-page-separator "\n"))
 #+end_src
@@ -1398,6 +1407,7 @@ embark-consult
 
 #+begin_src emacs-lisp
 (use-package emacs
+  :demand t
   :ensure nil
   :custom
   (minibuffer-follows-selected-frame nil "Display the minibuffer on a per-frame basis"))
@@ -1414,6 +1424,7 @@ orderless
 
 #+begin_src emacs-lisp
 (use-package minibuffer
+  :demand t
   :config
   (setq completion-styles '(basic substring orderless))
   (setq completion-category-overrides
@@ -1421,11 +1432,12 @@ orderless
           (kill-ring (styles . (emacs22 orderless))))))
 
 (use-package orderless
+  :demand t
   :bind ( :map minibuffer-local-completion-map
           ("SPC" . nil)
           ("?" . nil))
-  :config
-  (setq orderless-matching-styles '(orderless-prefixes orderless-regexp)))
+  :custom
+  (orderless-matching-styles '(orderless-prefixes orderless-regexp)))
 #+end_src
 
 *** =cur-config-completion.el= section on ~vertico~ and better completion UI
@@ -1439,6 +1451,7 @@ vertico
 
 #+begin_src emacs-lisp
 (use-package vertico
+  :defer t
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
   :bind ( :map vertico-map
 	  ("M-e" . vertico-next-group)
@@ -1458,8 +1471,9 @@ marginalia
 
 #+begin_src emacs-lisp
 (use-package marginalia
+  :demand t
   :config
-  (marginalia-mode 1))
+  (marginalia-mode +1))
 #+end_src
 
 *** =cur-config-completion.el= section on ~consult~ and richer interactive commands
@@ -1547,6 +1561,7 @@ consult-dir
 
 #+begin_src emacs-lisp
 (use-package consult-dir
+  :defer t
   :bind ( :map global-map
 	  ("C-x C-d" . consult-dir)
 	  :map minibuffer-local-completion-map
@@ -1555,12 +1570,14 @@ consult-dir
 
 (use-package consult-dir
   :after vertico
+  :defer t
   :bind ( :map vertico-map
 	  ("C-x C-d" . consult-dir)
 	  ("C-x C-j" . consult-dir-jump-file)))
 
 (use-package consult-dir
   :after meow
+  :defer t
   :bind ( :map cur/sub-leader-keymap
 	  ("C-d" . consult-dir)))
 #+end_src
@@ -1577,6 +1594,7 @@ embark-consult
 
 #+begin_src emacs-lisp
 (use-package emabark
+  :defer t
   :bind ( :map global-map
           ("C-." . embark-act)
           :map minibuffer-local-map
@@ -1597,6 +1615,7 @@ corfu
 
 #+begin_src emacs-lisp
 (use-package corfu
+  :defer t
   :bind
   (:map corfu-map
 	("TAB"       . corfu-next)
@@ -1650,6 +1669,7 @@ These are my settings for ~display-buffer-alist~ so windows just Do What I Mean.
 
 #+begin_src emacs-lisp
 (use-package cur-window
+  :demand t
   :config
   (setq window-sides-slots
         '(1 1 1 1))
@@ -1719,6 +1739,7 @@ ace-window
 #+begin_src emacs-lisp
 ;; ===Ace-Window Configuration===
 (use-package ace-window
+  :defer t
   :custom
   (aw-keys '(?n ?h ?j ?k ?l ?i ?u ?y ?r ?e))
   (aw-dispatch-always t)
@@ -1830,8 +1851,9 @@ popper
 :END:
 
 #+begin_src emacs-lisp
-(use-package emacs
+(use-package window
   :after repeat
+  :defer t
   :preface
   (defvar cur/scroll-up-repeat-map
     (let ((map (make-sparse-keymap)))
@@ -1873,12 +1895,14 @@ This is just a minor mode that shows a small bar at a certain column position. I
 
 #+begin_src emacs-lisp
 (use-package emacs
+  :demand t
   :custom
-  (display-fill-column-indicator-column 81)
-  ;; Enable this hook for it to show up in prog-mode
-  ;; :hook (prog-mode . (lambda (&rest _)
-  ;; 		       (display-fill-column-indicator-mode +1)))
-  )
+  (display-fill-column-indicator-column 81))
+
+(use-package emacs
+  :disabled t
+  :demand t
+  :hook (prog-mode . display-fill-column-indicator-mode))
 #+end_src
 
 *** =cur-config-ide.el= section on ~lsp-mode~ and lsp
@@ -1930,6 +1954,7 @@ lsp-ui
 #+begin_src emacs-lisp
 (use-package lsp-ui
   :after (lsp-mode)
+  :defer t
   :custom
   (lsp-ui-doc-enable nil "lsp-ui doc disabled by default")
   (lsp-ui-doc-show-with-cursor t "lsp-ui doc follows cursor")
@@ -1969,6 +1994,7 @@ company
 #+begin_src emacs-lisp
 ;; ===Company Mode===
 (use-package company
+  :defer t
   :hook
   (prog-mode . company-mode)
   (lsp-mode . company-mode)
@@ -1980,7 +2006,6 @@ company
   :custom
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0))
-;;(company-tng-configure-default))
 #+end_src
 
 *** =cur-config-ide.el= section on ~flycheck~ and in-buffer error messages
@@ -1997,6 +2022,7 @@ flycheck
 #+begin_src emacs-lisp
 ;; ===Flycheck===
 (use-package flycheck
+  :defer t
   :hook
   (prog-mode . flycheck-mode)
   (lsp-mode  . flycheck-mode))
@@ -2021,6 +2047,7 @@ magit
 #+begin_src emacs-lisp
 ;; ===Magit===
 (use-package magit
+  :defer t
   :bind ( :map cur/sub-leader-keymap
           ("C-v" . magit)
           :map project-prefix-map
@@ -2039,6 +2066,7 @@ magit
 
 #+begin_src emacs-lisp
 (use-package project
+  :defer t
   :bind ( :map project-prefix-map
           ("d"   . project-dired)
           ("D"   . project-find-dir)
@@ -2079,7 +2107,8 @@ rainbow-delimiters
 #+begin_src emacs-lisp
 ;; ===rainbow-delimiters===
 (use-package rainbow-delimiters
-  ;; :ensure t
+  :defer t
+  :commands (rainbow-delimiters-mode)
   :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
 
@@ -2095,8 +2124,8 @@ paredit
 #+begin_src emacs-lisp
 ;; ===Paredit===
 (use-package paredit
-  :hook ((emacs-lisp-mode lisp-interaction-mode scheme-mode) .
-         (lambda () (paredit-mode 1))))
+  :defer t
+  :hook ((emacs-lisp-mode lisp-interaction-mode scheme-mode) . paredit-mode))
 #+end_src
 
 *** =cur-config-ide.el= section on ~geiser~ and working with schemes
@@ -2136,13 +2165,14 @@ lsp-java
 #+begin_src emacs-lisp
 ;; ===Java Tree-Sitter Mode===
 (use-package java-ts-mode
+  :defer t
   :mode "\\.java\\'"
   :custom (java-ts-mode-indent-offset 8))
 
 ;; ===lsp-java===
 (use-package lsp-java
   :after (lsp-mode cc-mode)
-  :init
+  :defer t
   :hook
   (envrc-mode . (lambda ()
                   (when (equal major-mode 'java-ts-mode)
@@ -2185,6 +2215,7 @@ yaml-mode
 #+begin_src emacs-lisp
 ;; ===YAML===
 (use-package yaml-mode
+  :defer t
   :commands (yaml-mode))
 #+end_src
 
@@ -2202,14 +2233,14 @@ nix-ts-mode
 
 #+begin_src emacs-lisp
 ;; ===nix-mode===
+(use-package nix-mode
+  :defer t)
+
 (use-package lsp-mode
   :defer t
+  :after (nix-mode)
   :hook
-  (nix-mode . lsp-deferred)) ;; So that envrc mode will work
-
-(use-package nix-mode
-  :after lsp-mode
-  :defer t
+  (nix-mode . lsp-deferred) ;; So that envrc mode will work
   :custom
   (lsp-disabled-clients '((nix-mode . nix-nil)) "disable nil so that nixd will be used as lsp-server")
   (lsp-nix-nixd-server-path "nixd" "set nixd binary path to be use from current $PATH"))
@@ -2227,8 +2258,12 @@ rustic
 #+begin_src emacs-lisp
 ;; ===Rust-Mode===
 (use-package rustic
-  :after (lsp-mode)
-  :hook (rustic . lsp-deferred))
+  :defer t)
+
+(use-package lsp-mode
+  :defer t
+  :after (rustic)
+  :hook (rustic-mode . lsp-deferred))
 #+end_src
 
 *** =cur-config-ide.el= configurations for haskell
@@ -2246,14 +2281,20 @@ company-ghci
 (use-package haskell-mode
   :defer t)
 
+(use-package lsp-mode
+  :after (haskell-mode)
+  :defer t
+  :hook (haskell-mode . lsp-deferred))
+
 ;; ===LSP-Haskell===
 (use-package lsp-haskell
-  :hook
-  ((haskell-mode) . lsp-deferred))
+  :after (haskell-mode lsp-mode)
+  :demand t)
 
 ;; ===Company-GHCI===
 (use-package company-ghci
   :after (company haskell-mode)
+  :demand t
   :custom (company-ghc-show-info t)
   :config
   (push 'company-ghci company-backends))
@@ -2274,11 +2315,12 @@ merlin-company
 #+begin_src emacs-lisp
 ;; ===Tuareg===
 (use-package tuareg
-  :hook (tuareg-mode . merlin-mode)
-  :defer t)
+  :defer t
+  :hook (tuareg-mode . merlin-mode))
 
 ;; ===Utop===
 (use-package utop
+  :defer t
   :commands (utop utop-mode)
   :config
   (advice-add 'utop :around 'inheritenv-apply))
@@ -2287,7 +2329,8 @@ merlin-company
   :defer t)
 
 (use-package merlin-company
-  :after (merlin))
+  :after (company merlin)
+  :demand t)
 #+end_src
 
 *** =cur-config-ide.el= configurations for C lang
@@ -2305,6 +2348,7 @@ ccls
 ;; ===C Tree-Sitter Mode===
 (use-package c-ts-mode
   :after (cc-mode)
+  :defer t
   :mode
   ("\\.c\\'" . c-ts-mode)
   ("\\.h\\'" . c-ts-mode)
@@ -2313,13 +2357,17 @@ ccls
                      (java-mode . "java")
                      (awk-mode  . "awk")
                      (other     . "gnu"))
-		   "default style for c programs is linux")
-  :hook
-  (c-ts-mode . (lambda () (require 'ccls) (lsp-deferred))))
+		   "default style for c programs is linux"))
+
+(use-package lsp-mode
+  :after (c-ts-mode)
+  :defer t
+  :hook (c-ts-mode . lsp-deferred))
 
 ;; ===CCLS Mode===
 (use-package ccls
-  :after (cc-mode c-ts-mode))
+  :after (cc-mode c-ts-mode lsp-mode)
+  :demand t)
 #+end_src
 
 *** =cur-config-ide.el= configurations for zig
@@ -2334,6 +2382,11 @@ zig-mode
 #+begin_src emacs-lisp
 ;; ===Zig Mode===
 (use-package zig-mode
+  :defer t)
+
+(use-package lsp-mode
+  :after (zig-mode)
+  :defer t
   :hook (zig-mode . lsp-deferred))
 #+end_src
 
@@ -2345,14 +2398,19 @@ zig-mode
 #+begin_src emacs-lisp
 ;; ===Go Tree-Sitter Mode===
 (use-package go-ts-mode
+  :defer t
   :mode
   ("\\.go\\'" . go-ts-mode)
   ("go\\.mod\\'" . go-mod-ts-mode)
   :custom
   (go-ts-mode-indent-offset 4 "Set the indentation to 4")
   :hook
-  (go-ts-mode . lsp-deferred)
   (go-ts-mode . (lambda () (setq tab-width 4))))
+
+(use-package lsp-mode
+  :after (go-ts-mode)
+  :defer t
+  :hook (go-ts-mode . lsp-deferred))
 #+end_src
 
 *** =cur-config-ide.el= call to ~provide~
@@ -2384,6 +2442,7 @@ vterm
 #+begin_src emacs-lisp
 ;; ===Vterm===
 (use-package vterm
+  :defer t
   :bind ( :map cur/sub-leader-keymap
           ("C-S-t" . vterm))
   :custom
@@ -2393,6 +2452,8 @@ vterm
   (setq vterm-max-scrollback 10000))
 
 (use-package cur-vterm
+  :after (vterm)
+  :defer t
   :bind ( :map vterm-mode-map
           ("C-c C-RET"      . cur-vterm-enter-password)
           ("C-c C-<return>" . cur-vterm-enter-password)
@@ -2414,21 +2475,18 @@ eat
 #+begin_src emacs-lisp
 ;; ===Eat===
 (use-package eat
+  :defer t
   :hook (eat-exec . (lambda (&rest _) (eat-line-mode)))
   :bind ( :map eat-mode-map
 	  ("C-c C-RET" . eat-send-password)
-	  ("C-c C-<return>" . eat-send-password)
-	  ;; :map project-prefix-map
-	  ;; ("t" . eat-project)
-	  ;; :map cur/sub-leader-keymap
-	  ;; ("C-t" . eat)
-	  )
+	  ("C-c C-<return>" . eat-send-password))
   :custom
   (eat-kill-buffer-on-exit t)
   (eat-enable-directory-tracking t))
 
 (use-package eat
   :after meow
+  :defer t
   :hook
   (eat--char-mode . (lambda (&rest _)
 		      (if eat--char-mode
@@ -2438,6 +2496,7 @@ eat
 
 (use-package eat
   :after eshell
+  :demand t
   :hook (eat-eshell-exec . (lambda (&rest _) (eat-eshell-emacs-mode)))
   :bind ( :map eat-eshell-emacs-mode-map
 	  ("C-c C-RET" . eat-send-password)
@@ -2451,8 +2510,9 @@ eat
   :config
   (eat-eshell-mode 1))
 
-(use-package eat
-  :if (locate-library "corfu.el")
+(use-package corfu
+  :after (eat)
+  :defer t
   :hook (eat-mode . (lambda (&rest _)
 		      (setq-local corfu-auto nil)
 		      (setq-local corfu-quit-at-boundary nil)
@@ -2477,8 +2537,8 @@ eshell-syntax-highlighting
   :bind ( :map cur/sub-leader-keymap
           ("C-e" . eshell)))
 
-(use-package eshell
-  :if (locate-library "corfu.el")
+(use-package corfu
+  :after (eshell)
   :defer t
   :hook
   (eshell-mode . (lambda (&rest _)
@@ -2488,6 +2548,7 @@ eshell-syntax-highlighting
 
 (use-package eshell-syntax-highlighting
   :after eshell
+  :demand t
   :config
   (eshell-syntax-highlighting-global-mode +1))
 
@@ -2509,6 +2570,7 @@ mistty
 #+begin_src emacs-lisp
 ;; ===MisTTY===
 (use-package mistty
+  :defer t
   :bind ( :map project-prefix-map
 	  ("t" . mistty-in-project)
 	  :map cur/sub-leader-keymap
@@ -2517,6 +2579,7 @@ mistty
 
 (use-package cur-mistty
   :after (mistty)
+  :defer t
   :bind ( :map mistty-mode-map
 	  ("C-c C-RET" . cur-mistty-send-password)
 	  ("C-c C-<return>" . cur-mistty-send-password)))
@@ -2587,6 +2650,7 @@ org-bullets
 ;; ===Org Tempo and SRC Blocks===
 (use-package org-tempo
   :after org
+  :demand t
   :custom
   (org-structure-template-alist
    '(("s" . "src")
@@ -2603,7 +2667,8 @@ org-bullets
 #+begin_src emacs-lisp
 ;; ===Org Babel===
 (use-package ob
-  :after org)
+  :after org
+  :defer t)
 ;; TODO: fix this so I can still auto tangle on saving
 ;; :init
 ;; (defun cur/org-babel-tangle-config ()
@@ -2618,6 +2683,7 @@ org-bullets
 
 #+begin_src emacs-lisp
 (use-package flyspell
+  :demand t
   :bind ( :map flyspell-mode-map
           ("C-." . nil)
           ("C-," . nil)))
@@ -2650,6 +2716,7 @@ elpher
 ;; ===Org Gemini Exporter==
 (use-package ox-gemini
   :after org
+  :defer t
   :commands (org-gemini-export-to-file org-gemini-export-to-buffer))
 
 ;; ===Elpher Gemini/Gopher Client===
@@ -2670,7 +2737,6 @@ elfeed
 
 #+begin_src emacs-lisp
 ;;; cur-config-elfeed.el --- Links for elfeed -*- lexical-binding: t -*-
-
 (use-package elfeed
   :defer t
   :commands (elfeed)
@@ -2685,8 +2751,9 @@ elfeed
   (setopt elfeed-search-filter "@2-weeks-ago")
   (setopt elfeed-db-directory (concat (abbreviate-file-name (expand-file-name user-emacs-directory)) "elfeed-db")))
 
-(use-package elfeed
-  :after consult
+(use-package consult
+  :after elfeed
+  :defer t
   :bind ( :map elfeed-show-mode-map
 	  ([remap imenu] . consult-imenu)))
 
@@ -2744,10 +2811,12 @@ elfeed-tube-mpv
 
 #+begin_src emacs-lisp
 (use-package cur-yt
+  :defer t
   :commands (cur-yt-play-video))
 
 (use-package cur-yt
   :after (elfeed elfeed-tube)
+  :defer t
   :bind ( :map elfeed-show-mode-map
 	  ("V" . cur-yt-play-video)
 	  :map elfeed-search-mode-map
@@ -2765,6 +2834,7 @@ elcord
 
 #+begin_src emacs-lisp
 (use-package elcord
+  :defer t
   :custom
   (elcord-boring-buffers-regexp-list '("^ " "\\\\*Messages\\\\*"
 				       "\\\\*Help\\\\*" "\\\\*elpher\\\\*"
@@ -2796,6 +2866,7 @@ inheritenv
 #+begin_src emacs-lisp
 ;; ===Envrc===
 (use-package envrc
+  :demand t
   :config
   (envrc-global-mode))
 

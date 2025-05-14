@@ -36,6 +36,7 @@
              '(alpha-background . 85))
 
 (use-package emacs
+  :demand t
   :preface
   (defun cur/toggle-frame-opacity ()
     (interactive)
@@ -54,6 +55,7 @@
 (use-package cur-theme
   :bind ( :map cur/toggle-map
           ("C-t" . cur-override-theme-load-theme))
+  :defer t
   :custom
   (cur-override-theme-overrides
    '((catppuccin (company-preview :foreground (catppuccin-color 'overlay0)
@@ -123,9 +125,7 @@
 
 ;; ===Doom Emacs Themes===
 (use-package doom-themes
-  :demand t)
-  ;; :config
-  ;; (cur-override-theme-load-theme 'doom-flatwhite))
+  :defer t)
 
 ;; ===Autothemer===
 (use-package autothemer
@@ -139,15 +139,18 @@
 (cur-override-theme-load-theme 'doom-nord)
 
 ;; ===Ef-Themes===
-(use-package ef-themes)
-;; :config
-;; (cur/load-theme 'ef-tritanopia-dark))
+(use-package ef-themes
+  :defer t)
 
 ;; ===Ibuffer Icons===
 (use-package nerd-icons-ibuffer
+  :defer t
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
+;;; Code:
+
 (use-package cur-mode-line
+  :demand t
   :custom
   (mode-line-right-align-edge 'right-fringe)
   (cur-mode-line-exclude-narrow-inidcator '(Info-mode))

@@ -1,5 +1,6 @@
 ;; ===Vterm===
 (use-package vterm
+  :defer t
   :bind ( :map cur/sub-leader-keymap
           ("C-S-t" . vterm))
   :custom
@@ -9,6 +10,8 @@
   (setq vterm-max-scrollback 10000))
 
 (use-package cur-vterm
+  :after (vterm)
+  :defer t
   :bind ( :map vterm-mode-map
           ("C-c C-RET"      . cur-vterm-enter-password)
           ("C-c C-<return>" . cur-vterm-enter-password)
@@ -17,21 +20,18 @@
 
 ;; ===Eat===
 (use-package eat
+  :defer t
   :hook (eat-exec . (lambda (&rest _) (eat-line-mode)))
   :bind ( :map eat-mode-map
 	  ("C-c C-RET" . eat-send-password)
-	  ("C-c C-<return>" . eat-send-password)
-	  ;; :map project-prefix-map
-	  ;; ("t" . eat-project)
-	  ;; :map cur/sub-leader-keymap
-	  ;; ("C-t" . eat)
-	  )
+	  ("C-c C-<return>" . eat-send-password))
   :custom
   (eat-kill-buffer-on-exit t)
   (eat-enable-directory-tracking t))
 
 (use-package eat
   :after meow
+  :defer t
   :hook
   (eat--char-mode . (lambda (&rest _)
 		      (if eat--char-mode
@@ -41,6 +41,7 @@
 
 (use-package eat
   :after eshell
+  :demand t
   :hook (eat-eshell-exec . (lambda (&rest _) (eat-eshell-emacs-mode)))
   :bind ( :map eat-eshell-emacs-mode-map
 	  ("C-c C-RET" . eat-send-password)
@@ -54,8 +55,9 @@
   :config
   (eat-eshell-mode 1))
 
-(use-package eat
-  :if (locate-library "corfu.el")
+(use-package corfu
+  :after (eat)
+  :defer t
   :hook (eat-mode . (lambda (&rest _)
 		      (setq-local corfu-auto nil)
 		      (setq-local corfu-quit-at-boundary nil)
@@ -67,8 +69,8 @@
   :bind ( :map cur/sub-leader-keymap
           ("C-e" . eshell)))
 
-(use-package eshell
-  :if (locate-library "corfu.el")
+(use-package corfu
+  :after (eshell)
   :defer t
   :hook
   (eshell-mode . (lambda (&rest _)
@@ -78,6 +80,7 @@
 
 (use-package eshell-syntax-highlighting
   :after eshell
+  :demand t
   :config
   (eshell-syntax-highlighting-global-mode +1))
 
@@ -91,6 +94,7 @@
 
 ;; ===MisTTY===
 (use-package mistty
+  :defer t
   :bind ( :map project-prefix-map
 	  ("t" . mistty-in-project)
 	  :map cur/sub-leader-keymap
@@ -99,6 +103,7 @@
 
 (use-package cur-mistty
   :after (mistty)
+  :defer t
   :bind ( :map mistty-mode-map
 	  ("C-c C-RET" . cur-mistty-send-password)
 	  ("C-c C-<return>" . cur-mistty-send-password)))
