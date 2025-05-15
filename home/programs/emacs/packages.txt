@@ -26,8 +26,8 @@ corfu
 cape
 ace-window
 popper
-lsp-mode
-lsp-ui
+# lsp-mode
+# lsp-ui
 company
 flycheck
 magit
@@ -47,7 +47,7 @@ geiser-racket
 geiser-stklos
 macrostep
 macrostep-geiser
-lsp-java
+# lsp-java
 just-mode
 yaml-mode
 nix-mode
@@ -59,7 +59,7 @@ tuareg
 utop
 merlin
 merlin-company
-ccls
+# ccls
 zig-mode
 vterm
 eat

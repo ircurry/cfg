@@ -1913,12 +1913,13 @@ This is just a minor mode that shows a small bar at a certain column position. I
 Lsp-mode is my chosen language server protocol support package. I chose this over eglot because of the richer features and (at the time that I started using lsp) more mature state. I will revisit elgot in the future but for now I am perfectly happy with lsp-mode.
 
 #+begin_src text :tangle ./packages.txt :padline no
-lsp-mode
+# lsp-mode
 #+end_src
 
 #+begin_src emacs-lisp
 ;; ===LSP Mode===
 (use-package lsp-mode
+  :disabled t
   :demand t
   :hook
   (lsp-mode  . lsp-enable-which-key-integration)
@@ -1948,11 +1949,12 @@ lsp-mode
 Lsp-ui provides some ui enhancements and extra features to lsp. Probably the best one is the doc feature to view documentation in the editor.
 
 #+begin_src text :tangle ./packages.txt :padline no
-lsp-ui
+# lsp-ui
 #+end_src
 
 #+begin_src emacs-lisp
 (use-package lsp-ui
+  :disabled t
   :after (lsp-mode)
   :defer t
   :custom
@@ -1980,6 +1982,31 @@ lsp-ui
 :ID:       73015191-0919-4808-8b8b-377c9e3682f8
 :END:
 
+#+begin_src emacs-lisp
+(use-package eglot
+  :ensure nil
+  :defer t
+  :bind ( :map eglot-mode-map
+	  ("C-c C-a" . eglot-code-actions)))
+
+(use-package eldoc
+  :after (eglot)
+  :defer t
+  :bind ( :map eglot-mode-map
+	  ("C-c C-d" . eldoc-doc-buffer)))
+#+end_src
+
+*** TODO =cur-config-ide.el= section on ~eldoc~ and documentation
+:PROPERTIES:
+:ID:       25a6400d-7c55-4268-8230-6cdc8da7d141
+:END:
+
+#+begin_src emacs-lisp
+(use-package eldoc
+  :defer t
+  :hook (prog-mode . eldoc-mode))
+#+end_src
+
 *** =cur-config-ide.el= section on ~company~ and auto-complete
 :PROPERTIES:
 :ID:       4ce88735-e016-41ec-890c-26fac1907c9a
@@ -1997,7 +2024,6 @@ company
   :defer t
   :hook
   (prog-mode . company-mode)
-  (lsp-mode . company-mode)
   :bind ( :map company-active-map
           ("<tab>" . company-complete-common-or-cycle)
           ("<return>" . company-complete-selection)
@@ -2006,6 +2032,12 @@ company
   :custom
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0))
+
+(use-package company
+  :disabled t
+  :after (lsp-mode)
+  :defer t
+  :hook (lsp-mode . company-mode))
 #+end_src
 
 *** =cur-config-ide.el= section on ~flycheck~ and in-buffer error messages
@@ -2032,6 +2064,8 @@ flycheck
 :PROPERTIES:
 :ID:       cfbd2b8f-7860-4c1f-b54c-c81664bd499a
 :END:
+
+
 
 *** =cur-config-ide.el= section on ~magit~ and quick git interface
 :PROPERTIES:
@@ -2159,7 +2193,7 @@ My configurations for working with the Java language. I have ~java-ts-mode~, the
 I also have lsp-java set up for better integrating ~lsp-mode~ into ~java-ts-mode~. Note because I have =direnv= integration with ~envrc~, the hooks I add to start ~lsp~ must be ~lsp-defered~. ~lsp-defered~ does not start ~lsp-mode~ until after the buffer has visually loaded. We want this because ~envrc~ will change the ~exec-path~ to what =direnv= would change it to. For instance, if I have a devshell that says "here is the lsp-server, the build tool, and external libraries with these exact versions", envrc will make sure that ~exec-path~ contains exactly those versions of those programs in the nix store.
 
 #+begin_src text :tangle ./packages.txt :padline no
-lsp-java
+# lsp-java
 #+end_src
 
 #+begin_src emacs-lisp
@@ -2169,9 +2203,16 @@ lsp-java
   :mode "\\.java\\'"
   :custom (java-ts-mode-indent-offset 8))
 
+(use-package eglot
+  :ensure nil
+  :after (java-ts-mode)
+  :defer t
+  :hook (java-ts-mode . eglot-ensure))
+
 ;; ===lsp-java===
 (use-package lsp-java
-  :after (lsp-mode cc-mode)
+  :disabled t
+  :after (java-ts-mode lsp-mode cc-mode envrc)
   :defer t
   :hook
   (envrc-mode . (lambda ()
@@ -2236,7 +2277,14 @@ nix-ts-mode
 (use-package nix-mode
   :defer t)
 
+(use-package eglot
+  :ensure nil
+  :defer t
+  :after (nix-mode)
+  :hook (nix-mode . eglot-ensure))
+
 (use-package lsp-mode
+  :disabled t
   :defer t
   :after (nix-mode)
   :hook
@@ -2260,9 +2308,16 @@ rustic
 (use-package rustic
   :defer t)
 
-(use-package lsp-mode
-  :defer t
+(use-package eglot
+  :ensure nil
   :after (rustic)
+  :defer t
+  :hook (rustic-mode . eglot-ensure))
+
+(use-package lsp-mode
+  :disabled t
+  :after (rustic)
+  :defer t
   :hook (rustic-mode . lsp-deferred))
 #+end_src
 
@@ -2281,13 +2336,21 @@ company-ghci
 (use-package haskell-mode
   :defer t)
 
+(use-package eglot
+  :ensure nil
+  :after (haskell-mode)
+  :defer t
+  :hook (haskell-mode . eglot-ensure))
+
 (use-package lsp-mode
+  :disabled t
   :after (haskell-mode)
   :defer t
   :hook (haskell-mode . lsp-deferred))
 
 ;; ===LSP-Haskell===
 (use-package lsp-haskell
+  :disabled t
   :after (haskell-mode lsp-mode)
   :demand t)
 
@@ -2315,8 +2378,7 @@ merlin-company
 #+begin_src emacs-lisp
 ;; ===Tuareg===
 (use-package tuareg
-  :defer t
-  :hook (tuareg-mode . merlin-mode))
+  :defer t)
 
 ;; ===Utop===
 (use-package utop
@@ -2326,7 +2388,9 @@ merlin-company
   (advice-add 'utop :around 'inheritenv-apply))
 
 (use-package merlin
-  :defer t)
+  :after (tuareg)
+  :defer t
+  :hook (tuareg-mode . merlin-mode))
 
 (use-package merlin-company
   :after (company merlin)
@@ -2341,7 +2405,7 @@ merlin-company
 I use tree-sitter for C, which unfortunately is not currently integrated into the default C major mode for Emacs. I have also changed the ~c-default-style~ for C to be "linux", which is 8 spaces for indentation instead of the default of 2.
 
 #+begin_src text :tangle ./packages.txt :padline no
-ccls
+# ccls
 #+end_src
 
 #+begin_src emacs-lisp
@@ -2359,13 +2423,20 @@ ccls
                      (other     . "gnu"))
 		   "default style for c programs is linux"))
 
+(use-package eglot
+  :after (c-ts-mode)
+  :defer t
+  :hook (c-ts-mode . eglot-ensure))
+
 (use-package lsp-mode
+  :disabled t
   :after (c-ts-mode)
   :defer t
   :hook (c-ts-mode . lsp-deferred))
 
 ;; ===CCLS Mode===
 (use-package ccls
+  :disabled t
   :after (cc-mode c-ts-mode lsp-mode)
   :demand t)
 #+end_src
@@ -2384,7 +2455,13 @@ zig-mode
 (use-package zig-mode
   :defer t)
 
+(use-package eglot
+  :after (zig-mode)
+  :defer t
+  :hook (zig-mode . eglot-ensure))
+
 (use-package lsp-mode
+  :disabled t
   :after (zig-mode)
   :defer t
   :hook (zig-mode . lsp-deferred))
@@ -2407,7 +2484,13 @@ zig-mode
   :hook
   (go-ts-mode . (lambda () (setq tab-width 4))))
 
+(use-package eglot
+  :after (go-ts-mode)
+  :defer t
+  :hook (go-ts-mode . eglot-ensure))
+
 (use-package lsp-mode
+  :disabled t
   :after (go-ts-mode)
   :defer t
   :hook (go-ts-mode . lsp-deferred))

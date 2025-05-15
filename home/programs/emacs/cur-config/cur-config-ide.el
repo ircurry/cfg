@@ -10,6 +10,7 @@
 
 ;; ===LSP Mode===
 (use-package lsp-mode
+  :disabled t
   :demand t
   :hook
   (lsp-mode  . lsp-enable-which-key-integration)
@@ -31,6 +32,7 @@
   (lsp-enable-which-key-integration t))
 
 (use-package lsp-ui
+  :disabled t
   :after (lsp-mode)
   :defer t
   :custom
@@ -52,12 +54,27 @@
   :hook
   (lsp-mode . lsp-ui-mode))
 
+(use-package eglot
+  :ensure nil
+  :defer t
+  :bind ( :map eglot-mode-map
+	  ("C-c C-a" . eglot-code-actions)))
+
+(use-package eldoc
+  :after (eglot)
+  :defer t
+  :bind ( :map eglot-mode-map
+	  ("C-c C-d" . eldoc-doc-buffer)))
+
+(use-package eldoc
+  :defer t
+  :hook (prog-mode . eldoc-mode))
+
 ;; ===Company Mode===
 (use-package company
   :defer t
   :hook
   (prog-mode . company-mode)
-  (lsp-mode . company-mode)
   :bind ( :map company-active-map
           ("<tab>" . company-complete-common-or-cycle)
           ("<return>" . company-complete-selection)
@@ -66,6 +83,12 @@
   :custom
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0))
+
+(use-package company
+  :disabled t
+  :after (lsp-mode)
+  :defer t
+  :hook (lsp-mode . company-mode))
 
 ;; ===Flycheck===
 (use-package flycheck
@@ -118,9 +141,16 @@
   :mode "\\.java\\'"
   :custom (java-ts-mode-indent-offset 8))
 
+(use-package eglot
+  :ensure nil
+  :after (java-ts-mode)
+  :defer t
+  :hook (java-ts-mode . eglot-ensure))
+
 ;; ===lsp-java===
 (use-package lsp-java
-  :after (lsp-mode cc-mode)
+  :disabled t
+  :after (java-ts-mode lsp-mode cc-mode envrc)
   :defer t
   :hook
   (envrc-mode . (lambda ()
@@ -150,7 +180,14 @@
 (use-package nix-mode
   :defer t)
 
+(use-package eglot
+  :ensure nil
+  :defer t
+  :after (nix-mode)
+  :hook (nix-mode . eglot-ensure))
+
 (use-package lsp-mode
+  :disabled t
   :defer t
   :after (nix-mode)
   :hook
@@ -163,22 +200,37 @@
 (use-package rustic
   :defer t)
 
-(use-package lsp-mode
-  :defer t
+(use-package eglot
+  :ensure nil
   :after (rustic)
+  :defer t
+  :hook (rustic-mode . eglot-ensure))
+
+(use-package lsp-mode
+  :disabled t
+  :after (rustic)
+  :defer t
   :hook (rustic-mode . lsp-deferred))
 
 ;; ===Haskell-Mode===
 (use-package haskell-mode
   :defer t)
 
+(use-package eglot
+  :ensure nil
+  :after (haskell-mode)
+  :defer t
+  :hook (haskell-mode . eglot-ensure))
+
 (use-package lsp-mode
+  :disabled t
   :after (haskell-mode)
   :defer t
   :hook (haskell-mode . lsp-deferred))
 
 ;; ===LSP-Haskell===
 (use-package lsp-haskell
+  :disabled t
   :after (haskell-mode lsp-mode)
   :demand t)
 
@@ -192,8 +244,7 @@
 
 ;; ===Tuareg===
 (use-package tuareg
-  :defer t
-  :hook (tuareg-mode . merlin-mode))
+  :defer t)
 
 ;; ===Utop===
 (use-package utop
@@ -203,7 +254,9 @@
   (advice-add 'utop :around 'inheritenv-apply))
 
 (use-package merlin
-  :defer t)
+  :after (tuareg)
+  :defer t
+  :hook (tuareg-mode . merlin-mode))
 
 (use-package merlin-company
   :after (company merlin)
@@ -223,13 +276,20 @@
                      (other     . "gnu"))
 		   "default style for c programs is linux"))
 
+(use-package eglot
+  :after (c-ts-mode)
+  :defer t
+  :hook (c-ts-mode . eglot-ensure))
+
 (use-package lsp-mode
+  :disabled t
   :after (c-ts-mode)
   :defer t
   :hook (c-ts-mode . lsp-deferred))
 
 ;; ===CCLS Mode===
 (use-package ccls
+  :disabled t
   :after (cc-mode c-ts-mode lsp-mode)
   :demand t)
 
@@ -237,7 +297,13 @@
 (use-package zig-mode
   :defer t)
 
+(use-package eglot
+  :after (zig-mode)
+  :defer t
+  :hook (zig-mode . eglot-ensure))
+
 (use-package lsp-mode
+  :disabled t
   :after (zig-mode)
   :defer t
   :hook (zig-mode . lsp-deferred))
@@ -253,7 +319,13 @@
   :hook
   (go-ts-mode . (lambda () (setq tab-width 4))))
 
+(use-package eglot
+  :after (go-ts-mode)
+  :defer t
+  :hook (go-ts-mode . eglot-ensure))
+
 (use-package lsp-mode
+  :disabled t
   :after (go-ts-mode)
   :defer t
   :hook (go-ts-mode . lsp-deferred))
