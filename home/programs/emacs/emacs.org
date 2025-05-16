@@ -2032,13 +2032,6 @@ flycheck
   (lsp-mode . flycheck-mode))
 #+end_src
 
-*** TODO =cur-config-ide.el= section on ~flymake~ and in-buffer error messages
-:PROPERTIES:
-:ID:       cfbd2b8f-7860-4c1f-b54c-c81664bd499a
-:END:
-
-
-
 *** =cur-config-ide.el= section on ~magit~ and quick git interface
 :PROPERTIES:
 :ID:       c4b9aa02-bb0d-429c-88c1-780057bdac94
