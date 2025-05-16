@@ -72,6 +72,7 @@
 
 ;; ===Company Mode===
 (use-package company
+  :disabled t
   :defer t
   :hook
   (prog-mode . company-mode)

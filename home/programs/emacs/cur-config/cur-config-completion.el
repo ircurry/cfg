@@ -131,23 +131,34 @@
 
 (use-package corfu
   :defer t
-  :bind
-  (:map corfu-map
-	("TAB"       . corfu-next)
-	("<tab>"     . corfu-next)
-	("S-TAB"     . corfu-previous)
-	("<backtab>" . corfu-previous)
-	("<escape>"  . corfu-quit) ; note: cannot bind "ESC" because it causes errors
-	("M-SPC"     . corfu-insert-separator))
+  :bind ( :map corfu-map
+	  ("TAB"       . corfu-next)
+	  ("<tab>"     . corfu-next)
+	  ("S-TAB"     . corfu-previous)
+	  ("<backtab>" . corfu-previous)
+	  ("<escape>"  . corfu-quit) ; note: cannot bind "ESC" because it causes errors
+	  ("M-SPC"     . corfu-insert-separator)
+	  ("SPC"       . corfu-insert-separator))
   :custom
-  (corfu-auto t)
+  (corfu-auto nil)
   (corfu-preview-current 'insert)
+  (corfu-preselect 'first)
   (corfu-auto-delay 0.1)
   (corfu-auto-prefix 3)
   (corfu-max-width 40)
-  (corfu-popupinfo-delay '(2.0 . 1.0))
-  (tab-always-indent 'complete)
+  (tab-always-indent 'complete))
+
+(use-package corfu-popupinfo
+  :after (corfu)
+  :defer t
+  :custom
+  (corfu-popupinfo-delay '(1.5 . 0.5))
   :hook
   (corfu-mode . corfu-popupinfo-mode))
+
+(use-package corfu
+  :after (prog-mode)
+  :defer t
+  :hook (prog-mode . corfu-mode))
 
 (provide 'cur-config-completion)

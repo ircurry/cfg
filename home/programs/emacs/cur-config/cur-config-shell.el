@@ -1,3 +1,8 @@
+(use-package pcomplete
+  :ensure nil
+  :defer t
+  :custom (pcomplete-termination-string ""))
+
 ;; ===Vterm===
 (use-package vterm
   :defer t
