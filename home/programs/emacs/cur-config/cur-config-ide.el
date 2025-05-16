@@ -34,7 +34,6 @@
 (use-package lsp-ui
   :disabled t
   :after (lsp-mode)
-  :defer t
   :custom
   (lsp-ui-doc-enable nil "lsp-ui doc disabled by default")
   (lsp-ui-doc-show-with-cursor t "lsp-ui doc follows cursor")
@@ -56,24 +55,20 @@
 
 (use-package eglot
   :ensure nil
-  :defer t
   :bind ( :map eglot-mode-map
 	  ("C-c C-a" . eglot-code-actions)))
 
 (use-package eldoc
   :after (eglot)
-  :defer t
   :bind ( :map eglot-mode-map
 	  ("C-c C-d" . eldoc-doc-buffer)))
 
 (use-package eldoc
-  :defer t
   :hook (prog-mode . eldoc-mode))
 
 ;; ===Company Mode===
 (use-package company
   :disabled t
-  :defer t
   :hook
   (prog-mode . company-mode)
   :bind ( :map company-active-map
@@ -88,15 +83,18 @@
 (use-package company
   :disabled t
   :after (lsp-mode)
-  :defer t
   :hook (lsp-mode . company-mode))
 
 ;; ===Flycheck===
 (use-package flycheck
-  :defer t
+  :after (prog-mode)
   :hook
-  (prog-mode . flycheck-mode)
-  (lsp-mode  . flycheck-mode))
+  (prog-mode . flycheck-mode))
+
+(use-package flycheck
+  :after (lsp-mode)
+  :hook
+  (lsp-mode . flycheck-mode))
 
 ;; ===Magit===
 (use-package magit
@@ -119,7 +117,6 @@
   :demand t)
 
 (use-package project
-  :defer t
   :bind ( :map project-prefix-map
           ("d"   . project-dired)
           ("D"   . project-find-dir)
@@ -129,37 +126,31 @@
   (project-buffers-viewer #'project-list-buffers-ibuffer)
   (project-switch-use-entire-map t))
 
-(use-package rg
-  :defer t)
+(use-package rg)
 
 ;; ===rainbow-delimiters===
 (use-package rainbow-delimiters
-  :defer t
   :commands (rainbow-delimiters-mode)
   :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; ===Paredit===
 (use-package paredit
-  :defer t
   :hook ((emacs-lisp-mode lisp-interaction-mode scheme-mode) . paredit-mode))
 
 ;; ===Java Tree-Sitter Mode===
 (use-package java-ts-mode
-  :defer t
   :mode "\\.java\\'"
   :custom (java-ts-mode-indent-offset 8))
 
 (use-package eglot
   :ensure nil
   :after (java-ts-mode)
-  :defer t
   :hook (java-ts-mode . eglot-ensure))
 
 ;; ===lsp-java===
 (use-package lsp-java
   :disabled t
   :after (java-ts-mode lsp-mode cc-mode envrc)
-  :defer t
   :hook
   (envrc-mode . (lambda ()
                   (when (equal major-mode 'java-ts-mode)
@@ -176,27 +167,22 @@
       (message (concat jdtls-path "/share/java/"))
       (append (list (concat jdtls-path "/bin/jdtls")) jdtls-exec-options))))
 
-(use-package just-mode
-  :defer t)
+(use-package just-mode)
 
 ;; ===YAML===
 (use-package yaml-mode
-  :defer t
   :commands (yaml-mode))
 
 ;; ===nix-mode===
-(use-package nix-mode
-  :defer t)
+(use-package nix-mode)
 
 (use-package eglot
   :ensure nil
-  :defer t
   :after (nix-mode)
   :hook (nix-mode . eglot-ensure))
 
 (use-package lsp-mode
   :disabled t
-  :defer t
   :after (nix-mode)
   :hook
   (nix-mode . lsp-deferred) ;; So that envrc mode will work
@@ -205,35 +191,29 @@
   (lsp-nix-nixd-server-path "nixd" "set nixd binary path to be use from current $PATH"))
 
 ;; ===Rust-Mode===
-(use-package rustic
-  :defer t)
+(use-package rustic)
 
 (use-package eglot
   :ensure nil
   :after (rustic)
-  :defer t
   :hook (rustic-mode . eglot-ensure))
 
 (use-package lsp-mode
   :disabled t
   :after (rustic)
-  :defer t
   :hook (rustic-mode . lsp-deferred))
 
 ;; ===Haskell-Mode===
-(use-package haskell-mode
-  :defer t)
+(use-package haskell-mode)
 
 (use-package eglot
   :ensure nil
   :after (haskell-mode)
-  :defer t
   :hook (haskell-mode . eglot-ensure))
 
 (use-package lsp-mode
   :disabled t
   :after (haskell-mode)
-  :defer t
   :hook (haskell-mode . lsp-deferred))
 
 ;; ===LSP-Haskell===
@@ -251,19 +231,16 @@
   (push 'company-ghci company-backends))
 
 ;; ===Tuareg===
-(use-package tuareg
-  :defer t)
+(use-package tuareg)
 
 ;; ===Utop===
 (use-package utop
-  :defer t
   :commands (utop utop-mode)
   :config
   (advice-add 'utop :around 'inheritenv-apply))
 
 (use-package merlin
   :after (tuareg)
-  :defer t
   :hook (tuareg-mode . merlin-mode))
 
 (use-package merlin-company
@@ -273,7 +250,6 @@
 ;; ===C Tree-Sitter Mode===
 (use-package c-ts-mode
   :after (cc-mode)
-  :defer t
   :mode
   ("\\.c\\'" . c-ts-mode)
   ("\\.h\\'" . c-ts-mode)
@@ -287,13 +263,11 @@
 (use-package eglot
   :ensure nil
   :after (c-ts-mode)
-  :defer t
   :hook (c-ts-mode . eglot-ensure))
 
 (use-package lsp-mode
   :disabled t
   :after (c-ts-mode)
-  :defer t
   :hook (c-ts-mode . lsp-deferred))
 
 ;; ===CCLS Mode===
@@ -303,24 +277,20 @@
   :demand t)
 
 ;; ===Zig Mode===
-(use-package zig-mode
-  :defer t)
+(use-package zig-mode)
 
 (use-package eglot
   :ensure nil
   :after (zig-mode)
-  :defer t
   :hook (zig-mode . eglot-ensure))
 
 (use-package lsp-mode
   :disabled t
   :after (zig-mode)
-  :defer t
   :hook (zig-mode . lsp-deferred))
 
 ;; ===Go Tree-Sitter Mode===
 (use-package go-ts-mode
-  :defer t
   :mode
   ("\\.go\\'" . go-ts-mode)
   ("go\\.mod\\'" . go-mod-ts-mode)
@@ -332,13 +302,11 @@
 (use-package eglot
   :ensure nil
   :after (go-ts-mode)
-  :defer t
   :hook (go-ts-mode . eglot-ensure))
 
 (use-package lsp-mode
   :disabled t
   :after (go-ts-mode)
-  :defer t
   :hook (go-ts-mode . lsp-deferred))
 
 (provide 'cur-config-ide)

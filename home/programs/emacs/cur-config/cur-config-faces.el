@@ -55,7 +55,6 @@
 (use-package cur-theme
   :bind ( :map cur/toggle-map
           ("C-t" . cur-override-theme-load-theme))
-  :defer t
   :custom
   (cur-override-theme-overrides
    '((catppuccin (company-preview :foreground (catppuccin-color 'overlay0)
@@ -124,27 +123,22 @@
      (doom-tomorrow-night (mode-line-inactive :background "#0f1011")))))
 
 ;; ===Doom Emacs Themes===
-(use-package doom-themes
-  :defer t)
+(use-package doom-themes)
 
 ;; ===Autothemer===
-(use-package autothemer
-  :defer t)
+(use-package autothemer)
 
 ;; ===Catppuccin Theme===
 (use-package catppuccin-theme
-  :after (autothemer cur-theme)
-  :defer t)
+  :after (autothemer cur-theme))
 
 (cur-override-theme-load-theme 'doom-nord)
 
 ;; ===Ef-Themes===
-(use-package ef-themes
-  :defer t)
+(use-package ef-themes)
 
 ;; ===Ibuffer Icons===
 (use-package nerd-icons-ibuffer
-  :defer t
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
 ;;; Code:
@@ -180,7 +174,6 @@
 		  cur-mode-line-right-align
 		  mode-line-end-spaces)))
 
-(use-package page-break-lines
-  :defer t)
+(use-package page-break-lines)
 
 (provide 'cur-config-faces)

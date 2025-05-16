@@ -1,11 +1,9 @@
 (use-package pcomplete
   :ensure nil
-  :defer t
   :custom (pcomplete-termination-string ""))
 
 ;; ===Vterm===
 (use-package vterm
-  :defer t
   :bind ( :map cur/sub-leader-keymap
           ("C-S-t" . vterm))
   :custom
@@ -16,7 +14,6 @@
 
 (use-package cur-vterm
   :after (vterm)
-  :defer t
   :bind ( :map vterm-mode-map
           ("C-c C-RET"      . cur-vterm-enter-password)
           ("C-c C-<return>" . cur-vterm-enter-password)
@@ -25,7 +22,6 @@
 
 ;; ===Eat===
 (use-package eat
-  :defer t
   :hook (eat-exec . (lambda (&rest _) (eat-line-mode)))
   :bind ( :map eat-mode-map
 	  ("C-c C-RET" . eat-send-password)
@@ -36,7 +32,6 @@
 
 (use-package eat
   :after meow
-  :defer t
   :hook
   (eat--char-mode . (lambda (&rest _)
 		      (if eat--char-mode
@@ -62,7 +57,6 @@
 
 (use-package corfu
   :after (eat)
-  :defer t
   :hook (eat-mode . (lambda (&rest _)
 		      (setq-local corfu-auto nil)
 		      (setq-local corfu-quit-at-boundary nil)
@@ -70,13 +64,11 @@
 
 ;; ===Eshell===
 (use-package eshell
-  :defer t
   :bind ( :map cur/sub-leader-keymap
           ("C-e" . eshell)))
 
 (use-package corfu
   :after (eshell)
-  :defer t
   :hook
   (eshell-mode . (lambda (&rest _)
 		   (setq-local corfu-auto nil)
@@ -99,7 +91,6 @@
 
 ;; ===MisTTY===
 (use-package mistty
-  :defer t
   :bind ( :map project-prefix-map
 	  ("t" . mistty-in-project)
 	  :map cur/sub-leader-keymap
@@ -108,7 +99,6 @@
 
 (use-package cur-mistty
   :after (mistty)
-  :defer t
   :bind ( :map mistty-mode-map
 	  ("C-c C-RET" . cur-mistty-send-password)
 	  ("C-c C-<return>" . cur-mistty-send-password)))

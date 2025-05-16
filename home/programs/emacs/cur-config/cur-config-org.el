@@ -1,7 +1,6 @@
 ;; ===Org-Mode===
 (use-package org
   :ensure nil
-  :defer t
   :hook (org-mode . cur/org-mode-setup)
   :bind ( :map org-mode-map
           ("C-S-h" . outline-promote)
@@ -56,8 +55,7 @@
 
 ;; ===Org Babel===
 (use-package ob
-  :after org
-  :defer t)
+  :after org)
 ;; TODO: fix this so I can still auto tangle on saving
 ;; :init
 ;; (defun cur/org-babel-tangle-config ()

@@ -38,7 +38,11 @@
 
 ;; ===use-package Initialization===
 (require 'use-package)
-(setq use-package-compute-statistics t)
+;; (setq use-package-compute-statistics t) ; Uncomments to track package load times
+(setopt use-package-always-pin    nil
+	use-package-always-defer  t
+	use-package-always-demand nil
+	use-package-always-ensure nil)
 
 ;; ===Load Modules and Packages===
 (dolist (path '("cur-lisp" "cur-config"))

@@ -27,7 +27,6 @@
 
 ;; ===Bookmarks===
 (use-package bookmark
-  :defer t
   :commands (bookmark-set
              bookmark-set-no-overwrite
              bookmark-jump
@@ -37,11 +36,9 @@
 
 (use-package hl-line
   :after (bookmark)
-  :defer t
   :hook (bookmark-bmenu-mode . hl-line-mode))
 
 (use-package recentf
-  :defer t
   :hook (emacs-startup . recentf-mode))
 
 (use-package isearch
@@ -62,7 +59,6 @@
   (setq isearch-case-fold-search nil))
 
 (use-package replace
-  :defer t
   :custom (list-matching-lines-jump-to-current-line nil)
   :bind ( :map occur-mode-map
 	  ("RET" . occur-mode-goto-occurrence-other-window)
@@ -72,7 +68,6 @@
 ;;; Code:
 (use-package grep
   :ensure nil
-  :defer t
   :commands (grep lgrep rgrep)
   :custom
   (grep-save-buffers 'ask)
@@ -88,7 +83,6 @@
 
 (use-package compile
   :after (grep)
-  :defer t
   :bind ( :map grep-mode-map
 	  ("M-e" . compilation-next-file)
 	  ("M-a" . compilation-previous-file)))
@@ -96,7 +90,6 @@
 (use-package proced
   :ensure nil
   :if (eq system-type 'gnu/linux)
-  :defer t
   :commands (proced)
   :custom
   (proced-auto-update-flag t)
@@ -112,8 +105,7 @@
   (unless (server-running-p)
     (server-start)))
 
-(use-package tmr
-  :defer t)
+(use-package tmr)
 
 ;; ===which-key===
 (use-package which-key

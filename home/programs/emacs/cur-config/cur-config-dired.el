@@ -1,13 +1,11 @@
 ;; ===Dired Icons===
 (use-package nerd-icons-dired
   :after (dired)
-  :defer t
   :hook (dired-mode . nerd-icons-dired-mode))
 
 ;; ===Dired===
 (use-package dired
   :ensure nil
-  :defer t
   :hook
   (dired-mode . dired-hide-details-mode) ; don't show file details by default
   (dired-mode . hl-line-mode) ; Highlight the line the cursor is on
@@ -133,19 +131,16 @@
 
 (use-package cur-dired
   :after (dired)
-  :defer t
   :bind ( :map dired-mode-map
 	  ("l" . cur-dired-maybe-insert-subdir-or-find-file)))
 
 (use-package cur-wallpaper
   :after (dired)
-  :defer t
   :bind ( :map dired-mode-map
 	  ("W" . cur-wallpaper-set-wallpaper-dired)))
 
 (use-package cur-wallpaper
   :after (image-dired)
-  :defer t
   :bind ( :map image-dired-thumbnail-mode-map
 	  ("W" . cur-wallpaper-set-wallpaper)))
 

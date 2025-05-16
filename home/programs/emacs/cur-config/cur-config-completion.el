@@ -21,7 +21,6 @@
   (orderless-matching-styles '(orderless-prefixes orderless-regexp)))
 
 (use-package vertico
-  :defer t
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
   :bind ( :map vertico-map
 	  ("M-e" . vertico-next-group)
@@ -35,7 +34,6 @@
   (marginalia-mode +1))
 
 (use-package consult
-  :defer t
   :bind (("C-x b"               . consult-buffer)
          ("M-g i"               . consult-imenu)
          ("M-y"                 . consult-yank-pop)
@@ -70,25 +68,21 @@
 
 (use-package consult
   :after project
-  :defer t
   :bind ( :map project-prefix-map
 	  ("b" . consult-project-buffer)))
 
 (use-package consult
   :if (executable-find "rg")
-  :defer t
   :bind ( :map search-map
 	  ("i" . consult-ripgrep)))
 
 (use-package consult
   :unless (executable-find "rg")
-  :defer t
   :bind ( :map search-map
 	  ("i" . consult-grep)))
 
 (use-package consult
   :after (org)
-  :defer t
   :bind ( :map org-mode-map
           ([remap consult-imenu] . consult-org-heading)))
 
@@ -99,7 +93,6 @@
   (cur-override-theme-load-function #'cur-consult-theme))
 
 (use-package consult-dir
-  :defer t
   :bind ( :map global-map
 	  ("C-x C-d" . consult-dir)
 	  :map minibuffer-local-completion-map
@@ -108,19 +101,16 @@
 
 (use-package consult-dir
   :after vertico
-  :defer t
   :bind ( :map vertico-map
 	  ("C-x C-d" . consult-dir)
 	  ("C-x C-j" . consult-dir-jump-file)))
 
 (use-package consult-dir
   :after meow
-  :defer t
   :bind ( :map cur/sub-leader-keymap
 	  ("C-d" . consult-dir)))
 
 (use-package emabark
-  :defer t
   :bind ( :map global-map
           ("C-." . embark-act)
           :map minibuffer-local-map
@@ -130,7 +120,6 @@
           ("\"" . embark-dwim)))
 
 (use-package corfu
-  :defer t
   :bind ( :map corfu-map
 	  ("TAB"       . corfu-next)
 	  ("<tab>"     . corfu-next)
@@ -150,7 +139,6 @@
 
 (use-package corfu-popupinfo
   :after (corfu)
-  :defer t
   :custom
   (corfu-popupinfo-delay '(1.5 . 0.5))
   :hook
@@ -158,7 +146,6 @@
 
 (use-package corfu
   :after (prog-mode)
-  :defer t
   :hook (prog-mode . corfu-mode))
 
 (provide 'cur-config-completion)

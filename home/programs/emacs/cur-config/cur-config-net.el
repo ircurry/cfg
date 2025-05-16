@@ -1,22 +1,18 @@
 ;; ===Gemini-Mode===
-(use-package gemini-mode
-  :defer t)
+(use-package gemini-mode)
 
 ;; ===Org Gemini Exporter==
 (use-package ox-gemini
   :after org
-  :defer t
   :commands (org-gemini-export-to-file org-gemini-export-to-buffer))
 
 ;; ===Elpher Gemini/Gopher Client===
 (use-package elpher
-  :defer t
   :custom
   (elpher-default-url-type "gemini"))
 
 ;;; cur-config-elfeed.el --- Links for elfeed -*- lexical-binding: t -*-
 (use-package elfeed
-  :defer t
   :commands (elfeed)
   :bind ( :map elfeed-show-mode-map
 	  ("w" . elfeed-show-visit)
@@ -31,13 +27,11 @@
 
 (use-package consult
   :after elfeed
-  :defer t
   :bind ( :map elfeed-show-mode-map
 	  ([remap imenu] . consult-imenu)))
 
 (use-package elfeed
   :if (file-readable-p (locate-user-emacs-file "cur-elfeed-links"))
-  :defer t
   :config
   (setopt elfeed-feeds (car (read-from-string (with-temp-buffer
 						(insert-file-contents (locate-user-emacs-file "cur-elfeed-links"))
@@ -70,19 +64,16 @@
 (provide 'cur-config-elfeed)
 
 (use-package cur-yt
-  :defer t
   :commands (cur-yt-play-video))
 
 (use-package cur-yt
   :after (elfeed elfeed-tube)
-  :defer t
   :bind ( :map elfeed-show-mode-map
 	  ("V" . cur-yt-play-video)
 	  :map elfeed-search-mode-map
 	  ("V" . cur-yt-play-video)))
 
 (use-package elcord
-  :defer t
   :custom
   (elcord-boring-buffers-regexp-list '("^ " "\\\\*Messages\\\\*"
 				       "\\\\*Help\\\\*" "\\\\*elpher\\\\*"

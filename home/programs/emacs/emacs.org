@@ -131,7 +131,11 @@ Requiring ~use-package~ as that is what I use for almost all of my configuration
 #+begin_src emacs-lisp
 ;; ===use-package Initialization===
 (require 'use-package)
-(setq use-package-compute-statistics t)
+;; (setq use-package-compute-statistics t) ; Uncomments to track package load times
+(setopt use-package-always-pin    nil
+	use-package-always-defer  t
+	use-package-always-demand nil
+	use-package-always-ensure nil)
 #+end_src
 
 ** =init.el= section on configuration modules.
@@ -232,7 +236,6 @@ The built in bookmark feature of Emacs is great and one of the pillars of making
 #+begin_src emacs-lisp
 ;; ===Bookmarks===
 (use-package bookmark
-  :defer t
   :commands (bookmark-set
              bookmark-set-no-overwrite
              bookmark-jump
@@ -242,7 +245,6 @@ The built in bookmark feature of Emacs is great and one of the pillars of making
 
 (use-package hl-line
   :after (bookmark)
-  :defer t
   :hook (bookmark-bmenu-mode . hl-line-mode))
 #+end_src
 
@@ -255,7 +257,6 @@ This sets emacs to save the most recently visited files. I enable this primarily
 
 #+begin_src emacs-lisp
 (use-package recentf
-  :defer t
   :hook (emacs-startup . recentf-mode))
 #+end_src
 
@@ -294,7 +295,6 @@ This sets emacs to save the most recently visited files. I enable this primarily
 
 #+begin_src emacs-lisp
 (use-package replace
-  :defer t
   :custom (list-matching-lines-jump-to-current-line nil)
   :bind ( :map occur-mode-map
 	  ("RET" . occur-mode-goto-occurrence-other-window)
@@ -313,7 +313,6 @@ Emacs provides nice wrappers around standard cli commands such as grep. You can 
 ;;; Code:
 (use-package grep
   :ensure nil
-  :defer t
   :commands (grep lgrep rgrep)
   :custom
   (grep-save-buffers 'ask)
@@ -329,7 +328,6 @@ Emacs provides nice wrappers around standard cli commands such as grep. You can 
 
 (use-package compile
   :after (grep)
-  :defer t
   :bind ( :map grep-mode-map
 	  ("M-e" . compilation-next-file)
 	  ("M-a" . compilation-previous-file)))
@@ -346,7 +344,6 @@ Emacs provides nice wrappers around standard cli commands such as grep. You can 
 (use-package proced
   :ensure nil
   :if (eq system-type 'gnu/linux)
-  :defer t
   :commands (proced)
   :custom
   (proced-auto-update-flag t)
@@ -386,8 +383,7 @@ tmr
 #+end_src
 
 #+begin_src emacs-lisp
-(use-package tmr
-  :defer t)
+(use-package tmr)
 #+end_src
 
 *** =cur-config-essentials.el= section on ~which-key~ and showing key bindings
@@ -440,7 +436,6 @@ This module is the base of my key bindings. I use [[https:github.com/meow-edit/m
 #+begin_src emacs-lisp
 ;; ===Repeat Mode===
 (use-package repeat
-  :defer t
   :hook (after-init . repeat-mode))
 #+end_src
 
@@ -457,7 +452,6 @@ avy
 
 #+begin_src emacs-lisp
 (use-package avy
-  :defer t
   :custom
   (avy-timeout-seconds 1.0)
   :bind ( :map goto-map
@@ -768,7 +762,6 @@ meow
 ;; ===Meow Extensions===
 (use-package cur-meow
   :after (meow)
-  :defer t
   :commands (cur-meow-mini-search)
   :bind ( :map cur/sub-leader-keymap
           ("C-n" . cur-meow-toggle-temp-normal-motion))
@@ -829,7 +822,6 @@ nerd-icons-dired
 ;; ===Dired Icons===
 (use-package nerd-icons-dired
   :after (dired)
-  :defer t
   :hook (dired-mode . nerd-icons-dired-mode))
 #+end_src
 
@@ -846,7 +838,6 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
 ;; ===Dired===
 (use-package dired
   :ensure nil
-  :defer t
   :hook
   (dired-mode . dired-hide-details-mode) ; don't show file details by default
   (dired-mode . hl-line-mode) ; Highlight the line the cursor is on
@@ -972,7 +963,6 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
 
 (use-package cur-dired
   :after (dired)
-  :defer t
   :bind ( :map dired-mode-map
 	  ("l" . cur-dired-maybe-insert-subdir-or-find-file)))
 #+end_src
@@ -985,13 +975,11 @@ The keybindings are a hybrid of my normal state and the default dired keybinding
 #+begin_src emacs-lisp
 (use-package cur-wallpaper
   :after (dired)
-  :defer t
   :bind ( :map dired-mode-map
 	  ("W" . cur-wallpaper-set-wallpaper-dired)))
 
 (use-package cur-wallpaper
   :after (image-dired)
-  :defer t
   :bind ( :map image-dired-thumbnail-mode-map
 	  ("W" . cur-wallpaper-set-wallpaper)))
 #+end_src
@@ -1100,7 +1088,6 @@ I have several custom themes in a directory weirdly named themes. These are the 
 (use-package cur-theme
   :bind ( :map cur/toggle-map
           ("C-t" . cur-override-theme-load-theme))
-  :defer t
   :custom
   (cur-override-theme-overrides
    '((catppuccin (company-preview :foreground (catppuccin-color 'overlay0)
@@ -1182,8 +1169,7 @@ doom-themes
 
 #+begin_src emacs-lisp
 ;; ===Doom Emacs Themes===
-(use-package doom-themes
-  :defer t)
+(use-package doom-themes)
 #+end_src
 
 *** =cur-config-faces.el= section on ~autothemer~
@@ -1199,8 +1185,7 @@ autothemer
 
 #+begin_src emacs-lisp
 ;; ===Autothemer===
-(use-package autothemer
-  :defer t)
+(use-package autothemer)
 #+end_src
 
 *** =cur-config-faces.el= section on catppuccin theme
@@ -1217,8 +1202,7 @@ catppuccin-theme
 #+begin_src emacs-lisp
 ;; ===Catppuccin Theme===
 (use-package catppuccin-theme
-  :after (autothemer cur-theme)
-  :defer t)
+  :after (autothemer cur-theme))
 #+end_src
 
 *** =cur-config-faces.el= section on setting the default theme
@@ -1243,8 +1227,7 @@ ef-themes
 
 #+begin_src emacs-lisp
 ;; ===Ef-Themes===
-(use-package ef-themes
-  :defer t)
+(use-package ef-themes)
 #+end_src
 
 *** =cur-config-faces.el= section on ~nerd-icons-ibuffer~
@@ -1261,7 +1244,6 @@ nerd-icons-ibuffer
 #+begin_src emacs-lisp
 ;; ===Ibuffer Icons===
 (use-package nerd-icons-ibuffer
-  :defer t
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 #+end_src
 
@@ -1315,8 +1297,7 @@ page-break-lines
 #+end_src
 
 #+begin_src emacs-lisp
-(use-package page-break-lines
-  :defer t)
+(use-package page-break-lines)
 #+end_src
 
 *** =cur-config-faces.el= section on ~dashboard~ and startup overview
@@ -1451,7 +1432,6 @@ vertico
 
 #+begin_src emacs-lisp
 (use-package vertico
-  :defer t
   :hook (rfn-eshadow-update-overlay . vertico-directory-tidy)
   :bind ( :map vertico-map
 	  ("M-e" . vertico-next-group)
@@ -1487,7 +1467,6 @@ consult
 
 #+begin_src emacs-lisp
 (use-package consult
-  :defer t
   :bind (("C-x b"               . consult-buffer)
          ("M-g i"               . consult-imenu)
          ("M-y"                 . consult-yank-pop)
@@ -1522,25 +1501,21 @@ consult
 
 (use-package consult
   :after project
-  :defer t
   :bind ( :map project-prefix-map
 	  ("b" . consult-project-buffer)))
 
 (use-package consult
   :if (executable-find "rg")
-  :defer t
   :bind ( :map search-map
 	  ("i" . consult-ripgrep)))
 
 (use-package consult
   :unless (executable-find "rg")
-  :defer t
   :bind ( :map search-map
 	  ("i" . consult-grep)))
 
 (use-package consult
   :after (org)
-  :defer t
   :bind ( :map org-mode-map
           ([remap consult-imenu] . consult-org-heading)))
 
@@ -1561,7 +1536,6 @@ consult-dir
 
 #+begin_src emacs-lisp
 (use-package consult-dir
-  :defer t
   :bind ( :map global-map
 	  ("C-x C-d" . consult-dir)
 	  :map minibuffer-local-completion-map
@@ -1570,14 +1544,12 @@ consult-dir
 
 (use-package consult-dir
   :after vertico
-  :defer t
   :bind ( :map vertico-map
 	  ("C-x C-d" . consult-dir)
 	  ("C-x C-j" . consult-dir-jump-file)))
 
 (use-package consult-dir
   :after meow
-  :defer t
   :bind ( :map cur/sub-leader-keymap
 	  ("C-d" . consult-dir)))
 #+end_src
@@ -1594,7 +1566,6 @@ embark-consult
 
 #+begin_src emacs-lisp
 (use-package emabark
-  :defer t
   :bind ( :map global-map
           ("C-." . embark-act)
           :map minibuffer-local-map
@@ -1615,7 +1586,6 @@ corfu
 
 #+begin_src emacs-lisp
 (use-package corfu
-  :defer t
   :bind ( :map corfu-map
 	  ("TAB"       . corfu-next)
 	  ("<tab>"     . corfu-next)
@@ -1635,7 +1605,6 @@ corfu
 
 (use-package corfu-popupinfo
   :after (corfu)
-  :defer t
   :custom
   (corfu-popupinfo-delay '(1.5 . 0.5))
   :hook
@@ -1643,7 +1612,6 @@ corfu
 
 (use-package corfu
   :after (prog-mode)
-  :defer t
   :hook (prog-mode . corfu-mode))
 #+end_src
 
@@ -1750,7 +1718,6 @@ ace-window
 #+begin_src emacs-lisp
 ;; ===Ace-Window Configuration===
 (use-package ace-window
-  :defer t
   :custom
   (aw-keys '(?n ?h ?j ?k ?l ?i ?u ?y ?r ?e))
   (aw-dispatch-always t)
@@ -1774,7 +1741,6 @@ ace-window
 ;; ===Ace-Window Meow Bindings===
 (use-package ace-window
   :after (meow)
-  :defer t
   :commands (ace-window)
   :init
   (meow-leader-define-key
@@ -1824,7 +1790,6 @@ popper
 ;; ===Popper Fallback===
 (use-package popper
   :if (not (locate-library "cur-popper.el"))
-  :defer t
   :config
   (setopt popper-display-function #'display-buffer-below-selected)
   (progn
@@ -1834,7 +1799,6 @@ popper
 ;; ===Popper Exensions===
 (use-package cur-popper
   :after (popper)
-  :defer t
   :autoload (cur-popper-display-buffer-dwim cur-popper-fit-window-height)
   :init
   (setopt popper-display-function #'cur-popper-display-buffer-dwim)
@@ -1848,7 +1812,6 @@ popper
 ;; ===Popper Meow Bindings===
 (use-package popper
   :after (meow)
-  :defer t
   :commands (popper-toggle popper-cycle)
   :init
   (meow-leader-define-key
@@ -1864,7 +1827,6 @@ popper
 #+begin_src emacs-lisp
 (use-package window
   :after repeat
-  :defer t
   :preface
   (defvar cur/scroll-up-repeat-map
     (let ((map (make-sparse-keymap)))
@@ -1967,7 +1929,6 @@ Lsp-ui provides some ui enhancements and extra features to lsp. Probably the bes
 (use-package lsp-ui
   :disabled t
   :after (lsp-mode)
-  :defer t
   :custom
   (lsp-ui-doc-enable nil "lsp-ui doc disabled by default")
   (lsp-ui-doc-show-with-cursor t "lsp-ui doc follows cursor")
@@ -1996,13 +1957,11 @@ Lsp-ui provides some ui enhancements and extra features to lsp. Probably the bes
 #+begin_src emacs-lisp
 (use-package eglot
   :ensure nil
-  :defer t
   :bind ( :map eglot-mode-map
 	  ("C-c C-a" . eglot-code-actions)))
 
 (use-package eldoc
   :after (eglot)
-  :defer t
   :bind ( :map eglot-mode-map
 	  ("C-c C-d" . eldoc-doc-buffer)))
 #+end_src
@@ -2014,7 +1973,6 @@ Lsp-ui provides some ui enhancements and extra features to lsp. Probably the bes
 
 #+begin_src emacs-lisp
 (use-package eldoc
-  :defer t
   :hook (prog-mode . eldoc-mode))
 #+end_src
 
@@ -2033,7 +1991,6 @@ company
 ;; ===Company Mode===
 (use-package company
   :disabled t
-  :defer t
   :hook
   (prog-mode . company-mode)
   :bind ( :map company-active-map
@@ -2048,7 +2005,6 @@ company
 (use-package company
   :disabled t
   :after (lsp-mode)
-  :defer t
   :hook (lsp-mode . company-mode))
 #+end_src
 
@@ -2066,10 +2022,14 @@ flycheck
 #+begin_src emacs-lisp
 ;; ===Flycheck===
 (use-package flycheck
-  :defer t
+  :after (prog-mode)
   :hook
-  (prog-mode . flycheck-mode)
-  (lsp-mode  . flycheck-mode))
+  (prog-mode . flycheck-mode))
+
+(use-package flycheck
+  :after (lsp-mode)
+  :hook
+  (lsp-mode . flycheck-mode))
 #+end_src
 
 *** TODO =cur-config-ide.el= section on ~flymake~ and in-buffer error messages
@@ -2119,7 +2079,6 @@ magit
 
 #+begin_src emacs-lisp
 (use-package project
-  :defer t
   :bind ( :map project-prefix-map
           ("d"   . project-dired)
           ("D"   . project-find-dir)
@@ -2142,8 +2101,7 @@ rg
 #+end_src
 
 #+begin_src emacs-lisp
-(use-package rg
-  :defer t)
+(use-package rg)
 #+end_src
 
 *** =cur-config-ide.el= section on ~rainbow-delimiters~
@@ -2160,7 +2118,6 @@ rainbow-delimiters
 #+begin_src emacs-lisp
 ;; ===rainbow-delimiters===
 (use-package rainbow-delimiters
-  :defer t
   :commands (rainbow-delimiters-mode)
   :hook (prog-mode . rainbow-delimiters-mode))
 #+end_src
@@ -2177,7 +2134,6 @@ paredit
 #+begin_src emacs-lisp
 ;; ===Paredit===
 (use-package paredit
-  :defer t
   :hook ((emacs-lisp-mode lisp-interaction-mode scheme-mode) . paredit-mode))
 #+end_src
 
@@ -2218,21 +2174,18 @@ I also have lsp-java set up for better integrating ~lsp-mode~ into ~java-ts-mode
 #+begin_src emacs-lisp
 ;; ===Java Tree-Sitter Mode===
 (use-package java-ts-mode
-  :defer t
   :mode "\\.java\\'"
   :custom (java-ts-mode-indent-offset 8))
 
 (use-package eglot
   :ensure nil
   :after (java-ts-mode)
-  :defer t
   :hook (java-ts-mode . eglot-ensure))
 
 ;; ===lsp-java===
 (use-package lsp-java
   :disabled t
   :after (java-ts-mode lsp-mode cc-mode envrc)
-  :defer t
   :hook
   (envrc-mode . (lambda ()
                   (when (equal major-mode 'java-ts-mode)
@@ -2260,8 +2213,7 @@ just-mode
 #+end_src
 
 #+begin_src emacs-lisp
-(use-package just-mode
-  :defer t)
+(use-package just-mode)
 #+end_src
 
 *** =cur-config-ide.el= section on yaml files
@@ -2275,7 +2227,6 @@ yaml-mode
 #+begin_src emacs-lisp
 ;; ===YAML===
 (use-package yaml-mode
-  :defer t
   :commands (yaml-mode))
 #+end_src
 
@@ -2293,18 +2244,15 @@ nix-ts-mode
 
 #+begin_src emacs-lisp
 ;; ===nix-mode===
-(use-package nix-mode
-  :defer t)
+(use-package nix-mode)
 
 (use-package eglot
   :ensure nil
-  :defer t
   :after (nix-mode)
   :hook (nix-mode . eglot-ensure))
 
 (use-package lsp-mode
   :disabled t
-  :defer t
   :after (nix-mode)
   :hook
   (nix-mode . lsp-deferred) ;; So that envrc mode will work
@@ -2324,19 +2272,16 @@ rustic
 
 #+begin_src emacs-lisp
 ;; ===Rust-Mode===
-(use-package rustic
-  :defer t)
+(use-package rustic)
 
 (use-package eglot
   :ensure nil
   :after (rustic)
-  :defer t
   :hook (rustic-mode . eglot-ensure))
 
 (use-package lsp-mode
   :disabled t
   :after (rustic)
-  :defer t
   :hook (rustic-mode . lsp-deferred))
 #+end_src
 
@@ -2352,19 +2297,16 @@ company-ghci
 
 #+begin_src emacs-lisp
 ;; ===Haskell-Mode===
-(use-package haskell-mode
-  :defer t)
+(use-package haskell-mode)
 
 (use-package eglot
   :ensure nil
   :after (haskell-mode)
-  :defer t
   :hook (haskell-mode . eglot-ensure))
 
 (use-package lsp-mode
   :disabled t
   :after (haskell-mode)
-  :defer t
   :hook (haskell-mode . lsp-deferred))
 
 ;; ===LSP-Haskell===
@@ -2396,19 +2338,16 @@ merlin-company
 
 #+begin_src emacs-lisp
 ;; ===Tuareg===
-(use-package tuareg
-  :defer t)
+(use-package tuareg)
 
 ;; ===Utop===
 (use-package utop
-  :defer t
   :commands (utop utop-mode)
   :config
   (advice-add 'utop :around 'inheritenv-apply))
 
 (use-package merlin
   :after (tuareg)
-  :defer t
   :hook (tuareg-mode . merlin-mode))
 
 (use-package merlin-company
@@ -2431,7 +2370,6 @@ I use tree-sitter for C, which unfortunately is not currently integrated into th
 ;; ===C Tree-Sitter Mode===
 (use-package c-ts-mode
   :after (cc-mode)
-  :defer t
   :mode
   ("\\.c\\'" . c-ts-mode)
   ("\\.h\\'" . c-ts-mode)
@@ -2445,13 +2383,11 @@ I use tree-sitter for C, which unfortunately is not currently integrated into th
 (use-package eglot
   :ensure nil
   :after (c-ts-mode)
-  :defer t
   :hook (c-ts-mode . eglot-ensure))
 
 (use-package lsp-mode
   :disabled t
   :after (c-ts-mode)
-  :defer t
   :hook (c-ts-mode . lsp-deferred))
 
 ;; ===CCLS Mode===
@@ -2472,19 +2408,16 @@ zig-mode
 
 #+begin_src emacs-lisp
 ;; ===Zig Mode===
-(use-package zig-mode
-  :defer t)
+(use-package zig-mode)
 
 (use-package eglot
   :ensure nil
   :after (zig-mode)
-  :defer t
   :hook (zig-mode . eglot-ensure))
 
 (use-package lsp-mode
   :disabled t
   :after (zig-mode)
-  :defer t
   :hook (zig-mode . lsp-deferred))
 #+end_src
 
@@ -2496,7 +2429,6 @@ zig-mode
 #+begin_src emacs-lisp
 ;; ===Go Tree-Sitter Mode===
 (use-package go-ts-mode
-  :defer t
   :mode
   ("\\.go\\'" . go-ts-mode)
   ("go\\.mod\\'" . go-mod-ts-mode)
@@ -2508,13 +2440,11 @@ zig-mode
 (use-package eglot
   :ensure nil
   :after (go-ts-mode)
-  :defer t
   :hook (go-ts-mode . eglot-ensure))
 
 (use-package lsp-mode
   :disabled t
   :after (go-ts-mode)
-  :defer t
   :hook (go-ts-mode . lsp-deferred))
 #+end_src
 
@@ -2538,7 +2468,6 @@ zig-mode
 #+begin_src emacs-lisp
 (use-package pcomplete
   :ensure nil
-  :defer t
   :custom (pcomplete-termination-string ""))
 #+end_src
 
@@ -2556,7 +2485,6 @@ vterm
 #+begin_src emacs-lisp
 ;; ===Vterm===
 (use-package vterm
-  :defer t
   :bind ( :map cur/sub-leader-keymap
           ("C-S-t" . vterm))
   :custom
@@ -2567,7 +2495,6 @@ vterm
 
 (use-package cur-vterm
   :after (vterm)
-  :defer t
   :bind ( :map vterm-mode-map
           ("C-c C-RET"      . cur-vterm-enter-password)
           ("C-c C-<return>" . cur-vterm-enter-password)
@@ -2589,7 +2516,6 @@ eat
 #+begin_src emacs-lisp
 ;; ===Eat===
 (use-package eat
-  :defer t
   :hook (eat-exec . (lambda (&rest _) (eat-line-mode)))
   :bind ( :map eat-mode-map
 	  ("C-c C-RET" . eat-send-password)
@@ -2600,7 +2526,6 @@ eat
 
 (use-package eat
   :after meow
-  :defer t
   :hook
   (eat--char-mode . (lambda (&rest _)
 		      (if eat--char-mode
@@ -2626,7 +2551,6 @@ eat
 
 (use-package corfu
   :after (eat)
-  :defer t
   :hook (eat-mode . (lambda (&rest _)
 		      (setq-local corfu-auto nil)
 		      (setq-local corfu-quit-at-boundary nil)
@@ -2647,13 +2571,11 @@ eshell-syntax-highlighting
 #+begin_src emacs-lisp
 ;; ===Eshell===
 (use-package eshell
-  :defer t
   :bind ( :map cur/sub-leader-keymap
           ("C-e" . eshell)))
 
 (use-package corfu
   :after (eshell)
-  :defer t
   :hook
   (eshell-mode . (lambda (&rest _)
 		   (setq-local corfu-auto nil)
@@ -2684,7 +2606,6 @@ mistty
 #+begin_src emacs-lisp
 ;; ===MisTTY===
 (use-package mistty
-  :defer t
   :bind ( :map project-prefix-map
 	  ("t" . mistty-in-project)
 	  :map cur/sub-leader-keymap
@@ -2693,7 +2614,6 @@ mistty
 
 (use-package cur-mistty
   :after (mistty)
-  :defer t
   :bind ( :map mistty-mode-map
 	  ("C-c C-RET" . cur-mistty-send-password)
 	  ("C-c C-<return>" . cur-mistty-send-password)))
@@ -2722,7 +2642,6 @@ org-bullets
 ;; ===Org-Mode===
 (use-package org
   :ensure nil
-  :defer t
   :hook (org-mode . cur/org-mode-setup)
   :bind ( :map org-mode-map
           ("C-S-h" . outline-promote)
@@ -2781,8 +2700,7 @@ org-bullets
 #+begin_src emacs-lisp
 ;; ===Org Babel===
 (use-package ob
-  :after org
-  :defer t)
+  :after org)
 ;; TODO: fix this so I can still auto tangle on saving
 ;; :init
 ;; (defun cur/org-babel-tangle-config ()
@@ -2824,18 +2742,15 @@ elpher
 
 #+begin_src emacs-lisp
 ;; ===Gemini-Mode===
-(use-package gemini-mode
-  :defer t)
+(use-package gemini-mode)
 
 ;; ===Org Gemini Exporter==
 (use-package ox-gemini
   :after org
-  :defer t
   :commands (org-gemini-export-to-file org-gemini-export-to-buffer))
 
 ;; ===Elpher Gemini/Gopher Client===
 (use-package elpher
-  :defer t
   :custom
   (elpher-default-url-type "gemini"))
 #+end_src
@@ -2852,7 +2767,6 @@ elfeed
 #+begin_src emacs-lisp
 ;;; cur-config-elfeed.el --- Links for elfeed -*- lexical-binding: t -*-
 (use-package elfeed
-  :defer t
   :commands (elfeed)
   :bind ( :map elfeed-show-mode-map
 	  ("w" . elfeed-show-visit)
@@ -2867,13 +2781,11 @@ elfeed
 
 (use-package consult
   :after elfeed
-  :defer t
   :bind ( :map elfeed-show-mode-map
 	  ([remap imenu] . consult-imenu)))
 
 (use-package elfeed
   :if (file-readable-p (locate-user-emacs-file "cur-elfeed-links"))
-  :defer t
   :config
   (setopt elfeed-feeds (car (read-from-string (with-temp-buffer
 						(insert-file-contents (locate-user-emacs-file "cur-elfeed-links"))
@@ -2925,12 +2837,10 @@ elfeed-tube-mpv
 
 #+begin_src emacs-lisp
 (use-package cur-yt
-  :defer t
   :commands (cur-yt-play-video))
 
 (use-package cur-yt
   :after (elfeed elfeed-tube)
-  :defer t
   :bind ( :map elfeed-show-mode-map
 	  ("V" . cur-yt-play-video)
 	  :map elfeed-search-mode-map
@@ -2948,7 +2858,6 @@ elcord
 
 #+begin_src emacs-lisp
 (use-package elcord
-  :defer t
   :custom
   (elcord-boring-buffers-regexp-list '("^ " "\\\\*Messages\\\\*"
 				       "\\\\*Help\\\\*" "\\\\*elpher\\\\*"

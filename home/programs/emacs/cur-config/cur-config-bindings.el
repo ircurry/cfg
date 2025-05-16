@@ -1,10 +1,8 @@
 ;; ===Repeat Mode===
 (use-package repeat
-  :defer t
   :hook (after-init . repeat-mode))
 
 (use-package avy
-  :defer t
   :custom
   (avy-timeout-seconds 1.0)
   :bind ( :map goto-map
@@ -282,7 +280,6 @@
 ;; ===Meow Extensions===
 (use-package cur-meow
   :after (meow)
-  :defer t
   :commands (cur-meow-mini-search)
   :bind ( :map cur/sub-leader-keymap
           ("C-n" . cur-meow-toggle-temp-normal-motion))
