@@ -277,6 +277,7 @@
 		   "default style for c programs is linux"))
 
 (use-package eglot
+  :ensure nil
   :after (c-ts-mode)
   :defer t
   :hook (c-ts-mode . eglot-ensure))
@@ -298,6 +299,7 @@
   :defer t)
 
 (use-package eglot
+  :ensure nil
   :after (zig-mode)
   :defer t
   :hook (zig-mode . eglot-ensure))
@@ -320,6 +322,7 @@
   (go-ts-mode . (lambda () (setq tab-width 4))))
 
 (use-package eglot
+  :ensure nil
   :after (go-ts-mode)
   :defer t
   :hook (go-ts-mode . eglot-ensure))
