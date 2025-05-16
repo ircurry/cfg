@@ -2096,13 +2096,20 @@ magit
   :defer t
   :bind ( :map cur/sub-leader-keymap
           ("C-v" . magit)
-          :map project-prefix-map
+	  :map project-prefix-map
           ("C-v" . nil)
           ("v" . magit-project-status)
           ("V" . project-vc-dir))
+  :hook (magit-mode . hl-line-mode)
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
-  (transient-default-level 5 "Allowing for commit signing"))
+  (transient-default-level 5 "Allowing for commit signing")
+  :config
+  (setq magit-bind-magit-project-status nil))
+
+(use-package project ; Demand project after magit so that magit-project-status works
+  :after (magit)
+  :demand t)
 #+end_src
 
 *** =cur-config-ide.el= section on ~project~ and project related functions
