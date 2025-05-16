@@ -56,7 +56,8 @@
 (use-package eglot
   :ensure nil
   :bind ( :map eglot-mode-map
-	  ("C-c C-a" . eglot-code-actions)))
+	  ("C-c C-a" . eglot-code-actions))
+  :custom (eglot-ignored-server-capabilities '(:inlayHintProvider)))
 
 (use-package eldoc
   :after (eglot)
