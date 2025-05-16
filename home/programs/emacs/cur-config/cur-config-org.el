@@ -1,6 +1,7 @@
 ;; ===Org-Mode===
 (use-package org
   :ensure nil
+  :defer 3
   :hook (org-mode . cur/org-mode-setup)
   :bind ( :map org-mode-map
           ("C-S-h" . outline-promote)
