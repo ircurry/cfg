@@ -8,6 +8,8 @@
 			      (right-fringe . 0)
 			      (tool-bar-lines . 0))
 	inhibit-startup-message t ; Starts on blank screen
+	inhibit-x-resources t     ; no Xresources
+	inhibit-startup-buffer-menu t
 	initial-buffer-choice t   ; Scratch as initial buffer
 	;; initial-major-mode 'fundamental-mode
 	initial-scratch-message ";; Scratch Buffer\n\n"
@@ -16,8 +18,10 @@
 	menu-bar-mode nil   ; Disable menu bar
 	tooltip-mode nil)   ; Disable tooltips
 
-(set-fringe-mode 10)           ; Set fringe size
-(setq frame-title-format "%b") ; Set window title to buffer name
+(setq frame-title-format "%b" ; Set window title to buffer name
+      frame-resize-pixelwise t)
+
+(set-fringe-mode 10) ; Set fringe size
 
 (provide 'early-init)
 ;;; early-init.el ends here
