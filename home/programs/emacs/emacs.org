@@ -1921,7 +1921,7 @@ This is just a minor mode that shows a small bar at a certain column position. I
 :ID:       b0b77539-5afd-4043-987e-557363d778bc
 :END:
 
-Lsp-mode is my chosen language server protocol support package. I chose this over eglot because of the richer features and (at the time that I started using lsp) more mature state. I will revisit elgot in the future but for now I am perfectly happy with lsp-mode.
+Lsp-mode is my chosen language server protocol support package. I chose this over eglot because of the richer features and (at the time that I started using lsp) more mature state. I will revisit eglot in the future but for now I am perfectly happy with lsp-mode.
 
 #+begin_src text :tangle ./packages.txt :padline no
 # lsp-mode
