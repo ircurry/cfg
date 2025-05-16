@@ -25,10 +25,43 @@ Obligatory Frieren Ascii art.
 This is my configuration for GNU Emacs. It is a [[https://protesilaos.com/codelog/2025-01-26-emacs-organise-init/][literate configuration]], meaning that the documentation (prose) and configuration (code) are part of one file, right next to each other. This makes it easier for future me and others to be able to know what each part of my configuration does. That said, it is still possible for the prose and the code to become out of sync so please be aware of that when reading (i.e. if there is a discrepancy between the code and the prose, go with the code). I have primarily based my configuration specifically, and my approach to Emacs generally, off of [[https://protesilaos.com/emacs/dotemacs][Proesilaos Stavrou's]]. I highly recommend reading through some of his configuration as it is one of the most well documented and well structured configurations for Emacs out there.
 
 The way my configuration works is that the code parts of this file get copied out (tangled) to their respective files, meaning that Emacs does not read from this file at all. The main benefit of doing this is speed, Emacs only has to worry about the code parts, not finding the code among the prose (its more complicated than this but thats the gist). My configuration is structured as follows:
-- =init.el= :: This is the file Emacs reads from after starting. Here I take care of the some the fundamental stuff like setting up package management, checking if the feature configuration macro (~use-package~) is installed, and loading my configuration modules.
+- =early-init.el= :: This is the file Emacs reads before anything is drawn to the screen and after the core Emacs files have been loaded.
+- =init.el= :: This is the file Emacs reads from after creating a graphical window. Here I take care of the some the fundamental stuff like setting up package management, checking if the feature configuration macro (~use-package~) is installed, and loading my configuration modules.
 - =cur-config= :: This is the directory I keep all my configuration modules in. Each "module" is really just an Emacs Lisp file that configures a part of Emacs. Although these are Emacs Lisp files and I /could/ write anything in here (it is a complete programming language), I try to keep extending the functionalities of Emacs out of these files. These files tend to only set variables (settings in Emacs) and change key bindings.
 - =cur-lisp= :: This directory contains modules that extend the functionality of Emacs or Emacs packages. A good example is my custom [[info:emacs#Mode Line][mode line]], which I find cleaner that the default.
 - =themes= :: This is the directory where I store themes to change the color scheme of Emacs. It needs a major overhaul and can effectively ignored.
+
+* Pre-Initialization of Emacs (=init.el=)
+:PROPERTIES:
+:header-args:emacs-lisp: :tangle ./early-init.el
+:ID:       2c915fb3-8bb4-454b-871a-9d1697822a25
+:END:
+
+#+begin_src emacs-lisp
+;;; early-init.el --- Pre-initialization Configuration -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
+(setq gc-cons-threshold most-positive-fixnum)
+(add-hook 'after-init-hook #'(lambda (&rest _) (setq gc-cons-threshold 16777216)))
+
+(setopt initial-frame-alist '((left-fringe . 0)
+			      (right-fringe . 0)
+			      (tool-bar-lines . 0))
+	inhibit-startup-message t ; Starts on blank screen
+	initial-buffer-choice t   ; Scratch as initial buffer
+	;; initial-major-mode 'fundamental-mode
+	initial-scratch-message ";; Scratch Buffer\n\n"
+	scroll-bar-mode nil ; Disable visible scrollbar
+	tool-bar-mode nil   ; Disable tool bar
+	menu-bar-mode nil   ; Disable menu bar
+	tooltip-mode nil)   ; Disable tooltips
+
+(set-fringe-mode 10)           ; Set fringe size
+(setq frame-title-format "%b") ; Set window title to buffer name
+
+(provide 'early-init)
+;;; early-init.el ends here
+#+end_src
 
 * Initialization of Emacs (=init.el=)
 :PROPERTIES:
@@ -60,22 +93,13 @@ These are some basic settings that I want Emacs to load up front. Most of them a
 
 #+begin_src emacs-lisp
 ;; ===Basic Settings===
-(setq frame-title-format "%b")      ; Set window title to buffer name
-(setq initial-scratch-message ";; Scratch Buffer\n\n")
-(setq initial-buffer-choice t)      ; Scratch as initial buffer
 (setq make-backup-files nil)        ; No more file~ everywhere
-(setq inhibit-startup-message t)    ; Starts on blank screen
 (setq scroll-conservatively 101)    ; Enable Line by line scrolling
 (setq scroll-margin 0)              ; Start scrolling when at the very top/bottom of window
 (setq recenter-positions '(top bottom middle)) ; recenter line on top, then bottom, then middle
 (setq use-dialog-box nil)           ; No yes-no-p for mouse clicks
 (setq use-short-answers t)          ; Use y-or-n-p for yes-no dialogue.
 (setq async-shell-command-buffer 'new-buffer) ; Create new buffer or each async-shell-command
-(scroll-bar-mode -1)                ; Disable visible scrollbar
-(tool-bar-mode -1)                  ; Disable tool bar
-(menu-bar-mode -1)                  ; Disable menu bar
-(tooltip-mode -1)                   ; Disable tooltips
-(set-fringe-mode 10)                ; No idea what this does
 #+end_src
 
 ** =init.el= section on enabling disabled functions

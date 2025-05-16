@@ -58,6 +58,7 @@ in
       ];
 
       home.file = {
+        ".emacs.d/early-init.el".source = ./early-init.el;
         ".emacs.d/init.el".source = ./init.el;
         ".emacs.d/cur-config".source = ./cur-config;
         ".emacs.d/cur-lisp".source = ./cur-lisp;
