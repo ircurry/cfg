@@ -100,7 +100,7 @@
 
 ;; ===Magit===
 (use-package magit
-  :defer t
+  :defer 2
   :bind ( :map cur/sub-leader-keymap
           ("C-v" . magit)
 	  :map project-prefix-map
