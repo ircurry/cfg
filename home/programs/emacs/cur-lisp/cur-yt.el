@@ -5,6 +5,7 @@
 ;;; Code:
 
 (require 'rx)
+(require 'cl-lib)
 
 (defgroup cur-yt ()
   "UI for working with YouTube videos in Emacs."
@@ -21,27 +22,31 @@
       eol)
   "Regexp used to get view key from a YouTube URL.")
 
-(defun cur-yt--get-view-key (url)
+(defun cur-yt-get-view-key (url)
   "Get view key from URL."
   (when (not (string-empty-p url))
     (save-match-data
       (string-match cur-yt--youtube-view-key-regexp url)
       (match-string-no-properties 1 url))))
 
+(defun cur-yt--format-key-as-yt-link (key)
+  "Format KEY as a YouTube link."
+  (format "https://www.youtube.com/watch?v=%s" key))
+
 (defun cur-yt--convert-to-yt-link (url)
   "Convert URL to a YouTube link."
-  (let ((key (cur-yt--get-view-key url)))
+  (let ((key (cur-yt-get-view-key url)))
     (when key
-	(format "https://www.youtube.com/watch?v=%s" key))))
+      (cur-yt--format-key-as-yt-link key))))
 
 (defun cur-yt--mpv-ytdl-format (height)
   "Return the `mpv' option to get the best video of HEIGHT."
   (pcase height
-      ("best" "--ytdl-format=bestvideo+bestaudio/best")
-      ("worst" "--ytdl-format=worstvideo+worstaudio/worst")
-      ((guard (string-match-p (rx (+ (any "0-9"))) height))
-       (format "--ytdl-format=bestvideo[height<=?%s]+bestaudio/best" height))
-      (_ (error "Cannot format option for mpv, '%s' is not a number" height))))
+    ("best" "--ytdl-format=bestvideo+bestaudio/best")
+    ("worst" "--ytdl-format=worstvideo+worstaudio/worst")
+    ((guard (string-match-p (rx (+ (any "0-9"))) height))
+     (format "--ytdl-format=bestvideo[height<=?%s]+bestaudio/best" height))
+    (_ (error "Cannot format option for mpv, '%s' is not a number" height))))
 
 ;;; Play Video
 
@@ -80,31 +85,114 @@ This function with error if it finds a missing program."
   :type '(boolean)
   :group 'cur-yt)
 
+(cl-defun cur-yt--get-resolution (&optional (prompt-p t))
+  "Interactively get the resolution for the YouTube video.
+The primary factor in determining whether or not to prompt is the variable
+`cur-yt-play-always-prompt-resolution'.
+Optional argument PROMPT-P determines whether to prompt, which is true by
+default."
+  (when (or cur-yt-play-always-prompt-resolution prompt-p)
+    (completing-read "Resolution: "
+		     '("worst" "144" "240" "360" "480" "720" "1080" "1440" "2160" "best")
+		     nil 'confirm nil t)))
+
+(defun cur-yt-key-from-kill-ring ()
+  "Search for a YouTube view-key in the first element of the `kill-ring'."
+  (cur-yt-get-view-key (substring-no-properties (or (car kill-ring) ""))))
+
+(defcustom cur-yt-context-alist '((elfeed-search-mode . cur-yt-elfeed-search-key)
+				  (elfeed-show-mode . cur-yt-elfeed-show-key)
+				  (t . cur-yt-key-from-kill-ring))
+  "An alist of `major-mode' names to functions.
+The functions take no arguments and return the view-key or link of a YouTube
+video.  If there is no view-key or link in the current context the function
+should return nil.
+If no function is bound to the `major-mode', the function associated with t is
+consulted instead, should it exist."
+  :type '(alist :key-type symbol :value-type function)
+  :group 'cur-yt)
+
+(defun cur-yt--get-default-key ()
+  "Get the default view key based on the current context.
+The current context is gotten through the function associated with the current
+`major-mode' in `cur-yt-context-alist'."
+  (if-let* ((fn (cdr (assoc major-mode cur-yt-context-alist))))
+      (funcall fn)
+    (if-let* ((default-fn (cdr (assoc t cur-yt-context-alist))))
+	(funcall default-fn)
+      "")))
+
 ;;;###autoload
-(defun cur-yt-play-video (url &optional resolution)
-  "Play video URL at RESOLUTION."
+(defun cur-yt-play-video (url &optional resolution no-video)
+  "Play video URL at RESOLUTION.
+If NO-VIDEO is non-nil novideo will be played."
   (interactive
-   (let* ((default-key (cur-yt--get-view-key (substring-no-properties (or (car kill-ring) ""))))
+   (let* ((default-key (cur-yt--get-default-key))
 	  (prompt (if default-key
 		      (format "YouTube URL (%s): " default-key)
 		    "YouTube URL: ")))
      (list (read-string prompt nil
 			cur-yt-play-url-history
-			(cur-yt--convert-to-yt-link (substring-no-properties (or (car kill-ring) ""))))
-	   (when (or cur-yt-play-always-prompt-resolution current-prefix-arg)
-	     (completing-read "Resolution: "
-			      '("worst" "144" "240" "360" "480" "720" "1080" "1440" "2160" "best")
-			      nil 'confirm nil t)))))
+			(cur-yt--format-key-as-yt-link default-key))
+	   (cur-yt--get-resolution current-prefix-arg)
+	   nil)))
   (cur-yt--play-check-exetutables)
   (let ((res (or resolution cur-yt-play-default-resolution))
 	(yt-url (cur-yt--convert-to-yt-link url)))
     (unless yt-url
       (user-error "URL did not contain a YouTube view key"))
-    (start-process "my-process" (get-buffer-create "sugma")
-		   "mpv" (cur-yt--mpv-ytdl-format res) yt-url)
+    (let ((args (list "cur-yt-play-video"
+		      (get-buffer-create "*cur-yt-process-buffer*")
+		      "mpv"
+		      (cur-yt--mpv-ytdl-format res)
+		      yt-url)))
+      (when no-video (setq args (append args '("--no-video"))))
+      (apply #'start-process args))
     (message "Playing %s at %s" yt-url (pcase res
 					 ((or "best" "worst") (concat res " resolution"))
 					 (_ (concat res "p"))))))
+
+;;; YeeTube integration
+
+;;;###autoload
+(defun cur-yt-yeetube-play (url &optional _)
+  "This is a function intended to be used as the value of `yeetube-play-function'.
+URL is the url link to the YouTube video.  This function is more or less the
+same as `cur-yt-yeetube-play-resolution' but plays the default resolution
+instead of prompting for it."
+  (let ((no-video (if (boundp 'yeetube-mpv-disable-video)
+		      yeetube-mpv-disable-video
+		    nil)))
+    (cur-yt-play-video url nil no-video)))
+
+;;;###autoload
+(defun cur-yt-yeetube-play-resolution (url &optional _)
+  "This is a function intended to be used as the value of `yeetube-play-function'.
+URL is the url link to the YouTube video.  This function is more or less the
+same as `cur-yt-yeetube-play' but prompts for the resolution instead of using
+the default value."
+  (let ((no-video (if (boundp 'yeetube-mpv-disable-video)
+		      yeetube-mpv-disable-video
+		    nil)))
+    (cur-yt-play-video url (cur-yt--get-resolution) no-video)))
+
+;;; Elfeed integration
+
+;;;###autoload
+(defun cur-yt-elfeed-show-key ()
+  "Return the view key of the link in the current *elfeed-entry* buffer."
+  (when (fboundp 'elfeed-show-yank)
+    (let ((kill-ring kill-ring))
+      (elfeed-show-yank)
+      (cur-yt-key-from-kill-ring))))
+
+;;;###autoload
+(defun cur-yt-elfeed-search-key ()
+  "Return the view key of the link in the current *elfeed-search* buffer."
+  (when (fboundp 'elfeed-search-yank)
+    (let ((kill-ring kill-ring))
+      (elfeed-search-yank)
+      (cur-yt-key-from-kill-ring))))
 
 (provide 'cur-yt)
 ;;; cur-yt.el ends here

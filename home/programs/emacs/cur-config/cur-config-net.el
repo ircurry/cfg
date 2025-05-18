@@ -55,13 +55,25 @@
   :after (elfeed-tube elfeed)
   :demand t
   :bind ( :map elfeed-show-mode-map
-	  ("v"       . elfeed-tube-mpv)
+	  ("V"       . elfeed-tube-mpv)
 	  ("C-c C-f" . elfeed-tube-mpv-follow-mode)
 	  ("C-c C-w" . elfeed-tube-mpv-where)
 	  :map elfeed-search-mode-map
-	  ("v" . elfeed-tube-mpv)))
+	  ("V" . elfeed-tube-mpv)))
 
 (provide 'cur-config-elfeed)
+
+(use-package yeetube
+  :bind ( :map yeetube-mode-map
+	  ("s" . yeetube-search)
+	  ("v" . yeetube-play)))
+
+(use-package cur-yt
+  :after (yeetube)
+  :demand t
+  :custom (yeetube-play-function #'cur-yt-yeetube-play-resolution)
+  :config
+  (setf yeetube-invidious-instances '("youtube.com")))
 
 (use-package cur-yt
   :commands (cur-yt-play-video))
@@ -69,9 +81,9 @@
 (use-package cur-yt
   :after (elfeed elfeed-tube)
   :bind ( :map elfeed-show-mode-map
-	  ("V" . cur-yt-play-video)
+	  ("v" . cur-yt-play-video)
 	  :map elfeed-search-mode-map
-	  ("V" . cur-yt-play-video)))
+	  ("v" . cur-yt-play-video)))
 
 (use-package elcord
   :custom
