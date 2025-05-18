@@ -79,7 +79,7 @@
   :demand t
   :bind ( :map yeetube-mode-map
 	  ("v" . cur-yt-play-video))
-  :custom (yeetube-play-function #'cur-yt-yeetube-play))
+  :custom (yeetube-play-function #'cur-yt-yeetube-play-resolution))
 
 (use-package cur-yt
   :commands (cur-yt-play-video))
