@@ -70,6 +70,10 @@
   :config
   (setf yeetube-invidious-instances '("youtube.com")))
 
+(use-package hl-line-mode
+  :after (yeetube)
+  :hook (yeetube-mode . hl-line-mode))
+
 (use-package cur-yt
   :after (yeetube)
   :demand t
