@@ -65,15 +65,17 @@
 
 (use-package yeetube
   :bind ( :map yeetube-mode-map
-	  ("s" . yeetube-search)
-	  ("v" . yeetube-play)))
+	  ("s"   . yeetube-search)
+	  ("V" . yeetube-play))
+  :config
+  (setf yeetube-invidious-instances '("youtube.com")))
 
 (use-package cur-yt
   :after (yeetube)
   :demand t
-  :custom (yeetube-play-function #'cur-yt-yeetube-play-resolution)
-  :config
-  (setf yeetube-invidious-instances '("youtube.com")))
+  :bind ( :map yeetube-mode-map
+	  ("v" . cur-yt-play-video))
+  :custom (yeetube-play-function #'cur-yt-yeetube-play))
 
 (use-package cur-yt
   :commands (cur-yt-play-video))

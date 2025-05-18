@@ -102,6 +102,7 @@ default."
 
 (defcustom cur-yt-context-alist '((elfeed-search-mode . cur-yt-elfeed-search-key)
 				  (elfeed-show-mode . cur-yt-elfeed-show-key)
+				  (yeetube-mode . cur-yt-yeetube-key)
 				  (t . cur-yt-key-from-kill-ring))
   "An alist of `major-mode' names to functions.
 The functions take no arguments and return the view-key or link of a YouTube
@@ -153,6 +154,15 @@ If NO-VIDEO is non-nil novideo will be played."
 					 (_ (concat res "p"))))))
 
 ;;; YeeTube integration
+
+;;;###autoload
+(defun cur-yt-yeetube-key ()
+  "Get the view-key of the YouTube video at pint in the current *yeetube* buffer."
+  (when (and (fboundp 'tabulated-list-get-id)
+	     (fboundp 'yeetube-get-url))
+    (save-excursion
+      (and (null (tabulated-list-get-id)) (end-of-line))
+      (cur-yt-get-view-key (yeetube-get-url (tabulated-list-get-id))))))
 
 ;;;###autoload
 (defun cur-yt-yeetube-play (url &optional _)
