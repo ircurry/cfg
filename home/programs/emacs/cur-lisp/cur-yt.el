@@ -190,19 +190,19 @@ the default value."
 
 ;;;###autoload
 (defun cur-yt-elfeed-show-key ()
-  "Return the view key of the link in the current *elfeed-entry* buffer."
-  (when (fboundp 'elfeed-show-yank)
-    (let ((kill-ring kill-ring))
-      (elfeed-show-yank)
-      (cur-yt-key-from-kill-ring))))
+  "Return the view key of the link in the current *elfeed-search* buffer."
+  (when (and (boundp 'elfeed-show-entry)
+	     (fboundp 'elfeed-entry-link))
+    (cur-yt-get-view-key (elfeed-entry-link elfeed-show-entry))))
 
 ;;;###autoload
 (defun cur-yt-elfeed-search-key ()
   "Return the view key of the link in the current *elfeed-search* buffer."
-  (when (fboundp 'elfeed-search-yank)
-    (let ((kill-ring kill-ring))
-      (elfeed-search-yank)
-      (cur-yt-key-from-kill-ring))))
+  (when (and (fboundp 'elfeed-search-selected)
+	     (fboundp 'elfeed-entry-link))
+    (if-let* ((entries (elfeed-search-selected))
+	      ((length= entries 1)))
+	(cur-yt-get-view-key (elfeed-entry-link (car entries))))))
 
 (provide 'cur-yt)
 ;;; cur-yt.el ends here
