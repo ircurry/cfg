@@ -33,7 +33,7 @@ The way my configuration works is that the code parts of this file get copied ou
 - =cur-lisp= :: This directory contains modules that extend the functionality of Emacs or Emacs packages. A good example is my custom [[info:emacs#Mode Line][mode line]], which I find cleaner that the default.
 - =themes= :: This is the directory where I store themes to change the color scheme of Emacs. It needs a major overhaul and can effectively ignored.
 
-* Pre-Initialization of Emacs (=init.el=)
+* Pre-Initialization of Emacs (=early-init.el=)
 :PROPERTIES:
 :header-args:emacs-lisp: :tangle ./early-init.el
 :ID:       2c915fb3-8bb4-454b-871a-9d1697822a25
