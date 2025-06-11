@@ -9,7 +9,7 @@ let
 in
 {
   config = lib.mkIf (cfg.name == "hyprland") {
-    services.xserver.desktopManager.gnome.enable = lib.mkForce false;
+    services.desktopManager.gnome.enable = lib.mkForce false;
     services.xserver.displayManager.lightdm.enable = lib.mkForce false;
     programs.hyprland = {
       enable = true;

@@ -159,7 +159,7 @@ in
                 icon = "${pkgs.libsForQt5.breeze-icons}/share/icons/breeze-dark/actions/16/media-playback-start.svg";
                 definedAliases = [ "@od" ];
               };
-              "YouTube" = {
+              "youtube" = {
                 urls = [
                   {
                     template = "https://www.youtube.com/results";
