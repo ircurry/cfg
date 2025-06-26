@@ -132,7 +132,7 @@
 (use-package catppuccin-theme
   :after (autothemer cur-theme))
 
-(cur-override-theme-load-theme 'doom-nord)
+(cur-override-theme-load-theme 'catppuccin)
 
 ;; ===Ef-Themes===
 (use-package ef-themes)
