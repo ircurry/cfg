@@ -10,6 +10,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-waybar.url = "github:nixos/nixpkgs/cead77df2557634c834691272bb19a0c3930e939";
 
     nh = {
       url = "github:viperML/nh";

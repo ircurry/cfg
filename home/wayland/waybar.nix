@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   ...
@@ -14,7 +15,7 @@
     ];
     programs.waybar = {
       enable = true;
-      package = pkgs.waybar;
+      package = inputs.nixpkgs-waybar.legacyPackages.${pkgs.system}.waybar;
       style =
         let
           stdMargin = builtins.toString config.nocturne.wayland.waybar.stdMargin;
