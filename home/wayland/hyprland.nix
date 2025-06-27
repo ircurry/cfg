@@ -262,7 +262,7 @@ in
         monitor = monitorConfig;
         exec-once = [
           "${lib.getExe startup}"
-          "${pkgs.swww}/bin/swww init"
+          "setsid -f ${pkgs.swww}/bin/swww-daemon"
           "${pkgs.networkmanagerapplet}/bin/nm-applet"
         ];
         general = {
