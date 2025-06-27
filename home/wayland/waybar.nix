@@ -2,10 +2,16 @@
   inputs,
   config,
   pkgs,
+  lib,
   ...
 }:
+let
+  wcfg = config.nocturne.wayland;
+  inherit (wcfg) bar waybar;
+  inherit (wcfg.decoration) stdgaps;
+in
 {
-  config = {
+  config = lib.mkIf (bar.name == "waybar") {
     home.packages = with pkgs; [
       material-design-icons
       nerd-fonts.jetbrains-mono
@@ -18,12 +24,11 @@
       package = inputs.nixpkgs-waybar.legacyPackages.${pkgs.system}.waybar;
       style =
         let
-          stdMargin = builtins.toString config.nocturne.wayland.waybar.stdMargin;
-          stdPadding = builtins.toString config.nocturne.wayland.waybar.stdPadding;
-          stdFontSize = builtins.toString config.nocturne.wayland.waybar.stdFontSize;
-          launcher-font-size = builtins.toString config.nocturne.wayland.waybar.launcher-font-size;
-          power-font-size = builtins.toString config.nocturne.wayland.waybar.power-font-size;
-          inherit (config.nocturne.wayland.waybar)
+          stdPadding = builtins.toString waybar.stdPadding;
+          stdFontSize = builtins.toString waybar.stdFontSize;
+          launcher-font-size = builtins.toString waybar.launcher-font-size;
+          power-font-size = builtins.toString waybar.power-font-size;
+          inherit (waybar)
             workspace-bg
             workspace-hover-bg
             workspace-fg
@@ -67,6 +72,9 @@
         in
         ''
           * {
+            all: unset;
+          }
+          * {
             border: none;
             border-radius: 8px;
           }
@@ -95,7 +103,7 @@
           /* ===Workspaces=== */
           #workspaces {
             background-color: #${workspace-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           #workspaces button {
@@ -103,7 +111,7 @@
             font-family: Material Design Icons, Iosevka Nerd Font Mono, DejaVu Sans;
             font-size: ${stdFontSize}px;
             margin: 0px;
-            padding: 0px ${stdPadding}px;
+            padding: 0px ${builtins.toString (waybar.stdPadding * 2)}px;
           }
           #workspaces button:hover {
             box-shadow: none;
@@ -157,14 +165,14 @@
             font-size: ${launcher-font-size}px;
             color: #${launcher-fg};
             background-color: #${launcher-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===Battery=== */
           #battery {
             font-family: Material Design Icons, Iosevka Nerd Font Mono;
             font-size: ${stdFontSize}px;
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
             color: #${battery-fg};
             background-color: #${battery-bg};
@@ -182,7 +190,7 @@
             font-family: Material Design Icons, Iosevka Nerd Font Mono;
             font-size: ${stdFontSize}px;
             background-color: #${tray-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===Clock=== */
@@ -191,7 +199,7 @@
             font-size: ${stdFontSize}px;
             color: #${clock-fg};
             background-color: #${clock-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===Backlight=== */
@@ -200,7 +208,7 @@
             font-size: ${stdFontSize}px;
             color: #${backlight-fg};
             background-color: #${backlight-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===Audio=== */
@@ -209,7 +217,7 @@
             font-size: ${stdFontSize}px;
             color: #${audio-fg};
             background-color: #${audio-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===Network=== */
@@ -218,7 +226,7 @@
             font-size: ${stdFontSize}px;
             color: #${network-fg};
             background-color: #${network-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           #network.disconnected,
@@ -231,7 +239,7 @@
             font-size: ${power-font-size}px;
             color: #${power-fg};
             background-color: #${power-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===CPU=== */
@@ -240,7 +248,7 @@
             font-size: ${stdFontSize}px;
             color: #${cpu-fg};
             background-color: #${cpu-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===Memory=== */
@@ -249,7 +257,7 @@
             font-size: ${stdFontSize}px;
             color: #${memory-fg};
             background-color: #${memory-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
           /* ===MPD=== */
@@ -258,7 +266,7 @@
             font-size: ${stdFontSize}px;
             color: #${mpd-fg};
             background-color: #${mpd-bg};
-            margin: 0px ${stdMargin}px;
+            margin: 0px;
             padding: 0px ${stdPadding}px;
           }
         '';
@@ -267,6 +275,11 @@
         {
           layer = "top";
           position = "top";
+          spacing = waybar.stdSpacing;
+          margin-top = stdgaps;
+          margin-right = stdgaps;
+          margin-left = stdgaps;
+          margin-bottom = 0;
           output = [
             "eDP-1"
             "DP-2"
@@ -290,10 +303,9 @@
           "custom/launcher" = {
             format = "󱄅";
             tooltip = false;
-            on-click = "sleep 0.1 && ${config.nocturne.wayland.menu.exec}";
-            on-click-right = "sleep 0.1 && ${config.nocturne.wayland.menu.exec-run}";
+            on-click = "sleep 0.1 && ${wcfg.menu.exec}";
+            on-click-right = "sleep 0.1 && ${wcfg.menu.exec-run}";
           };
-          margin-top = 5;
           "hyprland/workspaces" = {
             on-click = "activate";
             format = "{icon}";
@@ -349,8 +361,8 @@
             ];
           };
           tray = {
-            icon-size = config.nocturne.wayland.waybar.stdIconSize;
-            spacing = config.nocturne.wayland.waybar.stdPadding;
+            icon-size = waybar.stdIconSize;
+            spacing = waybar.stdPadding;
           };
           # Center
           clock = {
@@ -404,7 +416,7 @@
           "custom/power" = {
             format = "󰐥";
             tooltip = false;
-            on-click = "sleep 0.1 && ${config.nocturne.wayland.menu.exec-logout}";
+            on-click = "sleep 0.1 && ${wcfg.menu.exec-logout}";
           };
           cpu = {
             format = "󰻠 {usage}%";
@@ -419,7 +431,7 @@
             max-length = 15;
             on-click = "${pkgs.mpc-cli}/bin/mpc toggle";
             on-click-middle = "${pkgs.mpc-cli}/bin/mpc stop";
-            on-click-right = "${config.nocturne.wayland.terminal.exec-center} ${pkgs.ncmpcpp}/bin/ncmpcpp";
+            on-click-right = "${wcfg.terminal.exec-center} ${pkgs.ncmpcpp}/bin/ncmpcpp";
             state-icons = {
               paused = "󰂼";
               playing = "󱉺";
@@ -430,5 +442,50 @@
         }
       ];
     };
+    nocturne.wayland =
+      let
+        waybar-pkg = config.programs.waybar.package;
+        on = pkgs.writeShellApplication {
+          name = "waybar-on";
+          runtimeInputs = with pkgs; [
+            util-linux
+            waybar-pkg
+          ];
+          text = ''
+            setsid -f waybar >/dev/null 2>&1
+          '';
+        };
+        off = pkgs.writeShellApplication {
+          name = "waybar-off";
+          runtimeInputs = with pkgs; [
+            killall
+            waybar-pkg
+          ];
+          text = ''
+            killall '.waybar-wrapped'
+          '';
+        };
+        toggle = pkgs.writeShellApplication {
+          name = "waybar-toggle";
+          runtimeInputs = [
+            on
+            off
+          ];
+          text = ''
+            waybar-off || waybar-on
+          '';
+        };
+      in
+      {
+        startup = [
+          {
+            exec = "waybar-on";
+            packages = [ on ];
+          }
+        ];
+        bar.exec-on = "${lib.getExe on}";
+        bar.exec-off = "${lib.getExe off}";
+        bar.exec-toggle = "${lib.getExe toggle}";
+      };
   };
 }

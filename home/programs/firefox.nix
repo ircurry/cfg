@@ -329,6 +329,13 @@ in
           ];
         };
       };
+      nocturne.wayland.startup = [
+        {
+          exec = "firefox";
+          packages = [ config.programs.firefox.package ];
+          workspace = 4;
+        }
+      ];
     })
     (lib.mkIf (way-cfg.name == "firefox") {
       home.sessionVariables =

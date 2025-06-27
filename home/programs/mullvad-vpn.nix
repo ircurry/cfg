@@ -12,6 +12,13 @@ in
 {
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [ mullvad-vpn ];
+    nocturne.wayland.startup = [
+      {
+        exec = "mullvad-vpn";
+        packages = [ pkgs.mullvad-vpn ];
+        workspace = 4;
+      }
+    ];
     warnings =
       lib.optionals ((cfg.enable == true) && (cfg-browser.enable == false)) [
         "Mullvad VPN client is enabled but Mullvad Browser is not"

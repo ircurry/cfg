@@ -2,6 +2,21 @@
 {
   options.nocturne.wayland = {
     # ===Abstract Options===
+    bar = {
+      name = lib.mkOption {
+        type = lib.types.enum [
+          "waybar"
+          "ags"
+          "ags-side"
+        ];
+        default = "waybar";
+        example = "ags-top";
+        description = "Name of bar use by the Wayland Compositor";
+      };
+      exec-on = lib.mkOption { type = lib.types.str; };
+      exec-off = lib.mkOption { type = lib.types.str; };
+      exec-toggle = lib.mkOption { type = lib.types.str; };
+    };
     browser = {
       name = lib.mkOption {
         type = lib.types.enum [ "firefox" ];
@@ -12,12 +27,31 @@
     };
     compositor = {
       name = lib.mkOption {
-        type = lib.types.nullOr (lib.types.enum [ "hyprland" ]);
+        type = lib.types.nullOr (
+          lib.types.enum [
+            "hyprland"
+            "niri"
+          ]
+        );
         default = "hyprland";
-        example = "hyprland";
+        example = "niri";
         description = "Name of the compositor";
       };
       profileExtra = lib.mkOption { type = lib.types.str; };
+    };
+    decoration = {
+      stdgaps = lib.mkOption {
+        type = lib.types.addCheck lib.types.int (x: x >= 0 && (0 == (lib.mod x 2)));
+        default = 6;
+        example = "12";
+        description = "The standard gapping between objects such as windows";
+      };
+      stdborderthick = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = 3;
+        example = "2";
+        description = "The standard border thickness";
+      };
     };
     editor = {
       name = lib.mkOption {
@@ -28,7 +62,6 @@
       };
       exec = lib.mkOption { type = lib.types.str; };
       exec-reuse = lib.mkOption { type = lib.types.nullOr lib.types.str; };
-      exec-start = lib.mkOption { type = lib.types.nullOr lib.types.str; };
     };
     fileManager = {
       name = lib.mkOption {
@@ -159,7 +192,6 @@
         example = "mako";
         description = "Which notification daemon to use";
       };
-      exec-start = lib.mkOption { type = lib.types.str; };
       exec-volup = lib.mkOption { type = lib.types.str; };
       exec-voldown = lib.mkOption { type = lib.types.str; };
       exec-volmute = lib.mkOption { type = lib.types.str; };
@@ -184,12 +216,72 @@
         description = "Which terminal emulator to use";
       };
       exec = lib.mkOption { type = lib.types.str; };
-      exec-start = lib.mkOption { type = lib.types.nullOr lib.types.str; };
       exec-center = lib.mkOption { type = lib.types.str; };
     };
+    startup =
+      let
+        inherit (lib) mkOption;
+        inherit (lib.types)
+          listOf
+          submodule
+          str
+          nullOr
+          package
+          ;
+        inherit (lib.types.ints) positive;
+      in
+      mkOption {
+        type = listOf (submodule {
+          options = {
+            exec = mkOption { type = str; };
+            workspace = mkOption {
+              type = nullOr positive;
+              default = null;
+            };
+            packages = mkOption {
+              type = listOf package;
+              default = [ ];
+            };
+          };
+        });
+        default = [ ];
+      };
 
     # ===Program Options===
     dunst = {
+      paddingMax = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = 8;
+      };
+      paddingMin = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = 4;
+      };
+      padding =
+        let
+          cfg = config.nocturne.wayland.dunst;
+          max = cfg.paddingMax;
+          min = cfg.paddingMin;
+          inherit (config.nocturne.wayland.decoration) stdgaps;
+          default = (if stdgaps > max then max else (if stdgaps < min then min else stdgaps));
+        in
+        lib.mkOption {
+          type = lib.types.addCheck lib.types.int (x: x <= max && x >= min);
+          inherit default;
+        };
+      offset =
+        let
+          deco = config.nocturne.wayland.decoration;
+          val = deco.stdgaps + deco.stdborderthick + (deco.stdgaps / 2);
+        in
+        lib.mkOption {
+          type = lib.types.str;
+          default = "${builtins.toString val}x${builtins.toString val}";
+        };
+      borderthick = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = config.nocturne.wayland.decoration.stdborderthick;
+      };
       frameColor = lib.mkOption {
         type = lib.types.str;
         default = config.nocturne.themes.colors.base0D;
@@ -345,14 +437,66 @@
       };
     };
     waybar = {
-      stdMargin = lib.mkOption {
-        type = lib.types.int;
+      stdSpacingMax = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = 8;
+      };
+      stdSpacingMin = lib.mkOption {
+        type = lib.types.ints.positive;
         default = 4;
       };
-      stdPadding = lib.mkOption {
-        type = lib.types.int;
-        default = 6;
+      stdSpacing =
+        let
+          cfg = config.nocturne.wayland.waybar;
+          max = cfg.stdSpacingMax;
+          min = cfg.stdSpacingMin;
+          inherit (config.nocturne.wayland.decoration) stdgaps;
+          default = (if stdgaps > max then max else (if stdgaps < min then min else stdgaps));
+        in
+        lib.mkOption {
+          type = lib.types.addCheck lib.types.int (x: x <= max && x >= min);
+          inherit default;
+        };
+      stdPaddingMax = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = 8;
       };
+      stdPaddingMin = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = 4;
+      };
+      stdPadding =
+        let
+          cfg = config.nocturne.wayland.waybar;
+          max = cfg.stdPaddingMax;
+          min = cfg.stdPaddingMin;
+          inherit (config.nocturne.wayland.decoration) stdgaps;
+          default = (if stdgaps > max then max else (if stdgaps < min then min else stdgaps));
+        in
+        lib.mkOption {
+          type = lib.types.addCheck lib.types.int (x: x <= max && x >= min);
+          inherit default;
+        };
+      workSpacePaddingMax = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = 10;
+      };
+      workSpacePaddingMin = lib.mkOption {
+        type = lib.types.ints.positive;
+        default = 4;
+      };
+      workSpacePadding =
+        let
+          cfg = config.nocturne.wayland.waybar;
+          max = cfg.workSpacePaddingMax;
+          min = cfg.workSpacePaddingMin;
+          val = cfg.stdPadding * 2;
+          default = (if val > max then max else (if val < min then min else val));
+        in
+        lib.mkOption {
+          type = lib.types.addCheck lib.types.int (x: x <= max && x >= min);
+          inherit default;
+        };
       stdFontSize = lib.mkOption {
         type = lib.types.int;
         default = 16;
