@@ -13,6 +13,7 @@ in
     home.packages = with pkgs; [ keepassxc ];
     nocturne.wayland.startup = [
       {
+        name = "keepassxc";
         exec = "keepassxc";
         packages = [ pkgs.keepassxc ];
         workspace = 5;

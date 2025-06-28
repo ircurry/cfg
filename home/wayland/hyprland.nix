@@ -58,6 +58,27 @@ let
   # ===Startup===
   startup =
     let
+      mkwrapper =
+        name: text: runtimeInputs:
+        pkgs.writeShellApplication {
+          inherit name text runtimeInputs;
+        };
+      wrappers-fn =
+        acc: x:
+        acc
+        ++ [
+          {
+            inherit (x) name workspace packages;
+            exec =
+              let
+                wrapper = mkwrapper (x.name + "-startup-wrapper") ''
+                  ${x.exec}
+                '' x.packages;
+              in
+              lib.getExe wrapper;
+          }
+        ];
+      wrappers = lib.foldl wrappers-fn [ ] config.nocturne.wayland.startup;
       exec-concat =
         text: exec: workspace:
         if (workspace == null) then
@@ -71,14 +92,14 @@ let
             hyprctl keyword exec '[workspace ${builtins.toString workspace} silent] ${exec}'
           '';
       fldfn = acc: x: {
-        runtimeInputs = lib.lists.unique (acc.runtimeInputs ++ x.packages);
+        inherit (acc) runtimeInputs;
         text = exec-concat acc.text x.exec x.workspace;
       };
       fldstart = {
         text = "";
         runtimeInputs = [ config.wayland.windowManager.hyprland.package ];
       };
-      folding = lib.foldl fldfn fldstart config.nocturne.wayland.startup;
+      folding = lib.foldl fldfn fldstart wrappers;
     in
     pkgs.writeShellApplication {
       name = "startup";

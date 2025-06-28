@@ -233,6 +233,7 @@
       mkOption {
         type = listOf (submodule {
           options = {
+            name = mkOption { type = str; };
             exec = mkOption { type = str; };
             workspace = mkOption {
               type = nullOr positive;

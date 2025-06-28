@@ -170,6 +170,7 @@ in
     };
     nocturne.wayland.startup = [
       {
+        name = "dunst";
         exec = "dunst";
         packages = [ config.services.dunst.package ];
       }

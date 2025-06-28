@@ -11,6 +11,7 @@ in
   config = lib.mkIf (cfg.name == "swayidle") {
     nocturne.wayland.startup = [
       {
+        name = "swayidle";
         exec = "swayidle -w timeout 300 '${config.nocturne.wayland.lock.exec} -f' timeout 360 'systemctl suspend'";
         packages = [ pkgs.swayidle ];
       }

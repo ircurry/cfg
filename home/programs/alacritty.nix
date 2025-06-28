@@ -123,6 +123,7 @@ in
       nocturne.wayland.terminal.exec-center = "${lib.getExe pkgs.alacritty} --class=center -e";
       nocturne.wayland.startup = [
         {
+          name = "alacritty";
           exec = "alacritty";
           packages = [ pkgs.alacritty ];
           workspace = 2;

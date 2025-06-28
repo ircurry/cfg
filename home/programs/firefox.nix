@@ -331,6 +331,7 @@ in
       };
       nocturne.wayland.startup = [
         {
+          name = "firefox";
           exec = "firefox";
           packages = [ config.programs.firefox.package ];
           workspace = 4;

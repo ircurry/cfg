@@ -20,6 +20,7 @@ in
     nocturne.wayland.notification.exec-brightdown = "${lib.getExe pkgs.brightnessctl} s 1%-";
     nocturne.wayland.startup = [
       {
+        name = "mako";
         exec = "mako";
         packages = [ pkgs.mako ];
       }

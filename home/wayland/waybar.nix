@@ -479,6 +479,7 @@ in
       {
         startup = [
           {
+            name = "waybar";
             exec = "waybar-on";
             packages = [ on ];
           }

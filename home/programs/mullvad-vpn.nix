@@ -14,6 +14,7 @@ in
     home.packages = with pkgs; [ mullvad-vpn ];
     nocturne.wayland.startup = [
       {
+        name = "mullvad-vpn";
         exec = "mullvad-vpn";
         packages = [ pkgs.mullvad-vpn ];
         workspace = 4;

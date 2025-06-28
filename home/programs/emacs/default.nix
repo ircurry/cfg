@@ -81,6 +81,7 @@ in
       ];
       nocturne.wayland.startup = [
         {
+          name = "emacs";
           exec = "emacs";
           packages = [ config.programs.emacs.package ];
           workspace = 3;

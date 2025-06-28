@@ -14,6 +14,7 @@ in
     home.packages = with pkgs; [ mullvad-browser ];
     nocturne.wayland.startup = [
       {
+        name = "mullvad-browser";
         exec = "mullvad-browser";
         packages = [ pkgs.mullvad-browser ];
         workspace = 4;
