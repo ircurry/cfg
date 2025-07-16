@@ -1,4 +1,15 @@
 { config, lib, ... }:
+let
+  mkExec =
+    options:
+    lib.mkOption (
+      {
+        type = lib.types.str;
+        default = "";
+      }
+      // options
+    );
+in
 {
   options.nocturne.wayland = {
     # ===Abstract Options===
@@ -13,9 +24,9 @@
         example = "ags-top";
         description = "Name of bar use by the Wayland Compositor";
       };
-      exec-on = lib.mkOption { type = lib.types.str; };
-      exec-off = lib.mkOption { type = lib.types.str; };
-      exec-toggle = lib.mkOption { type = lib.types.str; };
+      exec-on = mkExec { };
+      exec-off = mkExec { };
+      exec-toggle = mkExec { };
     };
     browser = {
       name = lib.mkOption {
@@ -37,7 +48,7 @@
         example = "niri";
         description = "Name of the compositor";
       };
-      profileExtra = lib.mkOption { type = lib.types.str; };
+      profileExtra = mkExec { };
     };
     decoration = {
       stdgaps = lib.mkOption {
@@ -60,7 +71,7 @@
         example = "emacs";
         description = "Name of the main system editor";
       };
-      exec = lib.mkOption { type = lib.types.str; };
+      exec = mkExec { };
       exec-reuse = lib.mkOption { type = lib.types.nullOr lib.types.str; };
     };
     fileManager = {
@@ -93,8 +104,8 @@
         example = "imv";
         description = "Name of the main system image viewer";
       };
-      exec = lib.mkOption { type = lib.types.str; };
-      exec-dir = lib.mkOption { type = lib.types.str; };
+      exec = mkExec { };
+      exec-dir = mkExec { };
     };
     lock = {
       name = lib.mkOption {
@@ -103,7 +114,7 @@
         example = "swaylock";
         description = "Which screen locking program to use";
       };
-      exec = lib.mkOption { type = lib.types.str; };
+      exec = mkExec { };
     };
     menu = {
       name = lib.mkOption {
@@ -115,11 +126,11 @@
         example = "rofi";
         description = "Which menu program to use";
       };
-      promptSwitch = lib.mkOption { type = lib.types.str; };
-      exec = lib.mkOption { type = lib.types.str; };
-      exec-run = lib.mkOption { type = lib.types.str; };
-      exec-dmenu = lib.mkOption { type = lib.types.str; };
-      exec-logout = lib.mkOption { type = lib.types.str; };
+      promptSwitch = mkExec { };
+      exec = mkExec { };
+      exec-run = mkExec { };
+      exec-dmenu = mkExec { };
+      exec-logout = mkExec { };
     };
     monitor-profiles =
       with lib.types;
@@ -192,11 +203,11 @@
         example = "mako";
         description = "Which notification daemon to use";
       };
-      exec-volup = lib.mkOption { type = lib.types.str; };
-      exec-voldown = lib.mkOption { type = lib.types.str; };
-      exec-volmute = lib.mkOption { type = lib.types.str; };
-      exec-brightup = lib.mkOption { type = lib.types.str; };
-      exec-brightdown = lib.mkOption { type = lib.types.str; };
+      exec-volup = mkExec { };
+      exec-voldown = mkExec { };
+      exec-volmute = mkExec { };
+      exec-brightup = mkExec { };
+      exec-brightdown = mkExec { };
     };
     screenshot = {
       name = lib.mkOption {
@@ -215,8 +226,8 @@
         example = "alacritty";
         description = "Which terminal emulator to use";
       };
-      exec = lib.mkOption { type = lib.types.str; };
-      exec-center = lib.mkOption { type = lib.types.str; };
+      exec = mkExec { };
+      exec-center = mkExec { };
     };
     startup =
       let
@@ -247,6 +258,19 @@
         });
         default = [ ];
       };
+    wallpaper = {
+      name = lib.mkOption {
+        type = lib.types.nullOr (lib.types.enum [ "swww" ]);
+        default = null;
+        example = "swww";
+        description = "Which wallpaper engine to use";
+      };
+      paper-path = lib.mkOption {
+        type = lib.types.path;
+        default = "${config.home.homeDirectory}/.cache/nocturne/wallpaper";
+      };
+      exec-change = mkExec { };
+    };
 
     # ===Program Options===
     dunst = {

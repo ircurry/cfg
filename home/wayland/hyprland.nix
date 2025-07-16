@@ -256,7 +256,6 @@ in
       pkgs.killall
       # Audio Control
       pkgs.pavucontrol
-      pkgs.swww
       pkgs.wl-clipboard
     ];
 
@@ -283,7 +282,6 @@ in
         monitor = monitorConfig;
         exec-once = [
           "${lib.getExe startup}"
-          "setsid -f ${pkgs.swww}/bin/swww-daemon"
           "${pkgs.networkmanagerapplet}/bin/nm-applet"
         ];
         general = {

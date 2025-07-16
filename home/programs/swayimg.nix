@@ -3,6 +3,7 @@ let
   wcfg = config.nocturne.wayland.image;
   scfg = config.nocturne.graphical.swayimg;
   simg = config.programs.swayimg;
+  inherit (config.nocturne.wayland.wallpaper) exec-change;
   inherit (scfg)
     bg
     tile-bg
@@ -93,7 +94,7 @@ in
           # ===2nd Row===
           "Tab" = "mode";
           "q" = "exit";
-          "w" = "exec swww img -t any \"%\"";
+          "w" = "exec ${exec-change} \"%\"";
           "Shift+w" = "zoom optimal";
           "e" = "next_file";
           "Shift+e" = "next_dir";
@@ -172,7 +173,7 @@ in
           # ===2nd Row===
           "Tab" = "mode";
           "q" = "exit";
-          "w" = "exec swww img -t any \"%\"";
+          "w" = "exec ${exec-change} \"%\"";
           "e" = "none";
           "r" = "none";
           "t" = "none";
