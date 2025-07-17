@@ -122,8 +122,8 @@ rec {
 
   # Map over a list of monitors and return a list of strings in the form that
   # hyprland uses for monitor configuration.
-  hyprlandMonitorsToString =
-    monitors:
+  hyprlandMonitorToString =
+    monitor:
     let
       nameToString = name: if name == null then "" else "${name}";
       resolutionToString =
@@ -134,29 +134,52 @@ rec {
           "${toString res.width}x${toString res.height}@${toString res.refresh_rate}";
       positionToString = pos: if pos == null then "auto" else "${toString pos.x}x${toString pos.y}";
       scaleToString = scale: if scale == null then "auto" else "${toString scale}";
-      mapFn =
-        monitor:
-        if monitor.enabled then
-          "${nameToString monitor.name},${resolutionToString monitor.resolution},${positionToString monitor.position},${scaleToString monitor.scale}"
-        else
-          "${nameToString monitor.name},disabled";
     in
-    map mapFn monitors;
+    if monitor.enabled then
+      "${nameToString monitor.name},${resolutionToString monitor.resolution},${positionToString monitor.position},${scaleToString monitor.scale}"
+    else
+      "${nameToString monitor.name},disabled";
 
-  # take a profile name (string) and a list of monitor profiles and return a
-  # list of strings that are in the form that hyprland uses for monitor
-  # configuration.
-  hyprlandDefaultProfile =
-    defaultProfile: monitorProfiles:
+  niriMonitorToString =
+    monitor:
+    if (monitor.name != null) then
+      let
+        inherit (monitor)
+          resolution
+          position
+          scale
+          enabled
+          ;
+        off = lib.optionalString (enabled != true) "off";
+        res =
+          lib.optionalString (resolution != null)
+            "mode \"${toString resolution.width}x${toString resolution.height}@${toString resolution.refresh_rate}\"";
+        pos = lib.optionalString (
+          position != null
+        ) "position x=${toString position.x} y=${toString position.y}";
+        scl = lib.optionalString (scale != null) "scale ${toString scale}\n";
+      in
+      ''
+        output "${monitor.name}" {
+            ${off}
+            ${res}
+            ${pos}
+            ${scl}
+        }''
+    else
+      "";
+
+  profileToString =
+    profileName: monitorProfiles: monitorToString:
     let
       profilesWithDefaultName = builtins.filter (x: x != { }) (
-        lib.map (x: if defaultProfile == x.name then x else { }) monitorProfiles
+        lib.map (x: if profileName == x.name then x else { }) monitorProfiles
       );
       profile =
         assert (builtins.length profilesWithDefaultName) == 1;
         builtins.head profilesWithDefaultName;
     in
-    hyprlandMonitorsToString profile.monitors;
+    map monitorToString profile.monitors;
 
   monitorsFilteredNames =
     profileName: monitorProfiles: filterFunction:

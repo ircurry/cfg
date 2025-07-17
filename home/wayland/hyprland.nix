@@ -53,7 +53,9 @@ let
   inherit (config.nocturne.wayland.hyprland) plugins;
 
   # ===Monitor Configurations===
-  monitorConfig = mylib.hyprlandDefaultProfile "undocked" config.nocturne.wayland.monitor-profiles;
+  monitorConfig =
+    mylib.profileToString "undocked" config.nocturne.wayland.monitor-profiles
+      mylib.hyprlandMonitorToString;
 
   # ===Startup===
   startup =

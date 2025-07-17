@@ -140,9 +140,18 @@ in
           default = null;
           type = nullOr (submodule {
             options = {
-              width = mkOption { type = ints.u32; };
-              height = mkOption { type = ints.u32; };
-              refresh_rate = mkOption { type = ints.positive; };
+              width = mkOption {
+                type = ints.u32;
+                default = 0;
+              };
+              height = mkOption {
+                type = ints.u32;
+                default = 0;
+              };
+              refresh_rate = mkOption {
+                type = ints.positive;
+                default = 60;
+              };
             };
           });
         };
@@ -150,21 +159,27 @@ in
           default = null;
           type = nullOr (submodule {
             options = {
-              x = mkOption { type = int; };
-              y = mkOption { type = int; };
+              x = mkOption {
+                type = int;
+                default = 0;
+              };
+              y = mkOption {
+                type = int;
+                default = 0;
+              };
             };
           });
+        };
+        scale = mkOption {
+          type = nullOr (numbers.between 1 256);
+          default = 1;
         };
         monitors = mkOption {
           type = listOf (submodule {
             options = {
+              inherit resolution position scale;
               name = mkOption {
                 type = nullOr str;
-                default = null;
-              };
-              inherit resolution position;
-              scale = mkOption {
-                type = nullOr (numbers.between 1 256);
                 default = null;
               };
               enabled = mkOption {
