@@ -437,6 +437,20 @@ which-key
   (which-key-idle-delay 1.0))
 #+end_src
 
+*** =cur-config-essentials.el= section on ~inheritenv~ and buffer local environments
+:PROPERTIES:
+:ID:       619903ff-705a-4d37-8d3a-405e741ece1e
+:END:
+
+#+begin_src text :tangle ./packages.txt :padline no
+inheritenv
+#+end_src
+
+#+begin_src emacs-lisp
+(use-package inheritenv
+  :demand t)
+#+end_src
+
 *** =cur-config-essentials.el= call to ~provide~
 :PROPERTIES:
 :ID:       2d610426-19cb-42e2-9a50-fee49ffca0ba
@@ -2295,7 +2309,13 @@ rustic
 
 #+begin_src emacs-lisp
 ;; ===Rust-Mode===
-(use-package rustic)
+(use-package rustic
+  :custom (rustic-lsp-client 'eglot))
+
+(use-package elec-pair
+  :after rustic
+  :demand t
+  :hook (rustic-mode . electric-pair-local-mode))
 
 (use-package eglot
   :ensure nil

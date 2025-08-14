@@ -191,7 +191,13 @@
   (lsp-nix-nixd-server-path "nixd" "set nixd binary path to be use from current $PATH"))
 
 ;; ===Rust-Mode===
-(use-package rustic)
+(use-package rustic
+  :custom (rustic-lsp-client 'eglot))
+
+(use-package elec-pair
+  :after rustic
+  :demand t
+  :hook (rustic-mode . electric-pair-local-mode))
 
 (use-package eglot
   :ensure nil

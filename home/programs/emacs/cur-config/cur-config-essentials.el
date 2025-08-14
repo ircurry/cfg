@@ -115,4 +115,7 @@
   :custom
   (which-key-idle-delay 1.0))
 
+(use-package inheritenv
+  :demand t)
+
 (provide 'cur-config-essentials)
