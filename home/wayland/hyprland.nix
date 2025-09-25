@@ -333,7 +333,6 @@ in
           orientation = "left";
           mfact = "0.5";
         };
-        gestures.workspace_swipe = "off";
         misc = {
           # Anime lady hehe
           force_default_wallpaper = -1;
@@ -372,58 +371,57 @@ in
           # Signal
           "workspace 1, class:^(Signal)$, title:^(.*)$"
         ];
-        bind =
-          [
-            # General Keybindings
-            "$MOD_SHIFT, Return, exec, $terminal"
-            "$MOD, Return, exec, $terminal"
-            "$MOD, E, exec, $editor"
-            "$MOD, R, exec, $menu-run"
-            "$MOD, P, exec, $menu-drun"
-            "$MOD_SHIFT, A, exec, ${lib.getExe toggleAnimations}"
-            # "$MOD, code:61, exec, $menu-window"
-            "$MOD, B, exec, ${bar-toggle}"
-            "$MOD, D, killactive, "
-            "$MOD_CTRL, Q, exit,"
-            ## Logout (semi-colon)
-            "$MOD_CTRL, code:47, exec, ${config.nocturne.wayland.menu.exec-logout}"
-            "$MOD, code:47, exec, ${config.nocturne.wayland.menu.exec-logout}"
-            ## Focus Mode
-            "$MOD_SHIFT, F, exec, ${lib.getExe focusMode}"
+        bind = [
+          # General Keybindings
+          "$MOD_SHIFT, Return, exec, $terminal"
+          "$MOD, Return, exec, $terminal"
+          "$MOD, E, exec, $editor"
+          "$MOD, R, exec, $menu-run"
+          "$MOD, P, exec, $menu-drun"
+          "$MOD_SHIFT, A, exec, ${lib.getExe toggleAnimations}"
+          # "$MOD, code:61, exec, $menu-window"
+          "$MOD, B, exec, ${bar-toggle}"
+          "$MOD, D, killactive, "
+          "$MOD_CTRL, Q, exit,"
+          ## Logout (semi-colon)
+          "$MOD_CTRL, code:47, exec, ${config.nocturne.wayland.menu.exec-logout}"
+          "$MOD, code:47, exec, ${config.nocturne.wayland.menu.exec-logout}"
+          ## Focus Mode
+          "$MOD_SHIFT, F, exec, ${lib.getExe focusMode}"
 
-            # Window Manipulation
-            "$MOD, Return, layoutmsg, swapwithmaster"
-            "$MOD, TAB, cyclenext"
-            "$MOD, TAB, bringactivetotop"
-            "$MOD, O, cyclenext"
-            "$MOD, O, bringactivetotop"
-            "$MOD, N, layoutmsg, orientationcycle left top center"
-            "$MOD, F, fullscreen"
-            "$MOD, M, fullscreen, 1"
-            "$MOD, W, togglefloating"
-            "$MOD, C, exec, hyprctl dispatch centerwindow 1"
-            "$MOD_SHIFT, C, exec, ${lib.getExe centerAllFloating}"
+          # Window Manipulation
+          "$MOD, Return, layoutmsg, swapwithmaster"
+          "$MOD, TAB, cyclenext"
+          "$MOD, TAB, bringactivetotop"
+          "$MOD, O, cyclenext"
+          "$MOD, O, bringactivetotop"
+          "$MOD, N, layoutmsg, orientationcycle left top center"
+          "$MOD, F, fullscreen"
+          "$MOD, M, fullscreen, 1"
+          "$MOD, W, togglefloating"
+          "$MOD, C, exec, hyprctl dispatch centerwindow 1"
+          "$MOD_SHIFT, C, exec, ${lib.getExe centerAllFloating}"
 
-            # Workspace Manipulation
-            "$MOD, 1, workspace, 1"
-            "$MOD, 2, workspace, 2"
-            "$MOD, 3, workspace, 3"
-            "$MOD, 4, workspace, 4"
-            "$MOD, 5, workspace, 5"
-            "$MOD, 6, workspace, 6"
-            "$MOD SHIFT, 1, movetoworkspace, 1"
-            "$MOD SHIFT, 2, movetoworkspace, 2"
-            "$MOD SHIFT, 3, movetoworkspace, 3"
-            "$MOD SHIFT, 4, movetoworkspace, 4"
-            "$MOD SHIFT, 5, movetoworkspace, 5"
-            "$MOD SHIFT, 6, movetoworkspace, 6"
+          # Workspace Manipulation
+          "$MOD, 1, workspace, 1"
+          "$MOD, 2, workspace, 2"
+          "$MOD, 3, workspace, 3"
+          "$MOD, 4, workspace, 4"
+          "$MOD, 5, workspace, 5"
+          "$MOD, 6, workspace, 6"
+          "$MOD SHIFT, 1, movetoworkspace, 1"
+          "$MOD SHIFT, 2, movetoworkspace, 2"
+          "$MOD SHIFT, 3, movetoworkspace, 3"
+          "$MOD SHIFT, 4, movetoworkspace, 4"
+          "$MOD SHIFT, 5, movetoworkspace, 5"
+          "$MOD SHIFT, 6, movetoworkspace, 6"
 
-            # Screenshot Commands (if enabled)
-          ]
-          ++ lib.optionals (config.nocturne.wayland.screenshot.name != null) [
-            "$MOD, S, exec, ${lib.getExe config.nocturne.wayland.screenshot.scrn}"
-            "$MOD_SHIFT, S, exec, ${lib.getExe config.nocturne.wayland.screenshot.scrn-region}"
-          ];
+          # Screenshot Commands (if enabled)
+        ]
+        ++ lib.optionals (config.nocturne.wayland.screenshot.name != null) [
+          "$MOD, S, exec, ${lib.getExe config.nocturne.wayland.screenshot.scrn}"
+          "$MOD_SHIFT, S, exec, ${lib.getExe config.nocturne.wayland.screenshot.scrn-region}"
+        ];
 
         binde = [
           # Window Management

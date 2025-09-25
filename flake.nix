@@ -11,6 +11,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     #nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs-waybar.url = "github:nixos/nixpkgs/cead77df2557634c834691272bb19a0c3930e939";
+    nixpkgs-yt-dlp.url = "github:nixos/nixpkgs/c3ffe46c059e3a830d9af6fad7d2b51cf4e15026";
 
     nh = {
       url = "github:viperML/nh";

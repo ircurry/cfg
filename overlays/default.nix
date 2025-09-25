@@ -14,6 +14,7 @@
           });
       })
       (_: prev: { dfh = inputs.dfh.packages.${pkgs.system}.dfh; })
+      (_: prev: { yt-dlp = inputs.nixpkgs-yt-dlp.legacyPackages.${pkgs.system}.yt-dlp; })
       # (_: prev: { nocturne-tools = inputs.nocturne-tools.packages.${pkgs.system}.default; })
     ];
   };

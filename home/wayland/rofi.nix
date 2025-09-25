@@ -13,26 +13,26 @@ in
     (lib.mkIf (way-cfg == "rofi") {
       # Warnings
       warnings =
-        lib.optionals ((way-cfg == "rofi-wayland") && (cfg.enable == false)) [
+        lib.optionals ((way-cfg == "rofi") && (cfg.enable == false)) [
           "rofi is set as the wayland application launcher but is not enabled"
         ]
-        ++ lib.optionals ((way-cfg != "rofi-wayland") && (cfg.enable == true)) [
+        ++ lib.optionals ((way-cfg != "rofi") && (cfg.enable == true)) [
           "rofi is enabled but not set as the wayland application launcher"
         ];
 
       home.packages = [
         pkgs.nerd-fonts.jetbrains-mono
-        pkgs.rofi-wayland
+        pkgs.rofi
       ];
       nocturne.wayland.menu = {
         promptSwitch = "-p";
-        exec = "${pkgs.rofi-wayland}/bin/rofi -show drun";
-        exec-run = "${pkgs.rofi-wayland}/bin/rofi -show run";
-        exec-dmenu = "${pkgs.rofi-wayland}/bin/rofi -dmenu -i";
+        exec = "${pkgs.rofi}/bin/rofi -show drun";
+        exec-run = "${pkgs.rofi}/bin/rofi -show run";
+        exec-dmenu = "${pkgs.rofi}/bin/rofi -dmenu -i";
       };
       programs.rofi = {
         enable = true;
-        package = pkgs.rofi-wayland;
+        package = pkgs.rofi;
         font = "JetBrainsMono Nerd Font 12";
         extraConfig = {
           modi = "run,drun,window";
