@@ -1,5 +1,5 @@
 {
-  inputs,
+  # inputs,
   config,
   pkgs,
   lib,
@@ -21,7 +21,7 @@ in
     ];
     programs.waybar = {
       enable = true;
-      package = inputs.nixpkgs-waybar.legacyPackages.${pkgs.system}.waybar;
+      # package = inputs.nixpkgs-waybar.legacyPackages.${pkgs.system}.waybar;
       style =
         let
           stdPadding = builtins.toString waybar.stdPadding;
