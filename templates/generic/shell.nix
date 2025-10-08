@@ -15,6 +15,6 @@ pkgs.mkShell {
     gcc
     ccls
     gf
-    gbd
+    gdb
   ];
 }
