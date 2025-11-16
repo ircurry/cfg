@@ -20,14 +20,14 @@
     # themes.theme = "tomorrow-night";
     graphical = {
       alacritty.enable = true;
-      anki.enable = true;
+      anki.enable = false;
       brave.enable = false;
       discord.enable = true;
       emacs.enable = true;
       firefox.enable = true;
       flatpak.enable = false;
       keepassxc.enable = true;
-      kid3.enable = true;
+      kid3.enable = false;
       libreoffice.enable = true;
       mullvadBrowser.enable = true;
       mullvad-vpn.enable = true;
@@ -41,13 +41,13 @@
     };
     cli = {
       age.enable = true;
-      amfora.enable = true;
-      ani-cli.enable = true;
+      amfora.enable = false;
+      ani-cli.enable = false;
       direnv.enable = true;
       file-convert.enable = true;
       mpd.enable = true;
-      newsboat.enable = true;
-      phetch.enable = true;
+      newsboat.enable = false;
+      phetch.enable = false;
       shell.name = "fish";
       youtube.enable = true;
     };
