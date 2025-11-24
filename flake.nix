@@ -11,7 +11,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     # nixpkgs-waybar.url = "github:nixos/nixpkgs/fc432219ea741efce59912cfb2a51ad9820c291d";
-    nixpkgs-yt-dlp.url = "github:nixos/nixpkgs/87b20f7095c855c1518f90761aea2d5b38894b0e";
+    nixpkgs-yt-dlp.url = "github:nixos/nixpkgs/7302c51794fffd3dc1840a68b6c0b04668d77342";
 
     nh = {
       url = "github:viperML/nh";
@@ -107,7 +107,7 @@
       devShells = forAllSystems (pkgs: {
         default = import ./shell.nix {
           inherit pkgs;
-          ags = inputs.ags.packages.${pkgs.system}.agsFull;
+          ags = inputs.ags.packages.${pkgs.stdenv.hostPlatform.system}.agsFull;
         };
       });
 

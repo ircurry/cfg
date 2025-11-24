@@ -11,7 +11,9 @@
     in
     {
       enable = true;
-      userEmail = cfg.userEmail;
-      userName = cfg.userName;
+      settings.user = {
+        email = cfg.userEmail;
+        name = cfg.userName;
+      };
     };
 }

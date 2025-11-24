@@ -21,7 +21,7 @@ in
     ];
     programs.waybar = {
       enable = true;
-      # package = inputs.nixpkgs-waybar.legacyPackages.${pkgs.system}.waybar;
+      # package = inputs.nixpkgs-waybar.legacyPackages.${pkgs.stdenv.hostPlatform.system}.waybar;
       style =
         let
           stdPadding = builtins.toString waybar.stdPadding;
@@ -429,8 +429,8 @@ in
             format-stopped = "󰓛 Stopped";
             format-paused = "{stateIcon} {title}";
             max-length = 15;
-            on-click = "${pkgs.mpc-cli}/bin/mpc toggle";
-            on-click-middle = "${pkgs.mpc-cli}/bin/mpc stop";
+            on-click = "${pkgs.mpc}/bin/mpc toggle";
+            on-click-middle = "${pkgs.mpc}/bin/mpc stop";
             on-click-right = "${wcfg.terminal.exec-center} ${pkgs.ncmpcpp}/bin/ncmpcpp";
             state-icons = {
               paused = "󰂼";

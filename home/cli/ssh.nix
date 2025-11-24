@@ -10,9 +10,12 @@
     services.ssh-agent.enable = true;
     programs.ssh = {
       enable = true;
-      addKeysToAgent = "yes";
-      hashKnownHosts = true;
+      enableDefaultConfig = false;
       matchBlocks = {
+        "*" = {
+          addKeysToAgent = "yes";
+          hashKnownHosts = true;
+        };
         "github.com" = {
           host = "github.com";
           user = "git";

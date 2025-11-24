@@ -180,7 +180,7 @@ in
             };
           };
 
-          extensions.packages = with inputs.firefox-addons.packages."${pkgs.system}"; [
+          extensions.packages = with inputs.firefox-addons.packages."${pkgs.stdenv.hostPlatform.system}"; [
             darkreader
             ublock-origin
             libredirect
@@ -250,7 +250,7 @@ in
             };
           };
 
-          extensions.packages = with inputs.firefox-addons.packages."${pkgs.system}"; [
+          extensions.packages = with inputs.firefox-addons.packages."${pkgs.stdenv.hostPlatform.system}"; [
             ublock-origin
             libredirect
             multi-account-containers
@@ -267,7 +267,7 @@ in
             force = true;
           };
 
-          extensions.packages = with inputs.firefox-addons.packages."${pkgs.system}"; [
+          extensions.packages = with inputs.firefox-addons.packages."${pkgs.stdenv.hostPlatform.system}"; [
             multi-account-containers
             ublock-origin
           ];
@@ -281,7 +281,7 @@ in
             force = true;
           };
 
-          extensions.packages = with inputs.firefox-addons.packages."${pkgs.system}"; [
+          extensions.packages = with inputs.firefox-addons.packages."${pkgs.stdenv.hostPlatform.system}"; [
             multi-account-containers
             ublock-origin
           ];
@@ -295,7 +295,7 @@ in
             force = true;
           };
 
-          extensions.packages = with inputs.firefox-addons.packages."${pkgs.system}"; [
+          extensions.packages = with inputs.firefox-addons.packages."${pkgs.stdenv.hostPlatform.system}"; [
             multi-account-containers
             ublock-origin
           ];
@@ -309,7 +309,7 @@ in
             force = true;
           };
 
-          extensions.packages = with inputs.firefox-addons.packages."${pkgs.system}"; [
+          extensions.packages = with inputs.firefox-addons.packages."${pkgs.stdenv.hostPlatform.system}"; [
             multi-account-containers
             ublock-origin
           ];
@@ -323,7 +323,7 @@ in
             force = true;
           };
 
-          extensions.packages = with inputs.firefox-addons.packages."${pkgs.system}"; [
+          extensions.packages = with inputs.firefox-addons.packages."${pkgs.stdenv.hostPlatform.system}"; [
             multi-account-containers
             ublock-origin
           ];

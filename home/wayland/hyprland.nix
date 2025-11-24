@@ -269,7 +269,7 @@ in
     # ===Actual Hyprland Config===
     wayland.windowManager.hyprland = {
       enable = true;
-      # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+      # package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
       plugins = with pkgs.hyprlandPlugins; [ ] ++ lib.optionals plugins.hyprbars.enable [ hyprbars ];
       settings = {
         "$terminal" = "${term-cfg.exec}";
