@@ -80,6 +80,13 @@ This function with error if it finds a missing program."
     (error "Neither `yt-dlp' nor `youtube-dl' are installed, please install one of them"))
   t)
 
+(defun cur-yt--freetube-check-exetutables ()
+  "Check if `freetube' is installed.
+This function with error if it finds the program missing."
+  (unless (executable-find "freetube")
+    (user-error "`freetube' is not installed on the system, please install it"))
+  t)
+
 (defcustom cur-yt-play-always-prompt-resolution nil
   "Whether or not `cur-yt-play-video' should always prompt for resolution."
   :type '(boolean)
@@ -123,6 +130,13 @@ The current context is gotten through the function associated with the current
 	(funcall default-fn)
       "")))
 
+(defun cur-yt--mpv-process-sentinel (process event)
+  "Handle `freetube' PROCESS EVENTs."
+  (cond ((string-prefix-p "finished" event)
+	 (progn (message "mpv has finished")
+		(kill-buffer (process-buffer process))))
+	(t (message "mpv had and unknown event: '%s'" event))))
+
 ;;;###autoload
 (defun cur-yt-play-video (url &optional resolution no-video)
   "Play video URL at RESOLUTION.
@@ -142,16 +156,46 @@ If NO-VIDEO is non-nil novideo will be played."
 	(yt-url (cur-yt--convert-to-yt-link url)))
     (unless yt-url
       (user-error "URL did not contain a YouTube view key"))
-    (let ((args (list "cur-yt-play-video"
-		      (get-buffer-create "*cur-yt-process-buffer*")
-		      "mpv"
+    (let ((args (list "mpv"
 		      (cur-yt--mpv-ytdl-format res)
 		      yt-url)))
       (when no-video (setq args (append args '("--no-video"))))
-      (apply #'start-process args))
+      (make-process :name "cur-yt-play-video"
+		    :buffer (generate-new-buffer "*cur-yt-process-buffer*")
+		    :command args
+		    :sentinel 'cur-yt--mpv-process-sentinel))
     (message "Playing %s at %s" yt-url (pcase res
 					 ((or "best" "worst") (concat res " resolution"))
 					 (_ (concat res "p"))))))
+
+(defun cur-yt--freetube-process-sentinel (process event)
+  "Handle `freetube' PROCESS EVENTs."
+  (cond ((string-prefix-p "finished" event)
+	 (progn (message "Freetube has finished")
+		(kill-buffer (process-buffer process))))
+	(t (message "Freetube had and unknown event: '%s'" event))))
+
+;;;###autoload
+(defun cur-yt-freetube-video (url)
+  "Open video URL in `freetube'.
+If NO-VIDEO is non-nil novideo will be played."
+  (interactive
+   (let* ((default-key (cur-yt--get-default-key))
+	  (prompt (if default-key
+		      (format "YouTube URL (%s): " default-key)
+		    "YouTube URL: ")))
+     (list (read-string prompt nil
+			cur-yt-play-url-history
+			(cur-yt--format-key-as-yt-link default-key)))))
+  (cur-yt--freetube-check-exetutables)
+  (let ((yt-url (cur-yt--convert-to-yt-link url)))
+    (unless yt-url
+      (user-error "URL did not contain a YouTube view key"))
+    (make-process :name "cur-yt-play-video"
+		  :buffer (generate-new-buffer "*cur-yt-freetube-buffer*")
+		  :command (list "freetube" "--new-window" yt-url)
+		  :sentinel 'cur-yt--freetube-process-sentinel)
+    (message "Opening %s in freetube" yt-url)))
 
 ;;; YeeTube integration
 

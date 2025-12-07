@@ -8,6 +8,7 @@
     ./emacs
     ./firefox.nix
     ./flatpak.nix
+    ./freetube.nix
     ./imv.nix
     ./keepassxc.nix
     ./keymapp.nix

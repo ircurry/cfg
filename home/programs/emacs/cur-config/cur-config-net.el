@@ -87,8 +87,10 @@
 (use-package cur-yt
   :after (elfeed elfeed-tube)
   :bind ( :map elfeed-show-mode-map
+	  ("f" . cur-yt-freetube-video)
 	  ("v" . cur-yt-play-video)
 	  :map elfeed-search-mode-map
+	  ("f" . cur-yt-freetube-video)
 	  ("v" . cur-yt-play-video)))
 
 (use-package elcord

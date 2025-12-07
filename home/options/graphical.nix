@@ -102,6 +102,7 @@
       description = "Enable Firefox";
     };
     flatpak.enable = lib.mkEnableOption "Enable Flatpaks";
+    freetube.enable = lib.mkEnableOption "Enable Freetube";
     keepassxc.enable = lib.mkEnableOption "Enable KeepassXC";
     keymapp.enable = lib.mkEnableOption "Enable ZSA's Keymapp";
     kid3.enable = lib.mkEnableOption "Enable kid3";
