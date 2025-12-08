@@ -15,8 +15,11 @@
 
 (defvar cur-yt--youtube-view-key-regexp
   (rx bol
-      (*? not-newline)
-      "watch?v="
+      (or (seq
+	   (*? not-newline)
+	   (or "watch?v=" 
+	       (seq "watch?" (*? not-newline) "&v=")))
+	  (seq (*? not-newline) "youtube.com/shorts/"))
       (group-n 1 (= 11 anything))
       (*? not-newline)
       eol)
