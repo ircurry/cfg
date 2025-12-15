@@ -20,44 +20,18 @@ consult-dir
 embark
 embark-consult
 corfu
-cape
 ace-window
 popper
-# lsp-mode
-# lsp-ui
 company
 flycheck
 magit
 rg
 rainbow-delimiters
 paredit
-geiser
-geiser-chez
-geiser-chibi
-geiser-chicken
-geiser-gambit
-geiser-gauche
-geiser-guile
-geiser-kawa
-geiser-mit
-geiser-racket
-geiser-stklos
-macrostep
-macrostep-geiser
-# lsp-java
-just-mode
 yaml-mode
 nix-mode
 nix-ts-mode
-rustic
-haskell-mode
-company-ghci
-tuareg
-utop
-merlin
-merlin-company
 # ccls
-zig-mode
 vterm
 eat
 eshell-syntax-highlighting

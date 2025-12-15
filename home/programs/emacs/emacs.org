@@ -1584,15 +1584,6 @@ corfu
   :hook (prog-mode . corfu-mode))
 #+end_src
 
-*** TODO =cur-config-completion.el= section on ~cape~ and making completion at point functions (capfs)
-:PROPERTIES:
-:ID:       64087654-2ad5-4dba-8de8-91b572720ca2
-:END:
-
-#+begin_src text :tangle ./packages.txt :padline no
-cape
-#+end_src
-
 *** =cur-config-completion.el= call to ~provide~
 :PROPERTIES:
 :ID:       ee9fb108-8f60-46d1-8b23-b3799f30716f
@@ -1847,77 +1838,6 @@ This is just a minor mode that shows a small bar at a certain column position. I
   :hook (prog-mode . display-fill-column-indicator-mode))
 #+end_src
 
-*** =cur-config-ide.el= section on ~lsp-mode~ and lsp
-:PROPERTIES:
-:ID:       b0b77539-5afd-4043-987e-557363d778bc
-:END:
-
-Lsp-mode is my chosen language server protocol support package. I chose this over eglot because of the richer features and (at the time that I started using lsp) more mature state. I will revisit eglot in the future but for now I am perfectly happy with lsp-mode.
-
-#+begin_src text :tangle ./packages.txt :padline no
-# lsp-mode
-#+end_src
-
-#+begin_src emacs-lisp
-;; ===LSP Mode===
-(use-package lsp-mode
-  :disabled t
-  :demand t
-  :hook
-  (lsp-mode  . lsp-enable-which-key-integration)
-  :custom
-  (lsp-keymap-prefix "C-c C-M-l" "lsp mode keymap")
-  (lsp-file-watch-threshold 1750)
-  (lsp-headerline-breadcrumb-enable nil)
-  :bind (:map lsp-mode-map
-              ("C-c C-a" . lsp-execute-code-action)  ; code actions
-              ("C-c C-e" . lsp-treemacs-errors-list) ; treemacs error list
-              ("C-c f"   . lsp-find-references)      ; find references
-              ("C-c r"   . lsp-find-definition))     ; find definitions
-  :config
-  (lsp-deferred)
-  (setq gc-cons-threshold (* 100 1024 1024))
-  (setq read-process-output-max (* 3 1024 1024))
-  (setq lsp-idle-delay 0.500)
-  (setq lsp-lens-enable nil)
-  (lsp-enable-which-key-integration t))
-#+end_src
-
-*** =cur-config-ide.el= section on ~lsp-ui~
-:PROPERTIES:
-:ID:       9b8b7653-7f3f-47f8-a5a1-e41c0fd07407
-:END:
-
-Lsp-ui provides some ui enhancements and extra features to lsp. Probably the best one is the doc feature to view documentation in the editor.
-
-#+begin_src text :tangle ./packages.txt :padline no
-# lsp-ui
-#+end_src
-
-#+begin_src emacs-lisp
-(use-package lsp-ui
-  :disabled t
-  :after (lsp-mode)
-  :custom
-  (lsp-ui-doc-enable nil "lsp-ui doc disabled by default")
-  (lsp-ui-doc-show-with-cursor t "lsp-ui doc follows cursor")
-  (lsp-ui-doc-show-with-mouse t "lsp-ui doc follows mouse")
-  (lsp-ui-doc-position 'at-point "lsp-ui doc shows at cursor")
-  :bind (:map lsp-ui-mode-map
-              ("C-c C-f" . lsp-ui-peek-find-references)  ; find references ui
-              ("C-c C-r" . lsp-ui-peek-find-definitions) ; find definitions ui
-              ("C-c C-d" . lsp-ui-doc-mode) ; toggle doc mode
-              :map lsp-ui-peek-mode-map
-              ("ESC" . lsp-ui-peek--abort)             ; toggle doc mode
-              ("g"   . lsp-ui-peek--abort)             ; toggle doc mode
-              ("j"   . lsp-ui-peek--select-next)       ; toggle doc mode
-              ("k"   . lsp-ui-peek--select-prev)       ; toggle doc mode
-              ("C-j" . lsp-ui-peek--select-next-file)  ; toggle doc mode
-              ("C-k" . lsp-ui-peek--select-prev-file)) ; toggle doc mode
-  :hook
-  (lsp-mode . lsp-ui-mode))
-#+end_src
-
 *** TODO =cur-config-ide.el= section on ~eglot~ and lsp
 :PROPERTIES:
 :ID:       73015191-0919-4808-8b8b-377c9e3682f8
@@ -2099,27 +2019,6 @@ paredit
   :hook ((emacs-lisp-mode lisp-interaction-mode scheme-mode) . paredit-mode))
 #+end_src
 
-*** =cur-config-ide.el= section on ~geiser~ and working with schemes
-:PROPERTIES:
-:ID:       b44c76ac-9660-4cc5-80d6-81112a734185
-:END:
-
-#+begin_src text :tangle ./packages.txt :padline no
-geiser
-geiser-chez
-geiser-chibi
-geiser-chicken
-geiser-gambit
-geiser-gauche
-geiser-guile
-geiser-kawa
-geiser-mit
-geiser-racket
-geiser-stklos
-macrostep
-macrostep-geiser
-#+end_src
-
 *** =cur-config-ide.el= section on java programming
 :PROPERTIES:
 :ID:       9f889f1e-d963-46ae-af5f-77fd0ba59779
@@ -2128,10 +2027,6 @@ macrostep-geiser
 My configurations for working with the Java language. I have ~java-ts-mode~, the tree sitter version of the normal ~java-mode~, as the mode for editing =.java= files. I have found that either tree sitter provides exactly the same or better syntax highlighting and the possibility of better movement once it gets better integrated into emacs.
 
 I also have lsp-java set up for better integrating ~lsp-mode~ into ~java-ts-mode~. Note because I have =direnv= integration with ~envrc~, the hooks I add to start ~lsp~ must be ~lsp-defered~. ~lsp-defered~ does not start ~lsp-mode~ until after the buffer has visually loaded. We want this because ~envrc~ will change the ~exec-path~ to what =direnv= would change it to. For instance, if I have a devshell that says "here is the lsp-server, the build tool, and external libraries with these exact versions", envrc will make sure that ~exec-path~ contains exactly those versions of those programs in the nix store.
-
-#+begin_src text :tangle ./packages.txt :padline no
-# lsp-java
-#+end_src
 
 #+begin_src emacs-lisp
 ;; ===Java Tree-Sitter Mode===
@@ -2143,39 +2038,6 @@ I also have lsp-java set up for better integrating ~lsp-mode~ into ~java-ts-mode
   :ensure nil
   :after (java-ts-mode)
   :hook (java-ts-mode . eglot-ensure))
-
-;; ===lsp-java===
-(use-package lsp-java
-  :disabled t
-  :after (java-ts-mode lsp-mode cc-mode envrc)
-  :hook
-  (envrc-mode . (lambda ()
-                  (when (equal major-mode 'java-ts-mode)
-                    (setq lsp-java-server-install-dir (concat (getenv "JDTLS_PATH") "/share/java/jdtls/")))))
-  (java-ts-mode . lsp-deferred)
-  :config
-  (defun lsp-java--ls-command ()
-    (let ((jdtls-path (getenv "JDTLS_PATH"))
-          (jdtls-exec-options (list
-                               "-configuration"
-                               (concat (getenv "HOME") "/.jdtls/config_linux")
-                               "-data"
-                               (concat (getenv "HOME") "/.jdtls/java-workspace"))))
-      (message (concat jdtls-path "/share/java/"))
-      (append (list (concat jdtls-path "/bin/jdtls")) jdtls-exec-options))))
-#+end_src
-
-*** =cur-config-ide.el= section on working with justfiles
-:PROPERTIES:
-:ID:       8e3e0c17-47b3-4a83-a4f2-381ab03727ef
-:END:
-
-#+begin_src text :tangle ./packages.txt :padline no
-just-mode
-#+end_src
-
-#+begin_src emacs-lisp
-(use-package just-mode)
 #+end_src
 
 *** =cur-config-ide.el= section on yaml files
@@ -2223,106 +2085,6 @@ nix-ts-mode
   (lsp-nix-nixd-server-path "nixd" "set nixd binary path to be use from current $PATH"))
 #+end_src
 
-*** =cur-config-ide.el= configurations for rust
-:PROPERTIES:
-:ID:       5faeccc8-de89-47ac-bd25-43fe3df10b9a
-:END:
-
-#+begin_src text :tangle ./packages.txt :padline no
-rustic
-#+end_src
-
-#+begin_src emacs-lisp
-;; ===Rust-Mode===
-(use-package rustic
-  :custom (rustic-lsp-client 'eglot))
-
-(use-package elec-pair
-  :after rustic
-  :demand t
-  :hook (rustic-mode . electric-pair-local-mode))
-
-(use-package eglot
-  :ensure nil
-  :after (rustic)
-  :hook (rustic-mode . eglot-ensure))
-
-(use-package lsp-mode
-  :disabled t
-  :after (rustic)
-  :hook (rustic-mode . lsp-deferred))
-#+end_src
-
-*** =cur-config-ide.el= configurations for haskell
-:PROPERTIES:
-:ID:       36eb4cf2-82a0-4de6-a27c-d56413744789
-:END:
-
-#+begin_src text :tangle ./packages.txt :padline no
-haskell-mode
-company-ghci
-#+end_src
-
-#+begin_src emacs-lisp
-;; ===Haskell-Mode===
-(use-package haskell-mode)
-
-(use-package eglot
-  :ensure nil
-  :after (haskell-mode)
-  :hook (haskell-mode . eglot-ensure))
-
-(use-package lsp-mode
-  :disabled t
-  :after (haskell-mode)
-  :hook (haskell-mode . lsp-deferred))
-
-;; ===LSP-Haskell===
-(use-package lsp-haskell
-  :disabled t
-  :after (haskell-mode lsp-mode)
-  :demand t)
-
-;; ===Company-GHCI===
-(use-package company-ghci
-  :after (company haskell-mode)
-  :demand t
-  :custom (company-ghc-show-info t)
-  :config
-  (push 'company-ghci company-backends))
-#+end_src
-
-*** =cur-config-ide.el= configurations for ocaml
-:PROPERTIES:
-:ID:       b17c9828-12cb-4ccf-b7a8-6dd60f1bfe29
-:END:
-
-#+begin_src text :tangle ./packages.txt :padline no
-tuareg
-utop
-merlin
-merlin-company
-#+end_src
-
-#+begin_src emacs-lisp
-;; ===Tuareg===
-(use-package tuareg)
-
-;; ===Utop===
-(use-package utop
-  :commands (utop utop-mode)
-  :config
-  (advice-add 'utop :around 'inheritenv-apply))
-
-(use-package merlin
-  :after (tuareg)
-  :hook (tuareg-mode . merlin-mode))
-
-(use-package merlin-company
-  :after (company merlin)
-  :demand t)
-#+end_src
-
 *** =cur-config-ide.el= configurations for C lang
 :PROPERTIES:
 :ID:       45a60406-d36b-4649-a0b3-0bd4a2135470
@@ -2363,30 +2125,6 @@ I use tree-sitter for C, which unfortunately is not currently integrated into th
   :disabled t
   :after (cc-mode c-ts-mode lsp-mode)
   :demand t)
-#+end_src
-
-*** =cur-config-ide.el= configurations for zig
-:PROPERTIES:
-:ID:       cd00a97f-9707-4b53-9700-fe0342382691
-:END:
-
-#+begin_src text :tangle ./packages.txt :padline no
-zig-mode
-#+end_src
-
-#+begin_src emacs-lisp
-;; ===Zig Mode===
-(use-package zig-mode)
-
-(use-package eglot
-  :ensure nil
-  :after (zig-mode)
-  :hook (zig-mode . eglot-ensure))
-
-(use-package lsp-mode
-  :disabled t
-  :after (zig-mode)
-  :hook (zig-mode . lsp-deferred))
 #+end_src
 
 *** =cur-config-ide.el= configurations for go
