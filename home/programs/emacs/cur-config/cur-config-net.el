@@ -51,16 +51,6 @@
 	  elfeed-tube-auto-save-p nil)
   (elfeed-tube-setup))
 
-(use-package elfeed-tube-mpv
-  :after (elfeed-tube elfeed)
-  :demand t
-  :bind ( :map elfeed-show-mode-map
-	  ("V"       . elfeed-tube-mpv)
-	  ("C-c C-f" . elfeed-tube-mpv-follow-mode)
-	  ("C-c C-w" . elfeed-tube-mpv-where)
-	  :map elfeed-search-mode-map
-	  ("V" . elfeed-tube-mpv)))
-
 (provide 'cur-config-elfeed)
 
 (use-package cur-yt

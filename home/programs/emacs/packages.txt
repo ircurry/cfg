@@ -38,6 +38,5 @@ ox-gemini
 elpher
 elfeed
 elfeed-tube
-elfeed-tube-mpv
 elcord
 envrc
