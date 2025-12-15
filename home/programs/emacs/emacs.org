@@ -2537,31 +2537,6 @@ elfeed-tube-mpv
 (provide 'cur-config-elfeed)
 #+end_src
 
-*** =cur-config-net.el= section on ~yeetube~ and playing youtube videos
-:PROPERTIES:
-:ID:       d0df968c-e940-4987-a4c4-a672af0b1bea
-:END:
-
-#+begin_src emacs-lisp
-(use-package yeetube
-  :bind ( :map yeetube-mode-map
-	  ("s"   . yeetube-search)
-	  ("V" . yeetube-play))
-  :config
-  (setf yeetube-invidious-instances '("youtube.com")))
-
-(use-package hl-line-mode
-  :after (yeetube)
-  :hook (yeetube-mode . hl-line-mode))
-
-(use-package cur-yt
-  :after (yeetube)
-  :demand t
-  :bind ( :map yeetube-mode-map
-	  ("v" . cur-yt-play-video))
-  :custom (yeetube-play-function #'cur-yt-yeetube-play-resolution))
-#+end_src
-
 *** =cur-config-net.el= section on playing youtube videos
 :PROPERTIES:
 :ID:       3ec2df0a-91ea-4e95-b3e3-fc950c5153c6

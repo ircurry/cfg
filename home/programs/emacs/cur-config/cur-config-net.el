@@ -63,24 +63,6 @@
 
 (provide 'cur-config-elfeed)
 
-(use-package yeetube
-  :bind ( :map yeetube-mode-map
-	  ("s"   . yeetube-search)
-	  ("V" . yeetube-play))
-  :config
-  (setf yeetube-invidious-instances '("youtube.com")))
-
-(use-package hl-line-mode
-  :after (yeetube)
-  :hook (yeetube-mode . hl-line-mode))
-
-(use-package cur-yt
-  :after (yeetube)
-  :demand t
-  :bind ( :map yeetube-mode-map
-	  ("v" . cur-yt-play-video))
-  :custom (yeetube-play-function #'cur-yt-yeetube-play-resolution))
-
 (use-package cur-yt
   :commands (cur-yt-play-video))
 
