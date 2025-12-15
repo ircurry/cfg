@@ -19,7 +19,8 @@
 	   (*? not-newline)
 	   (or "watch?v=" 
 	       (seq "watch?" (*? not-newline) "&v=")))
-	  (seq (*? not-newline) "youtube.com/shorts/"))
+	  (seq (*? not-newline) "youtube.com/shorts/")
+	  (seq (*? not-newline) "youtu.be/"))
       (group-n 1 (= 11 anything))
       (*? not-newline)
       eol)
