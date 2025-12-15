@@ -2561,7 +2561,6 @@ elcord
 
 #+begin_src text :tangle ./packages.txt :padline no
 envrc
-inheritenv
 #+end_src
 
 #+begin_src emacs-lisp

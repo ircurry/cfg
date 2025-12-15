@@ -44,4 +44,3 @@ elfeed-tube
 elfeed-tube-mpv
 elcord
 envrc
-inheritenv
