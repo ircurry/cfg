@@ -32,7 +32,6 @@ yaml-mode
 nix-mode
 nix-ts-mode
 # ccls
-vterm
 eat
 eshell-syntax-highlighting
 mistty

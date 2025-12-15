@@ -2177,37 +2177,6 @@ I use tree-sitter for C, which unfortunately is not currently integrated into th
   :custom (pcomplete-termination-string ""))
 #+end_src
 
-*** =cur-config-shell.el= section on ~vterm~ and fast, accurate terminal emulation
-:PROPERTIES:
-:ID:       de664b6d-e7b6-4ef2-b418-b1e91baef0a9
-:END:
-
-Vterm is a terminal emulator for Emacs. It is faster than ~term~ and ~ansi-term~ but the downside is that it is not written entirely in elisp so its cross platform. ~cur/meow-vterm~ and ~cur/meow-vterm-other-window~ help make vterm more "intuitive". ~cur/vterm-kill~ kills the vterm buffer cleanly and without prompting.
-
-#+begin_src text :tangle ./packages.txt :padline no
-vterm
-#+end_src
-
-#+begin_src emacs-lisp
-;; ===Vterm===
-(use-package vterm
-  :bind ( :map cur/sub-leader-keymap
-          ("C-S-t" . vterm))
-  :custom
-  (vterm-shell "fish")
-  :config
-  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
-  (setq vterm-max-scrollback 10000))
-
-(use-package cur-vterm
-  :after (vterm)
-  :bind ( :map vterm-mode-map
-          ("C-c C-RET"      . cur-vterm-enter-password)
-          ("C-c C-<return>" . cur-vterm-enter-password)
-          :map project-prefix-map
-          ("T" . cur-vterm-project-other-window)))
-#+end_src
-
 *** =cur-config-shell.el= section on ~eat~ and terminal emulation
 :PROPERTIES:
 :ID:       522c5038-171d-4163-9bce-7b36e5cbded8
@@ -3924,52 +3893,6 @@ determine if it will create a new window or reuse the current one.")
 
 (provide 'cur-window)
 ;;; cur-window.el ends here
-#+end_src
-
-** Vterm extension (=cur-vterm.el=)
-:PROPERTIES:
-:header-args:emacs-lisp: :tangle ./cur-lisp/cur-vterm.el
-:ID:       7c12cb33-ff1d-4aff-a0af-aa6d0023efe0
-:END:
-
-#+begin_src emacs-lisp
-;;; cur-vterm.el --- Customization and helper functions for vterm
-
-;;; Commentary:
-
-;;; Code:
-
-(require 'vterm)
-(require 'auth-source)
-
-(defun cur-vterm-enter-password ()
-  (declare (interactive-only t))
-  (interactive)
-  (unless (equal major-mode 'vterm-mode)
-    (user-error "Not in a VTerm Terminal"))
-  (vterm-insert (read-passwd "Password: "))
-  (vterm-send-return))
-
-(defun cur-vterm-project (&optional other-window)
-  (interactive)
-  (if-let* ((current-project (project-current))
-            (default-directory (project-root current-project))
-            (buffer-name (format "*%s-%s*" (project-name current-project) "vterm")))
-      (if (buffer-live-p (get-buffer buffer-name))
-          (if other-window
-              (switch-to-buffer-other-window buffer-name)
-            (switch-to-buffer buffer-name))
-        (if other-window
-            (vterm-other-window buffer-name)
-          (vterm buffer-name)))
-    (user-error "Cannot create vterm buffer in %s" (cdr current-project))))
-
-(defun cur-vterm-project-other-window ()
-  (interactive)
-  (cur-vterm-project t))
-
-(provide 'cur-vterm)
-;;; cur-vterm.el ends here
 #+end_src
 
 ** Playing YouTube Videos

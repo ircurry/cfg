@@ -2,24 +2,6 @@
   :ensure nil
   :custom (pcomplete-termination-string ""))
 
-;; ===Vterm===
-(use-package vterm
-  :bind ( :map cur/sub-leader-keymap
-          ("C-S-t" . vterm))
-  :custom
-  (vterm-shell "fish")
-  :config
-  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
-  (setq vterm-max-scrollback 10000))
-
-(use-package cur-vterm
-  :after (vterm)
-  :bind ( :map vterm-mode-map
-          ("C-c C-RET"      . cur-vterm-enter-password)
-          ("C-c C-<return>" . cur-vterm-enter-password)
-          :map project-prefix-map
-          ("T" . cur-vterm-project-other-window)))
-
 ;; ===Eat===
 (use-package eat
   :hook (eat-exec . (lambda (&rest _) (eat-line-mode)))
