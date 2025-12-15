@@ -22,35 +22,11 @@
 (use-package eldoc
   :hook (prog-mode . eldoc-mode))
 
-;; ===Company Mode===
-(use-package company
-  :disabled t
-  :hook
-  (prog-mode . company-mode)
-  :bind ( :map company-active-map
-          ("<tab>" . company-complete-common-or-cycle)
-          ("<return>" . company-complete-selection)
-	  :map company-mode-map
-	  ("<tab>" . company-indent-or-complete-common))
-  :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.0))
-
-(use-package company
-  :disabled t
-  :after (lsp-mode)
-  :hook (lsp-mode . company-mode))
-
 ;; ===Flycheck===
 (use-package flycheck
   :after (prog-mode)
   :hook
   (prog-mode . flycheck-mode))
-
-(use-package flycheck
-  :after (lsp-mode)
-  :hook
-  (lsp-mode . flycheck-mode))
 
 ;; ===Magit===
 (use-package magit
@@ -114,15 +90,6 @@
   :after (nix-mode)
   :hook (nix-mode . eglot-ensure))
 
-(use-package lsp-mode
-  :disabled t
-  :after (nix-mode)
-  :hook
-  (nix-mode . lsp-deferred) ;; So that envrc mode will work
-  :custom
-  (lsp-disabled-clients '((nix-mode . nix-nil)) "disable nil so that nixd will be used as lsp-server")
-  (lsp-nix-nixd-server-path "nixd" "set nixd binary path to be use from current $PATH"))
-
 ;; ===C Tree-Sitter Mode===
 (use-package c-ts-mode
   :after (cc-mode)
@@ -141,17 +108,6 @@
   :after (c-ts-mode)
   :hook (c-ts-mode . eglot-ensure))
 
-(use-package lsp-mode
-  :disabled t
-  :after (c-ts-mode)
-  :hook (c-ts-mode . lsp-deferred))
-
-;; ===CCLS Mode===
-(use-package ccls
-  :disabled t
-  :after (cc-mode c-ts-mode lsp-mode)
-  :demand t)
-
 ;; ===Go Tree-Sitter Mode===
 (use-package go-ts-mode
   :mode
@@ -166,10 +122,5 @@
   :ensure nil
   :after (go-ts-mode)
   :hook (go-ts-mode . eglot-ensure))
-
-(use-package lsp-mode
-  :disabled t
-  :after (go-ts-mode)
-  :hook (go-ts-mode . lsp-deferred))
 
 (provide 'cur-config-ide)

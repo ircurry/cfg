@@ -57,11 +57,7 @@
           ("C-t" . cur-override-theme-load-theme))
   :custom
   (cur-override-theme-overrides
-   '((catppuccin (company-preview :foreground (catppuccin-color 'overlay0)
-                                  :background (if (eq catppuccin-flavor 'latte)
-                                                  (catppuccin-darken (catppuccin-color 'base) 12)
-                                                (catppuccin-lighten (catppuccin-color 'base) 17)))
-                 (cur-mode-line-meow-state :background (catppuccin-color 'lavender)
+   '((catppuccin (cur-mode-line-meow-state :background (catppuccin-color 'lavender)
                                            :foreground (catppuccin-color 'base))
                  (cur-mode-line-major-mode-active :foreground (catppuccin-color 'blue) :weight 'bold)
                  (flycheck-info :underline (list :style 'wave :color (catppuccin-color 'green)))
@@ -77,13 +73,7 @@
                         (elpher-gemini-heading3 :foreground "#c594c5" :height 1.2 :inherit 'bold)
 			(elpher-gemini-preformatted :foreground "#65737e" :inhert 'fixed-pitch)
 			(hl-line :background "#343D46"))
-     (doom-flatwhite (haskell-operator-face :background "#f7f3ee"
-                                            :foreground "#605a52")
-                     (haskell-type-face :background "#d2ebe3"
-                                        :foreground "#465953")
-                     (haskell-constructor-face :background "#f7e0c3"
-                                               :foreground "#5b5143")
-                     (completions-common-part :background "#dde4f2"
+     (doom-flatwhite (completions-common-part :background "#dde4f2"
                                               :foreground "#7382a0"
                                               :weight 'bold)
                      (org-dispatcher-highlight :background "#f7e0c3"

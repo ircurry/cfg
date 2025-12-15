@@ -9,7 +9,6 @@
           ("\\*Org Src.*"
            (display-buffer-same-window))
           ((or (derived-mode . compilation-mode)
-               (derived-mode . geiser-mode)
                (derived-mode . grep-mode)
                (derived-mode . help-mode)
                (derived-mode . Info-mode)
@@ -30,12 +29,6 @@
             display-buffer-below-selected)
            (dedicated . t)
            (body-function . cur-window-select-fit-to-size))
-          ((or (derived-mode . justl-mode)
-               "justl - .*")
-           (display-buffer-reuse-window
-            display-buffer-at-bottom)
-           (dedicated . t)
-           (window-height . 0.25))
 	  ((or "\\*eshell .*"
                "\\*.*-eshell*"
                "\\*.*-eat\\*")
@@ -98,7 +91,6 @@
 				     "^\\*vterm\\*$"  "^\\*.*-vterm\\*$" vterm-mode
 				     compilation-mode
 				     occur-mode
-				     geiser-mode
 				     grep-mode
 				     rg-mode
 				     xref--xref-buffer-mode

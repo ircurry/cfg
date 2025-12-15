@@ -84,7 +84,7 @@ The minimum and maximum height and width is determined by
    (cur-window--get-window-size :min-width)))
 
 (defvar cur-window-same-window-modes-list
-  '(justl-mode)
+  '()
   "List of major modes that should have their window reused.
 The function `cur-window-display-buffer-below-or-pop' uses this variable to
 determine if it will create a new window or reuse the current one.")

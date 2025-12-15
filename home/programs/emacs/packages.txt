@@ -22,7 +22,6 @@ embark-consult
 corfu
 ace-window
 popper
-company
 flycheck
 magit
 rg
@@ -31,7 +30,6 @@ paredit
 yaml-mode
 nix-mode
 nix-ts-mode
-# ccls
 eat
 eshell-syntax-highlighting
 mistty

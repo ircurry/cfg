@@ -56,7 +56,6 @@
      (ediff-mode . motion)
      (eshell-mode . insert)
      (gud-mode . normal)
-     (haskell-interactive-mode . normal)
      (help-mode . motion)
      (helpful-mode . normal)
      (json-mode . normal)

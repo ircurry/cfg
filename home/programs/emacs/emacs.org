@@ -577,7 +577,6 @@ meow
      (ediff-mode . motion)
      (eshell-mode . insert)
      (gud-mode . normal)
-     (haskell-interactive-mode . normal)
      (help-mode . motion)
      (helpful-mode . normal)
      (json-mode . normal)
@@ -1129,11 +1128,7 @@ I have several custom themes in a directory weirdly named themes. These are the 
           ("C-t" . cur-override-theme-load-theme))
   :custom
   (cur-override-theme-overrides
-   '((catppuccin (company-preview :foreground (catppuccin-color 'overlay0)
-                                  :background (if (eq catppuccin-flavor 'latte)
-                                                  (catppuccin-darken (catppuccin-color 'base) 12)
-                                                (catppuccin-lighten (catppuccin-color 'base) 17)))
-                 (cur-mode-line-meow-state :background (catppuccin-color 'lavender)
+   '((catppuccin (cur-mode-line-meow-state :background (catppuccin-color 'lavender)
                                            :foreground (catppuccin-color 'base))
                  (cur-mode-line-major-mode-active :foreground (catppuccin-color 'blue) :weight 'bold)
                  (flycheck-info :underline (list :style 'wave :color (catppuccin-color 'green)))
@@ -1149,13 +1144,7 @@ I have several custom themes in a directory weirdly named themes. These are the 
                         (elpher-gemini-heading3 :foreground "#c594c5" :height 1.2 :inherit 'bold)
 			(elpher-gemini-preformatted :foreground "#65737e" :inhert 'fixed-pitch)
 			(hl-line :background "#343D46"))
-     (doom-flatwhite (haskell-operator-face :background "#f7f3ee"
-                                            :foreground "#605a52")
-                     (haskell-type-face :background "#d2ebe3"
-                                        :foreground "#465953")
-                     (haskell-constructor-face :background "#f7e0c3"
-                                               :foreground "#5b5143")
-                     (completions-common-part :background "#dde4f2"
+     (doom-flatwhite (completions-common-part :background "#dde4f2"
                                               :foreground "#7382a0"
                                               :weight 'bold)
                      (org-dispatcher-highlight :background "#f7e0c3"
@@ -1340,8 +1329,6 @@ nerd-icons-ibuffer
 :header-args:emacs-lisp: :tangle ./cur-config/cur-config-completion.el
 :ID:       54d4323e-5f7a-49bf-85d0-a14d3f6e291f
 :END:
-
-This section is not about code completion. Rather, this is my configuration for Emacs' completion system and the main interfaces that use them. For code completion please go see =cur-config-ide.el= and ~company-mode~.
 
 Currently I am using the [[https:github.com/abo-abo/swiper/][ivy/counsel/swiper]] suite for doing completions in Emacs. I like it but I know that the vertico/marginelia/consult/embark chain is better, faster, and more modern. I plan to make the switch at some point but for now I sticking with ivy.
 
@@ -1618,7 +1605,6 @@ These are my settings for ~display-buffer-alist~ so windows just Do What I Mean.
           ("\\*Org Src.*"
            (display-buffer-same-window))
           ((or (derived-mode . compilation-mode)
-               (derived-mode . geiser-mode)
                (derived-mode . grep-mode)
                (derived-mode . help-mode)
                (derived-mode . Info-mode)
@@ -1639,12 +1625,6 @@ These are my settings for ~display-buffer-alist~ so windows just Do What I Mean.
             display-buffer-below-selected)
            (dedicated . t)
            (body-function . cur-window-select-fit-to-size))
-          ((or (derived-mode . justl-mode)
-               "justl - .*")
-           (display-buffer-reuse-window
-            display-buffer-at-bottom)
-           (dedicated . t)
-           (window-height . 0.25))
 	  ((or "\\*eshell .*"
                "\\*.*-eshell*"
                "\\*.*-eat\\*")
@@ -1729,7 +1709,6 @@ popper
 				     "^\\*vterm\\*$"  "^\\*.*-vterm\\*$" vterm-mode
 				     compilation-mode
 				     occur-mode
-				     geiser-mode
 				     grep-mode
 				     rg-mode
 				     xref--xref-buffer-mode
@@ -1866,38 +1845,6 @@ This is just a minor mode that shows a small bar at a certain column position. I
   :hook (prog-mode . eldoc-mode))
 #+end_src
 
-*** =cur-config-ide.el= section on ~company~ and auto-complete
-:PROPERTIES:
-:ID:       4ce88735-e016-41ec-890c-26fac1907c9a
-:END:
-
-The code completion system. This is different from completions systems like ivy or vertico, this is for interactively completing a symbol while programming.
-
-#+begin_src text :tangle ./packages.txt :padline no
-company
-#+end_src
-
-#+begin_src emacs-lisp
-;; ===Company Mode===
-(use-package company
-  :disabled t
-  :hook
-  (prog-mode . company-mode)
-  :bind ( :map company-active-map
-          ("<tab>" . company-complete-common-or-cycle)
-          ("<return>" . company-complete-selection)
-	  :map company-mode-map
-	  ("<tab>" . company-indent-or-complete-common))
-  :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.0))
-
-(use-package company
-  :disabled t
-  :after (lsp-mode)
-  :hook (lsp-mode . company-mode))
-#+end_src
-
 *** =cur-config-ide.el= section on ~flycheck~ and in-buffer error messages
 :PROPERTIES:
 :ID:       5aa2456b-f94d-4151-83e2-f56995516dce
@@ -1915,11 +1862,6 @@ flycheck
   :after (prog-mode)
   :hook
   (prog-mode . flycheck-mode))
-
-(use-package flycheck
-  :after (lsp-mode)
-  :hook
-  (lsp-mode . flycheck-mode))
 #+end_src
 
 *** =cur-config-ide.el= section on ~magit~ and quick git interface
@@ -2026,8 +1968,6 @@ paredit
 
 My configurations for working with the Java language. I have ~java-ts-mode~, the tree sitter version of the normal ~java-mode~, as the mode for editing =.java= files. I have found that either tree sitter provides exactly the same or better syntax highlighting and the possibility of better movement once it gets better integrated into emacs.
 
-I also have lsp-java set up for better integrating ~lsp-mode~ into ~java-ts-mode~. Note because I have =direnv= integration with ~envrc~, the hooks I add to start ~lsp~ must be ~lsp-defered~. ~lsp-defered~ does not start ~lsp-mode~ until after the buffer has visually loaded. We want this because ~envrc~ will change the ~exec-path~ to what =direnv= would change it to. For instance, if I have a devshell that says "here is the lsp-server, the build tool, and external libraries with these exact versions", envrc will make sure that ~exec-path~ contains exactly those versions of those programs in the nix store.
-
 #+begin_src emacs-lisp
 ;; ===Java Tree-Sitter Mode===
 (use-package java-ts-mode
@@ -2074,15 +2014,6 @@ nix-ts-mode
   :ensure nil
   :after (nix-mode)
   :hook (nix-mode . eglot-ensure))
-
-(use-package lsp-mode
-  :disabled t
-  :after (nix-mode)
-  :hook
-  (nix-mode . lsp-deferred) ;; So that envrc mode will work
-  :custom
-  (lsp-disabled-clients '((nix-mode . nix-nil)) "disable nil so that nixd will be used as lsp-server")
-  (lsp-nix-nixd-server-path "nixd" "set nixd binary path to be use from current $PATH"))
 #+end_src
 
 *** =cur-config-ide.el= configurations for C lang
@@ -2091,10 +2022,6 @@ nix-ts-mode
 :END:
 
 I use tree-sitter for C, which unfortunately is not currently integrated into the default C major mode for Emacs. I have also changed the ~c-default-style~ for C to be "linux", which is 8 spaces for indentation instead of the default of 2.
-
-#+begin_src text :tangle ./packages.txt :padline no
-# ccls
-#+end_src
 
 #+begin_src emacs-lisp
 ;; ===C Tree-Sitter Mode===
@@ -2114,17 +2041,6 @@ I use tree-sitter for C, which unfortunately is not currently integrated into th
   :ensure nil
   :after (c-ts-mode)
   :hook (c-ts-mode . eglot-ensure))
-
-(use-package lsp-mode
-  :disabled t
-  :after (c-ts-mode)
-  :hook (c-ts-mode . lsp-deferred))
-
-;; ===CCLS Mode===
-(use-package ccls
-  :disabled t
-  :after (cc-mode c-ts-mode lsp-mode)
-  :demand t)
 #+end_src
 
 *** =cur-config-ide.el= configurations for go
@@ -2147,11 +2063,6 @@ I use tree-sitter for C, which unfortunately is not currently integrated into th
   :ensure nil
   :after (go-ts-mode)
   :hook (go-ts-mode . eglot-ensure))
-
-(use-package lsp-mode
-  :disabled t
-  :after (go-ts-mode)
-  :hook (go-ts-mode . lsp-deferred))
 #+end_src
 
 *** =cur-config-ide.el= call to ~provide~
@@ -3869,7 +3780,7 @@ The minimum and maximum height and width is determined by
    (cur-window--get-window-size :min-width)))
 
 (defvar cur-window-same-window-modes-list
-  '(justl-mode)
+  '()
   "List of major modes that should have their window reused.
 The function `cur-window-display-buffer-below-or-pop' uses this variable to
 determine if it will create a new window or reuse the current one.")
