@@ -115,9 +115,6 @@
 ;; ===Doom Emacs Themes===
 (use-package doom-themes)
 
-;; ===Autothemer===
-(use-package autothemer)
-
 ;; ===Catppuccin Theme===
 (use-package catppuccin-theme
   :after (autothemer cur-theme))

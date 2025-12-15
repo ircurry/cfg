@@ -6,7 +6,6 @@ meow-tree-sitter
 nerd-icons-dired
 fontaine
 doom-themes
-autothemer
 catppuccin-theme
 ef-themes
 nerd-icons-ibuffer

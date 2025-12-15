@@ -1200,22 +1200,6 @@ doom-themes
 (use-package doom-themes)
 #+end_src
 
-*** =cur-config-faces.el= section on ~autothemer~
-:PROPERTIES:
-:ID:       27ab6486-0928-425f-b089-1c42129fff25
-:END:
-
-A library used by =catppuccin= and =kanagawa=.
-
-#+begin_src text :tangle ./packages.txt :padline no
-autothemer
-#+end_src
-
-#+begin_src emacs-lisp
-;; ===Autothemer===
-(use-package autothemer)
-#+end_src
-
 *** =cur-config-faces.el= section on catppuccin theme
 :PROPERTIES:
 :ID:       805fb865-4448-4d17-a5f2-831af0ad02b5
