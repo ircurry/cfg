@@ -1330,76 +1330,6 @@ nerd-icons-ibuffer
 		  mode-line-end-spaces)))
 #+end_src
 
-*** =cur-config-faces.el= section on ~page-break-lines~ and making page breaks pretty
-:PROPERTIES:
-:ID:       3ce920f3-5990-4aa3-bb9e-6deb0de1c2c3
-:END:
-
-#+begin_src text :tangle ./packages.txt :padline no
-page-break-lines
-#+end_src
-
-#+begin_src emacs-lisp
-(use-package page-break-lines)
-#+end_src
-
-*** =cur-config-faces.el= section on ~dashboard~ and startup overview
-:PROPERTIES:
-:ID:       bbc53d0c-2f80-4cf3-8685-ae56f65ad9aa
-:END:
-
-#+begin_src text :tangle ./packages.txt :padline no
-dashboard
-nerd-icons
-#+end_src
-
-#+begin_src emacs-lisp :tangle no
-(use-package dashboard
-  :demand t
-  :custom
-  (dashboard-items '((projects . 5)
-		     (recents . 5)
-		     (bookmarks . 5)))
-  (dashboard-startupify-list '(dashboard-insert-banner
-			       dashboard-insert-newline
-			       dashboard-insert-init-info
-			       dashboard-insert-items
-			       dashboard-insert-newline
-			       dashboard-insert-footer))
-  (dashboard-center-content t)
-  :config
-  ;; These make it really easy to accidentally delete projects and bookmarks
-  (dolist (c '(dashboard-remove-item-under
-	       dashboard-remove-item-agenda
-	       dashboard-remove-item-recentf
-	       dashboard-remove-item-projects
-	       dashboard-remove-item-bookmarks))
-    (put c 'disabled t))
-  (setopt dashboard-heading-icons '((recents . "nf-oct-history")
-				    (bookmarks . "nf-oct-bookmark")
-				    (agenda . "nf-oct-calendar")
-				    (projects . "nf-oct-rocket")
-				    (registers . "nf-oct-database")))
-  (setopt dashboard-startup-banner (concat (expand-file-name user-emacs-directory) "dashboard-banners/nocturne-fraktur.txt"))
-  (dashboard-setup-startup-hook))
-
-(use-package dashboard
-  :if (locate-library "nerd-icons.el")
-  :demand t
-  :custom
-  (dashboard-display-icons-p t)
-  (dashboard-icon-type 'nerd-icons)
-  (dashboard-set-file-icons t)
-  (dashboard-set-heading-icons t))
-
-(use-package page-break-lines
-  :after (dashboard)
-  :demand t
-  :hook (dashboard-before-initialize . page-break-lines-mode)
-  :custom
-  (dashboard-page-separator "\n"))
-#+end_src
-
 *** =cur-config-faces.el= call to ~provide~
 :PROPERTIES:
 :ID:       e6cb8999-24b0-4b75-b6fa-5d7168ee0a8a

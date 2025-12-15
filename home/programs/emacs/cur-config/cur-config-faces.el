@@ -174,6 +174,4 @@
 		  cur-mode-line-right-align
 		  mode-line-end-spaces)))
 
-(use-package page-break-lines)
-
 (provide 'cur-config-faces)
