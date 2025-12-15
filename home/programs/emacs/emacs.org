@@ -422,10 +422,6 @@ tmr
 
 [[https://github.com/justbur/emacs-which-key][~which-key~]] shows you what keybindings are available in a keychord. Super helpful and +a must have in Emacs+ will be a part of Emacs 30 🎉.
 
-#+begin_src text :tangle ./packages.txt :padline no
-which-key
-#+end_src
-
 #+begin_src emacs-lisp
 ;; ===which-key===
 (use-package which-key
