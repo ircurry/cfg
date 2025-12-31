@@ -2345,9 +2345,10 @@ elfeed
 	  ("i" . imenu)
 	  :map elfeed-search-mode-map
 	  ("w" . elfeed-search-browse-url)
+	  ("l" . elfeed-search-show-entry)
 	  ("e" . eww))
   :config
-  (setopt elfeed-search-filter "@2-weeks-ago")
+  (setopt elfeed-search-filter "@2-weeks-ago +unread")
   (setopt elfeed-db-directory (concat (abbreviate-file-name (expand-file-name user-emacs-directory)) "elfeed-db")))
 
 (use-package consult
