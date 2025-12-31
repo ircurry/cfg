@@ -8,6 +8,8 @@
 
 ;; ===Elpher Gemini/Gopher Client===
 (use-package elpher
+  :bind ( :map elpher-mode-map
+	  ("l" . push-button))
   :custom
   (elpher-default-url-type "gemini"))
 
