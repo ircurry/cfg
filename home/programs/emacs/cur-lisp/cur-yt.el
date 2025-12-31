@@ -17,7 +17,7 @@
   (rx bol
       (or (seq
 	   (*? not-newline)
-	   (or "watch?v=" 
+	   (or "watch?v="
 	       (seq "watch?" (*? not-newline) "&v=")))
 	  (seq (*? not-newline) "youtube.com/shorts/")
 	  (seq (*? not-newline) "youtu.be/"))
