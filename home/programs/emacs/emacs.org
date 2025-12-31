@@ -3666,6 +3666,8 @@ If THEME is nil then call interactively the function
 :ID:       f7a52192-5fe8-45e6-a541-1139216007bd
 :END:
 
+Because this package contains GPL code from [[https://protesilaos.com/emacs/dotemacs#h:35b8a0a5-c447-4301-a404-bc274596238d][Protesilaos' configuration]] this section is GPL licensed. I intend to rewrite it entirely some time soon where I might dual license it as GPL and MIT.
+
 #+begin_src emacs-lisp
 ;;; cur-window.el --- Customization and helper functions for window management -*- lexical-binding: t -*-
 
