@@ -1,0 +1,19 @@
+* Nocturne Home
+** TODO Move to Hjem and Wrappers
+** TODO Decouple system keybindings from composititor (if possible)
+** TODO Make generic backend for monitor profiles
+** TODO Investigate moving from Alacritty to foot
+* Emacs
+** TODO Move off of ~use-pacakge~ and onto custom configuration macros
+** TODO Create simpler window management in Emacs
+** TODO Configure Embark for basic menus
+** TODO Finish Emacs splash screen
+** TODO Make base16 modus themes
+* Rice
+** TODO Move to Niri, Mangowc, or River for wayland compositor
+** TODO Use Quickshell for bar
+** TODO Use Quickshell for notification daemon
+** TODO Use Quickshell for application menu
+** TODO Use Quickshell for command menu
+** TODO Use Quickshell for power menu
+** TODO Use Quickshell as generic menu
