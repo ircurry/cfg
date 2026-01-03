@@ -34,11 +34,11 @@
               x86_64-linux = "amd64";
             };
             hash = selectSystem {
-              x86_64-linux = "sha256-zgU6pBujCXBhDO9XAqpUSDNuQt5daQ1gVwopXwc0nGo=";
+              x86_64-linux = "sha256-JHuYHi4uBHzMopa45ipwsdx/3Ox/FxN3lYhBACQOCkE=";
             };
           in
           rec {
-            version = "2025.13";
+            version = "2025.14";
             src = fetchurl {
               url = "https://github.com/mullvad/mullvadvpn-app/releases/download/${version}/MullvadVPN-${version}_${platform}.deb";
               inherit hash;
