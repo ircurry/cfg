@@ -9,6 +9,9 @@
 ** TODO Configure Embark for basic menus
 ** TODO Finish Emacs splash screen
 ** TODO Make base16 modus themes
+** TODO Set up denote
+** TODO Try out Beframe
+** TODO Explore Logos, see if it is useful
 * Rice
 ** TODO Move to Niri, Mangowc, or River for wayland compositor
 ** TODO Use Quickshell for bar
