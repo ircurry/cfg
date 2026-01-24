@@ -38,7 +38,6 @@
       devShells = forAllSystems (pkgs: {
         default = import ./shell.nix {
           inherit pkgs;
-          ags = inputs.ags.packages.${pkgs.stdenv.hostPlatform.system}.agsFull;
         };
       });
     };

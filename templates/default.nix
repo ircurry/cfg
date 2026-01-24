@@ -3,6 +3,10 @@ let
     path = ./c;
     description = "C flake and dev enviornment";
   };
+  generic = {
+    path = ./generic;
+    description = "Generic Programming Template";
+  };
   haskell = {
     path = ./haskell;
     description = "Haskell flake and dev enviornment";
@@ -13,6 +17,12 @@ let
   };
 in
 {
-  inherit c haskell zig;
+  inherit
+    c
+    generic
+    haskell
+    zig
+    ;
+  gen = generic;
   hs = haskell;
 }
