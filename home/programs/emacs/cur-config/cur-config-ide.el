@@ -52,6 +52,8 @@
           ("d"   . project-dired)
           ("D"   . project-find-dir)
           ("C-b" . nil)
+          ("C-c" . project-recompile)
+          ("c"   . project-compile)
           ("l"   . project-list-buffers))
   :custom
   (project-buffers-viewer #'project-list-buffers-ibuffer)
