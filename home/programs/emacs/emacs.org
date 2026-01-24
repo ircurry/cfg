@@ -2017,7 +2017,7 @@ I use tree-sitter for C, which unfortunately is not currently integrated into th
   ("\\.c\\'" . c-ts-mode)
   ("\\.h\\'" . c-ts-mode)
   :custom
-  (c-default-style '((c-ts-mode . "linux")
+  (c-default-style '((c-ts-mode . "bsd")
                      (java-mode . "java")
                      (awk-mode  . "awk")
                      (other     . "gnu"))

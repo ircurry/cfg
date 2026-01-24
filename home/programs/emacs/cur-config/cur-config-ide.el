@@ -99,7 +99,7 @@
   ("\\.c\\'" . c-ts-mode)
   ("\\.h\\'" . c-ts-mode)
   :custom
-  (c-default-style '((c-ts-mode . "linux")
+  (c-default-style '((c-ts-mode . "bsd")
                      (java-mode . "java")
                      (awk-mode  . "awk")
                      (other     . "gnu"))
