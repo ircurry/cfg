@@ -12,7 +12,7 @@ in
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       home.packages = with pkgs; [
-        custom.id3
+        # custom.id3
         yt-dlp
       ];
     })

@@ -18,9 +18,9 @@
           });
       })
       (_: prev: { dfh = inputs.dfh.packages.${pkgs.stdenv.hostPlatform.system}.dfh; })
-      (_: prev: {
-        yt-dlp = inputs.nixpkgs-yt-dlp.legacyPackages.${pkgs.stdenv.hostPlatform.system}.yt-dlp;
-      })
+      # (_: prev: {
+      #   yt-dlp = inputs.nixpkgs-yt-dlp.legacyPackages.${pkgs.stdenv.hostPlatform.system}.yt-dlp;
+      # })
       (_: prev: {
         mullvad-vpn = prev.mullvad-vpn.overrideAttrs (
           _:
