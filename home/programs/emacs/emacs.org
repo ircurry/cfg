@@ -2188,7 +2188,9 @@ mistty
   :bind ( :map project-prefix-map
 	  ("t" . mistty-in-project)
 	  :map cur/sub-leader-keymap
-	  ("C-t" . mistty))
+	  ("C-t" . mistty)
+	  :map mistty-mode-map
+	  ("C-j" . mistty-send-command))
   :custom (mistty-shell-command "fish"))
 
 (use-package cur-mistty
