@@ -1,6 +1,5 @@
 {
   pkgs ? import <nixpkgs> { },
-  ags ? pkgs.ags,
   ...
 }:
 pkgs.mkShell {

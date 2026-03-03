@@ -9,6 +9,6 @@ let
 in
 {
   config = lib.mkIf (cfg.name == "thunar") {
-    home.packages = [ pkgs.xfce.thunar ];
+    home.packages = [ pkgs.thunar ];
   };
 }
