@@ -98,17 +98,24 @@
   :mode
   ("\\.c\\'" . c-ts-mode)
   ("\\.h\\'" . c-ts-mode)
+  :hook (c-ts-mode (lambda (&rest _)
+		     (setq-local show-trailing-whitespace t)))
   :custom
   (c-default-style '((c-ts-mode . "bsd")
                      (java-mode . "java")
                      (awk-mode  . "awk")
                      (other     . "gnu"))
-		   "default style for c programs is linux"))
+		   "default style for c programs is linux")
+  (show-trailing-whitespace t))
 
-(use-package eglot
+(use-package xref
   :ensure nil
   :after (c-ts-mode)
-  :hook (c-ts-mode . eglot-ensure))
+  :hook (c-ts-mode . xref-etags-mode))
+
+(use-package elec-pair
+  :after (c-ts-mode)
+  :hook (c-ts-mode . electric-pair-local-mode))
 
 ;; ===Go Tree-Sitter Mode===
 (use-package go-ts-mode

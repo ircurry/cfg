@@ -2007,7 +2007,7 @@ nix-ts-mode
 :ID:       45a60406-d36b-4649-a0b3-0bd4a2135470
 :END:
 
-I use tree-sitter for C, which unfortunately is not currently integrated into the default C major mode for Emacs. I have also changed the ~c-default-style~ for C to be "linux", which is 8 spaces for indentation instead of the default of 2.
+I use tree-sitter for C, which unfortunately is not currently integrated into the default C major mode for Emacs.
 
 #+begin_src emacs-lisp
 ;; ===C Tree-Sitter Mode===
@@ -2016,17 +2016,24 @@ I use tree-sitter for C, which unfortunately is not currently integrated into th
   :mode
   ("\\.c\\'" . c-ts-mode)
   ("\\.h\\'" . c-ts-mode)
+  :hook (c-ts-mode (lambda (&rest _)
+		     (setq-local show-trailing-whitespace t)))
   :custom
   (c-default-style '((c-ts-mode . "bsd")
                      (java-mode . "java")
                      (awk-mode  . "awk")
                      (other     . "gnu"))
-		   "default style for c programs is linux"))
+		   "default style for c programs is linux")
+  (show-trailing-whitespace t))
 
-(use-package eglot
+(use-package xref
   :ensure nil
   :after (c-ts-mode)
-  :hook (c-ts-mode . eglot-ensure))
+  :hook (c-ts-mode . xref-etags-mode))
+
+(use-package elec-pair
+  :after (c-ts-mode)
+  :hook (c-ts-mode . electric-pair-local-mode))
 #+end_src
 
 *** =cur-config-ide.el= configurations for go
