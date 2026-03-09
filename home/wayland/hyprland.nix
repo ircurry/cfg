@@ -341,22 +341,23 @@ in
           enable_swallow = true;
           swallow_regex = [ "^(Alacritty)$" ];
         };
-        windowrulev2 = [
-          "suppressevent maximize, class:.*"
-          "size 80% 80%, class:.*" # have windows be a reasonable size
-          "center 1, class:.*" # have windows centered by default
+        windowrule = [
+          "match:class .*, suppress_event maximize"
+          "match:class .*, size 80% 80%" # have windows be a reasonable size
+          "match:class .*, size 80% 80%" # have windows be a reasonable size
+          "match:class .*, center 1" # have windows centered by default
 
           # Title Bar
-          "plugin:hyprbars:nobar, floating:0" # no bar on tiled windows
-          "plugin:hyprbars:nobar, initialTitle:^(vesktop)$" # no bar vesktop loading window
+          # "plugin:hyprbars:nobar, floating:0" # no bar on tiled windows
+          # "plugin:hyprbars:nobar, initialTitle:^(vesktop)$" # no bar vesktop loading window
 
           # Center
-          "float, class:^(center)$"
-          "size 80% 85%, class:^(center)$"
-          "center, class:^(center)$"
+          "match:class ^(center)$, float true"
+          "match:class ^(center)$, size 80% 85%"
+          "match:class ^(center)$, center true"
 
           # Discord/Vesktop
-          "workspace 1, class:^(vesktop)$, title:^(.*)$"
+          "match:title ^(.*)$, match:class ^(vesktop)$, workspace 1"
 
           # Pavucontrol
           # "float, class:^(pavucontrol)$, title:^(Volume Control)$"
@@ -364,12 +365,12 @@ in
           # "center, class:^(pavucontrol)$, title:^(Volume Control)$"
 
           # Network Manager Applet
-          "float, class:^(nm-connection-editor)$, title:^(.*)$"
-          "size 80% 85%, class:^(nm-connection-editor)$, title:^(.*)$"
-          "center, class:^(nm-connection-editor)$, title:^(.*)$"
+          "float true, match:class ^(nm-connection-editor)$, match:title ^(.*)$"
+          "size 80% 85%, match:class ^(nm-connection-editor)$, match:title ^(.*)$"
+          "center true, match:class ^(nm-connection-editor)$, match:title ^(.*)$"
 
           # Signal
-          "workspace 1, class:^(Signal)$, title:^(.*)$"
+          "workspace 1, match:class ^(Signal)$, match:title ^(.*)$"
         ];
         bind = [
           # General Keybindings
