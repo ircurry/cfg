@@ -1,6 +1,14 @@
-{ config, lib, pkgs, mylib, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  mylib,
+  ...
+}:
+{
   # ===Core CLI Packages===
-  home.packages = with pkgs;
+  home.packages =
+    with pkgs;
     [
       bottom # system resource monitor
       eza # a smart ls replacement
@@ -8,7 +16,7 @@
       file # file info
       fzf # cli fuzzy finder
       gdb # debugger
-      neofetch # system info fetcher
+      fastfetch # system info fetcher
       nitch # fancier system info fetcher
       ripgrep # fast grep replacement
       tmux # a terminal multiplexer

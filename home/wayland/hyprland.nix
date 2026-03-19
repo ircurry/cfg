@@ -263,7 +263,7 @@ in
 
     # ===Hyprland Autostart===
     nocturne.wayland.compositor.profileExtra = ''
-      [[ $(tty) == /dev/tty1 ]] && exec Hyprland && exit 0
+      [[ $(tty) == /dev/tty1 ]] && exec start-hyprland && exit 0
     '';
 
     # ===Actual Hyprland Config===
