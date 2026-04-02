@@ -10,7 +10,7 @@ pkgs.mkShell {
     just
     sops
     ssh-to-age
-    nixfmt-rfc-style
+    nixfmt
     nixd
     ags
   ];
