@@ -11,6 +11,7 @@
     in
     {
       enable = true;
+      signing.format = "openpgp";
       settings.user = {
         email = cfg.userEmail;
         name = cfg.userName;
