@@ -120,7 +120,7 @@
           ];
         }
       ];
-      wallpaper.name = "swww";
+      wallpaper.name = "awww";
     };
   };
 

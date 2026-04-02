@@ -13,7 +13,7 @@
     ./rofi.nix
     ./swayidle.nix
     ./swaylock.nix
-    ./swww.nix
+    ./awww.nix
     ./waybar.nix
   ];
 }

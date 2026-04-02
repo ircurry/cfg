@@ -275,9 +275,9 @@ in
       };
     wallpaper = {
       name = lib.mkOption {
-        type = lib.types.nullOr (lib.types.enum [ "swww" ]);
+        type = lib.types.nullOr (lib.types.enum [ "awww" ]);
         default = null;
-        example = "swww";
+        example = "awww";
         description = "Which wallpaper engine to use";
       };
       paper-path = lib.mkOption {

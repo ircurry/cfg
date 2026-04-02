@@ -5,35 +5,35 @@
   ...
 }:
 let
-  inherit (pkgs) swww writeShellApplication;
+  inherit (pkgs) awww writeShellApplication;
   cfg = config.nocturne.wayland.wallpaper;
   startup = writeShellApplication {
-    name = "swww-startup-script";
-    runtimeInputs = [ swww ];
+    name = "awww-startup-script";
+    runtimeInputs = [ awww ];
     text = ''
-      setsid -f swww-daemon >/dev/null 2>&1
+      setsid -f awww-daemon >/dev/null 2>&1
     '';
   };
   change-wallpaper = writeShellApplication {
-    name = "swww-change-wallpaper";
-    runtimeInputs = [ swww ];
+    name = "awww-change-wallpaper";
+    runtimeInputs = [ awww ];
     text = ''
-      swww img -t any "$1"
+      awww img -t any "$1"
     '';
   };
 in
 {
-  config = lib.mkIf (cfg.name == "swww") {
+  config = lib.mkIf (cfg.name == "awww") {
     home.packages = [
-      swww
+      awww
     ];
     nocturne.wayland = {
       startup = [
         {
-          name = "swww-startup";
+          name = "awww-startup";
           exec = "${lib.getExe startup}";
           packages = [
-            swww
+            awww
             startup
           ];
         }
