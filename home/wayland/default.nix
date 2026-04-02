@@ -2,6 +2,7 @@
 {
   imports = [
     ./ags
+    ./awww.nix
     ./dunst.nix
     ./fuzzel.nix
     ./grim-slurp.nix
@@ -13,7 +14,6 @@
     ./rofi.nix
     ./swayidle.nix
     ./swaylock.nix
-    ./awww.nix
     ./waybar.nix
   ];
 }
