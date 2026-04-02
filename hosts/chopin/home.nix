@@ -34,6 +34,7 @@
       mullvad-vpn.enable = true;
       obs.enable = true;
       qbittorrent.enable = true;
+      rofi.enable = true;
       signalDesktop.enable = true;
       thunderbird.enable = true;
       torBrowser.enable = true;
