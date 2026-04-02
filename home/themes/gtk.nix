@@ -29,6 +29,7 @@ in
 
         font.package = pkgs.dejavu_fonts;
         font.name = "DejaVu Sans";
+        gtk4.theme = config.gtk.theme;
       };
     })
     (lib.mkIf (cfg.enable && (variant == "dark")) {
