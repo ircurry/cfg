@@ -8,7 +8,7 @@ pkgs.mkShell {
     pre-commit
     just
     # Nix Stuff
-    nixfmt-rfc-style
+    nixfmt
     nixd
     # C Stuff
     clang
