@@ -21,9 +21,9 @@
       # (_: prev: {
       #   yt-dlp = inputs.nixpkgs-yt-dlp.legacyPackages.${pkgs.stdenv.hostPlatform.system}.yt-dlp;
       # })
-      (_: prev: {
-        freetube = inputs.nixpkgs-freetube.legacyPackages.${pkgs.stdenv.hostPlatform.system}.freetube;
-      })
+      # (_: prev: {
+      #   freetube = inputs.nixpkgs-freetube.legacyPackages.${pkgs.stdenv.hostPlatform.system}.freetube;
+      # })
       (_: prev: {
         mullvad-vpn = prev.mullvad-vpn.overrideAttrs (
           _:

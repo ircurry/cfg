@@ -12,7 +12,7 @@
     # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     # nixpkgs-waybar.url = "github:nixos/nixpkgs/fc432219ea741efce59912cfb2a51ad9820c291d";
     # nixpkgs-yt-dlp.url = "github:nixos/nixpkgs/7302c51794fffd3dc1840a68b6c0b04668d77342";
-    nixpkgs-freetube.url = "github:nixos/nixpkgs/edd93c2f8cc348813b9802e4042e572544e980ca";
+    # nixpkgs-freetube.url = "github:nixos/nixpkgs/edd93c2f8cc348813b9802e4042e572544e980ca";
 
     nh = {
       url = "github:viperML/nh";
