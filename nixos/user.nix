@@ -11,9 +11,11 @@
       isNormalUser = true;
       description = "Ian Curran";
       extraGroups = [
+        "adbusers"
+        "kvm"
         "networkmanager"
-        "wheel"
         "plugdev"
+        "wheel"
       ];
       initialPassword = "password";
       hashedPasswordFile = config.sops.secrets."${user}_password".path;
