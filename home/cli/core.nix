@@ -17,6 +17,8 @@
       fzf # cli fuzzy finder
       gdb # debugger
       fastfetch # system info fetcher
+      man-pages # standard man pages
+      man-pages-posix # posix and linux man pages
       nitch # fancier system info fetcher
       ripgrep # fast grep replacement
       tmux # a terminal multiplexer
