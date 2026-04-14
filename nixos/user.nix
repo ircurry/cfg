@@ -6,7 +6,10 @@
 }:
 {
   config = {
-    users.groups.plugdev = { };
+    users.groups = {
+      adbusers = { };
+      plugdev = { };
+    };
     users.users."${user}" = {
       isNormalUser = true;
       description = "Ian Curran";
