@@ -25,8 +25,9 @@
 ;; ===Flycheck===
 (use-package flycheck
   :after (prog-mode)
-  :hook
-  (prog-mode . flycheck-mode))
+  ;; :hook
+  ;; (prog-mode . flycheck-mode)
+  )
 
 ;; ===Magit===
 (use-package magit
@@ -73,12 +74,17 @@
 ;; ===Java Tree-Sitter Mode===
 (use-package java-ts-mode
   :mode "\\.java\\'"
-  :custom (java-ts-mode-indent-offset 8))
+  :custom (java-ts-mode-indent-offset 4))
 
 (use-package eglot
   :ensure nil
   :after (java-ts-mode)
-  :hook (java-ts-mode . eglot-ensure))
+  ;; :hook (java-ts-mode . eglot-ensure)
+  )
+
+(use-package elec-pair
+  :after (java-ts-mode)
+  :hook (java-ts-mode . electric-pair-local-mode))
 
 ;; ===YAML===
 (use-package yaml-mode
@@ -94,19 +100,18 @@
 
 ;; ===C Tree-Sitter Mode===
 (use-package c-ts-mode
-  :after (cc-mode)
   :mode
   ("\\.c\\'" . c-ts-mode)
   ("\\.h\\'" . c-ts-mode)
-  :hook (c-ts-mode (lambda (&rest _)
-		     (setq-local show-trailing-whitespace t)))
+  :hook (c-ts-mode . (lambda (&rest _)
+		       (setq-local show-trailing-whitespace t)))
   :custom
   (c-default-style '((c-ts-mode . "bsd")
                      (java-mode . "java")
                      (awk-mode  . "awk")
                      (other     . "gnu"))
-		   "default style for c programs is linux")
-  (show-trailing-whitespace t))
+		   "default style for c programs is bsd")
+  (c-ts-mode-indent-style 'bsd "default style for c-ts-mode is bsd"))
 
 (use-package xref
   :ensure nil
