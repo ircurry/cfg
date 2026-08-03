@@ -156,7 +156,7 @@ in
                   }
                 ];
 
-                icon = "${pkgs.libsForQt5.breeze-icons}/share/icons/breeze-dark/actions/16/media-playback-start.svg";
+                icon = "${pkgs.kdePackages.breeze-icons}/share/icons/breeze-dark/actions/16/media-playback-start.svg";
                 definedAliases = [ "@od" ];
               };
               "youtube" = {
@@ -172,7 +172,7 @@ in
                   }
                 ];
 
-                icon = "${pkgs.libsForQt5.breeze-icons}/share/icons/breeze-dark/actions/16/media-playback-start.svg";
+                icon = "${pkgs.kdePackages.breeze-icons}/share/icons/breeze-dark/actions/16/media-playback-start.svg";
                 definedAliases = [
                   "@yt"
                 ];
