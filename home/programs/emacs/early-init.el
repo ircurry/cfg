@@ -20,6 +20,8 @@
       frame-title-format "%b"       ; Set window title to buffer name
       frame-resize-pixelwise t)     ; Pixel perfect frame size
 
+(define-key global-map (kbd "M-c") 'capitalize-dwim) ; rebind common capitalization binding
+
 (set-fringe-mode 10) ; Set fringe size
 
 (provide 'early-init)
