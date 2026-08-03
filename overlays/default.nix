@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -21,9 +22,24 @@
       # (_: prev: {
       #   yt-dlp = inputs.nixpkgs-yt-dlp.legacyPackages.${pkgs.stdenv.hostPlatform.system}.yt-dlp;
       # })
-      # (_: prev: {
-      #   freetube = inputs.nixpkgs-freetube.legacyPackages.${pkgs.stdenv.hostPlatform.system}.freetube;
-      # })
+      (_: prev: {
+        freetube = prev.freetube.overrideAttrs (
+          _:
+          let
+            inherit (prev) fetchFromGitHub;
+            hash = "sha256-oo5ozdP3d82jY8OOYrt568MoSfPmwBoitdtgESiRMlE=";
+          in
+          rec {
+            version = "0.24.1";
+            src = fetchFromGitHub {
+              owner = "FreeTubeApp";
+              repo = "FreeTube";
+              tag = "v${version}-beta";
+              inherit hash;
+            };
+          }
+        );
+      })
       (_: prev: {
         mullvad-vpn = prev.mullvad-vpn.overrideAttrs (
           _:
