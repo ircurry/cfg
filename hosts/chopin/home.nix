@@ -20,7 +20,7 @@
     # themes.theme = "tomorrow-night";
     graphical = {
       alacritty.enable = true;
-      anki.enable = false;
+      anki.enable = true;
       brave.enable = false;
       discord.enable = true;
       emacs.enable = true;

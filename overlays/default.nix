@@ -23,24 +23,27 @@
       #   yt-dlp = inputs.nixpkgs-yt-dlp.legacyPackages.${pkgs.stdenv.hostPlatform.system}.yt-dlp;
       # })
       (_: prev: {
-        freetube = prev.freetube.overrideAttrs (
-          _:
-          let
-            inherit (prev) fetchFromGitHub;
-            hash = "sha256-CQiwAoOJoAZpcDIwqcOfUAvJHLWTdj8fIInlR3qyjg8=";
-            # hash = lib.fakeHash;
-          in
-          rec {
-            version = "0.25.1";
-            src = fetchFromGitHub {
-              owner = "FreeTubeApp";
-              repo = "FreeTube";
-              tag = "v${version}-beta";
-              inherit hash;
-            };
-          }
-        );
+        freetube = inputs.nixpkgs-freetube.legacyPackages.${pkgs.stdenv.hostPlatform.system}.freetube;
       })
+      # (_: prev: {
+      #   freetube = prev.freetube.overrideAttrs (
+      #     _:
+      #     let
+      #       inherit (prev) fetchFromGitHub;
+      #       hash = "sha256-CQiwAoOJoAZpcDIwqcOfUAvJHLWTdj8fIInlR3qyjg8=";
+      #       # hash = lib.fakeHash;
+      #     in
+      #     rec {
+      #       version = "0.25.1";
+      #       src = fetchFromGitHub {
+      #         owner = "FreeTubeApp";
+      #         repo = "FreeTube";
+      #         tag = "v${version}-beta";
+      #         inherit hash;
+      #       };
+      #     }
+      #   );
+      # })
       # (_: prev: {
       #   mullvad-vpn = prev.mullvad-vpn.overrideAttrs (
       #     _:

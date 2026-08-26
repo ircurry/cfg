@@ -708,6 +708,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-freetube": {
+      "locked": {
+        "lastModified": 1786591006,
+        "narHash": "sha256-pxauJM0bwCu0XW+XxxIfieNqIr7R8USc+BMVghnw3gY=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "1932e3cb3b79adef685033ef2321109536b8586c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "1932e3cb3b79adef685033ef2321109536b8586c",
+        "type": "github"
+      }
+    },
     "nixpkgs-lib": {
       "locked": {
         "lastModified": 1725233747,
@@ -1017,6 +1033,7 @@
         "nh": "nh",
         "niri": "niri",
         "nixpkgs": "nixpkgs_3",
+        "nixpkgs-freetube": "nixpkgs-freetube",
         "nocturne-tools": "nocturne-tools",
         "sops-nix": "sops-nix"
       }
