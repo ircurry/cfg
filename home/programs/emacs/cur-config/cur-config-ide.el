@@ -122,6 +122,21 @@
   :after (c-ts-mode)
   :hook (c-ts-mode . electric-pair-local-mode))
 
+;; ===Odin Mode===
+(use-package odin-mode
+  :mode ("\\.odin\\'" . odin-mode)
+  :hook (odin-mode . (lambda (&rest _)
+		       (setq-local show-trailing-whitespace t))))
+
+(use-package eglot
+  :ensure nil
+  :after (odin-mode)
+  :hook (odin-mode . eglot-ensure))
+
+(use-package elec-pair
+  :after (odin-mode)
+  :hook (odin-mode . electric-pair-local-mode))
+
 ;; ===Go Tree-Sitter Mode===
 (use-package go-ts-mode
   :mode

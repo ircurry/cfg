@@ -36,7 +36,7 @@
 	use-package-always-ensure nil)
 
 ;; ===Load Modules and Packages===
-(dolist (path '("cur-lisp" "cur-config"))
+(dolist (path '("cur-lisp" "cur-config" "third-party"))
   (add-to-list 'load-path (locate-user-emacs-file path)))
 
 (require 'cur-config-essentials)

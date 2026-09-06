@@ -2043,6 +2043,28 @@ I use tree-sitter for C, which unfortunately is not currently integrated into th
   :hook (c-ts-mode . electric-pair-local-mode))
 #+end_src
 
+*** =cur-config-ide.el= configurations for Odin
+:PROPERTIES:
+:ID:       5b82413a-32e4-4387-9392-68744de403a9
+:END:
+#+begin_src emacs-lisp
+;; ===Odin Mode===
+(use-package odin-mode
+  :mode ("\\.odin\\'" . odin-mode)
+  :hook (odin-mode . (lambda (&rest _)
+		       (setq-local show-trailing-whitespace t))))
+
+(use-package eglot
+  :ensure nil
+  :after (odin-mode)
+  :hook (odin-mode . eglot-ensure))
+
+(use-package elec-pair
+  :after (odin-mode)
+  :hook (odin-mode . electric-pair-local-mode))
+#+end_src
+
+
 *** =cur-config-ide.el= configurations for go
 :PROPERTIES:
 :ID:       378f48d2-ab20-4851-8837-69e6793830f0

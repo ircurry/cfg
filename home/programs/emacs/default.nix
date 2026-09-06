@@ -63,6 +63,7 @@ in
         ".emacs.d/cur-config".source = ./cur-config;
         ".emacs.d/cur-lisp".source = ./cur-lisp;
         ".emacs.d/themes".source = ./themes;
+        ".emacs.d/third-party".source = ./third-party;
         ".emacs.d/dashboard-banners".source = ./dashboard-banners;
       };
 
